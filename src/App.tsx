@@ -14,7 +14,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <Router>
+    <Router basename={import.meta.env.BASE_URL}>
       <div className="bg-vish-bg min-h-screen text-vish-text selection:bg-vish-accent selection:text-black">
         <CustomCursor />
 
