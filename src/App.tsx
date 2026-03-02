@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AnimatePresence } from 'motion/react';
 import { Home } from './pages/Home';
 import { AboutPage } from './pages/About';
-import { Work } from './pages/Work';
+import { ProjectsPage } from './pages/ProjectsPage';
+import { TeamPage } from './pages/TeamPage';
 import { ProjectDetail } from './pages/ProjectDetail';
 import { CustomCursor } from './components/CustomCursor';
 import { Loader } from './components/Loader';
@@ -15,7 +16,7 @@ function App() {
     <Router>
       <div className="bg-vish-bg min-h-screen text-vish-text selection:bg-vish-accent selection:text-black">
         <CustomCursor />
-        
+
         <AnimatePresence mode="wait">
           {isLoading && <Loader onLoadingComplete={() => setIsLoading(false)} />}
         </AnimatePresence>
@@ -24,7 +25,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<AboutPage />} />
-            <Route path="/work" element={<Work />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/team" element={<TeamPage />} />
             <Route path="/project/:id" element={<ProjectDetail />} />
           </Routes>
         )}

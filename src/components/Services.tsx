@@ -29,21 +29,22 @@ export const Services = () => {
     <section className="py-32 px-6 md:px-12 bg-vish-bg" id="services">
       <div className="max-w-[1400px] mx-auto">
         <div className="mb-24 flex justify-between items-end">
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="font-display text-4xl md:text-5xl font-medium text-white"
+            className="font-display text-3xl md:text-5xl lg:text-6xl font-medium text-white mb-8"
           >
-            Our Services<span className="text-vish-accent">.</span>
+            Our <br className="hidden md:block" />
+            Services<span className="text-vish-accent">.</span>
           </motion.h2>
-          <motion.a 
+          <motion.a
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            href="#" 
+            href="#"
             className="hidden md:flex items-center gap-2 text-sm font-sans font-medium text-gray-400 hover:text-vish-accent transition-colors"
           >
             View full capabilities <ArrowUpRight className="w-4 h-4" />
@@ -65,12 +66,12 @@ export const Services = () => {
                   {service.title}
                 </h3>
               </div>
-              
+
               <div className="md:w-2/3 flex flex-col md:flex-row gap-8 md:gap-16">
                 <p className="font-sans text-lg text-gray-400 max-w-sm leading-relaxed">
                   {service.description}
                 </p>
-                
+
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2">
                   {service.items.map((item, i) => (
                     <li key={i} className="font-sans text-sm text-gray-500 flex items-center gap-2">
@@ -82,7 +83,7 @@ export const Services = () => {
               </div>
             </motion.div>
           ))}
-          <motion.div 
+          <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}

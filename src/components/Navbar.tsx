@@ -25,8 +25,8 @@ export const Navbar = () => {
       >
         <div
           className={`pointer-events-auto flex items-center justify-between px-6 py-3 rounded-full transition-all duration-300 w-full max-w-5xl ${isScrolled
-              ? 'bg-black/80 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/50'
-              : 'bg-black/40 backdrop-blur-md border border-white/5'
+            ? 'bg-black/80 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/50'
+            : 'bg-black/40 backdrop-blur-md border border-white/5'
             }`}
         >
           <a href="/" className="font-display text-xl font-bold tracking-tight text-white mr-8">
@@ -36,10 +36,10 @@ export const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-1 bg-white/5 rounded-full p-1 border border-white/5">
             {[
-              { name: 'Work', href: '/#work' },
+              { name: 'Projects', href: '/projects' },
               { name: 'Services', href: '/#services' },
               { name: 'About', href: '/about' },
-              { name: 'Contact', href: '/#contact' }
+              { name: 'Team', href: '/team' }
             ].map((item) => (
               <a
                 key={item.name}
@@ -148,8 +148,8 @@ export const Navbar = () => {
             <div className="p-8 border-t border-white/5 bg-white/[0.02]">
               <div className="flex flex-col gap-2">
                 <p className="text-white/40 text-xs font-mono tracking-widest uppercase">Get in touch</p>
-                <a href="mailto:vishseenarain@gmail.com" className="text-lg text-white hover:text-gray-300 transition-colors font-sans">
-                  vishseenarain@gmail.com
+                <a href="mailto:hello@vish.studio" className="text-lg text-white hover:text-gray-300 transition-colors font-sans">
+                  hello@vish.studio
                 </a>
               </div>
             </div>

@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import { TextReveal } from './TextReveal';
 
 export const About = () => {
   return (
@@ -10,27 +11,18 @@ export const About = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="font-display text-4xl font-medium mb-8 text-white">About Us</h2>
+          <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-medium mb-8 text-white">
+            About <br className="hidden md:block" />
+            Us<span className="text-vish-accent">.</span>
+          </h2>
         </motion.div>
         <div>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="font-sans text-xl md:text-2xl text-gray-400 leading-relaxed mb-8"
-          >
+          <TextReveal className="font-display text-2xl md:text-3xl lg:text-4xl font-medium text-white mb-20 leading-[1.3]">
             We are a team of designers, developers, and strategists passionate about creating digital experiences that matter. We believe in simplicity, clarity, and the power of good design to transform businesses.
-          </motion.p>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="font-sans text-xl md:text-2xl text-gray-400 leading-relaxed"
-          >
+          </TextReveal>
+          <TextReveal className="font-display text-2xl md:text-3xl lg:text-4xl font-medium text-white leading-[1.3]">
             From our studio in New York, we work with clients globally to build brands, websites, and products that stand out in a crowded digital landscape.
-          </motion.p>
+          </TextReveal>
         </div>
       </div>
     </section>

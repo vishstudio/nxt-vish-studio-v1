@@ -3,7 +3,7 @@ import { ArrowUpRight } from 'lucide-react';
 
 export const Contact = () => {
   return (
-    <section className="bg-black text-white py-32 px-6 md:px-12 relative overflow-hidden" id="contact">
+    <section className="bg-black text-white py-32 pb-12 px-6 md:px-12 relative overflow-hidden" id="contact">
       {/* Background Grid - Optional subtle texture */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
 
@@ -16,10 +16,10 @@ export const Contact = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display text-7xl md:text-9xl font-medium tracking-tighter leading-[0.9]"
+            className="font-display text-3xl md:text-5xl lg:text-6xl font-medium tracking-tighter leading-[0.9]"
           >
             Let's work <br />
-            <span className="text-gray-500">together<span className="text-vish-accent">.</span></span>
+            together<span className="text-vish-accent">.</span>
           </motion.h2>
         </div>
 
