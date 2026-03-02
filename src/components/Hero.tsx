@@ -3,7 +3,7 @@ import { ArrowDown } from 'lucide-react';
 
 export const Hero = () => {
   return (
-    <section className="relative min-h-[90vh] flex flex-col justify-center px-6 md:px-12 pt-32 pb-12 bg-vish-bg">
+    <section className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 pt-32 pb-12 bg-vish-bg">
       <div className="max-w-[1400px] mx-auto w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -17,7 +17,7 @@ export const Hero = () => {
         </motion.div>
 
         <div className="max-w-5xl">
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}

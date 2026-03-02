@@ -28,7 +28,7 @@ export const Contact = () => {
           {/* Main Contact Link */}
           <div className="mb-24">
             <a
-              href="mailto:hello@vishstudio.com"
+              href="mailto:hello@vish.studio"
               className="block w-full"
             >
               <motion.div
@@ -53,7 +53,7 @@ export const Contact = () => {
                     }
                   }}
                 >
-                  hello@vishstudio.com
+                  hello@vish.studio
                 </motion.span>
                 <motion.div
                   variants={{

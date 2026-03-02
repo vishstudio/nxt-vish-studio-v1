@@ -1,9 +1,10 @@
-import { motion, useScroll, useTransform } from 'motion/react';
+import { motion, useScroll, useSpring, useTransform } from 'motion/react';
 import { ArrowDown } from 'lucide-react';
 
 export const ScrollCircular = () => {
   const { scrollY } = useScroll();
-  const rotate = useTransform(scrollY, [0, 1000], [0, 360]);
+  const rawRotate = useTransform(scrollY, [0, 50000], [0, 18000]);
+  const rotate = useSpring(rawRotate, { stiffness: 100, damping: 30 });
 
   return (
     <div className="fixed bottom-8 right-8 z-50 hidden md:flex items-center justify-center pointer-events-none mix-blend-difference">
@@ -30,7 +31,7 @@ export const ScrollCircular = () => {
 
         {/* Static Center Arrow */}
         <div className="absolute inset-0 flex items-center justify-center">
-            <ArrowDown className="w-5 h-5 text-vish-accent" />
+          <ArrowDown className="w-5 h-5 text-vish-accent" />
         </div>
       </div>
     </div>
