@@ -26,13 +26,27 @@ export const Navbar = () => {
       >
         <div
           className={`pointer-events-auto flex items-center justify-between transition-all duration-300 w-full max-w-[1400px] ${isScrolled
-            ? 'pl-6 pr-2 py-2 md:pl-12 md:pr-2 rounded-full bg-black/80 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/50'
+            ? 'pl-4 pr-2 py-2 md:pl-4 md:pr-2 rounded-full bg-black/80 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/50'
             : 'px-6 md:px-12 py-6 rounded-none bg-transparent border-transparent'
             }`}
         >
-          <a href="/" className="font-display text-xl font-bold tracking-tight text-white mr-4 relative z-50">
-            VISH<span className="text-vish-accent">.</span>
-          </a>
+          <div className="flex items-center gap-3">
+            <AnimatePresence>
+              {isScrolled && (
+                <motion.div
+                  initial={{ scale: 0, opacity: 0, width: 0 }}
+                  animate={{ scale: 1, opacity: 1, width: 'auto' }}
+                  exit={{ scale: 0, opacity: 0, width: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="w-4 h-4 rounded-full bg-vish-accent shadow-[0_0_10px_rgba(255,214,0,0.5)]" />
+                </motion.div>
+              )}
+            </AnimatePresence>
+            <a href="/" className="font-display text-xl font-bold tracking-tight text-white relative z-50">
+              VISH<span className="text-vish-accent">.</span>
+            </a>
+          </div>
 
           {/* Desktop Navigation */}
           <AnimatePresence>
