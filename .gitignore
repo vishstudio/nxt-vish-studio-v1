@@ -3,3 +3,7 @@ build/
 .env
 .DS_Store
 node_modules/
+
+# TinaCMS
+tina/__generated__/
+public/admin/

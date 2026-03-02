@@ -1,0 +1,88 @@
+{
+  "heroLabel": "Digital Design Agency",
+  "heroTitleLine1": "We build digital",
+  "heroTitleLine2": "experiences",
+  "heroDescription": "VISH Studio is a creative agency partnering with brands to build immersive websites, applications, and digital products.",
+  "aboutHeading": "About Us",
+  "aboutParagraph1": "We are a team of designers, developers, and strategists passionate about creating digital experiences that matter. We believe in simplicity, clarity, and the power of good design to transform businesses.",
+  "aboutParagraph2": "From our studio in New York, we work with clients globally to build brands, websites, and products that stand out in a crowded digital landscape.",
+  "servicesHeading": "Our Expertise",
+  "servicesSubtext": "Comprehensive digital solutions tailored to elevate your business in an evolving landscape.",
+  "servicesButtonText": "Explore All Services",
+  "services": [
+    {
+      "id": "01",
+      "title": "Strategy",
+      "description": "Laying the groundwork for digital success through data-driven insights and market analysis."
+    },
+    {
+      "id": "02",
+      "title": "Design",
+      "description": "Crafting immersive visual systems and user interfaces that tell your unique brand story."
+    },
+    {
+      "id": "03",
+      "title": "Development",
+      "description": "Building robust, scalable, and high-performance technical solutions for the modern web."
+    },
+    {
+      "id": "04",
+      "title": "Marketing",
+      "description": "Amplifying your voice to reach the right audience with precision and impact."
+    }
+  ],
+  "processHeading": "Our Process",
+  "processSubtext": "From concept to completion",
+  "processSteps": [
+    {
+      "num": "01",
+      "title": "Discovery",
+      "description": "We dive deep into your business objectives, understanding your audience and challenges to build a solid foundation.",
+      "tags": [
+        "Research",
+        "Audit",
+        "Insights"
+      ]
+    },
+    {
+      "num": "02",
+      "title": "Strategy",
+      "description": "Based on our findings, we develop a comprehensive roadmap that aligns with your business goals and user needs.",
+      "tags": [
+        "Planning",
+        "UX Arch",
+        "Roadmap"
+      ]
+    },
+    {
+      "num": "03",
+      "title": "Design",
+      "description": "We craft visually stunning and intuitive interfaces that reflect your brand identity while maximizing user engagement.",
+      "tags": [
+        "UI",
+        "Interaction",
+        "Motion"
+      ]
+    },
+    {
+      "num": "04",
+      "title": "Development",
+      "description": "Our engineering team brings the designs to life using cutting-edge technologies, ensuring performance and scalability.",
+      "tags": [
+        "Frontend",
+        "Backend",
+        "QA"
+      ]
+    },
+    {
+      "num": "05",
+      "title": "Launch",
+      "description": "We handle the deployment process with precision, ensuring a smooth transition and providing ongoing support for growth.",
+      "tags": [
+        "Deploy",
+        "Monitor",
+        "Scale"
+      ]
+    }
+  ]
+}

@@ -5,12 +5,15 @@ import { TextReveal } from '../components/TextReveal';
 import { TrustedPartners } from '../components/TrustedPartners';
 import { PageLayout } from '../components/ui/PageLayout';
 import { PageHero } from '../components/ui/PageHero';
+import { getAboutPage } from '../lib/content';
 
 export const AboutPage = () => {
+  const content = getAboutPage();
+
   return (
     <PageLayout>
       <PageHero
-        label="About Us"
+        label={content.heroLabel}
         title={
           <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-medium tracking-tight leading-[0.95] text-white mb-12">
             <motion.span
@@ -19,7 +22,7 @@ export const AboutPage = () => {
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="block"
             >
-              We craft digital
+              {content.heroTitleLine1}
             </motion.span>
             <motion.span
               initial={{ opacity: 0, y: 30 }}
@@ -27,7 +30,7 @@ export const AboutPage = () => {
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="block text-gray-500"
             >
-              futures<span className="text-vish-accent">.</span>
+              {content.heroTitleLine2}<span className="text-vish-accent">.</span>
             </motion.span>
           </h1>
         }
@@ -45,8 +48,8 @@ export const AboutPage = () => {
               className="relative aspect-[4/3] lg:aspect-square overflow-hidden rounded-sm"
             >
               <img
-                src="https://picsum.photos/seed/architecture/1600/1200"
-                alt="Studio Environment"
+                src={content.studioImage}
+                alt={content.studioImageAlt}
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
               />
             </motion.div>
@@ -58,14 +61,14 @@ export const AboutPage = () => {
                 viewport={{ once: true }}
                 className="font-display text-4xl md:text-5xl leading-tight"
               >
-                We are a design studio focused on building brands that matter.
+                {content.introHeading}
               </motion.h2>
               <div className="space-y-12">
                 <TextReveal className="font-sans text-xl text-gray-400 leading-relaxed">
-                  Founded in 2024, VISH Studio emerged from a simple belief: that design is the most powerful tool for change. We don't just make things look good; we make them work, we make them feel, and we make them last.
+                  {content.introParagraph1}
                 </TextReveal>
                 <TextReveal className="font-sans text-xl text-gray-400 leading-relaxed">
-                  Our team is a collective of designers, developers, and strategists who are obsessed with quality. We strip away the noise to reveal the essence of your brand, creating digital experiences that are as intuitive as they are beautiful.
+                  {content.introParagraph2}
                 </TextReveal>
               </div>
             </div>
@@ -77,28 +80,12 @@ export const AboutPage = () => {
       <section className="px-6 md:px-12 py-32 bg-vish-bg text-white">
         <div className="max-w-[1400px] mx-auto">
           <div className="mb-24">
-            <span className="font-mono text-sm text-vish-accent uppercase tracking-widest block mb-4">Our Philosophy</span>
-            <h2 className="font-display text-6xl md:text-8xl tracking-tight leading-none text-white">CORE VALUES</h2>
+            <span className="font-mono text-sm text-vish-accent uppercase tracking-widest block mb-4">{content.valuesLabel}</span>
+            <h2 className="font-display text-6xl md:text-8xl tracking-tight leading-none text-white">{content.valuesHeading}</h2>
           </div>
 
           <div className="grid grid-cols-1 border-t border-white/10">
-            {[
-              {
-                id: "01",
-                title: "Radical Simplicity",
-                desc: "Complexity is easy. Simplicity is hard. We fight for clarity in every pixel and line of code."
-              },
-              {
-                id: "02",
-                title: "Uncompromising Quality",
-                desc: "Good enough is never enough. We push every detail until it breaks, then we build it back better."
-              },
-              {
-                id: "03",
-                title: "Human First",
-                desc: "Technology serves people, not the other way around. Empathy is our primary design tool."
-              }
-            ].map((value, index) => (
+            {content.values.map((value, index) => (
               <div key={index} className="group grid grid-cols-1 md:grid-cols-12 gap-8 py-16 border-b border-white/10 transition-colors duration-500 hover:bg-white/[0.02]">
                 <div className="md:col-span-1 font-mono text-sm text-vish-accent pt-2">
                   /{value.id}
@@ -107,7 +94,7 @@ export const AboutPage = () => {
                   <h3 className="font-display text-4xl md:text-5xl font-medium text-white group-hover:translate-x-2 transition-transform duration-500">{value.title}</h3>
                 </div>
                 <div className="md:col-span-6">
-                  <p className="font-sans text-xl text-gray-400 leading-relaxed max-w-lg group-hover:text-gray-300 transition-colors duration-500">{value.desc}</p>
+                  <p className="font-sans text-xl text-gray-400 leading-relaxed max-w-lg group-hover:text-gray-300 transition-colors duration-500">{value.description}</p>
                 </div>
               </div>
             ))}

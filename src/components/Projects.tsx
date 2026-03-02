@@ -2,10 +2,11 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { projects } from '../data/projects';
+import { getProjects } from '../lib/projects';
 import { Button } from './ui/Button';
 
 export const Projects = ({ showViewAll = true }: { showViewAll?: boolean }) => {
+  const projects = getProjects();
   const [activeProject, setActiveProject] = useState(projects[0]);
 
   return (
@@ -32,7 +33,7 @@ export const Projects = ({ showViewAll = true }: { showViewAll?: boolean }) => {
           <div className="lg:col-span-7 flex flex-col">
             {projects.map((project, index) => (
               <Link
-                to={`/project/${project.id}`}
+                to={`/project/${project.slug}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 key={project.id}
@@ -135,7 +136,7 @@ export const Projects = ({ showViewAll = true }: { showViewAll?: boolean }) => {
               <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/90 via-black/50 to-transparent">
                 <div className="flex justify-between items-end">
                   <div>
-                    <p className="font-mono text-vish-accent text-sm mb-2">0{activeProject.id}</p>
+                    <p className="font-mono text-vish-accent text-sm mb-2">{activeProject.category}</p>
                     <h4 className="font-display text-3xl text-white">{activeProject.title}</h4>
                   </div>
                   <span className="font-sans text-sm text-gray-300">{activeProject.category}</span>

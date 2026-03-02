@@ -1,13 +1,13 @@
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ArrowLeft } from 'lucide-react';
-import { projects } from '../data/projects';
+import { getProject } from '../lib/projects';
 import { Navbar } from '../components/Navbar';
 import { CustomCursor } from '../components/CustomCursor';
 
 export const ProjectDetail = () => {
-  const { id } = useParams();
-  const project = projects.find((p) => p.id === Number(id));
+  const { slug } = useParams();
+  const project = getProject(slug || '');
 
   if (!project) {
     return (
@@ -36,7 +36,7 @@ export const ProjectDetail = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <span className="font-mono text-vish-accent text-sm mb-4 block">0{project.id} — {project.category}</span>
+          <span className="font-mono text-vish-accent text-sm mb-4 block">{project.category}</span>
           <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-medium mb-12 tracking-tight leading-[0.95]">
             {project.title}<span className="text-vish-accent">.</span>
           </h1>

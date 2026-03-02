@@ -1,6 +1,6 @@
 import { motion } from 'motion/react';
 import { User, Code, PenTool, Zap, Sparkles, Layout, Globe, Terminal } from 'lucide-react';
-import { team } from '../data/team';
+import { getTeamMembers } from '../lib/content';
 
 // Helper to get icon based on role
 const getIcon = (role: string) => {
@@ -13,6 +13,8 @@ const getIcon = (role: string) => {
 };
 
 export const Team = ({ showTitle = true }: { showTitle?: boolean }) => {
+  const team = getTeamMembers();
+
   return (
     <section className="py-24 md:py-32 px-6 md:px-12 bg-vish-bg text-white" id="team">
       <div className="max-w-[1400px] mx-auto">
@@ -38,7 +40,7 @@ export const Team = ({ showTitle = true }: { showTitle?: boolean }) => {
             const Icon = getIcon(member.role);
             return (
               <motion.div
-                key={member.id}
+                key={member.slug}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}

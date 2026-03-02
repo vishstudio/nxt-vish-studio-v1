@@ -1,0 +1,24 @@
+{
+  "heroLabel": "Get in Touch",
+  "heroTitleLine1": "Ready to start your",
+  "heroTitleLine2": "next project",
+  "heroTitlePunctuation": "?",
+  "heroDescription": "We help ambitious brands and startups build digital products that matter. Whether you have a clear vision or just a rough idea, we're here to help you bring it to life.",
+  "trustIndicators": [
+    {
+      "icon": "MessageSquare",
+      "title": "Clear Communication",
+      "description": "We believe in transparency. You'll be kept in the loop at every stage of the process, with regular updates and open channels."
+    },
+    {
+      "icon": "Clock",
+      "title": "Timely Delivery",
+      "description": "We respect your time. Our agile workflow ensures we meet deadlines without compromising on the quality of our work."
+    },
+    {
+      "icon": "Zap",
+      "title": "Impact Focused",
+      "description": "We don't just build for the sake of it. We focus on creating solutions that drive real business results and user value."
+    }
+  ]
+}

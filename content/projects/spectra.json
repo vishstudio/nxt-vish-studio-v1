@@ -1,0 +1,14 @@
+{
+  "title": "Spectra",
+  "category": "Product Design",
+  "image": "https://picsum.photos/seed/spectra/1600/1200",
+  "year": "2024",
+  "order": 4,
+  "description": "Next-gen audio visualization software interface.",
+  "fullDescription": "Spectra is an audio visualization tool for music producers and visual artists. Our design challenge was to create an interface that is both highly functional and visually inspiring, allowing users to 'see' their music in new ways.",
+  "gallery": [
+    "https://picsum.photos/seed/spectra-1/1600/1200",
+    "https://picsum.photos/seed/spectra-2/1600/1200",
+    "https://picsum.photos/seed/spectra-3/1600/1200"
+  ]
+}

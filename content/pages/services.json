@@ -1,0 +1,55 @@
+{
+  "heroLabel": "Our Expertise",
+  "heroTitleLine1": "Services",
+  "heroTitleLine2": "& Capabilities",
+  "categories": [
+    {
+      "category": "Strategy",
+      "description": "We build the foundation for your digital presence, ensuring every decision is data-driven and aligned with your business goals.",
+      "items": [
+        "Brand Strategy",
+        "UX Research",
+        "Content Strategy",
+        "Market Analysis",
+        "Digital Transformation",
+        "Product Roadmap"
+      ]
+    },
+    {
+      "category": "Design",
+      "description": "Crafting beautiful, functional, and user-centric interfaces that tell your story and engage your audience.",
+      "items": [
+        "UI/UX Design",
+        "Visual Identity",
+        "Motion Design",
+        "Design Systems",
+        "Prototyping",
+        "Interaction Design"
+      ]
+    },
+    {
+      "category": "Development",
+      "description": "Turning designs into robust, scalable digital products using cutting-edge technologies and best practices.",
+      "items": [
+        "Frontend Development",
+        "Backend Engineering",
+        "CMS Integration",
+        "Creative Coding",
+        "E-commerce Solutions",
+        "API Development"
+      ]
+    },
+    {
+      "category": "Marketing",
+      "description": "Amplifying your message to reach the right audience and drive meaningful growth for your brand.",
+      "items": [
+        "SEO Optimization",
+        "Social Media Strategy",
+        "Email Marketing",
+        "Analytics & Reporting",
+        "Performance Marketing",
+        "Content Creation"
+      ]
+    }
+  ]
+}

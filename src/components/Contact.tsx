@@ -1,7 +1,10 @@
 import { motion } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
+import { getSiteSettings } from '../lib/content';
 
 export const Contact = () => {
+  const settings = getSiteSettings();
+
   return (
     <section className="bg-black text-white py-32 pb-4 px-6 md:px-12 relative overflow-hidden" id="contact">
       {/* Background Grid - Optional subtle texture */}
@@ -18,8 +21,8 @@ export const Contact = () => {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="font-display text-6xl md:text-8xl lg:text-9xl font-medium tracking-tight leading-[0.95] text-white"
           >
-            <span className="text-white">Let's work</span> <br />
-            <span className="text-gray-500">together</span><span className="text-vish-accent">.</span>
+            <span className="text-white">{settings.contactHeadingLine1}</span> <br />
+            <span className="text-gray-500">{settings.contactHeadingLine2}</span><span className="text-vish-accent">.</span>
           </motion.h2>
         </div>
 
@@ -28,7 +31,7 @@ export const Contact = () => {
           {/* Main Contact Link */}
           <div className="mb-24">
             <a
-              href="mailto:hello@vish.studio"
+              href={`mailto:${settings.email}`}
               className="block w-full"
             >
               <motion.div
@@ -53,7 +56,7 @@ export const Contact = () => {
                     }
                   }}
                 >
-                  hello@vish.studio
+                  {settings.email}
                 </motion.span>
                 <motion.div
                   variants={{
@@ -77,15 +80,14 @@ export const Contact = () => {
             {/* Phone */}
             <div>
               <h3 className="font-mono text-xs text-gray-500 uppercase tracking-widest mb-6">Call Us</h3>
-              <a href="tel:+23059368556" className="block font-display text-2xl hover:text-vish-accent transition-colors">+(230) 5936-8556</a>
+              <a href={settings.phoneLink} className="block font-display text-2xl hover:text-vish-accent transition-colors">{settings.phone}</a>
             </div>
 
             {/* Address */}
             <div>
               <h3 className="font-mono text-xs text-gray-500 uppercase tracking-widest mb-6">Visit Us</h3>
-              <address className="font-sans text-lg text-gray-400 not-italic leading-relaxed">
-                Grand Gaube,<br />
-                Mauritius
+              <address className="font-sans text-lg text-gray-400 not-italic leading-relaxed whitespace-pre-line">
+                {settings.address}
               </address>
             </div>
 
@@ -93,9 +95,9 @@ export const Contact = () => {
             <div>
               <h3 className="font-mono text-xs text-gray-500 uppercase tracking-widest mb-6">Socials</h3>
               <div className="flex flex-col gap-4">
-                {['Instagram', 'Twitter', 'LinkedIn', 'Dribbble'].map((social) => (
-                  <a key={social} href="#" className="font-sans text-lg text-gray-400 hover:text-white transition-colors flex items-center gap-2 group w-fit">
-                    {social}
+                {settings.socials.map((social) => (
+                  <a key={social.name} href={social.url} className="font-sans text-lg text-gray-400 hover:text-white transition-colors flex items-center gap-2 group w-fit">
+                    {social.name}
                     <ArrowUpRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                   </a>
                 ))}
@@ -108,11 +110,11 @@ export const Contact = () => {
 
         {/* Footer */}
         <div className="mt-32 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-xs font-mono text-gray-600 uppercase tracking-wider">
-          <span>© 2026 VISH Studio.</span>
+          <span>{settings.copyright}</span>
           <div className="flex gap-8">
-            <a href="#" className="hover:text-white transition-colors">Privacy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms</a>
-            <a href="#" className="hover:text-white transition-colors">Sitemap</a>
+            {settings.footerLinks.map((link) => (
+              <a key={link.label} href={link.url} className="hover:text-white transition-colors">{link.label}</a>
+            ))}
           </div>
         </div>
 

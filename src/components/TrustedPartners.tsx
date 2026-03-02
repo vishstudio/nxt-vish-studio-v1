@@ -1,14 +1,14 @@
 import { motion } from 'motion/react';
-
-const partners = [
-  "MorisMetrics", "ForwardPsychology", "Shay", "GoGarage",
-];
+import { getPartners } from '../lib/content';
 
 export const TrustedPartners = () => {
+  const data = getPartners();
+  const partners = data.partners;
+
   return (
     <section className="py-16 bg-vish-subtle border-y border-white/5 overflow-hidden">
       <div className="px-6 md:px-12 max-w-[1400px] mx-auto mb-8">
-        <p className="text-sm font-sans font-medium text-gray-400 uppercase tracking-wide">Trusted by industry leaders</p>
+        <p className="text-sm font-sans font-medium text-gray-400 uppercase tracking-wide">{data.partnersLabel}</p>
       </div>
 
       <div className="flex relative">

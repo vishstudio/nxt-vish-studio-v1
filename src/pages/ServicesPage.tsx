@@ -3,35 +3,16 @@ import { Process } from '../components/Process';
 import { Contact } from '../components/Contact';
 import { PageLayout } from '../components/ui/PageLayout';
 import { PageHero } from '../components/ui/PageHero';
+import { getServicesPage } from '../lib/content';
 
 export const ServicesPage = () => {
-  const services = [
-    {
-      category: "Strategy",
-      description: "We build the foundation for your digital presence, ensuring every decision is data-driven and aligned with your business goals.",
-      items: ["Brand Strategy", "UX Research", "Content Strategy", "Market Analysis", "Digital Transformation", "Product Roadmap"]
-    },
-    {
-      category: "Design",
-      description: "Crafting beautiful, functional, and user-centric interfaces that tell your story and engage your audience.",
-      items: ["UI/UX Design", "Visual Identity", "Motion Design", "Design Systems", "Prototyping", "Interaction Design"]
-    },
-    {
-      category: "Development",
-      description: "Turning designs into robust, scalable digital products using cutting-edge technologies and best practices.",
-      items: ["Frontend Development", "Backend Engineering", "CMS Integration", "Creative Coding", "E-commerce Solutions", "API Development"]
-    },
-    {
-      category: "Marketing",
-      description: "Amplifying your message to reach the right audience and drive meaningful growth for your brand.",
-      items: ["SEO Optimization", "Social Media Strategy", "Email Marketing", "Analytics & Reporting", "Performance Marketing", "Content Creation"]
-    }
-  ];
+  const content = getServicesPage();
+  const services = content.categories;
 
   return (
     <PageLayout>
       <PageHero
-        label="Our Expertise"
+        label={content.heroLabel}
         title={
           <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-medium tracking-tight leading-[0.95] text-white mb-12">
             <motion.span
@@ -40,7 +21,7 @@ export const ServicesPage = () => {
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="block"
             >
-              Services
+              {content.heroTitleLine1}
             </motion.span>
             <motion.span
               initial={{ opacity: 0, y: 30 }}
@@ -48,7 +29,7 @@ export const ServicesPage = () => {
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="block text-gray-500"
             >
-              & Capabilities<span className="text-vish-accent">.</span>
+              {content.heroTitleLine2}<span className="text-vish-accent">.</span>
             </motion.span>
           </h1>
         }

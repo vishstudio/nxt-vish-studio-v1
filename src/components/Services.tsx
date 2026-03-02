@@ -1,30 +1,11 @@
 import { motion } from 'motion/react';
 import { ArrowUpRight, ArrowRight } from 'lucide-react';
 import { Button } from './ui/Button';
+import { getHomePage } from '../lib/content';
 
 export const Services = () => {
-  const services = [
-    {
-      id: "01",
-      title: "Strategy",
-      description: "Laying the groundwork for digital success through data-driven insights and market analysis."
-    },
-    {
-      id: "02",
-      title: "Design",
-      description: "Crafting immersive visual systems and user interfaces that tell your unique brand story."
-    },
-    {
-      id: "03",
-      title: "Development",
-      description: "Building robust, scalable, and high-performance technical solutions for the modern web."
-    },
-    {
-      id: "04",
-      title: "Marketing",
-      description: "Amplifying your voice to reach the right audience with precision and impact."
-    }
-  ];
+  const content = getHomePage();
+  const services = content.services;
 
   return (
     <section className="py-32 px-6 md:px-12 bg-black/20" id="services">
@@ -37,10 +18,10 @@ export const Services = () => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-medium text-white mb-6">
-              Our Expertise<span className="text-vish-accent">.</span>
+              {content.servicesHeading}<span className="text-vish-accent">.</span>
             </h2>
             <p className="font-sans text-gray-400 text-lg max-w-md">
-              Comprehensive digital solutions tailored to elevate your business in an evolving landscape.
+              {content.servicesSubtext}
             </p>
           </motion.div>
 
@@ -52,7 +33,7 @@ export const Services = () => {
             className="hidden md:block"
           >
             <Button href="/services" variant="white" size="md" icon={<ArrowRight className="w-4 h-4" />}>
-              Explore All Services
+              {content.servicesButtonText}
             </Button>
           </motion.div>
         </div>
@@ -89,7 +70,7 @@ export const Services = () => {
 
         <div className="mt-12 md:hidden flex justify-center">
           <Button href="/services" variant="white" size="md" icon={<ArrowRight className="w-4 h-4" />}>
-            Explore All Services
+            {content.servicesButtonText}
           </Button>
         </div>
       </div>

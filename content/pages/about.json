@@ -1,0 +1,29 @@
+{
+  "heroLabel": "About Us",
+  "heroTitleLine1": "We craft digital",
+  "heroTitleLine2": "futures",
+  "studioImage": "https://picsum.photos/seed/architecture/1600/1200",
+  "studioImageAlt": "Studio Environment",
+  "introHeading": "We are a design studio focused on building brands that matter.",
+  "introParagraph1": "Founded in 2024, VISH Studio emerged from a simple belief: that design is the most powerful tool for change. We don't just make things look good; we make them work, we make them feel, and we make them last.",
+  "introParagraph2": "Our team is a collective of designers, developers, and strategists who are obsessed with quality. We strip away the noise to reveal the essence of your brand, creating digital experiences that are as intuitive as they are beautiful.",
+  "valuesLabel": "Our Philosophy",
+  "valuesHeading": "CORE VALUES",
+  "values": [
+    {
+      "id": "01",
+      "title": "Radical Simplicity",
+      "description": "Complexity is easy. Simplicity is hard. We fight for clarity in every pixel and line of code."
+    },
+    {
+      "id": "02",
+      "title": "Uncompromising Quality",
+      "description": "Good enough is never enough. We push every detail until it breaks, then we build it back better."
+    },
+    {
+      "id": "03",
+      "title": "Human First",
+      "description": "Technology serves people, not the other way around. Empathy is our primary design tool."
+    }
+  ]
+}

@@ -1,7 +1,9 @@
 import { motion, useScroll, useSpring, useTransform } from 'motion/react';
 import { ArrowDown } from 'lucide-react';
+import { getSiteSettings } from '../lib/content';
 
 export const ScrollCircular = () => {
+  const settings = getSiteSettings();
   const { scrollY } = useScroll();
   const rawRotate = useTransform(scrollY, [0, 50000], [0, 18000]);
   const rotate = useSpring(rawRotate, { stiffness: 100, damping: 30 });
@@ -23,7 +25,7 @@ export const ScrollCircular = () => {
             </defs>
             <text className="font-mono text-[10.5px] font-bold uppercase tracking-[0.25em] fill-white">
               <textPath href="#circle" startOffset="0%">
-                Scroll to explore • Scroll to explore •
+                {settings.scrollText}
               </textPath>
             </text>
           </svg>

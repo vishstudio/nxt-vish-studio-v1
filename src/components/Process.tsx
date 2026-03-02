@@ -1,41 +1,12 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
-
-const steps = [
-  {
-    num: "01",
-    title: "Discovery",
-    description: "We dive deep into your business objectives, understanding your audience and challenges to build a solid foundation.",
-    tags: ["Research", "Audit", "Insights"]
-  },
-  {
-    num: "02",
-    title: "Strategy",
-    description: "Based on our findings, we develop a comprehensive roadmap that aligns with your business goals and user needs.",
-    tags: ["Planning", "UX Arch", "Roadmap"]
-  },
-  {
-    num: "03",
-    title: "Design",
-    description: "We craft visually stunning and intuitive interfaces that reflect your brand identity while maximizing user engagement.",
-    tags: ["UI", "Interaction", "Motion"]
-  },
-  {
-    num: "04",
-    title: "Development",
-    description: "Our engineering team brings the designs to life using cutting-edge technologies, ensuring performance and scalability.",
-    tags: ["Frontend", "Backend", "QA"]
-  },
-  {
-    num: "05",
-    title: "Launch",
-    description: "We handle the deployment process with precision, ensuring a smooth transition and providing ongoing support for growth.",
-    tags: ["Deploy", "Monitor", "Scale"]
-  }
-];
+import { getHomePage } from '../lib/content';
 
 export const Process = () => {
+  const content = getHomePage();
+  const steps = content.processSteps;
+
   const targetRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [scrollRange, setScrollRange] = useState(0);
@@ -93,10 +64,10 @@ export const Process = () => {
               transition={{ duration: 0.8 }}
             >
               <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-white mb-4">
-                Our Process<span className="text-vish-accent">.</span>
+                {content.processHeading}<span className="text-vish-accent">.</span>
               </h2>
               <p className="font-sans text-xs sm:text-sm text-gray-400 font-mono tracking-widest uppercase">
-                From concept to completion
+                {content.processSubtext}
               </p>
             </motion.div>
           </div>
@@ -115,7 +86,7 @@ export const Process = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.1 }}
                   viewport={{ margin: "-100px" }}
-                  className="group relative flex flex-col shrink-0 w-[85vw] sm:w-[60vw] md:w-[28vw] lg:w-[22vw] aspect-[4/5] md:aspect-[3/4] p-6 sm:p-8 md:p-10 bg-[#0A0A0A] border border-white/5 hover:border-vish-accent/40 rounded-3xl transition-all duration-500 hover:-translate-y-2 overflow-hidden"
+                  className="group relative flex flex-col shrink-0 w-[85vw] sm:w-[60vw] md:w-[28vw] lg:w-[22vw] aspect-[4/5] md:aspect-[3/4] p-6 sm:p-8 md:p-10 bg-[#0A0A0A] border border-white/5 hover:border-vish-accent/40 rounded-3xl transition-all duration-500 overflow-hidden"
                 >
                   {/* Decoration Gradient */}
                   <div className="absolute inset-0 bg-gradient-to-b from-white/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
