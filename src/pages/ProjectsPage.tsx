@@ -1,125 +1,39 @@
 import { motion } from 'motion/react';
-import { Link } from 'react-router-dom';
-import { ArrowUpRight } from 'lucide-react';
-import { Navbar } from '../components/Navbar';
-import { CustomCursor } from '../components/CustomCursor';
-import { Contact } from '../components/Contact';
 import { projects } from '../data/projects';
-import { ScrollCircular } from '../components/ScrollCircular';
+import { Contact } from '../components/Contact';
+import { PageLayout } from '../components/ui/PageLayout';
+import { PageHero } from '../components/ui/PageHero';
+import { Section } from '../components/ui/Section';
+import { ProjectCard } from '../components/ui/ProjectCard';
 
 export const ProjectsPage = () => {
   return (
-    <div className="bg-vish-bg min-h-screen text-white selection:bg-vish-accent selection:text-black cursor-none">
-      <CustomCursor />
-      <Navbar />
-      <ScrollCircular />
+    <PageLayout>
+      <PageHero
+        label="Our Portfolio"
+        title={
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="font-display text-6xl md:text-8xl lg:text-9xl font-medium tracking-tight leading-[0.95] text-white mb-12"
+          >
+            Selected <br />
+            <span className="text-gray-500">works<span className="text-vish-accent">.</span></span>
+          </motion.h1>
+        }
+        description="Explore a curated selection of our finest digital products. From immersive web experiences to comprehensive brand identities, each project represents our commitment to innovation and design excellence."
+      />
 
-      <main className="pt-32 pb-12">
-        <section className="px-6 md:px-12 mb-20 md:mb-32">
-          <div className="max-w-[1400px] mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="mb-8"
-            >
-              <span className="font-mono text-sm text-vish-accent uppercase tracking-widest">Our Portfolio</span>
-            </motion.div>
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="font-display text-6xl md:text-8xl lg:text-9xl font-medium tracking-tight leading-[0.95] text-white mb-12"
-            >
-              Selected <br />
-              <span className="text-gray-500">works<span className="text-vish-accent">.</span></span>
-            </motion.h1>
+      <Section className="mb-32">
+        <div className="flex flex-col gap-20 md:gap-40">
+          {projects.map((project, index) => (
+            <ProjectCard key={project.id} project={project} index={index} />
+          ))}
+        </div>
+      </Section>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="max-w-2xl"
-            >
-              <p className="font-sans text-xl md:text-2xl text-gray-400 leading-relaxed">
-                Explore a curated selection of our finest digital products. From immersive web experiences to comprehensive brand identities, each project represents our commitment to innovation and design excellence.
-              </p>
-            </motion.div>
-          </div>
-        </section>
-
-        <section className="px-6 md:px-12 mb-32">
-          <div className="max-w-[1400px] mx-auto flex flex-col gap-20 md:gap-40">
-            {projects.map((project, index) => (
-              <motion.div
-                key={project.id}
-                initial={{ opacity: 0, y: 60 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-10%" }}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 md:gap-20 items-center`}
-              >
-                {/* Project Image */}
-                <Link
-                  to={`/project/${project.id}`}
-                  className="w-full md:w-3/5 group overflow-hidden rounded-2xl block relative"
-                >
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.7, ease: [0.33, 1, 0.68, 1] }}
-                    className="aspect-[16/10] bg-gray-900"
-                  >
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500"
-                    />
-                  </motion.div>
-
-                  {/* Black Overlay */}
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
-                  {/* Overlay Button */}
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-vish-accent rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transform scale-50 group-hover:scale-100 transition-all duration-500 shadow-xl z-10">
-                    <ArrowUpRight className="w-8 h-8 text-black" />
-                  </div>
-                </Link>
-
-                {/* Project Details */}
-                <div className="w-full md:w-2/5 flex flex-col items-start">
-                  <span className="font-mono text-vish-accent mb-4 md:mb-6 text-sm tracking-widest uppercase">
-                    {project.category}
-                  </span>
-
-                  <Link to={`/project/${project.id}`} className="group-hover:text-gray-300 transition-colors block">
-                    <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-medium text-white mb-6 leading-[1.1]">
-                      {project.title}
-                    </h2>
-                  </Link>
-
-                  <p className="font-sans text-gray-400 text-lg leading-relaxed mb-8 max-w-sm">
-                    {project.description}
-                  </p>
-
-                  <div className="flex items-center gap-4">
-                    <span className="px-4 py-2 rounded-full border border-white/10 text-sm text-gray-400 font-mono">
-                      {project.year}
-                    </span>
-                    <Link
-                      to={`/project/${project.id}`}
-                      className="text-white border-b border-transparent hover:border-vish-accent hover:text-vish-accent transition-all duration-300 pb-0.5"
-                    >
-                      View Case Study
-                    </Link>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </section>
-
-        <Contact />
-      </main>
-    </div>
+      <Contact />
+    </PageLayout>
   );
 };
