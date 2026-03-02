@@ -6,7 +6,8 @@ export default defineConfig({
     process.env.TINA_BRANCH ||
     process.env.HEAD ||
     "main",
-  clientId: process.env.TINA_CLIENT_ID || "",
+  clientId:
+    process.env.TINA_CLIENT_ID || "43df9a3d-b238-44c9-8f2a-0b1563230ff6",
   token: process.env.TINA_TOKEN || "",
   build: {
     outputFolder: "admin",
