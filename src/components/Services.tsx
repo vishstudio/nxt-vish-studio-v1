@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { ArrowUpRight, ArrowRight } from 'lucide-react';
+import { Button } from './ui/Button';
 
 export const Services = () => {
   const services = [
@@ -43,16 +44,17 @@ export const Services = () => {
             </p>
           </motion.div>
 
-          <motion.a
+          <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            href="/services"
-            className="hidden md:flex items-center gap-2 px-6 py-3 rounded-full border border-white/10 hover:bg-white/5 hover:border-white/20 transition-all text-sm text-white group"
+            className="hidden md:block"
           >
-            Explore All Services <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </motion.a>
+            <Button href="/services" variant="outline" size="md" icon={<ArrowRight className="w-4 h-4" />}>
+              Explore All Services
+            </Button>
+          </motion.div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -86,12 +88,9 @@ export const Services = () => {
         </div>
 
         <div className="mt-12 md:hidden flex justify-center">
-          <a
-            href="/services"
-            className="flex items-center gap-2 px-6 py-3 rounded-full border border-white/10 hover:bg-white/5 hover:border-white/20 transition-all text-sm text-white group bg-white/[0.03]"
-          >
-            Explore All Services <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </a>
+          <Button href="/services" variant="outline" size="md" icon={<ArrowRight className="w-4 h-4" />}>
+            Explore All Services
+          </Button>
         </div>
       </div>
     </section>

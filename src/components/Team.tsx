@@ -15,7 +15,7 @@ const getIcon = (role: string) => {
 export const Team = ({ showTitle = true }: { showTitle?: boolean }) => {
   return (
     <section className="py-24 md:py-32 px-6 md:px-12 bg-vish-bg text-white" id="team">
-      <div className="max-w-screen-2xl mx-auto">
+      <div className="max-w-[1400px] mx-auto">
         {showTitle && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -24,9 +24,8 @@ export const Team = ({ showTitle = true }: { showTitle?: boolean }) => {
             transition={{ duration: 0.6 }}
             className="mb-20 md:mb-32"
           >
-            <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-medium text-white mb-8">
-              Our <br className="hidden md:block" />
-              Team<span className="text-vish-accent">.</span>
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-medium text-white mb-6">
+              Our Team<span className="text-vish-accent">.</span>
             </h2>
             <p className="font-sans text-xl md:text-2xl text-gray-400 max-w-2xl leading-relaxed">
               We are a collective of specialists, working across disciplines to deliver unified digital experiences.
@@ -34,7 +33,7 @@ export const Team = ({ showTitle = true }: { showTitle?: boolean }) => {
           </motion.div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="flex flex-wrap justify-center gap-6 lg:gap-8">
           {team.map((member, index) => {
             const Icon = getIcon(member.role);
             return (
@@ -44,10 +43,10 @@ export const Team = ({ showTitle = true }: { showTitle?: boolean }) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group flex flex-col h-full bg-white/[0.02] border border-white/5 hover:border-white/10 transition-colors duration-500 rounded-2xl overflow-hidden"
+                className="group flex flex-col h-full w-full sm:w-[calc(50%-12px)] lg:w-[calc(25%-24px)] bg-white/[0.02] border border-white/5 hover:border-white/10 transition-colors duration-500 rounded-2xl overflow-hidden"
               >
                 {/* Image Container */}
-                <div className="relative aspect-[4/5] overflow-hidden">
+                <div className="relative aspect-square overflow-hidden">
                   <div className="absolute inset-0 bg-gray-900 animate-pulse" />
                   <img
                     src={member.image}

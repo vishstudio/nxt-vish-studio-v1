@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { projects } from '../data/projects';
+import { Button } from './ui/Button';
 
 export const Projects = ({ showViewAll = true }: { showViewAll?: boolean }) => {
   const [activeProject, setActiveProject] = useState(projects[0]);
@@ -101,12 +102,15 @@ export const Projects = ({ showViewAll = true }: { showViewAll?: boolean }) => {
 
             {showViewAll && (
               <div className="mt-12">
-                <Link
-                  to="/work"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black rounded-full font-sans font-medium hover:bg-vish-accent transition-colors duration-300"
+                <Button
+                  href="/projects"
+                  variant="outline"
+                  size="md"
+                  icon={<ArrowUpRight className="w-5 h-5" />}
+                  iconPosition="right"
                 >
-                  View All Projects <ArrowUpRight className="w-5 h-5" />
-                </Link>
+                  View All Projects
+                </Button>
               </div>
             )}
           </div>

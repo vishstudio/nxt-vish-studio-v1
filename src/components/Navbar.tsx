@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, ArrowRight } from 'lucide-react';
+import { Button } from './ui/Button';
 
 export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -24,48 +25,76 @@ export const Navbar = () => {
         className="fixed top-6 left-0 right-0 z-50 flex justify-center pointer-events-none px-4"
       >
         <div
-          className={`pointer-events-auto flex items-center justify-between px-6 py-3 rounded-full transition-all duration-300 w-full max-w-5xl ${isScrolled
-            ? 'bg-black/80 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/50'
-            : 'bg-black/40 backdrop-blur-md border border-white/5'
+          className={`pointer-events-auto flex items-center justify-between transition-all duration-300 w-full max-w-[1400px] ${isScrolled
+            ? 'px-6 md:px-12 py-3 rounded-full bg-black/80 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/50'
+            : 'px-6 md:px-12 py-6 rounded-none bg-transparent border-transparent'
             }`}
         >
-          <a href="/" className="font-display text-xl font-bold tracking-tight text-white mr-8">
+          <a href="/" className="font-display text-xl font-bold tracking-tight text-white mr-4 relative z-50">
             VISH<span className="text-vish-accent">.</span>
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-1 bg-white/5 rounded-full p-1 border border-white/5">
-            {[
-              { name: 'Home', href: '/' },
-              { name: 'Projects', href: '/projects' },
-              { name: 'Services', href: '/services' },
-              { name: 'About', href: '/about' },
-              { name: 'Team', href: '/team' }
-            ].map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="px-5 py-2 rounded-full font-sans text-sm font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-all"
+          <AnimatePresence>
+            {!isScrolled && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.2 }}
+                className="hidden md:flex items-center gap-1 bg-white/5 rounded-full p-1 border border-white/5 absolute left-1/2 -translate-x-1/2"
               >
-                {item.name}
-              </a>
-            ))}
-          </div>
+                {[
+                  { name: 'Home', href: '/' },
+                  { name: 'Projects', href: '/projects' },
+                  { name: 'Services', href: '/services' },
+                  { name: 'About', href: '/about' },
+                  { name: 'Team', href: '/team' }
+                ].map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    className="px-5 py-2 rounded-full font-sans text-sm font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-all"
+                  >
+                    {item.name}
+                  </a>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           <div className="flex items-center gap-3">
-            <a
-              href="/#contact"
-              className="hidden md:flex group px-5 py-2.5 bg-vish-accent text-black font-sans font-medium text-sm rounded-full hover:bg-white transition-colors items-center gap-2"
-            >
-              Start Project <ArrowRight className="w-4 h-4 transition-transform group-hover:-rotate-45" />
-            </a>
+            <AnimatePresence>
+              {!isScrolled && (
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 10 }}
+                  transition={{ duration: 0.2 }}
+                  className="hidden md:flex"
+                >
+                  <Button
+                    href="/#contact"
+                    variant="primary"
+                    size="sm"
+                    icon={<ArrowRight className="w-4 h-4 transition-transform group-hover:-rotate-45" />}
+                    iconPosition="right"
+                    className="font-sans"
+                  >
+                    Start Project
+                  </Button>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
-            <button
+            <Button
+              variant="secondary"
+              size="icon"
               onClick={() => setIsMobileMenuOpen(true)}
-              className="md:hidden w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+              className={isScrolled ? 'flex' : 'flex md:hidden'}
             >
               <Menu className="w-5 h-5" />
-            </button>
+            </Button>
           </div>
         </div>
       </motion.nav>
@@ -95,12 +124,14 @@ export const Navbar = () => {
                 <span className="font-display text-2xl font-semibold text-white tracking-tight">
                   Menu<span className="text-vish-accent">.</span>
                 </span>
-                <button
+                <Button
+                  variant="secondary"
+                  size="icon"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="w-12 h-12 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-white transition-all duration-300 hover:rotate-90"
+                  className="w-12 h-12"
                 >
-                  <X className="w-5 h-5" />
-                </button>
+                  <X className="w-5 h-5 transition-transform duration-300 group-hover:rotate-90" />
+                </Button>
               </div>
 
               <div className="flex-1 overflow-y-auto py-8 px-8 flex flex-col gap-2">
