@@ -1,95 +1,97 @@
 import { motion } from 'motion/react';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, ArrowRight } from 'lucide-react';
 
 export const Services = () => {
   const services = [
     {
+      id: "01",
       title: "Strategy",
-      description: "We build the foundation for your digital presence.",
-      items: ["Brand Strategy", "UX Research", "Content Strategy", "Market Analysis"]
+      description: "Laying the groundwork for digital success through data-driven insights and market analysis."
     },
     {
+      id: "02",
       title: "Design",
-      description: "Crafting beautiful, functional, and user-centric interfaces.",
-      items: ["UI/UX Design", "Visual Identity", "Motion Design", "Design Systems"]
+      description: "Crafting immersive visual systems and user interfaces that tell your unique brand story."
     },
     {
+      id: "03",
       title: "Development",
-      description: "Turning designs into robust, scalable digital products.",
-      items: ["Frontend Development", "Backend Engineering", "CMS Integration", "Creative Coding"]
+      description: "Building robust, scalable, and high-performance technical solutions for the modern web."
     },
     {
+      id: "04",
       title: "Marketing",
-      description: "Amplifying your message to reach the right audience.",
-      items: ["SEO Optimization", "Social Media", "Email Marketing", "Analytics"]
+      description: "Amplifying your voice to reach the right audience with precision and impact."
     }
   ];
 
   return (
-    <section className="py-32 px-6 md:px-12 bg-vish-bg" id="services">
+    <section className="py-32 px-6 md:px-12 bg-black/20" id="services">
       <div className="max-w-[1400px] mx-auto">
-        <div className="mb-24 flex justify-between items-end">
-          <motion.h2
+        <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="font-display text-3xl md:text-5xl lg:text-6xl font-medium text-white mb-8"
           >
-            Our <br className="hidden md:block" />
-            Services<span className="text-vish-accent">.</span>
-          </motion.h2>
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-medium text-white mb-6">
+              Our Expertise<span className="text-vish-accent">.</span>
+            </h2>
+            <p className="font-sans text-gray-400 text-lg max-w-md">
+              Comprehensive digital solutions tailored to elevate your business in an evolving landscape.
+            </p>
+          </motion.div>
+
           <motion.a
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            href="#"
-            className="hidden md:flex items-center gap-2 text-sm font-sans font-medium text-gray-400 hover:text-vish-accent transition-colors"
+            href="/services"
+            className="hidden md:flex items-center gap-2 px-6 py-3 rounded-full border border-white/10 hover:bg-white/5 hover:border-white/20 transition-all text-sm text-white group"
           >
-            View full capabilities <ArrowUpRight className="w-4 h-4" />
+            Explore All Services <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </motion.a>
         </div>
 
-        <div className="flex flex-col">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => (
-            <motion.div
+            <motion.a
               key={index}
-              initial={{ opacity: 0, y: 40 }}
+              href="/services"
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, delay: index * 0.1 }}
-              className="group border-t border-white/10 hover:border-white/20 py-12 md:py-16 flex flex-col md:flex-row md:items-start justify-between gap-8 hover:bg-white/5 transition-all duration-300 px-4 -mx-4 rounded-xl"
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="group relative p-8 rounded-2xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.06] hover:border-white/10 transition-all duration-500 flex flex-col justify-between min-h-[320px]"
             >
-              <div className="md:w-1/3">
-                <h3 className="font-display text-3xl md:text-4xl font-medium text-white group-hover:text-vish-accent group-hover:translate-x-2 transition-all duration-300">
+              <div>
+                <span className="font-mono text-xs text-vish-accent mb-4 block">{service.id}</span>
+                <h3 className="font-display text-3xl text-white mb-4 group-hover:translate-x-1 transition-transform duration-300">
                   {service.title}
                 </h3>
-              </div>
-
-              <div className="md:w-2/3 flex flex-col md:flex-row gap-8 md:gap-16">
-                <p className="font-sans text-lg text-gray-400 max-w-sm leading-relaxed">
+                <p className="font-sans text-sm text-gray-500 leading-relaxed group-hover:text-gray-400 transition-colors duration-300">
                   {service.description}
                 </p>
-
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2">
-                  {service.items.map((item, i) => (
-                    <li key={i} className="font-sans text-sm text-gray-500 flex items-center gap-2">
-                      <span className="w-1 h-1 rounded-full bg-vish-accent opacity-0 group-hover:opacity-100 transition-opacity" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
               </div>
-            </motion.div>
+
+              <div className="flex justify-between items-end mt-8">
+                <span className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-white/40 group-hover:bg-vish-accent group-hover:text-black transition-all duration-300">
+                  <ArrowUpRight className="w-4 h-4" />
+                </span>
+              </div>
+            </motion.a>
           ))}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.5 }}
-            className="h-px bg-white/10 origin-left"
-          />
+        </div>
+
+        <div className="mt-12 md:hidden flex justify-center">
+          <a
+            href="/services"
+            className="flex items-center gap-2 px-6 py-3 rounded-full border border-white/10 hover:bg-white/5 hover:border-white/20 transition-all text-sm text-white group bg-white/[0.03]"
+          >
+            Explore All Services <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </a>
         </div>
       </div>
     </section>

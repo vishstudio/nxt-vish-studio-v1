@@ -38,7 +38,7 @@ export const Navbar = () => {
             {[
               { name: 'Home', href: '/' },
               { name: 'Projects', href: '/projects' },
-              { name: 'Services', href: '/#services' },
+              { name: 'Services', href: '/services' },
               { name: 'About', href: '/about' },
               { name: 'Team', href: '/team' }
             ].map((item) => (
@@ -73,125 +73,90 @@ export const Navbar = () => {
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div
-            initial={{ height: 0 }}
-            animate={{ height: "100dvh" }}
-            exit={{ height: 0 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed top-0 left-0 right-0 z-[60] bg-[#050505] flex flex-col overflow-hidden"
-          >
-            {/* Header - Replicating Navbar Position */}
-            <div className="absolute top-6 left-0 right-0 flex justify-center px-4 pointer-events-none z-[70]">
-              <div
-                className="pointer-events-auto flex items-center justify-between px-6 py-3 rounded-full transition-all duration-300 w-full max-w-5xl bg-black/80 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/50"
-              >
-                <span className="font-display text-xl font-bold tracking-tight text-white mr-8">
-                  VISH<span className="text-vish-accent">.</span>
+          <>
+            <motion.div
+              key="backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm"
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+            <motion.div
+              key="panel"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 20 }}
+              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              className="fixed top-0 right-0 bottom-0 w-full sm:w-[500px] z-[70] bg-[#050505] border-l border-white/10 flex flex-col shadow-2xl"
+            >
+              <div className="flex justify-between items-center p-8">
+                <span className="font-display text-2xl font-semibold text-white tracking-tight">
+                  Menu<span className="text-vish-accent">.</span>
                 </span>
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+                  className="w-12 h-12 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-white transition-all duration-300 hover:rotate-90"
                 >
-                  <motion.div
-                    initial={{ rotate: -90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: 90, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <X className="w-5 h-5" />
-                  </motion.div>
+                  <X className="w-5 h-5" />
                 </button>
               </div>
-            </div>
 
-            {/* Links Container */}
-            <motion.div
-              variants={{
-                hidden: { opacity: 0 },
-                visible: {
-                  opacity: 1,
-                  transition: { staggerChildren: 0.05, delayChildren: 0.2 }
-                },
-                exit: { opacity: 0 }
-              }}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              className="flex-1 flex flex-col justify-center px-6 mt-24"
-            >
-              {[
-                { name: 'Projects', href: '/projects', subtitle: 'Our Work' },
-                { name: 'Services', href: '/#services', subtitle: 'What We Do' },
-                { name: 'About', href: '/about', subtitle: 'Our Story' },
-                { name: 'Team', href: '/team', subtitle: 'Our People' }
-              ].map((item, index) => (
-                <motion.a
-                  key={item.name}
-                  href={item.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  variants={{
-                    hidden: { x: -20, opacity: 0 },
-                    visible: {
-                      x: 0,
-                      opacity: 1,
-                      transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] }
-                    },
-                    exit: { opacity: 0 }
-                  }}
-                  className="group py-5 border-b border-white/5 last:border-0 flex items-center justify-between"
+              <div className="flex-1 overflow-y-auto py-8 px-8 flex flex-col gap-2">
+                {[
+                  { name: 'Projects', href: '/projects', id: '01' },
+                  { name: 'Services', href: '/services', id: '02' },
+                  { name: 'About', href: '/about', id: '03' },
+                  { name: 'Team', href: '/team', id: '04' },
+                  { name: 'Contact', href: '/#contact', id: '05' }
+                ].map((item, i) => (
+                  <motion.a
+                    key={item.name}
+                    href={item.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    initial={{ x: 50, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: 0.1 + i * 0.05, duration: 0.4, ease: "easeOut" }}
+                    className="group block py-4"
+                  >
+                    <div className="flex items-baseline gap-6 group-hover:translate-x-4 transition-transform duration-300 ease-out">
+                      <span className="font-mono text-sm text-white/20 group-hover:text-vish-accent transition-colors">
+                        {item.id}
+                      </span>
+                      <span className="font-display text-6xl font-medium text-white group-hover:text-white/80 transition-colors tracking-tight">
+                        {item.name}
+                      </span>
+                    </div>
+                  </motion.a>
+                ))}
+
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.4, duration: 0.5 }}
+                  className="mt-auto pt-12 pb-8"
                 >
-                  <div className="flex flex-col">
-                    <span className="font-display text-4xl md:text-5xl font-medium text-white transition-colors duration-300 group-active:text-vish-accent">
-                      {item.name}
-                    </span>
-                    <span className="text-xs text-gray-500 font-mono mt-1 uppercase tracking-widest group-hover:text-vish-accent/70 transition-colors">
-                      {item.subtitle}
-                    </span>
-                  </div>
-                  <ArrowRight className="w-6 h-6 text-white/20 -rotate-45 group-hover:rotate-0 group-hover:text-vish-accent transition-all duration-300" />
-                </motion.a>
-              ))}
-              <motion.a
-                href="/#contact"
-                onClick={() => setIsMobileMenuOpen(false)}
-                variants={{
-                  hidden: { x: -20, opacity: 0 },
-                  visible: {
-                    x: 0,
-                    opacity: 1,
-                    transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] }
-                  },
-                  exit: { opacity: 0 }
-                }}
-                className="mt-8 bg-white text-black font-display text-xl px-6 py-4 rounded-full text-center hover:bg-vish-accent transition-colors"
-              >
-                Start A Project
-              </motion.a>
-            </motion.div>
-
-            {/* Footer */}
-            <div className="p-8 bg-white/[0.02] border-t border-white/5">
-              <div className="flex flex-col gap-6">
-                <div>
-                  <p className="text-white/40 text-xs font-mono tracking-widest uppercase mb-2">Say Hello</p>
-                  <a href="mailto:hello@vish.studio" className="font-display text-2xl text-vish-accent hover:text-white transition-colors">
+                  <p className="font-mono text-xs text-white/30 uppercase tracking-widest mb-6">Connect</p>
+                  <a href="mailto:hello@vish.studio" className="block font-display text-2xl text-white hover:text-vish-accent transition-colors mb-8">
                     hello@vish.studio
                   </a>
-                </div>
 
-                <div className="flex justify-between items-end pt-4 border-t border-white/5">
-                  <div className="flex gap-4">
-                    {['LI', 'TW', 'IG'].map((social) => (
-                      <a key={social} href="#" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-xs text-gray-400 hover:text-black hover:bg-white hover:border-white transition-all font-mono">
+                  <div className="flex gap-6">
+                    {['LinkedIn', 'Twitter', 'Instagram'].map((social) => (
+                      <a
+                        key={social}
+                        href="#"
+                        className="text-white/40 hover:text-white text-xs font-mono uppercase tracking-widest transition-colors"
+                      >
                         {social}
                       </a>
                     ))}
                   </div>
-                  <span className="text-[10px] text-white/20 font-mono">©2026 VISH.</span>
-                </div>
+                </motion.div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>
