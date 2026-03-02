@@ -1,0 +1,125 @@
+fragment ProjectParts on Project {
+  __typename
+  title
+  category
+  image
+  year
+  order
+  description
+  fullDescription
+  gallery
+}
+
+fragment TeamMemberParts on TeamMember {
+  __typename
+  name
+  role
+  image
+  bio
+  order
+}
+
+fragment SiteSettingsParts on SiteSettings {
+  __typename
+  email
+  phone
+  phoneLink
+  address
+  copyright
+  contactHeadingLine1
+  contactHeadingLine2
+  scrollText
+  socials {
+    __typename
+    name
+    url
+  }
+  footerLinks {
+    __typename
+    label
+    url
+  }
+}
+
+fragment PartnersParts on Partners {
+  __typename
+  partnersLabel
+  partners
+}
+
+fragment HomePageParts on HomePage {
+  __typename
+  heroLabel
+  heroTitleLine1
+  heroTitleLine2
+  heroDescription
+  aboutHeading
+  aboutParagraph1
+  aboutParagraph2
+  servicesHeading
+  servicesSubtext
+  servicesButtonText
+  services {
+    __typename
+    id
+    title
+    description
+  }
+  processHeading
+  processSubtext
+  processSteps {
+    __typename
+    num
+    title
+    description
+    tags
+  }
+}
+
+fragment AboutPageParts on AboutPage {
+  __typename
+  heroLabel
+  heroTitleLine1
+  heroTitleLine2
+  studioImage
+  studioImageAlt
+  introHeading
+  introParagraph1
+  introParagraph2
+  valuesLabel
+  valuesHeading
+  values {
+    __typename
+    id
+    title
+    description
+  }
+}
+
+fragment ServicesPageParts on ServicesPage {
+  __typename
+  heroLabel
+  heroTitleLine1
+  heroTitleLine2
+  categories {
+    __typename
+    category
+    description
+    items
+  }
+}
+
+fragment ContactPageParts on ContactPage {
+  __typename
+  heroLabel
+  heroTitleLine1
+  heroTitleLine2
+  heroTitlePunctuation
+  heroDescription
+  trustIndicators {
+    __typename
+    icon
+    title
+    description
+  }
+}

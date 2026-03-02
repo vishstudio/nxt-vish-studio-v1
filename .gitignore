@@ -4,6 +4,6 @@ build/
 .DS_Store
 node_modules/
 
-# TinaCMS
-tina/__generated__/
-public/admin/
+# TinaCMS (generated files are committed so vite build always works)
+# tina/__generated__/
+# public/admin/
