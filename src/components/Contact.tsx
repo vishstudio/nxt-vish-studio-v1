@@ -3,7 +3,7 @@ import { ArrowUpRight } from 'lucide-react';
 
 export const Contact = () => {
   return (
-    <section className="bg-black text-white py-32 pb-12 px-6 md:px-12 relative overflow-hidden" id="contact">
+    <section className="bg-black text-white py-32 pb-4 px-6 md:px-12 relative overflow-hidden" id="contact">
       {/* Background Grid - Optional subtle texture */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
 

@@ -14,7 +14,7 @@ export const ProjectsPage = () => {
       <Navbar />
       <ScrollCircular />
 
-      <main className="pt-32 pb-20">
+      <main className="pt-32 pb-12">
         <section className="px-6 md:px-12 mb-20 md:mb-32">
           <div className="max-w-screen-2xl mx-auto">
             <motion.div
@@ -29,9 +29,10 @@ export const ProjectsPage = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="font-display text-5xl md:text-7xl lg:text-8xl font-medium tracking-tight text-white max-w-4xl mb-12"
+              className="font-display text-6xl md:text-8xl lg:text-9xl font-medium tracking-tight leading-[0.95] text-white mb-12"
             >
-              Selected Works<span className="text-vish-accent">.</span>
+              Selected <br />
+              <span className="text-gray-500">works<span className="text-vish-accent">.</span></span>
             </motion.h1>
 
             <motion.div

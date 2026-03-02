@@ -24,8 +24,8 @@ export const ProjectDetail = () => {
     <div className="bg-vish-bg min-h-screen text-white selection:bg-vish-accent selection:text-black">
       <CustomCursor />
       <Navbar />
-      
-      <main className="pt-32 pb-20 px-6 md:px-12 max-w-[1400px] mx-auto">
+
+      <main className="pt-32 pb-12 px-6 md:px-12 max-w-[1400px] mx-auto">
         <Link to="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-vish-accent transition-colors mb-12 group">
           <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
           Back to Projects
@@ -37,8 +37,8 @@ export const ProjectDetail = () => {
           transition={{ duration: 0.6 }}
         >
           <span className="font-mono text-vish-accent text-sm mb-4 block">0{project.id} — {project.category}</span>
-          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-medium mb-8 leading-tight">
-            {project.title}
+          <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-medium mb-12 tracking-tight leading-[0.95]">
+            {project.title}<span className="text-vish-accent">.</span>
           </h1>
         </motion.div>
 
@@ -48,9 +48,9 @@ export const ProjectDetail = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="w-full aspect-video rounded-2xl overflow-hidden mb-16 border border-white/10"
         >
-          <img 
-            src={project.image} 
-            alt={project.title} 
+          <img
+            src={project.image}
+            alt={project.title}
             className="w-full h-full object-cover"
           />
         </motion.div>
@@ -93,9 +93,9 @@ export const ProjectDetail = () => {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   className="rounded-xl overflow-hidden aspect-[4/3] border border-white/10"
                 >
-                  <img 
-                    src={img} 
-                    alt={`${project.title} gallery ${index + 1}`} 
+                  <img
+                    src={img}
+                    alt={`${project.title} gallery ${index + 1}`}
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                   />
                 </motion.div>

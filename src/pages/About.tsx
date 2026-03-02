@@ -28,30 +28,22 @@ export const AboutPage = () => {
               <span className="font-mono text-sm text-vish-accent uppercase tracking-widest">About Us</span>
             </motion.div>
 
-            <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-medium tracking-tighter leading-[0.85] text-white">
+            <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-medium tracking-tight leading-[0.95] text-white mb-12">
               <motion.span
-                initial={{ opacity: 0, y: 100 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                 className="block"
               >
-                WE CRAFT
+                We craft digital
               </motion.span>
               <motion.span
-                initial={{ opacity: 0, y: 100 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="block text-white"
-              >
-                DIGITAL
-              </motion.span>
-              <motion.span
-                initial={{ opacity: 0, y: 100 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                className="block"
+                className="block text-gray-500"
               >
-                FUTURES<span className="text-vish-accent">.</span>
+                futures<span className="text-vish-accent">.</span>
               </motion.span>
             </h1>
           </div>
@@ -98,14 +90,14 @@ export const AboutPage = () => {
         </section>
 
         {/* Values Section - Redesigned */}
-        <section className="px-6 md:px-12 py-32 bg-white text-black">
+        <section className="px-6 md:px-12 py-32 bg-vish-bg text-white">
           <div className="max-w-[1400px] mx-auto">
             <div className="mb-24">
               <span className="font-mono text-sm text-vish-accent uppercase tracking-widest block mb-4">Our Philosophy</span>
-              <h2 className="font-display text-6xl md:text-8xl tracking-tighter">CORE VALUES</h2>
+              <h2 className="font-display text-6xl md:text-8xl tracking-tight leading-none text-white">CORE VALUES</h2>
             </div>
 
-            <div className="grid grid-cols-1 border-t border-black/10">
+            <div className="grid grid-cols-1 border-t border-white/10">
               {[
                 {
                   id: "01",
@@ -123,15 +115,15 @@ export const AboutPage = () => {
                   desc: "Technology serves people, not the other way around. Empathy is our primary design tool."
                 }
               ].map((value, index) => (
-                <div key={index} className="group grid grid-cols-1 md:grid-cols-12 gap-8 py-16 border-b border-black/10 hover:bg-black/5 transition-colors duration-300 px-4 -mx-4">
-                  <div className="md:col-span-2 font-mono text-xl text-gray-400 group-hover:text-vish-accent transition-colors">
+                <div key={index} className="group grid grid-cols-1 md:grid-cols-12 gap-8 py-16 border-b border-white/10 transition-colors duration-500 hover:bg-white/[0.02]">
+                  <div className="md:col-span-1 font-mono text-sm text-vish-accent pt-2">
                     /{value.id}
                   </div>
                   <div className="md:col-span-5">
-                    <h3 className="font-display text-4xl font-medium">{value.title}</h3>
+                    <h3 className="font-display text-4xl md:text-5xl font-medium text-white group-hover:translate-x-2 transition-transform duration-500">{value.title}</h3>
                   </div>
-                  <div className="md:col-span-5">
-                    <p className="font-sans text-xl text-gray-600 leading-relaxed max-w-md">{value.desc}</p>
+                  <div className="md:col-span-6">
+                    <p className="font-sans text-xl text-gray-400 leading-relaxed max-w-lg group-hover:text-gray-300 transition-colors duration-500">{value.desc}</p>
                   </div>
                 </div>
               ))}
