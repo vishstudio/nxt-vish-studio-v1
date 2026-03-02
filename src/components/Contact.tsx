@@ -16,10 +16,10 @@ export const Contact = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display text-3xl md:text-5xl lg:text-6xl font-medium tracking-tighter leading-[0.9]"
+            className="font-display text-6xl md:text-8xl lg:text-9xl font-medium tracking-tight leading-[0.95] text-white"
           >
-            Let's work <br />
-            together<span className="text-vish-accent">.</span>
+            <span className="text-white">Let's work</span> <br />
+            <span className="text-gray-500">together</span><span className="text-vish-accent">.</span>
           </motion.h2>
         </div>
 

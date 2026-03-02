@@ -34,7 +34,7 @@ export const Team = ({ showTitle = true }: { showTitle?: boolean }) => {
           </motion.div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {team.map((member, index) => {
             const Icon = getIcon(member.role);
             return (
@@ -44,7 +44,7 @@ export const Team = ({ showTitle = true }: { showTitle?: boolean }) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group flex flex-col h-full bg-white/[0.02] border border-white/5 hover:border-white/10 transition-colors duration-500 rounded-sm overflow-hidden"
+                className="group flex flex-col h-full bg-white/[0.02] border border-white/5 hover:border-white/10 transition-colors duration-500 rounded-2xl overflow-hidden"
               >
                 {/* Image Container */}
                 <div className="relative aspect-[4/5] overflow-hidden">

@@ -50,7 +50,7 @@ export const Projects = ({ showViewAll = true }: { showViewAll?: boolean }) => {
                       transition: { duration: 0.5, ease: [0.4, 0, 0.2, 1] }
                     }
                   }}
-                  className="border-t border-white/10 py-12 px-4 md:px-8 cursor-pointer relative"
+                  className="border-t border-white/10 py-12 px-4 md:px-8 cursor-pointer relative rounded-2xl overflow-hidden"
                   onMouseEnter={() => setActiveProject(project)}
                 >
                   <div className="flex items-start gap-6 md:gap-12">

@@ -56,7 +56,7 @@ export const ProjectsPage = () => {
                 className="group block relative"
               >
                 {/* Image Container */}
-                <div className="overflow-hidden rounded-sm mb-6">
+                <div className="overflow-hidden rounded-2xl mb-6">
                   <motion.div
                     initial={{ opacity: 0, scale: 1.1 }}
                     whileInView={{ opacity: 1, scale: 1 }}
