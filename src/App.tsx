@@ -5,8 +5,8 @@ import { Home } from './pages/Home';
 import { AboutPage } from './pages/About';
 import { ProjectsPage } from './pages/ProjectsPage';
 import { ServicesPage } from './pages/ServicesPage';
-import { TeamPage } from './pages/TeamPage';
 import { ProjectDetail } from './pages/ProjectDetail';
+import { ContactPage } from './pages/ContactPage';
 import { CustomCursor } from './components/CustomCursor';
 import { Loader } from './components/Loader';
 
@@ -28,7 +28,7 @@ function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/services" element={<ServicesPage />} />
-            <Route path="/team" element={<TeamPage />} />
+            <Route path="/contact" element={<ContactPage />} />
             <Route path="/project/:id" element={<ProjectDetail />} />
           </Routes>
         )}

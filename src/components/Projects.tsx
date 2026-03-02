@@ -104,7 +104,7 @@ export const Projects = ({ showViewAll = true }: { showViewAll?: boolean }) => {
               <div className="mt-12">
                 <Button
                   href="/projects"
-                  variant="outline"
+                  variant="white"
                   size="md"
                   icon={<ArrowUpRight className="w-5 h-5" />}
                   iconPosition="right"

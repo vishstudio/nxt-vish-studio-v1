@@ -16,7 +16,7 @@ export const ProjectsPage = () => {
 
       <main className="pt-32 pb-12">
         <section className="px-6 md:px-12 mb-20 md:mb-32">
-          <div className="max-w-screen-2xl mx-auto">
+          <div className="max-w-[1400px] mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -49,7 +49,7 @@ export const ProjectsPage = () => {
         </section>
 
         <section className="px-6 md:px-12 mb-32">
-          <div className="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-x-12 md:gap-y-24">
+          <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-x-12 md:gap-y-24">
             {projects.map((project, index) => (
               <Link
                 to={`/project/${project.id}`}

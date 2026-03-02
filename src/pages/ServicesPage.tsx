@@ -48,7 +48,7 @@ export const ServicesPage = () => {
               <span className="font-mono text-sm text-vish-accent uppercase tracking-widest">Our Expertise</span>
             </motion.div>
 
-            <h1 className="font-display text-7xl md:text-9xl font-medium tracking-tight leading-[0.9] text-white mb-12">
+            <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-medium tracking-tight leading-[0.95] text-white mb-12">
               <motion.span
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}

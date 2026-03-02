@@ -26,7 +26,7 @@ export const Navbar = () => {
       >
         <div
           className={`pointer-events-auto flex items-center justify-between transition-all duration-300 w-full max-w-[1400px] ${isScrolled
-            ? 'px-6 md:px-12 py-3 rounded-full bg-black/80 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/50'
+            ? 'pl-6 pr-2 py-2 md:pl-12 md:pr-2 rounded-full bg-black/80 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/50'
             : 'px-6 md:px-12 py-6 rounded-none bg-transparent border-transparent'
             }`}
         >
@@ -48,8 +48,7 @@ export const Navbar = () => {
                   { name: 'Home', href: '/' },
                   { name: 'Projects', href: '/projects' },
                   { name: 'Services', href: '/services' },
-                  { name: 'About', href: '/about' },
-                  { name: 'Team', href: '/team' }
+                  { name: 'About', href: '/about' }
                 ].map((item) => (
                   <a
                     key={item.name}
@@ -74,7 +73,7 @@ export const Navbar = () => {
                   className="hidden md:flex"
                 >
                   <Button
-                    href="/#contact"
+                    href="/contact"
                     variant="primary"
                     size="sm"
                     icon={<ArrowRight className="w-4 h-4 transition-transform group-hover:-rotate-45" />}
@@ -139,8 +138,7 @@ export const Navbar = () => {
                   { name: 'Projects', href: '/projects', id: '01' },
                   { name: 'Services', href: '/services', id: '02' },
                   { name: 'About', href: '/about', id: '03' },
-                  { name: 'Team', href: '/team', id: '04' },
-                  { name: 'Contact', href: '/#contact', id: '05' }
+                  { name: 'Contact', href: '/contact', id: '04' }
                 ].map((item, i) => (
                   <motion.a
                     key={item.name}

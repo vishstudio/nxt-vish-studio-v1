@@ -4,7 +4,7 @@ import { motion } from 'motion/react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
-type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'link';
+type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'link' | 'white';
 type ButtonSize = 'sm' | 'md' | 'lg' | 'icon';
 
 interface ButtonProps {
@@ -43,7 +43,8 @@ export const Button = ({
     secondary: "bg-white/10 text-white hover:bg-white/20 border border-white/5 backdrop-blur-sm",
     outline: "bg-transparent border border-white/20 text-white hover:border-vish-accent hover:text-vish-accent",
     ghost: "bg-transparent text-white/70 hover:text-white hover:bg-white/5",
-    link: "bg-transparent text-vish-accent hover:text-white underline-offset-4 hover:underline p-0 h-auto"
+    link: "bg-transparent text-vish-accent hover:text-white underline-offset-4 hover:underline p-0 h-auto",
+    white: "bg-white text-black hover:bg-vish-accent hover:text-black border border-transparent shadow-[0_0_15px_rgba(255,255,255,0.3)] hover:shadow-[0_0_25px_rgba(255,214,0,0.4)]"
   };
 
   const sizes = {
