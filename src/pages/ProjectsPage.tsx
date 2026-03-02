@@ -49,58 +49,71 @@ export const ProjectsPage = () => {
         </section>
 
         <section className="px-6 md:px-12 mb-32">
-          <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-x-12 md:gap-y-24">
+          <div className="max-w-[1400px] mx-auto flex flex-col gap-20 md:gap-40">
             {projects.map((project, index) => (
-              <Link
-                to={`/project/${project.id}`}
+              <motion.div
                 key={project.id}
-                className="group block relative"
+                initial={{ opacity: 0, y: 60 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 md:gap-20 items-center`}
               >
-                {/* Image Container */}
-                <div className="overflow-hidden rounded-2xl mb-6">
+                {/* Project Image */}
+                <Link
+                  to={`/project/${project.id}`}
+                  className="w-full md:w-3/5 group overflow-hidden rounded-2xl block relative"
+                >
                   <motion.div
-                    initial={{ opacity: 0, scale: 1.1 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8 }}
-                    className="relative w-full aspect-[4/3] bg-gray-900 overflow-hidden"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.7, ease: [0.33, 1, 0.68, 1] }}
+                    className="aspect-[16/10] bg-gray-900"
                   >
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500"
                     />
-
-                    {/* Hover Overlay - Minimalist */}
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center backdrop-blur-[2px]">
-                      <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center transform scale-50 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-500 delay-100">
-                        <ArrowUpRight className="w-6 h-6 text-black" />
-                      </div>
-                    </div>
                   </motion.div>
-                </div>
 
-                {/* Content below image */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.1 }}
-                  className="flex justify-between items-start"
-                >
-                  <div>
-                    <h3 className="font-display text-3xl md:text-4xl font-medium text-white mb-2 group-hover:text-gray-300 transition-colors">{project.title}</h3>
-                    <div className="flex items-center gap-3">
-                      <span className="font-mono text-xs text-vish-accent uppercase tracking-wider">{project.category}</span>
-                      <span className="w-1 h-1 rounded-full bg-gray-600"></span>
-                      <span className="font-mono text-xs text-gray-400">{project.year}</span>
-                    </div>
+                  {/* Black Overlay */}
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+                  {/* Overlay Button */}
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-vish-accent rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transform scale-50 group-hover:scale-100 transition-all duration-500 shadow-xl z-10">
+                    <ArrowUpRight className="w-8 h-8 text-black" />
                   </div>
-                  <div className="hidden md:block opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform translate-y-2 group-hover:translate-y-0 text-sm text-gray-400 max-w-xs text-right">
+                </Link>
+
+                {/* Project Details */}
+                <div className="w-full md:w-2/5 flex flex-col items-start">
+                  <span className="font-mono text-vish-accent mb-4 md:mb-6 text-sm tracking-widest uppercase">
+                    {project.category}
+                  </span>
+
+                  <Link to={`/project/${project.id}`} className="group-hover:text-gray-300 transition-colors block">
+                    <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-medium text-white mb-6 leading-[1.1]">
+                      {project.title}
+                    </h2>
+                  </Link>
+
+                  <p className="font-sans text-gray-400 text-lg leading-relaxed mb-8 max-w-sm">
                     {project.description}
+                  </p>
+
+                  <div className="flex items-center gap-4">
+                    <span className="px-4 py-2 rounded-full border border-white/10 text-sm text-gray-400 font-mono">
+                      {project.year}
+                    </span>
+                    <Link
+                      to={`/project/${project.id}`}
+                      className="text-white border-b border-transparent hover:border-vish-accent hover:text-vish-accent transition-all duration-300 pb-0.5"
+                    >
+                      View Case Study
+                    </Link>
                   </div>
-                </motion.div>
-              </Link>
+                </div>
+              </motion.div>
             ))}
           </div>
         </section>
