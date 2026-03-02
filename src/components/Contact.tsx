@@ -1,9 +1,9 @@
 import { motion } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
-import { getSiteSettings } from '../lib/content';
+import { useTinaSettings } from '../hooks/useTinaVisualEditing';
 
 export const Contact = () => {
-  const settings = getSiteSettings();
+  const { data: settings, tinaField } = useTinaSettings();
 
   return (
     <section className="bg-black text-white py-32 pb-4 px-6 md:px-12 relative overflow-hidden" id="contact">
@@ -21,8 +21,8 @@ export const Contact = () => {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="font-display text-6xl md:text-8xl lg:text-9xl font-medium tracking-tight leading-[0.95] text-white"
           >
-            <span className="text-white">{settings.contactHeadingLine1}</span> <br />
-            <span className="text-gray-500">{settings.contactHeadingLine2}</span><span className="text-vish-accent">.</span>
+            <span className="text-white" data-tina-field={tinaField('contactHeadingLine1')}>{settings.contactHeadingLine1}</span> <br />
+            <span className="text-gray-500" data-tina-field={tinaField('contactHeadingLine2')}>{settings.contactHeadingLine2}</span><span className="text-vish-accent">.</span>
           </motion.h2>
         </div>
 

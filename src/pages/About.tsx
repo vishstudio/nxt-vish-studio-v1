@@ -5,10 +5,10 @@ import { TextReveal } from '../components/TextReveal';
 import { TrustedPartners } from '../components/TrustedPartners';
 import { PageLayout } from '../components/ui/PageLayout';
 import { PageHero } from '../components/ui/PageHero';
-import { getAboutPage } from '../lib/content';
+import { useTinaAbout } from '../hooks/useTinaVisualEditing';
 
 export const AboutPage = () => {
-  const content = getAboutPage();
+  const { data: content, tinaField } = useTinaAbout();
 
   return (
     <PageLayout>
@@ -21,6 +21,7 @@ export const AboutPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="block"
+              data-tina-field={tinaField('heroTitleLine1')}
             >
               {content.heroTitleLine1}
             </motion.span>
@@ -29,6 +30,7 @@ export const AboutPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="block text-gray-500"
+              data-tina-field={tinaField('heroTitleLine2')}
             >
               {content.heroTitleLine2}<span className="text-vish-accent">.</span>
             </motion.span>
@@ -60,6 +62,7 @@ export const AboutPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 className="font-display text-4xl md:text-5xl leading-tight"
+                data-tina-field={tinaField('introHeading')}
               >
                 {content.introHeading}
               </motion.h2>

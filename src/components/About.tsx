@@ -1,9 +1,9 @@
 import { motion } from 'motion/react';
 import { TextReveal } from './TextReveal';
-import { getHomePage } from '../lib/content';
+import { useTinaHome } from '../hooks/useTinaVisualEditing';
 
 export const About = () => {
-  const content = getHomePage();
+  const { data: content, tinaField } = useTinaHome();
 
   return (
     <section className="py-32 px-6 md:px-12 bg-vish-bg" id="about">
@@ -14,17 +14,21 @@ export const About = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-medium mb-8 text-white">
+          <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-medium mb-8 text-white" data-tina-field={tinaField('aboutHeading')}>
             {content.aboutHeading}<span className="text-vish-accent">.</span>
           </h2>
         </motion.div>
         <div>
-          <TextReveal className="font-display text-2xl md:text-3xl lg:text-4xl font-medium text-white mb-20 leading-[1.3]">
-            {content.aboutParagraph1}
-          </TextReveal>
-          <TextReveal className="font-display text-2xl md:text-3xl lg:text-4xl font-medium text-white leading-[1.3]">
-            {content.aboutParagraph2}
-          </TextReveal>
+          <div data-tina-field={tinaField('aboutParagraph1')}>
+            <TextReveal className="font-display text-2xl md:text-3xl lg:text-4xl font-medium text-white mb-20 leading-[1.3]">
+              {content.aboutParagraph1}
+            </TextReveal>
+          </div>
+          <div data-tina-field={tinaField('aboutParagraph2')}>
+            <TextReveal className="font-display text-2xl md:text-3xl lg:text-4xl font-medium text-white leading-[1.3]">
+              {content.aboutParagraph2}
+            </TextReveal>
+          </div>
         </div>
       </div>
     </section>

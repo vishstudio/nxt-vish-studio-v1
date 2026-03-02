@@ -1,9 +1,9 @@
 import { motion, useScroll, useSpring, useTransform } from 'motion/react';
 import { ArrowDown } from 'lucide-react';
-import { getSiteSettings } from '../lib/content';
+import { useTinaSettings } from '../hooks/useTinaVisualEditing';
 
 export const ScrollCircular = () => {
-  const settings = getSiteSettings();
+  const { data: settings } = useTinaSettings();
   const { scrollY } = useScroll();
   const rawRotate = useTransform(scrollY, [0, 50000], [0, 18000]);
   const rotate = useSpring(rawRotate, { stiffness: 100, damping: 30 });

@@ -1,13 +1,13 @@
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ArrowLeft } from 'lucide-react';
-import { getProject } from '../lib/projects';
+import { useTinaProjectDetail } from '../hooks/useTinaVisualEditing';
 import { Navbar } from '../components/Navbar';
 import { CustomCursor } from '../components/CustomCursor';
 
 export const ProjectDetail = () => {
   const { slug } = useParams();
-  const project = getProject(slug || '');
+  const { data: project } = useTinaProjectDetail(slug || '');
 
   if (!project) {
     return (

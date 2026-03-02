@@ -3,10 +3,10 @@ import { Process } from '../components/Process';
 import { Contact } from '../components/Contact';
 import { PageLayout } from '../components/ui/PageLayout';
 import { PageHero } from '../components/ui/PageHero';
-import { getServicesPage } from '../lib/content';
+import { useTinaServices } from '../hooks/useTinaVisualEditing';
 
 export const ServicesPage = () => {
-  const content = getServicesPage();
+  const { data: content, tinaField } = useTinaServices();
   const services = content.categories;
 
   return (
@@ -20,6 +20,7 @@ export const ServicesPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="block"
+              data-tina-field={tinaField('heroTitleLine1')}
             >
               {content.heroTitleLine1}
             </motion.span>
@@ -28,6 +29,7 @@ export const ServicesPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="block text-gray-500"
+              data-tina-field={tinaField('heroTitleLine2')}
             >
               {content.heroTitleLine2}<span className="text-vish-accent">.</span>
             </motion.span>

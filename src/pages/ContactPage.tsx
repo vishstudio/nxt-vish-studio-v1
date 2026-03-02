@@ -4,7 +4,7 @@ import { MessageSquare, Clock, Zap, type LucideIcon } from 'lucide-react';
 import { PageLayout } from '../components/ui/PageLayout';
 import { PageHero } from '../components/ui/PageHero';
 import { Section } from '../components/ui/Section';
-import { getContactPage } from '../lib/content';
+import { useTinaContact } from '../hooks/useTinaVisualEditing';
 
 const iconMap: Record<string, LucideIcon> = {
   MessageSquare,
@@ -13,7 +13,7 @@ const iconMap: Record<string, LucideIcon> = {
 };
 
 export const ContactPage = () => {
-  const content = getContactPage();
+  const { data: content, tinaField } = useTinaContact();
 
   return (
     <PageLayout>
@@ -26,8 +26,8 @@ export const ContactPage = () => {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="font-display text-6xl md:text-8xl lg:text-9xl font-medium tracking-tight leading-[0.95] text-white mb-12"
           >
-            {content.heroTitleLine1} <br />
-            <span className="text-gray-500">{content.heroTitleLine2}<span className="text-vish-accent">{content.heroTitlePunctuation}</span></span>
+            <span data-tina-field={tinaField('heroTitleLine1')}>{content.heroTitleLine1}</span> <br />
+            <span className="text-gray-500"><span data-tina-field={tinaField('heroTitleLine2')}>{content.heroTitleLine2}</span><span className="text-vish-accent">{content.heroTitlePunctuation}</span></span>
           </motion.h1>
         }
         description={content.heroDescription}

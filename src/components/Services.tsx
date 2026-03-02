@@ -1,10 +1,10 @@
 import { motion } from 'motion/react';
 import { ArrowUpRight, ArrowRight } from 'lucide-react';
 import { Button } from './ui/Button';
-import { getHomePage } from '../lib/content';
+import { useTinaHome } from '../hooks/useTinaVisualEditing';
 
 export const Services = () => {
-  const content = getHomePage();
+  const { data: content, tinaField } = useTinaHome();
   const services = content.services;
 
   return (
@@ -17,10 +17,10 @@ export const Services = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-medium text-white mb-6">
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-medium text-white mb-6" data-tina-field={tinaField('servicesHeading')}>
               {content.servicesHeading}<span className="text-vish-accent">.</span>
             </h2>
-            <p className="font-sans text-gray-400 text-lg max-w-md">
+            <p className="font-sans text-gray-400 text-lg max-w-md" data-tina-field={tinaField('servicesSubtext')}>
               {content.servicesSubtext}
             </p>
           </motion.div>

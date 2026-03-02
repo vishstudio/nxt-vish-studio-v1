@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { getProjects } from '../lib/projects';
+import { useTinaProjectsList } from '../hooks/useTinaVisualEditing';
 import { Button } from './ui/Button';
 
 export const Projects = ({ showViewAll = true }: { showViewAll?: boolean }) => {
-  const projects = getProjects();
+  const { data: projects } = useTinaProjectsList();
   const [activeProject, setActiveProject] = useState(projects[0]);
 
   return (

@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
-import { getProjects } from '../lib/projects';
+import { useTinaProjectsList } from '../hooks/useTinaVisualEditing';
+import type { Project } from '../lib/projects';
 import { Contact } from '../components/Contact';
 import { PageLayout } from '../components/ui/PageLayout';
 import { PageHero } from '../components/ui/PageHero';
@@ -7,7 +8,7 @@ import { Section } from '../components/ui/Section';
 import { ProjectCard } from '../components/ui/ProjectCard';
 
 export const ProjectsPage = () => {
-  const projects = getProjects();
+  const { data: projects } = useTinaProjectsList();
 
   return (
     <PageLayout>
@@ -29,7 +30,7 @@ export const ProjectsPage = () => {
 
       <Section className="mb-32">
         <div className="flex flex-col gap-20 md:gap-40">
-          {projects.map((project, index) => (
+          {projects.map((project: Project, index: number) => (
             <ProjectCard key={project.slug} project={project} index={index} />
           ))}
         </div>

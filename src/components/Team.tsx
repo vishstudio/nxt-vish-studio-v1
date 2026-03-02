@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { User, Code, PenTool, Zap, Sparkles, Layout, Globe, Terminal } from 'lucide-react';
-import { getTeamMembers } from '../lib/content';
+import { useTinaTeamMembers } from '../hooks/useTinaVisualEditing';
+import type { TeamMember } from '../lib/content';
 
 // Helper to get icon based on role
 const getIcon = (role: string) => {
@@ -13,7 +14,7 @@ const getIcon = (role: string) => {
 };
 
 export const Team = ({ showTitle = true }: { showTitle?: boolean }) => {
-  const team = getTeamMembers();
+  const { data: team } = useTinaTeamMembers();
 
   return (
     <section className="py-24 md:py-32 px-6 md:px-12 bg-vish-bg text-white" id="team">
@@ -36,7 +37,7 @@ export const Team = ({ showTitle = true }: { showTitle?: boolean }) => {
         )}
 
         <div className="flex flex-wrap justify-center gap-6 lg:gap-8">
-          {team.map((member, index) => {
+          {team.map((member: TeamMember, index: number) => {
             const Icon = getIcon(member.role);
             return (
               <motion.div

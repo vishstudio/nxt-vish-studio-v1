@@ -1,14 +1,14 @@
 import { motion } from 'motion/react';
-import { getPartners } from '../lib/content';
+import { useTinaPartners } from '../hooks/useTinaVisualEditing';
 
 export const TrustedPartners = () => {
-  const data = getPartners();
+  const { data } = useTinaPartners();
   const partners = data.partners;
 
   return (
     <section className="py-16 bg-vish-subtle border-y border-white/5 overflow-hidden">
       <div className="px-6 md:px-12 max-w-[1400px] mx-auto mb-8">
-        <p className="text-sm font-sans font-medium text-gray-400 uppercase tracking-wide">{data.partnersLabel}</p>
+        <p className="text-sm font-sans font-medium text-gray-400 uppercase tracking-wide" data-tina-field={data ? undefined : undefined}>{data.partnersLabel}</p>
       </div>
 
       <div className="flex relative">
