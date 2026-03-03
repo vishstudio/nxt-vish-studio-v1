@@ -79,7 +79,7 @@ export const Projects = ({ showViewAll = true }: { showViewAll?: boolean }) => {
                       </div>
 
                       <div className="flex gap-8 text-sm font-sans text-gray-500 mb-6 group-hover:text-black/70 transition-colors duration-500">
-                        <span className="text-gray-400 group-hover:text-black/70 transition-colors duration-500">{project.category}</span>
+                        <span className="text-gray-400 group-hover:text-black/70 transition-colors duration-500">{Array.isArray(project.category) ? project.category.join(' / ') : project.category}</span>
                         <span className="group-hover:text-black/70 transition-colors duration-500">{project.year}</span>
                       </div>
 
@@ -137,10 +137,10 @@ export const Projects = ({ showViewAll = true }: { showViewAll?: boolean }) => {
               <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/90 via-black/50 to-transparent">
                 <div className="flex justify-between items-end">
                   <div>
-                    <p className="font-mono text-vish-accent text-sm mb-2">{activeProject.category}</p>
+                    <p className="font-mono text-vish-accent text-sm mb-2">{Array.isArray(activeProject.category) ? activeProject.category.join(' / ') : activeProject.category}</p>
                     <h4 className="font-display text-3xl text-white">{activeProject.title}</h4>
                   </div>
-                  <span className="font-sans text-sm text-gray-300">{activeProject.category}</span>
+                  <span className="font-sans text-sm text-gray-300">{activeProject.year}</span>
                 </div>
               </div>
             </div>

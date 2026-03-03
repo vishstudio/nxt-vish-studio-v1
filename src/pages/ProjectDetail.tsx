@@ -36,7 +36,11 @@ export const ProjectDetail = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <span className="font-mono text-vish-accent text-sm mb-4 block">{project.category}</span>
+          <div className="flex flex-wrap gap-2 mb-4">
+            {(Array.isArray(project.category) ? project.category : [project.category]).map((cat) => (
+              <span key={cat} className="font-mono text-vish-accent text-sm">{cat}</span>
+            ))}
+          </div>
           <h1 className={`font-display text-6xl md:text-8xl lg:text-9xl font-medium tracking-tight leading-[0.95] ${project.siteUrl ? 'mb-8' : 'mb-12'}`}>
             {project.title}<span className="text-vish-accent">.</span>
           </h1>
@@ -79,7 +83,7 @@ export const ProjectDetail = () => {
               </div>
               <div className="flex justify-between">
                 <span>Category</span>
-                <span className="text-white">{project.category}</span>
+                <span className="text-white text-right">{Array.isArray(project.category) ? project.category.join(', ') : project.category}</span>
               </div>
               <div className="flex justify-between">
                 <span>Role</span>
@@ -104,6 +108,21 @@ export const ProjectDetail = () => {
             <p className="font-sans text-xl md:text-2xl text-gray-300 leading-relaxed">
               {project.fullDescription || project.description}
             </p>
+            {project.techStack && project.techStack.length > 0 && (
+              <div className="mt-10">
+                <h4 className="font-mono text-xs text-gray-500 uppercase tracking-widest mb-4">Tech Stack</h4>
+                <div className="flex flex-wrap gap-2">
+                  {project.techStack.map((tech) => (
+                    <span
+                      key={tech}
+                      className="inline-flex items-center px-4 py-1.5 rounded-full border border-white/15 bg-white/5 font-mono text-sm text-gray-300 hover:border-vish-accent/50 hover:text-vish-accent transition-colors duration-200"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
 

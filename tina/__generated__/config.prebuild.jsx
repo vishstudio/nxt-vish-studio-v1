@@ -47,8 +47,10 @@ var config_default = defineConfig({
           {
             type: "string",
             name: "category",
-            label: "Category",
+            label: "Categories",
+            description: "Select up to 3 categories",
             required: true,
+            list: true,
             options: [
               "Web Design",
               "Branding",
@@ -56,6 +58,38 @@ var config_default = defineConfig({
               "Product Design",
               "UI/UX Design",
               "Mobile App"
+            ],
+            ui: {
+              validate: (value) => {
+                if (!value || value.length === 0) return "At least one category is required";
+                if (value.length > 3) return "Maximum 3 categories allowed";
+              }
+            }
+          },
+          {
+            type: "string",
+            name: "techStack",
+            label: "Tech Stack",
+            description: "Select technologies used in this project",
+            list: true,
+            options: [
+              "React JS",
+              "Next JS",
+              "MongoDB",
+              "Laravel",
+              "HTML 5",
+              "CSS 3",
+              "Javascript",
+              "Java",
+              "Figma",
+              "SEO",
+              "Node.js",
+              "MySQL",
+              "UI/UX",
+              "Logo Design",
+              "Marketing",
+              "Analytics",
+              "Webdesign"
             ]
           },
           {

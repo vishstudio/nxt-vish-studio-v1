@@ -3,6 +3,7 @@ fragment ProjectParts on Project {
   title
   slug
   category
+  techStack
   image
   year
   order

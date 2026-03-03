@@ -108,7 +108,8 @@ union DocumentNode = Project | SiteSettings | Partners | HomePage | AboutPage | 
 type Project implements Node & Document {
   title: String!
   slug: String!
-  category: String!
+  category: [String!]!
+  techStack: [String]
   image: String
   year: String!
   order: Float
@@ -148,6 +149,7 @@ input ProjectFilter {
   title: StringFilter
   slug: StringFilter
   category: StringFilter
+  techStack: StringFilter
   image: StringFilter
   year: StringFilter
   order: NumberFilter
@@ -541,7 +543,8 @@ input DocumentMutation {
 input ProjectMutation {
   title: String
   slug: String
-  category: String
+  category: [String]
+  techStack: [String]
   image: String
   year: String
   order: Float

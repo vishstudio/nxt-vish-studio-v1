@@ -58,7 +58,7 @@ export const ProjectCard = ({ project, index, alternate = true }: ProjectCardPro
       {/* Project Details */}
       <div className="w-full md:w-2/5 flex flex-col items-start">
         <span className="font-mono text-vish-accent mb-4 md:mb-6 text-sm tracking-widest uppercase">
-          {project.category}
+          {Array.isArray(project.category) ? project.category.join(' / ') : project.category}
         </span>
 
         <Link to={`/project/${project.slug}`} className="block">

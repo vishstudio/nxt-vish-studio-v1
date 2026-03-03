@@ -39,7 +39,7 @@ export function useTinaProjectDetail(slug: string) {
       data: {
         slug: p.slug || p._sys?.filename || slug,
         title: p.title ?? "",
-        category: p.category ?? "",
+        category: Array.isArray(p.category) ? p.category : p.category ? [p.category] : [],
         image: p.image ?? "",
         year: p.year ?? "",
         order: p.order ?? 999,
@@ -47,6 +47,8 @@ export function useTinaProjectDetail(slug: string) {
         fullDescription: p.fullDescription ?? "",
         gallery: (p.gallery ?? []).filter(Boolean),
         featuredOnHome: p.featuredOnHome ?? false,
+        siteUrl: p.siteUrl ?? "",
+        techStack: (p.techStack ?? []).filter(Boolean),
       } as Project,
       tinaData: liveData.project,
     };
@@ -92,7 +94,7 @@ export function useTinaProjectsList() {
           ({
             slug: p.slug || p._sys?.filename || "",
             title: p.title ?? "",
-            category: p.category ?? "",
+            category: Array.isArray(p.category) ? p.category : p.category ? [p.category] : [],
             image: p.image ?? "",
             year: p.year ?? "",
             order: p.order ?? 999,
@@ -101,6 +103,7 @@ export function useTinaProjectsList() {
             gallery: (p.gallery ?? []).filter(Boolean),
             featuredOnHome: p.featuredOnHome ?? false,
             siteUrl: p.siteUrl ?? "",
+            techStack: (p.techStack ?? []).filter(Boolean),
           } as Project),
       )
       .sort((a: Project, b: Project) => a.order - b.order);

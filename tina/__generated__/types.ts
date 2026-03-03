@@ -277,7 +277,8 @@ export type Project = Node & Document & {
   __typename?: 'Project';
   title: Scalars['String']['output'];
   slug: Scalars['String']['output'];
-  category: Scalars['String']['output'];
+  category: Array<Scalars['String']['output']>;
+  techStack?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   image?: Maybe<Scalars['String']['output']>;
   year: Scalars['String']['output'];
   order?: Maybe<Scalars['Float']['output']>;
@@ -317,6 +318,7 @@ export type ProjectFilter = {
   title?: InputMaybe<StringFilter>;
   slug?: InputMaybe<StringFilter>;
   category?: InputMaybe<StringFilter>;
+  techStack?: InputMaybe<StringFilter>;
   image?: InputMaybe<StringFilter>;
   year?: InputMaybe<StringFilter>;
   order?: InputMaybe<NumberFilter>;
@@ -857,7 +859,8 @@ export type DocumentMutation = {
 export type ProjectMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
-  category?: InputMaybe<Scalars['String']['input']>;
+  category?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  techStack?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   image?: InputMaybe<Scalars['String']['input']>;
   year?: InputMaybe<Scalars['String']['input']>;
   order?: InputMaybe<Scalars['Float']['input']>;
@@ -989,7 +992,7 @@ export type ContactPageMutation = {
   trustIndicators?: InputMaybe<Array<InputMaybe<ContactPageTrustIndicatorsMutation>>>;
 };
 
-export type ProjectPartsFragment = { __typename: 'Project', title: string, slug: string, category: string, image?: string | null, year: string, order?: number | null, featuredOnHome?: boolean | null, description: string, fullDescription?: string | null, gallery?: Array<string | null> | null, siteUrl?: string | null };
+export type ProjectPartsFragment = { __typename: 'Project', title: string, slug: string, category: Array<string>, techStack?: Array<string | null> | null, image?: string | null, year: string, order?: number | null, featuredOnHome?: boolean | null, description: string, fullDescription?: string | null, gallery?: Array<string | null> | null, siteUrl?: string | null };
 
 export type SiteSettingsPartsFragment = { __typename: 'SiteSettings', email: string, phone: string, phoneLink?: string | null, address?: string | null, copyright?: string | null, contactHeadingLine1?: string | null, contactHeadingLine2?: string | null, scrollText?: string | null, socials?: Array<{ __typename: 'SiteSettingsSocials', name: string, url: string, openInNewTab?: boolean | null } | null> | null, footerLinks?: Array<{ __typename: 'SiteSettingsFooterLinks', label: string, url: string } | null> | null };
 
@@ -1008,7 +1011,7 @@ export type ProjectQueryVariables = Exact<{
 }>;
 
 
-export type ProjectQuery = { __typename?: 'Query', project: { __typename: 'Project', id: string, title: string, slug: string, category: string, image?: string | null, year: string, order?: number | null, featuredOnHome?: boolean | null, description: string, fullDescription?: string | null, gallery?: Array<string | null> | null, siteUrl?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type ProjectQuery = { __typename?: 'Query', project: { __typename: 'Project', id: string, title: string, slug: string, category: Array<string>, techStack?: Array<string | null> | null, image?: string | null, year: string, order?: number | null, featuredOnHome?: boolean | null, description: string, fullDescription?: string | null, gallery?: Array<string | null> | null, siteUrl?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type ProjectConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1020,7 +1023,7 @@ export type ProjectConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ProjectConnectionQuery = { __typename?: 'Query', projectConnection: { __typename?: 'ProjectConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ProjectConnectionEdges', cursor: string, node?: { __typename: 'Project', id: string, title: string, slug: string, category: string, image?: string | null, year: string, order?: number | null, featuredOnHome?: boolean | null, description: string, fullDescription?: string | null, gallery?: Array<string | null> | null, siteUrl?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type ProjectConnectionQuery = { __typename?: 'Query', projectConnection: { __typename?: 'ProjectConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ProjectConnectionEdges', cursor: string, node?: { __typename: 'Project', id: string, title: string, slug: string, category: Array<string>, techStack?: Array<string | null> | null, image?: string | null, year: string, order?: number | null, featuredOnHome?: boolean | null, description: string, fullDescription?: string | null, gallery?: Array<string | null> | null, siteUrl?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type SiteSettingsQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1142,6 +1145,7 @@ export const ProjectPartsFragmentDoc = gql`
   title
   slug
   category
+  techStack
   image
   year
   order

@@ -3,7 +3,7 @@
 export interface Project {
   slug: string;
   title: string;
-  category: string;
+  category: string[];
   image: string;
   year: string;
   order: number;
@@ -12,12 +12,13 @@ export interface Project {
   gallery: string[];
   featuredOnHome: boolean;
   siteUrl?: string;
+  techStack?: string[];
 }
 
 interface ProjectJson {
   title: string;
   slug?: string;
-  category: string;
+  category: string | string[];
   image: string;
   year: string;
   order?: number;
@@ -26,6 +27,7 @@ interface ProjectJson {
   gallery?: string[];
   featuredOnHome?: boolean;
   siteUrl?: string;
+  techStack?: string[];
 }
 
 // Vite eagerly imports all project JSON at build time — fully static, no API needed
@@ -42,7 +44,7 @@ export function getProjects(): Project[] {
     .map(([filePath, data]) => ({
       slug: data.slug || filePath.split("/").pop()?.replace(".json", "") || "",
       title: data.title,
-      category: data.category,
+      category: Array.isArray(data.category) ? data.category : [data.category],
       image: data.image,
       year: data.year,
       order: data.order ?? 999,
@@ -51,6 +53,7 @@ export function getProjects(): Project[] {
       gallery: (data.gallery || []).filter(Boolean) as string[],
       featuredOnHome: data.featuredOnHome ?? false,
       siteUrl: data.siteUrl || "",
+      techStack: (data.techStack || []).filter(Boolean) as string[],
     }))
     .sort((a, b) => a.order - b.order);
 }
