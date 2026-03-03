@@ -12,7 +12,8 @@ export { useTinaServices } from "./tina/useTinaServices";
 export { useTinaContact } from "./tina/useTinaContact";
 export { useTinaSettings } from "./tina/useTinaSettings";
 export { useTinaPartners } from "./tina/useTinaPartners";
-export { useTinaProjectDetail, useTinaProjectsList } from "./tina/useTinaProjects";
+export {
+  useTinaProjectDetail,
+  useTinaProjectsList,
+} from "./tina/useTinaProjects";
 export { rawTinaField as tinaField } from "./tina/core";
-
-

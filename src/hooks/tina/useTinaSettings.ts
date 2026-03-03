@@ -7,8 +7,7 @@ export function useTinaSettings() {
 
   const result = useTinaData(
     staticContent,
-    () =>
-      client.queries.siteSettings({ relativePath: "settings.json" }) as any,
+    () => client.queries.siteSettings({ relativePath: "settings.json" }) as any,
     (qd: any) => {
       const s = qd.siteSettings;
       return {
