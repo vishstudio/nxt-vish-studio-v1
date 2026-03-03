@@ -8,7 +8,7 @@
   "introParagraph1": "Founded in 2024, VISH Studio emerged from a simple belief: that design is the most powerful tool for change. We don't just make things look good; we make them work, we make them feel, and we make them last.",
   "introParagraph2": "Our team is a collective of designers, developers, and strategists who are obsessed with quality. We strip away the noise to reveal the essence of your brand, creating digital experiences that are as intuitive as they are beautiful.",
   "valuesLabel": "Our Philosophy",
-  "valuesHeading": "CORE VALUES",
+  "valuesHeading": "Core values",
   "values": [
     {
       "id": "01",
@@ -45,7 +45,7 @@
       "name": "Ayesha Bhudookan",
       "role": "Consultant & Strategy Lead",
       "image": "https://picsum.photos/seed/elena/800/800",
-      "bio": "Crafting intuitive user experiences and pixel-perfect interfaces.",
+      "bio": "Crafting data-driven growth strategies and navigating complex business challenges.",
       "order": 3
     }
   ]
