@@ -37,9 +37,14 @@ export function getSiteSettings(): SiteSettings {
 
 // ─── Partners ────────────────────────────────────────────────────────────────
 
+export interface Partner {
+  name: string;
+  url?: string;
+}
+
 export interface PartnersData {
   partnersLabel: string;
-  partners: string[];
+  partners: Partner[];
 }
 
 const partnersModule = import.meta.glob<PartnersData>(

@@ -18,9 +18,21 @@ export const TrustedPartners = () => {
           transition={{ duration: 30, ease: "linear", repeat: Infinity }}
         >
           {[...partners, ...partners, ...partners].map((partner, index) => (
-            <span key={index} className="text-3xl md:text-4xl font-display font-medium text-white/40 hover:text-white transition-colors cursor-default">
-              {partner}
-            </span>
+            partner.url ? (
+              <a
+                key={index}
+                href={partner.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-3xl md:text-4xl font-display font-medium text-white/40 hover:text-white transition-colors cursor-pointer"
+              >
+                {partner.name}
+              </a>
+            ) : (
+              <span key={index} className="text-3xl md:text-4xl font-display font-medium text-white/40 hover:text-white transition-colors cursor-default">
+                {partner.name}
+              </span>
+            )
           ))}
         </motion.div>
       </div>

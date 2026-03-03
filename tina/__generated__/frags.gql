@@ -10,6 +10,7 @@ fragment ProjectParts on Project {
   description
   fullDescription
   gallery
+  siteUrl
 }
 
 fragment SiteSettingsParts on SiteSettings {
@@ -38,7 +39,11 @@ fragment SiteSettingsParts on SiteSettings {
 fragment PartnersParts on Partners {
   __typename
   partnersLabel
-  partners
+  partners {
+    __typename
+    name
+    url
+  }
 }
 
 fragment HomePageParts on HomePage {

@@ -78,7 +78,7 @@ export const Process = () => {
             <motion.div
               ref={contentRef}
               style={{ x: smoothX }}
-              className="flex gap-6 md:gap-8 items-center pointer-events-auto pl-[85vw] md:pl-[45vw]"
+              className="flex gap-6 md:gap-8 items-center pointer-events-auto pl-[85vw] md:pl-[48vw] lg:pl-[45vw]"
             >
               {steps.map((step, index) => (
                 <motion.div
@@ -87,13 +87,13 @@ export const Process = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.1 }}
                   viewport={{ margin: "-100px" }}
-                  className="group relative flex flex-col shrink-0 w-[85vw] sm:w-[60vw] md:w-[28vw] lg:w-[22vw] aspect-[4/5] md:aspect-[3/4] p-6 sm:p-8 md:p-10 bg-[#0A0A0A] border border-white/5 hover:border-vish-accent/40 rounded-3xl transition-all duration-500 overflow-hidden"
+                  className="group relative flex flex-col shrink-0 w-[85vw] sm:w-[60vw] md:w-[44vw] lg:w-[30vw] xl:w-[22vw] aspect-[4/5] md:aspect-auto md:min-h-[420px] lg:aspect-[3/4] p-6 sm:p-8 md:p-8 lg:p-10 bg-[#0A0A0A] border border-white/5 hover:border-vish-accent/40 rounded-3xl transition-all duration-500 overflow-hidden"
                 >
                   {/* Decoration Gradient */}
                   <div className="absolute inset-0 bg-gradient-to-b from-white/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                   <div className="flex justify-between items-start mb-auto relative z-10">
-                    <span className="font-mono text-5xl sm:text-6xl md:text-7xl text-white/10 font-bold group-hover:text-vish-accent/20 transition-colors duration-500">
+                    <span className="font-mono text-5xl sm:text-6xl md:text-5xl lg:text-6xl xl:text-7xl text-white/10 font-bold group-hover:text-vish-accent/20 transition-colors duration-500">
                       {step.num}
                     </span>
                     <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-vish-accent group-hover:border-vish-accent transition-all duration-300">
@@ -102,10 +102,10 @@ export const Process = () => {
                   </div>
 
                   <div className="relative z-10">
-                    <h3 className="font-display text-3xl sm:text-4xl md:text-5xl text-white mb-4 md:mb-6 group-hover:translate-x-2 transition-transform duration-500">
+                    <h3 className="font-display text-3xl sm:text-4xl md:text-3xl lg:text-4xl xl:text-5xl text-white mb-3 md:mb-4 lg:mb-6 group-hover:translate-x-2 transition-transform duration-500">
                       {step.title}
                     </h3>
-                    <p className="font-sans text-sm sm:text-base md:text-lg text-gray-400 leading-relaxed mb-6 md:mb-8 group-hover:text-gray-300 transition-colors">
+                    <p className="font-sans text-sm md:text-sm lg:text-base xl:text-lg text-gray-400 leading-relaxed mb-5 md:mb-6 lg:mb-8 group-hover:text-gray-300 transition-colors">
                       {step.description}
                     </p>
 

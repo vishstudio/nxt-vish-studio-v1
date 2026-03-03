@@ -1,6 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, ExternalLink } from 'lucide-react';
 import { useTinaProjectDetail } from '../hooks/useTinaVisualEditing';
 import { Navbar } from '../components/Navbar';
 import { CustomCursor } from '../components/CustomCursor';
@@ -71,6 +71,19 @@ export const ProjectDetail = () => {
                 <span>Role</span>
                 <span className="text-white">Design & Development</span>
               </div>
+              {project.siteUrl && (
+                <div className="flex justify-between items-center pt-2">
+                  <span>Live Site</span>
+                  <a
+                    href={project.siteUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-vish-accent hover:underline transition-colors"
+                  >
+                    View Site <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
+              )}
             </div>
           </div>
           <div className="lg:col-span-8">

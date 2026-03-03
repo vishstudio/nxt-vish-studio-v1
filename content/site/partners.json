@@ -1,11 +1,29 @@
 {
   "partnersLabel": "Trusted by industry leaders",
   "partners": [
-    "PlanitSwiss",
-    "MorisMetrics",
-    "Shay",
-    "GoGarage",
-    "ForwardPsychology",
-    "Imagine3d"
+    {
+      "name": "PlanitSwiss",
+      "url": ""
+    },
+    {
+      "name": "MorisMetrics",
+      "url": ""
+    },
+    {
+      "name": "Shay",
+      "url": ""
+    },
+    {
+      "name": "GoGarage",
+      "url": ""
+    },
+    {
+      "name": "ForwardPsychology",
+      "url": ""
+    },
+    {
+      "name": "Imagine3d",
+      "url": ""
+    }
   ]
 }

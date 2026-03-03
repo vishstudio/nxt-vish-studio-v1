@@ -1,5 +1,9 @@
 import client from "../../../tina/__generated__/client";
-import { getPartners, type PartnersData } from "../../lib/content";
+import {
+  getPartners,
+  type PartnersData,
+  type Partner,
+} from "../../lib/content";
 import { rawTinaField, useTinaData } from "./core";
 
 export function useTinaPartners() {
@@ -11,7 +15,14 @@ export function useTinaPartners() {
     (qd: any) =>
       ({
         partnersLabel: qd.partners.partnersLabel ?? "",
-        partners: (qd.partners.partners ?? []).filter(Boolean),
+        partners: (qd.partners.partners ?? [])
+          .filter(Boolean)
+          .map(
+            (p: any) =>
+              (typeof p === "string"
+                ? { name: p }
+                : { name: p.name ?? "", url: p.url ?? "" }) as Partner,
+          ),
       } as PartnersData),
   );
 

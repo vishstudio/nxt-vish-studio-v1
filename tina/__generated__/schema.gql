@@ -116,6 +116,7 @@ type Project implements Node & Document {
   description: String!
   fullDescription: String
   gallery: [String]
+  siteUrl: String
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -154,6 +155,7 @@ input ProjectFilter {
   description: StringFilter
   fullDescription: StringFilter
   gallery: StringFilter
+  siteUrl: StringFilter
 }
 
 type ProjectConnectionEdges {
@@ -229,17 +231,27 @@ type SiteSettingsConnection implements Connection {
   edges: [SiteSettingsConnectionEdges]
 }
 
+type PartnersPartners {
+  name: String!
+  url: String
+}
+
 type Partners implements Node & Document {
   partnersLabel: String!
-  partners: [String]
+  partners: [PartnersPartners]
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
 }
 
+input PartnersPartnersFilter {
+  name: StringFilter
+  url: StringFilter
+}
+
 input PartnersFilter {
   partnersLabel: StringFilter
-  partners: StringFilter
+  partners: PartnersPartnersFilter
 }
 
 type PartnersConnectionEdges {
@@ -537,6 +549,7 @@ input ProjectMutation {
   description: String
   fullDescription: String
   gallery: [String]
+  siteUrl: String
 }
 
 input SiteSettingsSocialsMutation {
@@ -563,9 +576,14 @@ input SiteSettingsMutation {
   footerLinks: [SiteSettingsFooterLinksMutation]
 }
 
+input PartnersPartnersMutation {
+  name: String
+  url: String
+}
+
 input PartnersMutation {
   partnersLabel: String
-  partners: [String]
+  partners: [PartnersPartnersMutation]
 }
 
 input HomePageServicesMutation {

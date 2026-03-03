@@ -8,7 +8,7 @@ export const LogoText = () => (
       fontVariationSettings: '"GRAD" 0',
     } as React.CSSProperties}
   >
-    <span className="text-white" style={{ fontWeight: 900 }}>VISH</span>
-    <span style={{ fontWeight: 400 }}> Studio</span>
+    <span className="text-white" style={{ fontWeight: 900 }}>vish</span>
+    <span style={{ fontWeight: 400 }}> studio</span>
   </span>
 );

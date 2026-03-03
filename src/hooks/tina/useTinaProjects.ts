@@ -100,6 +100,7 @@ export function useTinaProjectsList() {
             fullDescription: p.fullDescription ?? "",
             gallery: (p.gallery ?? []).filter(Boolean),
             featuredOnHome: p.featuredOnHome ?? false,
+            siteUrl: p.siteUrl ?? "",
           } as Project),
       )
       .sort((a: Project, b: Project) => a.order - b.order);

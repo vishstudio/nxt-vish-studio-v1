@@ -285,6 +285,7 @@ export type Project = Node & Document & {
   description: Scalars['String']['output'];
   fullDescription?: Maybe<Scalars['String']['output']>;
   gallery?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  siteUrl?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
@@ -323,6 +324,7 @@ export type ProjectFilter = {
   description?: InputMaybe<StringFilter>;
   fullDescription?: InputMaybe<StringFilter>;
   gallery?: InputMaybe<StringFilter>;
+  siteUrl?: InputMaybe<StringFilter>;
 };
 
 export type ProjectConnectionEdges = {
@@ -405,18 +407,29 @@ export type SiteSettingsConnection = Connection & {
   edges?: Maybe<Array<Maybe<SiteSettingsConnectionEdges>>>;
 };
 
+export type PartnersPartners = {
+  __typename?: 'PartnersPartners';
+  name: Scalars['String']['output'];
+  url?: Maybe<Scalars['String']['output']>;
+};
+
 export type Partners = Node & Document & {
   __typename?: 'Partners';
   partnersLabel: Scalars['String']['output'];
-  partners?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  partners?: Maybe<Array<Maybe<PartnersPartners>>>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
 };
 
+export type PartnersPartnersFilter = {
+  name?: InputMaybe<StringFilter>;
+  url?: InputMaybe<StringFilter>;
+};
+
 export type PartnersFilter = {
   partnersLabel?: InputMaybe<StringFilter>;
-  partners?: InputMaybe<StringFilter>;
+  partners?: InputMaybe<PartnersPartnersFilter>;
 };
 
 export type PartnersConnectionEdges = {
@@ -852,6 +865,7 @@ export type ProjectMutation = {
   description?: InputMaybe<Scalars['String']['input']>;
   fullDescription?: InputMaybe<Scalars['String']['input']>;
   gallery?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  siteUrl?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type SiteSettingsSocialsMutation = {
@@ -878,9 +892,14 @@ export type SiteSettingsMutation = {
   footerLinks?: InputMaybe<Array<InputMaybe<SiteSettingsFooterLinksMutation>>>;
 };
 
+export type PartnersPartnersMutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  url?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type PartnersMutation = {
   partnersLabel?: InputMaybe<Scalars['String']['input']>;
-  partners?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  partners?: InputMaybe<Array<InputMaybe<PartnersPartnersMutation>>>;
 };
 
 export type HomePageServicesMutation = {
@@ -970,11 +989,11 @@ export type ContactPageMutation = {
   trustIndicators?: InputMaybe<Array<InputMaybe<ContactPageTrustIndicatorsMutation>>>;
 };
 
-export type ProjectPartsFragment = { __typename: 'Project', title: string, slug: string, category: string, image?: string | null, year: string, order?: number | null, featuredOnHome?: boolean | null, description: string, fullDescription?: string | null, gallery?: Array<string | null> | null };
+export type ProjectPartsFragment = { __typename: 'Project', title: string, slug: string, category: string, image?: string | null, year: string, order?: number | null, featuredOnHome?: boolean | null, description: string, fullDescription?: string | null, gallery?: Array<string | null> | null, siteUrl?: string | null };
 
 export type SiteSettingsPartsFragment = { __typename: 'SiteSettings', email: string, phone: string, phoneLink?: string | null, address?: string | null, copyright?: string | null, contactHeadingLine1?: string | null, contactHeadingLine2?: string | null, scrollText?: string | null, socials?: Array<{ __typename: 'SiteSettingsSocials', name: string, url: string, openInNewTab?: boolean | null } | null> | null, footerLinks?: Array<{ __typename: 'SiteSettingsFooterLinks', label: string, url: string } | null> | null };
 
-export type PartnersPartsFragment = { __typename: 'Partners', partnersLabel: string, partners?: Array<string | null> | null };
+export type PartnersPartsFragment = { __typename: 'Partners', partnersLabel: string, partners?: Array<{ __typename: 'PartnersPartners', name: string, url?: string | null } | null> | null };
 
 export type HomePagePartsFragment = { __typename: 'HomePage', heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroDescription?: string | null, aboutHeading?: string | null, aboutParagraph1?: string | null, aboutParagraph2?: string | null, servicesHeading?: string | null, servicesSubtext?: string | null, servicesButtonText?: string | null, processHeading?: string | null, processSubtext?: string | null, services?: Array<{ __typename: 'HomePageServices', id?: string | null, title: string, description?: string | null } | null> | null, processSteps?: Array<{ __typename: 'HomePageProcessSteps', num?: string | null, title: string, description?: string | null, tags?: Array<string | null> | null } | null> | null };
 
@@ -989,7 +1008,7 @@ export type ProjectQueryVariables = Exact<{
 }>;
 
 
-export type ProjectQuery = { __typename?: 'Query', project: { __typename: 'Project', id: string, title: string, slug: string, category: string, image?: string | null, year: string, order?: number | null, featuredOnHome?: boolean | null, description: string, fullDescription?: string | null, gallery?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type ProjectQuery = { __typename?: 'Query', project: { __typename: 'Project', id: string, title: string, slug: string, category: string, image?: string | null, year: string, order?: number | null, featuredOnHome?: boolean | null, description: string, fullDescription?: string | null, gallery?: Array<string | null> | null, siteUrl?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type ProjectConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1001,7 +1020,7 @@ export type ProjectConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ProjectConnectionQuery = { __typename?: 'Query', projectConnection: { __typename?: 'ProjectConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ProjectConnectionEdges', cursor: string, node?: { __typename: 'Project', id: string, title: string, slug: string, category: string, image?: string | null, year: string, order?: number | null, featuredOnHome?: boolean | null, description: string, fullDescription?: string | null, gallery?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type ProjectConnectionQuery = { __typename?: 'Query', projectConnection: { __typename?: 'ProjectConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ProjectConnectionEdges', cursor: string, node?: { __typename: 'Project', id: string, title: string, slug: string, category: string, image?: string | null, year: string, order?: number | null, featuredOnHome?: boolean | null, description: string, fullDescription?: string | null, gallery?: Array<string | null> | null, siteUrl?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type SiteSettingsQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1027,7 +1046,7 @@ export type PartnersQueryVariables = Exact<{
 }>;
 
 
-export type PartnersQuery = { __typename?: 'Query', partners: { __typename: 'Partners', id: string, partnersLabel: string, partners?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type PartnersQuery = { __typename?: 'Query', partners: { __typename: 'Partners', id: string, partnersLabel: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, partners?: Array<{ __typename: 'PartnersPartners', name: string, url?: string | null } | null> | null } };
 
 export type PartnersConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1039,7 +1058,7 @@ export type PartnersConnectionQueryVariables = Exact<{
 }>;
 
 
-export type PartnersConnectionQuery = { __typename?: 'Query', partnersConnection: { __typename?: 'PartnersConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PartnersConnectionEdges', cursor: string, node?: { __typename: 'Partners', id: string, partnersLabel: string, partners?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type PartnersConnectionQuery = { __typename?: 'Query', partnersConnection: { __typename?: 'PartnersConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PartnersConnectionEdges', cursor: string, node?: { __typename: 'Partners', id: string, partnersLabel: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, partners?: Array<{ __typename: 'PartnersPartners', name: string, url?: string | null } | null> | null } | null } | null> | null } };
 
 export type HomePageQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1130,6 +1149,7 @@ export const ProjectPartsFragmentDoc = gql`
   description
   fullDescription
   gallery
+  siteUrl
 }
     `;
 export const SiteSettingsPartsFragmentDoc = gql`
@@ -1160,7 +1180,11 @@ export const PartnersPartsFragmentDoc = gql`
     fragment PartnersParts on Partners {
   __typename
   partnersLabel
-  partners
+  partners {
+    __typename
+    name
+    url
+  }
 }
     `;
 export const HomePagePartsFragmentDoc = gql`

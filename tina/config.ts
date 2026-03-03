@@ -110,6 +110,12 @@ export default defineConfig({
             description: "Paste image URLs, one per entry",
             list: true,
           },
+          {
+            type: "string",
+            name: "siteUrl",
+            label: "Live Site URL",
+            description: "Link to the live project (e.g. https://example.com)",
+          },
         ],
       },
 
@@ -194,10 +200,28 @@ export default defineConfig({
             required: true,
           },
           {
-            type: "string",
+            type: "object",
             name: "partners",
-            label: "Partner Names",
+            label: "Partners",
             list: true,
+            ui: {
+              itemProps: (item) => ({ label: item?.name || "Partner" }),
+            },
+            fields: [
+              {
+                type: "string",
+                name: "name",
+                label: "Name",
+                required: true,
+              },
+              {
+                type: "string",
+                name: "url",
+                label: "Website URL",
+                description:
+                  "Link to the partner's website (e.g. https://example.com)",
+              },
+            ],
           },
         ],
       },
