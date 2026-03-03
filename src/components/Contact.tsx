@@ -3,7 +3,7 @@ import { ArrowUpRight } from 'lucide-react';
 import { useTinaSettings } from '../hooks/useTinaVisualEditing';
 
 export const Contact = () => {
-  const { data: settings, tinaField } = useTinaSettings();
+  const { data: settings, tinaField, rawSiteSettings } = useTinaSettings();
 
   return (
     <section className="bg-black text-white py-32 pb-4 px-6 md:px-12 relative overflow-hidden" id="contact">
@@ -95,12 +95,21 @@ export const Contact = () => {
             <div>
               <h3 className="font-mono text-xs text-gray-500 uppercase tracking-widest mb-6">Socials</h3>
               <div className="flex flex-col gap-4">
-                {settings.socials.map((social) => (
-                  <a key={social.name} href={social.url} className="font-sans text-lg text-gray-400 hover:text-white transition-colors flex items-center gap-2 group w-fit">
-                    {social.name}
-                    <ArrowUpRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-                  </a>
-                ))}
+                {settings.socials.map((social, index) => {
+                  const rawSocial = rawSiteSettings?.socials?.[index];
+                  return (
+                    <a
+                      key={social.name}
+                      href={social.url}
+                      target={social.openInNewTab ? '_blank' : undefined}
+                      rel={social.openInNewTab ? 'noopener noreferrer' : undefined}
+                      className="font-sans text-lg text-gray-400 hover:text-white transition-colors flex items-center gap-2 group w-fit"
+                    >
+                      <span data-tina-field={rawSocial ? tinaField(rawSocial, 'name') : undefined}>{social.name}</span>
+                      <ArrowUpRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                    </a>
+                  );
+                })}
               </div>
             </div>
 

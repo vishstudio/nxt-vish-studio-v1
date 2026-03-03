@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, ArrowRight } from 'lucide-react';
 import { Button } from './ui/Button';
+import { useTinaSettings } from '../hooks/useTinaVisualEditing';
 
 export const Navbar = () => {
+  const { data: settings } = useTinaSettings();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -186,13 +188,15 @@ export const Navbar = () => {
                   </a>
 
                   <div className="flex gap-6">
-                    {['LinkedIn', 'Twitter', 'Instagram'].map((social) => (
+                    {settings.socials.map((social) => (
                       <a
-                        key={social}
-                        href="#"
+                        key={social.name}
+                        href={social.url}
+                        target={social.openInNewTab ? '_blank' : undefined}
+                        rel={social.openInNewTab ? 'noopener noreferrer' : undefined}
                         className="text-white/40 hover:text-white text-xs font-mono uppercase tracking-widest transition-colors"
                       >
-                        {social}
+                        {social.name}
                       </a>
                     ))}
                   </div>

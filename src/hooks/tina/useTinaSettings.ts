@@ -1,6 +1,6 @@
 import client from "../../../tina/__generated__/client";
 import { getSiteSettings, type SiteSettings } from "../../lib/content";
-import { rawTinaField, useTinaData } from "./core";
+import { makeTinaField, useTinaData } from "./core";
 
 export function useTinaSettings() {
   const staticContent = getSiteSettings();
@@ -22,6 +22,7 @@ export function useTinaSettings() {
         socials: (s.socials ?? []).map((x: any) => ({
           name: x?.name ?? "",
           url: x?.url ?? "",
+          openInNewTab: x?.openInNewTab ?? false,
         })),
         footerLinks: (s.footerLinks ?? []).map((x: any) => ({
           label: x?.label ?? "",
@@ -31,14 +32,11 @@ export function useTinaSettings() {
     },
   );
 
-  const rawPage = result.tinaData
+  const rawSiteSettings = result.tinaData
     ? (result.tinaData as any).siteSettings
     : null;
 
-  function tinaField(fieldName: string): string | undefined {
-    if (!rawPage) return undefined;
-    return rawTinaField(rawPage, fieldName);
-  }
+  const tinaField = makeTinaField(rawSiteSettings);
 
-  return { data: result.data, tinaField };
+  return { data: result.data, tinaField, rawSiteSettings };
 }

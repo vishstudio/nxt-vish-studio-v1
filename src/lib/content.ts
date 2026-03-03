@@ -5,6 +5,7 @@
 export interface Social {
   name: string;
   url: string;
+  openInNewTab?: boolean;
 }
 
 export interface FooterLink {

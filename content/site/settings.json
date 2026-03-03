@@ -7,10 +7,10 @@
   "contactHeadingLine1": "Let's work",
   "contactHeadingLine2": "together",
   "socials": [
-    { "name": "Instagram", "url": "#" },
-    { "name": "Twitter", "url": "#" },
-    { "name": "LinkedIn", "url": "#" },
-    { "name": "Dribbble", "url": "#" }
+    { "name": "Instagram", "url": "#", "openInNewTab": false },
+    { "name": "Twitter", "url": "#", "openInNewTab": false },
+    { "name": "LinkedIn", "url": "#", "openInNewTab": false },
+    { "name": "Dribbble", "url": "#", "openInNewTab": false }
   ],
   "footerLinks": [
     { "label": "Privacy", "url": "#" },
