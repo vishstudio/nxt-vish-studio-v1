@@ -6,6 +6,7 @@ import { Team } from '../components/Team';
 import { Services } from '../components/Services';
 import { Process } from '../components/Process';
 import { Projects } from '../components/Projects';
+import { Pricing } from '../components/Pricing';
 import { Contact } from '../components/Contact';
 import { ScrollCircular } from '../components/ScrollCircular';
 
@@ -22,6 +23,7 @@ export const Home = () => {
         <Services />
         <Process />
         <Team />
+        <Pricing />
         <Contact />
       </main>
     </>

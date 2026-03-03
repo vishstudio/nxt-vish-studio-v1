@@ -5,6 +5,7 @@ import { Home } from './pages/Home';
 import { AboutPage } from './pages/About';
 import { ProjectsPage } from './pages/ProjectsPage';
 import { ServicesPage } from './pages/ServicesPage';
+import { PricingPage } from './pages/PricingPage';
 import { ProjectDetail } from './pages/ProjectDetail';
 import { ContactPage } from './pages/ContactPage';
 import { NotFound } from './pages/NotFound';
@@ -39,6 +40,7 @@ function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/services" element={<ServicesPage />} />
+            <Route path="/pricing" element={<PricingPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/project/:slug" element={<ProjectDetail />} />
             <Route path="*" element={<NotFound />} />

@@ -1,0 +1,84 @@
+{
+  "heroLabel": "VISH STUDIO — PRICING",
+  "heroTitleLine1": "Transparent pricing",
+  "heroTitleLine2": "built for Mauritius",
+  "heroSubtext": "No hidden fees. No surprises. Choose a plan that fits your goals and let's build something great together.",
+  "sectionLabel": "Pricing",
+  "sectionHeading": "Choose your plan",
+  "sectionSubtext": "Every plan includes free hosting. All websites are custom-designed, mobile-first, and performance-optimised.",
+  "plans": [
+    {
+      "label": "STARTER",
+      "name": "Essentials",
+      "price": "Rs 3,000",
+      "priceNote": "ONE-TIME",
+      "delivery": "3–5 business days",
+      "tagline": "Perfect for individuals & small businesses getting online for the first time.",
+      "featured": false,
+      "ctaLabel": "Start on WhatsApp",
+      "ctaHref": "https://wa.me/23057000000",
+      "features": [
+        "Single-page website",
+        "Mobile responsive design",
+        "Contact form",
+        "WhatsApp integration",
+        "Basic SEO setup",
+        "1 month free hosting",
+        "1 month support"
+      ],
+      "bestFor": "Freelancers, tutors, market stalls, pop-up businesses",
+      "revisions": "1 revision round"
+    },
+    {
+      "label": "STUDIO",
+      "name": "Growth",
+      "price": "Rs 7,500",
+      "priceNote": "ONE-TIME",
+      "delivery": "5–7 business days",
+      "tagline": "For growing businesses wanting a polished, complete web presence.",
+      "featured": true,
+      "ctaLabel": "Get Started",
+      "ctaHref": "/contact",
+      "features": [
+        "Up to 5 pages",
+        "Custom design system",
+        "Contact & booking forms",
+        "Social media integration",
+        "Advanced SEO",
+        "Google Maps integration",
+        "3 months free hosting",
+        "3 months support"
+      ],
+      "bestFor": "Salons, restaurants, fitness coaches, local services",
+      "revisions": "2 revision rounds"
+    },
+    {
+      "label": "PRO",
+      "name": "Premium",
+      "price": "Rs 15,000",
+      "priceNote": "ONE-TIME",
+      "delivery": "2–3 weeks",
+      "tagline": "Complete digital solution for established businesses ready to scale.",
+      "featured": false,
+      "ctaLabel": "Book a Call",
+      "ctaHref": "/contact",
+      "features": [
+        "Up to 10 pages",
+        "Premium custom design",
+        "E-commerce ready",
+        "Analytics dashboard",
+        "Blog / News section",
+        "Email marketing setup",
+        "6 months free hosting",
+        "6 months support",
+        "Priority revisions"
+      ],
+      "bestFor": "Clinics, retail chains, real estate, tourism operators",
+      "revisions": "Unlimited during project"
+    }
+  ],
+  "customLabel": "Need Something Custom?",
+  "customDescription": "Don't see exactly what you need? Every project is unique — whether it's a web app, CRM integration, or a fully bespoke platform, we scope and price it together.",
+  "customCtaLabel": "Discuss Your Project",
+  "customCtaHref": "/contact"
+}

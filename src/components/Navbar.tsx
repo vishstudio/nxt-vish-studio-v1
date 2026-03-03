@@ -65,6 +65,7 @@ export const Navbar = () => {
                   { name: 'Home', href: '/' },
                   { name: 'Projects', href: '/projects' },
                   { name: 'Services', href: '/services' },
+                  { name: 'Pricing', href: '/pricing' },
                   { name: 'About', href: '/about' }
                 ].map((item) => (
                   <a
@@ -155,8 +156,9 @@ export const Navbar = () => {
                   { name: 'Home', href: '/', id: '01' },
                   { name: 'Projects', href: '/projects', id: '02' },
                   { name: 'Services', href: '/services', id: '03' },
-                  { name: 'About', href: '/about', id: '04' },
-                  { name: 'Contact', href: '/contact', id: '05' }
+                  { name: 'Pricing', href: '/pricing', id: '04' },
+                  { name: 'About', href: '/about', id: '05' },
+                  { name: 'Contact', href: '/contact', id: '06' }
                 ].map((item, i) => (
                   <motion.a
                     key={item.name}

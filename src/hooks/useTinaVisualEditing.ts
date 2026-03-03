@@ -12,6 +12,7 @@ export { useTinaServices } from "./tina/useTinaServices";
 export { useTinaContact } from "./tina/useTinaContact";
 export { useTinaSettings } from "./tina/useTinaSettings";
 export { useTinaPartners } from "./tina/useTinaPartners";
+export { useTinaPricing } from "./tina/useTinaPricing";
 export {
   useTinaProjectDetail,
   useTinaProjectsList,

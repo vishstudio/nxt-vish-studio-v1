@@ -10,5 +10,11 @@
   "featuredOnHome": true,
   "description": "Bringing the interior designs of imagine3d to the cloud. Hand crafted website to look clean and elegant.",
   "siteUrl": "https://react-imagine3d.vercel.app/",
-  "techStack": ["React JS", "HTML 5", "CSS 3", "Javascript", "Webdesign"]
+  "techStack": [
+    "React JS",
+    "HTML 5",
+    "CSS 3",
+    "Javascript",
+    "Webdesign"
+  ]
 }

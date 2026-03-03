@@ -9,5 +9,11 @@
   "order": 2,
   "featuredOnHome": true,
   "description": "Working a custom software solutions which helps SMEs tackle data cleaning.",
-  "techStack": ["React JS", "Node.js", "MongoDB", "Javascript", "Analytics"]
+  "techStack": [
+    "React JS",
+    "Node.js",
+    "MongoDB",
+    "Javascript",
+    "Analytics"
+  ]
 }

@@ -10,5 +10,11 @@
   "featuredOnHome": true,
   "description": "Bringing handymen business online. Curated website which fits the client business accordingly. #WIP",
   "siteUrl": "https://vish-studio.github.io/react-sspower-pros/",
-  "techStack": ["React JS", "HTML 5", "CSS 3", "Javascript", "SEO"]
+  "techStack": [
+    "React JS",
+    "HTML 5",
+    "CSS 3",
+    "Javascript",
+    "SEO"
+  ]
 }
