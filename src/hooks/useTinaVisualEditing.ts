@@ -37,6 +37,13 @@ export { rawTinaField as tinaField };
 
 // ─── Helper: generic Tina query hook ─────────────────────────────────────────
 
+/**
+ * A minimal valid GraphQL query used as a placeholder before the real query
+ * is fetched. Prevents the "Unexpected <EOF>" parse error that occurs when
+ * useTina() receives an empty query string inside the admin iframe.
+ */
+const PLACEHOLDER_QUERY = `query { __typename }`;
+
 interface TinaQueryResult<T> {
   data: T;
   query: string;
@@ -58,7 +65,7 @@ function useTinaData<TQueryData extends Record<string, unknown>, TContent>(
   // Build initial useTina input with static data as a stand-in
   const initialInput: TinaQueryResult<TQueryData> = {
     data: {} as TQueryData,
-    query: "",
+    query: PLACEHOLDER_QUERY,
     variables: {},
   };
 
@@ -323,7 +330,7 @@ export function useTinaTeamMembers() {
     variables: Record<string, unknown>;
   }>({
     data: {},
-    query: "",
+    query: PLACEHOLDER_QUERY,
     variables: {},
   });
   const [fetched, setFetched] = useState(false);
@@ -372,7 +379,7 @@ export function useTinaProjectDetail(slug: string) {
     variables: Record<string, unknown>;
   }>({
     data: {},
-    query: "",
+    query: PLACEHOLDER_QUERY,
     variables: {},
   });
   const [fetched, setFetched] = useState(false);
@@ -424,7 +431,7 @@ export function useTinaProjectsList() {
     variables: Record<string, unknown>;
   }>({
     data: {},
-    query: "",
+    query: PLACEHOLDER_QUERY,
     variables: {},
   });
   const [fetched, setFetched] = useState(false);
