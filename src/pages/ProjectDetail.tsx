@@ -1,13 +1,35 @@
 import { useParams, Link } from 'react-router-dom';
-import { motion } from 'motion/react';
-import { ArrowLeft, ExternalLink } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import { ArrowLeft, ExternalLink, X, ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react';
 import { useTinaProjectDetail } from '../hooks/useTinaVisualEditing';
 import { Navbar } from '../components/Navbar';
 import { CustomCursor } from '../components/CustomCursor';
+import { useState, useEffect, useCallback } from 'react';
 
 export const ProjectDetail = () => {
   const { slug } = useParams();
   const { data: project } = useTinaProjectDetail(slug || '');
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  const galleryImages: string[] = project?.gallery ?? [];
+
+  const openLightbox = (index: number) => setLightboxIndex(index);
+  const closeLightbox = useCallback(() => setLightboxIndex(null), []);
+  const prevImage = useCallback(() =>
+    setLightboxIndex(i => (i === null ? null : (i - 1 + galleryImages.length) % galleryImages.length)), [galleryImages.length]);
+  const nextImage = useCallback(() =>
+    setLightboxIndex(i => (i === null ? null : (i + 1) % galleryImages.length)), [galleryImages.length]);
+
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') prevImage();
+      if (e.key === 'ArrowRight') nextImage();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [lightboxIndex, closeLightbox, prevImage, nextImage]);
 
   if (!project) {
     return (
@@ -25,7 +47,7 @@ export const ProjectDetail = () => {
       <CustomCursor />
       <Navbar />
 
-      <main className="pt-32 pb-12 px-6 md:px-12 max-w-[1400px] mx-auto">
+      <main className="pt-32 pb-12 px-6 md:px-12 max-w-350 mx-auto">
         <Link to="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-vish-accent transition-colors mb-12 group">
           <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
           Back to Projects
@@ -126,24 +148,35 @@ export const ProjectDetail = () => {
           </div>
         </div>
 
-        {project.gallery && (
-          <div className="space-y-12">
-            <h3 className="font-display text-3xl text-white mb-8">Gallery</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {project.gallery && project.gallery.length > 0 && (
+          <div className="space-y-8">
+            <h3 className="font-display text-3xl text-white">Gallery</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {project.gallery.map((img, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="rounded-xl overflow-hidden aspect-[4/3] border border-white/10"
+                  transition={{ duration: 0.6, delay: index * 0.08 }}
+                  onClick={() => openLightbox(index)}
+                  className="group relative rounded-xl overflow-hidden aspect-4/3 bg-white border border-white/10 cursor-zoom-in shadow-lg hover:shadow-vish-accent/10 hover:border-white/25 transition-all duration-300"
                 >
                   <img
                     src={img}
                     alt={`${project.title} gallery ${index + 1}`}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-contain p-3 transition-transform duration-500 group-hover:scale-[1.03]"
                   />
+                  {/* Hover overlay */}
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/60 rounded-full p-3">
+                      <ZoomIn className="w-5 h-5 text-white" />
+                    </div>
+                  </div>
+                  {/* Index badge */}
+                  <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/70 rounded-md px-2 py-0.5 font-mono text-xs text-gray-300">
+                    {index + 1} / {project.gallery!.length}
+                  </div>
                 </motion.div>
               ))}
             </div>
@@ -154,6 +187,70 @@ export const ProjectDetail = () => {
       <footer className="py-12 border-t border-white/10 text-center font-mono text-sm text-gray-500">
         <p>&copy; {new Date().getFullYear()} VISH Studio. All rights reserved.</p>
       </footer>
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {lightboxIndex !== null && galleryImages[lightboxIndex] && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-100 flex items-center justify-center bg-black/90 backdrop-blur-sm"
+            onClick={closeLightbox}
+          >
+            {/* Close */}
+            <button
+              onClick={closeLightbox}
+              className="absolute top-5 right-5 z-10 bg-white/10 hover:bg-white/20 text-white rounded-full p-2 transition-colors duration-200"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            {/* Counter */}
+            <div className="absolute top-5 left-1/2 -translate-x-1/2 font-mono text-sm text-gray-400">
+              {lightboxIndex + 1} / {galleryImages.length}
+            </div>
+
+            {/* Prev */}
+            {galleryImages.length > 1 && (
+              <button
+                onClick={(e) => { e.stopPropagation(); prevImage(); }}
+                className="absolute left-4 md:left-8 z-10 bg-white/10 hover:bg-white/20 text-white rounded-full p-3 transition-colors duration-200"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+            )}
+
+            {/* Image */}
+            <motion.div
+              key={lightboxIndex}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.25 }}
+              className="relative max-w-[90vw] max-h-[85vh] bg-white rounded-2xl overflow-hidden shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={galleryImages[lightboxIndex]}
+                alt={`${project.title} gallery ${lightboxIndex + 1}`}
+                className="block max-w-[90vw] max-h-[85vh] w-auto h-auto object-contain"
+              />
+            </motion.div>
+
+            {/* Next */}
+            {galleryImages.length > 1 && (
+              <button
+                onClick={(e) => { e.stopPropagation(); nextImage(); }}
+                className="absolute right-4 md:right-8 z-10 bg-white/10 hover:bg-white/20 text-white rounded-full p-3 transition-colors duration-200"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
