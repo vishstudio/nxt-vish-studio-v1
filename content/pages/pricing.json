@@ -34,15 +34,15 @@
     {
       "label": "STUDIO",
       "name": "Growth",
-      "price": "Rs 7,500",
+      "price": "Rs 15,000",
       "priceNote": "ONE-TIME",
       "delivery": "5–7 business days",
       "tagline": "For growing businesses wanting a polished, complete web presence.",
       "featured": true,
-      "ctaLabel": "Get Started",
+      "ctaLabel": "Book Call",
       "ctaLink": {
-        "linkType": "internal",
-        "linkValue": "/contact"
+        "linkType": "phone",
+        "linkValue": "23059368556"
       },
       "features": [
         "Up to 5 pages",
@@ -51,8 +51,7 @@
         "Social media integration",
         "Advanced SEO",
         "Google Maps integration",
-        "3 months free hosting",
-        "3 months support"
+        "2 months support"
       ],
       "bestFor": "Salons, restaurants, fitness coaches, local services",
       "revisions": "2 revision rounds"
