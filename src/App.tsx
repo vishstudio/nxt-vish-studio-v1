@@ -7,6 +7,7 @@ import { ProjectsPage } from './pages/ProjectsPage';
 import { ServicesPage } from './pages/ServicesPage';
 import { ProjectDetail } from './pages/ProjectDetail';
 import { ContactPage } from './pages/ContactPage';
+import { NotFound } from './pages/NotFound';
 import { CustomCursor } from './components/CustomCursor';
 import { Loader } from './components/Loader';
 
@@ -30,6 +31,7 @@ function App() {
             <Route path="/services" element={<ServicesPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/project/:slug" element={<ProjectDetail />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         )}
       </div>

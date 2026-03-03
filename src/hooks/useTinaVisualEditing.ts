@@ -173,13 +173,15 @@ export function useTinaAbout() {
           title: v?.title ?? "",
           description: v?.description ?? "",
         })),
-        teamMembers: (qd.aboutPage.teamMembers ?? []).map((m: any) => ({
-          name: m?.name ?? "",
-          role: m?.role ?? "",
-          image: m?.image ?? "",
-          bio: m?.bio ?? "",
-          order: m?.order ?? 999,
-        })).sort((a: any, b: any) => a.order - b.order),
+        teamMembers: (qd.aboutPage.teamMembers ?? [])
+          .map((m: any) => ({
+            name: m?.name ?? "",
+            role: m?.role ?? "",
+            image: m?.image ?? "",
+            bio: m?.bio ?? "",
+            order: m?.order ?? 999,
+          }))
+          .sort((a: any, b: any) => a.order - b.order),
       } as AboutPageContent),
   );
 

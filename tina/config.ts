@@ -73,7 +73,8 @@ export default defineConfig({
             type: "string",
             name: "image",
             label: "Featured Image URL",
-            description: "Paste an image URL (e.g. https://example.com/image.jpg)",
+            description:
+              "Paste an image URL (e.g. https://example.com/image.jpg)",
           },
           { type: "string", name: "year", label: "Year", required: true },
           {
