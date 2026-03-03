@@ -6,16 +6,41 @@
   "copyright": "© 2026 VISH Studio.",
   "contactHeadingLine1": "Let's work",
   "contactHeadingLine2": "together",
+  "scrollText": "Scroll to explore • Scroll to explore •",
   "socials": [
-    { "name": "Instagram", "url": "#", "openInNewTab": false },
-    { "name": "Twitter", "url": "#", "openInNewTab": false },
-    { "name": "LinkedIn", "url": "#", "openInNewTab": false },
-    { "name": "Dribbble", "url": "#", "openInNewTab": false }
+    {
+      "name": "Instagram",
+      "url": "#",
+      "openInNewTab": false
+    },
+    {
+      "name": "Facebook",
+      "url": "https://www.facebook.com/VishSeenarain/photos/",
+      "openInNewTab": true
+    },
+    {
+      "name": "LinkedIn",
+      "url": "#",
+      "openInNewTab": false
+    },
+    {
+      "name": "Dribbble",
+      "url": "#",
+      "openInNewTab": false
+    }
   ],
   "footerLinks": [
-    { "label": "Privacy", "url": "#" },
-    { "label": "Terms", "url": "#" },
-    { "label": "Sitemap", "url": "#" }
-  ],
-  "scrollText": "Scroll to explore • Scroll to explore •"
+    {
+      "label": "Privacy",
+      "url": "#"
+    },
+    {
+      "label": "Terms",
+      "url": "#"
+    },
+    {
+      "label": "Sitemap",
+      "url": "#"
+    }
+  ]
 }
