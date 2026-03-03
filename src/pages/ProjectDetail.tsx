@@ -4,6 +4,7 @@ import { ArrowLeft, ExternalLink, X, ChevronLeft, ChevronRight, ZoomIn } from 'l
 import { useTinaProjectDetail } from '../hooks/useTinaVisualEditing';
 import { Navbar } from '../components/Navbar';
 import { CustomCursor } from '../components/CustomCursor';
+import { Contact } from '../components/Contact';
 import { useState, useEffect, useCallback } from 'react';
 
 export const ProjectDetail = () => {
@@ -177,9 +178,7 @@ export const ProjectDetail = () => {
         )}
       </main>
 
-      <footer className="py-12 border-t border-white/10 text-center font-mono text-sm text-gray-500">
-        <p>&copy; {new Date().getFullYear()} VISH Studio. All rights reserved.</p>
-      </footer>
+      <Contact />
 
       {/* Lightbox */}
       <AnimatePresence>
