@@ -37,9 +37,23 @@ export const ProjectDetail = () => {
           transition={{ duration: 0.6 }}
         >
           <span className="font-mono text-vish-accent text-sm mb-4 block">{project.category}</span>
-          <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-medium mb-12 tracking-tight leading-[0.95]">
+          <h1 className={`font-display text-6xl md:text-8xl lg:text-9xl font-medium tracking-tight leading-[0.95] ${project.siteUrl ? 'mb-8' : 'mb-12'}`}>
             {project.title}<span className="text-vish-accent">.</span>
           </h1>
+          {project.siteUrl && (
+            <motion.a
+              href={project.siteUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.15 }}
+              className="inline-flex items-center gap-2 mb-12 px-6 py-3 bg-vish-accent text-black font-mono text-sm font-semibold rounded-full hover:bg-white transition-colors duration-200 group"
+            >
+              Visit Live Site
+              <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
+            </motion.a>
+          )}
         </motion.div>
 
         <motion.div
