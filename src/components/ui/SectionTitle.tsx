@@ -1,5 +1,5 @@
 interface SectionTitleProps {
-  /** The heading text. The last word will be rendered in the accent colour with a '.' appended. */
+  /** The heading text. The last character will be in accent colour with a '.' appended. */
   children: string;
   /** Responsive size variant */
   size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
@@ -23,17 +23,14 @@ export const SectionTitle = ({
   className = '',
   tinaField,
 }: SectionTitleProps) => {
-  const words = children.trim().split(/\s+/);
-  const last = words.pop()!;
-  const rest = words.join(' ');
+  const text = children.trim();
 
   return (
     <h2
       className={`font-display text-white ${sizes[size]} ${className}`}
       data-tina-field={tinaField}
     >
-      {rest && <>{rest} </>}
-      <span className="text-vish-accent">{last}.</span>
+      {text}<span className="text-vish-accent">.</span>
     </h2>
   );
 };
