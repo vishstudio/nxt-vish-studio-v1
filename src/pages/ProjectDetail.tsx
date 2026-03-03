@@ -149,35 +149,28 @@ export const ProjectDetail = () => {
         </div>
 
         {project.gallery && project.gallery.length > 0 && (
-          <div className="space-y-8">
-            <h3 className="font-display text-3xl text-white">Gallery</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-4">
+            <h3 className="font-mono text-xs text-gray-500 uppercase tracking-widest">Gallery</h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
               {project.gallery.map((img, index) => (
-                <motion.div
+                <motion.button
                   key={index}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.08 }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
                   onClick={() => openLightbox(index)}
-                  className="group relative rounded-xl overflow-hidden aspect-4/3 bg-white border border-white/10 cursor-zoom-in shadow-lg hover:shadow-vish-accent/10 hover:border-white/25 transition-all duration-300"
+                  className="group relative rounded-lg overflow-hidden aspect-square bg-white border border-white/8 cursor-zoom-in hover:border-white/20 transition-all duration-200"
                 >
                   <img
                     src={img}
-                    alt={`${project.title} gallery ${index + 1}`}
-                    className="w-full h-full object-contain p-3 transition-transform duration-500 group-hover:scale-[1.03]"
+                    alt={`${project.title} ${index + 1}`}
+                    className="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-105"
                   />
-                  {/* Hover overlay */}
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
-                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/60 rounded-full p-3">
-                      <ZoomIn className="w-5 h-5 text-white" />
-                    </div>
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-200 flex items-center justify-center">
+                    <ZoomIn className="w-4 h-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 drop-shadow" />
                   </div>
-                  {/* Index badge */}
-                  <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/70 rounded-md px-2 py-0.5 font-mono text-xs text-gray-300">
-                    {index + 1} / {project.gallery!.length}
-                  </div>
-                </motion.div>
+                </motion.button>
               ))}
             </div>
           </div>
