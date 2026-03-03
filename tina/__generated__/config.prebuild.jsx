@@ -2,7 +2,7 @@
 import { defineConfig } from "tinacms";
 var config_default = defineConfig({
   branch: process.env.GITHUB_BRANCH || process.env.TINA_BRANCH || process.env.HEAD || "main",
-  clientId: process.env.TINA_CLIENT_ID || "43df9a3d-b238-44c9-8f2a-0b1563230ff6",
+  clientId: process.env.TINA_CLIENT_ID || "94cff29e-b158-496c-b456-9850440a0fb9",
   token: process.env.TINA_TOKEN || "",
   build: {
     outputFolder: "admin",
