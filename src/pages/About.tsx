@@ -5,6 +5,7 @@ import { TextReveal } from '../components/TextReveal';
 import { TrustedPartners } from '../components/TrustedPartners';
 import { PageLayout } from '../components/ui/PageLayout';
 import { PageHero } from '../components/ui/PageHero';
+import { SectionTitle } from '../components/ui/SectionTitle';
 import { useTinaAbout } from '../hooks/useTinaVisualEditing';
 
 export const AboutPage = () => {
@@ -97,12 +98,12 @@ export const AboutPage = () => {
             >
               {content.valuesLabel}
             </span>
-            <h2
-              className="font-display text-6xl md:text-8xl tracking-tight leading-none text-white"
-              data-tina-field={tinaField('valuesHeading')}
+            <SectionTitle
+              size="2xl"
+              tinaField={tinaField('valuesHeading')}
             >
               {content.valuesHeading}
-            </h2>
+            </SectionTitle>
           </div>
 
           <div className="grid grid-cols-1 border-t border-white/10">

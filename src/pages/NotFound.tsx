@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import { SectionTitle } from '../components/ui/SectionTitle';
 import { ArrowRight } from 'lucide-react';
 import { PageLayout } from '../components/ui/PageLayout';
 import { Button } from '../components/ui/Button';
@@ -27,9 +28,7 @@ export const NotFound = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
-            <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-medium text-white mb-8">
-              Page Not Found
-            </h2>
+            <SectionTitle className="mb-8">Page Not Found</SectionTitle>
             <p className="font-sans text-xl text-gray-400 leading-relaxed mb-12 max-w-xl mx-auto">
               The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
             </p>

@@ -3,6 +3,7 @@ import { Process } from '../components/Process';
 import { Contact } from '../components/Contact';
 import { PageLayout } from '../components/ui/PageLayout';
 import { PageHero } from '../components/ui/PageHero';
+import { SectionTitle } from '../components/ui/SectionTitle';
 import { useTinaServices } from '../hooks/useTinaVisualEditing';
 
 export const ServicesPage = () => {
@@ -54,12 +55,13 @@ export const ServicesPage = () => {
               >
                 <div className="lg:col-span-4">
                   <span className="font-mono text-vish-accent text-sm mb-4 block">0{index + 1}</span>
-                  <h2
-                    className="font-display text-5xl md:text-6xl text-white mb-6"
-                    data-tina-field={rawCat ? tinaField(rawCat, 'category') : undefined}
+                  <SectionTitle
+                    size="xl"
+                    className="mb-6"
+                    tinaField={rawCat ? tinaField(rawCat, 'category') : undefined}
                   >
                     {service.category}
-                  </h2>
+                  </SectionTitle>
                 </div>
 
                 <div className="lg:col-span-8 flex flex-col gap-12">

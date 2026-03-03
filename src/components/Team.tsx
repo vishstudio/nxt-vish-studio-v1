@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { User, PenTool, Sparkles, Globe, Terminal } from 'lucide-react';
 import type { TeamMember } from '../lib/content';
 import { getAboutPage } from '../lib/content';
+import { SectionTitle } from './ui/SectionTitle';
 
 // Helper to get icon based on role
 const getIcon = (role: string) => {
@@ -46,9 +47,7 @@ export const Team = ({ showTitle = true, members, rawTinaMembers, tinaField }: T
             transition={{ duration: 0.6 }}
             className="mb-20 md:mb-32"
           >
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-medium text-white mb-6">
-              Our Team<span className="text-vish-accent">.</span>
-            </h2>
+            <SectionTitle className="mb-6">Our Team</SectionTitle>
             <p className="font-sans text-xl md:text-2xl text-gray-400 max-w-2xl leading-relaxed">
               We are a collective of specialists, working across disciplines to deliver unified digital experiences.
             </p>

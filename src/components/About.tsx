@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { TextReveal } from './TextReveal';
 import { useTinaHome } from '../hooks/useTinaVisualEditing';
+import { SectionTitle } from './ui/SectionTitle';
 
 export const About = () => {
   const { data: content, tinaField } = useTinaHome();
@@ -14,9 +15,9 @@ export const About = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-medium mb-8 text-white" data-tina-field={tinaField('aboutHeading')}>
-            {content.aboutHeading}<span className="text-vish-accent">.</span>
-          </h2>
+          <SectionTitle className="mb-8" tinaField={tinaField('aboutHeading')}>
+            {content.aboutHeading}
+          </SectionTitle>
         </motion.div>
         <div>
           <div data-tina-field={tinaField('aboutParagraph1')}>

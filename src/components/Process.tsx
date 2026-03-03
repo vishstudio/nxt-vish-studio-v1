@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { useTinaHome } from '../hooks/useTinaVisualEditing';
+import { SectionTitle } from './ui/SectionTitle';
 
 export const Process = () => {
   const { data: content, tinaField } = useTinaHome();
@@ -63,9 +64,9 @@ export const Process = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-white mb-4" data-tina-field={tinaField('processHeading')}>
-                {content.processHeading}<span className="text-vish-accent">.</span>
-              </h2>
+              <SectionTitle size="lg" className="mb-4" tinaField={tinaField('processHeading')}>
+                {content.processHeading}
+              </SectionTitle>
               <p className="font-sans text-xs sm:text-sm text-gray-400 font-mono tracking-widest uppercase" data-tina-field={tinaField('processSubtext')}>
                 {content.processSubtext}
               </p>

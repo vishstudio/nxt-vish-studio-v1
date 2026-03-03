@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { ArrowUpRight, ArrowRight } from 'lucide-react';
 import { Button } from './ui/Button';
 import { useTinaHome } from '../hooks/useTinaVisualEditing';
+import { SectionTitle } from './ui/SectionTitle';
 
 export const Services = () => {
   const { data: content, tinaField } = useTinaHome();
@@ -17,9 +18,9 @@ export const Services = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-medium text-white mb-6" data-tina-field={tinaField('servicesHeading')}>
-              {content.servicesHeading}<span className="text-vish-accent">.</span>
-            </h2>
+            <SectionTitle className="mb-6" tinaField={tinaField('servicesHeading')}>
+              {content.servicesHeading}
+            </SectionTitle>
             <p className="font-sans text-gray-400 text-lg max-w-md" data-tina-field={tinaField('servicesSubtext')}>
               {content.servicesSubtext}
             </p>
