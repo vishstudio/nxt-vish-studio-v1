@@ -39,7 +39,11 @@ export function useTinaProjectDetail(slug: string) {
       data: {
         slug: p.slug || p._sys?.filename || slug,
         title: p.title ?? "",
-        category: Array.isArray(p.category) ? p.category : p.category ? [p.category] : [],
+        category: Array.isArray(p.category)
+          ? p.category
+          : p.category
+          ? [p.category]
+          : [],
         image: p.image ?? "",
         year: p.year ?? "",
         order: p.order ?? 999,
@@ -94,7 +98,11 @@ export function useTinaProjectsList() {
           ({
             slug: p.slug || p._sys?.filename || "",
             title: p.title ?? "",
-            category: Array.isArray(p.category) ? p.category : p.category ? [p.category] : [],
+            category: Array.isArray(p.category)
+              ? p.category
+              : p.category
+              ? [p.category]
+              : [],
             image: p.image ?? "",
             year: p.year ?? "",
             order: p.order ?? 999,

@@ -1,11 +1,14 @@
 {
   "title": "SS Power Pro",
   "slug": "ss-power-pro",
-  "category": ["Development"],
+  "category": [
+    "Development"
+  ],
   "image": "https://previews.dropbox.com/p/thumb/AC5-njq7RDJmGZvzWXpz95caXlPMiF6UVJNgnU8FKVgJwDHZtrcetytsMhF055lL_Krk_D5LBporQqD0UOXb7QFqoOdjahpnqyLNmfwQe0CTX0TpQjEoBkViaXMtNVl0SJaKQyvcjOa-AmZ1Hm-8Vyx_EjgOxVC1-Kywr4cU4i6kAs5kk2LH8gCAjMW3yX34g7bwIoG0lUdLJYKrx4PA8AnaYnPSEMavebQeAqoBXKI8nQtESNCW6Jf8sq6DUnUqx-bTcotjsEvSXUyHwFeX13cWyWkf-Fn4n81AWXExA2cRrDT4jczW4iV6q4BnPiyP-7_naltiiZB46DmLXcz_9nAH/p.jpeg?is_prewarmed=true",
   "year": "2026",
   "order": 3,
   "featuredOnHome": true,
   "description": "Bringing handymen business online. Curated website which fits the client business accordingly. #WIP",
-  "siteUrl": "https://vish-studio.github.io/react-sspower-pros/"
+  "siteUrl": "https://vish-studio.github.io/react-sspower-pros/",
+  "techStack": ["React JS", "HTML 5", "CSS 3", "Javascript", "SEO"]
 }

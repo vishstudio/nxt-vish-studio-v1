@@ -72,7 +72,8 @@ export default defineConfig({
             ],
             ui: {
               validate: (value: string[] | undefined) => {
-                if (!value || value.length === 0) return "At least one category is required";
+                if (!value || value.length === 0)
+                  return "At least one category is required";
                 if (value.length > 3) return "Maximum 3 categories allowed";
               },
             },
