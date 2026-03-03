@@ -10,24 +10,23 @@
     {
       "label": "STARTER",
       "name": "Essentials",
-      "price": "Rs 3,000",
+      "price": "Rs 7000",
       "priceNote": "ONE-TIME",
       "delivery": "3–5 business days",
       "tagline": "Perfect for individuals & small businesses getting online for the first time.",
       "featured": false,
-      "ctaLabel": "Start on WhatsApp",
+      "ctaLabel": "Book a call",
       "ctaLink": {
-        "linkType": "whatsapp",
-        "linkValue": "23057000000"
+        "linkType": "phone",
+        "linkValue": "23059368556"
       },
       "features": [
         "Single-page website",
         "Mobile responsive design",
         "Contact form",
-        "WhatsApp integration",
         "Basic SEO setup",
-        "1 month free hosting",
-        "1 month support"
+        "1 month support",
+        "4 - 6 Sections"
       ],
       "bestFor": "Freelancers, tutors, market stalls, pop-up businesses",
       "revisions": "1 revision round"
