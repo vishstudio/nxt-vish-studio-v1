@@ -45,8 +45,8 @@ export const Navbar = () => {
                 </motion.div>
               )}
             </AnimatePresence>
-            <a href="/" className="font-display text-xl font-bold tracking-tight text-white relative z-50">
-              VISH<span className="text-vish-accent">.</span>
+            <a href="/" className="relative z-50" style={{ fontFamily: 'var(--font-logo)', fontWeight: 800, fontSize: '1.25rem', letterSpacing: '-0.01em' }}>
+              <span className="text-white">VISH</span><span className="text-vish-accent"> Studio</span>
             </a>
           </div>
 
@@ -151,10 +151,11 @@ export const Navbar = () => {
 
               <div className="flex-1 overflow-y-auto py-8 px-8 flex flex-col gap-2">
                 {[
-                  { name: 'Projects', href: '/projects', id: '01' },
-                  { name: 'Services', href: '/services', id: '02' },
-                  { name: 'About', href: '/about', id: '03' },
-                  { name: 'Contact', href: '/contact', id: '04' }
+                  { name: 'Home', href: '/', id: '01' },
+                  { name: 'Projects', href: '/projects', id: '02' },
+                  { name: 'Services', href: '/services', id: '03' },
+                  { name: 'About', href: '/about', id: '04' },
+                  { name: 'Contact', href: '/contact', id: '05' }
                 ].map((item, i) => (
                   <motion.a
                     key={item.name}
