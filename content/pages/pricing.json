@@ -18,7 +18,7 @@
       "ctaLabel": "Contact us",
       "ctaLink": {
         "linkType": "internal",
-        "linkValue": "/contact"
+        "linkValue": "/#contact"
       },
       "features": [
         "Single-page website",
