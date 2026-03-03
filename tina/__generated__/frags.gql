@@ -151,7 +151,11 @@ fragment PricingPageParts on PricingPage {
     tagline
     featured
     ctaLabel
-    ctaHref
+    ctaLink {
+      __typename
+      linkType
+      linkValue
+    }
     features
     bestFor
     revisions

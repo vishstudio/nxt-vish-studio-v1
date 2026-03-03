@@ -500,6 +500,11 @@ type ContactPageConnection implements Connection {
   edges: [ContactPageConnectionEdges]
 }
 
+type PricingPagePlansCtaLink {
+  linkType: String
+  linkValue: String
+}
+
 type PricingPagePlans {
   label: String
   name: String!
@@ -509,7 +514,7 @@ type PricingPagePlans {
   tagline: String
   featured: Boolean
   ctaLabel: String
-  ctaHref: String
+  ctaLink: PricingPagePlansCtaLink
   features: [String]
   bestFor: String
   revisions: String
@@ -533,6 +538,11 @@ type PricingPage implements Node & Document {
   _values: JSON!
 }
 
+input PricingPagePlansCtaLinkFilter {
+  linkType: StringFilter
+  linkValue: StringFilter
+}
+
 input PricingPagePlansFilter {
   label: StringFilter
   name: StringFilter
@@ -542,7 +552,7 @@ input PricingPagePlansFilter {
   tagline: StringFilter
   featured: BooleanFilter
   ctaLabel: StringFilter
-  ctaHref: StringFilter
+  ctaLink: PricingPagePlansCtaLinkFilter
   features: StringFilter
   bestFor: StringFilter
   revisions: StringFilter
@@ -757,6 +767,11 @@ input ContactPageMutation {
   trustIndicators: [ContactPageTrustIndicatorsMutation]
 }
 
+input PricingPagePlansCtaLinkMutation {
+  linkType: String
+  linkValue: String
+}
+
 input PricingPagePlansMutation {
   label: String
   name: String
@@ -766,7 +781,7 @@ input PricingPagePlansMutation {
   tagline: String
   featured: Boolean
   ctaLabel: String
-  ctaHref: String
+  ctaLink: PricingPagePlansCtaLinkMutation
   features: [String]
   bestFor: String
   revisions: String

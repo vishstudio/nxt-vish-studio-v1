@@ -16,7 +16,7 @@
       "tagline": "Perfect for individuals & small businesses getting online for the first time.",
       "featured": false,
       "ctaLabel": "Start on WhatsApp",
-      "ctaHref": "https://wa.me/23057000000",
+      "ctaLink": { "linkType": "whatsapp", "linkValue": "23057000000" },
       "features": [
         "Single-page website",
         "Mobile responsive design",
@@ -38,7 +38,7 @@
       "tagline": "For growing businesses wanting a polished, complete web presence.",
       "featured": true,
       "ctaLabel": "Get Started",
-      "ctaHref": "/contact",
+      "ctaLink": { "linkType": "internal", "linkValue": "/contact" },
       "features": [
         "Up to 5 pages",
         "Custom design system",
@@ -61,7 +61,7 @@
       "tagline": "Complete digital solution for established businesses ready to scale.",
       "featured": false,
       "ctaLabel": "Book a Call",
-      "ctaHref": "/contact",
+      "ctaLink": { "linkType": "internal", "linkValue": "/contact" },
       "features": [
         "Up to 10 pages",
         "Premium custom design",

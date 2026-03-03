@@ -683,9 +683,29 @@ export default defineConfig({
               },
               { type: "string", name: "ctaLabel", label: "CTA Button Label" },
               {
-                type: "string",
-                name: "ctaHref",
-                label: "CTA Link (URL or /path)",
+                type: "object",
+                name: "ctaLink",
+                label: "CTA Button Link",
+                fields: [
+                  {
+                    type: "string",
+                    name: "linkType",
+                    label: "Link Type",
+                    options: [
+                      { label: "Internal path (e.g. /contact)", value: "internal" },
+                      { label: "External URL (https://...)", value: "url" },
+                      { label: "Phone number", value: "phone" },
+                      { label: "Email address", value: "email" },
+                      { label: "WhatsApp number", value: "whatsapp" },
+                    ],
+                  },
+                  {
+                    type: "string",
+                    name: "linkValue",
+                    label: "Value",
+                    description: "Path, full URL, phone number (digits only), email, or WhatsApp number (digits only)",
+                  },
+                ],
               },
               {
                 type: "string",

@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import { Check, ArrowRight, Sparkles } from 'lucide-react';
 import { useTinaPricing } from '../hooks/useTinaVisualEditing';
 import { SectionTitle } from './ui/SectionTitle';
-import type { PricingPlan } from '../lib/pricing';
+import { buildCtaHref, isExternalCtaLink, type PricingPlan } from '../lib/pricing';
 
 function PlanCard({ plan, index, tinaField, rawPlan }: {
   plan: PricingPlan;
@@ -11,7 +11,8 @@ function PlanCard({ plan, index, tinaField, rawPlan }: {
   tinaField: (obj: any, field: string) => string | undefined;
   rawPlan: any;
 }) {
-  const isExternal = plan.ctaHref.startsWith('http');
+  const href = buildCtaHref(plan.ctaLink);
+  const isExternal = isExternalCtaLink(plan.ctaLink);
 
   return (
     <motion.div
@@ -107,7 +108,7 @@ function PlanCard({ plan, index, tinaField, rawPlan }: {
       {/* CTA */}
       {isExternal ? (
         <a
-          href={plan.ctaHref}
+          href={href}
           target="_blank"
           rel="noopener noreferrer"
           className={`inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-xl font-mono text-sm font-semibold transition-all duration-200 ${plan.featured
@@ -120,7 +121,7 @@ function PlanCard({ plan, index, tinaField, rawPlan }: {
         </a>
       ) : (
         <Link
-          to={plan.ctaHref}
+          to={href}
           className={`inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-xl font-mono text-sm font-semibold transition-all duration-200 ${plan.featured
               ? 'bg-vish-accent text-black hover:bg-white'
               : 'border border-white/15 text-white hover:border-white/40 hover:bg-white/5'
