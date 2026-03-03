@@ -1,5 +1,6 @@
 import { motion, animate } from 'motion/react';
 import { useEffect, useState } from 'react';
+import { LogoText } from './LogoText';
 
 export const Loader = ({ onLoadingComplete }: { onLoadingComplete: () => void }) => {
   const [progress, setProgress] = useState(0);
@@ -28,9 +29,8 @@ export const Loader = ({ onLoadingComplete }: { onLoadingComplete: () => void })
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          style={{ fontFamily: 'var(--font-logo)', fontSize: '1.2rem', letterSpacing: '-0.01em', fontOpticalSizing: 'auto', fontVariationSettings: '"GRAD" 0' } as any}
         >
-          <span className="text-white" style={{ fontWeight: 700 }}>VISH</span><span style={{ fontWeight: 400 }}> studio</span>
+          <LogoText />
         </motion.div>
         <motion.div
           initial={{ opacity: 0, y: 10 }}

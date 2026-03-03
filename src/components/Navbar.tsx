@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, ArrowRight } from 'lucide-react';
 import { Button } from './ui/Button';
 import { useTinaSettings } from '../hooks/useTinaVisualEditing';
+import { LogoText } from './LogoText';
 
 export const Navbar = () => {
   const { data: settings } = useTinaSettings();
@@ -45,8 +46,8 @@ export const Navbar = () => {
                 </motion.div>
               )}
             </AnimatePresence>
-            <a href="/" className="relative z-50" style={{ fontFamily: 'var(--font-logo)', fontSize: '1.2rem', letterSpacing: '-0.01em', fontOpticalSizing: 'auto', fontVariationSettings: '"GRAD" 0' } as any}>
-              <span className="text-white" style={{ fontWeight: 700 }}>VISH</span><span style={{ fontWeight: 400 }}> studio.</span>
+            <a href="/" className="relative z-50">
+              <LogoText />
             </a>
           </div>
 
