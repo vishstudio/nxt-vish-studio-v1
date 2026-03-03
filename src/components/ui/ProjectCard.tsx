@@ -37,7 +37,7 @@ export const ProjectCard = ({ project, index, alternate = true }: ProjectCardPro
         <motion.div
           whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.7, ease: [0.33, 1, 0.68, 1] }}
-          className="aspect-[16/10] bg-gray-900"
+          className="aspect-16/10 bg-gray-900"
         >
           <img
             src={project.image}
@@ -86,9 +86,9 @@ export const ProjectCard = ({ project, index, alternate = true }: ProjectCardPro
               href={project.siteUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-gray-400 hover:text-white border-b border-transparent hover:border-white transition-all duration-300 pb-0.5"
+              className="inline-flex items-center gap-1.5 px-3 py-1 bg-vish-accent text-black font-mono text-xs font-semibold rounded-full hover:bg-white transition-colors duration-200 group"
             >
-              View Site <ExternalLink className="w-3.5 h-3.5" />
+              View Site <ExternalLink className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
             </a>
           )}
         </div>

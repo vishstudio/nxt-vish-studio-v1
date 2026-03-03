@@ -118,9 +118,9 @@ export const ProjectDetail = () => {
                     href={project.siteUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-vish-accent hover:underline transition-colors"
+                    className="inline-flex items-center gap-1.5 px-3 py-1 bg-vish-accent text-black font-mono text-xs font-semibold rounded-full hover:bg-white transition-colors duration-200 group"
                   >
-                    View Site <ExternalLink className="w-3 h-3" />
+                    View Site <ExternalLink className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
                   </a>
                 </div>
               )}
