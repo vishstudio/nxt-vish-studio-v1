@@ -43,17 +43,20 @@ export const CustomCursor = () => {
       y: mousePosition.y - 6,
       height: 12,
       width: 12,
-      backgroundColor: "#FFD600", // vish-accent
-      mixBlendMode: "difference" as const
+      backgroundColor: "#FFD600",
+      border: "2px solid transparent",
+      mixBlendMode: "normal" as const,
+      opacity: 1,
     },
     hover: {
-      x: mousePosition.x - 16,
-      y: mousePosition.y - 16,
-      height: 32,
-      width: 32,
-      backgroundColor: "#FFD600",
-      mixBlendMode: "difference" as const,
-      opacity: 0.8
+      x: mousePosition.x - 18,
+      y: mousePosition.y - 18,
+      height: 36,
+      width: 36,
+      backgroundColor: "transparent",
+      border: "2px solid #FFD600",
+      mixBlendMode: "normal" as const,
+      opacity: 1,
     },
     project: {
       x: mousePosition.x - 40,
@@ -61,14 +64,15 @@ export const CustomCursor = () => {
       height: 80,
       width: 80,
       backgroundColor: "#ffffff",
+      border: "2px solid transparent",
       mixBlendMode: "normal" as const,
-      opacity: 1
+      opacity: 1,
     }
   };
 
   return (
     <motion.div
-      className="fixed top-0 left-0 rounded-full pointer-events-none z-[100] flex items-center justify-center"
+      className="fixed top-0 left-0 rounded-full pointer-events-none z-9999 flex items-center justify-center"
       animate={variants[cursorVariant as keyof typeof variants]}
       transition={{
         type: "spring",
