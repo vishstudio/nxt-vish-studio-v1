@@ -28,7 +28,7 @@ export default defineConfig({
         path: "content/projects",
         format: "json",
         ui: {
-          router: ({ document }) => `/project/${document._sys.filename}`,
+          router: ({ document }) => `/project/${(document as any).slug || document._sys.filename}`,
           filename: {
             readonly: false,
             slugify: (values) =>
@@ -44,6 +44,13 @@ export default defineConfig({
             name: "title",
             label: "Title",
             isTitle: true,
+            required: true,
+          },
+          {
+            type: "string",
+            name: "slug",
+            label: "Slug",
+            description: "URL-friendly identifier (e.g. 'my-project'). Used in /project/<slug>",
             required: true,
           },
           {

@@ -23,7 +23,7 @@ var config_default = defineConfig({
         path: "content/projects",
         format: "json",
         ui: {
-          router: ({ document }) => `/project/${document._sys.filename}`,
+          router: ({ document }) => `/project/${document.slug || document._sys.filename}`,
           filename: {
             readonly: false,
             slugify: (values) => (values?.title || "").toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")
@@ -35,6 +35,13 @@ var config_default = defineConfig({
             name: "title",
             label: "Title",
             isTitle: true,
+            required: true
+          },
+          {
+            type: "string",
+            name: "slug",
+            label: "Slug",
+            description: "URL-friendly identifier (e.g. 'my-project'). Used in /project/<slug>",
             required: true
           },
           {

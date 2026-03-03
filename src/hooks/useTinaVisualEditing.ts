@@ -403,7 +403,7 @@ export function useTinaProjectDetail(slug: string) {
     const p = liveData.project;
     return {
       data: {
-        slug: p._sys?.filename ?? slug,
+        slug: p.slug || p._sys?.filename || slug,
         title: p.title ?? "",
         category: p.category ?? "",
         image: p.image ?? "",
@@ -457,7 +457,7 @@ export function useTinaProjectsList() {
       .map(
         (p: any) =>
           ({
-            slug: p._sys?.filename ?? "",
+            slug: p.slug || p._sys?.filename || "",
             title: p.title ?? "",
             category: p.category ?? "",
             image: p.image ?? "",

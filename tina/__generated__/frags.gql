@@ -1,6 +1,7 @@
 fragment ProjectParts on Project {
   __typename
   title
+  slug
   category
   image
   year

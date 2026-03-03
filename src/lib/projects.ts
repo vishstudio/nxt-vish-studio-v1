@@ -14,6 +14,7 @@ export interface Project {
 
 interface ProjectJson {
   title: string;
+  slug?: string;
   category: string;
   image: string;
   year: string;
@@ -35,7 +36,7 @@ const projectModules = import.meta.glob<ProjectJson>(
 export function getProjects(): Project[] {
   return Object.entries(projectModules)
     .map(([filePath, data]) => ({
-      slug: filePath.split("/").pop()?.replace(".json", "") || "",
+      slug: data.slug || filePath.split("/").pop()?.replace(".json", "") || "",
       title: data.title,
       category: data.category,
       image: data.image,

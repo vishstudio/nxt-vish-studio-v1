@@ -5,8 +5,11 @@ import { Link } from 'react-router-dom';
 import { useTinaProjectsList } from '../hooks/useTinaVisualEditing';
 import { Button } from './ui/Button';
 
+const HP_MAX_PROJECTS = 4;
+
 export const Projects = ({ showViewAll = true }: { showViewAll?: boolean }) => {
-  const { data: projects } = useTinaProjectsList();
+  const { data: allProjects } = useTinaProjectsList();
+  const projects = allProjects.slice(0, HP_MAX_PROJECTS);
   const [activeProject, setActiveProject] = useState(projects[0]);
 
   return (

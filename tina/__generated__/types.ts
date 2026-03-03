@@ -294,6 +294,7 @@ export type DocumentNode = Project | TeamMember | SiteSettings | Partners | Home
 export type Project = Node & Document & {
   __typename?: 'Project';
   title: Scalars['String']['output'];
+  slug: Scalars['String']['output'];
   category: Scalars['String']['output'];
   image?: Maybe<Scalars['String']['output']>;
   year: Scalars['String']['output'];
@@ -332,6 +333,7 @@ export type NumberFilter = {
 
 export type ProjectFilter = {
   title?: InputMaybe<StringFilter>;
+  slug?: InputMaybe<StringFilter>;
   category?: InputMaybe<StringFilter>;
   image?: InputMaybe<ImageFilter>;
   year?: InputMaybe<StringFilter>;
@@ -887,6 +889,7 @@ export type DocumentMutation = {
 
 export type ProjectMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
   category?: InputMaybe<Scalars['String']['input']>;
   image?: InputMaybe<Scalars['String']['input']>;
   year?: InputMaybe<Scalars['String']['input']>;
@@ -1010,7 +1013,7 @@ export type ContactPageMutation = {
   trustIndicators?: InputMaybe<Array<InputMaybe<ContactPageTrustIndicatorsMutation>>>;
 };
 
-export type ProjectPartsFragment = { __typename: 'Project', title: string, category: string, image?: string | null, year: string, order?: number | null, description: string, fullDescription?: string | null, gallery?: Array<string | null> | null };
+export type ProjectPartsFragment = { __typename: 'Project', title: string, slug: string, category: string, image?: string | null, year: string, order?: number | null, description: string, fullDescription?: string | null, gallery?: Array<string | null> | null };
 
 export type TeamMemberPartsFragment = { __typename: 'TeamMember', name: string, role: string, image?: string | null, bio?: string | null, order?: number | null };
 
@@ -1031,7 +1034,7 @@ export type ProjectQueryVariables = Exact<{
 }>;
 
 
-export type ProjectQuery = { __typename?: 'Query', project: { __typename: 'Project', id: string, title: string, category: string, image?: string | null, year: string, order?: number | null, description: string, fullDescription?: string | null, gallery?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type ProjectQuery = { __typename?: 'Query', project: { __typename: 'Project', id: string, title: string, slug: string, category: string, image?: string | null, year: string, order?: number | null, description: string, fullDescription?: string | null, gallery?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type ProjectConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1043,7 +1046,7 @@ export type ProjectConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ProjectConnectionQuery = { __typename?: 'Query', projectConnection: { __typename?: 'ProjectConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ProjectConnectionEdges', cursor: string, node?: { __typename: 'Project', id: string, title: string, category: string, image?: string | null, year: string, order?: number | null, description: string, fullDescription?: string | null, gallery?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type ProjectConnectionQuery = { __typename?: 'Query', projectConnection: { __typename?: 'ProjectConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ProjectConnectionEdges', cursor: string, node?: { __typename: 'Project', id: string, title: string, slug: string, category: string, image?: string | null, year: string, order?: number | null, description: string, fullDescription?: string | null, gallery?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type TeamMemberQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1182,6 +1185,7 @@ export const ProjectPartsFragmentDoc = gql`
     fragment ProjectParts on Project {
   __typename
   title
+  slug
   category
   image
   year
