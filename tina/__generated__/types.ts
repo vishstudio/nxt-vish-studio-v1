@@ -281,6 +281,7 @@ export type Project = Node & Document & {
   image?: Maybe<Scalars['String']['output']>;
   year: Scalars['String']['output'];
   order?: Maybe<Scalars['Float']['output']>;
+  featuredOnHome?: Maybe<Scalars['Boolean']['output']>;
   description: Scalars['String']['output'];
   fullDescription?: Maybe<Scalars['String']['output']>;
   gallery?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
@@ -306,6 +307,11 @@ export type NumberFilter = {
   in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
 };
 
+export type BooleanFilter = {
+  eq?: InputMaybe<Scalars['Boolean']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 export type ProjectFilter = {
   title?: InputMaybe<StringFilter>;
   slug?: InputMaybe<StringFilter>;
@@ -313,6 +319,7 @@ export type ProjectFilter = {
   image?: InputMaybe<StringFilter>;
   year?: InputMaybe<StringFilter>;
   order?: InputMaybe<NumberFilter>;
+  featuredOnHome?: InputMaybe<BooleanFilter>;
   description?: InputMaybe<StringFilter>;
   fullDescription?: InputMaybe<StringFilter>;
   gallery?: InputMaybe<StringFilter>;
@@ -839,6 +846,7 @@ export type ProjectMutation = {
   image?: InputMaybe<Scalars['String']['input']>;
   year?: InputMaybe<Scalars['String']['input']>;
   order?: InputMaybe<Scalars['Float']['input']>;
+  featuredOnHome?: InputMaybe<Scalars['Boolean']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   fullDescription?: InputMaybe<Scalars['String']['input']>;
   gallery?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -959,7 +967,7 @@ export type ContactPageMutation = {
   trustIndicators?: InputMaybe<Array<InputMaybe<ContactPageTrustIndicatorsMutation>>>;
 };
 
-export type ProjectPartsFragment = { __typename: 'Project', title: string, slug: string, category: string, image?: string | null, year: string, order?: number | null, description: string, fullDescription?: string | null, gallery?: Array<string | null> | null };
+export type ProjectPartsFragment = { __typename: 'Project', title: string, slug: string, category: string, image?: string | null, year: string, order?: number | null, featuredOnHome?: boolean | null, description: string, fullDescription?: string | null, gallery?: Array<string | null> | null };
 
 export type SiteSettingsPartsFragment = { __typename: 'SiteSettings', email: string, phone: string, phoneLink?: string | null, address?: string | null, copyright?: string | null, contactHeadingLine1?: string | null, contactHeadingLine2?: string | null, scrollText?: string | null, socials?: Array<{ __typename: 'SiteSettingsSocials', name: string, url: string } | null> | null, footerLinks?: Array<{ __typename: 'SiteSettingsFooterLinks', label: string, url: string } | null> | null };
 
@@ -978,7 +986,7 @@ export type ProjectQueryVariables = Exact<{
 }>;
 
 
-export type ProjectQuery = { __typename?: 'Query', project: { __typename: 'Project', id: string, title: string, slug: string, category: string, image?: string | null, year: string, order?: number | null, description: string, fullDescription?: string | null, gallery?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type ProjectQuery = { __typename?: 'Query', project: { __typename: 'Project', id: string, title: string, slug: string, category: string, image?: string | null, year: string, order?: number | null, featuredOnHome?: boolean | null, description: string, fullDescription?: string | null, gallery?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type ProjectConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -990,7 +998,7 @@ export type ProjectConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ProjectConnectionQuery = { __typename?: 'Query', projectConnection: { __typename?: 'ProjectConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ProjectConnectionEdges', cursor: string, node?: { __typename: 'Project', id: string, title: string, slug: string, category: string, image?: string | null, year: string, order?: number | null, description: string, fullDescription?: string | null, gallery?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type ProjectConnectionQuery = { __typename?: 'Query', projectConnection: { __typename?: 'ProjectConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ProjectConnectionEdges', cursor: string, node?: { __typename: 'Project', id: string, title: string, slug: string, category: string, image?: string | null, year: string, order?: number | null, featuredOnHome?: boolean | null, description: string, fullDescription?: string | null, gallery?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type SiteSettingsQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1115,6 +1123,7 @@ export const ProjectPartsFragmentDoc = gql`
   image
   year
   order
+  featuredOnHome
   description
   fullDescription
   gallery
@@ -1730,7 +1739,7 @@ export const ExperimentalGetTinaClient = () =>
   getSdk(
     generateRequester(
       createClient({
-        url: "http://localhost:4001/graphql",
+        url: "https://content.tinajs.io/2.1/content/43df9a3d-b238-44c9-8f2a-0b1563230ff6/github/main",
         queries,
       })
     )

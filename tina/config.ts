@@ -84,6 +84,12 @@ export default defineConfig({
             description: "Lower numbers appear first",
           },
           {
+            type: "boolean",
+            name: "featuredOnHome",
+            label: "Show on Homepage",
+            description: "Check to display this project in the Homepage. Only up to 4 will be shown.",
+          },
+          {
             type: "string",
             name: "description",
             label: "Short Description",

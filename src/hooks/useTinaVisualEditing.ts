@@ -371,6 +371,7 @@ export function useTinaProjectDetail(slug: string) {
         description: p.description ?? "",
         fullDescription: p.fullDescription ?? "",
         gallery: (p.gallery ?? []).filter(Boolean),
+        featuredOnHome: p.featuredOnHome ?? false,
       } as Project,
       tinaData: liveData.project,
     };
@@ -425,6 +426,7 @@ export function useTinaProjectsList() {
             description: p.description ?? "",
             fullDescription: p.fullDescription ?? "",
             gallery: (p.gallery ?? []).filter(Boolean),
+            featuredOnHome: p.featuredOnHome ?? false,
           } as Project),
       )
       .sort((a: Project, b: Project) => a.order - b.order);

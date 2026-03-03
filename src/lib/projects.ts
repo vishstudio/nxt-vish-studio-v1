@@ -10,6 +10,7 @@ export interface Project {
   description: string;
   fullDescription: string;
   gallery: string[];
+  featuredOnHome: boolean;
 }
 
 interface ProjectJson {
@@ -22,6 +23,7 @@ interface ProjectJson {
   description: string;
   fullDescription?: string;
   gallery?: string[];
+  featuredOnHome?: boolean;
 }
 
 // Vite eagerly imports all project JSON at build time — fully static, no API needed
@@ -45,6 +47,7 @@ export function getProjects(): Project[] {
       description: data.description,
       fullDescription: data.fullDescription || data.description,
       gallery: (data.gallery || []).filter(Boolean) as string[],
+      featuredOnHome: data.featuredOnHome ?? false,
     }))
     .sort((a, b) => a.order - b.order);
 }

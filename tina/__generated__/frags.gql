@@ -6,6 +6,7 @@ fragment ProjectParts on Project {
   image
   year
   order
+  featuredOnHome
   description
   fullDescription
   gallery

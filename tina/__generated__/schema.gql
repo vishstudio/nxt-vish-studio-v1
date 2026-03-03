@@ -112,6 +112,7 @@ type Project implements Node & Document {
   image: String
   year: String!
   order: Float
+  featuredOnHome: Boolean
   description: String!
   fullDescription: String
   gallery: [String]
@@ -137,6 +138,11 @@ input NumberFilter {
   in: [Float]
 }
 
+input BooleanFilter {
+  eq: Boolean
+  exists: Boolean
+}
+
 input ProjectFilter {
   title: StringFilter
   slug: StringFilter
@@ -144,6 +150,7 @@ input ProjectFilter {
   image: StringFilter
   year: StringFilter
   order: NumberFilter
+  featuredOnHome: BooleanFilter
   description: StringFilter
   fullDescription: StringFilter
   gallery: StringFilter
@@ -524,6 +531,7 @@ input ProjectMutation {
   image: String
   year: String
   order: Float
+  featuredOnHome: Boolean
   description: String
   fullDescription: String
   gallery: [String]

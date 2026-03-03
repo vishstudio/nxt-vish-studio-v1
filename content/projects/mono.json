@@ -1,0 +1,16 @@
+{
+  "title": "Mono",
+  "slug": "mono",
+  "category": "Development",
+  "image": "https://picsum.photos/seed/mono/1600/1200",
+  "year": "2025",
+  "order": 3,
+  "featuredOnHome": true,
+  "description": "High-performance e-commerce platform for minimalists.",
+  "fullDescription": "Mono is an e-commerce platform built for speed and simplicity. We utilized the latest web technologies to ensure lightning-fast load times and a seamless checkout experience, all wrapped in a minimalist aesthetic.",
+  "gallery": [
+    "https://picsum.photos/seed/mono-1/1600/1200",
+    "https://picsum.photos/seed/mono-2/1600/1200",
+    "https://picsum.photos/seed/mono-3/1600/1200"
+  ]
+}
