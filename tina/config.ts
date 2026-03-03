@@ -610,8 +610,16 @@ export default defineConfig({
             isTitle: true,
             required: true,
           },
-          { type: "string", name: "heroTitleLine1", label: "Hero Title Line 1" },
-          { type: "string", name: "heroTitleLine2", label: "Hero Title Line 2" },
+          {
+            type: "string",
+            name: "heroTitleLine1",
+            label: "Hero Title Line 1",
+          },
+          {
+            type: "string",
+            name: "heroTitleLine2",
+            label: "Hero Title Line 2",
+          },
           {
             type: "string",
             name: "heroSubtext",
@@ -635,20 +643,50 @@ export default defineConfig({
               itemProps: (item) => ({ label: item?.name || "Plan" }),
             },
             fields: [
-              { type: "string", name: "label", label: "Plan Label (e.g. STARTER)" },
-              { type: "string", name: "name", label: "Plan Name", required: true },
-              { type: "string", name: "price", label: "Price (e.g. Rs 3,000)", required: true },
-              { type: "string", name: "priceNote", label: "Price Note (e.g. ONE-TIME)" },
-              { type: "string", name: "delivery", label: "Delivery Time (e.g. 3–5 business days)" },
+              {
+                type: "string",
+                name: "label",
+                label: "Plan Label (e.g. STARTER)",
+              },
+              {
+                type: "string",
+                name: "name",
+                label: "Plan Name",
+                required: true,
+              },
+              {
+                type: "string",
+                name: "price",
+                label: "Price (e.g. Rs 3,000)",
+                required: true,
+              },
+              {
+                type: "string",
+                name: "priceNote",
+                label: "Price Note (e.g. ONE-TIME)",
+              },
+              {
+                type: "string",
+                name: "delivery",
+                label: "Delivery Time (e.g. 3–5 business days)",
+              },
               {
                 type: "string",
                 name: "tagline",
                 label: "Tagline",
                 ui: { component: "textarea" },
               },
-              { type: "boolean", name: "featured", label: "Featured (Most Popular)" },
+              {
+                type: "boolean",
+                name: "featured",
+                label: "Featured (Most Popular)",
+              },
               { type: "string", name: "ctaLabel", label: "CTA Button Label" },
-              { type: "string", name: "ctaHref", label: "CTA Link (URL or /path)" },
+              {
+                type: "string",
+                name: "ctaHref",
+                label: "CTA Link (URL or /path)",
+              },
               {
                 type: "string",
                 name: "features",
@@ -659,7 +697,11 @@ export default defineConfig({
               { type: "string", name: "revisions", label: "Revisions Policy" },
             ],
           },
-          { type: "string", name: "customLabel", label: "Custom Block Heading" },
+          {
+            type: "string",
+            name: "customLabel",
+            label: "Custom Block Heading",
+          },
           {
             type: "string",
             name: "customDescription",

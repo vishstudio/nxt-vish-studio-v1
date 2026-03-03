@@ -131,3 +131,33 @@ fragment ContactPageParts on ContactPage {
     description
   }
 }
+
+fragment PricingPageParts on PricingPage {
+  __typename
+  heroLabel
+  heroTitleLine1
+  heroTitleLine2
+  heroSubtext
+  sectionLabel
+  sectionHeading
+  sectionSubtext
+  plans {
+    __typename
+    label
+    name
+    price
+    priceNote
+    delivery
+    tagline
+    featured
+    ctaLabel
+    ctaHref
+    features
+    bestFor
+    revisions
+  }
+  customLabel
+  customDescription
+  customCtaLabel
+  customCtaHref
+}

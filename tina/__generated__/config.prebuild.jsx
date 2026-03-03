@@ -569,6 +569,85 @@ var config_default = defineConfig({
             ]
           }
         ]
+      },
+      // ─── Pricing Page (single file) ───
+      {
+        name: "pricingPage",
+        label: "Pricing Page",
+        path: "content/pages",
+        format: "json",
+        match: { include: "pricing" },
+        ui: {
+          router: () => "/pricing",
+          allowedActions: { create: false, delete: false }
+        },
+        fields: [
+          {
+            type: "string",
+            name: "heroLabel",
+            label: "Hero Label",
+            isTitle: true,
+            required: true
+          },
+          { type: "string", name: "heroTitleLine1", label: "Hero Title Line 1" },
+          { type: "string", name: "heroTitleLine2", label: "Hero Title Line 2" },
+          {
+            type: "string",
+            name: "heroSubtext",
+            label: "Hero Subtext",
+            ui: { component: "textarea" }
+          },
+          { type: "string", name: "sectionLabel", label: "Section Label" },
+          { type: "string", name: "sectionHeading", label: "Section Heading" },
+          {
+            type: "string",
+            name: "sectionSubtext",
+            label: "Section Subtext",
+            ui: { component: "textarea" }
+          },
+          {
+            type: "object",
+            name: "plans",
+            label: "Pricing Plans",
+            list: true,
+            ui: {
+              itemProps: (item) => ({ label: item?.name || "Plan" })
+            },
+            fields: [
+              { type: "string", name: "label", label: "Plan Label (e.g. STARTER)" },
+              { type: "string", name: "name", label: "Plan Name", required: true },
+              { type: "string", name: "price", label: "Price (e.g. Rs 3,000)", required: true },
+              { type: "string", name: "priceNote", label: "Price Note (e.g. ONE-TIME)" },
+              { type: "string", name: "delivery", label: "Delivery Time (e.g. 3\u20135 business days)" },
+              {
+                type: "string",
+                name: "tagline",
+                label: "Tagline",
+                ui: { component: "textarea" }
+              },
+              { type: "boolean", name: "featured", label: "Featured (Most Popular)" },
+              { type: "string", name: "ctaLabel", label: "CTA Button Label" },
+              { type: "string", name: "ctaHref", label: "CTA Link (URL or /path)" },
+              {
+                type: "string",
+                name: "features",
+                label: "Features",
+                list: true
+              },
+              { type: "string", name: "bestFor", label: "Best For" },
+              { type: "string", name: "revisions", label: "Revisions Policy" }
+            ]
+          },
+          { type: "string", name: "customLabel", label: "Custom Block Heading" },
+          {
+            type: "string",
+            name: "customDescription",
+            label: "Custom Block Description",
+            ui: { component: "textarea" }
+          },
+          { type: "string", name: "customCtaLabel", label: "Custom CTA Label" },
+          { type: "string", name: "customCtaHref", label: "Custom CTA Link" }
+        ]
       }
     ]
   }

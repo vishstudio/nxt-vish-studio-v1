@@ -19,11 +19,10 @@ function PlanCard({ plan, index, tinaField, rawPlan }: {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
-      className={`relative flex flex-col rounded-2xl border p-8 transition-all duration-300 ${
-        plan.featured
+      className={`relative flex flex-col rounded-2xl border p-8 transition-all duration-300 ${plan.featured
           ? 'border-vish-accent/60 bg-white/[0.06] shadow-[0_0_60px_-12px] shadow-vish-accent/20'
           : 'border-white/8 bg-white/[0.03] hover:border-white/15 hover:bg-white/[0.05]'
-      }`}
+        }`}
     >
       {plan.featured && (
         <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
@@ -111,11 +110,10 @@ function PlanCard({ plan, index, tinaField, rawPlan }: {
           href={plan.ctaHref}
           target="_blank"
           rel="noopener noreferrer"
-          className={`inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-xl font-mono text-sm font-semibold transition-all duration-200 ${
-            plan.featured
+          className={`inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-xl font-mono text-sm font-semibold transition-all duration-200 ${plan.featured
               ? 'bg-vish-accent text-black hover:bg-white'
               : 'border border-white/15 text-white hover:border-white/40 hover:bg-white/5'
-          }`}
+            }`}
         >
           {plan.ctaLabel}
           <ArrowRight className="w-4 h-4" />
@@ -123,11 +121,10 @@ function PlanCard({ plan, index, tinaField, rawPlan }: {
       ) : (
         <Link
           to={plan.ctaHref}
-          className={`inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-xl font-mono text-sm font-semibold transition-all duration-200 ${
-            plan.featured
+          className={`inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-xl font-mono text-sm font-semibold transition-all duration-200 ${plan.featured
               ? 'bg-vish-accent text-black hover:bg-white'
               : 'border border-white/15 text-white hover:border-white/40 hover:bg-white/5'
-          }`}
+            }`}
         >
           {plan.ctaLabel}
           <ArrowRight className="w-4 h-4" />

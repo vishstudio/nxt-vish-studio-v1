@@ -68,6 +68,8 @@ type Query {
   servicesPageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ServicesPageFilter): ServicesPageConnection!
   contactPage(relativePath: String): ContactPage!
   contactPageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ContactPageFilter): ContactPageConnection!
+  pricingPage(relativePath: String): PricingPage!
+  pricingPageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PricingPageFilter): PricingPageConnection!
 }
 
 input DocumentFilter {
@@ -78,6 +80,7 @@ input DocumentFilter {
   aboutPage: AboutPageFilter
   servicesPage: ServicesPageFilter
   contactPage: ContactPageFilter
+  pricingPage: PricingPageFilter
 }
 
 type DocumentConnectionEdges {
@@ -103,7 +106,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Project | SiteSettings | Partners | HomePage | AboutPage | ServicesPage | ContactPage | Folder
+union DocumentNode = Project | SiteSettings | Partners | HomePage | AboutPage | ServicesPage | ContactPage | PricingPage | Folder
 
 type Project implements Node & Document {
   title: String!
@@ -497,6 +500,80 @@ type ContactPageConnection implements Connection {
   edges: [ContactPageConnectionEdges]
 }
 
+type PricingPagePlans {
+  label: String
+  name: String!
+  price: String!
+  priceNote: String
+  delivery: String
+  tagline: String
+  featured: Boolean
+  ctaLabel: String
+  ctaHref: String
+  features: [String]
+  bestFor: String
+  revisions: String
+}
+
+type PricingPage implements Node & Document {
+  heroLabel: String!
+  heroTitleLine1: String
+  heroTitleLine2: String
+  heroSubtext: String
+  sectionLabel: String
+  sectionHeading: String
+  sectionSubtext: String
+  plans: [PricingPagePlans]
+  customLabel: String
+  customDescription: String
+  customCtaLabel: String
+  customCtaHref: String
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input PricingPagePlansFilter {
+  label: StringFilter
+  name: StringFilter
+  price: StringFilter
+  priceNote: StringFilter
+  delivery: StringFilter
+  tagline: StringFilter
+  featured: BooleanFilter
+  ctaLabel: StringFilter
+  ctaHref: StringFilter
+  features: StringFilter
+  bestFor: StringFilter
+  revisions: StringFilter
+}
+
+input PricingPageFilter {
+  heroLabel: StringFilter
+  heroTitleLine1: StringFilter
+  heroTitleLine2: StringFilter
+  heroSubtext: StringFilter
+  sectionLabel: StringFilter
+  sectionHeading: StringFilter
+  sectionSubtext: StringFilter
+  plans: PricingPagePlansFilter
+  customLabel: StringFilter
+  customDescription: StringFilter
+  customCtaLabel: StringFilter
+  customCtaHref: StringFilter
+}
+
+type PricingPageConnectionEdges {
+  cursor: String!
+  node: PricingPage
+}
+
+type PricingPageConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [PricingPageConnectionEdges]
+}
+
 type Mutation {
   addPendingDocument(collection: String!, relativePath: String!, template: String): DocumentNode!
   updateDocument(collection: String, relativePath: String!, params: DocumentUpdateMutation!): DocumentNode!
@@ -517,6 +594,8 @@ type Mutation {
   createServicesPage(relativePath: String!, params: ServicesPageMutation!): ServicesPage!
   updateContactPage(relativePath: String!, params: ContactPageMutation!): ContactPage!
   createContactPage(relativePath: String!, params: ContactPageMutation!): ContactPage!
+  updatePricingPage(relativePath: String!, params: PricingPageMutation!): PricingPage!
+  createPricingPage(relativePath: String!, params: PricingPageMutation!): PricingPage!
 }
 
 input DocumentUpdateMutation {
@@ -527,6 +606,7 @@ input DocumentUpdateMutation {
   aboutPage: AboutPageMutation
   servicesPage: ServicesPageMutation
   contactPage: ContactPageMutation
+  pricingPage: PricingPageMutation
   relativePath: String
 }
 
@@ -538,6 +618,7 @@ input DocumentMutation {
   aboutPage: AboutPageMutation
   servicesPage: ServicesPageMutation
   contactPage: ContactPageMutation
+  pricingPage: PricingPageMutation
 }
 
 input ProjectMutation {
@@ -674,6 +755,36 @@ input ContactPageMutation {
   heroTitlePunctuation: String
   heroDescription: String
   trustIndicators: [ContactPageTrustIndicatorsMutation]
+}
+
+input PricingPagePlansMutation {
+  label: String
+  name: String
+  price: String
+  priceNote: String
+  delivery: String
+  tagline: String
+  featured: Boolean
+  ctaLabel: String
+  ctaHref: String
+  features: [String]
+  bestFor: String
+  revisions: String
+}
+
+input PricingPageMutation {
+  heroLabel: String
+  heroTitleLine1: String
+  heroTitleLine2: String
+  heroSubtext: String
+  sectionLabel: String
+  sectionHeading: String
+  sectionSubtext: String
+  plans: [PricingPagePlansMutation]
+  customLabel: String
+  customDescription: String
+  customCtaLabel: String
+  customCtaHref: String
 }
 
 schema {

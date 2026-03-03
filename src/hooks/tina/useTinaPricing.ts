@@ -7,7 +7,10 @@ export function useTinaPricing() {
 
   const result = useTinaData(
     staticContent,
-    () => (client.queries as any).pricingPage({ relativePath: "pricing.json" }) as any,
+    () =>
+      (client.queries as any).pricingPage({
+        relativePath: "pricing.json",
+      }) as any,
     (qd: any) =>
       ({
         heroLabel: qd.pricingPage.heroLabel ?? "",
@@ -40,7 +43,10 @@ export function useTinaPricing() {
 
   const rawPage = result.tinaData ? (result.tinaData as any).pricingPage : null;
 
-  function tinaField(fieldNameOrObj: string | any, fieldName?: string): string | undefined {
+  function tinaField(
+    fieldNameOrObj: string | any,
+    fieldName?: string,
+  ): string | undefined {
     if (!rawPage) return undefined;
     if (typeof fieldNameOrObj === "string") {
       return rawTinaField(rawPage, fieldNameOrObj);
