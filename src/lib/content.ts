@@ -53,38 +53,11 @@ export function getPartners(): PartnersData {
 // ─── Team Members ────────────────────────────────────────────────────────────
 
 export interface TeamMember {
-  slug: string;
   name: string;
   role: string;
   image: string;
   bio: string;
   order: number;
-}
-
-interface TeamMemberJson {
-  name: string;
-  role: string;
-  image: string;
-  bio: string;
-  order?: number;
-}
-
-const teamModules = import.meta.glob<TeamMemberJson>("/content/team/*.json", {
-  eager: true,
-  import: "default",
-}) as Record<string, TeamMemberJson>;
-
-export function getTeamMembers(): TeamMember[] {
-  return Object.entries(teamModules)
-    .map(([filePath, data]) => ({
-      slug: filePath.split("/").pop()?.replace(".json", "") || "",
-      name: data.name,
-      role: data.role,
-      image: data.image,
-      bio: data.bio,
-      order: data.order ?? 999,
-    }))
-    .sort((a, b) => a.order - b.order);
 }
 
 // ─── Page Content ────────────────────────────────────────────────────────────
@@ -148,6 +121,7 @@ export interface AboutPageContent {
   valuesLabel: string;
   valuesHeading: string;
   values: CoreValue[];
+  teamMembers: TeamMember[];
 }
 
 const aboutModule = import.meta.glob<AboutPageContent>(

@@ -25,5 +25,28 @@
       "title": "Human First",
       "description": "Technology serves people, not the other way around. Empathy is our primary design tool."
     }
+  ],
+  "teamMembers": [
+    {
+      "name": "Vishroy Seenarain",
+      "role": "Founder & Creative Director",
+      "image": "https://picsum.photos/seed/vish/800/800",
+      "bio": "Leading the vision with a passion for minimalist design and functional aesthetics.",
+      "order": 1
+    },
+    {
+      "name": "Divesh Heeramun",
+      "role": "Cofounder & Technical Lead",
+      "image": "https://picsum.photos/seed/david/800/800",
+      "bio": "Architecting robust and scalable digital solutions.",
+      "order": 2
+    },
+    {
+      "name": "Ayesha Bhudookan",
+      "role": "Consultant & Strategy Lead",
+      "image": "https://picsum.photos/seed/elena/800/800",
+      "bio": "Crafting intuitive user experiences and pixel-perfect interfaces.",
+      "order": 3
+    }
   ]
 }

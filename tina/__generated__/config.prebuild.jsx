@@ -58,7 +58,12 @@ var config_default = defineConfig({
               "Mobile App"
             ]
           },
-          { type: "image", name: "image", label: "Featured Image" },
+          {
+            type: "string",
+            name: "image",
+            label: "Featured Image URL",
+            description: "Paste an image URL (e.g. https://example.com/image.jpg)"
+          },
           { type: "string", name: "year", label: "Year", required: true },
           {
             type: "number",
@@ -80,43 +85,12 @@ var config_default = defineConfig({
             ui: { component: "textarea" }
           },
           {
-            type: "image",
+            type: "string",
             name: "gallery",
-            label: "Gallery Images",
+            label: "Gallery Image URLs",
+            description: "Paste image URLs, one per entry",
             list: true
           }
-        ]
-      },
-      // ─── Team Members (multi-file) ───
-      {
-        name: "teamMember",
-        label: "Team Members",
-        path: "content/team",
-        format: "json",
-        ui: {
-          router: () => "/about",
-          filename: {
-            readonly: false,
-            slugify: (values) => (values?.name || "").toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")
-          }
-        },
-        fields: [
-          {
-            type: "string",
-            name: "name",
-            label: "Name",
-            isTitle: true,
-            required: true
-          },
-          { type: "string", name: "role", label: "Role", required: true },
-          { type: "image", name: "image", label: "Photo" },
-          {
-            type: "string",
-            name: "bio",
-            label: "Bio",
-            ui: { component: "textarea" }
-          },
-          { type: "number", name: "order", label: "Display Order" }
         ]
       },
       // ─── Site Settings (single file) ───
@@ -330,7 +304,12 @@ var config_default = defineConfig({
             name: "heroTitleLine2",
             label: "Hero Title Line 2"
           },
-          { type: "image", name: "studioImage", label: "Studio Image" },
+          {
+            type: "string",
+            name: "studioImage",
+            label: "Studio Image URL",
+            description: "Paste an image URL"
+          },
           {
             type: "string",
             name: "studioImageAlt",
@@ -373,6 +352,32 @@ var config_default = defineConfig({
                 label: "Description",
                 ui: { component: "textarea" }
               }
+            ]
+          },
+          {
+            type: "object",
+            name: "teamMembers",
+            label: "Team Members",
+            list: true,
+            ui: {
+              itemProps: (item) => ({ label: item?.name || "New Team Member" })
+            },
+            fields: [
+              { type: "string", name: "name", label: "Name", required: true },
+              { type: "string", name: "role", label: "Role", required: true },
+              {
+                type: "string",
+                name: "image",
+                label: "Photo URL",
+                description: "Paste an image URL"
+              },
+              {
+                type: "string",
+                name: "bio",
+                label: "Bio",
+                ui: { component: "textarea" }
+              },
+              { type: "number", name: "order", label: "Display Order" }
             ]
           }
         ]

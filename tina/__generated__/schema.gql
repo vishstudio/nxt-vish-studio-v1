@@ -56,8 +56,6 @@ type Query {
   document(collection: String, relativePath: String): DocumentNode!
   project(relativePath: String): Project!
   projectConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ProjectFilter): ProjectConnection!
-  teamMember(relativePath: String): TeamMember!
-  teamMemberConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: TeamMemberFilter): TeamMemberConnection!
   siteSettings(relativePath: String): SiteSettings!
   siteSettingsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: SiteSettingsFilter): SiteSettingsConnection!
   partners(relativePath: String): Partners!
@@ -74,7 +72,6 @@ type Query {
 
 input DocumentFilter {
   project: ProjectFilter
-  teamMember: TeamMemberFilter
   siteSettings: SiteSettingsFilter
   partners: PartnersFilter
   homePage: HomePageFilter
@@ -106,7 +103,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Project | TeamMember | SiteSettings | Partners | HomePage | AboutPage | ServicesPage | ContactPage | Folder
+union DocumentNode = Project | SiteSettings | Partners | HomePage | AboutPage | ServicesPage | ContactPage | Folder
 
 type Project implements Node & Document {
   title: String!
@@ -130,13 +127,6 @@ input StringFilter {
   in: [String]
 }
 
-input ImageFilter {
-  startsWith: String
-  eq: String
-  exists: Boolean
-  in: [String]
-}
-
 input NumberFilter {
   lt: Float
   lte: Float
@@ -151,12 +141,12 @@ input ProjectFilter {
   title: StringFilter
   slug: StringFilter
   category: StringFilter
-  image: ImageFilter
+  image: StringFilter
   year: StringFilter
   order: NumberFilter
   description: StringFilter
   fullDescription: StringFilter
-  gallery: ImageFilter
+  gallery: StringFilter
 }
 
 type ProjectConnectionEdges {
@@ -168,36 +158,6 @@ type ProjectConnection implements Connection {
   pageInfo: PageInfo!
   totalCount: Float!
   edges: [ProjectConnectionEdges]
-}
-
-type TeamMember implements Node & Document {
-  name: String!
-  role: String!
-  image: String
-  bio: String
-  order: Float
-  id: ID!
-  _sys: SystemInfo!
-  _values: JSON!
-}
-
-input TeamMemberFilter {
-  name: StringFilter
-  role: StringFilter
-  image: ImageFilter
-  bio: StringFilter
-  order: NumberFilter
-}
-
-type TeamMemberConnectionEdges {
-  cursor: String!
-  node: TeamMember
-}
-
-type TeamMemberConnection implements Connection {
-  pageInfo: PageInfo!
-  totalCount: Float!
-  edges: [TeamMemberConnectionEdges]
 }
 
 type SiteSettingsSocials {
@@ -364,6 +324,14 @@ type AboutPageValues {
   description: String
 }
 
+type AboutPageTeamMembers {
+  name: String!
+  role: String!
+  image: String
+  bio: String
+  order: Float
+}
+
 type AboutPage implements Node & Document {
   heroLabel: String!
   heroTitleLine1: String
@@ -376,6 +344,7 @@ type AboutPage implements Node & Document {
   valuesLabel: String
   valuesHeading: String
   values: [AboutPageValues]
+  teamMembers: [AboutPageTeamMembers]
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -387,11 +356,19 @@ input AboutPageValuesFilter {
   description: StringFilter
 }
 
+input AboutPageTeamMembersFilter {
+  name: StringFilter
+  role: StringFilter
+  image: StringFilter
+  bio: StringFilter
+  order: NumberFilter
+}
+
 input AboutPageFilter {
   heroLabel: StringFilter
   heroTitleLine1: StringFilter
   heroTitleLine2: StringFilter
-  studioImage: ImageFilter
+  studioImage: StringFilter
   studioImageAlt: StringFilter
   introHeading: StringFilter
   introParagraph1: StringFilter
@@ -399,6 +376,7 @@ input AboutPageFilter {
   valuesLabel: StringFilter
   valuesHeading: StringFilter
   values: AboutPageValuesFilter
+  teamMembers: AboutPageTeamMembersFilter
 }
 
 type AboutPageConnectionEdges {
@@ -504,8 +482,6 @@ type Mutation {
   createFolder(collection: String, relativePath: String!): DocumentNode!
   updateProject(relativePath: String!, params: ProjectMutation!): Project!
   createProject(relativePath: String!, params: ProjectMutation!): Project!
-  updateTeamMember(relativePath: String!, params: TeamMemberMutation!): TeamMember!
-  createTeamMember(relativePath: String!, params: TeamMemberMutation!): TeamMember!
   updateSiteSettings(relativePath: String!, params: SiteSettingsMutation!): SiteSettings!
   createSiteSettings(relativePath: String!, params: SiteSettingsMutation!): SiteSettings!
   updatePartners(relativePath: String!, params: PartnersMutation!): Partners!
@@ -522,7 +498,6 @@ type Mutation {
 
 input DocumentUpdateMutation {
   project: ProjectMutation
-  teamMember: TeamMemberMutation
   siteSettings: SiteSettingsMutation
   partners: PartnersMutation
   homePage: HomePageMutation
@@ -534,7 +509,6 @@ input DocumentUpdateMutation {
 
 input DocumentMutation {
   project: ProjectMutation
-  teamMember: TeamMemberMutation
   siteSettings: SiteSettingsMutation
   partners: PartnersMutation
   homePage: HomePageMutation
@@ -553,14 +527,6 @@ input ProjectMutation {
   description: String
   fullDescription: String
   gallery: [String]
-}
-
-input TeamMemberMutation {
-  name: String
-  role: String
-  image: String
-  bio: String
-  order: Float
 }
 
 input SiteSettingsSocialsMutation {
@@ -627,6 +593,14 @@ input AboutPageValuesMutation {
   description: String
 }
 
+input AboutPageTeamMembersMutation {
+  name: String
+  role: String
+  image: String
+  bio: String
+  order: Float
+}
+
 input AboutPageMutation {
   heroLabel: String
   heroTitleLine1: String
@@ -639,6 +613,7 @@ input AboutPageMutation {
   valuesLabel: String
   valuesHeading: String
   values: [AboutPageValuesMutation]
+  teamMembers: [AboutPageTeamMembersMutation]
 }
 
 input ServicesPageCategoriesMutation {

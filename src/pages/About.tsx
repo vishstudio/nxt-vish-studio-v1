@@ -105,7 +105,7 @@ export const AboutPage = () => {
         </div>
       </section>
 
-      <Team />
+      <Team members={content.teamMembers} />
       <TrustedPartners />
       <Contact />
     </PageLayout>

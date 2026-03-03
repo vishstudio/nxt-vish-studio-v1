@@ -84,8 +84,6 @@ export type Query = {
   document: DocumentNode;
   project: Project;
   projectConnection: ProjectConnection;
-  teamMember: TeamMember;
-  teamMemberConnection: TeamMemberConnection;
   siteSettings: SiteSettings;
   siteSettingsConnection: SiteSettingsConnection;
   partners: Partners;
@@ -134,21 +132,6 @@ export type QueryProjectConnectionArgs = {
   last?: InputMaybe<Scalars['Float']['input']>;
   sort?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<ProjectFilter>;
-};
-
-
-export type QueryTeamMemberArgs = {
-  relativePath?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-export type QueryTeamMemberConnectionArgs = {
-  before?: InputMaybe<Scalars['String']['input']>;
-  after?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<TeamMemberFilter>;
 };
 
 
@@ -243,7 +226,6 @@ export type QueryContactPageConnectionArgs = {
 
 export type DocumentFilter = {
   project?: InputMaybe<ProjectFilter>;
-  teamMember?: InputMaybe<TeamMemberFilter>;
   siteSettings?: InputMaybe<SiteSettingsFilter>;
   partners?: InputMaybe<PartnersFilter>;
   homePage?: InputMaybe<HomePageFilter>;
@@ -289,7 +271,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Project | TeamMember | SiteSettings | Partners | HomePage | AboutPage | ServicesPage | ContactPage | Folder;
+export type DocumentNode = Project | SiteSettings | Partners | HomePage | AboutPage | ServicesPage | ContactPage | Folder;
 
 export type Project = Node & Document & {
   __typename?: 'Project';
@@ -314,13 +296,6 @@ export type StringFilter = {
   in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-export type ImageFilter = {
-  startsWith?: InputMaybe<Scalars['String']['input']>;
-  eq?: InputMaybe<Scalars['String']['input']>;
-  exists?: InputMaybe<Scalars['Boolean']['input']>;
-  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export type NumberFilter = {
   lt?: InputMaybe<Scalars['Float']['input']>;
   lte?: InputMaybe<Scalars['Float']['input']>;
@@ -335,12 +310,12 @@ export type ProjectFilter = {
   title?: InputMaybe<StringFilter>;
   slug?: InputMaybe<StringFilter>;
   category?: InputMaybe<StringFilter>;
-  image?: InputMaybe<ImageFilter>;
+  image?: InputMaybe<StringFilter>;
   year?: InputMaybe<StringFilter>;
   order?: InputMaybe<NumberFilter>;
   description?: InputMaybe<StringFilter>;
   fullDescription?: InputMaybe<StringFilter>;
-  gallery?: InputMaybe<ImageFilter>;
+  gallery?: InputMaybe<StringFilter>;
 };
 
 export type ProjectConnectionEdges = {
@@ -354,39 +329,6 @@ export type ProjectConnection = Connection & {
   pageInfo: PageInfo;
   totalCount: Scalars['Float']['output'];
   edges?: Maybe<Array<Maybe<ProjectConnectionEdges>>>;
-};
-
-export type TeamMember = Node & Document & {
-  __typename?: 'TeamMember';
-  name: Scalars['String']['output'];
-  role: Scalars['String']['output'];
-  image?: Maybe<Scalars['String']['output']>;
-  bio?: Maybe<Scalars['String']['output']>;
-  order?: Maybe<Scalars['Float']['output']>;
-  id: Scalars['ID']['output'];
-  _sys: SystemInfo;
-  _values: Scalars['JSON']['output'];
-};
-
-export type TeamMemberFilter = {
-  name?: InputMaybe<StringFilter>;
-  role?: InputMaybe<StringFilter>;
-  image?: InputMaybe<ImageFilter>;
-  bio?: InputMaybe<StringFilter>;
-  order?: InputMaybe<NumberFilter>;
-};
-
-export type TeamMemberConnectionEdges = {
-  __typename?: 'TeamMemberConnectionEdges';
-  cursor: Scalars['String']['output'];
-  node?: Maybe<TeamMember>;
-};
-
-export type TeamMemberConnection = Connection & {
-  __typename?: 'TeamMemberConnection';
-  pageInfo: PageInfo;
-  totalCount: Scalars['Float']['output'];
-  edges?: Maybe<Array<Maybe<TeamMemberConnectionEdges>>>;
 };
 
 export type SiteSettingsSocials = {
@@ -567,6 +509,15 @@ export type AboutPageValues = {
   description?: Maybe<Scalars['String']['output']>;
 };
 
+export type AboutPageTeamMembers = {
+  __typename?: 'AboutPageTeamMembers';
+  name: Scalars['String']['output'];
+  role: Scalars['String']['output'];
+  image?: Maybe<Scalars['String']['output']>;
+  bio?: Maybe<Scalars['String']['output']>;
+  order?: Maybe<Scalars['Float']['output']>;
+};
+
 export type AboutPage = Node & Document & {
   __typename?: 'AboutPage';
   heroLabel: Scalars['String']['output'];
@@ -580,6 +531,7 @@ export type AboutPage = Node & Document & {
   valuesLabel?: Maybe<Scalars['String']['output']>;
   valuesHeading?: Maybe<Scalars['String']['output']>;
   values?: Maybe<Array<Maybe<AboutPageValues>>>;
+  teamMembers?: Maybe<Array<Maybe<AboutPageTeamMembers>>>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
@@ -591,11 +543,19 @@ export type AboutPageValuesFilter = {
   description?: InputMaybe<StringFilter>;
 };
 
+export type AboutPageTeamMembersFilter = {
+  name?: InputMaybe<StringFilter>;
+  role?: InputMaybe<StringFilter>;
+  image?: InputMaybe<StringFilter>;
+  bio?: InputMaybe<StringFilter>;
+  order?: InputMaybe<NumberFilter>;
+};
+
 export type AboutPageFilter = {
   heroLabel?: InputMaybe<StringFilter>;
   heroTitleLine1?: InputMaybe<StringFilter>;
   heroTitleLine2?: InputMaybe<StringFilter>;
-  studioImage?: InputMaybe<ImageFilter>;
+  studioImage?: InputMaybe<StringFilter>;
   studioImageAlt?: InputMaybe<StringFilter>;
   introHeading?: InputMaybe<StringFilter>;
   introParagraph1?: InputMaybe<StringFilter>;
@@ -603,6 +563,7 @@ export type AboutPageFilter = {
   valuesLabel?: InputMaybe<StringFilter>;
   valuesHeading?: InputMaybe<StringFilter>;
   values?: InputMaybe<AboutPageValuesFilter>;
+  teamMembers?: InputMaybe<AboutPageTeamMembersFilter>;
 };
 
 export type AboutPageConnectionEdges = {
@@ -719,8 +680,6 @@ export type Mutation = {
   createFolder: DocumentNode;
   updateProject: Project;
   createProject: Project;
-  updateTeamMember: TeamMember;
-  createTeamMember: TeamMember;
   updateSiteSettings: SiteSettings;
   createSiteSettings: SiteSettings;
   updatePartners: Partners;
@@ -778,18 +737,6 @@ export type MutationUpdateProjectArgs = {
 export type MutationCreateProjectArgs = {
   relativePath: Scalars['String']['input'];
   params: ProjectMutation;
-};
-
-
-export type MutationUpdateTeamMemberArgs = {
-  relativePath: Scalars['String']['input'];
-  params: TeamMemberMutation;
-};
-
-
-export type MutationCreateTeamMemberArgs = {
-  relativePath: Scalars['String']['input'];
-  params: TeamMemberMutation;
 };
 
 
@@ -866,7 +813,6 @@ export type MutationCreateContactPageArgs = {
 
 export type DocumentUpdateMutation = {
   project?: InputMaybe<ProjectMutation>;
-  teamMember?: InputMaybe<TeamMemberMutation>;
   siteSettings?: InputMaybe<SiteSettingsMutation>;
   partners?: InputMaybe<PartnersMutation>;
   homePage?: InputMaybe<HomePageMutation>;
@@ -878,7 +824,6 @@ export type DocumentUpdateMutation = {
 
 export type DocumentMutation = {
   project?: InputMaybe<ProjectMutation>;
-  teamMember?: InputMaybe<TeamMemberMutation>;
   siteSettings?: InputMaybe<SiteSettingsMutation>;
   partners?: InputMaybe<PartnersMutation>;
   homePage?: InputMaybe<HomePageMutation>;
@@ -897,14 +842,6 @@ export type ProjectMutation = {
   description?: InputMaybe<Scalars['String']['input']>;
   fullDescription?: InputMaybe<Scalars['String']['input']>;
   gallery?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-export type TeamMemberMutation = {
-  name?: InputMaybe<Scalars['String']['input']>;
-  role?: InputMaybe<Scalars['String']['input']>;
-  image?: InputMaybe<Scalars['String']['input']>;
-  bio?: InputMaybe<Scalars['String']['input']>;
-  order?: InputMaybe<Scalars['Float']['input']>;
 };
 
 export type SiteSettingsSocialsMutation = {
@@ -971,6 +908,14 @@ export type AboutPageValuesMutation = {
   description?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type AboutPageTeamMembersMutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  role?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  bio?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Scalars['Float']['input']>;
+};
+
 export type AboutPageMutation = {
   heroLabel?: InputMaybe<Scalars['String']['input']>;
   heroTitleLine1?: InputMaybe<Scalars['String']['input']>;
@@ -983,6 +928,7 @@ export type AboutPageMutation = {
   valuesLabel?: InputMaybe<Scalars['String']['input']>;
   valuesHeading?: InputMaybe<Scalars['String']['input']>;
   values?: InputMaybe<Array<InputMaybe<AboutPageValuesMutation>>>;
+  teamMembers?: InputMaybe<Array<InputMaybe<AboutPageTeamMembersMutation>>>;
 };
 
 export type ServicesPageCategoriesMutation = {
@@ -1015,15 +961,13 @@ export type ContactPageMutation = {
 
 export type ProjectPartsFragment = { __typename: 'Project', title: string, slug: string, category: string, image?: string | null, year: string, order?: number | null, description: string, fullDescription?: string | null, gallery?: Array<string | null> | null };
 
-export type TeamMemberPartsFragment = { __typename: 'TeamMember', name: string, role: string, image?: string | null, bio?: string | null, order?: number | null };
-
 export type SiteSettingsPartsFragment = { __typename: 'SiteSettings', email: string, phone: string, phoneLink?: string | null, address?: string | null, copyright?: string | null, contactHeadingLine1?: string | null, contactHeadingLine2?: string | null, scrollText?: string | null, socials?: Array<{ __typename: 'SiteSettingsSocials', name: string, url: string } | null> | null, footerLinks?: Array<{ __typename: 'SiteSettingsFooterLinks', label: string, url: string } | null> | null };
 
 export type PartnersPartsFragment = { __typename: 'Partners', partnersLabel: string, partners?: Array<string | null> | null };
 
 export type HomePagePartsFragment = { __typename: 'HomePage', heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroDescription?: string | null, aboutHeading?: string | null, aboutParagraph1?: string | null, aboutParagraph2?: string | null, servicesHeading?: string | null, servicesSubtext?: string | null, servicesButtonText?: string | null, processHeading?: string | null, processSubtext?: string | null, services?: Array<{ __typename: 'HomePageServices', id?: string | null, title: string, description?: string | null } | null> | null, processSteps?: Array<{ __typename: 'HomePageProcessSteps', num?: string | null, title: string, description?: string | null, tags?: Array<string | null> | null } | null> | null };
 
-export type AboutPagePartsFragment = { __typename: 'AboutPage', heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, studioImage?: string | null, studioImageAlt?: string | null, introHeading?: string | null, introParagraph1?: string | null, introParagraph2?: string | null, valuesLabel?: string | null, valuesHeading?: string | null, values?: Array<{ __typename: 'AboutPageValues', id?: string | null, title: string, description?: string | null } | null> | null };
+export type AboutPagePartsFragment = { __typename: 'AboutPage', heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, studioImage?: string | null, studioImageAlt?: string | null, introHeading?: string | null, introParagraph1?: string | null, introParagraph2?: string | null, valuesLabel?: string | null, valuesHeading?: string | null, values?: Array<{ __typename: 'AboutPageValues', id?: string | null, title: string, description?: string | null } | null> | null, teamMembers?: Array<{ __typename: 'AboutPageTeamMembers', name: string, role: string, image?: string | null, bio?: string | null, order?: number | null } | null> | null };
 
 export type ServicesPagePartsFragment = { __typename: 'ServicesPage', heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, categories?: Array<{ __typename: 'ServicesPageCategories', category: string, description?: string | null, items?: Array<string | null> | null } | null> | null };
 
@@ -1047,25 +991,6 @@ export type ProjectConnectionQueryVariables = Exact<{
 
 
 export type ProjectConnectionQuery = { __typename?: 'Query', projectConnection: { __typename?: 'ProjectConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ProjectConnectionEdges', cursor: string, node?: { __typename: 'Project', id: string, title: string, slug: string, category: string, image?: string | null, year: string, order?: number | null, description: string, fullDescription?: string | null, gallery?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
-
-export type TeamMemberQueryVariables = Exact<{
-  relativePath: Scalars['String']['input'];
-}>;
-
-
-export type TeamMemberQuery = { __typename?: 'Query', teamMember: { __typename: 'TeamMember', id: string, name: string, role: string, image?: string | null, bio?: string | null, order?: number | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
-
-export type TeamMemberConnectionQueryVariables = Exact<{
-  before?: InputMaybe<Scalars['String']['input']>;
-  after?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<TeamMemberFilter>;
-}>;
-
-
-export type TeamMemberConnectionQuery = { __typename?: 'Query', teamMemberConnection: { __typename?: 'TeamMemberConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'TeamMemberConnectionEdges', cursor: string, node?: { __typename: 'TeamMember', id: string, name: string, role: string, image?: string | null, bio?: string | null, order?: number | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type SiteSettingsQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1129,7 +1054,7 @@ export type AboutPageQueryVariables = Exact<{
 }>;
 
 
-export type AboutPageQuery = { __typename?: 'Query', aboutPage: { __typename: 'AboutPage', id: string, heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, studioImage?: string | null, studioImageAlt?: string | null, introHeading?: string | null, introParagraph1?: string | null, introParagraph2?: string | null, valuesLabel?: string | null, valuesHeading?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, values?: Array<{ __typename: 'AboutPageValues', id?: string | null, title: string, description?: string | null } | null> | null } };
+export type AboutPageQuery = { __typename?: 'Query', aboutPage: { __typename: 'AboutPage', id: string, heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, studioImage?: string | null, studioImageAlt?: string | null, introHeading?: string | null, introParagraph1?: string | null, introParagraph2?: string | null, valuesLabel?: string | null, valuesHeading?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, values?: Array<{ __typename: 'AboutPageValues', id?: string | null, title: string, description?: string | null } | null> | null, teamMembers?: Array<{ __typename: 'AboutPageTeamMembers', name: string, role: string, image?: string | null, bio?: string | null, order?: number | null } | null> | null } };
 
 export type AboutPageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1141,7 +1066,7 @@ export type AboutPageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type AboutPageConnectionQuery = { __typename?: 'Query', aboutPageConnection: { __typename?: 'AboutPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'AboutPageConnectionEdges', cursor: string, node?: { __typename: 'AboutPage', id: string, heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, studioImage?: string | null, studioImageAlt?: string | null, introHeading?: string | null, introParagraph1?: string | null, introParagraph2?: string | null, valuesLabel?: string | null, valuesHeading?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, values?: Array<{ __typename: 'AboutPageValues', id?: string | null, title: string, description?: string | null } | null> | null } | null } | null> | null } };
+export type AboutPageConnectionQuery = { __typename?: 'Query', aboutPageConnection: { __typename?: 'AboutPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'AboutPageConnectionEdges', cursor: string, node?: { __typename: 'AboutPage', id: string, heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, studioImage?: string | null, studioImageAlt?: string | null, introHeading?: string | null, introParagraph1?: string | null, introParagraph2?: string | null, valuesLabel?: string | null, valuesHeading?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, values?: Array<{ __typename: 'AboutPageValues', id?: string | null, title: string, description?: string | null } | null> | null, teamMembers?: Array<{ __typename: 'AboutPageTeamMembers', name: string, role: string, image?: string | null, bio?: string | null, order?: number | null } | null> | null } | null } | null> | null } };
 
 export type ServicesPageQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1193,16 +1118,6 @@ export const ProjectPartsFragmentDoc = gql`
   description
   fullDescription
   gallery
-}
-    `;
-export const TeamMemberPartsFragmentDoc = gql`
-    fragment TeamMemberParts on TeamMember {
-  __typename
-  name
-  role
-  image
-  bio
-  order
 }
     `;
 export const SiteSettingsPartsFragmentDoc = gql`
@@ -1283,6 +1198,14 @@ export const AboutPagePartsFragmentDoc = gql`
     id
     title
     description
+  }
+  teamMembers {
+    __typename
+    name
+    role
+    image
+    bio
+    order
   }
 }
     `;
@@ -1373,63 +1296,6 @@ export const ProjectConnectionDocument = gql`
   }
 }
     ${ProjectPartsFragmentDoc}`;
-export const TeamMemberDocument = gql`
-    query teamMember($relativePath: String!) {
-  teamMember(relativePath: $relativePath) {
-    ... on Document {
-      _sys {
-        filename
-        basename
-        hasReferences
-        breadcrumbs
-        path
-        relativePath
-        extension
-      }
-      id
-    }
-    ...TeamMemberParts
-  }
-}
-    ${TeamMemberPartsFragmentDoc}`;
-export const TeamMemberConnectionDocument = gql`
-    query teamMemberConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: TeamMemberFilter) {
-  teamMemberConnection(
-    before: $before
-    after: $after
-    first: $first
-    last: $last
-    sort: $sort
-    filter: $filter
-  ) {
-    pageInfo {
-      hasPreviousPage
-      hasNextPage
-      startCursor
-      endCursor
-    }
-    totalCount
-    edges {
-      cursor
-      node {
-        ... on Document {
-          _sys {
-            filename
-            basename
-            hasReferences
-            breadcrumbs
-            path
-            relativePath
-            extension
-          }
-          id
-        }
-        ...TeamMemberParts
-      }
-    }
-  }
-}
-    ${TeamMemberPartsFragmentDoc}`;
 export const SiteSettingsDocument = gql`
     query siteSettings($relativePath: String!) {
   siteSettings(relativePath: $relativePath) {
@@ -1780,12 +1646,6 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     projectConnection(variables?: ProjectConnectionQueryVariables, options?: C): Promise<{data: ProjectConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ProjectConnectionQueryVariables, query: string}> {
         return requester<{data: ProjectConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ProjectConnectionQueryVariables, query: string}, ProjectConnectionQueryVariables>(ProjectConnectionDocument, variables, options);
-      },
-    teamMember(variables: TeamMemberQueryVariables, options?: C): Promise<{data: TeamMemberQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TeamMemberQueryVariables, query: string}> {
-        return requester<{data: TeamMemberQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TeamMemberQueryVariables, query: string}, TeamMemberQueryVariables>(TeamMemberDocument, variables, options);
-      },
-    teamMemberConnection(variables?: TeamMemberConnectionQueryVariables, options?: C): Promise<{data: TeamMemberConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TeamMemberConnectionQueryVariables, query: string}> {
-        return requester<{data: TeamMemberConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TeamMemberConnectionQueryVariables, query: string}, TeamMemberConnectionQueryVariables>(TeamMemberConnectionDocument, variables, options);
       },
     siteSettings(variables: SiteSettingsQueryVariables, options?: C): Promise<{data: SiteSettingsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SiteSettingsQueryVariables, query: string}> {
         return requester<{data: SiteSettingsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SiteSettingsQueryVariables, query: string}, SiteSettingsQueryVariables>(SiteSettingsDocument, variables, options);

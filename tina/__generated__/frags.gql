@@ -11,15 +11,6 @@ fragment ProjectParts on Project {
   gallery
 }
 
-fragment TeamMemberParts on TeamMember {
-  __typename
-  name
-  role
-  image
-  bio
-  order
-}
-
 fragment SiteSettingsParts on SiteSettings {
   __typename
   email
@@ -94,6 +85,14 @@ fragment AboutPageParts on AboutPage {
     id
     title
     description
+  }
+  teamMembers {
+    __typename
+    name
+    role
+    image
+    bio
+    order
   }
 }
 

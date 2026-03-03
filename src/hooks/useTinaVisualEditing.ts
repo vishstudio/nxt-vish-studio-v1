@@ -22,7 +22,6 @@ import {
   getContactPage,
   getSiteSettings,
   getPartners,
-  getTeamMembers,
   type HomePageContent,
   type AboutPageContent,
   type ServicesPageContent,
@@ -174,6 +173,13 @@ export function useTinaAbout() {
           title: v?.title ?? "",
           description: v?.description ?? "",
         })),
+        teamMembers: (qd.aboutPage.teamMembers ?? []).map((m: any) => ({
+          name: m?.name ?? "",
+          role: m?.role ?? "",
+          image: m?.image ?? "",
+          bio: m?.bio ?? "",
+          order: m?.order ?? 999,
+        })).sort((a: any, b: any) => a.order - b.order),
       } as AboutPageContent),
   );
 
@@ -317,55 +323,6 @@ export function useTinaPartners() {
   }
 
   return { data: result.data, tinaField: tinaFieldPartners };
-}
-
-// ─── Team Members ────────────────────────────────────────────────────────────
-
-export function useTinaTeamMembers() {
-  const staticMembers = getTeamMembers();
-
-  const [queryResult, setQueryResult] = useState<{
-    data: Record<string, any>;
-    query: string;
-    variables: Record<string, unknown>;
-  }>({
-    data: {},
-    query: PLACEHOLDER_QUERY,
-    variables: {},
-  });
-  const [fetched, setFetched] = useState(false);
-
-  useEffect(() => {
-    client.queries
-      .teamMemberConnection()
-      .then((res: any) => {
-        setQueryResult(res);
-        setFetched(true);
-      })
-      .catch(() => {});
-  }, []);
-
-  const { data: liveData } = useTina(queryResult) as {
-    data: Record<string, any>;
-  };
-
-  if (fetched && liveData?.teamMemberConnection?.edges) {
-    const members = liveData.teamMemberConnection.edges
-      .map((e: any) => e?.node)
-      .filter(Boolean)
-      .map((m: any) => ({
-        slug: m._sys?.filename ?? "",
-        name: m.name ?? "",
-        role: m.role ?? "",
-        image: m.image ?? "",
-        bio: m.bio ?? "",
-        order: m.order ?? 999,
-      }))
-      .sort((a: any, b: any) => a.order - b.order);
-    return { data: members };
-  }
-
-  return { data: staticMembers };
 }
 
 // ─── Project Detail ──────────────────────────────────────────────────────────

@@ -53,61 +53,6 @@ query projectConnection($before: String, $after: String, $first: Float, $last: F
   }
 }
 
-query teamMember($relativePath: String!) {
-  teamMember(relativePath: $relativePath) {
-    ... on Document {
-      _sys {
-        filename
-        basename
-        hasReferences
-        breadcrumbs
-        path
-        relativePath
-        extension
-      }
-      id
-    }
-    ...TeamMemberParts
-  }
-}
-
-query teamMemberConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: TeamMemberFilter) {
-  teamMemberConnection(
-    before: $before
-    after: $after
-    first: $first
-    last: $last
-    sort: $sort
-    filter: $filter
-  ) {
-    pageInfo {
-      hasPreviousPage
-      hasNextPage
-      startCursor
-      endCursor
-    }
-    totalCount
-    edges {
-      cursor
-      node {
-        ... on Document {
-          _sys {
-            filename
-            basename
-            hasReferences
-            breadcrumbs
-            path
-            relativePath
-            extension
-          }
-          id
-        }
-        ...TeamMemberParts
-      }
-    }
-  }
-}
-
 query siteSettings($relativePath: String!) {
   siteSettings(relativePath: $relativePath) {
     ... on Document {
