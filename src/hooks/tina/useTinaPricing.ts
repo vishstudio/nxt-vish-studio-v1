@@ -1,5 +1,9 @@
 import client from "../../../tina/__generated__/client";
-import { getPricingPage, type PricingPageContent, type CtaLinkType } from "../../lib/pricing";
+import {
+  getPricingPage,
+  type PricingPageContent,
+  type CtaLinkType,
+} from "../../lib/pricing";
 import { rawTinaField, useTinaData } from "./core";
 
 export function useTinaPricing() {
@@ -30,7 +34,10 @@ export function useTinaPricing() {
           featured: p?.featured ?? false,
           ctaLabel: p?.ctaLabel ?? "",
           ctaLink: p?.ctaLink
-            ? { linkType: (p.ctaLink.linkType ?? "internal") as CtaLinkType, linkValue: p.ctaLink.linkValue ?? "" }
+            ? {
+                linkType: (p.ctaLink.linkType ?? "internal") as CtaLinkType,
+                linkValue: p.ctaLink.linkValue ?? "",
+              }
             : { linkType: "url" as CtaLinkType, linkValue: p?.ctaHref ?? "" },
           features: (p?.features ?? []).filter(Boolean),
           bestFor: p?.bestFor ?? "",

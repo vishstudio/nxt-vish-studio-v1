@@ -35,8 +35,6 @@ export const Projects = ({ showViewAll = true }: { showViewAll?: boolean }) => {
             {projects.map((project, index) => (
               <Link
                 to={`/project/${project.slug}`}
-                target="_blank"
-                rel="noopener noreferrer"
                 key={project.id}
                 className="group block w-full"
                 data-cursor="project"

@@ -692,7 +692,10 @@ export default defineConfig({
                     name: "linkType",
                     label: "Link Type",
                     options: [
-                      { label: "Internal path (e.g. /contact)", value: "internal" },
+                      {
+                        label: "Internal path (e.g. /contact)",
+                        value: "internal",
+                      },
                       { label: "External URL (https://...)", value: "url" },
                       { label: "Phone number", value: "phone" },
                       { label: "Email address", value: "email" },
@@ -703,7 +706,8 @@ export default defineConfig({
                     type: "string",
                     name: "linkValue",
                     label: "Value",
-                    description: "Path, full URL, phone number (digits only), email, or WhatsApp number (digits only)",
+                    description:
+                      "Path, full URL, phone number (digits only), email, or WhatsApp number (digits only)",
                   },
                 ],
               },
@@ -735,4 +739,3 @@ export default defineConfig({
     ],
   },
 });
-
