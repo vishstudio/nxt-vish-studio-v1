@@ -4,16 +4,17 @@
   "category": [
     "Development"
   ],
-  "image": "https://assets.tina.io/43df9a3d-b238-44c9-8f2a-0b1563230ff6/Mockuuups%20Free%20iPad%20Pro%20mockup%20on%20textured%20fabric%20and%20wooden%20surface.jpeg",
-  "year": "2025",
-  "order": 2,
-  "featuredOnHome": true,
-  "description": "Working a custom software solutions which helps SMEs tackle data cleaning.",
   "techStack": [
     "React JS",
     "Node.js",
     "MongoDB",
     "Javascript",
     "Analytics"
-  ]
+  ],
+  "image": "https://assets.tina.io/43df9a3d-b238-44c9-8f2a-0b1563230ff6/Mockuuups%20Free%20iPad%20Pro%20mockup%20on%20textured%20fabric%20and%20wooden%20surface.jpeg",
+  "year": "2025",
+  "order": 2,
+  "featuredOnHome": true,
+  "description": "Working a custom software solutions which helps SMEs tackle data cleaning.",
+  "siteUrl": "https://www.morismetrics.com/"
 }
