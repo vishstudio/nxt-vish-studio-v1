@@ -41,7 +41,9 @@ export const Navbar = () => {
                   exit={{ scale: 0, opacity: 0, width: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="w-4 h-4 rounded-full bg-vish-accent shadow-[0_0_10px_rgba(255,214,0,0.5)]" />
+                  <div className="w-4 h-4 rounded-full overflow-hidden shadow-[0_0_10px_rgba(255,214,0,0.5)]">
+                    <img src="/assets/icon.png" alt="" className="w-full h-full object-cover" />
+                  </div>
                 </motion.div>
               )}
             </AnimatePresence>
