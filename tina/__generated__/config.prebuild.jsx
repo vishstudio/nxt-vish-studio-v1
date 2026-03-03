@@ -139,7 +139,12 @@ var config_default = defineConfig({
             list: true,
             fields: [
               { type: "string", name: "name", label: "Name", required: true },
-              { type: "string", name: "url", label: "URL", required: true }
+              { type: "string", name: "url", label: "URL", required: true },
+              {
+                type: "boolean",
+                name: "openInNewTab",
+                label: "Open in new tab"
+              }
             ]
           },
           {

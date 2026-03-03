@@ -170,6 +170,7 @@ type ProjectConnection implements Connection {
 type SiteSettingsSocials {
   name: String!
   url: String!
+  openInNewTab: Boolean
 }
 
 type SiteSettingsFooterLinks {
@@ -196,6 +197,7 @@ type SiteSettings implements Node & Document {
 input SiteSettingsSocialsFilter {
   name: StringFilter
   url: StringFilter
+  openInNewTab: BooleanFilter
 }
 
 input SiteSettingsFooterLinksFilter {
@@ -540,6 +542,7 @@ input ProjectMutation {
 input SiteSettingsSocialsMutation {
   name: String
   url: String
+  openInNewTab: Boolean
 }
 
 input SiteSettingsFooterLinksMutation {

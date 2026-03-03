@@ -26,6 +26,7 @@ fragment SiteSettingsParts on SiteSettings {
     __typename
     name
     url
+    openInNewTab
   }
   footerLinks {
     __typename

@@ -46,7 +46,7 @@ export const Navbar = () => {
               )}
             </AnimatePresence>
             <a href="/" className="relative z-50" style={{ fontFamily: 'var(--font-logo)', fontSize: '1.2rem', letterSpacing: '-0.01em', fontOpticalSizing: 'auto', fontVariationSettings: '"GRAD" 0' } as any}>
-              <span className="text-white" style={{ fontWeight: 700 }}>VISH</span><span className="text-vish-accent" style={{ fontWeight: 400 }}> Studio</span>
+              <span className="text-white" style={{ fontWeight: 700 }}>VISH</span><span style={{ fontWeight: 400 }}> studio.</span>
             </a>
           </div>
 

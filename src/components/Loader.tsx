@@ -28,9 +28,9 @@ export const Loader = ({ onLoadingComplete }: { onLoadingComplete: () => void })
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="font-display font-bold text-xl tracking-tight"
+          style={{ fontFamily: 'var(--font-logo)', fontSize: '1.2rem', letterSpacing: '-0.01em', fontOpticalSizing: 'auto', fontVariationSettings: '"GRAD" 0' } as any}
         >
-          VISH.
+          <span className="text-white" style={{ fontWeight: 700 }}>VISH</span><span style={{ fontWeight: 400 }}> studio</span>
         </motion.div>
         <motion.div
           initial={{ opacity: 0, y: 10 }}

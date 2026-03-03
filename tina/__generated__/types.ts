@@ -342,6 +342,7 @@ export type SiteSettingsSocials = {
   __typename?: 'SiteSettingsSocials';
   name: Scalars['String']['output'];
   url: Scalars['String']['output'];
+  openInNewTab?: Maybe<Scalars['Boolean']['output']>;
 };
 
 export type SiteSettingsFooterLinks = {
@@ -370,6 +371,7 @@ export type SiteSettings = Node & Document & {
 export type SiteSettingsSocialsFilter = {
   name?: InputMaybe<StringFilter>;
   url?: InputMaybe<StringFilter>;
+  openInNewTab?: InputMaybe<BooleanFilter>;
 };
 
 export type SiteSettingsFooterLinksFilter = {
@@ -855,6 +857,7 @@ export type ProjectMutation = {
 export type SiteSettingsSocialsMutation = {
   name?: InputMaybe<Scalars['String']['input']>;
   url?: InputMaybe<Scalars['String']['input']>;
+  openInNewTab?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type SiteSettingsFooterLinksMutation = {
@@ -969,7 +972,7 @@ export type ContactPageMutation = {
 
 export type ProjectPartsFragment = { __typename: 'Project', title: string, slug: string, category: string, image?: string | null, year: string, order?: number | null, featuredOnHome?: boolean | null, description: string, fullDescription?: string | null, gallery?: Array<string | null> | null };
 
-export type SiteSettingsPartsFragment = { __typename: 'SiteSettings', email: string, phone: string, phoneLink?: string | null, address?: string | null, copyright?: string | null, contactHeadingLine1?: string | null, contactHeadingLine2?: string | null, scrollText?: string | null, socials?: Array<{ __typename: 'SiteSettingsSocials', name: string, url: string } | null> | null, footerLinks?: Array<{ __typename: 'SiteSettingsFooterLinks', label: string, url: string } | null> | null };
+export type SiteSettingsPartsFragment = { __typename: 'SiteSettings', email: string, phone: string, phoneLink?: string | null, address?: string | null, copyright?: string | null, contactHeadingLine1?: string | null, contactHeadingLine2?: string | null, scrollText?: string | null, socials?: Array<{ __typename: 'SiteSettingsSocials', name: string, url: string, openInNewTab?: boolean | null } | null> | null, footerLinks?: Array<{ __typename: 'SiteSettingsFooterLinks', label: string, url: string } | null> | null };
 
 export type PartnersPartsFragment = { __typename: 'Partners', partnersLabel: string, partners?: Array<string | null> | null };
 
@@ -1005,7 +1008,7 @@ export type SiteSettingsQueryVariables = Exact<{
 }>;
 
 
-export type SiteSettingsQuery = { __typename?: 'Query', siteSettings: { __typename: 'SiteSettings', id: string, email: string, phone: string, phoneLink?: string | null, address?: string | null, copyright?: string | null, contactHeadingLine1?: string | null, contactHeadingLine2?: string | null, scrollText?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, socials?: Array<{ __typename: 'SiteSettingsSocials', name: string, url: string } | null> | null, footerLinks?: Array<{ __typename: 'SiteSettingsFooterLinks', label: string, url: string } | null> | null } };
+export type SiteSettingsQuery = { __typename?: 'Query', siteSettings: { __typename: 'SiteSettings', id: string, email: string, phone: string, phoneLink?: string | null, address?: string | null, copyright?: string | null, contactHeadingLine1?: string | null, contactHeadingLine2?: string | null, scrollText?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, socials?: Array<{ __typename: 'SiteSettingsSocials', name: string, url: string, openInNewTab?: boolean | null } | null> | null, footerLinks?: Array<{ __typename: 'SiteSettingsFooterLinks', label: string, url: string } | null> | null } };
 
 export type SiteSettingsConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1017,7 +1020,7 @@ export type SiteSettingsConnectionQueryVariables = Exact<{
 }>;
 
 
-export type SiteSettingsConnectionQuery = { __typename?: 'Query', siteSettingsConnection: { __typename?: 'SiteSettingsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'SiteSettingsConnectionEdges', cursor: string, node?: { __typename: 'SiteSettings', id: string, email: string, phone: string, phoneLink?: string | null, address?: string | null, copyright?: string | null, contactHeadingLine1?: string | null, contactHeadingLine2?: string | null, scrollText?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, socials?: Array<{ __typename: 'SiteSettingsSocials', name: string, url: string } | null> | null, footerLinks?: Array<{ __typename: 'SiteSettingsFooterLinks', label: string, url: string } | null> | null } | null } | null> | null } };
+export type SiteSettingsConnectionQuery = { __typename?: 'Query', siteSettingsConnection: { __typename?: 'SiteSettingsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'SiteSettingsConnectionEdges', cursor: string, node?: { __typename: 'SiteSettings', id: string, email: string, phone: string, phoneLink?: string | null, address?: string | null, copyright?: string | null, contactHeadingLine1?: string | null, contactHeadingLine2?: string | null, scrollText?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, socials?: Array<{ __typename: 'SiteSettingsSocials', name: string, url: string, openInNewTab?: boolean | null } | null> | null, footerLinks?: Array<{ __typename: 'SiteSettingsFooterLinks', label: string, url: string } | null> | null } | null } | null> | null } };
 
 export type PartnersQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1144,6 +1147,7 @@ export const SiteSettingsPartsFragmentDoc = gql`
     __typename
     name
     url
+    openInNewTab
   }
   footerLinks {
     __typename
@@ -1739,7 +1743,7 @@ export const ExperimentalGetTinaClient = () =>
   getSdk(
     generateRequester(
       createClient({
-        url: "https://content.tinajs.io/2.1/content/43df9a3d-b238-44c9-8f2a-0b1563230ff6/github/main",
+        url: "http://localhost:4001/graphql",
         queries,
       })
     )
