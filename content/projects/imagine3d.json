@@ -1,0 +1,11 @@
+{
+  "title": "Imagine3D",
+  "slug": "imagine-3d",
+  "category": "Development",
+  "image": "https://www.dropbox.com/scl/fi/h6is7azw8ucnnj2bc194t/imagine3d.jpg?rlkey=rjopatzhdqpdpxw93davv8bq0&st=9px476et&dl=0",
+  "year": "2023",
+  "order": 1,
+  "featuredOnHome": true,
+  "description": "Bringing the interior designs of imagine3d to the cloud. Hand crafted website to look clean and elegant.",
+  "siteUrl": "https://react-imagine3d.vercel.app/"
+}
