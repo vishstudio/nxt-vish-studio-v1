@@ -64,10 +64,10 @@
       "delivery": "2–3 weeks",
       "tagline": "Complete digital solution for established businesses ready to scale.",
       "featured": false,
-      "ctaLabel": "Book a Call",
+      "ctaLabel": "Mail us",
       "ctaLink": {
-        "linkType": "internal",
-        "linkValue": "/contact"
+        "linkType": "email",
+        "linkValue": "vishstudio.ltd@gmail.com"
       },
       "features": [
         "Up to 10 pages",
