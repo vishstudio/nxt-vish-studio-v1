@@ -8,12 +8,13 @@ import { PageHero } from '../components/ui/PageHero';
 import { useTinaAbout } from '../hooks/useTinaVisualEditing';
 
 export const AboutPage = () => {
-  const { data: content, tinaField } = useTinaAbout();
+  const { data: content, tinaField, rawAboutPage } = useTinaAbout();
 
   return (
     <PageLayout>
       <PageHero
         label={content.heroLabel}
+        labelTinaField={tinaField('heroLabel')}
         title={
           <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-medium tracking-tight leading-[0.95] text-white mb-12">
             <motion.span
@@ -48,6 +49,7 @@ export const AboutPage = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
               className="relative aspect-[4/3] lg:aspect-square overflow-hidden rounded-sm"
+              data-tina-field={tinaField('studioImage')}
             >
               <img
                 src={content.studioImage}
@@ -67,10 +69,16 @@ export const AboutPage = () => {
                 {content.introHeading}
               </motion.h2>
               <div className="space-y-12">
-                <TextReveal className="font-sans text-xl text-gray-400 leading-relaxed">
+                <TextReveal
+                  className="font-sans text-xl text-gray-400 leading-relaxed"
+                  tinaField={tinaField('introParagraph1')}
+                >
                   {content.introParagraph1}
                 </TextReveal>
-                <TextReveal className="font-sans text-xl text-gray-400 leading-relaxed">
+                <TextReveal
+                  className="font-sans text-xl text-gray-400 leading-relaxed"
+                  tinaField={tinaField('introParagraph2')}
+                >
                   {content.introParagraph2}
                 </TextReveal>
               </div>
@@ -83,21 +91,45 @@ export const AboutPage = () => {
       <section className="px-6 md:px-12 py-32 bg-vish-bg text-white">
         <div className="max-w-[1400px] mx-auto">
           <div className="mb-24">
-            <span className="font-mono text-sm text-vish-accent uppercase tracking-widest block mb-4">{content.valuesLabel}</span>
-            <h2 className="font-display text-6xl md:text-8xl tracking-tight leading-none text-white">{content.valuesHeading}</h2>
+            <span
+              className="font-mono text-sm text-vish-accent uppercase tracking-widest block mb-4"
+              data-tina-field={tinaField('valuesLabel')}
+            >
+              {content.valuesLabel}
+            </span>
+            <h2
+              className="font-display text-6xl md:text-8xl tracking-tight leading-none text-white"
+              data-tina-field={tinaField('valuesHeading')}
+            >
+              {content.valuesHeading}
+            </h2>
           </div>
 
           <div className="grid grid-cols-1 border-t border-white/10">
             {content.values.map((value, index) => (
-              <div key={index} className="group grid grid-cols-1 md:grid-cols-12 gap-8 py-16 border-b border-white/10 transition-colors duration-500 hover:bg-white/[0.02]">
+              <div
+                key={index}
+                className="group grid grid-cols-1 md:grid-cols-12 gap-8 py-16 border-b border-white/10 transition-colors duration-500 hover:bg-white/[0.02]"
+                data-tina-field={rawAboutPage?.values?.[index] ? tinaField(rawAboutPage.values[index], 'id') : undefined}
+              >
                 <div className="md:col-span-1 font-mono text-sm text-vish-accent pt-2">
                   /{value.id}
                 </div>
                 <div className="md:col-span-5">
-                  <h3 className="font-display text-4xl md:text-5xl font-medium text-white group-hover:translate-x-2 transition-transform duration-500">{value.title}</h3>
+                  <h3
+                    className="font-display text-4xl md:text-5xl font-medium text-white group-hover:translate-x-2 transition-transform duration-500"
+                    data-tina-field={rawAboutPage?.values?.[index] ? tinaField(rawAboutPage.values[index], 'title') : undefined}
+                  >
+                    {value.title}
+                  </h3>
                 </div>
                 <div className="md:col-span-6">
-                  <p className="font-sans text-xl text-gray-400 leading-relaxed max-w-lg group-hover:text-gray-300 transition-colors duration-500">{value.description}</p>
+                  <p
+                    className="font-sans text-xl text-gray-400 leading-relaxed max-w-lg group-hover:text-gray-300 transition-colors duration-500"
+                    data-tina-field={rawAboutPage?.values?.[index] ? tinaField(rawAboutPage.values[index], 'description') : undefined}
+                  >
+                    {value.description}
+                  </p>
                 </div>
               </div>
             ))}
@@ -105,7 +137,7 @@ export const AboutPage = () => {
         </div>
       </section>
 
-      <Team members={content.teamMembers} />
+      <Team members={content.teamMembers} rawTinaMembers={rawAboutPage?.teamMembers} tinaField={tinaField} />
       <TrustedPartners />
       <Contact />
     </PageLayout>

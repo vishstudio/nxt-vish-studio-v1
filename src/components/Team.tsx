@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { User, Code, PenTool, Zap, Sparkles, Layout, Globe, Terminal } from 'lucide-react';
+import { User, PenTool, Sparkles, Globe, Terminal } from 'lucide-react';
 import type { TeamMember } from '../lib/content';
 import { getAboutPage } from '../lib/content';
 
@@ -16,12 +16,24 @@ const getIcon = (role: string) => {
 interface TeamProps {
   showTitle?: boolean;
   members?: TeamMember[];
+  /** Raw Tina team member objects for click-to-edit annotations */
+  rawTinaMembers?: any[];
+  /** tinaField helper from useTinaAbout */
+  tinaField?: (objOrField: any, fieldName?: string) => string | undefined;
 }
 
-export const Team = ({ showTitle = true, members }: TeamProps) => {
+export const Team = ({ showTitle = true, members, rawTinaMembers, tinaField }: TeamProps) => {
   // Use provided members or fall back to static about page data
   const teamData = members ?? getAboutPage().teamMembers ?? [];
   const team = [...teamData].sort((a, b) => a.order - b.order);
+
+  // Build a name → raw tina object map so sorting doesn't break index alignment
+  const rawByName: Record<string, any> = {};
+  if (rawTinaMembers && tinaField) {
+    rawTinaMembers.forEach((m: any) => {
+      if (m?.name) rawByName[m.name] = m;
+    });
+  }
 
   return (
     <section className="py-24 md:py-32 px-6 md:px-12 bg-vish-bg text-white" id="team">
@@ -46,6 +58,7 @@ export const Team = ({ showTitle = true, members }: TeamProps) => {
         <div className="flex flex-wrap justify-center gap-6 lg:gap-8">
           {team.map((member: TeamMember, index: number) => {
             const Icon = getIcon(member.role);
+            const rawMember = rawByName[member.name];
             return (
               <motion.div
                 key={member.name}
@@ -56,7 +69,10 @@ export const Team = ({ showTitle = true, members }: TeamProps) => {
                 className="group flex flex-col h-full w-full sm:w-[calc(50%-12px)] lg:w-[calc(25%-24px)] bg-white/[0.02] border border-white/5 hover:border-white/10 transition-colors duration-500 rounded-2xl overflow-hidden"
               >
                 {/* Image Container */}
-                <div className="relative aspect-square overflow-hidden">
+                <div
+                  className="relative aspect-square overflow-hidden"
+                  data-tina-field={rawMember && tinaField ? tinaField(rawMember, 'image') : undefined}
+                >
                   <div className="absolute inset-0 bg-gray-900 animate-pulse" />
                   <img
                     src={member.image}
@@ -64,7 +80,6 @@ export const Team = ({ showTitle = true, members }: TeamProps) => {
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0"
                     loading="lazy"
                   />
-                  {/* Gradient Overlay for better text readability if needed, though text is below */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
 
@@ -76,15 +91,24 @@ export const Team = ({ showTitle = true, members }: TeamProps) => {
                     </div>
                   </div>
 
-                  <h3 className="font-display text-2xl font-medium text-white mb-2 group-hover:translate-x-1 transition-transform duration-300">
+                  <h3
+                    className="font-display text-2xl font-medium text-white mb-2 group-hover:translate-x-1 transition-transform duration-300"
+                    data-tina-field={rawMember && tinaField ? tinaField(rawMember, 'name') : undefined}
+                  >
                     {member.name}
                   </h3>
 
-                  <p className="font-mono text-xs text-vish-accent uppercase tracking-wider mb-4">
+                  <p
+                    className="font-mono text-xs text-vish-accent uppercase tracking-wider mb-4"
+                    data-tina-field={rawMember && tinaField ? tinaField(rawMember, 'role') : undefined}
+                  >
                     {member.role}
                   </p>
 
-                  <p className="font-sans text-sm text-gray-400 leading-relaxed mt-auto group-hover:text-gray-300 transition-colors">
+                  <p
+                    className="font-sans text-sm text-gray-400 leading-relaxed mt-auto group-hover:text-gray-300 transition-colors"
+                    data-tina-field={rawMember && tinaField ? tinaField(rawMember, 'bio') : undefined}
+                  >
                     {member.bio}
                   </p>
                 </div>

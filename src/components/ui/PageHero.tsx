@@ -4,6 +4,8 @@ import { motion } from 'motion/react';
 interface PageHeroProps {
   /** Optional label above the title */
   label?: string;
+  /** data-tina-field value for the label span */
+  labelTinaField?: string;
   /** Style of the label: 'mono' (uppercase tracking) or 'pill' (bordered pill badge) */
   labelStyle?: 'mono' | 'pill';
   /** Title content — typically an h1 with motion animations */
@@ -18,6 +20,7 @@ interface PageHeroProps {
 
 export const PageHero = ({
   label,
+  labelTinaField,
   labelStyle = 'mono',
   title,
   description,
@@ -40,11 +43,11 @@ export const PageHero = ({
             className="mb-8"
           >
             {labelStyle === 'pill' ? (
-              <span className="inline-block px-4 py-1.5 border border-white/10 rounded-full text-sm font-sans font-medium text-gray-400">
+              <span className="inline-block px-4 py-1.5 border border-white/10 rounded-full text-sm font-sans font-medium text-gray-400" data-tina-field={labelTinaField}>
                 {label}
               </span>
             ) : (
-              <span className="font-mono text-sm text-vish-accent uppercase tracking-widest">
+              <span className="font-mono text-sm text-vish-accent uppercase tracking-widest" data-tina-field={labelTinaField}>
                 {label}
               </span>
             )}

@@ -4,9 +4,10 @@ import { useScroll, useTransform, motion, MotionValue } from 'motion/react';
 interface TextRevealProps {
   children: string;
   className?: string;
+  tinaField?: string;
 }
 
-export const TextReveal = ({ children, className }: TextRevealProps) => {
+export const TextReveal = ({ children, className, tinaField }: TextRevealProps) => {
   const element = useRef(null);
   const { scrollYProgress } = useScroll({
     target: element,
@@ -19,6 +20,7 @@ export const TextReveal = ({ children, className }: TextRevealProps) => {
     <p
       ref={element}
       className={`flex flex-wrap ${className}`}
+      data-tina-field={tinaField}
     >
       {words.map((word, i) => {
         // Distribute the animation of words across the scroll progress

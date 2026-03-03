@@ -185,14 +185,22 @@ export function useTinaAbout() {
       } as AboutPageContent),
   );
 
-  function tinaFieldAbout(fieldName: string) {
-    if (result.tinaData && (result.tinaData as any).aboutPage) {
-      return rawTinaField((result.tinaData as any).aboutPage, fieldName);
+  function tinaFieldAbout(fieldNameOrObj: string | any, fieldName?: string) {
+    if (!result.tinaData) return undefined;
+    const page = (result.tinaData as any).aboutPage;
+    if (!page) return undefined;
+    if (typeof fieldNameOrObj === 'string') {
+      return rawTinaField(page, fieldNameOrObj);
+    }
+    if (fieldNameOrObj && fieldName) {
+      return rawTinaField(fieldNameOrObj, fieldName);
     }
     return undefined;
   }
 
-  return { data: result.data, tinaField: tinaFieldAbout };
+  const rawAboutPage = result.tinaData ? (result.tinaData as any).aboutPage : null;
+
+  return { data: result.data, tinaField: tinaFieldAbout, rawAboutPage };
 }
 
 // ─── Services Page ───────────────────────────────────────────────────────────
