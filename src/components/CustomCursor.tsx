@@ -13,11 +13,11 @@ export const CustomCursor = () => {
 
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      
+
       if (target.closest('[data-cursor="project"]')) {
         setCursorVariant('project');
       } else if (
-        target.tagName === 'A' || 
+        target.tagName === 'A' ||
         target.tagName === 'BUTTON' ||
         target.closest('a') ||
         target.closest('button')
