@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tinacms dev -c \"vite --port=3000 --host=0.0.0.0\"",
     "dev:vite": "vite --port=3000 --host=0.0.0.0",
-    "build": "tinacms build || echo 'Tina build skipped (missing token), using committed generated files' && vite build",
+    "build": "(tinacms build && rm -f public/admin/.gitignore) || echo 'Tina build skipped (missing token), using committed generated files' && vite build",
     "preview": "vite preview",
     "clean": "rm -rf dist",
     "lint": "tsc --noEmit",
