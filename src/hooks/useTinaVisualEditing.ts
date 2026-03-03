@@ -189,7 +189,7 @@ export function useTinaAbout() {
     if (!result.tinaData) return undefined;
     const page = (result.tinaData as any).aboutPage;
     if (!page) return undefined;
-    if (typeof fieldNameOrObj === 'string') {
+    if (typeof fieldNameOrObj === "string") {
       return rawTinaField(page, fieldNameOrObj);
     }
     if (fieldNameOrObj && fieldName) {
@@ -198,7 +198,9 @@ export function useTinaAbout() {
     return undefined;
   }
 
-  const rawAboutPage = result.tinaData ? (result.tinaData as any).aboutPage : null;
+  const rawAboutPage = result.tinaData
+    ? (result.tinaData as any).aboutPage
+    : null;
 
   return { data: result.data, tinaField: tinaFieldAbout, rawAboutPage };
 }
@@ -224,14 +226,22 @@ export function useTinaServices() {
       } as ServicesPageContent),
   );
 
-  function tinaFieldServices(fieldName: string) {
-    if (result.tinaData && (result.tinaData as any).servicesPage) {
-      return rawTinaField((result.tinaData as any).servicesPage, fieldName);
+  function tinaFieldServices(fieldNameOrObj: string | any, fieldName?: string) {
+    if (!result.tinaData) return undefined;
+    const page = (result.tinaData as any).servicesPage;
+    if (!page) return undefined;
+    if (typeof fieldNameOrObj === 'string') {
+      return rawTinaField(page, fieldNameOrObj);
+    }
+    if (fieldNameOrObj && fieldName) {
+      return rawTinaField(fieldNameOrObj, fieldName);
     }
     return undefined;
   }
 
-  return { data: result.data, tinaField: tinaFieldServices };
+  const rawServicesPage = result.tinaData ? (result.tinaData as any).servicesPage : null;
+
+  return { data: result.data, tinaField: tinaFieldServices, rawServicesPage };
 }
 
 // ─── Contact Page ────────────────────────────────────────────────────────────
