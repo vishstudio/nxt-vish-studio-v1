@@ -8,7 +8,7 @@ export default defineConfig({
     "main",
   clientId:
     process.env.TINA_CLIENT_ID || "94cff29e-b158-496c-b456-9850440a0fb9",
-  token: process.env.TINA_TOKEN || "",
+  token: process.env.TINA_TOKEN || "effdd5b419c83677e081c08c90c3a1dee3d7b399",
   build: {
     outputFolder: "admin",
     publicFolder: "public",
