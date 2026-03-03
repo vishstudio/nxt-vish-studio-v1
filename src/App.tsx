@@ -13,12 +13,12 @@ import { Loader } from './components/Loader';
 
 function App() {
   const [isLoading, setIsLoading] = useState(() => {
-    // Check if the current route is a known route. 
+    // Check if the current route is a known route.
     // If not, we don't show the initial loader (e.g. for 404 page).
     const path = window.location.pathname;
     const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
     const normalizedPath = path.replace(base, '') || '/';
-    
+
     const knownExactPaths = ['/', '/about', '/projects', '/services', '/contact'];
     const isKnownPath = knownExactPaths.includes(normalizedPath) || normalizedPath.startsWith('/project/');
     return isKnownPath;
