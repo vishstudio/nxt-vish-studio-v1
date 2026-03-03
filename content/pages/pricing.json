@@ -61,7 +61,7 @@
       "name": "Premium",
       "price": "Rs 25,000",
       "priceNote": "ONE-TIME",
-      "delivery": "2–3 weeks",
+      "delivery": "2–4 weeks",
       "tagline": "Complete digital solution for established businesses ready to scale.",
       "featured": false,
       "ctaLabel": "Mail us",
@@ -73,12 +73,11 @@
         "Up to 10 pages",
         "Premium custom design",
         "E-commerce ready",
-        "Analytics dashboard",
-        "Blog / News section",
         "Email marketing setup",
-        "6 months free hosting",
-        "6 months support",
-        "Priority revisions"
+        "3 months support",
+        "Priority revisions",
+        "Blog / News section",
+        "Analytics dashboard"
       ],
       "bestFor": "Clinics, retail chains, real estate, tourism operators",
       "revisions": "Unlimited during project"
