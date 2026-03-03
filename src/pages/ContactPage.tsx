@@ -13,12 +13,15 @@ const iconMap: Record<string, LucideIcon> = {
 };
 
 export const ContactPage = () => {
-  const { data: content, tinaField } = useTinaContact();
+  const { data: content, tinaField, rawContactPage } = useTinaContact();
 
   return (
     <PageLayout>
       <PageHero
         label={content.heroLabel}
+        labelTinaField={tinaField('heroLabel')}
+        description={content.heroDescription}
+        descriptionTinaField={tinaField('heroDescription')}
         title={
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
@@ -27,10 +30,9 @@ export const ContactPage = () => {
             className="font-display text-6xl md:text-8xl lg:text-9xl font-medium tracking-tight leading-[0.95] text-white mb-12"
           >
             <span data-tina-field={tinaField('heroTitleLine1')}>{content.heroTitleLine1}</span> <br />
-            <span className="text-gray-500"><span data-tina-field={tinaField('heroTitleLine2')}>{content.heroTitleLine2}</span><span className="text-vish-accent">{content.heroTitlePunctuation}</span></span>
+            <span className="text-gray-500"><span data-tina-field={tinaField('heroTitleLine2')}>{content.heroTitleLine2}</span><span data-tina-field={tinaField('heroTitlePunctuation')} className="text-vish-accent">{content.heroTitlePunctuation}</span></span>
           </motion.h1>
         }
-        description={content.heroDescription}
       />
 
       <Section className="pb-20">
@@ -38,6 +40,7 @@ export const ContactPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 border-t border-white/10 pt-12">
           {content.trustIndicators.map((item, index) => {
             const Icon = iconMap[item.icon] || Zap;
+            const rawItem = rawContactPage?.trustIndicators?.[index];
             return (
               <motion.div
                 key={index}
@@ -47,11 +50,24 @@ export const ContactPage = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="group"
               >
-                <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-vish-accent/10 transition-colors">
+                <div
+                  data-tina-field={rawItem ? tinaField(rawItem, 'icon') : undefined}
+                  className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-vish-accent/10 transition-colors"
+                >
                   <Icon className="w-6 h-6 text-gray-300 group-hover:text-vish-accent transition-colors" />
                 </div>
-                <h3 className="font-display text-xl text-white mb-3">{item.title}</h3>
-                <p className="font-sans text-gray-400 text-sm leading-relaxed max-w-xs">{item.description}</p>
+                <h3
+                  data-tina-field={rawItem ? tinaField(rawItem, 'title') : undefined}
+                  className="font-display text-xl text-white mb-3"
+                >
+                  {item.title}
+                </h3>
+                <p
+                  data-tina-field={rawItem ? tinaField(rawItem, 'description') : undefined}
+                  className="font-sans text-gray-400 text-sm leading-relaxed max-w-xs"
+                >
+                  {item.description}
+                </p>
               </motion.div>
             );
           })}
