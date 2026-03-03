@@ -671,7 +671,10 @@ var config_default = defineConfig({
                     name: "linkType",
                     label: "Link Type",
                     options: [
-                      { label: "Internal path (e.g. /contact)", value: "internal" },
+                      {
+                        label: "Internal path (e.g. /contact)",
+                        value: "internal"
+                      },
                       { label: "External URL (https://...)", value: "url" },
                       { label: "Phone number", value: "phone" },
                       { label: "Email address", value: "email" },
