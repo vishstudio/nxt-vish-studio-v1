@@ -16,5 +16,10 @@
   "order": 3,
   "featuredOnHome": true,
   "description": "Bringing handymen business online. Curated website which fits the client business accordingly. #WIP",
+  "gallery": [
+    "https://www.dropbox.com/scl/fi/o6tgrfkqbdia28mgj9gcp/SS-Pro.png?rlkey=0ifbz2hh0sgs7gq133468knmo&st=l5lxhcsy&dl=0",
+    "https://www.dropbox.com/scl/fi/gw9pbyhu4qz6jcasj3hoe/Screenshot-2026-03-03-at-23.37.20.png?rlkey=m0gsi303c76ckhh7znlcitz6b&st=d0vno0al&dl=0",
+    "https://www.dropbox.com/scl/fi/s1n8qr4r87xyn7k2swhqp/Screenshot-2026-03-03-at-23.37.48.png?rlkey=ukm87ul6oazbm0xkb3qi14kz6&st=vi9d1kpl&dl=0"
+  ],
   "siteUrl": "https://vish-studio.github.io/react-sspower-pros/"
 }
