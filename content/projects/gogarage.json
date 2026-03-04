@@ -16,5 +16,6 @@
   "year": "2026",
   "order": 4,
   "featuredOnHome": true,
-  "description": "Connecting garage work with the cloud. Rest assure while your car is being repaired at the garage while having live notifications of the process."
+  "description": "Connecting garage work with the cloud. Rest assure while your car is being repaired at the garage while having live notifications of the process.",
+  "siteUrl": "https://vish-studio.github.io/nxt-go-garage-marketing/"
 }
