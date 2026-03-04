@@ -1,0 +1,20 @@
+{
+  "title": "GoGarage",
+  "slug": "go-garage",
+  "category": [
+    "Web Design",
+    "Branding",
+    "Development"
+  ],
+  "techStack": [
+    "Next JS",
+    "HTML 5",
+    "CSS 3",
+    "Javascript"
+  ],
+  "image": "https://previews.dropbox.com/p/thumb/AC6w-gHymwkts0oYewgGrdiNagxdn4-y6PUsw7JA6vDHRHQD2vt8XYlrlNyjyv2r361oJ-zMrb-iXXFiSmBQHACcFZEQJHGc-EF5wXTMPJm_6lEH7QEF9uNpnHH-BEZvAqkU5mYkwBwRv_OmwbHF9r-KOhdbTyfof7PQg80GZvF9PXnuzikXH-t-RpUsebSyB0-DLnde9txVUHAJui4GbSx003jlIhTwWOWeQqkT3ZSGTBlMa4HRENy87pfzhYSsnszO-rSorIKfcN9anXS3nBbchNtzbqVKmNGi_qt2CtQ96EWopW7GaXBomfHZjI-G31Qy2MHSWFb_b0DFB6-X01Xi/p.jpeg?is_prewarmed=true",
+  "year": "2026",
+  "order": 4,
+  "featuredOnHome": true,
+  "description": "Connecting garage work with the cloud. Rest assure while your car is being repaired at the garage while having live notifications of the process."
+}
