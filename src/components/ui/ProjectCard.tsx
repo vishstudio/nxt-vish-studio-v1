@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, ExternalLink } from 'lucide-react';
+import { getImageUrl } from '../../utils/imageUrl';
 
 interface ProjectCardProject {
   slug: string;
@@ -40,7 +41,7 @@ export const ProjectCard = ({ project, index, alternate = true }: ProjectCardPro
           className="aspect-16/10 bg-gray-900"
         >
           <img
-            src={project.image}
+            src={getImageUrl(project.image)}
             alt={project.title}
             className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500"
           />

@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTinaProjectsList } from '../hooks/useTinaVisualEditing';
+import { getImageUrl } from '../utils/imageUrl';
 import { Button } from './ui/Button';
 
 export const Projects = ({ showViewAll = true }: { showViewAll?: boolean }) => {
@@ -88,7 +89,7 @@ export const Projects = ({ showViewAll = true }: { showViewAll?: boolean }) => {
                       {/* Mobile Image */}
                       <div className="lg:hidden mt-6 rounded-xl overflow-hidden aspect-video">
                         <img
-                          src={project.image}
+                          src={getImageUrl(project.image)}
                           alt={project.title}
                           className="w-full h-full object-cover"
                         />
@@ -121,7 +122,7 @@ export const Projects = ({ showViewAll = true }: { showViewAll?: boolean }) => {
               <AnimatePresence mode="wait">
                 <motion.img
                   key={activeProject.id}
-                  src={activeProject.image}
+                  src={getImageUrl(activeProject.image)}
                   alt={activeProject.title}
                   initial={{ opacity: 0, scale: 1.1 }}
                   animate={{ opacity: 1, scale: 1 }}

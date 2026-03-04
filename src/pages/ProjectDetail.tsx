@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowLeft, ExternalLink, X, ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react';
 import { useTinaProjectDetail } from '../hooks/useTinaVisualEditing';
+import { getImageUrl } from '../utils/imageUrl';
 import { Navbar } from '../components/Navbar';
 import { CustomCursor } from '../components/CustomCursor';
 import { Contact } from '../components/Contact';
@@ -12,7 +13,7 @@ export const ProjectDetail = () => {
   const { data: project } = useTinaProjectDetail(slug || '');
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
-  const galleryImages: string[] = project?.gallery ?? [];
+  const galleryImages: string[] = (project?.gallery ?? []).map(getImageUrl);
 
   const openLightbox = (index: number) => setLightboxIndex(index);
   const closeLightbox = useCallback(() => setLightboxIndex(null), []);
@@ -90,7 +91,7 @@ export const ProjectDetail = () => {
           className="w-full aspect-video rounded-2xl overflow-hidden mb-16 border border-white/10"
         >
           <img
-            src={project.image}
+            src={getImageUrl(project.image)}
             alt={project.title}
             className="w-full h-full object-cover"
           />
@@ -164,7 +165,7 @@ export const ProjectDetail = () => {
                   className="group relative rounded-lg overflow-hidden aspect-square bg-white border border-white/8 cursor-zoom-in hover:border-white/20 transition-all duration-200"
                 >
                   <img
-                    src={img}
+                    src={getImageUrl(img)}
                     alt={`${project.title} ${index + 1}`}
                     className="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-105"
                   />

@@ -109,7 +109,7 @@ export default defineConfig({
             name: "image",
             label: "Featured Image URL",
             description:
-              "Paste an image URL (e.g. https://example.com/image.jpg)",
+              "Paste a Dropbox share link and change '?dl=0' to '?raw=1' (e.g. https://www.dropbox.com/s/xxx/image.jpg?raw=1). Do NOT use the 'previews.dropbox.com' URL — that link expires.",
           },
           { type: "string", name: "year", label: "Year", required: true },
           {
@@ -142,7 +142,8 @@ export default defineConfig({
             type: "string",
             name: "gallery",
             label: "Gallery Image URLs",
-            description: "Paste image URLs, one per entry",
+            description:
+              "Paste Dropbox share links with '?raw=1' appended, one per entry (e.g. https://www.dropbox.com/s/xxx/image.jpg?raw=1). Do NOT use 'previews.dropbox.com' URLs.",
             list: true,
           },
           {
