@@ -24,12 +24,12 @@ export const TrustedPartners = () => {
                 href={partner.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-3xl md:text-4xl font-display font-medium text-white/40 hover:text-white transition-colors cursor-pointer"
+                className="text-3xl md:text-4xl font-display font-medium text-white/40 hover:text-vish-accent transition-colors cursor-pointer"
               >
                 {partner.name}
               </a>
             ) : (
-              <span key={index} className="text-3xl md:text-4xl font-display font-medium text-white/40 hover:text-white transition-colors cursor-default">
+              <span key={index} className="text-3xl md:text-4xl font-display font-medium text-white/40 hover:text-vish-accent transition-colors cursor-default">
                 {partner.name}
               </span>
             )

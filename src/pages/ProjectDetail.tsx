@@ -13,6 +13,10 @@ export const ProjectDetail = () => {
   const { data: project } = useTinaProjectDetail(slug || '');
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [slug]);
+
   const galleryImages: string[] = (project?.gallery ?? []).map(getImageUrl);
 
   const openLightbox = (index: number) => setLightboxIndex(index);
@@ -162,7 +166,7 @@ export const ProjectDetail = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: index * 0.05 }}
                   onClick={() => openLightbox(index)}
-                  className="group relative rounded-lg overflow-hidden aspect-square bg-white border border-white/8 cursor-zoom-in hover:border-white/20 transition-all duration-200"
+                  className="group relative rounded-lg overflow-hidden aspect-square bg-white/5 border border-white/8 cursor-zoom-in hover:border-white/20 transition-all duration-200"
                 >
                   <img
                     src={getImageUrl(img)}
