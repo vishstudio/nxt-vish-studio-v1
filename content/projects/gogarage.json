@@ -17,5 +17,12 @@
   "order": 4,
   "featuredOnHome": true,
   "description": "Connecting garage work with the cloud. Rest assure while your car is being repaired at the garage while having live notifications of the process.",
+  "gallery": [
+    "https://www.dropbox.com/scl/fi/s3jfnxra5mp0wri8476p1/Screenshot-2026-03-04-at-10.54.02.png?rlkey=0rmebh5afvqimgl9vp7v51267&st=nupwbkpg&dl=0",
+    "https://www.dropbox.com/scl/fi/x9ke9aq7zkffvvsuo9o8t/Screenshot-2026-03-05-at-01.59.35.png?rlkey=81jdluwx2uw1cbaqu2yjo1sb7&st=dmqjq5jw&dl=0",
+    "https://www.dropbox.com/scl/fi/nv7qhd8r084776p930qij/Screenshot-2026-03-05-at-01.59.43.png?rlkey=hixl7mcuiqqjbwxd3pmchtf1m&st=r1f1z6uc&dl=0",
+    "https://www.dropbox.com/scl/fi/9eprheny27b9izwjws5tz/Screenshot-2026-03-05-at-01.59.54.png?rlkey=91wlptdn6vq8ytuutvqxo5y5g&st=q5kanief&dl=0",
+    "https://www.dropbox.com/scl/fi/lcdwpm1olr37r3xfn2by7/Screenshot-2026-03-05-at-02.00.10.png?rlkey=rh21riguixu6eauq2ugph5a78&st=f98pxy83&dl=0"
+  ],
   "siteUrl": "https://vish-studio.github.io/nxt-go-garage-marketing/"
 }
