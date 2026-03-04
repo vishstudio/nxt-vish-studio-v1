@@ -66,7 +66,8 @@ export const Navbar = () => {
                   { name: 'Projects', href: '/projects' },
                   { name: 'Services', href: '/services' },
                   { name: 'Pricing', href: '/pricing' },
-                  { name: 'About', href: '/about' }
+                  { name: 'About', href: '/about' },
+                  { name: 'Testimonials', href: '/testimonials' }
                 ].map((item) => (
                   <a
                     key={item.name}
@@ -153,11 +154,11 @@ export const Navbar = () => {
 
               <div className="flex-1 overflow-y-auto py-8 px-8 flex flex-col gap-2">
                 {[
-                  { name: 'Home', href: '/', id: '01' },
-                  { name: 'Projects', href: '/projects', id: '02' },
-                  { name: 'Services', href: '/services', id: '03' },
-                  { name: 'Pricing', href: '/pricing', id: '04' },
-                  { name: 'About', href: '/about', id: '05' },
+                  { name: 'Projects', href: '/projects', id: '01' },
+                  { name: 'Services', href: '/services', id: '02' },
+                  { name: 'Pricing', href: '/pricing', id: '03' },
+                  { name: 'About', href: '/about', id: '04' },
+                  { name: 'Testimonials', href: '/testimonials', id: '05' },
                   { name: 'Contact', href: '/contact', id: '06' }
                 ].map((item, i) => (
                   <motion.a

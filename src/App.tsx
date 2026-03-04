@@ -8,6 +8,7 @@ import { ServicesPage } from './pages/ServicesPage';
 import { PricingPage } from './pages/PricingPage';
 import { ProjectDetail } from './pages/ProjectDetail';
 import { ContactPage } from './pages/ContactPage';
+import { TestimonialsPage } from './pages/TestimonialsPage';
 import { NotFound } from './pages/NotFound';
 import { CustomCursor } from './components/CustomCursor';
 import { Loader } from './components/Loader';
@@ -20,7 +21,7 @@ function App() {
     const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
     const normalizedPath = path.replace(base, '') || '/';
 
-    const knownExactPaths = ['/', '/about', '/projects', '/services', '/contact'];
+    const knownExactPaths = ['/', '/about', '/projects', '/services', '/contact', '/testimonials'];
     const isKnownPath = knownExactPaths.includes(normalizedPath) || normalizedPath.startsWith('/project/');
     return isKnownPath;
   });
@@ -42,6 +43,7 @@ function App() {
             <Route path="/services" element={<ServicesPage />} />
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/testimonials" element={<TestimonialsPage />} />
             <Route path="/project/:slug" element={<ProjectDetail />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

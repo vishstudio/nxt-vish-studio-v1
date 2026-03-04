@@ -360,6 +360,47 @@ export default defineConfig({
               { type: "string", name: "tags", label: "Tags", list: true },
             ],
           },
+          {
+            type: "string",
+            name: "testimonialsHeading",
+            label: "Testimonials Heading",
+          },
+          {
+            type: "string",
+            name: "testimonialsSubtext",
+            label: "Testimonials Subtext",
+          },
+          {
+            type: "object",
+            name: "testimonials",
+            label: "Testimonials",
+            list: true,
+            ui: {
+              itemProps: (item) => ({ label: item?.name || "New Testimonial" }),
+            },
+            fields: [
+              {
+                type: "string",
+                name: "quote",
+                label: "Quote",
+                required: true,
+                ui: { component: "textarea" },
+              },
+              {
+                type: "string",
+                name: "name",
+                label: "Client Name",
+                required: true,
+              },
+              {
+                type: "string",
+                name: "role",
+                label: "Role / Title",
+                required: true,
+              },
+              { type: "string", name: "company", label: "Company" },
+            ],
+          },
         ],
       },
 

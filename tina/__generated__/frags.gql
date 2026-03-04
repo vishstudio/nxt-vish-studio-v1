@@ -74,6 +74,15 @@ fragment HomePageParts on HomePage {
     description
     tags
   }
+  testimonialsHeading
+  testimonialsSubtext
+  testimonials {
+    __typename
+    quote
+    name
+    role
+    company
+  }
 }
 
 fragment AboutPageParts on AboutPage {

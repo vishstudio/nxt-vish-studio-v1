@@ -81,6 +81,13 @@ export interface ProcessStep {
   tags: string[];
 }
 
+export interface Testimonial {
+  quote: string;
+  name: string;
+  role: string;
+  company?: string;
+}
+
 export interface HomePageContent {
   heroLabel: string;
   heroTitleLine1: string;
@@ -96,6 +103,9 @@ export interface HomePageContent {
   processHeading: string;
   processSubtext: string;
   processSteps: ProcessStep[];
+  testimonialsHeading: string;
+  testimonialsSubtext: string;
+  testimonials: Testimonial[];
 }
 
 const homeModule = import.meta.glob<HomePageContent>(

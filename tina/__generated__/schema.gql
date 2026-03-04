@@ -283,6 +283,13 @@ type HomePageProcessSteps {
   tags: [String]
 }
 
+type HomePageTestimonials {
+  quote: String!
+  name: String!
+  role: String!
+  company: String
+}
+
 type HomePage implements Node & Document {
   heroLabel: String!
   heroTitleLine1: String
@@ -298,6 +305,9 @@ type HomePage implements Node & Document {
   processHeading: String
   processSubtext: String
   processSteps: [HomePageProcessSteps]
+  testimonialsHeading: String
+  testimonialsSubtext: String
+  testimonials: [HomePageTestimonials]
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -316,6 +326,13 @@ input HomePageProcessStepsFilter {
   tags: StringFilter
 }
 
+input HomePageTestimonialsFilter {
+  quote: StringFilter
+  name: StringFilter
+  role: StringFilter
+  company: StringFilter
+}
+
 input HomePageFilter {
   heroLabel: StringFilter
   heroTitleLine1: StringFilter
@@ -331,6 +348,9 @@ input HomePageFilter {
   processHeading: StringFilter
   processSubtext: StringFilter
   processSteps: HomePageProcessStepsFilter
+  testimonialsHeading: StringFilter
+  testimonialsSubtext: StringFilter
+  testimonials: HomePageTestimonialsFilter
 }
 
 type HomePageConnectionEdges {
@@ -693,6 +713,13 @@ input HomePageProcessStepsMutation {
   tags: [String]
 }
 
+input HomePageTestimonialsMutation {
+  quote: String
+  name: String
+  role: String
+  company: String
+}
+
 input HomePageMutation {
   heroLabel: String
   heroTitleLine1: String
@@ -708,6 +735,9 @@ input HomePageMutation {
   processHeading: String
   processSubtext: String
   processSteps: [HomePageProcessStepsMutation]
+  testimonialsHeading: String
+  testimonialsSubtext: String
+  testimonials: [HomePageTestimonialsMutation]
 }
 
 input AboutPageValuesMutation {
