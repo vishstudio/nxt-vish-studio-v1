@@ -16,6 +16,13 @@ if (typeof window !== 'undefined' && process.env.NEXT_PUBLIC_POSTHOG_KEY) {
     // Respect Do Not Track headers
     respect_dnt: true,
     persistence: 'localStorage+cookie',
+    // ── Session replay ────────────────────────────────────────────────────────
+    session_recording: {
+      // Record all sessions (set to e.g. 0.5 to sample 50% if volume is high)
+      recordCrossOriginIframes: false,
+    },
+    // Also capture console errors in the recording timeline
+    enable_recording_console_log: true,
   });
 }
 
