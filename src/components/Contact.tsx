@@ -1,3 +1,4 @@
+'use client';
 import { motion } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
 import { useTinaSettings } from '../hooks/useTinaVisualEditing';

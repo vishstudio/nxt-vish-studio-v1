@@ -1,5 +1,3 @@
-/// <reference types="vite/client" />
-
 export type CtaLinkType = "internal" | "url" | "phone" | "email" | "whatsapp";
 
 export interface CtaLink {
@@ -95,13 +93,10 @@ interface PricingPageJson {
   customCtaHref: string;
 }
 
-const pricingModule = import.meta.glob<PricingPageJson>(
-  "/content/pages/pricing.json",
-  { eager: true, import: "default" },
-) as Record<string, PricingPageJson>;
+import pricingJson from "@/content/pages/pricing.json";
 
 export function getPricingPage(): PricingPageContent {
-  const raw = Object.values(pricingModule)[0];
+  const raw = pricingJson as unknown as PricingPageJson;
   return {
     heroLabel: raw.heroLabel ?? "",
     heroTitleLine1: raw.heroTitleLine1 ?? "",

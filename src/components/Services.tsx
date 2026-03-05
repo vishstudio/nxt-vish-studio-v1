@@ -1,3 +1,4 @@
+'use client';
 import { motion } from 'motion/react';
 import { ArrowUpRight, ArrowRight } from 'lucide-react';
 import { Button } from './ui/Button';

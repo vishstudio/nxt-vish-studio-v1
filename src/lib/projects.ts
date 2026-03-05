@@ -1,5 +1,3 @@
-/// <reference types="vite/client" />
-
 export interface Project {
   slug: string;
   title: string;
@@ -30,14 +28,20 @@ interface ProjectJson {
   techStack?: string[];
 }
 
-// Vite eagerly imports all project JSON at build time — fully static, no API needed
-const projectModules = import.meta.glob<ProjectJson>(
-  "/content/projects/*.json",
-  {
-    eager: true,
-    import: "default",
-  },
-) as Record<string, ProjectJson>;
+// Statically imported project JSON files — fully static, no API needed
+import gogarageJson from "@/content/projects/gogarage.json";
+import imagine3dJson from "@/content/projects/imagine3d.json";
+import morisMetricsJson from "@/content/projects/moris-metrics.json";
+import ssPowerProJson from "@/content/projects/ss-power-pro.json";
+
+const projectModules: Record<string, ProjectJson> = {
+  "/content/projects/gogarage.json": gogarageJson as unknown as ProjectJson,
+  "/content/projects/imagine3d.json": imagine3dJson as unknown as ProjectJson,
+  "/content/projects/moris-metrics.json":
+    morisMetricsJson as unknown as ProjectJson,
+  "/content/projects/ss-power-pro.json":
+    ssPowerProJson as unknown as ProjectJson,
+};
 
 export function getProjects(): Project[] {
   return Object.entries(projectModules)

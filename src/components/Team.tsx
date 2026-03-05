@@ -1,3 +1,4 @@
+'use client';
 import { motion } from 'motion/react';
 import { User, PenTool, Sparkles, Globe, Terminal } from 'lucide-react';
 import type { TeamMember } from '../lib/content';

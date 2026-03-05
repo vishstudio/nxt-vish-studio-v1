@@ -1,7 +1,8 @@
+'use client';
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronLeft, ChevronRight, Quote, ArrowUpRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { useTinaTestimonials } from '../hooks/useTinaVisualEditing';
 import { SectionTitle } from './ui/SectionTitle';
 
@@ -79,7 +80,7 @@ export const Testimonials = () => {
                 <ChevronRight className="w-5 h-5" />
               </button>
               <Link
-                to="/testimonials"
+                href="/testimonials"
                 className="inline-flex items-center gap-2 ml-2 font-mono text-sm text-gray-400 hover:text-vish-accent transition-colors duration-300 group"
               >
                 View All

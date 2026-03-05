@@ -1,7 +1,8 @@
+'use client';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { useTinaProjectsList } from '../hooks/useTinaVisualEditing';
 import { getImageUrl } from '../utils/imageUrl';
 import { Button } from './ui/Button';
@@ -35,8 +36,8 @@ export const Projects = ({ showViewAll = true }: { showViewAll?: boolean }) => {
           <div className="lg:col-span-7 flex flex-col">
             {projects.map((project, index) => (
               <Link
-                to={`/project/${project.slug}`}
-                key={project.id}
+                href={`/project/${project.slug}`}
+                key={project.slug}
                 className="group block w-full"
                 data-cursor="project"
               >

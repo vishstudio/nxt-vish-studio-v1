@@ -1,3 +1,4 @@
+'use client';
 import { motion, useScroll, useSpring, useTransform } from 'motion/react';
 import { ArrowDown } from 'lucide-react';
 import { useTinaSettings } from '../hooks/useTinaVisualEditing';

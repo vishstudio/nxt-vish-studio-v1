@@ -1,0 +1,26 @@
+{
+  "../node_modules/tinacms/dist/client.js -> node:crypto": {
+    "id": "../node_modules/tinacms/dist/client.js -> node:crypto",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_next_dist_compiled_crypto-browserify_index_js.js"
+    ]
+  },
+  "../node_modules/tinacms/dist/client.js -> node:fs": {
+    "id": "../node_modules/tinacms/dist/client.js -> node:fs",
+    "files": [
+      "static/chunks/_39ae.js"
+    ]
+  },
+  "../node_modules/tinacms/dist/client.js -> node:os": {
+    "id": "../node_modules/tinacms/dist/client.js -> node:os",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_next_dist_compiled_os-browserify_browser_js.js"
+    ]
+  },
+  "../node_modules/tinacms/dist/client.js -> node:path": {
+    "id": "../node_modules/tinacms/dist/client.js -> node:path",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_next_dist_compiled_path-browserify_index_js.js"
+    ]
+  }
+}

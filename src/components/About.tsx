@@ -1,3 +1,4 @@
+'use client';
 import { motion } from 'motion/react';
 import { TextReveal } from './TextReveal';
 import { useTinaHome } from '../hooks/useTinaVisualEditing';

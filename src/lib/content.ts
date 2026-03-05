@@ -1,5 +1,3 @@
-/// <reference types="vite/client" />
-
 // ─── Site Settings ───────────────────────────────────────────────────────────
 
 export interface Social {
@@ -26,13 +24,9 @@ export interface SiteSettings {
   scrollText: string;
 }
 
-const settingsModule = import.meta.glob<SiteSettings>(
-  "/content/site/settings.json",
-  { eager: true, import: "default" },
-) as Record<string, SiteSettings>;
-
+import settingsJson from "@/content/site/settings.json";
 export function getSiteSettings(): SiteSettings {
-  return Object.values(settingsModule)[0];
+  return settingsJson as unknown as SiteSettings;
 }
 
 // ─── Partners ────────────────────────────────────────────────────────────────
@@ -47,13 +41,9 @@ export interface PartnersData {
   partners: Partner[];
 }
 
-const partnersModule = import.meta.glob<PartnersData>(
-  "/content/site/partners.json",
-  { eager: true, import: "default" },
-) as Record<string, PartnersData>;
-
+import partnersJson from "@/content/site/partners.json";
 export function getPartners(): PartnersData {
-  return Object.values(partnersModule)[0];
+  return partnersJson as unknown as PartnersData;
 }
 
 // ─── Team Members ────────────────────────────────────────────────────────────
@@ -111,22 +101,14 @@ export interface TestimonialsPageContent {
   testimonials: Testimonial[];
 }
 
-const homeModule = import.meta.glob<HomePageContent>(
-  "/content/pages/home.json",
-  { eager: true, import: "default" },
-) as Record<string, HomePageContent>;
-
+import homeJson from "@/content/pages/home.json";
 export function getHomePage(): HomePageContent {
-  return Object.values(homeModule)[0];
+  return homeJson as unknown as HomePageContent;
 }
 
-const testimonialsModule = import.meta.glob<TestimonialsPageContent>(
-  "/content/pages/testimonials.json",
-  { eager: true, import: "default" },
-) as Record<string, TestimonialsPageContent>;
-
+import testimonialsJson from "@/content/pages/testimonials.json";
 export function getTestimonialsPage(): TestimonialsPageContent {
-  return Object.values(testimonialsModule)[0];
+  return testimonialsJson as unknown as TestimonialsPageContent;
 }
 
 // ─── About Page ──────────────────────────────────────────────────────────────
@@ -152,13 +134,9 @@ export interface AboutPageContent {
   teamMembers: TeamMember[];
 }
 
-const aboutModule = import.meta.glob<AboutPageContent>(
-  "/content/pages/about.json",
-  { eager: true, import: "default" },
-) as Record<string, AboutPageContent>;
-
+import aboutJson from "@/content/pages/about.json";
 export function getAboutPage(): AboutPageContent {
-  return Object.values(aboutModule)[0];
+  return aboutJson as unknown as AboutPageContent;
 }
 
 // ─── Services Page ───────────────────────────────────────────────────────────
@@ -176,13 +154,9 @@ export interface ServicesPageContent {
   categories: ServiceCategory[];
 }
 
-const servicesModule = import.meta.glob<ServicesPageContent>(
-  "/content/pages/services.json",
-  { eager: true, import: "default" },
-) as Record<string, ServicesPageContent>;
-
+import servicesJson from "@/content/pages/services.json";
 export function getServicesPage(): ServicesPageContent {
-  return Object.values(servicesModule)[0];
+  return servicesJson as unknown as ServicesPageContent;
 }
 
 // ─── Contact Page ────────────────────────────────────────────────────────────
@@ -202,11 +176,7 @@ export interface ContactPageContent {
   trustIndicators: TrustIndicator[];
 }
 
-const contactModule = import.meta.glob<ContactPageContent>(
-  "/content/pages/contact.json",
-  { eager: true, import: "default" },
-) as Record<string, ContactPageContent>;
-
+import contactJson from "@/content/pages/contact.json";
 export function getContactPage(): ContactPageContent {
-  return Object.values(contactModule)[0];
+  return contactJson as unknown as ContactPageContent;
 }

@@ -1,3 +1,4 @@
+'use client';
 interface SectionTitleProps {
   /** The heading text. The last character will be in accent colour with a '.' appended. */
   children: string;

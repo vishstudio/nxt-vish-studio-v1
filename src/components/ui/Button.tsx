@@ -1,5 +1,6 @@
+'use client';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { motion } from 'motion/react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -103,7 +104,7 @@ export const Button = ({
     }
 
     return (
-      <Link to={href} className={classes} onClick={onClick}>
+      <Link href={href} className={classes} onClick={onClick}>
         {content}
       </Link>
     );

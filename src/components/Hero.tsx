@@ -1,3 +1,4 @@
+'use client';
 import { motion } from 'motion/react';
 import { PageHero } from './ui/PageHero';
 import { useTinaHome } from '../hooks/useTinaVisualEditing';

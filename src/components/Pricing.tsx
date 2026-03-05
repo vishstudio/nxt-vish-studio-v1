@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+'use client';
+import Link from 'next/link';
 import { motion } from 'motion/react';
 import { Check, ArrowRight, Sparkles } from 'lucide-react';
 import { useTinaPricing } from '../hooks/useTinaVisualEditing';
@@ -121,7 +122,7 @@ function PlanCard({ plan, index, tinaField, rawPlan }: {
         </a>
       ) : (
         <Link
-          to={href}
+          href={href}
           className={`inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-xl font-mono text-sm font-semibold transition-all duration-200 ${plan.featured
             ? 'bg-vish-accent text-black hover:bg-white'
             : 'border border-white/15 text-white hover:border-white/40 hover:bg-white/5'
@@ -172,7 +173,7 @@ export const Pricing = () => {
             className="hidden md:block flex-shrink-0"
           >
             <Link
-              to="/pricing"
+              href="/pricing"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/15 text-white font-sans text-sm hover:border-white/40 hover:bg-white/5 transition-all"
             >
               View all plans
@@ -220,7 +221,7 @@ export const Pricing = () => {
             </p>
           </div>
           <Link
-            to={content.customCtaHref}
+            href={content.customCtaHref}
             className="flex-shrink-0 inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-white/20 text-white font-mono text-sm font-semibold hover:border-vish-accent hover:text-vish-accent transition-all duration-200 whitespace-nowrap"
           >
             {content.customCtaLabel}
@@ -231,7 +232,7 @@ export const Pricing = () => {
         {/* Mobile link */}
         <div className="mt-10 md:hidden flex justify-center">
           <Link
-            to="/pricing"
+            href="/pricing"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/15 text-white font-sans text-sm hover:border-white/40 hover:bg-white/5 transition-all"
           >
             View all plans

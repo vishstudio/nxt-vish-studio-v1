@@ -1,3 +1,4 @@
+'use client';
 import { motion, animate } from 'motion/react';
 import { useEffect, useState } from 'react';
 import { LogoText } from './LogoText';

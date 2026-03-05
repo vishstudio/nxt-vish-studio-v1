@@ -1,12 +1,13 @@
+'use client';
 import { motion } from 'motion/react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { ArrowUpRight, ExternalLink } from 'lucide-react';
 import { getImageUrl } from '../../utils/imageUrl';
 
 interface ProjectCardProject {
   slug: string;
   title: string;
-  category: string;
+  category: string | string[];
   image: string;
   year: string;
   description: string;
@@ -32,7 +33,7 @@ export const ProjectCard = ({ project, index, alternate = true }: ProjectCardPro
     >
       {/* Project Image */}
       <Link
-        to={`/project/${project.slug}`}
+        href={`/project/${project.slug}`}
         className="w-full md:w-3/5 group overflow-hidden rounded-2xl block relative"
       >
         <motion.div
@@ -62,7 +63,7 @@ export const ProjectCard = ({ project, index, alternate = true }: ProjectCardPro
           {Array.isArray(project.category) ? project.category.join(' / ') : project.category}
         </span>
 
-        <Link to={`/project/${project.slug}`} className="block">
+        <Link href={`/project/${project.slug}`} className="block">
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-medium text-white mb-6 leading-[1.1] hover:text-gray-300 transition-colors">
             {project.title}
           </h2>
@@ -77,7 +78,7 @@ export const ProjectCard = ({ project, index, alternate = true }: ProjectCardPro
             {project.year}
           </span>
           <Link
-            to={`/project/${project.slug}`}
+            href={`/project/${project.slug}`}
             className="text-white border-b border-transparent hover:border-vish-accent hover:text-vish-accent transition-all duration-300 pb-0.5"
           >
             View Case Study
