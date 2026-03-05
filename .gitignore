@@ -1,9 +1,10 @@
 dist/
 build/
+out/
 .env
 .DS_Store
 node_modules/
-# .next/
+.next/
 
 # TinaCMS (generated files are committed so vite build always works)
 # tina/__generated__/
