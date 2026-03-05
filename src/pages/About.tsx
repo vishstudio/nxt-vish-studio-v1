@@ -88,6 +88,10 @@ export const AboutPage = () => {
         </div>
       </section>
 
+      <TrustedPartners />
+
+      <Team members={content.teamMembers} rawTinaMembers={rawAboutPage?.teamMembers} tinaField={tinaField} />
+
       {/* Values Section */}
       <section className="px-6 md:px-12 py-32 bg-vish-bg text-white">
         <div className="max-w-[1400px] mx-auto">
@@ -138,8 +142,6 @@ export const AboutPage = () => {
         </div>
       </section>
 
-      <Team members={content.teamMembers} rawTinaMembers={rawAboutPage?.teamMembers} tinaField={tinaField} />
-      <TrustedPartners />
       <Contact />
     </PageLayout>
   );
