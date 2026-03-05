@@ -1,5 +1,5 @@
 'use client';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { useTinaHome } from '../hooks/useTinaVisualEditing';
@@ -11,28 +11,26 @@ export const Process = () => {
 
   const targetRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const [scrollRange, setScrollRange] = useState(0);
-  const [viewportWidth, setViewportWidth] = useState(0);
+  // Use a ref (not state) so useTransform always reads the live value without
+  // causing MotionValue recreation / stale-closure issues on re-render.
+  const scrollRangeRef = useRef(0);
 
   useEffect(() => {
     const updateScrollRange = () => {
       if (contentRef.current && contentRef.current.parentElement) {
         const fullWidth = contentRef.current.scrollWidth;
         const visibleWidth = contentRef.current.parentElement.clientWidth;
-        setViewportWidth(visibleWidth);
-        const range = fullWidth - visibleWidth + visibleWidth * 0.1; // Add visual padding
-        setScrollRange(range > 0 ? range : 0);
+        scrollRangeRef.current = Math.max(0, fullWidth - visibleWidth);
       }
     };
 
     updateScrollRange();
-    // Allow time for layout to settle
-    const tm = setTimeout(updateScrollRange, 100);
+    const tm = setTimeout(updateScrollRange, 200);
     window.addEventListener('resize', updateScrollRange);
     return () => {
       window.removeEventListener('resize', updateScrollRange);
       clearTimeout(tm);
-    }
+    };
   }, []);
 
   const { scrollYProgress } = useScroll({
@@ -40,7 +38,8 @@ export const Process = () => {
     offset: ["start start", "end end"]
   });
 
-  const x = useTransform(scrollYProgress, [0, 1], ["0px", `-${scrollRange}px`]);
+  // Reads scrollRangeRef.current at interpolation time — no stale closure.
+  const x = useTransform(scrollYProgress, (v) => `${-v * scrollRangeRef.current}px`);
   const smoothX = useSpring(x, { stiffness: 60, damping: 20, mass: 0.5 });
   const progressScale = useSpring(scrollYProgress, { stiffness: 60, damping: 20 });
 

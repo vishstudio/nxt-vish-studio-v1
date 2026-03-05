@@ -23,7 +23,9 @@
 }
 
 html {
-  overflow-x: hidden;
+  /* clip instead of hidden: clips overflow without creating a scroll container,
+     which allows position:sticky children to work correctly. */
+  overflow-x: clip;
   scroll-behavior: smooth;
 }
 
@@ -31,7 +33,7 @@ body {
   background-color: var(--color-vish-bg);
   color: var(--color-vish-text);
   font-family: var(--font-sans);
-  overflow-x: hidden;
+  overflow-x: clip;
   cursor: default;
 }
 
