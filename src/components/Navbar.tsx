@@ -59,7 +59,7 @@ export const Navbar = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.2 }}
-                className="hidden md:flex items-center gap-1 bg-white/5 rounded-full p-1 border border-white/5 absolute left-1/2 -translate-x-1/2"
+                className="hidden lg:flex items-center gap-1 bg-white/5 rounded-full p-1 border border-white/5 absolute left-1/2 -translate-x-1/2"
               >
                 {[
                   { name: 'Home', href: '/' },
@@ -89,7 +89,7 @@ export const Navbar = () => {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: 10 }}
                   transition={{ duration: 0.2 }}
-                  className="hidden md:flex"
+                  className="hidden lg:flex"
                 >
                   <Button
                     href="/contact"
@@ -109,7 +109,7 @@ export const Navbar = () => {
               variant="secondary"
               size="icon"
               onClick={() => setIsMobileMenuOpen(true)}
-              className={isScrolled ? 'flex' : 'flex md:hidden'}
+              className={isScrolled ? 'flex' : 'flex lg:hidden'}
             >
               <Menu className="w-5 h-5" />
             </Button>
