@@ -33,14 +33,6 @@ export function useTinaHome() {
           description: s?.description ?? "",
           tags: (s?.tags ?? []).filter(Boolean),
         })),
-        testimonialsHeading: qd.homePage.testimonialsHeading ?? "",
-        testimonialsSubtext: qd.homePage.testimonialsSubtext ?? "",
-        testimonials: (qd.homePage.testimonials ?? []).map((t: any) => ({
-          quote: t?.quote ?? "",
-          name: t?.name ?? "",
-          role: t?.role ?? "",
-          company: t?.company ?? "",
-        })),
       } as HomePageContent),
   );
 

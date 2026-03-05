@@ -74,8 +74,12 @@ fragment HomePageParts on HomePage {
     description
     tags
   }
-  testimonialsHeading
-  testimonialsSubtext
+}
+
+fragment TestimonialsPageParts on TestimonialsPage {
+  __typename
+  heading
+  subtext
   testimonials {
     __typename
     quote

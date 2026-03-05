@@ -90,6 +90,8 @@ export type Query = {
   partnersConnection: PartnersConnection;
   homePage: HomePage;
   homePageConnection: HomePageConnection;
+  testimonialsPage: TestimonialsPage;
+  testimonialsPageConnection: TestimonialsPageConnection;
   aboutPage: AboutPage;
   aboutPageConnection: AboutPageConnection;
   servicesPage: ServicesPage;
@@ -182,6 +184,21 @@ export type QueryHomePageConnectionArgs = {
 };
 
 
+export type QueryTestimonialsPageArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryTestimonialsPageConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<TestimonialsPageFilter>;
+};
+
+
 export type QueryAboutPageArgs = {
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
@@ -246,6 +263,7 @@ export type DocumentFilter = {
   siteSettings?: InputMaybe<SiteSettingsFilter>;
   partners?: InputMaybe<PartnersFilter>;
   homePage?: InputMaybe<HomePageFilter>;
+  testimonialsPage?: InputMaybe<TestimonialsPageFilter>;
   aboutPage?: InputMaybe<AboutPageFilter>;
   servicesPage?: InputMaybe<ServicesPageFilter>;
   contactPage?: InputMaybe<ContactPageFilter>;
@@ -289,7 +307,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Project | SiteSettings | Partners | HomePage | AboutPage | ServicesPage | ContactPage | PricingPage | Folder;
+export type DocumentNode = Project | SiteSettings | Partners | HomePage | TestimonialsPage | AboutPage | ServicesPage | ContactPage | PricingPage | Folder;
 
 export type Project = Node & Document & {
   __typename?: 'Project';
@@ -480,14 +498,6 @@ export type HomePageProcessSteps = {
   tags?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
 };
 
-export type HomePageTestimonials = {
-  __typename?: 'HomePageTestimonials';
-  quote: Scalars['String']['output'];
-  name: Scalars['String']['output'];
-  role: Scalars['String']['output'];
-  company?: Maybe<Scalars['String']['output']>;
-};
-
 export type HomePage = Node & Document & {
   __typename?: 'HomePage';
   heroLabel: Scalars['String']['output'];
@@ -504,9 +514,6 @@ export type HomePage = Node & Document & {
   processHeading?: Maybe<Scalars['String']['output']>;
   processSubtext?: Maybe<Scalars['String']['output']>;
   processSteps?: Maybe<Array<Maybe<HomePageProcessSteps>>>;
-  testimonialsHeading?: Maybe<Scalars['String']['output']>;
-  testimonialsSubtext?: Maybe<Scalars['String']['output']>;
-  testimonials?: Maybe<Array<Maybe<HomePageTestimonials>>>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
@@ -525,13 +532,6 @@ export type HomePageProcessStepsFilter = {
   tags?: InputMaybe<StringFilter>;
 };
 
-export type HomePageTestimonialsFilter = {
-  quote?: InputMaybe<StringFilter>;
-  name?: InputMaybe<StringFilter>;
-  role?: InputMaybe<StringFilter>;
-  company?: InputMaybe<StringFilter>;
-};
-
 export type HomePageFilter = {
   heroLabel?: InputMaybe<StringFilter>;
   heroTitleLine1?: InputMaybe<StringFilter>;
@@ -547,9 +547,6 @@ export type HomePageFilter = {
   processHeading?: InputMaybe<StringFilter>;
   processSubtext?: InputMaybe<StringFilter>;
   processSteps?: InputMaybe<HomePageProcessStepsFilter>;
-  testimonialsHeading?: InputMaybe<StringFilter>;
-  testimonialsSubtext?: InputMaybe<StringFilter>;
-  testimonials?: InputMaybe<HomePageTestimonialsFilter>;
 };
 
 export type HomePageConnectionEdges = {
@@ -563,6 +560,50 @@ export type HomePageConnection = Connection & {
   pageInfo: PageInfo;
   totalCount: Scalars['Float']['output'];
   edges?: Maybe<Array<Maybe<HomePageConnectionEdges>>>;
+};
+
+export type TestimonialsPageTestimonials = {
+  __typename?: 'TestimonialsPageTestimonials';
+  quote: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  role: Scalars['String']['output'];
+  company?: Maybe<Scalars['String']['output']>;
+};
+
+export type TestimonialsPage = Node & Document & {
+  __typename?: 'TestimonialsPage';
+  heading: Scalars['String']['output'];
+  subtext?: Maybe<Scalars['String']['output']>;
+  testimonials?: Maybe<Array<Maybe<TestimonialsPageTestimonials>>>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type TestimonialsPageTestimonialsFilter = {
+  quote?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
+  role?: InputMaybe<StringFilter>;
+  company?: InputMaybe<StringFilter>;
+};
+
+export type TestimonialsPageFilter = {
+  heading?: InputMaybe<StringFilter>;
+  subtext?: InputMaybe<StringFilter>;
+  testimonials?: InputMaybe<TestimonialsPageTestimonialsFilter>;
+};
+
+export type TestimonialsPageConnectionEdges = {
+  __typename?: 'TestimonialsPageConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<TestimonialsPage>;
+};
+
+export type TestimonialsPageConnection = Connection & {
+  __typename?: 'TestimonialsPageConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<TestimonialsPageConnectionEdges>>>;
 };
 
 export type AboutPageValues = {
@@ -838,6 +879,8 @@ export type Mutation = {
   createPartners: Partners;
   updateHomePage: HomePage;
   createHomePage: HomePage;
+  updateTestimonialsPage: TestimonialsPage;
+  createTestimonialsPage: TestimonialsPage;
   updateAboutPage: AboutPage;
   createAboutPage: AboutPage;
   updateServicesPage: ServicesPage;
@@ -930,6 +973,18 @@ export type MutationCreateHomePageArgs = {
 };
 
 
+export type MutationUpdateTestimonialsPageArgs = {
+  relativePath: Scalars['String']['input'];
+  params: TestimonialsPageMutation;
+};
+
+
+export type MutationCreateTestimonialsPageArgs = {
+  relativePath: Scalars['String']['input'];
+  params: TestimonialsPageMutation;
+};
+
+
 export type MutationUpdateAboutPageArgs = {
   relativePath: Scalars['String']['input'];
   params: AboutPageMutation;
@@ -982,6 +1037,7 @@ export type DocumentUpdateMutation = {
   siteSettings?: InputMaybe<SiteSettingsMutation>;
   partners?: InputMaybe<PartnersMutation>;
   homePage?: InputMaybe<HomePageMutation>;
+  testimonialsPage?: InputMaybe<TestimonialsPageMutation>;
   aboutPage?: InputMaybe<AboutPageMutation>;
   servicesPage?: InputMaybe<ServicesPageMutation>;
   contactPage?: InputMaybe<ContactPageMutation>;
@@ -994,6 +1050,7 @@ export type DocumentMutation = {
   siteSettings?: InputMaybe<SiteSettingsMutation>;
   partners?: InputMaybe<PartnersMutation>;
   homePage?: InputMaybe<HomePageMutation>;
+  testimonialsPage?: InputMaybe<TestimonialsPageMutation>;
   aboutPage?: InputMaybe<AboutPageMutation>;
   servicesPage?: InputMaybe<ServicesPageMutation>;
   contactPage?: InputMaybe<ContactPageMutation>;
@@ -1062,13 +1119,6 @@ export type HomePageProcessStepsMutation = {
   tags?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-export type HomePageTestimonialsMutation = {
-  quote?: InputMaybe<Scalars['String']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-  role?: InputMaybe<Scalars['String']['input']>;
-  company?: InputMaybe<Scalars['String']['input']>;
-};
-
 export type HomePageMutation = {
   heroLabel?: InputMaybe<Scalars['String']['input']>;
   heroTitleLine1?: InputMaybe<Scalars['String']['input']>;
@@ -1084,9 +1134,19 @@ export type HomePageMutation = {
   processHeading?: InputMaybe<Scalars['String']['input']>;
   processSubtext?: InputMaybe<Scalars['String']['input']>;
   processSteps?: InputMaybe<Array<InputMaybe<HomePageProcessStepsMutation>>>;
-  testimonialsHeading?: InputMaybe<Scalars['String']['input']>;
-  testimonialsSubtext?: InputMaybe<Scalars['String']['input']>;
-  testimonials?: InputMaybe<Array<InputMaybe<HomePageTestimonialsMutation>>>;
+};
+
+export type TestimonialsPageTestimonialsMutation = {
+  quote?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  role?: InputMaybe<Scalars['String']['input']>;
+  company?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type TestimonialsPageMutation = {
+  heading?: InputMaybe<Scalars['String']['input']>;
+  subtext?: InputMaybe<Scalars['String']['input']>;
+  testimonials?: InputMaybe<Array<InputMaybe<TestimonialsPageTestimonialsMutation>>>;
 };
 
 export type AboutPageValuesMutation = {
@@ -1187,7 +1247,9 @@ export type SiteSettingsPartsFragment = { __typename: 'SiteSettings', email: str
 
 export type PartnersPartsFragment = { __typename: 'Partners', partnersLabel: string, partners?: Array<{ __typename: 'PartnersPartners', name: string, url?: string | null } | null> | null };
 
-export type HomePagePartsFragment = { __typename: 'HomePage', heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroDescription?: string | null, aboutHeading?: string | null, aboutParagraph1?: string | null, aboutParagraph2?: string | null, servicesHeading?: string | null, servicesSubtext?: string | null, servicesButtonText?: string | null, processHeading?: string | null, processSubtext?: string | null, testimonialsHeading?: string | null, testimonialsSubtext?: string | null, services?: Array<{ __typename: 'HomePageServices', id?: string | null, title: string, description?: string | null } | null> | null, processSteps?: Array<{ __typename: 'HomePageProcessSteps', num?: string | null, title: string, description?: string | null, tags?: Array<string | null> | null } | null> | null, testimonials?: Array<{ __typename: 'HomePageTestimonials', quote: string, name: string, role: string, company?: string | null } | null> | null };
+export type HomePagePartsFragment = { __typename: 'HomePage', heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroDescription?: string | null, aboutHeading?: string | null, aboutParagraph1?: string | null, aboutParagraph2?: string | null, servicesHeading?: string | null, servicesSubtext?: string | null, servicesButtonText?: string | null, processHeading?: string | null, processSubtext?: string | null, services?: Array<{ __typename: 'HomePageServices', id?: string | null, title: string, description?: string | null } | null> | null, processSteps?: Array<{ __typename: 'HomePageProcessSteps', num?: string | null, title: string, description?: string | null, tags?: Array<string | null> | null } | null> | null };
+
+export type TestimonialsPagePartsFragment = { __typename: 'TestimonialsPage', heading: string, subtext?: string | null, testimonials?: Array<{ __typename: 'TestimonialsPageTestimonials', quote: string, name: string, role: string, company?: string | null } | null> | null };
 
 export type AboutPagePartsFragment = { __typename: 'AboutPage', heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, studioImage?: string | null, studioImageAlt?: string | null, introHeading?: string | null, introParagraph1?: string | null, introParagraph2?: string | null, valuesLabel?: string | null, valuesHeading?: string | null, values?: Array<{ __typename: 'AboutPageValues', id?: string | null, title: string, description?: string | null } | null> | null, teamMembers?: Array<{ __typename: 'AboutPageTeamMembers', name: string, role: string, image?: string | null, bio?: string | null, order?: number | null } | null> | null };
 
@@ -1259,7 +1321,7 @@ export type HomePageQueryVariables = Exact<{
 }>;
 
 
-export type HomePageQuery = { __typename?: 'Query', homePage: { __typename: 'HomePage', id: string, heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroDescription?: string | null, aboutHeading?: string | null, aboutParagraph1?: string | null, aboutParagraph2?: string | null, servicesHeading?: string | null, servicesSubtext?: string | null, servicesButtonText?: string | null, processHeading?: string | null, processSubtext?: string | null, testimonialsHeading?: string | null, testimonialsSubtext?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, services?: Array<{ __typename: 'HomePageServices', id?: string | null, title: string, description?: string | null } | null> | null, processSteps?: Array<{ __typename: 'HomePageProcessSteps', num?: string | null, title: string, description?: string | null, tags?: Array<string | null> | null } | null> | null, testimonials?: Array<{ __typename: 'HomePageTestimonials', quote: string, name: string, role: string, company?: string | null } | null> | null } };
+export type HomePageQuery = { __typename?: 'Query', homePage: { __typename: 'HomePage', id: string, heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroDescription?: string | null, aboutHeading?: string | null, aboutParagraph1?: string | null, aboutParagraph2?: string | null, servicesHeading?: string | null, servicesSubtext?: string | null, servicesButtonText?: string | null, processHeading?: string | null, processSubtext?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, services?: Array<{ __typename: 'HomePageServices', id?: string | null, title: string, description?: string | null } | null> | null, processSteps?: Array<{ __typename: 'HomePageProcessSteps', num?: string | null, title: string, description?: string | null, tags?: Array<string | null> | null } | null> | null } };
 
 export type HomePageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1271,7 +1333,26 @@ export type HomePageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type HomePageConnectionQuery = { __typename?: 'Query', homePageConnection: { __typename?: 'HomePageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'HomePageConnectionEdges', cursor: string, node?: { __typename: 'HomePage', id: string, heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroDescription?: string | null, aboutHeading?: string | null, aboutParagraph1?: string | null, aboutParagraph2?: string | null, servicesHeading?: string | null, servicesSubtext?: string | null, servicesButtonText?: string | null, processHeading?: string | null, processSubtext?: string | null, testimonialsHeading?: string | null, testimonialsSubtext?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, services?: Array<{ __typename: 'HomePageServices', id?: string | null, title: string, description?: string | null } | null> | null, processSteps?: Array<{ __typename: 'HomePageProcessSteps', num?: string | null, title: string, description?: string | null, tags?: Array<string | null> | null } | null> | null, testimonials?: Array<{ __typename: 'HomePageTestimonials', quote: string, name: string, role: string, company?: string | null } | null> | null } | null } | null> | null } };
+export type HomePageConnectionQuery = { __typename?: 'Query', homePageConnection: { __typename?: 'HomePageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'HomePageConnectionEdges', cursor: string, node?: { __typename: 'HomePage', id: string, heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroDescription?: string | null, aboutHeading?: string | null, aboutParagraph1?: string | null, aboutParagraph2?: string | null, servicesHeading?: string | null, servicesSubtext?: string | null, servicesButtonText?: string | null, processHeading?: string | null, processSubtext?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, services?: Array<{ __typename: 'HomePageServices', id?: string | null, title: string, description?: string | null } | null> | null, processSteps?: Array<{ __typename: 'HomePageProcessSteps', num?: string | null, title: string, description?: string | null, tags?: Array<string | null> | null } | null> | null } | null } | null> | null } };
+
+export type TestimonialsPageQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type TestimonialsPageQuery = { __typename?: 'Query', testimonialsPage: { __typename: 'TestimonialsPage', id: string, heading: string, subtext?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, testimonials?: Array<{ __typename: 'TestimonialsPageTestimonials', quote: string, name: string, role: string, company?: string | null } | null> | null } };
+
+export type TestimonialsPageConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<TestimonialsPageFilter>;
+}>;
+
+
+export type TestimonialsPageConnectionQuery = { __typename?: 'Query', testimonialsPageConnection: { __typename?: 'TestimonialsPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'TestimonialsPageConnectionEdges', cursor: string, node?: { __typename: 'TestimonialsPage', id: string, heading: string, subtext?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, testimonials?: Array<{ __typename: 'TestimonialsPageTestimonials', quote: string, name: string, role: string, company?: string | null } | null> | null } | null } | null> | null } };
 
 export type AboutPageQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1429,8 +1510,13 @@ export const HomePagePartsFragmentDoc = gql`
     description
     tags
   }
-  testimonialsHeading
-  testimonialsSubtext
+}
+    `;
+export const TestimonialsPagePartsFragmentDoc = gql`
+    fragment TestimonialsPageParts on TestimonialsPage {
+  __typename
+  heading
+  subtext
   testimonials {
     __typename
     quote
@@ -1762,6 +1848,63 @@ export const HomePageConnectionDocument = gql`
   }
 }
     ${HomePagePartsFragmentDoc}`;
+export const TestimonialsPageDocument = gql`
+    query testimonialsPage($relativePath: String!) {
+  testimonialsPage(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...TestimonialsPageParts
+  }
+}
+    ${TestimonialsPagePartsFragmentDoc}`;
+export const TestimonialsPageConnectionDocument = gql`
+    query testimonialsPageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: TestimonialsPageFilter) {
+  testimonialsPageConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...TestimonialsPageParts
+      }
+    }
+  }
+}
+    ${TestimonialsPagePartsFragmentDoc}`;
 export const AboutPageDocument = gql`
     query aboutPage($relativePath: String!) {
   aboutPage(relativePath: $relativePath) {
@@ -2016,6 +2159,12 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     homePageConnection(variables?: HomePageConnectionQueryVariables, options?: C): Promise<{data: HomePageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: HomePageConnectionQueryVariables, query: string}> {
         return requester<{data: HomePageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: HomePageConnectionQueryVariables, query: string}, HomePageConnectionQueryVariables>(HomePageConnectionDocument, variables, options);
+      },
+    testimonialsPage(variables: TestimonialsPageQueryVariables, options?: C): Promise<{data: TestimonialsPageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TestimonialsPageQueryVariables, query: string}> {
+        return requester<{data: TestimonialsPageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TestimonialsPageQueryVariables, query: string}, TestimonialsPageQueryVariables>(TestimonialsPageDocument, variables, options);
+      },
+    testimonialsPageConnection(variables?: TestimonialsPageConnectionQueryVariables, options?: C): Promise<{data: TestimonialsPageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TestimonialsPageConnectionQueryVariables, query: string}> {
+        return requester<{data: TestimonialsPageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TestimonialsPageConnectionQueryVariables, query: string}, TestimonialsPageConnectionQueryVariables>(TestimonialsPageConnectionDocument, variables, options);
       },
     aboutPage(variables: AboutPageQueryVariables, options?: C): Promise<{data: AboutPageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AboutPageQueryVariables, query: string}> {
         return requester<{data: AboutPageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AboutPageQueryVariables, query: string}, AboutPageQueryVariables>(AboutPageDocument, variables, options);

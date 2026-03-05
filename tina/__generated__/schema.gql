@@ -62,6 +62,8 @@ type Query {
   partnersConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PartnersFilter): PartnersConnection!
   homePage(relativePath: String): HomePage!
   homePageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: HomePageFilter): HomePageConnection!
+  testimonialsPage(relativePath: String): TestimonialsPage!
+  testimonialsPageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: TestimonialsPageFilter): TestimonialsPageConnection!
   aboutPage(relativePath: String): AboutPage!
   aboutPageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: AboutPageFilter): AboutPageConnection!
   servicesPage(relativePath: String): ServicesPage!
@@ -77,6 +79,7 @@ input DocumentFilter {
   siteSettings: SiteSettingsFilter
   partners: PartnersFilter
   homePage: HomePageFilter
+  testimonialsPage: TestimonialsPageFilter
   aboutPage: AboutPageFilter
   servicesPage: ServicesPageFilter
   contactPage: ContactPageFilter
@@ -106,7 +109,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Project | SiteSettings | Partners | HomePage | AboutPage | ServicesPage | ContactPage | PricingPage | Folder
+union DocumentNode = Project | SiteSettings | Partners | HomePage | TestimonialsPage | AboutPage | ServicesPage | ContactPage | PricingPage | Folder
 
 type Project implements Node & Document {
   title: String!
@@ -283,13 +286,6 @@ type HomePageProcessSteps {
   tags: [String]
 }
 
-type HomePageTestimonials {
-  quote: String!
-  name: String!
-  role: String!
-  company: String
-}
-
 type HomePage implements Node & Document {
   heroLabel: String!
   heroTitleLine1: String
@@ -305,9 +301,6 @@ type HomePage implements Node & Document {
   processHeading: String
   processSubtext: String
   processSteps: [HomePageProcessSteps]
-  testimonialsHeading: String
-  testimonialsSubtext: String
-  testimonials: [HomePageTestimonials]
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -326,13 +319,6 @@ input HomePageProcessStepsFilter {
   tags: StringFilter
 }
 
-input HomePageTestimonialsFilter {
-  quote: StringFilter
-  name: StringFilter
-  role: StringFilter
-  company: StringFilter
-}
-
 input HomePageFilter {
   heroLabel: StringFilter
   heroTitleLine1: StringFilter
@@ -348,9 +334,6 @@ input HomePageFilter {
   processHeading: StringFilter
   processSubtext: StringFilter
   processSteps: HomePageProcessStepsFilter
-  testimonialsHeading: StringFilter
-  testimonialsSubtext: StringFilter
-  testimonials: HomePageTestimonialsFilter
 }
 
 type HomePageConnectionEdges {
@@ -362,6 +345,46 @@ type HomePageConnection implements Connection {
   pageInfo: PageInfo!
   totalCount: Float!
   edges: [HomePageConnectionEdges]
+}
+
+type TestimonialsPageTestimonials {
+  quote: String!
+  name: String!
+  role: String!
+  company: String
+}
+
+type TestimonialsPage implements Node & Document {
+  heading: String!
+  subtext: String
+  testimonials: [TestimonialsPageTestimonials]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input TestimonialsPageTestimonialsFilter {
+  quote: StringFilter
+  name: StringFilter
+  role: StringFilter
+  company: StringFilter
+}
+
+input TestimonialsPageFilter {
+  heading: StringFilter
+  subtext: StringFilter
+  testimonials: TestimonialsPageTestimonialsFilter
+}
+
+type TestimonialsPageConnectionEdges {
+  cursor: String!
+  node: TestimonialsPage
+}
+
+type TestimonialsPageConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [TestimonialsPageConnectionEdges]
 }
 
 type AboutPageValues {
@@ -618,6 +641,8 @@ type Mutation {
   createPartners(relativePath: String!, params: PartnersMutation!): Partners!
   updateHomePage(relativePath: String!, params: HomePageMutation!): HomePage!
   createHomePage(relativePath: String!, params: HomePageMutation!): HomePage!
+  updateTestimonialsPage(relativePath: String!, params: TestimonialsPageMutation!): TestimonialsPage!
+  createTestimonialsPage(relativePath: String!, params: TestimonialsPageMutation!): TestimonialsPage!
   updateAboutPage(relativePath: String!, params: AboutPageMutation!): AboutPage!
   createAboutPage(relativePath: String!, params: AboutPageMutation!): AboutPage!
   updateServicesPage(relativePath: String!, params: ServicesPageMutation!): ServicesPage!
@@ -633,6 +658,7 @@ input DocumentUpdateMutation {
   siteSettings: SiteSettingsMutation
   partners: PartnersMutation
   homePage: HomePageMutation
+  testimonialsPage: TestimonialsPageMutation
   aboutPage: AboutPageMutation
   servicesPage: ServicesPageMutation
   contactPage: ContactPageMutation
@@ -645,6 +671,7 @@ input DocumentMutation {
   siteSettings: SiteSettingsMutation
   partners: PartnersMutation
   homePage: HomePageMutation
+  testimonialsPage: TestimonialsPageMutation
   aboutPage: AboutPageMutation
   servicesPage: ServicesPageMutation
   contactPage: ContactPageMutation
@@ -713,13 +740,6 @@ input HomePageProcessStepsMutation {
   tags: [String]
 }
 
-input HomePageTestimonialsMutation {
-  quote: String
-  name: String
-  role: String
-  company: String
-}
-
 input HomePageMutation {
   heroLabel: String
   heroTitleLine1: String
@@ -735,9 +755,19 @@ input HomePageMutation {
   processHeading: String
   processSubtext: String
   processSteps: [HomePageProcessStepsMutation]
-  testimonialsHeading: String
-  testimonialsSubtext: String
-  testimonials: [HomePageTestimonialsMutation]
+}
+
+input TestimonialsPageTestimonialsMutation {
+  quote: String
+  name: String
+  role: String
+  company: String
+}
+
+input TestimonialsPageMutation {
+  heading: String
+  subtext: String
+  testimonials: [TestimonialsPageTestimonialsMutation]
 }
 
 input AboutPageValuesMutation {

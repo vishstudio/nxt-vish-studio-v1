@@ -1,13 +1,13 @@
 import { motion } from 'motion/react';
 import { Quote } from 'lucide-react';
-import { useTinaHome } from '../hooks/useTinaVisualEditing';
+import { useTinaTestimonials } from '../hooks/useTinaVisualEditing';
 import { PageLayout } from '../components/ui/PageLayout';
 import { PageHero } from '../components/ui/PageHero';
 import { Contact } from '../components/Contact';
 import { useEffect } from 'react';
 
 export const TestimonialsPage = () => {
-  const { data: content } = useTinaHome();
+  const { data: content } = useTinaTestimonials();
   const testimonials = content.testimonials ?? [];
 
   useEffect(() => {
@@ -20,10 +20,10 @@ export const TestimonialsPage = () => {
         label="Client Testimonials"
         title={
           <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-medium tracking-tight leading-[0.95] text-white">
-            {content.testimonialsHeading || 'What Clients Say'}<span className="text-vish-accent">.</span>
+            {content.heading || 'What Clients Say'}<span className="text-vish-accent">.</span>
           </h1>
         }
-        description={content.testimonialsSubtext || 'Real words from real partners'}
+        description={content.subtext || 'Real words from real partners'}
       />
 
       <section className="py-24 px-6 md:px-12">

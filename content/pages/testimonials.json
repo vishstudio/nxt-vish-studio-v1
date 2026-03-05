@@ -1,0 +1,24 @@
+{
+  "heading": "What Clients Say",
+  "subtext": "Real words from real partners",
+  "testimonials": [
+    {
+      "quote": "VISH Studio transformed our online presence entirely. The attention to detail, the speed of delivery, and the quality of the final product exceeded every expectation we had.",
+      "name": "Alex Morgan",
+      "role": "CEO",
+      "company": "Imagine3D"
+    },
+    {
+      "quote": "Working with VISH Studio was an absolute pleasure. They understood our brand vision from day one and delivered a website that perfectly captures who we are.",
+      "name": "Sarah Chen",
+      "role": "Founder",
+      "company": "Moris Metrics"
+    },
+    {
+      "quote": "The team at VISH Studio brought creativity and professionalism to every stage of our project. Our new platform has driven a significant increase in conversions.",
+      "name": "James Okafor",
+      "role": "Head of Product",
+      "company": "GoGarage"
+    }
+  ]
+}

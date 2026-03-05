@@ -360,15 +360,32 @@ export default defineConfig({
               { type: "string", name: "tags", label: "Tags", list: true },
             ],
           },
+        ],
+      },
+
+      // ─── Testimonials Page (single file) ───
+      {
+        name: "testimonialsPage",
+        label: "Testimonials",
+        path: "content/pages",
+        format: "json",
+        match: { include: "testimonials" },
+        ui: {
+          router: () => "/testimonials",
+          allowedActions: { create: false, delete: false },
+        },
+        fields: [
           {
             type: "string",
-            name: "testimonialsHeading",
-            label: "Testimonials Heading",
+            name: "heading",
+            label: "Page Heading",
+            isTitle: true,
+            required: true,
           },
           {
             type: "string",
-            name: "testimonialsSubtext",
-            label: "Testimonials Subtext",
+            name: "subtext",
+            label: "Subtext",
           },
           {
             type: "object",

@@ -103,8 +103,11 @@ export interface HomePageContent {
   processHeading: string;
   processSubtext: string;
   processSteps: ProcessStep[];
-  testimonialsHeading: string;
-  testimonialsSubtext: string;
+}
+
+export interface TestimonialsPageContent {
+  heading: string;
+  subtext: string;
   testimonials: Testimonial[];
 }
 
@@ -115,6 +118,15 @@ const homeModule = import.meta.glob<HomePageContent>(
 
 export function getHomePage(): HomePageContent {
   return Object.values(homeModule)[0];
+}
+
+const testimonialsModule = import.meta.glob<TestimonialsPageContent>(
+  "/content/pages/testimonials.json",
+  { eager: true, import: "default" },
+) as Record<string, TestimonialsPageContent>;
+
+export function getTestimonialsPage(): TestimonialsPageContent {
+  return Object.values(testimonialsModule)[0];
 }
 
 // ─── About Page ──────────────────────────────────────────────────────────────

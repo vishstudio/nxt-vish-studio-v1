@@ -2,11 +2,11 @@ import { useRef, useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronLeft, ChevronRight, Quote, ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useTinaHome } from '../hooks/useTinaVisualEditing';
+import { useTinaTestimonials } from '../hooks/useTinaVisualEditing';
 import { SectionTitle } from './ui/SectionTitle';
 
 export const Testimonials = () => {
-  const { data: content, tinaField } = useTinaHome();
+  const { data: content, tinaField } = useTinaTestimonials();
   const testimonials = content.testimonials ?? [];
   const [active, setActive] = useState(0);
   const [direction, setDirection] = useState<1 | -1>(1);
@@ -53,11 +53,11 @@ export const Testimonials = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <SectionTitle size="lg" tinaField={tinaField('testimonialsHeading')}>
-              {content.testimonialsHeading || 'Client Testimonials'}
+            <SectionTitle size="lg" tinaField={tinaField('heading')}>
+              {content.heading || 'Client Testimonials'}
             </SectionTitle>
-            <p className="font-mono text-xs text-gray-500 uppercase tracking-widest mt-3" data-tina-field={tinaField('testimonialsSubtext')}>
-              {content.testimonialsSubtext}
+            <p className="font-mono text-xs text-gray-500 uppercase tracking-widest mt-3" data-tina-field={tinaField('subtext')}>
+              {content.subtext}
             </p>
           </motion.div>
 
