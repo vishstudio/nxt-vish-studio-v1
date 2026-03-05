@@ -137,7 +137,7 @@ export const Navbar = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 20 }}
               transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="fixed top-0 right-0 bottom-0 w-full sm:w-[500px] z-[70] bg-[#050505] border-l border-white/10 flex flex-col shadow-2xl"
+              className="fixed top-0 right-0 bottom-0 w-full sm:w-[420px] z-[70] bg-[#050505] border-l border-white/10 flex flex-col shadow-2xl overflow-hidden"
             >
               <div className="flex justify-between items-center p-8">
                 <span className="font-display text-2xl font-semibold text-white tracking-tight">
@@ -171,11 +171,11 @@ export const Navbar = () => {
                     transition={{ delay: 0.1 + i * 0.05, duration: 0.4, ease: "easeOut" }}
                     className="group block py-4"
                   >
-                    <div className="flex items-baseline gap-6 group-hover:translate-x-4 transition-transform duration-300 ease-out">
+                    <div className="flex items-baseline gap-4 group-hover:translate-x-2 transition-transform duration-300 ease-out">
                       <span className="font-mono text-sm text-white/20 group-hover:text-vish-accent transition-colors">
                         {item.id}
                       </span>
-                      <span className="font-display text-6xl font-medium text-white group-hover:text-white/80 transition-colors tracking-tight">
+                      <span className="font-display text-4xl sm:text-5xl font-medium text-white group-hover:text-white/80 transition-colors tracking-tight">
                         {item.name}
                       </span>
                     </div>
