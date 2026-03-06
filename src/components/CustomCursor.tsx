@@ -3,18 +3,21 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
 
+type CursorVariant = 'default' | 'hover' | 'project';
+
 export const CustomCursor = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [cursorVariant, setCursorVariant] = useState('default');
+  const [mousePosition, setMousePosition] = useState({ x: -200, y: -200 });
+  const [cursorVariant, setCursorVariant] = useState<CursorVariant>('default');
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const updateMousePosition = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
+      if (!visible) setVisible(true);
     };
 
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-
       if (target.closest('[data-cursor="project"]')) {
         setCursorVariant('project');
       } else if (
@@ -29,58 +32,62 @@ export const CustomCursor = () => {
       }
     };
 
+    const handleMouseLeave = () => setVisible(false);
+    const handleMouseEnter = () => setVisible(true);
+
     window.addEventListener('mousemove', updateMousePosition);
     window.addEventListener('mouseover', handleMouseOver);
+    document.documentElement.addEventListener('mouseleave', handleMouseLeave);
+    document.documentElement.addEventListener('mouseenter', handleMouseEnter);
 
     return () => {
       window.removeEventListener('mousemove', updateMousePosition);
       window.removeEventListener('mouseover', handleMouseOver);
+      document.documentElement.removeEventListener('mouseleave', handleMouseLeave);
+      document.documentElement.removeEventListener('mouseenter', handleMouseEnter);
     };
-  }, []);
+  }, [visible]);
 
-  const variants = {
-    default: {
-      x: mousePosition.x - 6,
-      y: mousePosition.y - 6,
-      height: 12,
-      width: 12,
-      backgroundColor: "#FFD600",
-      border: "2px solid transparent",
-      mixBlendMode: "normal" as const,
-      opacity: 1,
-    },
-    hover: {
-      x: mousePosition.x - 18,
-      y: mousePosition.y - 18,
-      height: 36,
-      width: 36,
-      backgroundColor: "transparent",
-      border: "2px solid #FFD600",
-      mixBlendMode: "normal" as const,
-      opacity: 1,
-    },
-    project: {
-      x: mousePosition.x - 40,
-      y: mousePosition.y - 40,
-      height: 80,
-      width: 80,
-      backgroundColor: "#ffffff",
-      border: "2px solid transparent",
-      mixBlendMode: "normal" as const,
-      opacity: 1,
-    }
+  const sizeMap: Record<CursorVariant, { w: number; h: number }> = {
+    default: { w: 12, h: 12 },
+    hover: { w: 36, h: 36 },
+    project: { w: 80, h: 80 },
   };
+
+  const bgMap: Record<CursorVariant, string> = {
+    default: '#FFD600',
+    hover: 'rgba(0,0,0,0)',
+    project: '#ffffff',
+  };
+
+  const borderMap: Record<CursorVariant, string> = {
+    default: 'rgba(0,0,0,0)',
+    hover: '#FFD600',
+    project: 'rgba(0,0,0,0)',
+  };
+
+  const { w, h } = sizeMap[cursorVariant];
 
   return (
     <motion.div
-      className="fixed top-0 left-0 rounded-full pointer-events-none z-9999 flex items-center justify-center"
-      animate={variants[cursorVariant as keyof typeof variants]}
-      transition={{
-        type: "spring",
-        stiffness: 500,
-        damping: 28,
-        mass: 0.5
+      className="fixed top-0 left-0 rounded-full pointer-events-none z-[9999] flex items-center justify-center border-2"
+      animate={{
+        x: mousePosition.x - w / 2,
+        y: mousePosition.y - h / 2,
+        width: w,
+        height: h,
+        opacity: visible ? 1 : 0,
+        backgroundColor: bgMap[cursorVariant],
+        borderColor: borderMap[cursorVariant],
       }}
+      transition={{
+        x: { type: 'spring', stiffness: 500, damping: 28, mass: 0.5 },
+        y: { type: 'spring', stiffness: 500, damping: 28, mass: 0.5 },
+        width: { type: 'spring', stiffness: 300, damping: 25 },
+        height: { type: 'spring', stiffness: 300, damping: 25 },
+        opacity: { duration: 0.15 },
+      }}
+      style={{ willChange: 'transform' }}
     >
       <AnimatePresence>
         {cursorVariant === 'project' && (
@@ -97,3 +104,4 @@ export const CustomCursor = () => {
     </motion.div>
   );
 };
+

@@ -34,7 +34,15 @@ body {
   color: var(--color-vish-text);
   font-family: var(--font-sans);
   overflow-x: clip;
-  cursor: default;
+  /* Hide native cursor globally so the custom cursor takes over */
+  cursor: none;
+}
+
+/* Ensure no element shows a native cursor */
+*,
+*::before,
+*::after {
+  cursor: none !important;
 }
 
 /* Custom Scrollbar */

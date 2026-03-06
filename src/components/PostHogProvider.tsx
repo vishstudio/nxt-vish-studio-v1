@@ -10,6 +10,7 @@ import { usePathname, useSearchParams } from 'next/navigation';
 if (typeof window !== 'undefined' && process.env.NEXT_PUBLIC_POSTHOG_KEY) {
   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
     api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST ?? 'https://us.i.posthog.com',
+    ui_host: 'https://us.posthog.com',
     // Don't fire the initial $pageview automatically — we capture it ourselves
     // below so Next.js client-side navigations are tracked too.
     capture_pageview: false,
@@ -17,12 +18,19 @@ if (typeof window !== 'undefined' && process.env.NEXT_PUBLIC_POSTHOG_KEY) {
     respect_dnt: true,
     persistence: 'localStorage+cookie',
     // ── Session replay ────────────────────────────────────────────────────────
+    // disable_session_recording: false explicitly enables recording regardless
+    // of what the remote /decide endpoint returns.
+    disable_session_recording: false,
     session_recording: {
-      // Record all sessions (set to e.g. 0.5 to sample 50% if volume is high)
+      maskAllInputs: false,
+      maskTextSelector: undefined,
       recordCrossOriginIframes: false,
     },
-    // Also capture console errors in the recording timeline
     enable_recording_console_log: true,
+    // Force-start the recording once the SDK has initialised and decided.
+    loaded: (ph) => {
+      ph.startSessionRecording();
+    },
   });
 }
 
