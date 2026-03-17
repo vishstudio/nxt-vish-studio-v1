@@ -61,7 +61,7 @@
     {
       "label": "PRO",
       "name": "Premium",
-      "price": "Rs 25,000",
+      "price": "Rs 35,000",
       "priceNote": "ONE-TIME",
       "delivery": "2–4 weeks",
       "tagline": "Complete digital solution for established businesses ready to scale.",
@@ -74,7 +74,6 @@
       "features": [
         "Up to 10 pages",
         "Premium custom design",
-        "E-commerce ready",
         "Email marketing setup",
         "3 months support",
         "Priority revisions",
