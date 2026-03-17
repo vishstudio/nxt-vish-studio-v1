@@ -15,10 +15,10 @@
       "delivery": "4–7 business days",
       "tagline": "Perfect for individuals & small businesses getting online for the first time.",
       "featured": false,
-      "ctaLabel": "Contact us",
+      "ctaLabel": "Book Call",
       "ctaLink": {
-        "linkType": "internal",
-        "linkValue": "/#contact"
+        "linkType": "phone",
+        "linkValue": "23059368556"
       },
       "features": [
         "Single-page website",
