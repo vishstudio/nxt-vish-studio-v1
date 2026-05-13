@@ -1,12 +1,12 @@
 'use client';
 import { motion } from 'motion/react';
-import { Contact } from '../components/Contact';
-import { Team } from '../components/Team';
-import { TextReveal } from '../components/TextReveal';
-import { TrustedPartners } from '../components/TrustedPartners';
-import { PageLayout } from '../components/ui/PageLayout';
-import { PageHero } from '../components/ui/PageHero';
-import { SectionTitle } from '../components/ui/SectionTitle';
+import { Contact } from '../components/contact/contact';
+import { Team } from '../components/team/team';
+import { TextReveal } from '../components/text-reveal/text-reveal';
+import { TrustedPartners } from '../components/trusted-partners/trusted-partners';
+import { PageLayout } from '../components/ui/page-layout/page-layout';
+import { PageHero } from '../components/ui/page-hero/page-hero';
+import { SectionTitle } from '../components/ui/section-title/section-title';
 import { useTinaAbout } from '../hooks/useTinaVisualEditing';
 
 export const AboutPage = () => {

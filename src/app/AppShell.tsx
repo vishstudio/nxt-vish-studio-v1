@@ -3,9 +3,9 @@
 import { useState, useCallback, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence } from 'motion/react';
-import { Loader } from '@/src/components/Loader';
-import { PostHogProvider } from '@/src/components/PostHogProvider';
-import { CustomCursor } from '@/src/components/CustomCursor';
+import { Loader } from '@/src/components/loader/loader';
+import { PostHogProvider } from '@/src/components/post-hog-provider/post-hog-provider';
+import { CustomCursor } from '@/src/components/custom-cursor/custom-cursor';
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();

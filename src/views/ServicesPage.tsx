@@ -1,10 +1,10 @@
 'use client';
 import { motion } from 'motion/react';
-import { Process } from '../components/Process';
-import { Contact } from '../components/Contact';
-import { PageLayout } from '../components/ui/PageLayout';
-import { PageHero } from '../components/ui/PageHero';
-import { SectionTitle } from '../components/ui/SectionTitle';
+import { Process } from '../components/process/process';
+import { Contact } from '../components/contact/contact';
+import { PageLayout } from '../components/ui/page-layout/page-layout';
+import { PageHero } from '../components/ui/page-hero/page-hero';
+import { SectionTitle } from '../components/ui/section-title/section-title';
 import { useTinaServices } from '../hooks/useTinaVisualEditing';
 
 export const ServicesPage = () => {

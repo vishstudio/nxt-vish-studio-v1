@@ -1,10 +1,10 @@
 'use client';
 import { motion } from 'motion/react';
-import { SectionTitle } from '../components/ui/SectionTitle';
+import { SectionTitle } from '../components/ui/section-title/section-title';
 import { ArrowRight } from 'lucide-react';
-import { PageLayout } from '../components/ui/PageLayout';
-import { Button } from '../components/ui/Button';
-import { Contact } from '../components/Contact';
+import { PageLayout } from '../components/ui/page-layout/page-layout';
+import { Button } from '../components/ui/button/button';
+import { Contact } from '../components/contact/contact';
 
 export const NotFound = () => {
   return (

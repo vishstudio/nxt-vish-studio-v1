@@ -3,9 +3,9 @@ import Link from 'next/link';
 import { motion } from 'motion/react';
 import { Check, ArrowRight, Sparkles } from 'lucide-react';
 import { useTinaPricing } from '../hooks/useTinaVisualEditing';
-import { PageLayout } from '../components/ui/PageLayout';
-import { PageHero } from '../components/ui/PageHero';
-import { Contact } from '../components/Contact';
+import { PageLayout } from '../components/ui/page-layout/page-layout';
+import { PageHero } from '../components/ui/page-hero/page-hero';
+import { Contact } from '../components/contact/contact';
 import { buildCtaHref, isExternalCtaLink, type PricingPlan } from '../lib/pricing';
 
 function PlanCard({ plan, index, tinaField, rawPlan }: {

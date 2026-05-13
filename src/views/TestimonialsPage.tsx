@@ -2,9 +2,9 @@
 import { motion } from 'motion/react';
 import { Quote } from 'lucide-react';
 import { useTinaTestimonials } from '../hooks/useTinaVisualEditing';
-import { PageLayout } from '../components/ui/PageLayout';
-import { PageHero } from '../components/ui/PageHero';
-import { Contact } from '../components/Contact';
+import { PageLayout } from '../components/ui/page-layout/page-layout';
+import { PageHero } from '../components/ui/page-hero/page-hero';
+import { Contact } from '../components/contact/contact';
 import { useEffect } from 'react';
 
 export const TestimonialsPage = () => {

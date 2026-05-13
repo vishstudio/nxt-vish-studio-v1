@@ -5,9 +5,9 @@ import { motion, AnimatePresence } from 'motion/react';
 import { ArrowLeft, ExternalLink, X, ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react';
 import { useTinaProjectDetail } from '../hooks/useTinaVisualEditing';
 import { getImageUrl } from '../utils/imageUrl';
-import { Navbar } from '../components/Navbar';
-import { CustomCursor } from '../components/CustomCursor';
-import { Contact } from '../components/Contact';
+import { Navbar } from '../components/navbar/navbar';
+import { CustomCursor } from '../components/custom-cursor/custom-cursor';
+import { Contact } from '../components/contact/contact';
 import { useState, useEffect, useCallback } from 'react';
 
 export const ProjectDetail = () => {
