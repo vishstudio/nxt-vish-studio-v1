@@ -1,6 +1,6 @@
 'use client';
 import { useRef, useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import { ChevronLeft, ChevronRight, Quote, ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
 import { useTinaTestimonials } from '../../hooks/useTinaVisualEditing';
@@ -11,8 +11,14 @@ export const Testimonials = () => {
   const testimonials = content.testimonials ?? [];
   const [active, setActive] = useState(0);
   const [direction, setDirection] = useState<1 | -1>(1);
+  const sectionRef = useRef<HTMLElement>(null);
   const dragStart = useRef(0);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  });
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ['-8%', '8%']);
 
   const go = useCallback((dir: 1 | -1) => {
     setDirection(dir);
@@ -43,8 +49,18 @@ export const Testimonials = () => {
   const t = testimonials[active];
 
   return (
-    <section className="testimonials py-32 px-6 md:px-12 bg-vish-bg overflow-hidden" id="testimonials">
-      <div className="max-w-350 mx-auto">
+    <section ref={sectionRef} className="testimonials relative py-32 px-6 md:px-12 bg-black overflow-hidden" id="testimonials">
+      <motion.img
+        src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2342&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        alt=""
+        className="absolute -top-[10%] left-0 w-full h-[120%] object-cover opacity-30 grayscale will-change-transform"
+        style={{ y: backgroundY }}
+        aria-hidden="true"
+      />
+      <div className="absolute inset-0 bg-black/45" aria-hidden="true" />
+      <div className="absolute inset-0 bg-linear-to-b from-vish-bg/70 via-black/15 to-vish-bg/80" aria-hidden="true" />
+
+      <div className="relative z-10 max-w-350 mx-auto">
 
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-20">
