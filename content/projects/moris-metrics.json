@@ -7,16 +7,21 @@
   ],
   "techStack": [
     "MongoDB",
-    "Javascript",
     "Next JS",
     "CSS 3",
-    "HTML 5"
+    "HTML 5",
+    "React JS",
+    "SEO",
+    "UI/UX",
+    "Figma",
+    "Webdesign"
   ],
   "image": "https://assets.tina.io/43df9a3d-b238-44c9-8f2a-0b1563230ff6/Mockuuups%20Free%20iPad%20Pro%20mockup%20on%20textured%20fabric%20and%20wooden%20surface.jpeg",
   "year": "2025",
   "order": 2,
   "featuredOnHome": true,
   "description": "Working a custom software solutions which helps SMEs tackle data cleaning.",
+  "fullDescription": "Data is only as valuable as its accessibility. In the Mauritian market, critical insights are often fragmented, buried in spreadsheets, or difficult to visualize. Moris Metrics was born from the need to turn complex local data into a competitive advantage.",
   "gallery": [
     "https://www.dropbox.com/scl/fi/y9d9ma73lczhaq4tez2uc/Screenshot-2026-03-05-at-02.21.31.png?rlkey=rdkwupn2ddovpmzfwliy7dy7b&st=d4k6aeit&dl=0",
     "https://www.dropbox.com/scl/fi/s2v7v2x57z1zgs15grjbo/Screenshot-2026-03-05-at-02.21.39.png?rlkey=595q62n2565v8dguxm5ilal8b&st=3wvwf4h6&dl=0",
