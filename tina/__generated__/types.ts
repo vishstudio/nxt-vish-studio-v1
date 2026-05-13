@@ -321,6 +321,14 @@ export type Project = Node & Document & {
   featuredOnHome?: Maybe<Scalars['Boolean']['output']>;
   description: Scalars['String']['output'];
   fullDescription?: Maybe<Scalars['String']['output']>;
+  overview?: Maybe<Scalars['String']['output']>;
+  overviewImage?: Maybe<Scalars['String']['output']>;
+  challenge?: Maybe<Scalars['String']['output']>;
+  challengeImage?: Maybe<Scalars['String']['output']>;
+  strategy?: Maybe<Scalars['String']['output']>;
+  strategyImage?: Maybe<Scalars['String']['output']>;
+  solution?: Maybe<Scalars['String']['output']>;
+  solutionImage?: Maybe<Scalars['String']['output']>;
   gallery?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   siteUrl?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
@@ -361,6 +369,14 @@ export type ProjectFilter = {
   featuredOnHome?: InputMaybe<BooleanFilter>;
   description?: InputMaybe<StringFilter>;
   fullDescription?: InputMaybe<StringFilter>;
+  overview?: InputMaybe<StringFilter>;
+  overviewImage?: InputMaybe<StringFilter>;
+  challenge?: InputMaybe<StringFilter>;
+  challengeImage?: InputMaybe<StringFilter>;
+  strategy?: InputMaybe<StringFilter>;
+  strategyImage?: InputMaybe<StringFilter>;
+  solution?: InputMaybe<StringFilter>;
+  solutionImage?: InputMaybe<StringFilter>;
   gallery?: InputMaybe<StringFilter>;
   siteUrl?: InputMaybe<StringFilter>;
 };
@@ -1068,6 +1084,14 @@ export type ProjectMutation = {
   featuredOnHome?: InputMaybe<Scalars['Boolean']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   fullDescription?: InputMaybe<Scalars['String']['input']>;
+  overview?: InputMaybe<Scalars['String']['input']>;
+  overviewImage?: InputMaybe<Scalars['String']['input']>;
+  challenge?: InputMaybe<Scalars['String']['input']>;
+  challengeImage?: InputMaybe<Scalars['String']['input']>;
+  strategy?: InputMaybe<Scalars['String']['input']>;
+  strategyImage?: InputMaybe<Scalars['String']['input']>;
+  solution?: InputMaybe<Scalars['String']['input']>;
+  solutionImage?: InputMaybe<Scalars['String']['input']>;
   gallery?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   siteUrl?: InputMaybe<Scalars['String']['input']>;
 };
@@ -1241,7 +1265,7 @@ export type PricingPageMutation = {
   customCtaHref?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type ProjectPartsFragment = { __typename: 'Project', title: string, slug: string, category: Array<string>, techStack?: Array<string | null> | null, image?: string | null, year: string, order?: number | null, featuredOnHome?: boolean | null, description: string, fullDescription?: string | null, gallery?: Array<string | null> | null, siteUrl?: string | null };
+export type ProjectPartsFragment = { __typename: 'Project', title: string, slug: string, category: Array<string>, techStack?: Array<string | null> | null, image?: string | null, year: string, order?: number | null, featuredOnHome?: boolean | null, description: string, fullDescription?: string | null, overview?: string | null, overviewImage?: string | null, challenge?: string | null, challengeImage?: string | null, strategy?: string | null, strategyImage?: string | null, solution?: string | null, solutionImage?: string | null, gallery?: Array<string | null> | null, siteUrl?: string | null };
 
 export type SiteSettingsPartsFragment = { __typename: 'SiteSettings', email: string, phone: string, phoneLink?: string | null, address?: string | null, copyright?: string | null, contactHeadingLine1?: string | null, contactHeadingLine2?: string | null, scrollText?: string | null, socials?: Array<{ __typename: 'SiteSettingsSocials', name: string, url: string, openInNewTab?: boolean | null } | null> | null, footerLinks?: Array<{ __typename: 'SiteSettingsFooterLinks', label: string, url: string } | null> | null };
 
@@ -1264,7 +1288,7 @@ export type ProjectQueryVariables = Exact<{
 }>;
 
 
-export type ProjectQuery = { __typename?: 'Query', project: { __typename: 'Project', id: string, title: string, slug: string, category: Array<string>, techStack?: Array<string | null> | null, image?: string | null, year: string, order?: number | null, featuredOnHome?: boolean | null, description: string, fullDescription?: string | null, gallery?: Array<string | null> | null, siteUrl?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type ProjectQuery = { __typename?: 'Query', project: { __typename: 'Project', id: string, title: string, slug: string, category: Array<string>, techStack?: Array<string | null> | null, image?: string | null, year: string, order?: number | null, featuredOnHome?: boolean | null, description: string, fullDescription?: string | null, overview?: string | null, overviewImage?: string | null, challenge?: string | null, challengeImage?: string | null, strategy?: string | null, strategyImage?: string | null, solution?: string | null, solutionImage?: string | null, gallery?: Array<string | null> | null, siteUrl?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type ProjectConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1276,7 +1300,7 @@ export type ProjectConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ProjectConnectionQuery = { __typename?: 'Query', projectConnection: { __typename?: 'ProjectConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ProjectConnectionEdges', cursor: string, node?: { __typename: 'Project', id: string, title: string, slug: string, category: Array<string>, techStack?: Array<string | null> | null, image?: string | null, year: string, order?: number | null, featuredOnHome?: boolean | null, description: string, fullDescription?: string | null, gallery?: Array<string | null> | null, siteUrl?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type ProjectConnectionQuery = { __typename?: 'Query', projectConnection: { __typename?: 'ProjectConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ProjectConnectionEdges', cursor: string, node?: { __typename: 'Project', id: string, title: string, slug: string, category: Array<string>, techStack?: Array<string | null> | null, image?: string | null, year: string, order?: number | null, featuredOnHome?: boolean | null, description: string, fullDescription?: string | null, overview?: string | null, overviewImage?: string | null, challenge?: string | null, challengeImage?: string | null, strategy?: string | null, strategyImage?: string | null, solution?: string | null, solutionImage?: string | null, gallery?: Array<string | null> | null, siteUrl?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type SiteSettingsQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1443,6 +1467,14 @@ export const ProjectPartsFragmentDoc = gql`
   featuredOnHome
   description
   fullDescription
+  overview
+  overviewImage
+  challenge
+  challengeImage
+  strategy
+  strategyImage
+  solution
+  solutionImage
   gallery
   siteUrl
 }

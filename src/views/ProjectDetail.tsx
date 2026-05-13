@@ -29,6 +29,17 @@ export const ProjectDetail = () => {
   const nextImage = useCallback(() =>
     setLightboxIndex(i => (i === null ? null : (i + 1) % galleryImages.length)), [galleryImages.length]);
 
+  const renderSectionText = (text: string) =>
+    text
+      .split(/\n+/)
+      .map((paragraph) => paragraph.trim())
+      .filter(Boolean)
+      .map((paragraph) => (
+        <p key={paragraph} className="font-sans text-lg md:text-xl text-gray-300 leading-relaxed">
+          {paragraph}
+        </p>
+      ));
+
   useEffect(() => {
     if (lightboxIndex === null) return;
     const onKey = (e: KeyboardEvent) => {
@@ -50,6 +61,33 @@ export const ProjectDetail = () => {
       </div>
     );
   }
+
+  const projectSections = [
+    {
+      eyebrow: '01',
+      title: 'Overview',
+      content: project.overview || project.fullDescription || project.description,
+      image: project.overviewImage,
+    },
+    {
+      eyebrow: '02',
+      title: 'The Challenge',
+      content: project.challenge,
+      image: project.challengeImage,
+    },
+    {
+      eyebrow: '03',
+      title: 'The Strategy',
+      content: project.strategy,
+      image: project.strategyImage,
+    },
+    {
+      eyebrow: '04',
+      title: 'The Solution',
+      content: project.solution,
+      image: project.solutionImage,
+    },
+  ];
 
   return (
     <div className="bg-vish-bg min-h-screen text-white selection:bg-vish-accent selection:text-black">
@@ -106,7 +144,7 @@ export const ProjectDetail = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-24">
           <div className="lg:col-span-4">
-            <h3 className="font-display text-2xl mb-6 text-white">Project Overview</h3>
+            <h3 className="font-display text-2xl mb-6 text-white">Project Details</h3>
             <div className="space-y-4 font-mono text-sm text-gray-400 border-t border-white/10 pt-6">
               <div className="flex justify-between">
                 <span>Year</span>
@@ -134,13 +172,8 @@ export const ProjectDetail = () => {
                 </div>
               )}
             </div>
-          </div>
-          <div className="lg:col-span-8">
-            <p className="font-sans text-xl md:text-2xl text-gray-300 leading-relaxed">
-              {project.fullDescription || project.description}
-            </p>
             {project.techStack && project.techStack.length > 0 && (
-              <div className="mt-10">
+              <div className="mt-10 border-t border-white/10 pt-6">
                 <h4 className="font-mono text-xs text-gray-500 uppercase tracking-widest mb-4">Tech Stack</h4>
                 <div className="flex flex-wrap gap-2">
                   {project.techStack.map((tech) => (
@@ -155,6 +188,60 @@ export const ProjectDetail = () => {
               </div>
             )}
           </div>
+          <div className="lg:col-span-8 lg:pt-12">
+            <p className="font-sans text-2xl md:text-4xl text-gray-200 leading-tight">
+              {project.description}
+            </p>
+          </div>
+        </div>
+
+        <div className="space-y-24 mb-24">
+          {projectSections.map((section, index) => {
+            const hasImage = Boolean(section.image);
+            const isReversed = index % 2 === 1;
+
+            return (
+              <motion.section
+                key={section.title}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-100px' }}
+                transition={{ duration: 0.55 }}
+                className="border-t border-white/10 pt-10"
+              >
+                <div className={`grid grid-cols-1 ${hasImage ? 'lg:grid-cols-12' : ''} gap-8 lg:gap-12 items-center`}>
+                  <div className={`${hasImage ? `lg:col-span-5 ${isReversed ? 'lg:order-2' : ''}` : 'max-w-4xl'} space-y-6`}>
+                    <div>
+                      <span className="font-mono text-xs text-vish-accent">{section.eyebrow}</span>
+                      <h2 className="font-display text-4xl md:text-6xl leading-none text-white mt-4">
+                        {section.title}
+                      </h2>
+                    </div>
+                    <div className="space-y-5">
+                      {section.content ? (
+                        renderSectionText(section.content)
+                      ) : (
+                        <p className="font-sans text-lg md:text-xl text-gray-500 leading-relaxed">
+                          Details coming soon.
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                  {hasImage && (
+                    <div className={`lg:col-span-7 ${isReversed ? 'lg:order-1' : ''}`}>
+                      <div className="aspect-[16/10] overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+                        <img
+                          src={getImageUrl(section.image || '')}
+                          alt={`${project.title} ${section.title}`}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </motion.section>
+            );
+          })}
         </div>
 
         {project.gallery && project.gallery.length > 0 && (

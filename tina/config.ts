@@ -140,6 +140,66 @@ export default defineConfig({
           },
           {
             type: "string",
+            name: "overview",
+            label: "Overview",
+            description:
+              "Project detail section: Overview. This title is shown on the project detail page.",
+            ui: { component: "textarea" },
+          },
+          {
+            type: "string",
+            name: "overviewImage",
+            label: "Overview Image URL",
+            description:
+              "Optional image for the Overview section. Paste a Dropbox share link with '?raw=1' or another image URL.",
+          },
+          {
+            type: "string",
+            name: "challenge",
+            label: "The Challenge",
+            description:
+              "Project detail section: The Challenge. This title is shown on the project detail page.",
+            ui: { component: "textarea" },
+          },
+          {
+            type: "string",
+            name: "challengeImage",
+            label: "The Challenge Image URL",
+            description:
+              "Optional image for The Challenge section. Paste a Dropbox share link with '?raw=1' or another image URL.",
+          },
+          {
+            type: "string",
+            name: "strategy",
+            label: "The Strategy",
+            description:
+              "Project detail section: The Strategy. This title is shown on the project detail page.",
+            ui: { component: "textarea" },
+          },
+          {
+            type: "string",
+            name: "strategyImage",
+            label: "The Strategy Image URL",
+            description:
+              "Optional image for The Strategy section. Paste a Dropbox share link with '?raw=1' or another image URL.",
+          },
+          {
+            type: "string",
+            name: "solution",
+            label: "The Solution",
+            description:
+              "Project detail section: The Solution. This title is shown on the project detail page.",
+            ui: { component: "textarea" },
+          },
+          {
+            type: "string",
+            name: "solutionImage",
+            label: "The Solution Image URL",
+            description:
+              "Optional image for The Solution section. Paste a Dropbox share link with '?raw=1' or another image URL.",
+          },
+          {
+            type: "string",
             name: "gallery",
             label: "Gallery Image URLs",
             description:

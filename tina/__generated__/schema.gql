@@ -122,6 +122,14 @@ type Project implements Node & Document {
   featuredOnHome: Boolean
   description: String!
   fullDescription: String
+  overview: String
+  overviewImage: String
+  challenge: String
+  challengeImage: String
+  strategy: String
+  strategyImage: String
+  solution: String
+  solutionImage: String
   gallery: [String]
   siteUrl: String
   id: ID!
@@ -162,6 +170,14 @@ input ProjectFilter {
   featuredOnHome: BooleanFilter
   description: StringFilter
   fullDescription: StringFilter
+  overview: StringFilter
+  overviewImage: StringFilter
+  challenge: StringFilter
+  challengeImage: StringFilter
+  strategy: StringFilter
+  strategyImage: StringFilter
+  solution: StringFilter
+  solutionImage: StringFilter
   gallery: StringFilter
   siteUrl: StringFilter
 }
@@ -689,6 +705,14 @@ input ProjectMutation {
   featuredOnHome: Boolean
   description: String
   fullDescription: String
+  overview: String
+  overviewImage: String
+  challenge: String
+  challengeImage: String
+  strategy: String
+  strategyImage: String
+  solution: String
+  solutionImage: String
   gallery: [String]
   siteUrl: String
 }
