@@ -1,7 +1,7 @@
 {
   "email": "hello@vish.studio",
-  "phone": "+(230) 5936-8556",
-  "phoneLink": "tel:+23059368556",
+  "phone": "+(230) 57099969",
+  "phoneLink": "tel:+23057099969",
   "address": "Grand Gaube,\nMauritius",
   "copyright": "© 2026 VISH Studio.",
   "contactHeadingLine1": "Let's work",
@@ -21,6 +21,11 @@
     {
       "name": "LinkedIn",
       "url": "https://www.linkedin.com/company/vishstudio/",
+      "openInNewTab": true
+    },
+    {
+      "name": "Tiktok",
+      "url": "https://www.tiktok.com/@vish.studio",
       "openInNewTab": true
     }
   ],
