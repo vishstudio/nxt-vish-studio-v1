@@ -8,49 +8,22 @@ export const Process = () => {
   const { data: content, tinaField } = useTinaHome();
   const steps = content.processSteps;
   const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
-  const stepVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.08,
-      },
-    },
-  };
-  const markerVariants = {
-    hidden: { opacity: 0, scale: 0.65, rotate: -18, filter: 'blur(8px)' },
-    visible: { opacity: 1, scale: 1, rotate: 0, filter: 'blur(0px)', transition: { duration: 0.7, ease } },
-  };
-  const cardVariants = {
-    hidden: {
-      opacity: 0,
-      y: 64,
-      rotateX: 10,
-      scale: 0.96,
-      filter: 'blur(10px)',
-      clipPath: 'inset(18% 0% 18% 0% round 16px)',
-    },
+  const rowVariants = {
+    hidden: { opacity: 0, y: 56, clipPath: 'inset(14% 0% 14% 0% round 20px)' },
     visible: {
       opacity: 1,
       y: 0,
-      rotateX: 0,
-      scale: 1,
-      filter: 'blur(0px)',
-      clipPath: 'inset(0% 0% 0% 0% round 16px)',
+      clipPath: 'inset(0% 0% 0% 0% round 20px)',
       transition: { duration: 0.9, ease },
     },
   };
-  const contentVariants = {
-    hidden: { opacity: 0, y: 24, filter: 'blur(6px)' },
-    visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.68, ease } },
-  };
-  const lineVariants = {
-    hidden: { scaleY: 0 },
-    visible: { scaleY: 1, transition: { duration: 0.9, ease } },
-  };
-  const sweepVariants = {
-    hidden: { x: '-120%', opacity: 0 },
-    visible: { x: '120%', opacity: [0, 1, 0], transition: { duration: 1.1, ease, delay: 0.2 } },
+  const copyVariants = {
+    hidden: { opacity: 0, y: 18 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.65, ease, delay: 0.08 },
+    },
   };
 
   return (
@@ -76,96 +49,66 @@ export const Process = () => {
           </motion.div>
 
           <div className="lg:col-span-8">
-            <div className="relative">
-              <div className="hidden md:block absolute left-[2.35rem] top-8 bottom-8 w-px bg-white/10 overflow-hidden">
-                <motion.div
-                  initial={{ scaleY: 0 }}
-                  whileInView={{ scaleY: 1 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 1.2, ease }}
-                  className="timeline-line absolute inset-0 origin-top bg-linear-to-b from-vish-accent via-white/35 to-white/0"
-                />
-              </div>
-
-              <div className="space-y-6 md:space-y-8">
+            <div className="process-timeline space-y-4 md:space-y-5">
                 {steps.map((step, index) => (
                   <motion.article
                     key={`${step.num}-${step.title}`}
-                    variants={stepVariants}
+                    variants={rowVariants}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true, amount: 0.25 }}
-                    className="group relative grid grid-cols-1 md:grid-cols-[5rem_1fr] gap-5 md:gap-8 [perspective:1200px]"
+                    viewport={{ once: true, amount: 0.28 }}
+                    className="group relative overflow-hidden rounded-[1.25rem] border border-white/10 bg-white/[0.025] transition-colors duration-500 hover:border-white/20 hover:bg-white/[0.045]"
                   >
-                    <motion.div
-                      variants={markerVariants}
-                      className="relative z-10 flex md:block items-center gap-4"
-                    >
-                      <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-full border border-white/10 bg-[#0A0A0A] flex items-center justify-center overflow-hidden group-hover:border-vish-accent/50 transition-colors duration-300">
-                        <motion.div
-                          variants={sweepVariants}
-                          className="absolute inset-y-0 w-1/2 bg-white/20 skew-x-[-18deg]"
-                        />
-                        <span className="relative z-10 font-mono text-lg md:text-xl text-vish-accent">
+                    <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-white/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                    <span className="pointer-events-none absolute -right-3 -top-8 font-display text-[8rem] md:text-[12rem] leading-none text-white/[0.025] transition-colors duration-500 group-hover:text-white/[0.045]">
+                      {step.num}
+                    </span>
+
+                    <div className="relative z-10 grid grid-cols-1 md:grid-cols-[10rem_1fr] xl:grid-cols-[10rem_minmax(0,0.85fr)_minmax(20rem,1fr)] gap-6 xl:gap-12 p-6 md:p-8 lg:p-10">
+                      <motion.div variants={copyVariants} className="flex items-center gap-3 md:block">
+                        <span className="font-mono text-xs text-white/35">Step</span>
+                        <span className="font-mono text-sm text-white/70 md:mt-3 md:block">
                           {step.num}
                         </span>
-                      </div>
-                      <motion.div variants={lineVariants} className="md:hidden h-px flex-1 bg-white/10 origin-left" />
-                    </motion.div>
+                      </motion.div>
 
-                    <motion.div
-                      variants={cardVariants}
-                      className="relative overflow-hidden rounded-2xl border border-white/8 bg-white/[0.03] p-7 md:p-9 transition-colors duration-300 group-hover:border-vish-accent/35 group-hover:bg-white/[0.05] [transform-style:preserve-3d]"
-                    >
-                      <motion.div
-                        variants={sweepVariants}
-                        className="absolute inset-y-0 -left-1/3 w-1/3 bg-linear-to-r from-transparent via-white/8 to-transparent skew-x-[-18deg] pointer-events-none"
-                      />
-                      <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-vish-accent/0 via-vish-accent/50 to-vish-accent/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                      <div className="absolute inset-0 bg-radial-[circle_at_20%_0%] from-vish-accent/8 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
-                      <div className="flex items-start justify-between gap-6 mb-5">
-                        <motion.h3
-                          variants={contentVariants}
-                          className="font-display text-3xl md:text-5xl text-white leading-tight"
-                        >
-                          {step.title}
-                        </motion.h3>
-                        <motion.div
-                          variants={contentVariants}
-                          className="hidden sm:flex w-10 h-10 shrink-0 rounded-full border border-white/10 items-center justify-center group-hover:bg-vish-accent group-hover:border-vish-accent transition-all duration-300"
-                        >
-                          <ArrowRight className="w-4 h-4 text-white/40 group-hover:text-black -rotate-45 group-hover:rotate-0 transition-all duration-300" />
-                        </motion.div>
-                      </div>
-
-                      <motion.p
-                        variants={contentVariants}
-                        className="font-sans text-base md:text-lg text-gray-400 leading-relaxed max-w-2xl mb-7"
+                      <motion.h3
+                        variants={copyVariants}
+                        className="font-display text-4xl md:text-5xl xl:text-6xl text-white leading-[0.95] tracking-tight"
                       >
-                        {step.description}
-                      </motion.p>
+                        {step.title}
+                      </motion.h3>
 
-                      {step.tags && step.tags.length > 0 && (
-                        <motion.div variants={contentVariants} className="flex flex-wrap gap-2">
-                          {step.tags.map((tag, tagIndex) => (
-                            <motion.span
-                              key={tag}
-                              initial={{ opacity: 0, y: 12 }}
-                              whileInView={{ opacity: 1, y: 0 }}
-                              viewport={{ once: true }}
-                              transition={{ duration: 0.45, delay: 0.25 + tagIndex * 0.05, ease }}
-                              className="px-3 py-1 rounded-full border border-white/10 text-xs font-mono text-white/45 group-hover:border-vish-accent/30 group-hover:text-vish-accent transition-colors duration-300"
-                            >
-                              {tag}
-                            </motion.span>
-                          ))}
-                        </motion.div>
-                      )}
-                    </motion.div>
+                      <motion.div variants={copyVariants}>
+                        <div className="flex items-start justify-between gap-6">
+                          <p className="font-sans text-base md:text-lg text-gray-400 leading-relaxed max-w-2xl">
+                            {step.description}
+                          </p>
+                          <div className="hidden sm:flex w-10 h-10 shrink-0 rounded-full border border-white/10 items-center justify-center transition-all duration-300 group-hover:bg-white group-hover:border-white">
+                            <ArrowRight className="w-4 h-4 text-white/40 -rotate-45 transition-all duration-300 group-hover:rotate-0 group-hover:text-black" />
+                          </div>
+                        </div>
+
+                        {step.tags && step.tags.length > 0 && (
+                          <div className="mt-7 flex flex-wrap gap-2">
+                            {step.tags.map((tag, tagIndex) => (
+                              <motion.span
+                                key={tag}
+                                initial={{ opacity: 0, y: 10 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.45, delay: 0.18 + tagIndex * 0.04, ease }}
+                                className="px-3 py-1 rounded-full border border-white/10 text-xs font-mono text-white/45 transition-colors duration-300 group-hover:border-white/20 group-hover:text-white/75"
+                              >
+                                {tag}
+                              </motion.span>
+                            ))}
+                          </div>
+                        )}
+                      </motion.div>
+                    </div>
                   </motion.article>
                 ))}
-              </div>
             </div>
           </div>
         </div>

@@ -5,6 +5,7 @@ import { useTinaSettings } from '../../hooks/useTinaVisualEditing';
 
 export const Contact = () => {
   const { data: settings, tinaField, rawSiteSettings } = useTinaSettings();
+  const footerLogoLetters = 'vish studio'.split('');
 
   return (
     <footer className="contact bg-black text-white py-32 pb-4 px-6 md:px-12 relative overflow-hidden" id="contact">
@@ -116,10 +117,49 @@ export const Contact = () => {
 
           </div>
 
+        <div
+          aria-hidden="true"
+          className="absolute bottom-10 pointer-events-none left-1/2 w-screen -translate-x-1/2 overflow-hidden px-4 text-center"
+        >
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+            variants={{
+              hidden: {},
+              visible: {
+                transition: {
+                  staggerChildren: 0.045,
+                  delayChildren: 0.08,
+                },
+              },
+            }}
+            className="font-logo lowercase leading-none text-white/[0.03] text-[18vw] sm:text-[17vw] md:text-[16vw] lg:text-[15vw] whitespace-nowrap select-none"
+          >
+            {footerLogoLetters.map((letter, index) => (
+              <motion.span
+                key={`${letter}-${index}`}
+                variants={{
+                  hidden: { opacity: 0, y: '0.35em', filter: 'blur(8px)' },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    filter: 'blur(0px)',
+                    transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] },
+                  },
+                }}
+                className={index < 4 ? 'inline-block font-black' : 'inline-block font-normal'}
+              >
+                {letter === ' ' ? '\u00A0' : letter}
+              </motion.span>
+            ))}
+          </motion.div>
+        </div>
         </div>
 
+
         {/* Footer */}
-        <div className="mt-32 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-xs font-mono text-gray-600 uppercase tracking-wider">
+        <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-xs font-mono text-gray-600 uppercase tracking-wider">
           <span>{settings.copyright} <span className="text-[16px] lg:text-[14px] font-logo lowercase"><strong>vish</strong> studio.</span></span>
           <div className="flex gap-8">
             {settings.footerLinks.map((link) => (
