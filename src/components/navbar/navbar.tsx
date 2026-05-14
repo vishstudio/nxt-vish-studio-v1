@@ -5,6 +5,7 @@ import { Menu, X, ArrowRight } from 'lucide-react';
 import { Button } from '../ui/button/button';
 import { useTinaSettings } from '../../hooks/useTinaVisualEditing';
 import { LogoText } from '../logo-text/logo-text';
+import { li } from 'motion/react-client';
 
 export const Navbar = () => {
   const { data: settings } = useTinaSettings();
@@ -22,7 +23,7 @@ export const Navbar = () => {
 
   return (
     <div className="navbar contents">
-      <motion.nav
+      <motion.header
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
@@ -55,13 +56,14 @@ export const Navbar = () => {
           {/* Desktop Navigation */}
           <AnimatePresence>
             {!isScrolled && (
-              <motion.div
+              <motion.nav
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.2 }}
                 className="hidden lg:flex items-center gap-1 bg-white/5 rounded-full p-1 border border-white/5 absolute left-1/2 -translate-x-1/2"
               >
+                <ol className="flex items-center px-2 py-1">
                 {[
                   { name: 'Home', href: '/' },
                   { name: 'Projects', href: '/projects' },
@@ -69,15 +71,17 @@ export const Navbar = () => {
                   { name: 'About', href: '/about' },
                   { name: 'Testimonials', href: '/testimonials' }
                 ].map((item) => (
-                  <a
+                  <li key={item.name}>
+                    <a
                     key={item.name}
                     href={item.href}
-                    className="px-5 py-2 rounded-full font-sans text-sm font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-all"
-                  >
-                    {item.name}
-                  </a>
+                    className="px-5 py-2 rounded-full font-sans text-sm font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-all">
+                      {item.name}
+                    </a>
+                  </li>
                 ))}
-              </motion.div>
+               </ol>
+              </motion.nav>
             )}
           </AnimatePresence>
 
@@ -115,7 +119,7 @@ export const Navbar = () => {
             </Button>
           </div>
         </div>
-      </motion.nav>
+      </motion.header>
 
       {/* Mobile Menu Overlay */}
       <AnimatePresence>

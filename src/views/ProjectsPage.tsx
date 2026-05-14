@@ -15,6 +15,7 @@ export const ProjectsPage = () => {
     <PageLayout>
       <PageHero
         label="Our Portfolio"
+        backgroundImage="https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=2301&auto=format&fit=crop&ixlib=rb-4.1.0"
         title={
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
