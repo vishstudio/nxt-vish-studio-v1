@@ -1,16 +1,42 @@
 'use client';
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, ArrowRight } from 'lucide-react';
 import { Button } from '../ui/button/button';
 import { useTinaSettings } from '../../hooks/useTinaVisualEditing';
 import { LogoText } from '../logo-text/logo-text';
-import { li } from 'motion/react-client';
 
 export const Navbar = () => {
   const { data: settings } = useTinaSettings();
+  const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const navItems = [
+    { name: 'Home', href: '/' },
+    { name: 'Projects', href: '/projects', activePaths: ['/project'] },
+    { name: 'Services', href: '/services' },
+    { name: 'About', href: '/about' },
+    { name: 'Testimonials', href: '/testimonials' }
+  ];
+
+  const normalizePath = (path: string) => path.replace(/\/$/, '') || '/';
+  const currentPath = normalizePath(pathname || '/');
+  const isActiveLink = (href: string, activePaths: string[] = []) => {
+    const normalizedHref = normalizePath(href);
+
+    if (normalizedHref === '/') {
+      return currentPath === '/';
+    }
+
+    return currentPath === normalizedHref
+      || currentPath.startsWith(`${normalizedHref}/`)
+      || activePaths.some((path) => {
+        const normalizedPath = normalizePath(path);
+        return currentPath === normalizedPath || currentPath.startsWith(`${normalizedPath}/`);
+      });
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -64,22 +90,25 @@ export const Navbar = () => {
                 className="hidden lg:flex items-center gap-1 bg-white/5 rounded-full p-1 border border-white/5 absolute left-1/2 -translate-x-1/2"
               >
                 <ol className="flex items-center px-2 py-1">
-                {[
-                  { name: 'Home', href: '/' },
-                  { name: 'Projects', href: '/projects' },
-                  { name: 'Services', href: '/services' },
-                  { name: 'About', href: '/about' },
-                  { name: 'Testimonials', href: '/testimonials' }
-                ].map((item) => (
-                  <li key={item.name}>
-                    <a
-                    key={item.name}
-                    href={item.href}
-                    className="px-5 py-2 rounded-full font-sans text-sm font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-all">
-                      {item.name}
-                    </a>
-                  </li>
-                ))}
+                  {navItems.map((item) => {
+                    const isActive = isActiveLink(item.href, item.activePaths);
+
+                    return (
+                      <li key={item.name}>
+                        <a
+                          href={item.href}
+                          aria-current={isActive ? 'page' : undefined}
+                          className={`px-5 py-2 rounded-full font-sans text-sm font-medium transition-all ${
+                            isActive
+                              ? 'text-white bg-white/10'
+                              : 'text-gray-300 hover:text-white hover:bg-white/10'
+                          }`}
+                        >
+                          {item.name}
+                        </a>
+                      </li>
+                    );
+                  })}
                </ol>
               </motion.nav>
             )}

@@ -14,6 +14,7 @@ export { useTinaContact } from "./tina/useTinaContact";
 export { useTinaSettings } from "./tina/useTinaSettings";
 export { useTinaPartners } from "./tina/useTinaPartners";
 export { useTinaPricing } from "./tina/useTinaPricing";
+export { useTinaLegalPage } from "./tina/useTinaLegal";
 export {
   useTinaProjectDetail,
   useTinaProjectsList,

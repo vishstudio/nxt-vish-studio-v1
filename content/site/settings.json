@@ -32,15 +32,15 @@
   "footerLinks": [
     {
       "label": "Privacy",
-      "url": "#"
+      "url": "/privacy"
     },
     {
       "label": "Terms",
-      "url": "#"
+      "url": "/terms"
     },
     {
       "label": "Sitemap",
-      "url": "#"
+      "url": "/sitemap.xml"
     }
   ]
 }

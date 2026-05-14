@@ -22,6 +22,20 @@ fragment ProjectParts on Project {
   siteUrl
 }
 
+fragment LegalPageParts on LegalPage {
+  __typename
+  title
+  slug
+  heroLabel
+  intro
+  lastUpdated
+  sections {
+    __typename
+    title
+    body
+  }
+}
+
 fragment SiteSettingsParts on SiteSettings {
   __typename
   email

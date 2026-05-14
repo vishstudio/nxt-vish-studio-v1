@@ -180,3 +180,35 @@ import contactJson from "@/content/pages/contact.json";
 export function getContactPage(): ContactPageContent {
   return contactJson as unknown as ContactPageContent;
 }
+
+// ─── Legal Pages ─────────────────────────────────────────────────────────────
+
+export interface LegalSection {
+  title: string;
+  body: string;
+}
+
+export interface LegalPageContent {
+  title: string;
+  slug: string;
+  heroLabel: string;
+  intro: string;
+  lastUpdated: string;
+  sections: LegalSection[];
+}
+
+import privacyJson from "@/content/legal/privacy.json";
+import termsJson from "@/content/legal/terms.json";
+
+const legalPages: Record<string, LegalPageContent> = {
+  privacy: privacyJson as unknown as LegalPageContent,
+  terms: termsJson as unknown as LegalPageContent,
+};
+
+export function getLegalPage(slug: string): LegalPageContent | undefined {
+  return legalPages[slug];
+}
+
+export function getLegalPages(): LegalPageContent[] {
+  return Object.values(legalPages);
+}

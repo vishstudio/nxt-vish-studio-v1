@@ -1,0 +1,37 @@
+{
+  "title": "Privacy Policy",
+  "slug": "privacy",
+  "heroLabel": "Privacy",
+  "intro": "This Privacy Policy explains how Vish Studio collects, uses, and protects information when you visit our website or contact us about a project.",
+  "lastUpdated": "2026-05-14",
+  "sections": [
+    {
+      "title": "Information We Collect",
+      "body": "We may collect information you provide directly, such as your name, email address, phone number, company details, project requirements, and messages submitted through contact links or forms.\n\nWe may also collect basic technical information such as browser type, device information, pages visited, referral source, and analytics events to understand how visitors use the website."
+    },
+    {
+      "title": "How We Use Information",
+      "body": "We use information to respond to enquiries, prepare proposals, deliver services, maintain client communication, improve our website, and understand website performance.\n\nWe do not sell personal information."
+    },
+    {
+      "title": "Analytics",
+      "body": "The website may use analytics tools to measure page views, interactions, and general visitor behaviour. This helps us improve content, performance, and user experience."
+    },
+    {
+      "title": "Data Sharing",
+      "body": "We only share information when needed to provide services, operate the website, comply with legal obligations, or work with trusted service providers. Those providers are expected to handle information securely."
+    },
+    {
+      "title": "Data Retention",
+      "body": "We keep enquiry and project information only for as long as reasonably needed for business, legal, accounting, or operational purposes."
+    },
+    {
+      "title": "Your Rights",
+      "body": "You may contact us to request access, correction, or deletion of personal information we hold about you, subject to applicable legal and operational requirements."
+    },
+    {
+      "title": "Contact",
+      "body": "For privacy questions, contact us at hello@vish.studio."
+    }
+  ]
+}

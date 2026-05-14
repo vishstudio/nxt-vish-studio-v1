@@ -84,6 +84,8 @@ export type Query = {
   document: DocumentNode;
   project: Project;
   projectConnection: ProjectConnection;
+  legalPage: LegalPage;
+  legalPageConnection: LegalPageConnection;
   siteSettings: SiteSettings;
   siteSettingsConnection: SiteSettingsConnection;
   partners: Partners;
@@ -136,6 +138,21 @@ export type QueryProjectConnectionArgs = {
   last?: InputMaybe<Scalars['Float']['input']>;
   sort?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<ProjectFilter>;
+};
+
+
+export type QueryLegalPageArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryLegalPageConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<LegalPageFilter>;
 };
 
 
@@ -260,6 +277,7 @@ export type QueryPricingPageConnectionArgs = {
 
 export type DocumentFilter = {
   project?: InputMaybe<ProjectFilter>;
+  legalPage?: InputMaybe<LegalPageFilter>;
   siteSettings?: InputMaybe<SiteSettingsFilter>;
   partners?: InputMaybe<PartnersFilter>;
   homePage?: InputMaybe<HomePageFilter>;
@@ -307,7 +325,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Project | SiteSettings | Partners | HomePage | TestimonialsPage | AboutPage | ServicesPage | ContactPage | PricingPage | Folder;
+export type DocumentNode = Project | LegalPage | SiteSettings | Partners | HomePage | TestimonialsPage | AboutPage | ServicesPage | ContactPage | PricingPage | Folder;
 
 export type Project = Node & Document & {
   __typename?: 'Project';
@@ -392,6 +410,52 @@ export type ProjectConnection = Connection & {
   pageInfo: PageInfo;
   totalCount: Scalars['Float']['output'];
   edges?: Maybe<Array<Maybe<ProjectConnectionEdges>>>;
+};
+
+export type LegalPageSections = {
+  __typename?: 'LegalPageSections';
+  title: Scalars['String']['output'];
+  body?: Maybe<Scalars['String']['output']>;
+};
+
+export type LegalPage = Node & Document & {
+  __typename?: 'LegalPage';
+  title: Scalars['String']['output'];
+  slug: Scalars['String']['output'];
+  heroLabel?: Maybe<Scalars['String']['output']>;
+  intro?: Maybe<Scalars['String']['output']>;
+  lastUpdated?: Maybe<Scalars['String']['output']>;
+  sections?: Maybe<Array<Maybe<LegalPageSections>>>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type LegalPageSectionsFilter = {
+  title?: InputMaybe<StringFilter>;
+  body?: InputMaybe<StringFilter>;
+};
+
+export type LegalPageFilter = {
+  title?: InputMaybe<StringFilter>;
+  slug?: InputMaybe<StringFilter>;
+  heroLabel?: InputMaybe<StringFilter>;
+  intro?: InputMaybe<StringFilter>;
+  lastUpdated?: InputMaybe<StringFilter>;
+  sections?: InputMaybe<LegalPageSectionsFilter>;
+};
+
+export type LegalPageConnectionEdges = {
+  __typename?: 'LegalPageConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<LegalPage>;
+};
+
+export type LegalPageConnection = Connection & {
+  __typename?: 'LegalPageConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<LegalPageConnectionEdges>>>;
 };
 
 export type SiteSettingsSocials = {
@@ -889,6 +953,8 @@ export type Mutation = {
   createFolder: DocumentNode;
   updateProject: Project;
   createProject: Project;
+  updateLegalPage: LegalPage;
+  createLegalPage: LegalPage;
   updateSiteSettings: SiteSettings;
   createSiteSettings: SiteSettings;
   updatePartners: Partners;
@@ -950,6 +1016,18 @@ export type MutationUpdateProjectArgs = {
 export type MutationCreateProjectArgs = {
   relativePath: Scalars['String']['input'];
   params: ProjectMutation;
+};
+
+
+export type MutationUpdateLegalPageArgs = {
+  relativePath: Scalars['String']['input'];
+  params: LegalPageMutation;
+};
+
+
+export type MutationCreateLegalPageArgs = {
+  relativePath: Scalars['String']['input'];
+  params: LegalPageMutation;
 };
 
 
@@ -1050,6 +1128,7 @@ export type MutationCreatePricingPageArgs = {
 
 export type DocumentUpdateMutation = {
   project?: InputMaybe<ProjectMutation>;
+  legalPage?: InputMaybe<LegalPageMutation>;
   siteSettings?: InputMaybe<SiteSettingsMutation>;
   partners?: InputMaybe<PartnersMutation>;
   homePage?: InputMaybe<HomePageMutation>;
@@ -1063,6 +1142,7 @@ export type DocumentUpdateMutation = {
 
 export type DocumentMutation = {
   project?: InputMaybe<ProjectMutation>;
+  legalPage?: InputMaybe<LegalPageMutation>;
   siteSettings?: InputMaybe<SiteSettingsMutation>;
   partners?: InputMaybe<PartnersMutation>;
   homePage?: InputMaybe<HomePageMutation>;
@@ -1094,6 +1174,20 @@ export type ProjectMutation = {
   solutionImage?: InputMaybe<Scalars['String']['input']>;
   gallery?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   siteUrl?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type LegalPageSectionsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  body?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type LegalPageMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  heroLabel?: InputMaybe<Scalars['String']['input']>;
+  intro?: InputMaybe<Scalars['String']['input']>;
+  lastUpdated?: InputMaybe<Scalars['String']['input']>;
+  sections?: InputMaybe<Array<InputMaybe<LegalPageSectionsMutation>>>;
 };
 
 export type SiteSettingsSocialsMutation = {
@@ -1267,6 +1361,8 @@ export type PricingPageMutation = {
 
 export type ProjectPartsFragment = { __typename: 'Project', title: string, slug: string, category: Array<string>, techStack?: Array<string | null> | null, image?: string | null, year: string, order?: number | null, featuredOnHome?: boolean | null, description: string, fullDescription?: string | null, overview?: string | null, overviewImage?: string | null, challenge?: string | null, challengeImage?: string | null, strategy?: string | null, strategyImage?: string | null, solution?: string | null, solutionImage?: string | null, gallery?: Array<string | null> | null, siteUrl?: string | null };
 
+export type LegalPagePartsFragment = { __typename: 'LegalPage', title: string, slug: string, heroLabel?: string | null, intro?: string | null, lastUpdated?: string | null, sections?: Array<{ __typename: 'LegalPageSections', title: string, body?: string | null } | null> | null };
+
 export type SiteSettingsPartsFragment = { __typename: 'SiteSettings', email: string, phone: string, phoneLink?: string | null, address?: string | null, copyright?: string | null, contactHeadingLine1?: string | null, contactHeadingLine2?: string | null, scrollText?: string | null, socials?: Array<{ __typename: 'SiteSettingsSocials', name: string, url: string, openInNewTab?: boolean | null } | null> | null, footerLinks?: Array<{ __typename: 'SiteSettingsFooterLinks', label: string, url: string } | null> | null };
 
 export type PartnersPartsFragment = { __typename: 'Partners', partnersLabel: string, partners?: Array<{ __typename: 'PartnersPartners', name: string, url?: string | null } | null> | null };
@@ -1301,6 +1397,25 @@ export type ProjectConnectionQueryVariables = Exact<{
 
 
 export type ProjectConnectionQuery = { __typename?: 'Query', projectConnection: { __typename?: 'ProjectConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ProjectConnectionEdges', cursor: string, node?: { __typename: 'Project', id: string, title: string, slug: string, category: Array<string>, techStack?: Array<string | null> | null, image?: string | null, year: string, order?: number | null, featuredOnHome?: boolean | null, description: string, fullDescription?: string | null, overview?: string | null, overviewImage?: string | null, challenge?: string | null, challengeImage?: string | null, strategy?: string | null, strategyImage?: string | null, solution?: string | null, solutionImage?: string | null, gallery?: Array<string | null> | null, siteUrl?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+
+export type LegalPageQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type LegalPageQuery = { __typename?: 'Query', legalPage: { __typename: 'LegalPage', id: string, title: string, slug: string, heroLabel?: string | null, intro?: string | null, lastUpdated?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, sections?: Array<{ __typename: 'LegalPageSections', title: string, body?: string | null } | null> | null } };
+
+export type LegalPageConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<LegalPageFilter>;
+}>;
+
+
+export type LegalPageConnectionQuery = { __typename?: 'Query', legalPageConnection: { __typename?: 'LegalPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'LegalPageConnectionEdges', cursor: string, node?: { __typename: 'LegalPage', id: string, title: string, slug: string, heroLabel?: string | null, intro?: string | null, lastUpdated?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, sections?: Array<{ __typename: 'LegalPageSections', title: string, body?: string | null } | null> | null } | null } | null> | null } };
 
 export type SiteSettingsQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1477,6 +1592,21 @@ export const ProjectPartsFragmentDoc = gql`
   solutionImage
   gallery
   siteUrl
+}
+    `;
+export const LegalPagePartsFragmentDoc = gql`
+    fragment LegalPageParts on LegalPage {
+  __typename
+  title
+  slug
+  heroLabel
+  intro
+  lastUpdated
+  sections {
+    __typename
+    title
+    body
+  }
 }
     `;
 export const SiteSettingsPartsFragmentDoc = gql`
@@ -1709,6 +1839,63 @@ export const ProjectConnectionDocument = gql`
   }
 }
     ${ProjectPartsFragmentDoc}`;
+export const LegalPageDocument = gql`
+    query legalPage($relativePath: String!) {
+  legalPage(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...LegalPageParts
+  }
+}
+    ${LegalPagePartsFragmentDoc}`;
+export const LegalPageConnectionDocument = gql`
+    query legalPageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: LegalPageFilter) {
+  legalPageConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...LegalPageParts
+      }
+    }
+  }
+}
+    ${LegalPagePartsFragmentDoc}`;
 export const SiteSettingsDocument = gql`
     query siteSettings($relativePath: String!) {
   siteSettings(relativePath: $relativePath) {
@@ -2173,6 +2360,12 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     projectConnection(variables?: ProjectConnectionQueryVariables, options?: C): Promise<{data: ProjectConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ProjectConnectionQueryVariables, query: string}> {
         return requester<{data: ProjectConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ProjectConnectionQueryVariables, query: string}, ProjectConnectionQueryVariables>(ProjectConnectionDocument, variables, options);
+      },
+    legalPage(variables: LegalPageQueryVariables, options?: C): Promise<{data: LegalPageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: LegalPageQueryVariables, query: string}> {
+        return requester<{data: LegalPageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: LegalPageQueryVariables, query: string}, LegalPageQueryVariables>(LegalPageDocument, variables, options);
+      },
+    legalPageConnection(variables?: LegalPageConnectionQueryVariables, options?: C): Promise<{data: LegalPageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: LegalPageConnectionQueryVariables, query: string}> {
+        return requester<{data: LegalPageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: LegalPageConnectionQueryVariables, query: string}, LegalPageConnectionQueryVariables>(LegalPageConnectionDocument, variables, options);
       },
     siteSettings(variables: SiteSettingsQueryVariables, options?: C): Promise<{data: SiteSettingsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SiteSettingsQueryVariables, query: string}> {
         return requester<{data: SiteSettingsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SiteSettingsQueryVariables, query: string}, SiteSettingsQueryVariables>(SiteSettingsDocument, variables, options);

@@ -120,14 +120,13 @@ export const Contact = () => {
 
         {/* Footer */}
         <div className="mt-32 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-xs font-mono text-gray-600 uppercase tracking-wider">
-          <span>{settings.copyright}</span>
+          <span>{settings.copyright} <span className="text-[16px] lg:text-[14px] font-logo lowercase"><strong>vish</strong> studio.</span></span>
           <div className="flex gap-8">
             {settings.footerLinks.map((link) => (
               <a key={link.label} href={link.url} className="hover:text-white transition-colors">{link.label}</a>
             ))}
           </div>
         </div>
-
       </div>
     </footer>
   );

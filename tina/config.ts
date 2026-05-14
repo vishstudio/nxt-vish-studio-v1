@@ -215,6 +215,75 @@ export default defineConfig({
         ],
       },
 
+      // ─── Legal Pages (multi-file) ───
+      {
+        name: "legalPage",
+        label: "Legal Pages",
+        path: "content/legal",
+        format: "json",
+        ui: {
+          router: ({ document }) =>
+            `/${(document as any).slug || document._sys.filename}`,
+          allowedActions: { create: false, delete: false },
+        },
+        fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Title",
+            isTitle: true,
+            required: true,
+          },
+          {
+            type: "string",
+            name: "slug",
+            label: "Slug",
+            description: "Use 'privacy' or 'terms'.",
+            required: true,
+          },
+          {
+            type: "string",
+            name: "heroLabel",
+            label: "Hero Label",
+          },
+          {
+            type: "string",
+            name: "intro",
+            label: "Intro",
+            ui: { component: "textarea" },
+          },
+          {
+            type: "string",
+            name: "lastUpdated",
+            label: "Last Updated",
+            description: "Use YYYY-MM-DD format.",
+          },
+          {
+            type: "object",
+            name: "sections",
+            label: "Sections",
+            list: true,
+            ui: {
+              itemProps: (item) => ({ label: item?.title || "Section" }),
+            },
+            fields: [
+              {
+                type: "string",
+                name: "title",
+                label: "Title",
+                required: true,
+              },
+              {
+                type: "string",
+                name: "body",
+                label: "Body",
+                ui: { component: "textarea" },
+              },
+            ],
+          },
+        ],
+      },
+
       // ─── Site Settings (single file) ───
       {
         name: "siteSettings",
