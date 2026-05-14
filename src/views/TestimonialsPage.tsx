@@ -2,9 +2,9 @@
 import { motion } from 'motion/react';
 import { Quote } from 'lucide-react';
 import { useTinaTestimonials } from '../hooks/useTinaVisualEditing';
-import { PageLayout } from '../components/ui/PageLayout';
-import { PageHero } from '../components/ui/PageHero';
-import { Contact } from '../components/Contact';
+import { PageLayout } from '../components/ui/page-layout/page-layout';
+import { PageHero } from '../components/ui/page-hero/page-hero';
+import { Contact } from '../components/contact/contact';
 import { useEffect } from 'react';
 
 export const TestimonialsPage = () => {
@@ -19,6 +19,7 @@ export const TestimonialsPage = () => {
     <PageLayout>
       <PageHero
         label="Client Testimonials"
+        backgroundImage="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2342&auto=format&fit=crop&ixlib=rb-4.1.0"
         title={
           <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-medium tracking-tight leading-[0.95] text-white">
             {content.heading || 'What Clients Say'}<span className="text-vish-accent">.</span>

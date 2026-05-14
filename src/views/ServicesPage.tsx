@@ -1,10 +1,10 @@
 'use client';
 import { motion } from 'motion/react';
-import { Process } from '../components/Process';
-import { Contact } from '../components/Contact';
-import { PageLayout } from '../components/ui/PageLayout';
-import { PageHero } from '../components/ui/PageHero';
-import { SectionTitle } from '../components/ui/SectionTitle';
+import { Process } from '../components/process/process';
+import { Contact } from '../components/contact/contact';
+import { PageLayout } from '../components/ui/page-layout/page-layout';
+import { PageHero } from '../components/ui/page-hero/page-hero';
+import { SectionTitle } from '../components/ui/section-title/section-title';
 import { useTinaServices } from '../hooks/useTinaVisualEditing';
 
 export const ServicesPage = () => {
@@ -16,6 +16,7 @@ export const ServicesPage = () => {
       <PageHero
         label={content.heroLabel}
         labelTinaField={tinaField('heroLabel')}
+        backgroundImage="https://images.unsplash.com/photo-1699665235382-a6666f77a60e?q=80&w=2344&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         title={
           <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-medium tracking-tight leading-[0.95] text-white mb-12">
             <motion.span

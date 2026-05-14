@@ -10,8 +10,30 @@ fragment ProjectParts on Project {
   featuredOnHome
   description
   fullDescription
+  overview
+  overviewImage
+  challenge
+  challengeImage
+  strategy
+  strategyImage
+  solution
+  solutionImage
   gallery
   siteUrl
+}
+
+fragment LegalPageParts on LegalPage {
+  __typename
+  title
+  slug
+  heroLabel
+  intro
+  lastUpdated
+  sections {
+    __typename
+    title
+    body
+  }
 }
 
 fragment SiteSettingsParts on SiteSettings {

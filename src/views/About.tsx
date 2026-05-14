@@ -1,12 +1,12 @@
 'use client';
 import { motion } from 'motion/react';
-import { Contact } from '../components/Contact';
-import { Team } from '../components/Team';
-import { TextReveal } from '../components/TextReveal';
-import { TrustedPartners } from '../components/TrustedPartners';
-import { PageLayout } from '../components/ui/PageLayout';
-import { PageHero } from '../components/ui/PageHero';
-import { SectionTitle } from '../components/ui/SectionTitle';
+import { Contact } from '../components/contact/contact';
+import { Team } from '../components/team/team';
+import { TextReveal } from '../components/text-reveal/text-reveal';
+import { TrustedPartners } from '../components/trusted-partners/trusted-partners';
+import { PageLayout } from '../components/ui/page-layout/page-layout';
+import { PageHero } from '../components/ui/page-hero/page-hero';
+import { SectionTitle } from '../components/ui/section-title/section-title';
 import { useTinaAbout } from '../hooks/useTinaVisualEditing';
 
 export const AboutPage = () => {
@@ -17,6 +17,7 @@ export const AboutPage = () => {
       <PageHero
         label={content.heroLabel}
         labelTinaField={tinaField('heroLabel')}
+        backgroundImage="https://images.unsplash.com/photo-1519155031214-e8d583928bf2?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         title={
           <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-medium tracking-tight leading-[0.95] text-white mb-12">
             <motion.span

@@ -2,11 +2,11 @@
 import { motion } from 'motion/react';
 import { useTinaProjectsList } from '../hooks/useTinaVisualEditing';
 import type { Project } from '../lib/projects';
-import { Contact } from '../components/Contact';
-import { PageLayout } from '../components/ui/PageLayout';
-import { PageHero } from '../components/ui/PageHero';
-import { Section } from '../components/ui/Section';
-import { ProjectCard } from '../components/ui/ProjectCard';
+import { Contact } from '../components/contact/contact';
+import { PageLayout } from '../components/ui/page-layout/page-layout';
+import { PageHero } from '../components/ui/page-hero/page-hero';
+import { Section } from '../components/ui/section/section';
+import { ProjectCard } from '../components/ui/project-card/project-card';
 
 export const ProjectsPage = () => {
   const { data: projects } = useTinaProjectsList();
@@ -15,6 +15,7 @@ export const ProjectsPage = () => {
     <PageLayout>
       <PageHero
         label="Our Portfolio"
+        backgroundImage="https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=2301&auto=format&fit=crop&ixlib=rb-4.1.0"
         title={
           <motion.h1
             initial={{ opacity: 0, y: 30 }}

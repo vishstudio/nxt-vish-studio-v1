@@ -1,0 +1,37 @@
+{
+  "title": "Terms of Service",
+  "slug": "terms",
+  "heroLabel": "Terms",
+  "intro": "These Terms of Service outline the general conditions for using the Vish Studio website and engaging with our services.",
+  "lastUpdated": "2026-05-14",
+  "sections": [
+    {
+      "title": "Website Use",
+      "body": "You may browse this website for information about Vish Studio, our services, projects, and contact details. You agree not to misuse the website, attempt to disrupt it, or use it for unlawful purposes."
+    },
+    {
+      "title": "Project Enquiries",
+      "body": "Submitting an enquiry does not create a client relationship or guarantee availability. Project scope, pricing, deliverables, timelines, and payment terms are confirmed separately in writing."
+    },
+    {
+      "title": "Intellectual Property",
+      "body": "Unless otherwise stated, website content, visuals, copy, branding, layouts, and project presentations are owned by Vish Studio or used with permission. You may not copy, reproduce, or redistribute this content without written consent."
+    },
+    {
+      "title": "Portfolio Work",
+      "body": "We may showcase completed work in our portfolio unless a separate written agreement states otherwise. Confidential work will be handled according to the relevant project agreement."
+    },
+    {
+      "title": "External Links",
+      "body": "This website may link to third-party websites or platforms. We are not responsible for the content, policies, or practices of external sites."
+    },
+    {
+      "title": "Limitation of Liability",
+      "body": "The website is provided for general information. We aim to keep information accurate, but we do not guarantee that all content is complete, current, or error-free. To the extent permitted by law, Vish Studio is not liable for losses arising from website use."
+    },
+    {
+      "title": "Contact",
+      "body": "For questions about these terms, contact us at hello@vish.studio."
+    }
+  ]
+}

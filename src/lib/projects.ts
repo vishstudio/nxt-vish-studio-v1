@@ -7,6 +7,14 @@ export interface Project {
   order: number;
   description: string;
   fullDescription: string;
+  overview: string;
+  overviewImage?: string;
+  challenge: string;
+  challengeImage?: string;
+  strategy: string;
+  strategyImage?: string;
+  solution: string;
+  solutionImage?: string;
   gallery: string[];
   featuredOnHome: boolean;
   siteUrl?: string;
@@ -22,6 +30,14 @@ interface ProjectJson {
   order?: number;
   description: string;
   fullDescription?: string;
+  overview?: string;
+  overviewImage?: string;
+  challenge?: string;
+  challengeImage?: string;
+  strategy?: string;
+  strategyImage?: string;
+  solution?: string;
+  solutionImage?: string;
   gallery?: string[];
   featuredOnHome?: boolean;
   siteUrl?: string;
@@ -54,6 +70,14 @@ export function getProjects(): Project[] {
       order: data.order ?? 999,
       description: data.description,
       fullDescription: data.fullDescription || data.description,
+      overview: data.overview || data.fullDescription || data.description,
+      overviewImage: data.overviewImage || "",
+      challenge: data.challenge || "",
+      challengeImage: data.challengeImage || "",
+      strategy: data.strategy || "",
+      strategyImage: data.strategyImage || "",
+      solution: data.solution || "",
+      solutionImage: data.solutionImage || "",
       gallery: (data.gallery || []).filter(Boolean) as string[],
       featuredOnHome: data.featuredOnHome ?? false,
       siteUrl: data.siteUrl || "",

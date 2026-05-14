@@ -56,6 +56,8 @@ type Query {
   document(collection: String, relativePath: String): DocumentNode!
   project(relativePath: String): Project!
   projectConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ProjectFilter): ProjectConnection!
+  legalPage(relativePath: String): LegalPage!
+  legalPageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: LegalPageFilter): LegalPageConnection!
   siteSettings(relativePath: String): SiteSettings!
   siteSettingsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: SiteSettingsFilter): SiteSettingsConnection!
   partners(relativePath: String): Partners!
@@ -76,6 +78,7 @@ type Query {
 
 input DocumentFilter {
   project: ProjectFilter
+  legalPage: LegalPageFilter
   siteSettings: SiteSettingsFilter
   partners: PartnersFilter
   homePage: HomePageFilter
@@ -109,7 +112,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Project | SiteSettings | Partners | HomePage | TestimonialsPage | AboutPage | ServicesPage | ContactPage | PricingPage | Folder
+union DocumentNode = Project | LegalPage | SiteSettings | Partners | HomePage | TestimonialsPage | AboutPage | ServicesPage | ContactPage | PricingPage | Folder
 
 type Project implements Node & Document {
   title: String!
@@ -122,6 +125,14 @@ type Project implements Node & Document {
   featuredOnHome: Boolean
   description: String!
   fullDescription: String
+  overview: String
+  overviewImage: String
+  challenge: String
+  challengeImage: String
+  strategy: String
+  strategyImage: String
+  solution: String
+  solutionImage: String
   gallery: [String]
   siteUrl: String
   id: ID!
@@ -162,6 +173,14 @@ input ProjectFilter {
   featuredOnHome: BooleanFilter
   description: StringFilter
   fullDescription: StringFilter
+  overview: StringFilter
+  overviewImage: StringFilter
+  challenge: StringFilter
+  challengeImage: StringFilter
+  strategy: StringFilter
+  strategyImage: StringFilter
+  solution: StringFilter
+  solutionImage: StringFilter
   gallery: StringFilter
   siteUrl: StringFilter
 }
@@ -175,6 +194,48 @@ type ProjectConnection implements Connection {
   pageInfo: PageInfo!
   totalCount: Float!
   edges: [ProjectConnectionEdges]
+}
+
+type LegalPageSections {
+  title: String!
+  body: String
+}
+
+type LegalPage implements Node & Document {
+  title: String!
+  slug: String!
+  heroLabel: String
+  intro: String
+  lastUpdated: String
+  sections: [LegalPageSections]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input LegalPageSectionsFilter {
+  title: StringFilter
+  body: StringFilter
+}
+
+input LegalPageFilter {
+  title: StringFilter
+  slug: StringFilter
+  heroLabel: StringFilter
+  intro: StringFilter
+  lastUpdated: StringFilter
+  sections: LegalPageSectionsFilter
+}
+
+type LegalPageConnectionEdges {
+  cursor: String!
+  node: LegalPage
+}
+
+type LegalPageConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [LegalPageConnectionEdges]
 }
 
 type SiteSettingsSocials {
@@ -635,6 +696,8 @@ type Mutation {
   createFolder(collection: String, relativePath: String!): DocumentNode!
   updateProject(relativePath: String!, params: ProjectMutation!): Project!
   createProject(relativePath: String!, params: ProjectMutation!): Project!
+  updateLegalPage(relativePath: String!, params: LegalPageMutation!): LegalPage!
+  createLegalPage(relativePath: String!, params: LegalPageMutation!): LegalPage!
   updateSiteSettings(relativePath: String!, params: SiteSettingsMutation!): SiteSettings!
   createSiteSettings(relativePath: String!, params: SiteSettingsMutation!): SiteSettings!
   updatePartners(relativePath: String!, params: PartnersMutation!): Partners!
@@ -655,6 +718,7 @@ type Mutation {
 
 input DocumentUpdateMutation {
   project: ProjectMutation
+  legalPage: LegalPageMutation
   siteSettings: SiteSettingsMutation
   partners: PartnersMutation
   homePage: HomePageMutation
@@ -668,6 +732,7 @@ input DocumentUpdateMutation {
 
 input DocumentMutation {
   project: ProjectMutation
+  legalPage: LegalPageMutation
   siteSettings: SiteSettingsMutation
   partners: PartnersMutation
   homePage: HomePageMutation
@@ -689,8 +754,30 @@ input ProjectMutation {
   featuredOnHome: Boolean
   description: String
   fullDescription: String
+  overview: String
+  overviewImage: String
+  challenge: String
+  challengeImage: String
+  strategy: String
+  strategyImage: String
+  solution: String
+  solutionImage: String
   gallery: [String]
   siteUrl: String
+}
+
+input LegalPageSectionsMutation {
+  title: String
+  body: String
+}
+
+input LegalPageMutation {
+  title: String
+  slug: String
+  heroLabel: String
+  intro: String
+  lastUpdated: String
+  sections: [LegalPageSectionsMutation]
 }
 
 input SiteSettingsSocialsMutation {

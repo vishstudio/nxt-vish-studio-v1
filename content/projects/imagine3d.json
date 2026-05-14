@@ -17,6 +17,10 @@
   "order": 1,
   "featuredOnHome": true,
   "description": "Bringing interior design projects to the web. Custom made website for a portfolio website.",
+  "overview": "Imagine3D needed a polished portfolio presence that could translate highly visual interior design work into a fast, focused web experience. The site gives prospective clients a clear path through the studio's services, project style, and contact points.",
+  "challenge": "The main challenge was balancing large visual moments with a lightweight browsing experience. The portfolio needed to feel premium without slowing down users or making the content difficult to scan.",
+  "strategy": "We shaped the experience around clean project presentation, direct navigation, and responsive layouts that keep imagery at the center. The interface was kept restrained so the interiors and services could carry the visual weight.",
+  "solution": "The final website delivers a custom portfolio built with modern frontend tooling, responsive project sections, and SEO-ready structure. It gives Imagine3D a professional digital home that supports discovery, credibility, and client enquiries.",
   "gallery": [
     "https://www.dropbox.com/scl/fi/00ea3u6a2u6jzpijglpt8/Screenshot-2026-03-05-at-02.08.22.png?rlkey=wm5ci4h3aww5iii500mi3mmtg&st=i4tmujtn&dl=0",
     "https://www.dropbox.com/scl/fi/cbvl4g6tls5d8a8k3m7n0/Screenshot-2026-03-05-at-01.56.02.png?rlkey=ingyb82ifif8yxew4z73jifio&st=5phsinzh&dl=0",
