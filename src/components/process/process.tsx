@@ -64,48 +64,52 @@ export const Process = () => {
                       {step.num}
                     </span>
 
-                    <div className="relative z-10 grid grid-cols-1 md:grid-cols-[10rem_1fr] xl:grid-cols-[10rem_minmax(0,0.85fr)_minmax(20rem,1fr)] gap-6 xl:gap-12 p-6 md:p-8 lg:p-10">
-                      <motion.div variants={copyVariants} className="flex items-center gap-3 md:block">
+                    <div className="relative z-10 grid grid-cols-1 gap-6 p-6 md:grid-cols-[6rem_minmax(0,1fr)] md:p-8 lg:gap-10 lg:p-10">
+                      <motion.div variants={copyVariants} className="flex items-center gap-3 md:block md:pt-1">
                         <span className="font-mono text-xs text-white/35">Step</span>
                         <span className="font-mono text-sm text-white/70 md:mt-3 md:block">
                           {step.num}
                         </span>
                       </motion.div>
 
-                      <motion.h3
-                        variants={copyVariants}
-                        className="font-display text-4xl md:text-5xl xl:text-6xl text-white leading-[0.95] tracking-tight"
-                      >
-                        {step.title}
-                      </motion.h3>
+                      <div className="min-w-0">
+                        <div className="grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,0.9fr)_minmax(18rem,1fr)] xl:gap-10">
+                          <motion.h3
+                            variants={copyVariants}
+                            className="min-w-0 break-words font-display text-4xl leading-[0.95] tracking-tight text-white md:text-5xl 2xl:text-6xl"
+                          >
+                            {step.title}
+                          </motion.h3>
 
-                      <motion.div variants={copyVariants}>
-                        <div className="flex items-start justify-between gap-6">
-                          <p className="font-sans text-base md:text-lg text-gray-400 leading-relaxed max-w-2xl">
-                            {step.description}
-                          </p>
-                          <div className="hidden sm:flex w-10 h-10 shrink-0 rounded-full border border-white/10 items-center justify-center transition-all duration-300 group-hover:bg-white group-hover:border-white">
-                            <ArrowRight className="w-4 h-4 text-white/40 -rotate-45 transition-all duration-300 group-hover:rotate-0 group-hover:text-black" />
-                          </div>
+                          <motion.div variants={copyVariants} className="min-w-0">
+                            <div className="flex items-start justify-between gap-6">
+                              <p className="max-w-xl font-sans text-base leading-relaxed text-gray-400 md:text-lg">
+                                {step.description}
+                              </p>
+                              <div className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/10 transition-all duration-300 group-hover:border-white group-hover:bg-white sm:flex">
+                                <ArrowRight className="h-4 w-4 -rotate-45 text-white/40 transition-all duration-300 group-hover:rotate-0 group-hover:text-black" />
+                              </div>
+                            </div>
+
+                            {step.tags && step.tags.length > 0 && (
+                              <div className="mt-7 flex flex-wrap gap-2">
+                                {step.tags.map((tag, tagIndex) => (
+                                  <motion.span
+                                    key={tag}
+                                    initial={{ opacity: 0, y: 10 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.45, delay: 0.18 + tagIndex * 0.04, ease }}
+                                    className="rounded-full border border-white/10 px-3 py-1 font-mono text-xs text-white/45 transition-colors duration-300 group-hover:border-white/20 group-hover:text-white/75"
+                                  >
+                                    {tag}
+                                  </motion.span>
+                                ))}
+                              </div>
+                            )}
+                          </motion.div>
                         </div>
-
-                        {step.tags && step.tags.length > 0 && (
-                          <div className="mt-7 flex flex-wrap gap-2">
-                            {step.tags.map((tag, tagIndex) => (
-                              <motion.span
-                                key={tag}
-                                initial={{ opacity: 0, y: 10 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.45, delay: 0.18 + tagIndex * 0.04, ease }}
-                                className="px-3 py-1 rounded-full border border-white/10 text-xs font-mono text-white/45 transition-colors duration-300 group-hover:border-white/20 group-hover:text-white/75"
-                              >
-                                {tag}
-                              </motion.span>
-                            ))}
-                          </div>
-                        )}
-                      </motion.div>
+                      </div>
                     </div>
                   </motion.article>
                 ))}
