@@ -89,12 +89,12 @@ export const Navbar = () => {
                 transition={{ duration: 0.2 }}
                 className="hidden lg:flex items-center gap-1 bg-white/5 rounded-full p-1 border border-white/5 absolute left-1/2 -translate-x-1/2"
               >
-                <ol className="flex items-center px-2 py-1">
+                <ol className="flex items-center">
                   {navItems.map((item) => {
                     const isActive = isActiveLink(item.href, item.activePaths);
 
                     return (
-                      <li key={item.name}>
+                      <li key={item.name} className='flex items-center justify-center'>
                         <a
                           href={item.href}
                           aria-current={isActive ? 'page' : undefined}

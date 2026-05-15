@@ -2,6 +2,7 @@
 import { motion } from 'motion/react';
 import { PageHero } from '../ui/page-hero/page-hero';
 import { useTinaHome } from '../../hooks/useTinaVisualEditing';
+import { HeroWaveDots } from '../hero-wave-dots/hero-wave-dots';
 
 export const Hero = () => {
   const { data: content, tinaField } = useTinaHome();
@@ -24,6 +25,7 @@ export const Hero = () => {
           </motion.h1>
         }
         description={content.heroDescription}
+        decorativeLayer={<HeroWaveDots />}
       />
     </div>
   );

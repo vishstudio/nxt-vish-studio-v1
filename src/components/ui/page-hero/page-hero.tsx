@@ -23,6 +23,8 @@ interface PageHeroProps {
   backgroundImage?: string;
   /** Optional extra classes for the background image layer */
   backgroundImageClassName?: string;
+  /** Optional decorative layer rendered behind hero content */
+  decorativeLayer?: React.ReactNode;
 }
 
 export const PageHero = ({
@@ -36,6 +38,7 @@ export const PageHero = ({
   className = '',
   backgroundImage,
   backgroundImageClassName = '',
+  decorativeLayer,
 }: PageHeroProps) => {
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
@@ -63,6 +66,12 @@ export const PageHero = ({
           <div className="absolute inset-0 bg-black/50" aria-hidden="true" />
           <div className="absolute inset-0 bg-linear-to-b from-vish-bg/75 via-black/20 to-vish-bg/90" aria-hidden="true" />
         </>
+      )}
+
+      {decorativeLayer && (
+        <div className="absolute inset-0 z-0" aria-hidden="true">
+          {decorativeLayer}
+        </div>
       )}
 
       <div className="relative z-10 max-w-[1400px] mx-auto w-full">

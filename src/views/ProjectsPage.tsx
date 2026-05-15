@@ -7,9 +7,14 @@ import { PageLayout } from '../components/ui/page-layout/page-layout';
 import { PageHero } from '../components/ui/page-hero/page-hero';
 import { Section } from '../components/ui/section/section';
 import { ProjectCard } from '../components/ui/project-card/project-card';
+import { ProjectsCta } from '../components/projects-cta/projects-cta';
 
 export const ProjectsPage = () => {
   const { data: projects } = useTinaProjectsList();
+  const ctaBackgroundImages = [
+    'https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0',
+    'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0',
+  ];
 
   return (
     <PageLayout>
@@ -33,7 +38,15 @@ export const ProjectsPage = () => {
       <Section className="mb-32">
         <div className="flex flex-col gap-20 md:gap-40">
           {projects.map((project: Project, index: number) => (
-            <ProjectCard key={project.slug} project={project} index={index} />
+            <div key={project.slug} className="contents">
+              <ProjectCard project={project} index={index} />
+              {(index + 1) % 2 === 0 && index < projects.length - 1 && (
+                <ProjectsCta
+                  index={Math.floor(index / 2)}
+                  backgroundImage={ctaBackgroundImages[Math.floor(index / 2) % ctaBackgroundImages.length]}
+                />
+              )}
+            </div>
           ))}
         </div>
       </Section>
