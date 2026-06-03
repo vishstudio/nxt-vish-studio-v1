@@ -15,6 +15,7 @@ import { Team } from '../components/team/team';
 import { Services } from '../components/services/services';
 import { Process } from '../components/process/process';
 import { Projects } from '../components/projects/projects';
+import { ProjectsCta } from '../components/projects-cta/projects-cta';
 import { Pricing } from '../components/pricing/pricing';
 import { Testimonials } from '../components/testimonials/testimonials';
 import { Contact } from '../components/contact/contact';
@@ -43,6 +44,11 @@ const homePageJsonLd = {
   ],
 };
 
+const homeCtaBackgroundImages = [
+  'https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0',
+  'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0',
+];
+
 export const Home = () => {
   return (
     <>
@@ -60,8 +66,10 @@ export const Home = () => {
         <TrustedPartners />
         <About />
         <Projects />
+        <ProjectsCta index={0} backgroundImage={homeCtaBackgroundImages[0]} />
         <Services />
         <Process />
+        <ProjectsCta index={1} backgroundImage={homeCtaBackgroundImages[1]} />
         {/* <Team /> */}
         {/* <Pricing /> */}
         <Testimonials />
