@@ -3,6 +3,7 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '../ui/button/button';
+import { PROJECT_INQUIRY_ACTION, PROJECT_INQUIRY_ARIA_LABEL, PROJECT_INQUIRY_HREF } from '../../lib/conversion';
 
 interface ProjectsCtaProps {
   index: number;
@@ -63,11 +64,13 @@ export const ProjectsCta = ({ index, backgroundImage }: ProjectsCtaProps) => {
 
           <div className="flex lg:justify-end">
             <Button
-              href="/contact"
+              href={PROJECT_INQUIRY_HREF}
               variant="white"
               size="lg"
               icon={<ArrowRight className="h-4 w-4 transition-transform group-hover:-rotate-45" />}
               iconPosition="right"
+              ariaLabel={PROJECT_INQUIRY_ARIA_LABEL}
+              dataConversionAction={PROJECT_INQUIRY_ACTION}
             >
               Start Project
             </Button>

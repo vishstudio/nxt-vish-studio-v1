@@ -35,6 +35,8 @@ export const Contact = () => {
             <a
               href={`mailto:${settings.email}`}
               className="block w-full"
+              aria-label="Start a project inquiry with VISH Studio by email"
+              data-conversion-action="project_inquiry_email"
             >
               <motion.div
                 initial="initial"

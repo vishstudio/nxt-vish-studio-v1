@@ -64,9 +64,9 @@ export const ProjectCard = ({ project, index, alternate = true }: ProjectCardPro
         </span>
 
         <Link href={`/project/${project.slug}`} className="block">
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-medium text-white mb-6 leading-[1.1] hover:text-gray-300 transition-colors">
+          <h3 className="font-display text-4xl md:text-5xl lg:text-6xl font-medium text-white mb-6 leading-[1.1] hover:text-gray-300 transition-colors">
             {project.title}
-          </h2>
+          </h3>
         </Link>
 
         <p className="font-sans text-gray-400 text-lg leading-relaxed mb-8 max-w-sm">

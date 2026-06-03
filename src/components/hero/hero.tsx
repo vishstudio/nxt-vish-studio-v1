@@ -5,6 +5,7 @@ import { PageHero } from '../ui/page-hero/page-hero';
 import { useTinaHome } from '../../hooks/useTinaVisualEditing';
 import { HeroWaveDots } from '../hero-wave-dots/hero-wave-dots';
 import { Button } from '../ui/button/button';
+import { PROJECT_INQUIRY_ACTION, PROJECT_INQUIRY_ARIA_LABEL, PROJECT_INQUIRY_HREF } from '../../lib/conversion';
 
 export const Hero = () => {
   const { data: content, tinaField } = useTinaHome();
@@ -46,11 +47,13 @@ export const Hero = () => {
               className="rounded-full"
             >
               <Button
-                href="/contact"
+                href={PROJECT_INQUIRY_HREF}
                 variant="primary"
                 size="md"
                 icon={<ArrowRight className="h-4 w-4 transition-transform group-hover:-rotate-45" />}
                 iconPosition="right"
+                ariaLabel={PROJECT_INQUIRY_ARIA_LABEL}
+                dataConversionAction={PROJECT_INQUIRY_ACTION}
                 className="px-6 py-4 font-mono text-xs font-semibold uppercase tracking-widest"
               >
                 Start a Project

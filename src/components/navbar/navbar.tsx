@@ -6,6 +6,7 @@ import { Menu, X, ArrowRight } from 'lucide-react';
 import { Button } from '../ui/button/button';
 import { useTinaSettings } from '../../hooks/useTinaVisualEditing';
 import { LogoText } from '../logo-text/logo-text';
+import { PROJECT_INQUIRY_ACTION, PROJECT_INQUIRY_ARIA_LABEL, PROJECT_INQUIRY_HREF } from '../../lib/conversion';
 
 export const Navbar = () => {
   const { data: settings } = useTinaSettings();
@@ -125,11 +126,13 @@ export const Navbar = () => {
                   className="hidden lg:flex"
                 >
                   <Button
-                    href="/contact"
+                    href={PROJECT_INQUIRY_HREF}
                     variant="primary"
                     size="sm"
                     icon={<ArrowRight className="w-4 h-4 transition-transform group-hover:-rotate-45" />}
                     iconPosition="right"
+                    ariaLabel={PROJECT_INQUIRY_ARIA_LABEL}
+                    dataConversionAction={PROJECT_INQUIRY_ACTION}
                     className="font-sans"
                   >
                     Start Project
@@ -175,11 +178,13 @@ export const Navbar = () => {
                 className="rounded-full"
               >
                 <Button
-                  href="/contact"
+                  href={PROJECT_INQUIRY_HREF}
                   variant="primary"
                   size="sm"
                   icon={<ArrowRight className="w-4 h-4 transition-transform group-hover:-rotate-45" />}
                   iconPosition="right"
+                  ariaLabel={PROJECT_INQUIRY_ARIA_LABEL}
+                  dataConversionAction={PROJECT_INQUIRY_ACTION}
                   className="py-3 font-mono text-[10px] font-semibold uppercase tracking-widest"
                 >
                   Start a Project

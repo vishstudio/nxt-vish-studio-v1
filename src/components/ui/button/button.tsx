@@ -19,6 +19,8 @@ interface ButtonProps {
   disabled?: boolean;
   icon?: React.ReactNode;
   iconPosition?: 'left' | 'right';
+  ariaLabel?: string;
+  dataConversionAction?: string;
 }
 
 function cn(...inputs: ClassValue[]) {
@@ -35,7 +37,9 @@ export const Button = ({
   type = "button",
   disabled = false,
   icon,
-  iconPosition = 'right'
+  iconPosition = 'right',
+  ariaLabel,
+  dataConversionAction,
 }: ButtonProps) => {
   const baseStyles = "inline-flex items-center justify-center rounded-full font-medium transition-all duration-300 focus:outline-none disabled:opacity-50 disabled:pointer-events-none group";
 
@@ -85,6 +89,8 @@ export const Button = ({
           target="_blank"
           rel="noopener noreferrer"
           onClick={onClick}
+          aria-label={ariaLabel}
+          data-conversion-action={dataConversionAction}
         >
           {content}
         </motion.a>
@@ -98,6 +104,8 @@ export const Button = ({
           href={href}
           className={classes}
           onClick={onClick}
+          aria-label={ariaLabel}
+          data-conversion-action={dataConversionAction}
         >
           {content}
         </motion.a>
@@ -105,7 +113,13 @@ export const Button = ({
     }
 
     return (
-      <Link href={href} className={classes} onClick={onClick}>
+      <Link
+        href={href}
+        className={classes}
+        onClick={onClick}
+        aria-label={ariaLabel}
+        data-conversion-action={dataConversionAction}
+      >
         {content}
       </Link>
     );
@@ -118,6 +132,8 @@ export const Button = ({
       className={classes}
       onClick={onClick}
       disabled={disabled}
+      aria-label={ariaLabel}
+      data-conversion-action={dataConversionAction}
     >
       {content}
     </motion.button>
