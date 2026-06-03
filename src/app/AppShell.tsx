@@ -4,7 +4,6 @@ import { useState, useCallback, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence } from 'motion/react';
 import { Loader } from '@/src/components/loader/loader';
-import { PostHogProvider } from '@/src/components/post-hog-provider/post-hog-provider';
 import { CustomCursor } from '@/src/components/custom-cursor/custom-cursor';
 import { ProjectInquiryModal } from '@/src/components/project-inquiry-modal/project-inquiry-modal';
 import { ServiceWorkerRegistration } from '@/src/components/service-worker-registration/service-worker-registration';
@@ -28,7 +27,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <PostHogProvider>
+    <>
       {/* Custom cursor lives here so it works on every page */}
       <CustomCursor />
       <ServiceWorkerRegistration />
@@ -39,6 +38,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         )}
       </AnimatePresence>
       {children}
-    </PostHogProvider>
+    </>
   );
 }
