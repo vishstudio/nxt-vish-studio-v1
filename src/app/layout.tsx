@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { AppShell } from "./AppShell";
+import { GoogleAnalytics } from "../components/google-analytics/google-analytics";
 
 export const metadata: Metadata = {
   title: "VISH Studio | Creative Web Agency Mauritius",
@@ -30,6 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body style={{ overflowX: 'clip' }}>
+        <GoogleAnalytics />
         <AppShell>{children}</AppShell>
       </body>
     </html>

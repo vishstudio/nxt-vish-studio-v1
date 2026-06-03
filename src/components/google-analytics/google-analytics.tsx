@@ -1,10 +1,10 @@
 'use client';
 
-import { Suspense, useEffect } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import Script from 'next/script';
 
-const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 declare global {
   interface Window {
@@ -39,8 +39,61 @@ function GoogleAnalyticsPageView() {
   return null;
 }
 
-export function GoogleAnalytics() {
+function isTinaPreviewContext(
+  pathname: string | null,
+  searchParams: { has: (name: string) => boolean } | null,
+) {
+  if (pathname?.startsWith('/admin')) {
+    return true;
+  }
+
+  const tinaPreviewParams = [
+    'tina',
+    'tina-admin',
+    'tina-preview',
+    'tinaPreview',
+    'visualEditing',
+    'preview',
+  ];
+
+  if (tinaPreviewParams.some((param) => searchParams?.has(param))) {
+    return true;
+  }
+
+  if (typeof window === 'undefined') {
+    return true;
+  }
+
+  let isFramed = false;
+
+  try {
+    isFramed = window.self !== window.top;
+  } catch {
+    isFramed = true;
+  }
+
+  const referrer = document.referrer.toLowerCase();
+  const isTinaReferrer = referrer.includes('/admin') || referrer.includes('tina');
+
+  return isFramed && isTinaReferrer;
+}
+
+function GoogleAnalyticsScripts() {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const [canRenderAnalytics, setCanRenderAnalytics] = useState(false);
+
+  useEffect(() => {
+    setCanRenderAnalytics(
+      Boolean(GA_MEASUREMENT_ID) && !isTinaPreviewContext(pathname, searchParams),
+    );
+  }, [pathname, searchParams]);
+
   if (!GA_MEASUREMENT_ID) {
+    return null;
+  }
+
+  if (!canRenderAnalytics) {
     return null;
   }
 
@@ -67,5 +120,13 @@ export function GoogleAnalytics() {
         <GoogleAnalyticsPageView />
       </Suspense>
     </>
+  );
+}
+
+export function GoogleAnalytics() {
+  return (
+    <Suspense fallback={null}>
+      <GoogleAnalyticsScripts />
+    </Suspense>
   );
 }

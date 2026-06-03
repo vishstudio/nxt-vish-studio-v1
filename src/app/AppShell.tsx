@@ -5,7 +5,6 @@ import { usePathname } from 'next/navigation';
 import { AnimatePresence } from 'motion/react';
 import { Loader } from '@/src/components/loader/loader';
 import { CustomCursor } from '@/src/components/custom-cursor/custom-cursor';
-import { GoogleAnalytics } from '@/src/components/google-analytics/google-analytics';
 import { ProjectInquiryModal } from '@/src/components/project-inquiry-modal/project-inquiry-modal';
 import { ServiceWorkerRegistration } from '@/src/components/service-worker-registration/service-worker-registration';
 
@@ -29,7 +28,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <GoogleAnalytics />
       {/* Custom cursor lives here so it works on every page */}
       <CustomCursor />
       <ServiceWorkerRegistration />
