@@ -150,6 +150,46 @@ export const Navbar = () => {
         </div>
       </motion.header>
 
+      <AnimatePresence>
+        {isScrolled && !isMobileMenuOpen && (
+          <motion.div
+            initial={{ y: 96, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 96, opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed bottom-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none lg:hidden"
+          >
+            <div className="pointer-events-auto flex w-full max-w-[420px] items-center justify-between gap-3 rounded-full border border-white/10 bg-black/80 py-2.5 pl-4 pr-2 shadow-2xl shadow-black/50 backdrop-blur-xl">
+              <span className="font-mono text-[10px] font-semibold uppercase tracking-widest text-white/40">
+                Ready?
+              </span>
+              <motion.div
+                animate={{
+                  boxShadow: [
+                    '0 0 0 0 rgba(255,214,0,0)',
+                    '0 0 22px 0 rgba(255,214,0,0.28)',
+                    '0 0 0 0 rgba(255,214,0,0)',
+                  ],
+                }}
+                transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
+                className="rounded-full"
+              >
+                <Button
+                  href="/contact"
+                  variant="primary"
+                  size="sm"
+                  icon={<ArrowRight className="w-4 h-4 transition-transform group-hover:-rotate-45" />}
+                  iconPosition="right"
+                  className="py-3 font-mono text-[10px] font-semibold uppercase tracking-widest"
+                >
+                  Start a Project
+                </Button>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (

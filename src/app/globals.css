@@ -34,15 +34,19 @@ body {
   color: var(--color-vish-text);
   font-family: var(--font-sans);
   overflow-x: clip;
-  /* Hide native cursor globally so the custom cursor takes over */
-  cursor: none;
 }
 
-/* Ensure no element shows a native cursor */
-*,
-*::before,
-*::after {
-  cursor: none !important;
+@media (min-width: 1024px) and (pointer: fine) {
+  body {
+    /* Hide native cursor on desktop so the custom cursor takes over */
+    cursor: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    cursor: none !important;
+  }
 }
 
 /* Custom Scrollbar */

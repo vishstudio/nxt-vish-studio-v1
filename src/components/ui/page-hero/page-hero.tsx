@@ -13,6 +13,8 @@ interface PageHeroProps {
   title: React.ReactNode;
   /** Optional description paragraph below the title */
   description?: string;
+  /** Optional action rendered directly below the description */
+  action?: React.ReactNode;
   /** data-tina-field value for the description paragraph */
   descriptionTinaField?: string;
   /** Hero size variant: 'full' for homepage (min-h-screen), 'large' for sub-pages (min-h-[60vh]) */
@@ -33,6 +35,7 @@ export const PageHero = ({
   labelStyle = 'mono',
   title,
   description,
+  action,
   descriptionTinaField,
   size = 'large',
   className = '',
@@ -108,6 +111,8 @@ export const PageHero = ({
               {description}
             </motion.p>
           )}
+
+          {action}
         </div>
       </div>
     </section>

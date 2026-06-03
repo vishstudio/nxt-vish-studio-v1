@@ -6,11 +6,27 @@ import { ArrowUpRight } from 'lucide-react';
 type CursorVariant = 'default' | 'hover' | 'project';
 
 export const CustomCursor = () => {
+  const [isDesktopPointer, setIsDesktopPointer] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: -200, y: -200 });
   const [cursorVariant, setCursorVariant] = useState<CursorVariant>('default');
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia('(min-width: 1024px) and (pointer: fine)');
+    const updatePointerMode = () => setIsDesktopPointer(mediaQuery.matches);
+
+    updatePointerMode();
+    mediaQuery.addEventListener('change', updatePointerMode);
+
+    return () => mediaQuery.removeEventListener('change', updatePointerMode);
+  }, []);
+
+  useEffect(() => {
+    if (!isDesktopPointer) {
+      setVisible(false);
+      return;
+    }
+
     const updateMousePosition = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
       if (!visible) setVisible(true);
@@ -46,7 +62,11 @@ export const CustomCursor = () => {
       document.documentElement.removeEventListener('mouseleave', handleMouseLeave);
       document.documentElement.removeEventListener('mouseenter', handleMouseEnter);
     };
-  }, [visible]);
+  }, [isDesktopPointer, visible]);
+
+  if (!isDesktopPointer) {
+    return null;
+  }
 
   const sizeMap: Record<CursorVariant, { w: number; h: number }> = {
     default: { w: 12, h: 12 },
@@ -104,4 +124,3 @@ export const CustomCursor = () => {
     </motion.div>
   );
 };
-
