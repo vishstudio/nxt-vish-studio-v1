@@ -1,4 +1,5 @@
 import Script from 'next/script';
+import { COOKIE_CONSENT_EVENT, COOKIE_CONSENT_KEY } from '@/src/lib/cookie-consent';
 import { GoogleAnalyticsPageView } from './google-analytics-page-view';
 
 const GA_MEASUREMENT_ID = (process.env.NEXT_PUBLIC_GA_ID ?? '')
@@ -19,6 +20,8 @@ export function GoogleAnalytics() {
           __html: `
             (function () {
               var measurementId = '${GA_MEASUREMENT_ID}';
+              var consentKey = '${COOKIE_CONSENT_KEY}';
+              var consentEvent = '${COOKIE_CONSENT_EVENT}';
               var previewParams = ['tina', 'tina-admin', 'tina-preview', 'tinaPreview', 'visualEditing', 'preview'];
               var params = new URLSearchParams(window.location.search);
               var isPreviewRoute = window.location.pathname.indexOf('/admin') === 0;
@@ -38,15 +41,55 @@ export function GoogleAnalytics() {
                 return;
               }
 
-              window.dataLayer = window.dataLayer || [];
-              window.gtag = window.gtag || function gtag(){ window.dataLayer.push(arguments); };
-              window.gtag('js', new Date());
-              window.gtag('config', measurementId);
+              function hasAnalyticsConsent() {
+                try {
+                  var storedConsent = window.localStorage.getItem(consentKey);
+                  if (!storedConsent) return false;
+                  return JSON.parse(storedConsent).analytics === true;
+                } catch (error) {
+                  return false;
+                }
+              }
 
-              var googleTag = document.createElement('script');
-              googleTag.async = true;
-              googleTag.src = 'https://www.googletagmanager.com/gtag/js?id=' + measurementId;
-              document.head.appendChild(googleTag);
+              function setAnalyticsStorage(value) {
+                if (!window.gtag) return;
+
+                window.gtag('consent', 'update', {
+                  analytics_storage: value
+                });
+              }
+
+              function loadGoogleAnalytics() {
+                if (window.__vishGoogleAnalyticsLoaded) return;
+
+                window.__vishGoogleAnalyticsLoaded = true;
+                window.dataLayer = window.dataLayer || [];
+                window.gtag = window.gtag || function gtag(){ window.dataLayer.push(arguments); };
+                window.gtag('consent', 'default', {
+                  analytics_storage: 'granted'
+                });
+                window.gtag('js', new Date());
+                window.gtag('config', measurementId);
+
+                var googleTag = document.createElement('script');
+                googleTag.async = true;
+                googleTag.src = 'https://www.googletagmanager.com/gtag/js?id=' + measurementId;
+                document.head.appendChild(googleTag);
+              }
+
+              window.addEventListener(consentEvent, function (event) {
+                if (event.detail && event.detail.analytics === true) {
+                  loadGoogleAnalytics();
+                } else {
+                  setAnalyticsStorage('denied');
+                }
+              });
+
+              if (!hasAnalyticsConsent()) {
+                return;
+              }
+
+              loadGoogleAnalytics();
             })();
           `,
         }}

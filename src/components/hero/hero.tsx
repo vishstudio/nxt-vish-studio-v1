@@ -1,4 +1,6 @@
 'use client';
+import { useEffect, useRef, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { PageHero } from '../ui/page-hero/page-hero';
@@ -6,9 +8,60 @@ import { useTinaHome } from '../../hooks/useTinaVisualEditing';
 import { HeroWaveDots } from '../hero-wave-dots/hero-wave-dots';
 import { Button } from '../ui/button/button';
 import { openProjectInquiryModal, PROJECT_INQUIRY_ACTION, PROJECT_INQUIRY_ARIA_LABEL } from '../../lib/conversion';
+import { APP_READY_EVENT, HERO_REVEALED_EVENT } from '../../lib/site-events';
+
+const revealEase = [0.16, 1, 0.3, 1] as const;
+
+const headlineVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.16,
+      delayChildren: 0.15,
+    },
+  },
+};
+
+const headlineLineVariants = {
+  hidden: { opacity: 0, y: 42, filter: 'blur(10px)' },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: { duration: 0.85, ease: revealEase },
+  },
+};
 
 export const Hero = () => {
   const { data: content, tinaField } = useTinaHome();
+  const pathname = usePathname();
+  const hasDispatchedHeroReveal = useRef(false);
+  const [isHeroRevealed, setIsHeroRevealed] = useState(pathname !== '/');
+
+  useEffect(() => {
+    if (pathname !== '/') {
+      setIsHeroRevealed(true);
+      return undefined;
+    }
+
+    setIsHeroRevealed(false);
+    hasDispatchedHeroReveal.current = false;
+
+    const handleAppReady = () => {
+      setIsHeroRevealed(true);
+    };
+
+    window.addEventListener(APP_READY_EVENT, handleAppReady);
+    return () => window.removeEventListener(APP_READY_EVENT, handleAppReady);
+  }, [pathname]);
+
+  const handleHeroRevealComplete = () => {
+    if (!isHeroRevealed) return;
+    if (hasDispatchedHeroReveal.current) return;
+
+    hasDispatchedHeroReveal.current = true;
+    window.dispatchEvent(new Event(HERO_REVEALED_EVENT));
+  };
 
   return (
     <div className="hero contents">
@@ -16,23 +69,43 @@ export const Hero = () => {
         label={content.heroLabel}
         labelStyle="pill"
         size="full"
+        isRevealed={isHeroRevealed}
         title={
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            variants={headlineVariants}
+            initial="hidden"
+            animate={isHeroRevealed ? 'visible' : 'hidden'}
             className="font-display text-5xl md:text-6xl lg:text-8xl font-medium tracking-tight leading-[0.95] text-white mb-12"
           >
-            <span data-tina-field={tinaField('heroTitleLine1')}>{content.heroTitleLine1}</span> <br />
-            <span className="text-gray-500"><span data-tina-field={tinaField('heroTitleLine2')}>{content.heroTitleLine2}</span><span className="text-vish-accent">.</span></span>
+            <span className="block overflow-hidden pb-1">
+              <motion.span
+                variants={headlineLineVariants}
+                className="inline-block will-change-transform"
+                data-tina-field={tinaField('heroTitleLine1')}
+              >
+                {content.heroTitleLine1}
+              </motion.span>
+            </span>
+            <span className="block overflow-hidden pb-1 text-gray-500">
+              <motion.span
+                variants={headlineLineVariants}
+                className="inline-block will-change-transform"
+              >
+                <span data-tina-field={tinaField('heroTitleLine2')}>{content.heroTitleLine2}</span>
+                <span className="text-vish-accent">.</span>
+              </motion.span>
+            </span>
           </motion.h1>
         }
         description={content.heroDescription}
         action={
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.55 }}
+            initial={{ opacity: 0, y: 18, filter: 'blur(8px)' }}
+            animate={isHeroRevealed
+              ? { opacity: 1, y: 0, filter: 'blur(0px)' }
+              : { opacity: 0, y: 18, filter: 'blur(8px)' }}
+            transition={{ duration: 0.75, delay: 0.75, ease: [0.16, 1, 0.3, 1] }}
+            onAnimationComplete={handleHeroRevealComplete}
             className="mt-8 flex"
           >
             <motion.div

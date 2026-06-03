@@ -5,8 +5,10 @@ import { usePathname } from 'next/navigation';
 import { AnimatePresence } from 'motion/react';
 import { Loader } from '@/src/components/loader/loader';
 import { CustomCursor } from '@/src/components/custom-cursor/custom-cursor';
+import { CookieSettings } from '@/src/components/cookie-settings/cookie-settings';
 import { ProjectInquiryModal } from '@/src/components/project-inquiry-modal/project-inquiry-modal';
 import { ServiceWorkerRegistration } from '@/src/components/service-worker-registration/service-worker-registration';
+import { APP_READY_EVENT } from '@/src/lib/site-events';
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -24,6 +26,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   const handleLoadingComplete = useCallback(() => {
     setLoadingPath(null);
+    window.dispatchEvent(new Event(APP_READY_EVENT));
   }, []);
 
   return (
@@ -32,6 +35,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <CustomCursor />
       <ServiceWorkerRegistration />
       <ProjectInquiryModal />
+      <CookieSettings />
       <AnimatePresence>
         {loadingPath === '/' && (
           <Loader key={`loader-${loadingPath}`} onLoadingComplete={handleLoadingComplete} />

@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, ArrowRight } from 'lucide-react';
 import { Button } from '../ui/button/button';
+import { CookieSettingsTrigger } from '../cookie-settings/cookie-settings';
 import { useTinaSettings } from '../../hooks/useTinaVisualEditing';
 import { LogoText } from '../logo-text/logo-text';
 import { openProjectInquiryModal, PROJECT_INQUIRY_ACTION, PROJECT_INQUIRY_ARIA_LABEL } from '../../lib/conversion';
@@ -162,10 +163,13 @@ export const Navbar = () => {
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="fixed bottom-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none lg:hidden"
           >
-            <div className="pointer-events-auto flex w-full max-w-[420px] items-center justify-between gap-3 rounded-full border border-white/10 bg-black/80 py-2.5 pl-4 pr-2 shadow-2xl shadow-black/50 backdrop-blur-xl">
-              <span className="font-mono text-[10px] font-semibold uppercase tracking-widest text-white/40">
-                Ready?
-              </span>
+            <div className="pointer-events-auto flex w-full max-w-[420px] items-center justify-between gap-3 rounded-full border border-white/10 bg-black/80 py-2.5 pl-2.5 pr-2 shadow-2xl shadow-black/50 backdrop-blur-xl">
+              <div className="flex min-w-0 items-center gap-2">
+                <CookieSettingsTrigger compact className="h-10 w-10 shrink-0" />
+                <span className="hidden font-mono text-[10px] font-semibold uppercase tracking-widest text-white/40 sm:inline">
+                  Ready?
+                </span>
+              </div>
               <motion.div
                 animate={{
                   boxShadow: [

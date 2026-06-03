@@ -2,6 +2,7 @@
 import { motion } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
 import { useTinaSettings } from '../../hooks/useTinaVisualEditing';
+import { CookieSettingsTrigger } from '../cookie-settings/cookie-settings';
 
 export const Contact = () => {
   const { data: settings, tinaField, rawSiteSettings } = useTinaSettings();
@@ -172,10 +173,11 @@ export const Contact = () => {
         {/* Footer */}
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-xs font-mono text-gray-600 uppercase tracking-wider">
           <span>{settings.copyright} <span className="text-[16px] lg:text-[14px] font-logo lowercase"><strong>vish</strong> studio.</span></span>
-          <div className="flex gap-8">
+          <div className="flex flex-wrap items-center justify-center gap-6 md:justify-end md:gap-8">
             {settings.footerLinks.map((link) => (
               <a key={link.label} href={link.url} className="hover:text-white transition-colors">{link.label}</a>
             ))}
+            <CookieSettingsTrigger className="h-auto bg-transparent p-0 font-mono text-xs uppercase tracking-wider text-gray-600 shadow-none hover:bg-transparent hover:text-white" />
           </div>
         </div>
       </div>

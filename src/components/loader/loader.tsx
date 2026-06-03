@@ -25,7 +25,7 @@ export const Loader = ({ onLoadingComplete }: { onLoadingComplete: () => void })
       exit={{ opacity: 0, transition: { duration: 0.8, ease: "easeInOut" } }}
     >
       {/* Top Row */}
-      <div className="flex justify-between items-start w-full">
+      <div className="flex justify-between items-center lg:item-start w-full">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -39,7 +39,7 @@ export const Loader = ({ onLoadingComplete }: { onLoadingComplete: () => void })
           transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="font-mono text-xs opacity-50 uppercase tracking-widest"
         >
-          Portfolio ©2026
+          ©2026
         </motion.div>
       </div>
 

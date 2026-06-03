@@ -27,6 +27,8 @@ interface PageHeroProps {
   backgroundImageClassName?: string;
   /** Optional decorative layer rendered behind hero content */
   decorativeLayer?: React.ReactNode;
+  /** Controls hero content reveal timing when a page-level loader is present */
+  isRevealed?: boolean;
 }
 
 export const PageHero = ({
@@ -42,6 +44,7 @@ export const PageHero = ({
   backgroundImage,
   backgroundImageClassName = '',
   decorativeLayer,
+  isRevealed = true,
 }: PageHeroProps) => {
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
@@ -81,7 +84,7 @@ export const PageHero = ({
         {label && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8 }}
             className="mb-8"
           >
@@ -103,7 +106,7 @@ export const PageHero = ({
           {description && (
             <motion.p
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.8, delay: 0.4 }}
               className="font-sans text-md md:text-xl text-gray-400 max-w-2xl leading-relaxed"
               data-tina-field={descriptionTinaField}
