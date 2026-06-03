@@ -13,17 +13,17 @@
     {
       "id": "01",
       "title": "Strategy",
-      "description": "Laying the groundwork for digital success through data-driven insights and market analysis."
+      "description": "Aligning your digital presence with long-term business goals. We focus on brand positioning, client onboarding automation, and workflow optimization to turn your traffic into measurable revenue."
     },
     {
       "id": "02",
       "title": "Design",
-      "description": "Crafting immersive visual systems and user interfaces that tell your unique brand story."
+      "description": "High-end, minimalist visual identities designed for the modern web. We build intuitive, high-contrast user interfaces with rhythmic typography that elevates your brand authority and guarantees a seamless user experience."
     },
     {
       "id": "03",
       "title": "Development",
-      "description": "Building robust, scalable, and high-performance technical solutions for the modern web."
+      "description": "Engineering fast, reliable, and highly scalable digital products. Specialized in robust React, TypeScript, and Next.js architectures, secure backend integrations, and custom applications built to perform under pressure."
     },
     {
       "id": "04",
@@ -31,13 +31,13 @@
       "description": "Amplifying your voice to reach the right audience with precision and impact."
     }
   ],
-  "processHeading": "Our Process",
-  "processSubtext": "From ideas to completion",
+  "processHeading": "How We Partner",
+  "processSubtext": "A focused delivery model for moving from business clarity to production-ready digital systems.",
   "processSteps": [
     {
       "num": "01",
-      "title": "Discovery",
-      "description": "We dive deep into your business objectives, understanding your audience and challenges to build a solid foundation.",
+      "title": "Discovery & Strategy",
+      "description": "Uncovering business bottlenecks, analyzing user data, and mapping out the technical product architecture.",
       "tags": [
         "Research",
         "Audit",
@@ -46,42 +46,32 @@
     },
     {
       "num": "02",
-      "title": "Strategy",
-      "description": "Based on our findings, we develop a comprehensive roadmap that aligns with your business goals and user needs.",
+      "title": "High-Fidelity Design",
+      "description": "Crafting distinct visual systems and interactive user journeys engineered around frictionless user experiences.",
       "tags": [
-        "Planning",
-        "UX Arch",
-        "Roadmap"
+        "UI",
+        "UX",
+        "Systems"
       ]
     },
     {
       "num": "03",
-      "title": "Design",
-      "description": "We craft visually stunning and intuitive interfaces that reflect your brand identity while maximizing user engagement.",
+      "title": "Production-Grade Engineering",
+      "description": "Translating approved designs into lightning-fast, scalable React, TypeScript, and Next.js codebases.",
       "tags": [
-        "UI",
-        "Interaction",
-        "Motion"
+        "React",
+        "TypeScript",
+        "Next.js"
       ]
     },
     {
       "num": "04",
-      "title": "Development",
-      "description": "Our engineering team brings the designs to life using cutting-edge technologies, ensuring performance and scalability.",
+      "title": "Deployment & Growth",
+      "description": "Comprehensive performance testing, search engine optimization, and seamless deployment for maximum business impact.",
       "tags": [
-        "Frontend",
-        "Backend",
-        "QA"
-      ]
-    },
-    {
-      "num": "05",
-      "title": "Launch",
-      "description": "We handle the deployment process with precision, ensuring a smooth transition and providing ongoing support for growth.",
-      "tags": [
-        "Deploy",
-        "Monitor",
-        "Scale"
+        "QA",
+        "SEO",
+        "Launch"
       ]
     }
   ]

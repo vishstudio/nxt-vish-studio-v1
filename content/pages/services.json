@@ -5,7 +5,7 @@
   "categories": [
     {
       "category": "Strategy",
-      "description": "We build the foundation for your digital presence, ensuring every decision is data-driven and aligned with your business goals.",
+      "description": "Aligning your digital presence with long-term business goals. We focus on brand positioning, client onboarding automation, and workflow optimization to turn your traffic into measurable revenue.",
       "items": [
         "Brand Strategy",
         "UX Research",
@@ -17,7 +17,7 @@
     },
     {
       "category": "Design",
-      "description": "Crafting beautiful, functional, and user-centric interfaces that tell your story and engage your audience.",
+      "description": "High-end, minimalist visual identities designed for the modern web. We build intuitive, high-contrast user interfaces with rhythmic typography that elevates your brand authority and guarantees a seamless user experience.",
       "items": [
         "UI/UX Design",
         "Visual Identity",
@@ -29,7 +29,7 @@
     },
     {
       "category": "Development",
-      "description": "Turning designs into robust, scalable digital products using cutting-edge technologies and best practices.",
+      "description": "Engineering fast, reliable, and highly scalable digital products. Specialized in robust React, TypeScript, and Next.js architectures, secure backend integrations, and custom applications built to perform under pressure.",
       "items": [
         "Frontend Development",
         "Backend Engineering",

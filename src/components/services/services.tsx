@@ -6,6 +6,15 @@ import { Button } from '../ui/button/button';
 import { useTinaHome } from '../../hooks/useTinaVisualEditing';
 import { SectionTitle } from '../ui/section-title/section-title';
 
+const developmentTechStack = [
+  'React',
+  'TypeScript',
+  'Next.js',
+  'Tailwind CSS',
+  'Node.js',
+  'Firebase/Firestore',
+];
+
 export const Services = () => {
   const { data: content, tinaField } = useTinaHome();
   const services = content.services;
@@ -76,6 +85,22 @@ export const Services = () => {
                 <p className="font-sans text-sm text-gray-500 leading-relaxed group-hover:text-gray-400 transition-colors duration-300">
                   {service.description}
                 </p>
+                {service.title === 'Development' && (
+                  <ul className="mt-6 flex flex-wrap gap-2" aria-label="Development tech stack">
+                    {developmentTechStack.map((technology, techIndex) => (
+                      <motion.li
+                        key={technology}
+                        initial={{ opacity: 0, y: 8 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.4, delay: 0.2 + techIndex * 0.04 }}
+                        className="rounded-full border border-white/10 px-3 py-1 font-mono text-xs text-white/45 transition-colors duration-300 hover:border-white/20 hover:text-white/75"
+                      >
+                        {technology}
+                      </motion.li>
+                    ))}
+                  </ul>
+                )}
               </div>
 
               <div className="flex justify-between items-end mt-8">

@@ -74,6 +74,15 @@ export const Contact = () => {
                 </motion.div>
               </motion.div>
             </a>
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="mt-8 max-w-2xl font-mono text-xs uppercase tracking-widest text-neutral-500"
+            >
+              Based in Mauritius, partnering with scaling brands globally to engineer distinct digital ecosystems.
+            </motion.p>
           </div>
 
           {/* Secondary Details Grid */}

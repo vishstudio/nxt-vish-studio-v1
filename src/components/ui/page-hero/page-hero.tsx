@@ -105,7 +105,7 @@ export const PageHero = ({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="font-sans text-xl md:text-2xl text-gray-400 max-w-2xl leading-relaxed"
+              className="font-sans text-md md:text-xl text-gray-400 max-w-2xl leading-relaxed"
               data-tina-field={descriptionTinaField}
             >
               {description}
