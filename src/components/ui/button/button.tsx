@@ -5,8 +5,18 @@ import { motion } from 'motion/react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
-type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'link' | 'white';
-type ButtonSize = 'sm' | 'md' | 'lg' | 'icon';
+type ButtonVariant =
+  | 'cta'
+  | 'navigation'
+  | 'caseStudy'
+  | 'external'
+  | 'primary'
+  | 'secondary'
+  | 'outline'
+  | 'ghost'
+  | 'link'
+  | 'white';
+type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'icon' | 'text';
 
 interface ButtonProps {
   children: React.ReactNode;
@@ -21,6 +31,7 @@ interface ButtonProps {
   iconPosition?: 'left' | 'right';
   ariaLabel?: string;
   dataConversionAction?: string;
+  tabIndex?: number;
 }
 
 function cn(...inputs: ClassValue[]) {
@@ -40,10 +51,15 @@ export const Button = ({
   iconPosition = 'right',
   ariaLabel,
   dataConversionAction,
+  tabIndex,
 }: ButtonProps) => {
-  const baseStyles = "inline-flex items-center justify-center rounded-full font-medium transition-all duration-300 focus:outline-none disabled:opacity-50 disabled:pointer-events-none group";
+  const baseStyles = "inline-flex items-center justify-center rounded-full font-medium transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-vish-accent/70 focus-visible:ring-offset-2 focus-visible:ring-offset-black disabled:opacity-50 disabled:pointer-events-none group";
 
   const variants = {
+    cta: "bg-vish-accent text-black hover:bg-white border border-transparent shadow-[0_0_15px_rgba(255,214,0,0.3)] hover:shadow-[0_0_25px_rgba(255,255,255,0.4)]",
+    navigation: "bg-white text-black hover:bg-vish-accent hover:text-black border border-transparent shadow-[0_0_15px_rgba(255,255,255,0.3)] hover:shadow-[0_0_25px_rgba(255,214,0,0.4)]",
+    caseStudy: "bg-transparent border border-transparent text-white hover:text-vish-accent hover:border-vish-accent/40",
+    external: "bg-vish-accent text-black hover:bg-white border border-transparent font-mono font-semibold",
     primary: "bg-vish-accent text-black hover:bg-white border border-transparent shadow-[0_0_15px_rgba(255,214,0,0.3)] hover:shadow-[0_0_25px_rgba(255,255,255,0.4)]",
     secondary: "bg-white/10 text-white hover:bg-white/20 border border-white/5 backdrop-blur-sm",
     outline: "bg-transparent border border-white/20 text-white hover:border-vish-accent hover:text-vish-accent",
@@ -53,10 +69,12 @@ export const Button = ({
   };
 
   const sizes = {
+    xs: "px-3 py-1 text-xs",
     sm: "px-4 py-2 text-xs",
     md: "px-6 py-3 text-sm",
     lg: "px-8 py-4 text-base",
-    icon: "w-10 h-10 p-0 flex items-center justify-center rounded-full"
+    icon: "w-10 h-10 p-0 flex items-center justify-center rounded-full",
+    text: "h-auto p-0 text-base"
   };
 
   const classes = cn(
@@ -77,7 +95,8 @@ export const Button = ({
 
   // If href is provided, render appropriate link
   if (href) {
-    const isExternal = href.startsWith('http');
+    const isExternal = href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:');
+    const opensInNewTab = href.startsWith('http');
     const isAnchor = href.startsWith('#');
 
     if (isExternal) {
@@ -86,11 +105,12 @@ export const Button = ({
           whileTap={{ scale: 0.98 }}
           href={href}
           className={classes}
-          target="_blank"
-          rel="noopener noreferrer"
+          target={opensInNewTab ? '_blank' : undefined}
+          rel={opensInNewTab ? 'noopener noreferrer' : undefined}
           onClick={onClick}
           aria-label={ariaLabel}
           data-conversion-action={dataConversionAction}
+          tabIndex={tabIndex}
         >
           {content}
         </motion.a>
@@ -106,6 +126,7 @@ export const Button = ({
           onClick={onClick}
           aria-label={ariaLabel}
           data-conversion-action={dataConversionAction}
+          tabIndex={tabIndex}
         >
           {content}
         </motion.a>
@@ -119,6 +140,7 @@ export const Button = ({
         onClick={onClick}
         aria-label={ariaLabel}
         data-conversion-action={dataConversionAction}
+        tabIndex={tabIndex}
       >
         {content}
       </Link>
@@ -134,6 +156,7 @@ export const Button = ({
       disabled={disabled}
       aria-label={ariaLabel}
       data-conversion-action={dataConversionAction}
+      tabIndex={tabIndex}
     >
       {content}
     </motion.button>

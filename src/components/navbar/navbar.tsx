@@ -126,7 +126,7 @@ export const Navbar = () => {
                   className="hidden lg:flex"
                 >
                   <Button
-                    variant="primary"
+                    variant="cta"
                     size="sm"
                     onClick={openProjectInquiryModal}
                     icon={<ArrowRight className="w-4 h-4 transition-transform group-hover:-rotate-45" />}
@@ -178,7 +178,7 @@ export const Navbar = () => {
                 className="rounded-full"
               >
                 <Button
-                  variant="primary"
+                  variant="cta"
                   size="sm"
                   onClick={openProjectInquiryModal}
                   icon={<ArrowRight className="w-4 h-4 transition-transform group-hover:-rotate-45" />}

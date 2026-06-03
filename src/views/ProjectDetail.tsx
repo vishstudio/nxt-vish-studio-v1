@@ -8,6 +8,7 @@ import { getImageUrl } from '../utils/imageUrl';
 import { Navbar } from '../components/navbar/navbar';
 import { CustomCursor } from '../components/custom-cursor/custom-cursor';
 import { Contact } from '../components/contact/contact';
+import { Button } from '../components/ui/button/button';
 import { useState, useEffect, useCallback } from 'react';
 
 export const ProjectDetail = () => {
@@ -161,14 +162,15 @@ export const ProjectDetail = () => {
               {project.siteUrl && (
                 <div className="flex justify-between items-center pt-2">
                   <span>Live Site</span>
-                  <a
+                  <Button
                     href={project.siteUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 py-1 bg-vish-accent text-black font-mono text-xs font-semibold rounded-full hover:bg-white transition-colors duration-200 group"
+                    variant="external"
+                    size="xs"
+                    icon={<ExternalLink className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />}
+                    iconPosition="right"
                   >
-                    View Site <ExternalLink className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
-                  </a>
+                    View Site
+                  </Button>
                 </div>
               )}
             </div>

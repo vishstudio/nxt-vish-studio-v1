@@ -108,23 +108,25 @@ const StickyProjectSlide = ({
           <span className="rounded-full border border-white/10 px-4 py-2 font-mono text-sm text-gray-400">
             {project.year}
           </span>
-          <Link
+          <Button
             href={`/project/${project.slug}`}
             tabIndex={isActive ? 0 : -1}
-            className="font-sans text-white transition-colors hover:text-vish-accent"
+            variant="caseStudy"
+            size="text"
           >
             View Case Study
-          </Link>
+          </Button>
           {project.siteUrl && (
-            <a
+            <Button
               href={project.siteUrl}
-              target="_blank"
-              rel="noopener noreferrer"
               tabIndex={isActive ? 0 : -1}
-              className="inline-flex items-center gap-1.5 rounded-full bg-vish-accent px-3 py-1 font-mono text-xs font-semibold text-black transition-colors duration-200 hover:bg-white"
+              variant="external"
+              size="xs"
+              icon={<ExternalLink className="h-3 w-3" />}
+              iconPosition="right"
             >
-              View Site <ExternalLink className="h-3 w-3" />
-            </a>
+              View Site
+            </Button>
           )}
         </motion.div>
       </motion.div>
@@ -237,7 +239,7 @@ export const Projects = ({ showViewAll = true }: { showViewAll?: boolean }) => {
               <ProjectProgressSlider projects={projects} activeIndex={activeIndex} className="flex lg:hidden" />
               <Button
                 href="/projects"
-                variant="white"
+                variant="navigation"
                 size="md"
                 icon={<ArrowUpRight className="w-5 h-5" />}
                 iconPosition="right"

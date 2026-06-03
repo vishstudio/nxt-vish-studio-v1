@@ -44,6 +44,7 @@ export const ProjectsPage = () => {
                 <ProjectsCta
                   index={Math.floor(index / 2)}
                   backgroundImage={ctaBackgroundImages[Math.floor(index / 2) % ctaBackgroundImages.length]}
+                  contained={false}
                 />
               )}
             </div>

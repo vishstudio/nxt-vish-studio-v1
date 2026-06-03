@@ -42,7 +42,7 @@ export const NotFound = () => {
           >
             <Button 
               href="/"
-              variant="white"
+              variant="navigation"
               icon={<ArrowRight className="w-4 h-4" />}
             >
               Return Home

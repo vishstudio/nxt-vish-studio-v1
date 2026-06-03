@@ -60,7 +60,7 @@ export const Services = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="hidden md:block"
           >
-            <Button href="/services" variant="white" size="md" icon={<ArrowRight className="w-4 h-4" />}>
+            <Button href="/services" variant="navigation" size="md" icon={<ArrowRight className="w-4 h-4" />}>
               {content.servicesButtonText}
             </Button>
           </motion.div>
@@ -113,7 +113,7 @@ export const Services = () => {
         </div>
 
         <div className="mt-12 md:hidden flex justify-center">
-          <Button href="/services" variant="white" size="md" icon={<ArrowRight className="w-4 h-4" />}>
+          <Button href="/services" variant="navigation" size="md" icon={<ArrowRight className="w-4 h-4" />}>
             {content.servicesButtonText}
           </Button>
         </div>

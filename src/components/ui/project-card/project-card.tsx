@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import Link from 'next/link';
 import { ArrowUpRight, ExternalLink } from 'lucide-react';
 import { getImageUrl } from '../../../utils/imageUrl';
+import { Button } from '../button/button';
 
 interface ProjectCardProject {
   slug: string;
@@ -77,21 +78,23 @@ export const ProjectCard = ({ project, index, alternate = true }: ProjectCardPro
           <span className="px-4 py-2 rounded-full border border-white/10 text-sm text-gray-400 font-mono">
             {project.year}
           </span>
-          <Link
+          <Button
             href={`/project/${project.slug}`}
-            className="text-white border-b border-transparent hover:border-vish-accent hover:text-vish-accent transition-all duration-300 pb-0.5"
+            variant="caseStudy"
+            size="text"
           >
             View Case Study
-          </Link>
+          </Button>
           {project.siteUrl && (
-            <a
+            <Button
               href={project.siteUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1 bg-vish-accent text-black font-mono text-xs font-semibold rounded-full hover:bg-white transition-colors duration-200 group"
+              variant="external"
+              size="xs"
+              icon={<ExternalLink className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />}
+              iconPosition="right"
             >
-              View Site <ExternalLink className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
-            </a>
+              View Site
+            </Button>
           )}
         </div>
       </div>

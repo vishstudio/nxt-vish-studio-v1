@@ -8,9 +8,10 @@ import { openProjectInquiryModal, PROJECT_INQUIRY_ACTION, PROJECT_INQUIRY_ARIA_L
 interface ProjectsCtaProps {
   index: number;
   backgroundImage?: string;
+  contained?: boolean;
 }
 
-export const ProjectsCta = ({ index, backgroundImage }: ProjectsCtaProps) => {
+export const ProjectsCta = ({ index, backgroundImage, contained = true }: ProjectsCtaProps) => {
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -25,13 +26,19 @@ export const ProjectsCta = ({ index, backgroundImage }: ProjectsCtaProps) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-12%' }}
       transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
-      className="projects-cta relative overflow-hidden border-y border-white/10 bg-black py-10 md:py-14"
+      className={`projects-cta relative overflow-hidden border-y border-white/10 bg-black py-10 md:py-14 ${
+        contained ? 'px-6 md:px-12' : ''
+      }`}
     >
       <span className="pointer-events-none absolute -right-4 -top-8 font-display text-[8rem] leading-none text-white/[0.025] md:-right-8 md:-top-14 md:text-[13rem]">
         {String(index + 1).padStart(2, '0')}
       </span>
 
-      <div className="relative z-10 grid grid-cols-1 gap-8 md:grid-cols-[minmax(18rem,0.52fr)_1fr] md:items-center md:gap-12 lg:gap-20">
+      <div
+        className={`relative z-10 grid grid-cols-1 gap-8 md:grid-cols-[minmax(18rem,0.44fr)_minmax(0,1fr)] md:items-center md:gap-12 lg:gap-20 ${
+          contained ? 'mx-auto w-full max-w-[1400px]' : ''
+        }`}
+      >
         <div className="relative aspect-16/10 overflow-hidden bg-white/[0.035] md:aspect-4/3">
           {backgroundImage && (
             <motion.img
@@ -49,8 +56,8 @@ export const ProjectsCta = ({ index, backgroundImage }: ProjectsCtaProps) => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
-          <div>
+        <div className="flex flex-col items-start">
+          <div className="max-w-3xl">
             <span className="mb-5 block font-mono text-xs uppercase tracking-widest text-vish-accent">
               Open Slot {String(index + 1).padStart(2, '0')}
             </span>
@@ -62,15 +69,16 @@ export const ProjectsCta = ({ index, backgroundImage }: ProjectsCtaProps) => {
             </p>
           </div>
 
-          <div className="flex lg:justify-end">
+          <div className="mt-8 flex">
             <Button
-              variant="white"
-              size="lg"
+              variant="cta"
+              size="md"
               onClick={openProjectInquiryModal}
               icon={<ArrowRight className="h-4 w-4 transition-transform group-hover:-rotate-45" />}
               iconPosition="right"
               ariaLabel={PROJECT_INQUIRY_ARIA_LABEL}
               dataConversionAction={PROJECT_INQUIRY_ACTION}
+              className="px-6 py-4 font-mono text-xs font-semibold uppercase tracking-widest"
             >
               Start Project
             </Button>

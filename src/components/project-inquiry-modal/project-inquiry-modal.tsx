@@ -287,7 +287,7 @@ export const ProjectInquiryModal = () => {
                   <p className="mt-6 max-w-xl font-sans text-base leading-relaxed text-gray-400">
                     We will review your project parameters within 24 hours.
                   </p>
-                  <Button onClick={closeModal} variant="white" size="md" className="mt-10">
+                  <Button onClick={closeModal} variant="navigation" size="md" className="mt-10">
                     Close
                   </Button>
                 </div>
@@ -381,7 +381,7 @@ export const ProjectInquiryModal = () => {
 
                     <Button
                       type="submit"
-                      variant="primary"
+                      variant="cta"
                       size="md"
                       disabled={!canProceed || submissionState === 'submitting'}
                       icon={<ArrowRight className="h-4 w-4 transition-transform group-hover:-rotate-45" />}

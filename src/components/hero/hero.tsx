@@ -47,7 +47,7 @@ export const Hero = () => {
               className="rounded-full"
             >
               <Button
-                variant="primary"
+                variant="cta"
                 size="md"
                 onClick={openProjectInquiryModal}
                 icon={<ArrowRight className="h-4 w-4 transition-transform group-hover:-rotate-45" />}
