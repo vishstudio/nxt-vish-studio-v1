@@ -6,6 +6,8 @@ import { AnimatePresence } from 'motion/react';
 import { Loader } from '@/src/components/loader/loader';
 import { PostHogProvider } from '@/src/components/post-hog-provider/post-hog-provider';
 import { CustomCursor } from '@/src/components/custom-cursor/custom-cursor';
+import { ProjectInquiryModal } from '@/src/components/project-inquiry-modal/project-inquiry-modal';
+import { ServiceWorkerRegistration } from '@/src/components/service-worker-registration/service-worker-registration';
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -29,6 +31,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     <PostHogProvider>
       {/* Custom cursor lives here so it works on every page */}
       <CustomCursor />
+      <ServiceWorkerRegistration />
+      <ProjectInquiryModal />
       <AnimatePresence>
         {loadingPath === '/' && (
           <Loader key={`loader-${loadingPath}`} onLoadingComplete={handleLoadingComplete} />
