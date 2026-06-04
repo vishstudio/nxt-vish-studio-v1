@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, ArrowRight } from 'lucide-react';
@@ -9,11 +9,19 @@ import { useTinaSettings } from '../../hooks/useTinaVisualEditing';
 import { LogoText } from '../logo-text/logo-text';
 import { openProjectInquiryModal, PROJECT_INQUIRY_ACTION, PROJECT_INQUIRY_ARIA_LABEL } from '../../lib/conversion';
 
+const bottomBarDelayMs = 2000;
+const scrollIdleMs = 160;
+
 export const Navbar = () => {
   const { data: settings } = useTinaSettings();
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isBottomBarVisible, setIsBottomBarVisible] = useState(true);
+  const [isInSelectedProjects, setIsInSelectedProjects] = useState(false);
+  const scrollStopTimer = useRef<number | null>(null);
+  const bottomBarHideTimer = useRef<number | null>(null);
+  const bottomBarShowTimer = useRef<number | null>(null);
 
   const navItems = [
     { name: 'Home', href: '/' },
@@ -45,9 +53,95 @@ export const Navbar = () => {
       setIsScrolled(window.scrollY > 20);
     };
     handleScroll();
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    const handleScrollActivity = () => {
+      if (bottomBarShowTimer.current) {
+        window.clearTimeout(bottomBarShowTimer.current);
+        bottomBarShowTimer.current = null;
+      }
+
+      if (!bottomBarHideTimer.current) {
+        bottomBarHideTimer.current = window.setTimeout(() => {
+          setIsBottomBarVisible(false);
+          bottomBarHideTimer.current = null;
+        }, bottomBarDelayMs);
+      }
+
+      if (scrollStopTimer.current) {
+        window.clearTimeout(scrollStopTimer.current);
+      }
+
+      scrollStopTimer.current = window.setTimeout(() => {
+        if (bottomBarShowTimer.current) {
+          window.clearTimeout(bottomBarShowTimer.current);
+        }
+
+        bottomBarShowTimer.current = window.setTimeout(() => {
+          setIsBottomBarVisible(true);
+          bottomBarShowTimer.current = null;
+        }, bottomBarDelayMs);
+      }, scrollIdleMs);
+    };
+
+    window.addEventListener('scroll', handleScrollActivity, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScrollActivity);
+      if (scrollStopTimer.current) {
+        window.clearTimeout(scrollStopTimer.current);
+      }
+      if (bottomBarHideTimer.current) {
+        window.clearTimeout(bottomBarHideTimer.current);
+      }
+      if (bottomBarShowTimer.current) {
+        window.clearTimeout(bottomBarShowTimer.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (currentPath !== '/') {
+      setIsInSelectedProjects(false);
+      return undefined;
+    }
+
+    const selectedProjectsSection = document.getElementById('work');
+    if (!selectedProjectsSection) {
+      setIsInSelectedProjects(false);
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInSelectedProjects(entry.isIntersecting);
+        if (entry.isIntersecting) {
+          setIsBottomBarVisible(true);
+
+          if (bottomBarHideTimer.current) {
+            window.clearTimeout(bottomBarHideTimer.current);
+            bottomBarHideTimer.current = null;
+          }
+          if (bottomBarShowTimer.current) {
+            window.clearTimeout(bottomBarShowTimer.current);
+            bottomBarShowTimer.current = null;
+          }
+        }
+      },
+      {
+        threshold: 0.08,
+      },
+    );
+
+    observer.observe(selectedProjectsSection);
+
+    return () => observer.disconnect();
+  }, [currentPath]);
+
+  const shouldShowBottomBar = !isMobileMenuOpen && (isInSelectedProjects || isBottomBarVisible);
 
   return (
     <div className="navbar contents">
@@ -155,15 +249,15 @@ export const Navbar = () => {
       </motion.header>
 
       <AnimatePresence>
-        {isScrolled && !isMobileMenuOpen && (
+        {shouldShowBottomBar && (
           <motion.div
-            initial={{ y: 96, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 96, opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed bottom-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none lg:hidden"
+            initial={{ y: 40, opacity: 0, filter: 'blur(4px)' }}
+            animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
+            exit={{ y: 32, opacity: 0, filter: 'blur(4px)' }}
+            transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed bottom-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none"
           >
-            <div className="pointer-events-auto flex w-full max-w-[420px] items-center justify-between gap-3 rounded-full border border-white/10 bg-black/80 py-2.5 pl-2.5 pr-2 shadow-2xl shadow-black/50 backdrop-blur-xl">
+            <div className="pointer-events-auto flex w-full max-w-[420px] items-center justify-between gap-3 rounded-full border border-white/10 bg-black/80 py-2.5 pl-2.5 pr-2 shadow-2xl shadow-black/50 backdrop-blur-xl sm:max-w-[460px]">
               <div className="flex min-w-0 items-center gap-2">
                 <CookieSettingsTrigger compact className="h-10 w-10 shrink-0" />
                 <span className="hidden font-mono text-[10px] font-semibold uppercase tracking-widest text-white/40 sm:inline">
