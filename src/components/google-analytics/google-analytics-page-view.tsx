@@ -2,7 +2,7 @@
 
 import { Suspense, useEffect } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { COOKIE_CONSENT_KEY } from '@/src/lib/cookie-consent';
+import { readCookieConsent } from '@/src/lib/cookie-consent';
 
 declare global {
   interface Window {
@@ -16,12 +16,9 @@ function GoogleAnalyticsPageViewInner() {
 
   useEffect(() => {
     if (!window.gtag) return;
-    try {
-      const storedConsent = window.localStorage.getItem(COOKIE_CONSENT_KEY);
-      if (!storedConsent || JSON.parse(storedConsent).analytics !== true) return;
-    } catch {
-      return;
-    }
+
+    const consent = readCookieConsent(document.cookie);
+    if (!consent?.analytics) return;
 
     const queryString = searchParams?.toString();
     const pagePath = queryString ? `${pathname}?${queryString}` : pathname;

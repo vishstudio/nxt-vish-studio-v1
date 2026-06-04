@@ -12,25 +12,38 @@ import {
   type CookieConsent,
   defaultCookieConsent,
   normalizeCookieConsent,
+  readCookieConsent,
+  serializeCookieConsent,
 } from '@/src/lib/cookie-consent';
 import { HERO_REVEALED_EVENT } from '@/src/lib/site-events';
 
 function readConsent(): CookieConsent | null {
   if (typeof window === 'undefined') return null;
 
+  const cookieConsent = readCookieConsent(document.cookie);
+  if (cookieConsent) return cookieConsent;
+
   try {
     const storedConsent = window.localStorage.getItem(COOKIE_CONSENT_KEY);
     if (!storedConsent) return null;
 
     const parsedConsent = JSON.parse(storedConsent) as Partial<CookieConsent>;
-    return normalizeCookieConsent(parsedConsent);
+    const migratedConsent = normalizeCookieConsent(parsedConsent);
+
+    if (migratedConsent) {
+      document.cookie = serializeCookieConsent(migratedConsent);
+      window.localStorage.removeItem(COOKIE_CONSENT_KEY);
+    }
+
+    return migratedConsent;
   } catch {
     return null;
   }
 }
 
 function writeConsent(consent: CookieConsent) {
-  window.localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify(consent));
+  document.cookie = serializeCookieConsent(consent);
+  window.localStorage.removeItem(COOKIE_CONSENT_KEY);
   window.dispatchEvent(new CustomEvent(COOKIE_CONSENT_EVENT, { detail: consent }));
 }
 

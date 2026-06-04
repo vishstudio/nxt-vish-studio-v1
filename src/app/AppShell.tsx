@@ -2,13 +2,26 @@
 
 import { useState, useCallback, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
+import dynamic from 'next/dynamic';
 import { AnimatePresence } from 'motion/react';
 import { Loader } from '@/src/components/loader/loader';
 import { CustomCursor } from '@/src/components/custom-cursor/custom-cursor';
-import { CookieSettings } from '@/src/components/cookie-settings/cookie-settings';
-import { ProjectInquiryModal } from '@/src/components/project-inquiry-modal/project-inquiry-modal';
-import { ServiceWorkerRegistration } from '@/src/components/service-worker-registration/service-worker-registration';
 import { APP_READY_EVENT } from '@/src/lib/site-events';
+
+const CookieSettings = dynamic(
+  () => import('@/src/components/cookie-settings/cookie-settings').then((mod) => mod.CookieSettings),
+  { ssr: false },
+);
+
+const ProjectInquiryModal = dynamic(
+  () => import('@/src/components/project-inquiry-modal/project-inquiry-modal').then((mod) => mod.ProjectInquiryModal),
+  { ssr: false },
+);
+
+const ServiceWorkerRegistration = dynamic(
+  () => import('@/src/components/service-worker-registration/service-worker-registration').then((mod) => mod.ServiceWorkerRegistration),
+  { ssr: false },
+);
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();

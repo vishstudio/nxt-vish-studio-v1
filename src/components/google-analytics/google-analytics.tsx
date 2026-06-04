@@ -43,9 +43,20 @@ export function GoogleAnalytics() {
 
               function hasAnalyticsConsent() {
                 try {
-                  var storedConsent = window.localStorage.getItem(consentKey);
+                  var cookies = document.cookie ? document.cookie.split(';') : [];
+                  var prefix = consentKey + '=';
+                  var storedConsent = '';
+
+                  for (var index = 0; index < cookies.length; index += 1) {
+                    var cookie = cookies[index].trim();
+                    if (cookie.indexOf(prefix) === 0) {
+                      storedConsent = cookie.slice(prefix.length);
+                      break;
+                    }
+                  }
+
                   if (!storedConsent) return false;
-                  return JSON.parse(storedConsent).analytics === true;
+                  return JSON.parse(decodeURIComponent(storedConsent)).analytics === true;
                 } catch (error) {
                   return false;
                 }

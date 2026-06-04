@@ -1,5 +1,3 @@
-'use client';
-
 /**
  * SEO keyword alignment:
  * - Creative web agency Mauritius
