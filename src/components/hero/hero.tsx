@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { motion } from 'motion/react';
+import { AnimatePresence, motion, useScroll, useTransform } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { PageHero } from '../ui/page-hero/page-hero';
 import { useTinaHome } from '../../hooks/useTinaVisualEditing';
@@ -9,6 +9,8 @@ import { HeroWaveDots } from '../hero-wave-dots/hero-wave-dots';
 import { Button } from '../ui/button/button';
 import { openProjectInquiryModal, PROJECT_INQUIRY_ACTION, PROJECT_INQUIRY_ARIA_LABEL } from '../../lib/conversion';
 import { APP_READY_EVENT, HERO_REVEALED_EVENT } from '../../lib/site-events';
+import { getProjects } from '../../lib/projects';
+import { getImageUrl } from '../../utils/imageUrl';
 
 const revealEase = [0.16, 1, 0.3, 1] as const;
 
@@ -31,6 +33,139 @@ const headlineLineVariants = {
     transition: { duration: 0.85, ease: revealEase },
   },
 };
+
+const recentProjects = getProjects().filter((project) => project.featuredOnHome).slice(0, 4);
+
+const projectCardSizes = [
+  'h-24 w-36 lg:h-32 lg:w-48 xl:h-36 xl:w-56',
+  'h-24 w-36 lg:h-28 lg:w-44 xl:h-32 xl:w-52',
+  'h-28 w-44 lg:h-32 lg:w-52 xl:h-36 xl:w-60',
+];
+
+interface HeroProjectCard {
+  id: number;
+  projectIndex: number;
+  left: number;
+  top: number;
+  rotation: number;
+  sizeClass: string;
+}
+
+function getRandomProjectCard(id: number, previousCards: HeroProjectCard[]): HeroProjectCard {
+  const visibleProjectIndexes = new Set(previousCards.map((card) => card.projectIndex));
+  const availableProjectIndexes = recentProjects
+    .map((_, index) => index)
+    .filter((index) => !visibleProjectIndexes.has(index));
+  const projectPool = availableProjectIndexes.length > 0
+    ? availableProjectIndexes
+    : recentProjects.map((_, index) => index);
+  const projectIndex = projectPool[Math.floor(Math.random() * projectPool.length)] ?? 0;
+
+  return {
+    id,
+    projectIndex,
+    left: 8 + Math.random() * 54,
+    top: 8 + Math.random() * 58,
+    rotation: -10 + Math.random() * 20,
+    sizeClass: projectCardSizes[id % projectCardSizes.length],
+  };
+}
+
+function HeroRecentProjects({ isHeroRevealed }: { isHeroRevealed: boolean }) {
+  const visibleProjectCount = Math.min(3, recentProjects.length);
+  const nextCardId = useRef(0);
+  const [visibleCards, setVisibleCards] = useState<HeroProjectCard[]>([]);
+  const { scrollYProgress } = useScroll();
+  const clusterY = useTransform(scrollYProgress, [0, 0.24], [0, -92]);
+
+  useEffect(() => {
+    if (!isHeroRevealed || visibleProjectCount === 0) {
+      setVisibleCards([]);
+      return undefined;
+    }
+
+    nextCardId.current = 0;
+    setVisibleCards([]);
+
+    const revealTimer = window.setInterval(() => {
+      setVisibleCards((currentCards) => {
+        const nextCard = getRandomProjectCard(nextCardId.current, currentCards);
+        nextCardId.current += 1;
+
+        return [...currentCards, nextCard].slice(-visibleProjectCount);
+      });
+    }, 1150);
+
+    return () => window.clearInterval(revealTimer);
+  }, [isHeroRevealed, visibleProjectCount]);
+
+  if (recentProjects.length === 0) {
+    return null;
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: 26, filter: 'blur(10px)' }}
+      animate={isHeroRevealed
+        ? { opacity: 1, x: 0, filter: 'blur(0px)' }
+        : { opacity: 0, x: 26, filter: 'blur(10px)' }}
+      transition={{ duration: 0.85, delay: 0.65, ease: revealEase }}
+      className="pointer-events-none absolute right-[-8%] top-[50%] hidden h-[19rem] w-[24rem] -translate-y-1/2 md:block lg:right-0 lg:top-[46%] lg:h-[23rem] lg:w-[32rem] xl:right-[8%] xl:h-[27rem] xl:w-[38rem]"
+      aria-hidden="true"
+    >
+      <motion.div className="absolute inset-0 will-change-transform" style={{ y: clusterY }}>
+        <AnimatePresence>
+          {visibleCards.map((card, positionIndex) => {
+            const project = recentProjects[card.projectIndex];
+
+            return (
+              <motion.div
+                key={`${project.slug}-${card.id}`}
+                initial={{
+                  opacity: 0,
+                  scale: 0.82,
+                  y: 22,
+                  rotate: card.rotation * 0.6,
+                  filter: 'blur(12px)',
+                }}
+                animate={{
+                  opacity: 1,
+                  scale: 1,
+                  y: 0,
+                  rotate: card.rotation,
+                  filter: 'blur(0px)',
+                }}
+                exit={{
+                  opacity: 0,
+                  scale: 0.86,
+                  y: -18,
+                  rotate: card.rotation * 1.25,
+                  filter: 'blur(10px)',
+                }}
+                transition={{ duration: 0.72, delay: positionIndex * 0.08, ease: revealEase }}
+                className={`absolute overflow-hidden rounded-2xl border border-white/5 bg-white/[0.025] shadow-2xl shadow-black/50 lg:border-white/10 lg:bg-white/[0.035] ${card.sizeClass}`}
+                style={{
+                  left: `${card.left}%`,
+                  top: `${card.top}%`,
+                }}
+              >
+                <div className="h-full w-full opacity-35 lg:opacity-100">
+                  <img
+                    src={getImageUrl(project.image)}
+                    alt=""
+                    className="h-full w-full object-cover opacity-90 saturate-75"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-black/20 lg:bg-black/10" />
+                </div>
+              </motion.div>
+            );
+          })}
+        </AnimatePresence>
+      </motion.div>
+    </motion.div>
+  );
+}
 
 export const Hero = () => {
   const { data: content, tinaField } = useTinaHome();
@@ -70,6 +205,7 @@ export const Hero = () => {
         labelStyle="pill"
         size="full"
         isRevealed={isHeroRevealed}
+        contentParallax
         title={
           <motion.h1
             variants={headlineVariants}
@@ -134,7 +270,12 @@ export const Hero = () => {
             </motion.div>
           </motion.div>
         }
-        decorativeLayer={<HeroWaveDots />}
+        decorativeLayer={(
+          <>
+            {/* <HeroWaveDots /> */}
+            <HeroRecentProjects isHeroRevealed={isHeroRevealed} />
+          </>
+        )}
       />
     </div>
   );

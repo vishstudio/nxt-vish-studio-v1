@@ -29,6 +29,8 @@ interface PageHeroProps {
   decorativeLayer?: React.ReactNode;
   /** Controls hero content reveal timing when a page-level loader is present */
   isRevealed?: boolean;
+  /** Adds subtle scroll-linked movement to the hero copy/content */
+  contentParallax?: boolean;
 }
 
 export const PageHero = ({
@@ -45,6 +47,7 @@ export const PageHero = ({
   backgroundImageClassName = '',
   decorativeLayer,
   isRevealed = true,
+  contentParallax = false,
 }: PageHeroProps) => {
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
@@ -52,6 +55,7 @@ export const PageHero = ({
     offset: ['start start', 'end start'],
   });
   const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '12%']);
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, 72]);
 
   const sizeClasses = {
     full: 'min-h-screen flex flex-col justify-center',
@@ -80,7 +84,10 @@ export const PageHero = ({
         </div>
       )}
 
-      <div className="relative z-10 max-w-[1400px] mx-auto w-full">
+      <motion.div
+        className="relative z-10 max-w-[1400px] mx-auto w-full will-change-transform"
+        style={{ y: contentParallax ? contentY : 0 }}
+      >
         {label && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -117,7 +124,7 @@ export const PageHero = ({
 
           {action}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
