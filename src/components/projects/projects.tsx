@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useTinaProjectsList } from '../../hooks/useTinaVisualEditing';
 import { Button } from '../ui/button/button';
 import { SectionTitle } from '../ui/section-title/section-title';
+import { CarouselProgress } from '../carousel-progress/CarouselProgress';
 import { getImageUrl } from '../../utils/imageUrl';
 import type { Project } from '../../lib/projects';
 
@@ -134,40 +135,6 @@ const StickyProjectSlide = ({
   );
 };
 
-interface ProjectProgressSliderProps {
-  projects: Project[];
-  activeIndex: number;
-  orientation?: 'horizontal' | 'vertical';
-  className?: string;
-}
-
-const ProjectProgressSlider = ({
-  projects,
-  activeIndex,
-  orientation = 'horizontal',
-  className = '',
-}: ProjectProgressSliderProps) => (
-  <div
-    className={`${orientation === 'vertical' ? 'flex-col items-center gap-3' : 'items-center gap-2'} ${className}`}
-    aria-hidden="true"
-  >
-    {projects.map((project, index) => (
-      <span
-        key={project.slug}
-        className={`rounded-full transition-all duration-300 ${
-          orientation === 'vertical'
-            ? index === activeIndex
-              ? 'h-8 w-1.5 bg-vish-accent'
-              : 'h-1.5 w-1.5 bg-white/15'
-            : index === activeIndex
-              ? 'h-1.5 w-8 bg-vish-accent'
-              : 'h-1.5 w-1.5 bg-white/15'
-        }`}
-      />
-    ))}
-  </div>
-);
-
 export const Projects = ({ showViewAll = true }: { showViewAll?: boolean }) => {
   const { data: allProjects } = useTinaProjectsList();
   const projects = allProjects.filter((p) => p.featuredOnHome).slice(0, 4);
@@ -219,8 +186,8 @@ export const Projects = ({ showViewAll = true }: { showViewAll?: boolean }) => {
           </div>
 
           <div className="relative min-h-[430px] sm:min-h-[500px] md:min-h-[680px] lg:min-h-[540px]">
-            <ProjectProgressSlider
-              projects={projects}
+            <CarouselProgress
+              count={projects.length}
               activeIndex={activeIndex}
               orientation="vertical"
               className="absolute right-0 top-1/2 z-10 hidden -translate-y-1/2 lg:flex"
@@ -236,7 +203,7 @@ export const Projects = ({ showViewAll = true }: { showViewAll?: boolean }) => {
 
           {showViewAll && (
             <div className="mt-10 flex items-center justify-between gap-6">
-              <ProjectProgressSlider projects={projects} activeIndex={activeIndex} className="flex lg:hidden" />
+              <CarouselProgress count={projects.length} activeIndex={activeIndex} className="flex lg:hidden" />
               <Button
                 href="/projects"
                 variant="navigation"

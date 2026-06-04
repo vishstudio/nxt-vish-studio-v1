@@ -6,6 +6,29 @@ import {
 } from "../../lib/pricing";
 import { rawTinaField, useTinaData } from "./core";
 
+function mapPricingPlan(p: any) {
+  return {
+    label: p?.label ?? "",
+    name: p?.name ?? "",
+    price: p?.price ?? "",
+    discountedPrice: p?.discountedPrice ?? "",
+    priceNote: p?.priceNote ?? "",
+    delivery: p?.delivery ?? "",
+    tagline: p?.tagline ?? "",
+    featured: p?.featured ?? false,
+    ctaLabel: p?.ctaLabel ?? "",
+    ctaLink: p?.ctaLink
+      ? {
+          linkType: (p.ctaLink.linkType ?? "internal") as CtaLinkType,
+          linkValue: p.ctaLink.linkValue ?? "",
+        }
+      : { linkType: "url" as CtaLinkType, linkValue: p?.ctaHref ?? "" },
+    features: (p?.features ?? []).filter(Boolean),
+    bestFor: p?.bestFor ?? "",
+    revisions: p?.revisions ?? "",
+  };
+}
+
 export function useTinaPricing() {
   const staticContent = getPricingPage();
 
@@ -24,25 +47,14 @@ export function useTinaPricing() {
         sectionLabel: qd.pricingPage.sectionLabel ?? "",
         sectionHeading: qd.pricingPage.sectionHeading ?? "",
         sectionSubtext: qd.pricingPage.sectionSubtext ?? "",
-        plans: (qd.pricingPage.plans ?? []).map((p: any) => ({
-          label: p?.label ?? "",
-          name: p?.name ?? "",
-          price: p?.price ?? "",
-          priceNote: p?.priceNote ?? "",
-          delivery: p?.delivery ?? "",
-          tagline: p?.tagline ?? "",
-          featured: p?.featured ?? false,
-          ctaLabel: p?.ctaLabel ?? "",
-          ctaLink: p?.ctaLink
-            ? {
-                linkType: (p.ctaLink.linkType ?? "internal") as CtaLinkType,
-                linkValue: p.ctaLink.linkValue ?? "",
-              }
-            : { linkType: "url" as CtaLinkType, linkValue: p?.ctaHref ?? "" },
-          features: (p?.features ?? []).filter(Boolean),
-          bestFor: p?.bestFor ?? "",
-          revisions: p?.revisions ?? "",
-        })),
+        plans: (qd.pricingPage.plans ?? []).map(mapPricingPlan),
+        pricingCategories: (qd.pricingPage.pricingCategories ?? [])
+          .map((category: any) => ({
+            label: category?.label ?? "",
+            slug: category?.slug ?? "",
+            plans: (category?.plans ?? []).map(mapPricingPlan),
+          }))
+          .filter((category: any) => category.label && category.plans.length > 0),
         customLabel: qd.pricingPage.customLabel ?? "",
         customDescription: qd.pricingPage.customDescription ?? "",
         customCtaLabel: qd.pricingPage.customCtaLabel ?? "",

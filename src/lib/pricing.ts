@@ -35,6 +35,7 @@ export interface PricingPlan {
   label: string;
   name: string;
   price: string;
+  discountedPrice: string;
   priceNote: string;
   delivery: string;
   tagline: string;
@@ -46,6 +47,12 @@ export interface PricingPlan {
   revisions: string;
 }
 
+export interface PricingCategory {
+  label: string;
+  slug: string;
+  plans: PricingPlan[];
+}
+
 export interface PricingPageContent {
   heroLabel: string;
   heroTitleLine1: string;
@@ -55,6 +62,7 @@ export interface PricingPageContent {
   sectionHeading: string;
   sectionSubtext: string;
   plans: PricingPlan[];
+  pricingCategories: PricingCategory[];
   customLabel: string;
   customDescription: string;
   customCtaLabel: string;
@@ -65,6 +73,7 @@ interface PricingPlanJson {
   label: string;
   name: string;
   price: string;
+  discountedPrice?: string;
   priceNote: string;
   delivery: string;
   tagline: string;
@@ -87,6 +96,11 @@ interface PricingPageJson {
   sectionHeading: string;
   sectionSubtext: string;
   plans?: PricingPlanJson[];
+  pricingCategories?: {
+    label?: string;
+    slug?: string;
+    plans?: PricingPlanJson[];
+  }[];
   customLabel: string;
   customDescription: string;
   customCtaLabel: string;
@@ -95,8 +109,40 @@ interface PricingPageJson {
 
 import pricingJson from "@/content/pages/pricing.json";
 
+function mapPricingPlan(p: PricingPlanJson): PricingPlan {
+  return {
+    label: p.label ?? "",
+    name: p.name ?? "",
+    price: p.price ?? "",
+    discountedPrice: p.discountedPrice ?? "",
+    priceNote: p.priceNote ?? "",
+    delivery: p.delivery ?? "",
+    tagline: p.tagline ?? "",
+    featured: p.featured ?? false,
+    ctaLabel: p.ctaLabel ?? "",
+    ctaLink: p.ctaLink
+      ? {
+          linkType: (p.ctaLink.linkType ?? "internal") as CtaLinkType,
+          linkValue: p.ctaLink.linkValue ?? "",
+        }
+      : { linkType: "url" as CtaLinkType, linkValue: p.ctaHref ?? "" },
+    features: (p.features ?? []).filter(Boolean),
+    bestFor: p.bestFor ?? "",
+    revisions: p.revisions ?? "",
+  };
+}
+
 export function getPricingPage(): PricingPageContent {
   const raw = pricingJson as unknown as PricingPageJson;
+  const plans = (raw.plans ?? []).map(mapPricingPlan);
+  const pricingCategories = (raw.pricingCategories ?? [])
+    .map((category) => ({
+      label: category.label ?? "",
+      slug: category.slug ?? "",
+      plans: (category.plans ?? []).map(mapPricingPlan),
+    }))
+    .filter((category) => category.label && category.plans.length > 0);
+
   return {
     heroLabel: raw.heroLabel ?? "",
     heroTitleLine1: raw.heroTitleLine1 ?? "",
@@ -105,25 +151,8 @@ export function getPricingPage(): PricingPageContent {
     sectionLabel: raw.sectionLabel ?? "",
     sectionHeading: raw.sectionHeading ?? "",
     sectionSubtext: raw.sectionSubtext ?? "",
-    plans: (raw.plans ?? []).map((p) => ({
-      label: p.label ?? "",
-      name: p.name ?? "",
-      price: p.price ?? "",
-      priceNote: p.priceNote ?? "",
-      delivery: p.delivery ?? "",
-      tagline: p.tagline ?? "",
-      featured: p.featured ?? false,
-      ctaLabel: p.ctaLabel ?? "",
-      ctaLink: p.ctaLink
-        ? {
-            linkType: (p.ctaLink.linkType ?? "internal") as CtaLinkType,
-            linkValue: p.ctaLink.linkValue ?? "",
-          }
-        : { linkType: "url" as CtaLinkType, linkValue: p.ctaHref ?? "" },
-      features: (p.features ?? []).filter(Boolean),
-      bestFor: p.bestFor ?? "",
-      revisions: p.revisions ?? "",
-    })),
+    plans,
+    pricingCategories,
     customLabel: raw.customLabel ?? "",
     customDescription: raw.customDescription ?? "",
     customCtaLabel: raw.customCtaLabel ?? "",

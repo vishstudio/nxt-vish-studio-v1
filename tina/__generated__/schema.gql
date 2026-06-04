@@ -613,6 +613,7 @@ type PricingPagePlans {
   label: String
   name: String!
   price: String!
+  discountedPrice: String
   priceNote: String
   delivery: String
   tagline: String
@@ -624,6 +625,33 @@ type PricingPagePlans {
   revisions: String
 }
 
+type PricingPagePricingCategoriesPlansCtaLink {
+  linkType: String
+  linkValue: String
+}
+
+type PricingPagePricingCategoriesPlans {
+  label: String
+  name: String!
+  price: String!
+  discountedPrice: String
+  priceNote: String
+  delivery: String
+  tagline: String
+  featured: Boolean
+  ctaLabel: String
+  ctaLink: PricingPagePricingCategoriesPlansCtaLink
+  features: [String]
+  bestFor: String
+  revisions: String
+}
+
+type PricingPagePricingCategories {
+  label: String!
+  slug: String
+  plans: [PricingPagePricingCategoriesPlans]
+}
+
 type PricingPage implements Node & Document {
   heroLabel: String!
   heroTitleLine1: String
@@ -633,6 +661,7 @@ type PricingPage implements Node & Document {
   sectionHeading: String
   sectionSubtext: String
   plans: [PricingPagePlans]
+  pricingCategories: [PricingPagePricingCategories]
   customLabel: String
   customDescription: String
   customCtaLabel: String
@@ -651,6 +680,7 @@ input PricingPagePlansFilter {
   label: StringFilter
   name: StringFilter
   price: StringFilter
+  discountedPrice: StringFilter
   priceNote: StringFilter
   delivery: StringFilter
   tagline: StringFilter
@@ -662,6 +692,33 @@ input PricingPagePlansFilter {
   revisions: StringFilter
 }
 
+input PricingPagePricingCategoriesPlansCtaLinkFilter {
+  linkType: StringFilter
+  linkValue: StringFilter
+}
+
+input PricingPagePricingCategoriesPlansFilter {
+  label: StringFilter
+  name: StringFilter
+  price: StringFilter
+  discountedPrice: StringFilter
+  priceNote: StringFilter
+  delivery: StringFilter
+  tagline: StringFilter
+  featured: BooleanFilter
+  ctaLabel: StringFilter
+  ctaLink: PricingPagePricingCategoriesPlansCtaLinkFilter
+  features: StringFilter
+  bestFor: StringFilter
+  revisions: StringFilter
+}
+
+input PricingPagePricingCategoriesFilter {
+  label: StringFilter
+  slug: StringFilter
+  plans: PricingPagePricingCategoriesPlansFilter
+}
+
 input PricingPageFilter {
   heroLabel: StringFilter
   heroTitleLine1: StringFilter
@@ -671,6 +728,7 @@ input PricingPageFilter {
   sectionHeading: StringFilter
   sectionSubtext: StringFilter
   plans: PricingPagePlansFilter
+  pricingCategories: PricingPagePricingCategoriesFilter
   customLabel: StringFilter
   customDescription: StringFilter
   customCtaLabel: StringFilter
@@ -923,6 +981,7 @@ input PricingPagePlansMutation {
   label: String
   name: String
   price: String
+  discountedPrice: String
   priceNote: String
   delivery: String
   tagline: String
@@ -934,6 +993,33 @@ input PricingPagePlansMutation {
   revisions: String
 }
 
+input PricingPagePricingCategoriesPlansCtaLinkMutation {
+  linkType: String
+  linkValue: String
+}
+
+input PricingPagePricingCategoriesPlansMutation {
+  label: String
+  name: String
+  price: String
+  discountedPrice: String
+  priceNote: String
+  delivery: String
+  tagline: String
+  featured: Boolean
+  ctaLabel: String
+  ctaLink: PricingPagePricingCategoriesPlansCtaLinkMutation
+  features: [String]
+  bestFor: String
+  revisions: String
+}
+
+input PricingPagePricingCategoriesMutation {
+  label: String
+  slug: String
+  plans: [PricingPagePricingCategoriesPlansMutation]
+}
+
 input PricingPageMutation {
   heroLabel: String
   heroTitleLine1: String
@@ -943,6 +1029,7 @@ input PricingPageMutation {
   sectionHeading: String
   sectionSubtext: String
   plans: [PricingPagePlansMutation]
+  pricingCategories: [PricingPagePricingCategoriesMutation]
   customLabel: String
   customDescription: String
   customCtaLabel: String

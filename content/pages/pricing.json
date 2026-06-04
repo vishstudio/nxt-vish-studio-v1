@@ -85,6 +85,320 @@
       "revisions": "Unlimited during project"
     }
   ],
+  "pricingCategories": [
+    {
+      "label": "Website",
+      "slug": "website",
+      "plans": [
+        {
+          "label": "STARTER",
+          "name": "Essentials",
+          "price": "Rs 7,500",
+          "priceNote": "ONE-TIME",
+          "delivery": "4–7 business days",
+          "tagline": "A focused, conversion-ready website for getting online quickly.",
+          "featured": false,
+          "ctaLabel": "Book Call",
+          "ctaLink": {
+            "linkType": "phone",
+            "linkValue": "23059368556"
+          },
+          "features": [
+            "Single-page website",
+            "Mobile responsive layout",
+            "Contact form",
+            "Basic SEO setup",
+            "4–6 content sections",
+            "6 months hosting"
+          ],
+          "bestFor": "Freelancers, consultants, pop-up businesses",
+          "revisions": "1 revision round"
+        },
+        {
+          "label": "STUDIO",
+          "name": "Growth",
+          "price": "Rs 14,000",
+          "priceNote": "ONE-TIME",
+          "delivery": "7–13 business days",
+          "tagline": "A polished multi-page website for brands ready to grow online.",
+          "featured": true,
+          "ctaLabel": "Book Call",
+          "ctaLink": {
+            "linkType": "phone",
+            "linkValue": "23059368556"
+          },
+          "features": [
+            "Up to 5 pages",
+            "Custom design system",
+            "Contact and booking forms",
+            "Advanced SEO structure",
+            "Google Maps integration",
+            "12 months hosting"
+          ],
+          "bestFor": "Restaurants, salons, clinics, local services",
+          "revisions": "2 revision rounds"
+        },
+        {
+          "label": "PRO",
+          "name": "Premium",
+          "price": "Rs 36,000",
+          "priceNote": "ONE-TIME",
+          "delivery": "2–4 weeks",
+          "tagline": "A premium web system engineered for credibility, SEO, and scale.",
+          "featured": false,
+          "ctaLabel": "Book Call",
+          "ctaLink": {
+            "linkType": "phone",
+            "linkValue": "23059368556"
+          },
+          "features": [
+            "Up to 10 pages",
+            "Premium custom design",
+            "Blog or news section",
+            "Analytics dashboard setup",
+            "Email marketing integration",
+            "Priority launch support"
+          ],
+          "bestFor": "Tourism, real estate, retail, established brands",
+          "revisions": "Unlimited during project"
+        }
+      ]
+    },
+    {
+      "label": "Branding",
+      "slug": "branding",
+      "plans": [
+        {
+          "label": "STARTER",
+          "name": "Essentials",
+          "price": "Rs 9,500",
+          "priceNote": "ONE-TIME",
+          "delivery": "5–8 business days",
+          "tagline": "A lean brand identity foundation for clear market presence.",
+          "featured": false,
+          "ctaLabel": "Book Call",
+          "ctaLink": {
+            "linkType": "phone",
+            "linkValue": "23059368556"
+          },
+          "features": [
+            "Logo refinement or starter mark",
+            "Core color palette",
+            "Typography pairing",
+            "Social profile assets",
+            "Basic brand usage sheet",
+            "Export-ready brand files"
+          ],
+          "bestFor": "New ventures, freelancers, small teams",
+          "revisions": "1 revision round"
+        },
+        {
+          "label": "STUDIO",
+          "name": "Growth",
+          "price": "Rs 22,000",
+          "priceNote": "ONE-TIME",
+          "delivery": "2–3 weeks",
+          "tagline": "A complete visual identity system for a more premium brand presence.",
+          "featured": true,
+          "ctaLabel": "Book Call",
+          "ctaLink": {
+            "linkType": "phone",
+            "linkValue": "23059368556"
+          },
+          "features": [
+            "Primary and secondary logo system",
+            "Visual identity direction",
+            "Color and typography system",
+            "Social media starter kit",
+            "Brand guidelines document",
+            "Launch asset exports"
+          ],
+          "bestFor": "Growing brands, boutiques, hospitality, service businesses",
+          "revisions": "2 revision rounds"
+        },
+        {
+          "label": "PRO",
+          "name": "Premium",
+          "price": "Rs 48,000",
+          "priceNote": "ONE-TIME",
+          "delivery": "3–5 weeks",
+          "tagline": "A strategic brand architecture package for scaling companies.",
+          "featured": false,
+          "ctaLabel": "Book Call",
+          "ctaLink": {
+            "linkType": "phone",
+            "linkValue": "23059368556"
+          },
+          "features": [
+            "Brand strategy workshop",
+            "Complete identity system",
+            "Art direction and visual language",
+            "Messaging and positioning notes",
+            "Extended brand guidelines",
+            "Priority rollout support"
+          ],
+          "bestFor": "Scaling brands, product launches, premium repositioning",
+          "revisions": "Unlimited during project"
+        }
+      ]
+    },
+    {
+      "label": "Softwares",
+      "slug": "softwares",
+      "plans": [
+        {
+          "label": "STARTER",
+          "name": "Essentials",
+          "price": "Rs 28,000",
+          "priceNote": "STARTING FROM",
+          "delivery": "2–4 weeks",
+          "tagline": "A focused custom tool to automate one high-value workflow.",
+          "featured": false,
+          "ctaLabel": "Book Call",
+          "ctaLink": {
+            "linkType": "phone",
+            "linkValue": "23059368556"
+          },
+          "features": [
+            "Single workflow application",
+            "Responsive React interface",
+            "Basic dashboard view",
+            "Form and data capture",
+            "Firebase or API integration",
+            "Deployment and handoff"
+          ],
+          "bestFor": "Internal tools, lead capture systems, workflow prototypes",
+          "revisions": "1 revision round"
+        },
+        {
+          "label": "STUDIO",
+          "name": "Growth",
+          "price": "Rs 65,000",
+          "priceNote": "STARTING FROM",
+          "delivery": "4–7 weeks",
+          "tagline": "A scalable web app foundation with authenticated workflows.",
+          "featured": true,
+          "ctaLabel": "Book Call",
+          "ctaLink": {
+            "linkType": "phone",
+            "linkValue": "23059368556"
+          },
+          "features": [
+            "Custom React or Next.js app",
+            "Authentication flow",
+            "Database-backed dashboard",
+            "Secure backend integration",
+            "Admin management screens",
+            "Performance-focused deployment"
+          ],
+          "bestFor": "Client portals, booking systems, operational dashboards",
+          "revisions": "2 revision rounds"
+        },
+        {
+          "label": "PRO",
+          "name": "Premium",
+          "price": "Rs 120,000+",
+          "priceNote": "CUSTOM SCOPE",
+          "delivery": "8–12+ weeks",
+          "tagline": "A production-grade software build for serious operational scale.",
+          "featured": false,
+          "ctaLabel": "Book Call",
+          "ctaLink": {
+            "linkType": "phone",
+            "linkValue": "23059368556"
+          },
+          "features": [
+            "Custom product architecture",
+            "Advanced user roles",
+            "Complex database workflows",
+            "Third-party API integrations",
+            "Reporting and analytics",
+            "Launch, testing, and growth support"
+          ],
+          "bestFor": "SaaS products, CRM systems, marketplaces, enterprise workflows",
+          "revisions": "Scoped iteration cycles"
+        }
+      ]
+    },
+    {
+      "label": "Mobile Apps",
+      "slug": "mobile-apps",
+      "plans": [
+        {
+          "label": "STARTER",
+          "name": "Essentials",
+          "price": "Rs 45,000",
+          "priceNote": "STARTING FROM",
+          "delivery": "4–6 weeks",
+          "tagline": "A focused mobile app prototype for validating a core product flow.",
+          "featured": false,
+          "ctaLabel": "Book Call",
+          "ctaLink": {
+            "linkType": "phone",
+            "linkValue": "23059368556"
+          },
+          "features": [
+            "Single core app flow",
+            "Mobile-first interface design",
+            "User input and data capture",
+            "Firebase or API connection",
+            "Basic app testing",
+            "Deployment guidance"
+          ],
+          "bestFor": "MVPs, booking tools, client intake apps",
+          "revisions": "1 revision round"
+        },
+        {
+          "label": "STUDIO",
+          "name": "Growth",
+          "price": "Rs 95,000",
+          "priceNote": "STARTING FROM",
+          "delivery": "7–10 weeks",
+          "tagline": "A polished mobile application for authenticated customer or team workflows.",
+          "featured": true,
+          "ctaLabel": "Book Call",
+          "ctaLink": {
+            "linkType": "phone",
+            "linkValue": "23059368556"
+          },
+          "features": [
+            "Custom app interface system",
+            "Authentication and user profiles",
+            "Dashboard or account screens",
+            "Database-backed workflows",
+            "Push-ready architecture planning",
+            "Launch testing and handoff"
+          ],
+          "bestFor": "Customer portals, booking apps, operational tools",
+          "revisions": "2 revision rounds"
+        },
+        {
+          "label": "PRO",
+          "name": "Premium",
+          "price": "Rs 180,000+",
+          "priceNote": "CUSTOM SCOPE",
+          "delivery": "10–16+ weeks",
+          "tagline": "A scalable mobile product build with advanced workflows and growth-ready architecture.",
+          "featured": false,
+          "ctaLabel": "Book Call",
+          "ctaLink": {
+            "linkType": "phone",
+            "linkValue": "23059368556"
+          },
+          "features": [
+            "Full product architecture",
+            "Advanced user roles and permissions",
+            "Complex app workflows",
+            "Third-party integrations",
+            "Analytics and reporting setup",
+            "Launch, QA, and growth support"
+          ],
+          "bestFor": "Marketplaces, SaaS apps, internal platforms, funded products",
+          "revisions": "Scoped iteration cycles"
+        }
+      ]
+    }
+  ],
   "customLabel": "Need Something Custom?",
   "customDescription": "Don't see exactly what you need? Every project is unique — whether it's a web app, CRM integration, or a fully bespoke platform, we scope and price it together.",
   "customCtaLabel": "Discuss Your Project",

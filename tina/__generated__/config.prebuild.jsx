@@ -1,5 +1,85 @@
 // tina/config.ts
 import { defineConfig } from "tinacms";
+var pricingPlanFields = [
+  {
+    type: "string",
+    name: "label",
+    label: "Plan Label (e.g. STARTER)"
+  },
+  {
+    type: "string",
+    name: "name",
+    label: "Plan Name",
+    required: true
+  },
+  {
+    type: "string",
+    name: "price",
+    label: "Price (e.g. Rs 14,000)",
+    required: true
+  },
+  {
+    type: "string",
+    name: "discountedPrice",
+    label: "Discounted Price",
+    description: "Optional sale price shown before the regular price."
+  },
+  {
+    type: "string",
+    name: "priceNote",
+    label: "Price Note (e.g. ONE-TIME)"
+  },
+  {
+    type: "string",
+    name: "delivery",
+    label: "Delivery Time (e.g. 2\u20133 weeks)"
+  },
+  {
+    type: "string",
+    name: "tagline",
+    label: "Tagline",
+    ui: { component: "textarea" }
+  },
+  {
+    type: "boolean",
+    name: "featured",
+    label: "Featured (Most Popular)"
+  },
+  { type: "string", name: "ctaLabel", label: "CTA Button Label" },
+  {
+    type: "object",
+    name: "ctaLink",
+    label: "CTA Button Link",
+    fields: [
+      {
+        type: "string",
+        name: "linkType",
+        label: "Link Type",
+        options: [
+          { label: "Internal path (e.g. /contact)", value: "internal" },
+          { label: "External URL (https://...)", value: "url" },
+          { label: "Phone number", value: "phone" },
+          { label: "Email address", value: "email" },
+          { label: "WhatsApp number", value: "whatsapp" }
+        ]
+      },
+      {
+        type: "string",
+        name: "linkValue",
+        label: "Value",
+        description: "Path, full URL, phone number (digits only), email, or WhatsApp number (digits only)"
+      }
+    ]
+  },
+  {
+    type: "string",
+    name: "features",
+    label: "Features",
+    list: true
+  },
+  { type: "string", name: "bestFor", label: "Best For" },
+  { type: "string", name: "revisions", label: "Revisions Policy" }
+];
 var config_default = defineConfig({
   branch: process.env.GITHUB_BRANCH || process.env.TINA_BRANCH || process.env.HEAD || "main",
   clientId: process.env.TINA_CLIENT_ID || "94cff29e-b158-496c-b456-9850440a0fb9",
@@ -817,6 +897,12 @@ var config_default = defineConfig({
               },
               {
                 type: "string",
+                name: "discountedPrice",
+                label: "Discounted Price",
+                description: "Optional sale price shown before the regular price."
+              },
+              {
+                type: "string",
                 name: "priceNote",
                 label: "Price Note (e.g. ONE-TIME)"
               },
@@ -873,6 +959,40 @@ var config_default = defineConfig({
               },
               { type: "string", name: "bestFor", label: "Best For" },
               { type: "string", name: "revisions", label: "Revisions Policy" }
+            ]
+          },
+          {
+            type: "object",
+            name: "pricingCategories",
+            label: "Homepage Pricing Tabs",
+            description: "Editable tab groups for the homepage pricing section. Each tab should contain the same package levels with category-specific prices and features.",
+            list: true,
+            ui: {
+              itemProps: (item) => ({ label: item?.label || "Pricing Tab" })
+            },
+            fields: [
+              {
+                type: "string",
+                name: "label",
+                label: "Tab Label",
+                required: true
+              },
+              {
+                type: "string",
+                name: "slug",
+                label: "Tab Slug",
+                description: "Lowercase identifier, e.g. website, branding, softwares"
+              },
+              {
+                type: "object",
+                name: "plans",
+                label: "Packages",
+                list: true,
+                ui: {
+                  itemProps: (item) => ({ label: item?.name || "Package" })
+                },
+                fields: pricingPlanFields
+              }
             ]
           },
           {

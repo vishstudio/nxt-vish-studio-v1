@@ -866,6 +866,7 @@ export type PricingPagePlans = {
   label?: Maybe<Scalars['String']['output']>;
   name: Scalars['String']['output'];
   price: Scalars['String']['output'];
+  discountedPrice?: Maybe<Scalars['String']['output']>;
   priceNote?: Maybe<Scalars['String']['output']>;
   delivery?: Maybe<Scalars['String']['output']>;
   tagline?: Maybe<Scalars['String']['output']>;
@@ -875,6 +876,36 @@ export type PricingPagePlans = {
   features?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   bestFor?: Maybe<Scalars['String']['output']>;
   revisions?: Maybe<Scalars['String']['output']>;
+};
+
+export type PricingPagePricingCategoriesPlansCtaLink = {
+  __typename?: 'PricingPagePricingCategoriesPlansCtaLink';
+  linkType?: Maybe<Scalars['String']['output']>;
+  linkValue?: Maybe<Scalars['String']['output']>;
+};
+
+export type PricingPagePricingCategoriesPlans = {
+  __typename?: 'PricingPagePricingCategoriesPlans';
+  label?: Maybe<Scalars['String']['output']>;
+  name: Scalars['String']['output'];
+  price: Scalars['String']['output'];
+  discountedPrice?: Maybe<Scalars['String']['output']>;
+  priceNote?: Maybe<Scalars['String']['output']>;
+  delivery?: Maybe<Scalars['String']['output']>;
+  tagline?: Maybe<Scalars['String']['output']>;
+  featured?: Maybe<Scalars['Boolean']['output']>;
+  ctaLabel?: Maybe<Scalars['String']['output']>;
+  ctaLink?: Maybe<PricingPagePricingCategoriesPlansCtaLink>;
+  features?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  bestFor?: Maybe<Scalars['String']['output']>;
+  revisions?: Maybe<Scalars['String']['output']>;
+};
+
+export type PricingPagePricingCategories = {
+  __typename?: 'PricingPagePricingCategories';
+  label: Scalars['String']['output'];
+  slug?: Maybe<Scalars['String']['output']>;
+  plans?: Maybe<Array<Maybe<PricingPagePricingCategoriesPlans>>>;
 };
 
 export type PricingPage = Node & Document & {
@@ -887,6 +918,7 @@ export type PricingPage = Node & Document & {
   sectionHeading?: Maybe<Scalars['String']['output']>;
   sectionSubtext?: Maybe<Scalars['String']['output']>;
   plans?: Maybe<Array<Maybe<PricingPagePlans>>>;
+  pricingCategories?: Maybe<Array<Maybe<PricingPagePricingCategories>>>;
   customLabel?: Maybe<Scalars['String']['output']>;
   customDescription?: Maybe<Scalars['String']['output']>;
   customCtaLabel?: Maybe<Scalars['String']['output']>;
@@ -905,6 +937,7 @@ export type PricingPagePlansFilter = {
   label?: InputMaybe<StringFilter>;
   name?: InputMaybe<StringFilter>;
   price?: InputMaybe<StringFilter>;
+  discountedPrice?: InputMaybe<StringFilter>;
   priceNote?: InputMaybe<StringFilter>;
   delivery?: InputMaybe<StringFilter>;
   tagline?: InputMaybe<StringFilter>;
@@ -916,6 +949,33 @@ export type PricingPagePlansFilter = {
   revisions?: InputMaybe<StringFilter>;
 };
 
+export type PricingPagePricingCategoriesPlansCtaLinkFilter = {
+  linkType?: InputMaybe<StringFilter>;
+  linkValue?: InputMaybe<StringFilter>;
+};
+
+export type PricingPagePricingCategoriesPlansFilter = {
+  label?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
+  price?: InputMaybe<StringFilter>;
+  discountedPrice?: InputMaybe<StringFilter>;
+  priceNote?: InputMaybe<StringFilter>;
+  delivery?: InputMaybe<StringFilter>;
+  tagline?: InputMaybe<StringFilter>;
+  featured?: InputMaybe<BooleanFilter>;
+  ctaLabel?: InputMaybe<StringFilter>;
+  ctaLink?: InputMaybe<PricingPagePricingCategoriesPlansCtaLinkFilter>;
+  features?: InputMaybe<StringFilter>;
+  bestFor?: InputMaybe<StringFilter>;
+  revisions?: InputMaybe<StringFilter>;
+};
+
+export type PricingPagePricingCategoriesFilter = {
+  label?: InputMaybe<StringFilter>;
+  slug?: InputMaybe<StringFilter>;
+  plans?: InputMaybe<PricingPagePricingCategoriesPlansFilter>;
+};
+
 export type PricingPageFilter = {
   heroLabel?: InputMaybe<StringFilter>;
   heroTitleLine1?: InputMaybe<StringFilter>;
@@ -925,6 +985,7 @@ export type PricingPageFilter = {
   sectionHeading?: InputMaybe<StringFilter>;
   sectionSubtext?: InputMaybe<StringFilter>;
   plans?: InputMaybe<PricingPagePlansFilter>;
+  pricingCategories?: InputMaybe<PricingPagePricingCategoriesFilter>;
   customLabel?: InputMaybe<StringFilter>;
   customDescription?: InputMaybe<StringFilter>;
   customCtaLabel?: InputMaybe<StringFilter>;
@@ -1333,6 +1394,7 @@ export type PricingPagePlansMutation = {
   label?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   price?: InputMaybe<Scalars['String']['input']>;
+  discountedPrice?: InputMaybe<Scalars['String']['input']>;
   priceNote?: InputMaybe<Scalars['String']['input']>;
   delivery?: InputMaybe<Scalars['String']['input']>;
   tagline?: InputMaybe<Scalars['String']['input']>;
@@ -1344,6 +1406,33 @@ export type PricingPagePlansMutation = {
   revisions?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type PricingPagePricingCategoriesPlansCtaLinkMutation = {
+  linkType?: InputMaybe<Scalars['String']['input']>;
+  linkValue?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PricingPagePricingCategoriesPlansMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  price?: InputMaybe<Scalars['String']['input']>;
+  discountedPrice?: InputMaybe<Scalars['String']['input']>;
+  priceNote?: InputMaybe<Scalars['String']['input']>;
+  delivery?: InputMaybe<Scalars['String']['input']>;
+  tagline?: InputMaybe<Scalars['String']['input']>;
+  featured?: InputMaybe<Scalars['Boolean']['input']>;
+  ctaLabel?: InputMaybe<Scalars['String']['input']>;
+  ctaLink?: InputMaybe<PricingPagePricingCategoriesPlansCtaLinkMutation>;
+  features?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  bestFor?: InputMaybe<Scalars['String']['input']>;
+  revisions?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PricingPagePricingCategoriesMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  plans?: InputMaybe<Array<InputMaybe<PricingPagePricingCategoriesPlansMutation>>>;
+};
+
 export type PricingPageMutation = {
   heroLabel?: InputMaybe<Scalars['String']['input']>;
   heroTitleLine1?: InputMaybe<Scalars['String']['input']>;
@@ -1353,6 +1442,7 @@ export type PricingPageMutation = {
   sectionHeading?: InputMaybe<Scalars['String']['input']>;
   sectionSubtext?: InputMaybe<Scalars['String']['input']>;
   plans?: InputMaybe<Array<InputMaybe<PricingPagePlansMutation>>>;
+  pricingCategories?: InputMaybe<Array<InputMaybe<PricingPagePricingCategoriesMutation>>>;
   customLabel?: InputMaybe<Scalars['String']['input']>;
   customDescription?: InputMaybe<Scalars['String']['input']>;
   customCtaLabel?: InputMaybe<Scalars['String']['input']>;
@@ -1377,7 +1467,7 @@ export type ServicesPagePartsFragment = { __typename: 'ServicesPage', heroLabel:
 
 export type ContactPagePartsFragment = { __typename: 'ContactPage', heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroTitlePunctuation?: string | null, heroDescription?: string | null, trustIndicators?: Array<{ __typename: 'ContactPageTrustIndicators', icon?: string | null, title: string, description?: string | null } | null> | null };
 
-export type PricingPagePartsFragment = { __typename: 'PricingPage', heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroSubtext?: string | null, sectionLabel?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, customLabel?: string | null, customDescription?: string | null, customCtaLabel?: string | null, customCtaHref?: string | null, plans?: Array<{ __typename: 'PricingPagePlans', label?: string | null, name: string, price: string, priceNote?: string | null, delivery?: string | null, tagline?: string | null, featured?: boolean | null, ctaLabel?: string | null, features?: Array<string | null> | null, bestFor?: string | null, revisions?: string | null, ctaLink?: { __typename: 'PricingPagePlansCtaLink', linkType?: string | null, linkValue?: string | null } | null } | null> | null };
+export type PricingPagePartsFragment = { __typename: 'PricingPage', heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroSubtext?: string | null, sectionLabel?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, customLabel?: string | null, customDescription?: string | null, customCtaLabel?: string | null, customCtaHref?: string | null, plans?: Array<{ __typename: 'PricingPagePlans', label?: string | null, name: string, price: string, discountedPrice?: string | null, priceNote?: string | null, delivery?: string | null, tagline?: string | null, featured?: boolean | null, ctaLabel?: string | null, features?: Array<string | null> | null, bestFor?: string | null, revisions?: string | null, ctaLink?: { __typename: 'PricingPagePlansCtaLink', linkType?: string | null, linkValue?: string | null } | null } | null> | null, pricingCategories?: Array<{ __typename: 'PricingPagePricingCategories', label: string, slug?: string | null, plans?: Array<{ __typename: 'PricingPagePricingCategoriesPlans', label?: string | null, name: string, price: string, discountedPrice?: string | null, priceNote?: string | null, delivery?: string | null, tagline?: string | null, featured?: boolean | null, ctaLabel?: string | null, features?: Array<string | null> | null, bestFor?: string | null, revisions?: string | null, ctaLink?: { __typename: 'PricingPagePricingCategoriesPlansCtaLink', linkType?: string | null, linkValue?: string | null } | null } | null> | null } | null> | null };
 
 export type ProjectQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1555,7 +1645,7 @@ export type PricingPageQueryVariables = Exact<{
 }>;
 
 
-export type PricingPageQuery = { __typename?: 'Query', pricingPage: { __typename: 'PricingPage', id: string, heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroSubtext?: string | null, sectionLabel?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, customLabel?: string | null, customDescription?: string | null, customCtaLabel?: string | null, customCtaHref?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, plans?: Array<{ __typename: 'PricingPagePlans', label?: string | null, name: string, price: string, priceNote?: string | null, delivery?: string | null, tagline?: string | null, featured?: boolean | null, ctaLabel?: string | null, features?: Array<string | null> | null, bestFor?: string | null, revisions?: string | null, ctaLink?: { __typename: 'PricingPagePlansCtaLink', linkType?: string | null, linkValue?: string | null } | null } | null> | null } };
+export type PricingPageQuery = { __typename?: 'Query', pricingPage: { __typename: 'PricingPage', id: string, heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroSubtext?: string | null, sectionLabel?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, customLabel?: string | null, customDescription?: string | null, customCtaLabel?: string | null, customCtaHref?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, plans?: Array<{ __typename: 'PricingPagePlans', label?: string | null, name: string, price: string, discountedPrice?: string | null, priceNote?: string | null, delivery?: string | null, tagline?: string | null, featured?: boolean | null, ctaLabel?: string | null, features?: Array<string | null> | null, bestFor?: string | null, revisions?: string | null, ctaLink?: { __typename: 'PricingPagePlansCtaLink', linkType?: string | null, linkValue?: string | null } | null } | null> | null, pricingCategories?: Array<{ __typename: 'PricingPagePricingCategories', label: string, slug?: string | null, plans?: Array<{ __typename: 'PricingPagePricingCategoriesPlans', label?: string | null, name: string, price: string, discountedPrice?: string | null, priceNote?: string | null, delivery?: string | null, tagline?: string | null, featured?: boolean | null, ctaLabel?: string | null, features?: Array<string | null> | null, bestFor?: string | null, revisions?: string | null, ctaLink?: { __typename: 'PricingPagePricingCategoriesPlansCtaLink', linkType?: string | null, linkValue?: string | null } | null } | null> | null } | null> | null } };
 
 export type PricingPageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1567,7 +1657,7 @@ export type PricingPageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type PricingPageConnectionQuery = { __typename?: 'Query', pricingPageConnection: { __typename?: 'PricingPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PricingPageConnectionEdges', cursor: string, node?: { __typename: 'PricingPage', id: string, heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroSubtext?: string | null, sectionLabel?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, customLabel?: string | null, customDescription?: string | null, customCtaLabel?: string | null, customCtaHref?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, plans?: Array<{ __typename: 'PricingPagePlans', label?: string | null, name: string, price: string, priceNote?: string | null, delivery?: string | null, tagline?: string | null, featured?: boolean | null, ctaLabel?: string | null, features?: Array<string | null> | null, bestFor?: string | null, revisions?: string | null, ctaLink?: { __typename: 'PricingPagePlansCtaLink', linkType?: string | null, linkValue?: string | null } | null } | null> | null } | null } | null> | null } };
+export type PricingPageConnectionQuery = { __typename?: 'Query', pricingPageConnection: { __typename?: 'PricingPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PricingPageConnectionEdges', cursor: string, node?: { __typename: 'PricingPage', id: string, heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroSubtext?: string | null, sectionLabel?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, customLabel?: string | null, customDescription?: string | null, customCtaLabel?: string | null, customCtaHref?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, plans?: Array<{ __typename: 'PricingPagePlans', label?: string | null, name: string, price: string, discountedPrice?: string | null, priceNote?: string | null, delivery?: string | null, tagline?: string | null, featured?: boolean | null, ctaLabel?: string | null, features?: Array<string | null> | null, bestFor?: string | null, revisions?: string | null, ctaLink?: { __typename: 'PricingPagePlansCtaLink', linkType?: string | null, linkValue?: string | null } | null } | null> | null, pricingCategories?: Array<{ __typename: 'PricingPagePricingCategories', label: string, slug?: string | null, plans?: Array<{ __typename: 'PricingPagePricingCategoriesPlans', label?: string | null, name: string, price: string, discountedPrice?: string | null, priceNote?: string | null, delivery?: string | null, tagline?: string | null, featured?: boolean | null, ctaLabel?: string | null, features?: Array<string | null> | null, bestFor?: string | null, revisions?: string | null, ctaLink?: { __typename: 'PricingPagePricingCategoriesPlansCtaLink', linkType?: string | null, linkValue?: string | null } | null } | null> | null } | null> | null } | null } | null> | null } };
 
 export const ProjectPartsFragmentDoc = gql`
     fragment ProjectParts on Project {
@@ -1762,6 +1852,7 @@ export const PricingPagePartsFragmentDoc = gql`
     label
     name
     price
+    discountedPrice
     priceNote
     delivery
     tagline
@@ -1775,6 +1866,31 @@ export const PricingPagePartsFragmentDoc = gql`
     features
     bestFor
     revisions
+  }
+  pricingCategories {
+    __typename
+    label
+    slug
+    plans {
+      __typename
+      label
+      name
+      price
+      discountedPrice
+      priceNote
+      delivery
+      tagline
+      featured
+      ctaLabel
+      ctaLink {
+        __typename
+        linkType
+        linkValue
+      }
+      features
+      bestFor
+      revisions
+    }
   }
   customLabel
   customDescription

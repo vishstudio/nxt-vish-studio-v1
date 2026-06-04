@@ -181,6 +181,7 @@ fragment PricingPageParts on PricingPage {
     label
     name
     price
+    discountedPrice
     priceNote
     delivery
     tagline
@@ -194,6 +195,31 @@ fragment PricingPageParts on PricingPage {
     features
     bestFor
     revisions
+  }
+  pricingCategories {
+    __typename
+    label
+    slug
+    plans {
+      __typename
+      label
+      name
+      price
+      discountedPrice
+      priceNote
+      delivery
+      tagline
+      featured
+      ctaLabel
+      ctaLink {
+        __typename
+        linkType
+        linkValue
+      }
+      features
+      bestFor
+      revisions
+    }
   }
   customLabel
   customDescription
