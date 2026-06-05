@@ -82,6 +82,8 @@ const pricingPlanFields: any[] = [
     type: "object" as const,
     name: "carePlan",
     label: "Monthly Care Plan",
+    description:
+      "Optional package-specific maintenance plan. This appears on the pricing page and in homepage package details.",
     fields: [
       { type: "string" as const, name: "title", label: "Care Plan Title" },
       { type: "string" as const, name: "price", label: "Monthly Price" },
@@ -922,106 +924,15 @@ export default defineConfig({
           },
           {
             type: "object",
-            name: "plans",
-            label: "Pricing Plans",
-            list: true,
-            ui: {
-              itemProps: (item) => ({ label: item?.name || "Plan" }),
-            },
-            fields: [
-              {
-                type: "string",
-                name: "label",
-                label: "Plan Label (e.g. STARTER)",
-              },
-              {
-                type: "string",
-                name: "name",
-                label: "Plan Name",
-                required: true,
-              },
-              {
-                type: "string",
-                name: "price",
-                label: "Price (e.g. Rs 3,000)",
-                required: true,
-              },
-              {
-                type: "string",
-                name: "discountedPrice",
-                label: "Discounted Price",
-                description: "Optional sale price shown before the regular price.",
-              },
-              {
-                type: "string",
-                name: "priceNote",
-                label: "Price Note (e.g. ONE-TIME)",
-              },
-              {
-                type: "string",
-                name: "delivery",
-                label: "Delivery Time (e.g. 3–5 business days)",
-              },
-              {
-                type: "string",
-                name: "tagline",
-                label: "Tagline",
-                ui: { component: "textarea" },
-              },
-              {
-                type: "boolean",
-                name: "featured",
-                label: "Featured (Most Popular)",
-              },
-              { type: "string", name: "ctaLabel", label: "CTA Button Label" },
-              {
-                type: "object",
-                name: "ctaLink",
-                label: "CTA Button Link",
-                fields: [
-                  {
-                    type: "string",
-                    name: "linkType",
-                    label: "Link Type",
-                    options: [
-                      {
-                        label: "Internal path (e.g. /contact)",
-                        value: "internal",
-                      },
-                      { label: "External URL (https://...)", value: "url" },
-                      { label: "Phone number", value: "phone" },
-                      { label: "Email address", value: "email" },
-                      { label: "WhatsApp number", value: "whatsapp" },
-                    ],
-                  },
-                  {
-                    type: "string",
-                    name: "linkValue",
-                    label: "Value",
-                    description:
-                      "Path, full URL, phone number (digits only), email, or WhatsApp number (digits only)",
-                  },
-                ],
-              },
-              {
-                type: "string",
-                name: "features",
-                label: "Features",
-                list: true,
-              },
-              { type: "string", name: "bestFor", label: "Best For" },
-              { type: "string", name: "revisions", label: "Revisions Policy" },
-            ],
-          },
-          {
-            type: "object",
             name: "pricingCategories",
-            label: "Homepage Pricing Tabs",
+            label: "Shared Service Pricing",
             description:
-              "Editable tab groups for the homepage pricing section. Each tab should contain the same package levels with category-specific prices and features.",
+              "Single source of truth for homepage pricing cards and the full pricing page. Edit packages, prices, features, CTAs, and monthly care plans here.",
             list: true,
             ui: {
-              itemProps: (item) => ({ label: item?.label || "Pricing Tab" }),
+              itemProps: (item) => ({
+                label: `${item?.label || "Service"} pricing`,
+              }),
             },
             fields: [
               {
@@ -1034,15 +945,20 @@ export default defineConfig({
                 type: "string",
                 name: "slug",
                 label: "Tab Slug",
-                description: "Lowercase identifier, e.g. website, branding, softwares",
+                description:
+                  "Lowercase identifier, e.g. website, branding, softwares, mobile-apps",
               },
               {
                 type: "object",
                 name: "plans",
                 label: "Packages",
+                description:
+                  "These packages render as homepage cards and pricing page rows. Care plans inside each package render as monthly maintenance pricing.",
                 list: true,
                 ui: {
-                  itemProps: (item) => ({ label: item?.name || "Package" }),
+                  itemProps: (item) => ({
+                    label: `${item?.label ? `${item.label} — ` : ""}${item?.name || "Package"}${item?.price ? ` (${item.price})` : ""}`,
+                  }),
                 },
                 fields: pricingPlanFields,
               },

@@ -366,7 +366,7 @@ export const PricingPage = () => {
   const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
   const unsortedPricingCategories = content.pricingCategories.length > 0
     ? content.pricingCategories
-    : [{ label: content.sectionLabel || 'Website', slug: 'website', plans: content.plans }];
+    : [];
   const pricingCategories = [...unsortedPricingCategories].sort((a, b) => {
     const aIndex = serviceOrder.indexOf(a.slug);
     const bIndex = serviceOrder.indexOf(b.slug);

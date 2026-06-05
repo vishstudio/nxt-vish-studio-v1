@@ -55,7 +55,6 @@ export function useTinaPricing() {
         sectionLabel: qd.pricingPage.sectionLabel ?? "",
         sectionHeading: qd.pricingPage.sectionHeading ?? "",
         sectionSubtext: qd.pricingPage.sectionSubtext ?? "",
-        plans: (qd.pricingPage.plans ?? []).map(mapPricingPlan),
         pricingCategories: (qd.pricingPage.pricingCategories ?? [])
           .map((category: any) => ({
             label: category?.label ?? "",

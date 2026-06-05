@@ -161,6 +161,14 @@ function PlanDetails({ plan, tinaField, rawPlan }: {
       </ul>
 
       <div className="space-y-2">
+        {plan.carePlan?.price && (
+          <p
+            className="font-mono text-xs text-gray-500"
+            data-tina-field={rawPlan?.carePlan ? tinaField(rawPlan.carePlan, 'price') : undefined}
+          >
+            <span className="text-gray-600">Care plan: </span>{plan.carePlan.price}
+          </p>
+        )}
         {plan.bestFor && (
           <p className="font-mono text-xs text-gray-500">
             <span className="text-gray-600">Best for: </span>{plan.bestFor}
@@ -185,7 +193,7 @@ export const Pricing = () => {
         {
           label: 'Website',
           slug: 'website',
-          plans: content.plans,
+          plans: [],
         },
       ];
   const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
@@ -193,7 +201,7 @@ export const Pricing = () => {
   const [activePlanIndex, setActivePlanIndex] = useState(0);
   const activeCategory = pricingCategories[activeCategoryIndex] ?? pricingCategories[0];
   const activeRawCategory = rawPricingPage?.pricingCategories?.[activeCategoryIndex];
-  const activeRawPlans = activeRawCategory?.plans ?? rawPricingPage?.plans;
+  const activeRawPlans = activeRawCategory?.plans;
   const tabItems = pricingCategories.map((category, index) => ({
     id: `pricing-${category.slug || category.label.toLowerCase().replace(/\s+/g, '-')}`,
     label: category.label,

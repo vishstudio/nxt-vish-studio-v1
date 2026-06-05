@@ -176,26 +176,6 @@ fragment PricingPageParts on PricingPage {
   sectionLabel
   sectionHeading
   sectionSubtext
-  plans {
-    __typename
-    label
-    name
-    price
-    discountedPrice
-    priceNote
-    delivery
-    tagline
-    featured
-    ctaLabel
-    ctaLink {
-      __typename
-      linkType
-      linkValue
-    }
-    features
-    bestFor
-    revisions
-  }
   pricingCategories {
     __typename
     label

@@ -69,7 +69,6 @@ export interface PricingPageContent {
   sectionLabel: string;
   sectionHeading: string;
   sectionSubtext: string;
-  plans: PricingPlan[];
   pricingCategories: PricingCategory[];
   customLabel: string;
   customDescription: string;
@@ -104,7 +103,6 @@ interface PricingPageJson {
   sectionLabel: string;
   sectionHeading: string;
   sectionSubtext: string;
-  plans?: PricingPlanJson[];
   pricingCategories?: {
     label?: string;
     slug?: string;
@@ -151,7 +149,6 @@ function mapPricingPlan(p: PricingPlanJson): PricingPlan {
 
 export function getPricingPage(): PricingPageContent {
   const raw = pricingJson as unknown as PricingPageJson;
-  const plans = (raw.plans ?? []).map(mapPricingPlan);
   const pricingCategories = (raw.pricingCategories ?? [])
     .map((category) => ({
       label: category.label ?? "",
@@ -168,7 +165,6 @@ export function getPricingPage(): PricingPageContent {
     sectionLabel: raw.sectionLabel ?? "",
     sectionHeading: raw.sectionHeading ?? "",
     sectionSubtext: raw.sectionSubtext ?? "",
-    plans,
     pricingCategories,
     customLabel: raw.customLabel ?? "",
     customDescription: raw.customDescription ?? "",

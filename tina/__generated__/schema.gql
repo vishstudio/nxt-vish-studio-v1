@@ -604,27 +604,6 @@ type ContactPageConnection implements Connection {
   edges: [ContactPageConnectionEdges]
 }
 
-type PricingPagePlansCtaLink {
-  linkType: String
-  linkValue: String
-}
-
-type PricingPagePlans {
-  label: String
-  name: String!
-  price: String!
-  discountedPrice: String
-  priceNote: String
-  delivery: String
-  tagline: String
-  featured: Boolean
-  ctaLabel: String
-  ctaLink: PricingPagePlansCtaLink
-  features: [String]
-  bestFor: String
-  revisions: String
-}
-
 type PricingPagePricingCategoriesPlansCtaLink {
   linkType: String
   linkValue: String
@@ -668,7 +647,6 @@ type PricingPage implements Node & Document {
   sectionLabel: String
   sectionHeading: String
   sectionSubtext: String
-  plans: [PricingPagePlans]
   pricingCategories: [PricingPagePricingCategories]
   customLabel: String
   customDescription: String
@@ -677,27 +655,6 @@ type PricingPage implements Node & Document {
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
-}
-
-input PricingPagePlansCtaLinkFilter {
-  linkType: StringFilter
-  linkValue: StringFilter
-}
-
-input PricingPagePlansFilter {
-  label: StringFilter
-  name: StringFilter
-  price: StringFilter
-  discountedPrice: StringFilter
-  priceNote: StringFilter
-  delivery: StringFilter
-  tagline: StringFilter
-  featured: BooleanFilter
-  ctaLabel: StringFilter
-  ctaLink: PricingPagePlansCtaLinkFilter
-  features: StringFilter
-  bestFor: StringFilter
-  revisions: StringFilter
 }
 
 input PricingPagePricingCategoriesPlansCtaLinkFilter {
@@ -743,7 +700,6 @@ input PricingPageFilter {
   sectionLabel: StringFilter
   sectionHeading: StringFilter
   sectionSubtext: StringFilter
-  plans: PricingPagePlansFilter
   pricingCategories: PricingPagePricingCategoriesFilter
   customLabel: StringFilter
   customDescription: StringFilter
@@ -988,27 +944,6 @@ input ContactPageMutation {
   trustIndicators: [ContactPageTrustIndicatorsMutation]
 }
 
-input PricingPagePlansCtaLinkMutation {
-  linkType: String
-  linkValue: String
-}
-
-input PricingPagePlansMutation {
-  label: String
-  name: String
-  price: String
-  discountedPrice: String
-  priceNote: String
-  delivery: String
-  tagline: String
-  featured: Boolean
-  ctaLabel: String
-  ctaLink: PricingPagePlansCtaLinkMutation
-  features: [String]
-  bestFor: String
-  revisions: String
-}
-
 input PricingPagePricingCategoriesPlansCtaLinkMutation {
   linkType: String
   linkValue: String
@@ -1052,7 +987,6 @@ input PricingPageMutation {
   sectionLabel: String
   sectionHeading: String
   sectionSubtext: String
-  plans: [PricingPagePlansMutation]
   pricingCategories: [PricingPagePricingCategoriesMutation]
   customLabel: String
   customDescription: String
