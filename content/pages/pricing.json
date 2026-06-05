@@ -186,9 +186,8 @@
           },
           "features": [
             "Single core app flow",
-            "Basic user interface design",
             "Mobile-first interface design",
-            "User input and data capture",
+            "Basic UI/UX design",
             "Firebase or API connection",
             "Deployment guidance",
             "Basic app testing",
