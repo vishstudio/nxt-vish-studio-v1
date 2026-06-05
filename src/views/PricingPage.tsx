@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { motion } from 'motion/react';
+import { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
 import { ArrowRight, Check, Sparkles } from 'lucide-react';
 import { useTinaPricing } from '../hooks/useTinaVisualEditing';
 import { PageLayout } from '../components/ui/page-layout/page-layout';
@@ -23,19 +23,6 @@ const serviceDetails = {
       { label: 'Additional homepage section', price: 'Rs 900 / section', note: 'Useful for testimonials, FAQs, galleries, or conversion blocks.' },
       { label: 'Blog article setup', price: 'Rs 600 / article', note: 'Formatting, metadata, image placement, and publishing support.' },
       { label: 'Advanced SEO pass', price: 'Rs 3,500', note: 'Keyword structure, metadata, schema, and internal linking review.' },
-    ],
-  },
-  branding: {
-    carePlans: [
-      { title: 'Essentials Brand Support', price: 'Rs 1,200 / mo', cadence: 'Monthly', summary: 'Light brand file upkeep, small export requests, and visual consistency checks.' },
-      { title: 'Growth Brand Support', price: 'Rs 1,800 / mo', cadence: 'Monthly', summary: 'Social asset support, campaign graphics, brand file maintenance, and monthly creative guidance.' },
-      { title: 'Premium Brand Support', price: 'Rs 3,500 / mo', cadence: 'Monthly', summary: 'Priority creative support, campaign system refinement, launch assets, and ongoing brand direction.' },
-    ],
-    addOns: [
-      { label: 'Additional logo lockup', price: 'Rs 1,200', note: 'Alternative layout or usage-specific mark.' },
-      { label: 'Social media template', price: 'Rs 750 / template', note: 'Reusable branded layout for posts, stories, or promos.' },
-      { label: 'Campaign creative set', price: 'Rs 4,500', note: 'A compact set of campaign visuals for one launch or offer.' },
-      { label: 'Extended brand guideline page', price: 'Rs 1,000 / page', note: 'More detail for usage, tone, layouts, or production rules.' },
     ],
   },
   softwares: {
@@ -64,6 +51,19 @@ const serviceDetails = {
       { label: 'Advanced app workflow', price: 'From Rs 18,000', note: 'Multi-step flows, permissions, data rules, or integrations.' },
     ],
   },
+  branding: {
+    carePlans: [
+      { title: 'Essentials Brand Support', price: 'Rs 1,200 / mo', cadence: 'Monthly', summary: 'Light brand file upkeep, small export requests, and visual consistency checks.' },
+      { title: 'Growth Brand Support', price: 'Rs 1,800 / mo', cadence: 'Monthly', summary: 'Social asset support, campaign graphics, brand file maintenance, and monthly creative guidance.' },
+      { title: 'Premium Brand Support', price: 'Rs 3,500 / mo', cadence: 'Monthly', summary: 'Priority creative support, campaign system refinement, launch assets, and ongoing brand direction.' },
+    ],
+    addOns: [
+      { label: 'Additional logo lockup', price: 'Rs 1,200', note: 'Alternative layout or usage-specific mark.' },
+      { label: 'Social media template', price: 'Rs 750 / template', note: 'Reusable branded layout for posts, stories, or promos.' },
+      { label: 'Campaign creative set', price: 'Rs 4,500', note: 'A compact set of campaign visuals for one launch or offer.' },
+      { label: 'Extended brand guideline page', price: 'Rs 1,000 / page', note: 'More detail for usage, tone, layouts, or production rules.' },
+    ],
+  },
 } satisfies Record<string, {
   carePlans: PricingCarePlan[];
   addOns: { label: string; price: string; note: string }[];
@@ -78,7 +78,7 @@ const fallbackServiceDetail = {
   ],
 };
 
-const serviceOrder = ['website', 'branding', 'softwares', 'mobile-apps'];
+const serviceOrder = ['website', 'mobile-apps', 'softwares', 'branding'];
 
 function getPackageCarePlan(plan: PricingPlan, detail: typeof fallbackServiceDetail, index: number): PricingCarePlan {
   if (plan.carePlan?.price) {
@@ -364,6 +364,7 @@ function ActivePricingSection({
 export const PricingPage = () => {
   const { data: content, tinaField, rawPricingPage } = useTinaPricing();
   const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
+  const [isPricingNavVisible, setIsPricingNavVisible] = useState(false);
   const heroBackgroundImage = content.heroBackgroundImageUrl || content.heroBackgroundImage;
   const unsortedPricingCategories = content.pricingCategories.length > 0
     ? content.pricingCategories
@@ -393,6 +394,31 @@ export const PricingPage = () => {
       });
     });
   };
+
+  useEffect(() => {
+    const pricingSection = document.getElementById('pricing-content');
+
+    if (!pricingSection) {
+      return;
+    }
+
+    const updatePricingNavVisibility = () => {
+      const sectionBounds = pricingSection.getBoundingClientRect();
+      const revealPoint = window.innerHeight * 0.72;
+      const shouldShow = sectionBounds.top <= revealPoint && sectionBounds.bottom > 160;
+
+      setIsPricingNavVisible(shouldShow);
+    };
+
+    updatePricingNavVisibility();
+    window.addEventListener('scroll', updatePricingNavVisibility, { passive: true });
+    window.addEventListener('resize', updatePricingNavVisibility);
+
+    return () => {
+      window.removeEventListener('scroll', updatePricingNavVisibility);
+      window.removeEventListener('resize', updatePricingNavVisibility);
+    };
+  }, []);
 
   return (
     <PageLayout>
@@ -476,22 +502,27 @@ export const PricingPage = () => {
         </div>
       </section>
 
-      <motion.div
-        initial={{ y: 40, opacity: 0, filter: 'blur(4px)' }}
-        animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
-        transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-        className="fixed bottom-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none"
-      >
-        <div className="pointer-events-auto w-full max-w-[720px] rounded-[1.75rem] border border-white/10 bg-black/80 p-2 shadow-2xl shadow-black/50 backdrop-blur-xl">
-          <Tabs
-            items={tabItems}
-            activeIndex={activeCategoryIndex}
-            onChange={handleCategoryChange}
-            ariaLabel="Pricing services"
-            className="w-full justify-center border-white/5 bg-white/[0.025]"
-          />
-        </div>
-      </motion.div>
+      <AnimatePresence>
+        {isPricingNavVisible && (
+          <motion.div
+            initial={{ y: 40, opacity: 0, filter: 'blur(4px)' }}
+            animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
+            exit={{ y: 28, opacity: 0, filter: 'blur(4px)' }}
+            transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed bottom-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none"
+          >
+            <div className="pointer-events-auto w-full max-w-[720px] rounded-[1.75rem] border border-white/10 bg-black/80 p-2 shadow-2xl shadow-black/50 backdrop-blur-xl">
+              <Tabs
+                items={tabItems}
+                activeIndex={activeCategoryIndex}
+                onChange={handleCategoryChange}
+                ariaLabel="Pricing services"
+                className="w-full justify-center border-white/5 bg-white/[0.025]"
+              />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <Contact />
     </PageLayout>
