@@ -52,6 +52,8 @@ export function useTinaPricing() {
         heroTitleLine1: qd.pricingPage.heroTitleLine1 ?? "",
         heroTitleLine2: qd.pricingPage.heroTitleLine2 ?? "",
         heroSubtext: qd.pricingPage.heroSubtext ?? "",
+        heroBackgroundImage: qd.pricingPage.heroBackgroundImage ?? "",
+        heroBackgroundImageUrl: qd.pricingPage.heroBackgroundImageUrl ?? "",
         sectionLabel: qd.pricingPage.sectionLabel ?? "",
         sectionHeading: qd.pricingPage.sectionHeading ?? "",
         sectionSubtext: qd.pricingPage.sectionSubtext ?? "",

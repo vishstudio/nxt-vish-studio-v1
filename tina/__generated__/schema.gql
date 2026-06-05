@@ -644,6 +644,8 @@ type PricingPage implements Node & Document {
   heroTitleLine1: String
   heroTitleLine2: String
   heroSubtext: String
+  heroBackgroundImage: String
+  heroBackgroundImageUrl: String
   sectionLabel: String
   sectionHeading: String
   sectionSubtext: String
@@ -655,6 +657,13 @@ type PricingPage implements Node & Document {
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
+}
+
+input ImageFilter {
+  startsWith: String
+  eq: String
+  exists: Boolean
+  in: [String]
 }
 
 input PricingPagePricingCategoriesPlansCtaLinkFilter {
@@ -697,6 +706,8 @@ input PricingPageFilter {
   heroTitleLine1: StringFilter
   heroTitleLine2: StringFilter
   heroSubtext: StringFilter
+  heroBackgroundImage: ImageFilter
+  heroBackgroundImageUrl: StringFilter
   sectionLabel: StringFilter
   sectionHeading: StringFilter
   sectionSubtext: StringFilter
@@ -984,6 +995,8 @@ input PricingPageMutation {
   heroTitleLine1: String
   heroTitleLine2: String
   heroSubtext: String
+  heroBackgroundImage: String
+  heroBackgroundImageUrl: String
   sectionLabel: String
   sectionHeading: String
   sectionSubtext: String

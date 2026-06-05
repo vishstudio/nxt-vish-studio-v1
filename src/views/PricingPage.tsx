@@ -364,6 +364,7 @@ function ActivePricingSection({
 export const PricingPage = () => {
   const { data: content, tinaField, rawPricingPage } = useTinaPricing();
   const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
+  const heroBackgroundImage = content.heroBackgroundImageUrl || content.heroBackgroundImage;
   const unsortedPricingCategories = content.pricingCategories.length > 0
     ? content.pricingCategories
     : [];
@@ -422,6 +423,8 @@ export const PricingPage = () => {
         }
         description={content.heroSubtext}
         descriptionTinaField={tinaField('heroSubtext')}
+        backgroundImage={heroBackgroundImage}
+        backgroundImageClassName="object-[70%_50%]"
       />
 
       <section id="pricing-content" className="bg-black px-6 pb-40 pt-6 md:px-12 md:pb-44 md:pt-10">

@@ -173,6 +173,8 @@ fragment PricingPageParts on PricingPage {
   heroTitleLine1
   heroTitleLine2
   heroSubtext
+  heroBackgroundImage
+  heroBackgroundImageUrl
   sectionLabel
   sectionHeading
   sectionSubtext

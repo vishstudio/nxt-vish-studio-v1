@@ -900,6 +900,8 @@ export type PricingPage = Node & Document & {
   heroTitleLine1?: Maybe<Scalars['String']['output']>;
   heroTitleLine2?: Maybe<Scalars['String']['output']>;
   heroSubtext?: Maybe<Scalars['String']['output']>;
+  heroBackgroundImage?: Maybe<Scalars['String']['output']>;
+  heroBackgroundImageUrl?: Maybe<Scalars['String']['output']>;
   sectionLabel?: Maybe<Scalars['String']['output']>;
   sectionHeading?: Maybe<Scalars['String']['output']>;
   sectionSubtext?: Maybe<Scalars['String']['output']>;
@@ -911,6 +913,13 @@ export type PricingPage = Node & Document & {
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
+};
+
+export type ImageFilter = {
+  startsWith?: InputMaybe<Scalars['String']['input']>;
+  eq?: InputMaybe<Scalars['String']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type PricingPagePricingCategoriesPlansCtaLinkFilter = {
@@ -953,6 +962,8 @@ export type PricingPageFilter = {
   heroTitleLine1?: InputMaybe<StringFilter>;
   heroTitleLine2?: InputMaybe<StringFilter>;
   heroSubtext?: InputMaybe<StringFilter>;
+  heroBackgroundImage?: InputMaybe<ImageFilter>;
+  heroBackgroundImageUrl?: InputMaybe<StringFilter>;
   sectionLabel?: InputMaybe<StringFilter>;
   sectionHeading?: InputMaybe<StringFilter>;
   sectionSubtext?: InputMaybe<StringFilter>;
@@ -1396,6 +1407,8 @@ export type PricingPageMutation = {
   heroTitleLine1?: InputMaybe<Scalars['String']['input']>;
   heroTitleLine2?: InputMaybe<Scalars['String']['input']>;
   heroSubtext?: InputMaybe<Scalars['String']['input']>;
+  heroBackgroundImage?: InputMaybe<Scalars['String']['input']>;
+  heroBackgroundImageUrl?: InputMaybe<Scalars['String']['input']>;
   sectionLabel?: InputMaybe<Scalars['String']['input']>;
   sectionHeading?: InputMaybe<Scalars['String']['input']>;
   sectionSubtext?: InputMaybe<Scalars['String']['input']>;
@@ -1424,7 +1437,7 @@ export type ServicesPagePartsFragment = { __typename: 'ServicesPage', heroLabel:
 
 export type ContactPagePartsFragment = { __typename: 'ContactPage', heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroTitlePunctuation?: string | null, heroDescription?: string | null, trustIndicators?: Array<{ __typename: 'ContactPageTrustIndicators', icon?: string | null, title: string, description?: string | null } | null> | null };
 
-export type PricingPagePartsFragment = { __typename: 'PricingPage', heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroSubtext?: string | null, sectionLabel?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, customLabel?: string | null, customDescription?: string | null, customCtaLabel?: string | null, customCtaHref?: string | null, pricingCategories?: Array<{ __typename: 'PricingPagePricingCategories', label: string, slug?: string | null, plans?: Array<{ __typename: 'PricingPagePricingCategoriesPlans', label?: string | null, name: string, price: string, discountedPrice?: string | null, priceNote?: string | null, delivery?: string | null, tagline?: string | null, featured?: boolean | null, ctaLabel?: string | null, features?: Array<string | null> | null, bestFor?: string | null, revisions?: string | null, ctaLink?: { __typename: 'PricingPagePricingCategoriesPlansCtaLink', linkType?: string | null, linkValue?: string | null } | null, carePlan?: { __typename: 'PricingPagePricingCategoriesPlansCarePlan', title?: string | null, price?: string | null, cadence?: string | null, summary?: string | null } | null } | null> | null } | null> | null };
+export type PricingPagePartsFragment = { __typename: 'PricingPage', heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroSubtext?: string | null, heroBackgroundImage?: string | null, heroBackgroundImageUrl?: string | null, sectionLabel?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, customLabel?: string | null, customDescription?: string | null, customCtaLabel?: string | null, customCtaHref?: string | null, pricingCategories?: Array<{ __typename: 'PricingPagePricingCategories', label: string, slug?: string | null, plans?: Array<{ __typename: 'PricingPagePricingCategoriesPlans', label?: string | null, name: string, price: string, discountedPrice?: string | null, priceNote?: string | null, delivery?: string | null, tagline?: string | null, featured?: boolean | null, ctaLabel?: string | null, features?: Array<string | null> | null, bestFor?: string | null, revisions?: string | null, ctaLink?: { __typename: 'PricingPagePricingCategoriesPlansCtaLink', linkType?: string | null, linkValue?: string | null } | null, carePlan?: { __typename: 'PricingPagePricingCategoriesPlansCarePlan', title?: string | null, price?: string | null, cadence?: string | null, summary?: string | null } | null } | null> | null } | null> | null };
 
 export type ProjectQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1602,7 +1615,7 @@ export type PricingPageQueryVariables = Exact<{
 }>;
 
 
-export type PricingPageQuery = { __typename?: 'Query', pricingPage: { __typename: 'PricingPage', id: string, heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroSubtext?: string | null, sectionLabel?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, customLabel?: string | null, customDescription?: string | null, customCtaLabel?: string | null, customCtaHref?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, pricingCategories?: Array<{ __typename: 'PricingPagePricingCategories', label: string, slug?: string | null, plans?: Array<{ __typename: 'PricingPagePricingCategoriesPlans', label?: string | null, name: string, price: string, discountedPrice?: string | null, priceNote?: string | null, delivery?: string | null, tagline?: string | null, featured?: boolean | null, ctaLabel?: string | null, features?: Array<string | null> | null, bestFor?: string | null, revisions?: string | null, ctaLink?: { __typename: 'PricingPagePricingCategoriesPlansCtaLink', linkType?: string | null, linkValue?: string | null } | null, carePlan?: { __typename: 'PricingPagePricingCategoriesPlansCarePlan', title?: string | null, price?: string | null, cadence?: string | null, summary?: string | null } | null } | null> | null } | null> | null } };
+export type PricingPageQuery = { __typename?: 'Query', pricingPage: { __typename: 'PricingPage', id: string, heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroSubtext?: string | null, heroBackgroundImage?: string | null, heroBackgroundImageUrl?: string | null, sectionLabel?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, customLabel?: string | null, customDescription?: string | null, customCtaLabel?: string | null, customCtaHref?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, pricingCategories?: Array<{ __typename: 'PricingPagePricingCategories', label: string, slug?: string | null, plans?: Array<{ __typename: 'PricingPagePricingCategoriesPlans', label?: string | null, name: string, price: string, discountedPrice?: string | null, priceNote?: string | null, delivery?: string | null, tagline?: string | null, featured?: boolean | null, ctaLabel?: string | null, features?: Array<string | null> | null, bestFor?: string | null, revisions?: string | null, ctaLink?: { __typename: 'PricingPagePricingCategoriesPlansCtaLink', linkType?: string | null, linkValue?: string | null } | null, carePlan?: { __typename: 'PricingPagePricingCategoriesPlansCarePlan', title?: string | null, price?: string | null, cadence?: string | null, summary?: string | null } | null } | null> | null } | null> | null } };
 
 export type PricingPageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1614,7 +1627,7 @@ export type PricingPageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type PricingPageConnectionQuery = { __typename?: 'Query', pricingPageConnection: { __typename?: 'PricingPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PricingPageConnectionEdges', cursor: string, node?: { __typename: 'PricingPage', id: string, heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroSubtext?: string | null, sectionLabel?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, customLabel?: string | null, customDescription?: string | null, customCtaLabel?: string | null, customCtaHref?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, pricingCategories?: Array<{ __typename: 'PricingPagePricingCategories', label: string, slug?: string | null, plans?: Array<{ __typename: 'PricingPagePricingCategoriesPlans', label?: string | null, name: string, price: string, discountedPrice?: string | null, priceNote?: string | null, delivery?: string | null, tagline?: string | null, featured?: boolean | null, ctaLabel?: string | null, features?: Array<string | null> | null, bestFor?: string | null, revisions?: string | null, ctaLink?: { __typename: 'PricingPagePricingCategoriesPlansCtaLink', linkType?: string | null, linkValue?: string | null } | null, carePlan?: { __typename: 'PricingPagePricingCategoriesPlansCarePlan', title?: string | null, price?: string | null, cadence?: string | null, summary?: string | null } | null } | null> | null } | null> | null } | null } | null> | null } };
+export type PricingPageConnectionQuery = { __typename?: 'Query', pricingPageConnection: { __typename?: 'PricingPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PricingPageConnectionEdges', cursor: string, node?: { __typename: 'PricingPage', id: string, heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroSubtext?: string | null, heroBackgroundImage?: string | null, heroBackgroundImageUrl?: string | null, sectionLabel?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, customLabel?: string | null, customDescription?: string | null, customCtaLabel?: string | null, customCtaHref?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, pricingCategories?: Array<{ __typename: 'PricingPagePricingCategories', label: string, slug?: string | null, plans?: Array<{ __typename: 'PricingPagePricingCategoriesPlans', label?: string | null, name: string, price: string, discountedPrice?: string | null, priceNote?: string | null, delivery?: string | null, tagline?: string | null, featured?: boolean | null, ctaLabel?: string | null, features?: Array<string | null> | null, bestFor?: string | null, revisions?: string | null, ctaLink?: { __typename: 'PricingPagePricingCategoriesPlansCtaLink', linkType?: string | null, linkValue?: string | null } | null, carePlan?: { __typename: 'PricingPagePricingCategoriesPlansCarePlan', title?: string | null, price?: string | null, cadence?: string | null, summary?: string | null } | null } | null> | null } | null> | null } | null } | null> | null } };
 
 export const ProjectPartsFragmentDoc = gql`
     fragment ProjectParts on Project {
@@ -1801,6 +1814,8 @@ export const PricingPagePartsFragmentDoc = gql`
   heroTitleLine1
   heroTitleLine2
   heroSubtext
+  heroBackgroundImage
+  heroBackgroundImageUrl
   sectionLabel
   sectionHeading
   sectionSubtext

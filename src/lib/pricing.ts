@@ -66,6 +66,8 @@ export interface PricingPageContent {
   heroTitleLine1: string;
   heroTitleLine2: string;
   heroSubtext: string;
+  heroBackgroundImage: string;
+  heroBackgroundImageUrl: string;
   sectionLabel: string;
   sectionHeading: string;
   sectionSubtext: string;
@@ -100,6 +102,8 @@ interface PricingPageJson {
   heroTitleLine1: string;
   heroTitleLine2: string;
   heroSubtext: string;
+  heroBackgroundImage?: string;
+  heroBackgroundImageUrl?: string;
   sectionLabel: string;
   sectionHeading: string;
   sectionSubtext: string;
@@ -162,6 +166,8 @@ export function getPricingPage(): PricingPageContent {
     heroTitleLine1: raw.heroTitleLine1 ?? "",
     heroTitleLine2: raw.heroTitleLine2 ?? "",
     heroSubtext: raw.heroSubtext ?? "",
+    heroBackgroundImage: raw.heroBackgroundImage ?? "",
+    heroBackgroundImageUrl: raw.heroBackgroundImageUrl ?? "",
     sectionLabel: raw.sectionLabel ?? "",
     sectionHeading: raw.sectionHeading ?? "",
     sectionSubtext: raw.sectionSubtext ?? "",

@@ -914,6 +914,20 @@ export default defineConfig({
             label: "Hero Subtext",
             ui: { component: "textarea" },
           },
+          {
+            type: "image",
+            name: "heroBackgroundImage",
+            label: "Hero Background Image Upload",
+            description:
+              "Upload a WEBP, PNG, or JPG hero image. Used when no pasted image URL is provided.",
+          },
+          {
+            type: "string",
+            name: "heroBackgroundImageUrl",
+            label: "Hero Background Image URL",
+            description:
+              "Optional external image URL. If filled, this takes priority over the uploaded image.",
+          },
           { type: "string", name: "sectionLabel", label: "Section Label" },
           { type: "string", name: "sectionHeading", label: "Section Heading" },
           {
