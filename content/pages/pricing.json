@@ -190,7 +190,8 @@
             "User input and data capture",
             "Firebase or API connection",
             "Basic app testing",
-            "Deployment guidance"
+            "Deployment guidance",
+            "5 Features"
           ],
           "bestFor": "MVPs, booking tools, client intake apps",
           "revisions": "1 revision round"
