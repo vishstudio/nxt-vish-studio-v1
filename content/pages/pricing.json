@@ -174,7 +174,7 @@
         {
           "label": "STARTER",
           "name": "Essentials",
-          "price": "Rs 55,000",
+          "price": "Rs 65,000",
           "priceNote": "STARTING FROM",
           "delivery": "4–6 weeks",
           "tagline": "A focused mobile app prototype for validating a core product flow.",
@@ -189,8 +189,8 @@
             "Mobile-first interface design",
             "User input and data capture",
             "Firebase or API connection",
-            "Basic app testing",
             "Deployment guidance",
+            "Basic app testing",
             "4 Features"
           ],
           "bestFor": "MVPs, booking tools, client intake apps",
