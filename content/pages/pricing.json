@@ -238,10 +238,12 @@
           },
           "features": [
             "Full product architecture",
-            "Advanced user roles and permissions",
             "Complex app workflows",
+            "Custom UI/UX Design",
+            "Advanced user roles and permissions",
             "Third-party integrations",
             "Analytics and reporting setup",
+            "Admin interface (App based)",
             "Launch, QA, and growth support",
             "15 - 20 Features"
           ],
