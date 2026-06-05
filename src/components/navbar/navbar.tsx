@@ -27,6 +27,7 @@ export const Navbar = () => {
     { name: 'Home', href: '/' },
     { name: 'Projects', href: '/projects', activePaths: ['/project'] },
     { name: 'Services', href: '/services' },
+    { name: 'Pricing', href: '/pricing' },
     { name: 'About', href: '/about' },
     { name: 'Testimonials', href: '/testimonials' }
   ];
@@ -141,7 +142,7 @@ export const Navbar = () => {
     return () => observer.disconnect();
   }, [currentPath]);
 
-  const shouldShowBottomBar = !isMobileMenuOpen && (isInSelectedProjects || isBottomBarVisible);
+  const shouldShowBottomBar = currentPath !== '/pricing' && !isMobileMenuOpen && (isInSelectedProjects || isBottomBarVisible);
 
   return (
     <div className="navbar contents">
@@ -332,9 +333,10 @@ export const Navbar = () => {
                 {[
                   { name: 'Projects', href: '/projects', id: '01' },
                   { name: 'Services', href: '/services', id: '02' },
-                  { name: 'About', href: '/about', id: '03' },
-                  { name: 'Testimonials', href: '/testimonials', id: '04' },
-                  { name: 'Contact', href: '/contact', id: '05' }
+                  { name: 'Pricing', href: '/pricing', id: '03' },
+                  { name: 'About', href: '/about', id: '04' },
+                  { name: 'Testimonials', href: '/testimonials', id: '05' },
+                  { name: 'Contact', href: '/contact', id: '06' }
                 ].map((item, i) => (
                   <motion.a
                     key={item.name}

@@ -1,145 +1,397 @@
 'use client';
-import Link from 'next/link';
+
+import { useState } from 'react';
 import { motion } from 'motion/react';
-import { Check, ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, Check, Sparkles } from 'lucide-react';
 import { useTinaPricing } from '../hooks/useTinaVisualEditing';
 import { PageLayout } from '../components/ui/page-layout/page-layout';
 import { PageHero } from '../components/ui/page-hero/page-hero';
 import { Contact } from '../components/contact/contact';
-import { buildCtaHref, isExternalCtaLink, type PricingPlan } from '../lib/pricing';
+import { Button } from '../components/ui/button/button';
+import { Tabs } from '../components/tabs/Tabs';
+import { type PricingCarePlan, type PricingCategory, type PricingPlan } from '../lib/pricing';
 
-function PlanCard({ plan, index, tinaField, rawPlan }: {
+const serviceDetails = {
+  website: {
+    carePlans: [
+      { title: 'Essentials Care', price: 'Rs 1,500 / mo', cadence: 'Monthly', summary: 'Core uptime checks, light content edits, backups, and monthly health monitoring.' },
+      { title: 'Growth Care', price: 'Rs 2,500 / mo', cadence: 'Monthly', summary: 'Performance checks, minor content updates, SEO hygiene, uptime monitoring, and hosting support.' },
+      { title: 'Premium Care', price: 'Rs 4,500 / mo', cadence: 'Monthly', summary: 'Priority support, conversion checks, technical SEO review, analytics monitoring, and monthly improvement planning.' },
+    ],
+    addOns: [
+      { label: 'Additional content page', price: 'Rs 1,500 / page', note: 'For service, landing, legal, or campaign pages.' },
+      { label: 'Additional homepage section', price: 'Rs 900 / section', note: 'Useful for testimonials, FAQs, galleries, or conversion blocks.' },
+      { label: 'Blog article setup', price: 'Rs 600 / article', note: 'Formatting, metadata, image placement, and publishing support.' },
+      { label: 'Advanced SEO pass', price: 'Rs 3,500', note: 'Keyword structure, metadata, schema, and internal linking review.' },
+    ],
+  },
+  branding: {
+    carePlans: [
+      { title: 'Essentials Brand Support', price: 'Rs 1,200 / mo', cadence: 'Monthly', summary: 'Light brand file upkeep, small export requests, and visual consistency checks.' },
+      { title: 'Growth Brand Support', price: 'Rs 1,800 / mo', cadence: 'Monthly', summary: 'Social asset support, campaign graphics, brand file maintenance, and monthly creative guidance.' },
+      { title: 'Premium Brand Support', price: 'Rs 3,500 / mo', cadence: 'Monthly', summary: 'Priority creative support, campaign system refinement, launch assets, and ongoing brand direction.' },
+    ],
+    addOns: [
+      { label: 'Additional logo lockup', price: 'Rs 1,200', note: 'Alternative layout or usage-specific mark.' },
+      { label: 'Social media template', price: 'Rs 750 / template', note: 'Reusable branded layout for posts, stories, or promos.' },
+      { label: 'Campaign creative set', price: 'Rs 4,500', note: 'A compact set of campaign visuals for one launch or offer.' },
+      { label: 'Extended brand guideline page', price: 'Rs 1,000 / page', note: 'More detail for usage, tone, layouts, or production rules.' },
+    ],
+  },
+  softwares: {
+    carePlans: [
+      { title: 'Essentials Software Support', price: 'Rs 5,500 / mo', cadence: 'Monthly', summary: 'Bug triage, dependency checks, uptime review, and minor workflow support.' },
+      { title: 'Growth Software Support', price: 'Rs 8,500 / mo', cadence: 'Monthly', summary: 'Bug triage, dependency updates, small workflow improvements, and release support.' },
+      { title: 'Premium Software Support', price: 'Rs 15,000 / mo', cadence: 'Monthly', summary: 'Priority engineering support, monitoring review, release planning, reporting checks, and iterative product improvements.' },
+    ],
+    addOns: [
+      { label: 'Additional dashboard screen', price: 'Rs 5,500 / screen', note: 'Designed and engineered into the active product flow.' },
+      { label: 'Advanced user role', price: 'Rs 6,500 / role', note: 'Permissions, routing, and interface states for a new role.' },
+      { label: 'Third-party integration', price: 'From Rs 12,000', note: 'API, CRM, payment, booking, automation, or analytics connection.' },
+      { label: 'Reporting module', price: 'From Rs 15,000', note: 'Metrics, filtering, export, and admin visibility.' },
+    ],
+  },
+  'mobile-apps': {
+    carePlans: [
+      { title: 'Essentials App Support', price: 'Rs 6,500 / mo', cadence: 'Monthly', summary: 'Basic QA support, app health checks, issue triage, and store readiness checks.' },
+      { title: 'Growth App Support', price: 'Rs 10,000 / mo', cadence: 'Monthly', summary: 'App monitoring, QA support, minor improvements, release support, and launch-readiness maintenance.' },
+      { title: 'Premium App Support', price: 'Rs 18,000 / mo', cadence: 'Monthly', summary: 'Priority mobile support, release planning, feature iteration, analytics checks, and store optimization guidance.' },
+    ],
+    addOns: [
+      { label: 'Additional app screen', price: 'Rs 6,500 / screen', note: 'Interface, state handling, and implementation for one new screen.' },
+      { label: 'Push notification flow', price: 'From Rs 9,500', note: 'Notification triggers, copy, setup, and testing.' },
+      { label: 'App store launch support', price: 'Rs 12,000', note: 'Listing guidance, assets, metadata, and submission support.' },
+      { label: 'Advanced app workflow', price: 'From Rs 18,000', note: 'Multi-step flows, permissions, data rules, or integrations.' },
+    ],
+  },
+} satisfies Record<string, {
+  carePlans: PricingCarePlan[];
+  addOns: { label: string; price: string; note: string }[];
+}>;
+
+const fallbackServiceDetail = {
+  carePlans: [
+    { title: 'Care Plan', price: 'Scoped monthly', cadence: 'Monthly', summary: 'Ongoing support, technical checks, small updates, and launch-readiness maintenance.' },
+  ],
+  addOns: [
+    { label: 'Additional scoped feature', price: 'Quoted after review', note: 'Priced according to complexity, dependencies, and delivery timeline.' },
+  ],
+};
+
+const serviceOrder = ['website', 'branding', 'softwares', 'mobile-apps'];
+
+function getPackageCarePlan(plan: PricingPlan, detail: typeof fallbackServiceDetail, index: number): PricingCarePlan {
+  if (plan.carePlan?.price) {
+    return {
+      title: plan.carePlan.title || `${plan.name} Care`,
+      price: plan.carePlan.price,
+      cadence: plan.carePlan.cadence || 'Monthly',
+      summary: plan.carePlan.summary || 'Ongoing support, technical checks, small updates, and launch-readiness maintenance.',
+    };
+  }
+
+  return detail.carePlans[index] ?? detail.carePlans[detail.carePlans.length - 1] ?? fallbackServiceDetail.carePlans[0];
+}
+
+function PackageRow({
+  plan,
+  index,
+  tinaField,
+  rawPlan,
+}: {
   plan: PricingPlan;
   index: number;
   tinaField: (obj: any, field: string) => string | undefined;
   rawPlan: any;
 }) {
-  const href = buildCtaHref(plan.ctaLink);
-  const isExternal = isExternalCtaLink(plan.ctaLink);
-
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
+    <motion.article
+      initial={{ opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
-      className={`relative flex flex-col rounded-2xl border p-8 lg:p-10 transition-all duration-300 ${plan.featured
-        ? 'border-vish-accent/60 bg-white/[0.06] shadow-[0_0_80px_-12px] shadow-vish-accent/25'
-        : 'border-white/8 bg-white/[0.03] hover:border-white/15 hover:bg-white/[0.05]'
-        }`}
+      viewport={{ once: true, margin: '-10%' }}
+      transition={{ duration: 0.5, delay: index * 0.06 }}
+      className={`grid gap-8 border-t border-white/10 py-10 lg:grid-cols-[0.85fr_1fr_1.2fr_auto] lg:items-start ${
+        plan.featured ? 'bg-vish-accent/[0.025]' : ''
+      }`}
     >
-      {plan.featured && (
-        <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-          <span className="inline-flex items-center gap-1.5 px-4 py-1 rounded-full bg-vish-accent text-black font-mono text-xs font-bold tracking-wider uppercase">
-            <Sparkles className="w-3 h-3" />
-            Most Popular
+      <div>
+        <div className="mb-4 flex flex-wrap items-center gap-3">
+          <span
+            className="font-mono text-xs font-semibold uppercase tracking-widest text-vish-accent"
+            data-tina-field={rawPlan ? tinaField(rawPlan, 'label') : undefined}
+          >
+            {plan.label}
           </span>
+          {plan.featured && (
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-vish-accent px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-black">
+              <Sparkles className="h-3 w-3" />
+              Most Popular
+            </span>
+          )}
         </div>
-      )}
-
-      {/* Header */}
-      <div className="mb-8">
-        <span
-          className="font-mono text-xs text-vish-accent tracking-widest uppercase mb-3 block"
-          data-tina-field={rawPlan ? tinaField(rawPlan, 'label') : undefined}
-        >
-          {plan.label}
-        </span>
-        <h2
-          className="font-display text-4xl font-medium text-white mb-6"
+        <h3
+          className="font-display text-3xl font-medium leading-tight text-white md:text-4xl"
           data-tina-field={rawPlan ? tinaField(rawPlan, 'name') : undefined}
         >
           {plan.name}
-        </h2>
-        <div className="flex items-baseline gap-2 mb-1">
-          <span
-            className="font-display text-6xl font-medium text-white tracking-tight"
-            data-tina-field={rawPlan ? tinaField(rawPlan, 'price') : undefined}
-          >
-            {plan.price}
-          </span>
-        </div>
-        <span className="font-mono text-xs text-gray-500 uppercase tracking-widest">
-          {plan.priceNote}
-        </span>
-
-        <div className="flex items-center gap-2 mt-5">
-          <span className="inline-block w-1.5 h-1.5 rounded-full bg-vish-accent" />
-          <span className="font-mono text-xs text-gray-400">
-            Delivery: {plan.delivery}
-          </span>
-        </div>
+        </h3>
+        <p
+          className="mt-4 max-w-md font-sans text-sm leading-relaxed text-gray-400 md:text-base"
+          data-tina-field={rawPlan ? tinaField(rawPlan, 'tagline') : undefined}
+        >
+          {plan.tagline}
+        </p>
       </div>
 
-      {/* Tagline */}
-      <p
-        className="font-sans text-base text-gray-400 leading-relaxed mb-8 pb-8 border-b border-white/8"
-        data-tina-field={rawPlan ? tinaField(rawPlan, 'tagline') : undefined}
-      >
-        {plan.tagline}
-      </p>
+      <div>
+        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+          <span
+            className="font-display text-4xl font-medium tracking-tight text-white md:text-5xl"
+            data-tina-field={rawPlan ? tinaField(rawPlan, plan.discountedPrice ? 'discountedPrice' : 'price') : undefined}
+          >
+            {plan.discountedPrice || plan.price}
+          </span>
+          {plan.discountedPrice && (
+            <span
+              className="font-mono text-sm text-gray-500 line-through"
+              data-tina-field={rawPlan ? tinaField(rawPlan, 'price') : undefined}
+            >
+              {plan.price}
+            </span>
+          )}
+        </div>
+        <p className="mt-2 font-mono text-xs uppercase tracking-widest text-gray-500">
+          {plan.priceNote}
+        </p>
+        <p className="mt-5 font-mono text-xs leading-relaxed text-gray-400">
+          <span className="text-vish-accent">•</span> Delivery: {plan.delivery}
+        </p>
+        {plan.bestFor && (
+          <p className="mt-4 max-w-sm font-mono text-xs leading-relaxed text-gray-500">
+            Best for: {plan.bestFor}
+          </p>
+        )}
+        {plan.revisions && (
+          <p className="mt-2 font-mono text-xs leading-relaxed text-gray-500">
+            Revisions: {plan.revisions}
+          </p>
+        )}
+      </div>
 
-      {/* Feature list */}
       <ul
-        className="flex flex-col gap-3.5 mb-10 flex-1"
+        className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2"
         data-tina-field={rawPlan ? tinaField(rawPlan, 'features') : undefined}
       >
         {plan.features.map((feature) => (
           <li key={feature} className="flex items-start gap-3">
-            <span className={`mt-0.5 flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center ${plan.featured ? 'bg-vish-accent/20' : 'bg-white/8'}`}>
-              <Check className={`w-3 h-3 ${plan.featured ? 'text-vish-accent' : 'text-gray-400'}`} />
+            <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white/8">
+              <Check className="h-3 w-3 text-vish-accent" />
             </span>
-            <span className="font-sans text-sm text-gray-300 leading-relaxed">{feature}</span>
+            <span className="font-sans text-sm leading-relaxed text-gray-300">{feature}</span>
           </li>
         ))}
       </ul>
 
-      {/* Meta */}
-      <div className="mb-8 space-y-2 pt-4 border-t border-white/8">
-        {plan.bestFor && (
-          <p className="font-mono text-xs text-gray-500 leading-relaxed">
-            <span className="text-gray-600">Best for: </span>{plan.bestFor}
-          </p>
-        )}
-        {plan.revisions && (
-          <p className="font-mono text-xs text-gray-500">
-            <span className="text-gray-600">Revisions: </span>{plan.revisions}
-          </p>
-        )}
-      </div>
+      <div className="hidden lg:block lg:min-w-40" aria-hidden="true" />
+    </motion.article>
+  );
+}
 
-      {/* CTA */}
-      {isExternal ? (
-        <a
-          href={href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`inline-flex items-center justify-center gap-2 w-full py-4 rounded-xl font-mono text-sm font-semibold transition-all duration-200 ${plan.featured
-            ? 'bg-vish-accent text-black hover:bg-white'
-            : 'border border-white/15 text-white hover:border-white/40 hover:bg-white/5'
-            }`}
-        >
-          {plan.ctaLabel}
-          <ArrowRight className="w-4 h-4" />
-        </a>
-      ) : (
-        <Link
-          href={href}
-          className={`inline-flex items-center justify-center gap-2 w-full py-4 rounded-xl font-mono text-sm font-semibold transition-all duration-200 ${plan.featured
-            ? 'bg-vish-accent text-black hover:bg-white'
-            : 'border border-white/15 text-white hover:border-white/40 hover:bg-white/5'
-            }`}
-        >
-          {plan.ctaLabel}
-          <ArrowRight className="w-4 h-4" />
-        </Link>
-      )}
+function ActivePricingSection({
+  category,
+  categoryIndex,
+  tinaField,
+  rawCategory,
+}: {
+  category: PricingCategory;
+  categoryIndex: number;
+  tinaField: (obj: any, field: string) => string | undefined;
+  rawCategory: any;
+}) {
+  const detail = serviceDetails[category.slug as keyof typeof serviceDetails] ?? fallbackServiceDetail;
+
+  return (
+    <motion.div
+      key={category.slug || category.label}
+      initial={{ opacity: 0, y: 18, filter: 'blur(6px)' }}
+      animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+      exit={{ opacity: 0, y: -12, filter: 'blur(6px)' }}
+      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+      role="tabpanel"
+      id={`pricing-${category.slug || category.label.toLowerCase().replace(/\s+/g, '-')}-panel`}
+      aria-labelledby={`pricing-${category.slug || category.label.toLowerCase().replace(/\s+/g, '-')}-tab`}
+    >
+      <section className="border-b border-white/10 pb-16 md:pb-20">
+        <div className="mb-10 flex flex-col items-start gap-6">
+          <div>
+            <span className="mb-4 block font-mono text-xs uppercase tracking-widest text-vish-accent">
+              {String(categoryIndex + 1).padStart(2, '0')} / Service Pricing
+            </span>
+            <h2
+              className="font-display text-4xl font-medium tracking-tight text-white md:text-6xl"
+              data-tina-field={rawCategory ? tinaField(rawCategory, 'label') : undefined}
+            >
+              {category.label}<span className="text-vish-accent">.</span>
+            </h2>
+          </div>
+          <p className="max-w-2xl font-sans text-base leading-relaxed text-gray-400 md:text-lg">
+            Compare starter, growth, and premium scopes for {category.label.toLowerCase()} projects. Below the packages, you will find the matching care plan and common additional costs for this service.
+          </p>
+        </div>
+
+        <div className="rounded-2xl border border-white/10 bg-white/[0.025] px-6 md:px-8">
+          {category.plans.map((plan, index) => (
+            <PackageRow
+              key={`${category.slug || category.label}-${plan.name}`}
+              plan={plan}
+              index={index}
+              tinaField={tinaField}
+              rawPlan={rawCategory?.plans?.[index]}
+            />
+          ))}
+        </div>
+      </section>
+
+      <section className="grid gap-6 py-16 lg:grid-cols-[0.72fr_1.28fr] lg:items-stretch md:py-20">
+        <div className="rounded-2xl border border-vish-accent/35 bg-vish-accent/[0.045] p-8 md:p-10">
+          <span className="mb-5 block font-mono text-xs uppercase tracking-widest text-vish-accent">
+            Care Plans
+          </span>
+          <h3 className="font-display text-4xl font-medium text-white">
+            Monthly care by package
+          </h3>
+          <p className="mt-8 font-sans text-base leading-relaxed text-gray-400">
+            Each {category.label.toLowerCase()} package can be paired with its own maintenance scope after launch, so support scales with the complexity of the work.
+          </p>
+        </div>
+
+        <div className="rounded-2xl border border-white/10 bg-white/[0.025] px-6 md:px-8">
+          <div className="grid gap-6 border-b border-white/10 py-8 md:grid-cols-[0.42fr_1fr] md:items-end">
+            <div>
+              <span className="mb-4 block font-mono text-xs uppercase tracking-widest text-vish-accent">
+                Maintenance
+              </span>
+              <h3 className="font-display text-3xl font-medium text-white md:text-4xl">
+                Package care
+              </h3>
+            </div>
+            <p className="font-sans text-sm leading-relaxed text-gray-400 md:text-base">
+              Monthly support is priced against the selected package tier, from essential checks to priority improvement cycles.
+            </p>
+          </div>
+          {category.plans.map((plan, index) => {
+            const carePlan = getPackageCarePlan(plan, detail, index);
+
+            return (
+              <div
+                key={`${plan.label}-${plan.name}-care`}
+                className="grid gap-4 border-b border-white/8 py-6 last:border-b-0 md:grid-cols-[0.38fr_0.35fr_1fr] md:items-start"
+              >
+                <div>
+                  <p className="mb-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-vish-accent">
+                    {plan.label}
+                  </p>
+                  <h4
+                    className="font-display text-2xl font-medium text-white"
+                    data-tina-field={rawCategory?.plans?.[index]?.carePlan ? tinaField(rawCategory.plans[index].carePlan, 'title') : undefined}
+                  >
+                    {carePlan.title}
+                  </h4>
+                </div>
+                <div>
+                  <p
+                    className="font-display text-2xl font-medium text-white md:text-3xl"
+                    data-tina-field={rawCategory?.plans?.[index]?.carePlan ? tinaField(rawCategory.plans[index].carePlan, 'price') : undefined}
+                  >
+                    {carePlan.price}
+                  </p>
+                  <p
+                    className="mt-2 font-mono text-xs uppercase tracking-widest text-gray-500"
+                    data-tina-field={rawCategory?.plans?.[index]?.carePlan ? tinaField(rawCategory.plans[index].carePlan, 'cadence') : undefined}
+                  >
+                    {carePlan.cadence}
+                  </p>
+                </div>
+                <p
+                  className="font-sans text-sm leading-relaxed text-gray-400"
+                  data-tina-field={rawCategory?.plans?.[index]?.carePlan ? tinaField(rawCategory.plans[index].carePlan, 'summary') : undefined}
+                >
+                  {carePlan.summary}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="pb-16 md:pb-20">
+        <div className="rounded-2xl border border-white/10 bg-white/[0.025] px-6 md:px-8">
+          <div className="grid gap-6 border-b border-white/10 py-8 md:grid-cols-[0.42fr_1fr] md:items-end">
+            <div>
+              <span className="mb-4 block font-mono text-xs uppercase tracking-widest text-vish-accent">
+                Additional Costs
+              </span>
+              <h3 className="font-display text-3xl font-medium text-white md:text-4xl">
+                Common add-ons
+              </h3>
+            </div>
+            <p className="font-sans text-sm leading-relaxed text-gray-400 md:text-base">
+              These are typical add-on prices for {category.label.toLowerCase()} projects. Final pricing depends on complexity, content readiness, integrations, and timeline.
+            </p>
+          </div>
+          {detail.addOns.map((addOn) => (
+            <div
+              key={addOn.label}
+              className="grid gap-4 border-b border-white/8 py-6 last:border-b-0 md:grid-cols-[0.55fr_0.35fr_1fr] md:items-start"
+            >
+              <h4 className="font-display text-2xl font-medium text-white">
+                {addOn.label}
+              </h4>
+              <p className="font-mono text-xs uppercase tracking-widest text-vish-accent">
+                {addOn.price}
+              </p>
+              <p className="font-sans text-sm leading-relaxed text-gray-400">
+                {addOn.note}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
     </motion.div>
   );
 }
 
 export const PricingPage = () => {
   const { data: content, tinaField, rawPricingPage } = useTinaPricing();
+  const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
+  const unsortedPricingCategories = content.pricingCategories.length > 0
+    ? content.pricingCategories
+    : [{ label: content.sectionLabel || 'Website', slug: 'website', plans: content.plans }];
+  const pricingCategories = [...unsortedPricingCategories].sort((a, b) => {
+    const aIndex = serviceOrder.indexOf(a.slug);
+    const bIndex = serviceOrder.indexOf(b.slug);
+
+    return (aIndex === -1 ? serviceOrder.length : aIndex) - (bIndex === -1 ? serviceOrder.length : bIndex);
+  });
+  const activeCategory = pricingCategories[activeCategoryIndex] ?? pricingCategories[0];
+  const activeRawCategory = rawPricingPage?.pricingCategories?.find((category: any) => category?.slug === activeCategory?.slug);
+  const tabItems = pricingCategories.map((category) => ({
+    id: `pricing-${category.slug || category.label.toLowerCase().replace(/\s+/g, '-')}`,
+    label: category.label,
+    tinaField: rawPricingPage?.pricingCategories?.find((rawCategory: any) => rawCategory?.slug === category.slug)
+      ? tinaField(rawPricingPage.pricingCategories.find((rawCategory: any) => rawCategory?.slug === category.slug), 'label')
+      : undefined,
+  }));
+  const handleCategoryChange = (index: number) => {
+    setActiveCategoryIndex(index);
+
+    window.requestAnimationFrame(() => {
+      document.getElementById('pricing-content')?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    });
+  };
 
   return (
     <PageLayout>
@@ -147,7 +399,7 @@ export const PricingPage = () => {
         label={content.heroLabel}
         labelTinaField={tinaField('heroLabel')}
         title={
-          <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-medium tracking-tight leading-[0.95] text-white mb-8">
+          <h1 className="mb-8 font-display text-6xl font-medium leading-[0.95] tracking-tight text-white md:text-8xl lg:text-9xl">
             <motion.span
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -168,47 +420,31 @@ export const PricingPage = () => {
             </motion.span>
           </h1>
         }
+        description={content.heroSubtext}
+        descriptionTinaField={tinaField('heroSubtext')}
       />
 
-      {/* Subtext */}
-      <div className="px-6 md:px-12 -mt-8 pb-24 max-w-[1400px] mx-auto">
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.4 }}
-          className="font-sans text-xl text-gray-400 max-w-2xl leading-relaxed"
-          data-tina-field={tinaField('heroSubtext')}
-        >
-          {content.heroSubtext}
-        </motion.p>
-      </div>
+      <section id="pricing-content" className="bg-black px-6 pb-40 pt-6 md:px-12 md:pb-44 md:pt-10">
+        <div className="mx-auto max-w-[1400px]">
+          {activeCategory && (
+            <ActivePricingSection
+              category={activeCategory}
+              categoryIndex={activeCategoryIndex}
+              tinaField={tinaField}
+              rawCategory={activeRawCategory}
+            />
+          )}
 
-      {/* Plans */}
-      <section className="px-6 md:px-12 pb-32 bg-black">
-        <div className="max-w-[1400px] mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            {content.plans.map((plan, index) => (
-              <PlanCard
-                key={plan.name}
-                plan={plan}
-                index={index}
-                tinaField={tinaField}
-                rawPlan={rawPricingPage?.plans?.[index]}
-              />
-            ))}
-          </div>
-
-          {/* Custom / Enterprise block */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="rounded-2xl border border-white/8 bg-white/[0.02] p-10 md:p-16 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left"
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="flex flex-col items-start justify-between gap-8 rounded-2xl border border-white/8 bg-white/[0.02] p-8 md:flex-row md:items-center md:p-12"
           >
             <div>
-              <div className="flex items-center justify-center md:justify-start gap-2 mb-4">
-                <Sparkles className="w-5 h-5 text-vish-accent" />
+              <div className="mb-4 flex items-center gap-2">
+                <Sparkles className="h-5 w-5 text-vish-accent" />
                 <span
                   className="font-display text-3xl text-white"
                   data-tina-field={tinaField('customLabel')}
@@ -217,22 +453,43 @@ export const PricingPage = () => {
                 </span>
               </div>
               <p
-                className="font-sans text-gray-400 text-lg max-w-2xl leading-relaxed"
+                className="max-w-2xl font-sans text-base leading-relaxed text-gray-400 md:text-lg"
                 data-tina-field={tinaField('customDescription')}
               >
                 {content.customDescription}
               </p>
             </div>
-            <Link
+            <Button
               href={content.customCtaHref}
-              className="flex-shrink-0 inline-flex items-center gap-2 px-8 py-4 rounded-full border border-white/20 text-white font-mono text-sm font-semibold hover:border-vish-accent hover:text-vish-accent transition-all duration-200 whitespace-nowrap"
+              variant="outline"
+              size="lg"
+              icon={<ArrowRight className="h-4 w-4" />}
+              iconPosition="right"
+              className="shrink-0 font-mono text-xs font-semibold uppercase tracking-widest"
             >
               {content.customCtaLabel}
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+            </Button>
           </motion.div>
         </div>
       </section>
+
+      <motion.div
+        initial={{ y: 40, opacity: 0, filter: 'blur(4px)' }}
+        animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
+        transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+        className="fixed bottom-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none"
+      >
+        <div className="pointer-events-auto w-full max-w-[720px] rounded-[1.75rem] border border-white/10 bg-black/80 p-2 shadow-2xl shadow-black/50 backdrop-blur-xl">
+          <Tabs
+            items={tabItems}
+            activeIndex={activeCategoryIndex}
+            onChange={handleCategoryChange}
+            ariaLabel="Pricing services"
+            className="w-full justify-center border-white/5 bg-white/[0.025]"
+          />
+        </div>
+      </motion.div>
+
       <Contact />
     </PageLayout>
   );

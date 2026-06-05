@@ -24,6 +24,14 @@ function mapPricingPlan(p: any) {
         }
       : { linkType: "url" as CtaLinkType, linkValue: p?.ctaHref ?? "" },
     features: (p?.features ?? []).filter(Boolean),
+    carePlan: p?.carePlan
+      ? {
+          title: p.carePlan.title ?? "",
+          price: p.carePlan.price ?? "",
+          cadence: p.carePlan.cadence ?? "",
+          summary: p.carePlan.summary ?? "",
+        }
+      : undefined,
     bestFor: p?.bestFor ?? "",
     revisions: p?.revisions ?? "",
   };

@@ -78,6 +78,22 @@ const pricingPlanFields: any[] = [
     label: "Features",
     list: true,
   },
+  {
+    type: "object" as const,
+    name: "carePlan",
+    label: "Monthly Care Plan",
+    fields: [
+      { type: "string" as const, name: "title", label: "Care Plan Title" },
+      { type: "string" as const, name: "price", label: "Monthly Price" },
+      { type: "string" as const, name: "cadence", label: "Cadence" },
+      {
+        type: "string" as const,
+        name: "summary",
+        label: "Summary",
+        ui: { component: "textarea" },
+      },
+    ],
+  },
   { type: "string" as const, name: "bestFor", label: "Best For" },
   { type: "string" as const, name: "revisions", label: "Revisions Policy" },
 ];

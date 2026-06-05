@@ -77,6 +77,22 @@ var pricingPlanFields = [
     label: "Features",
     list: true
   },
+  {
+    type: "object",
+    name: "carePlan",
+    label: "Monthly Care Plan",
+    fields: [
+      { type: "string", name: "title", label: "Care Plan Title" },
+      { type: "string", name: "price", label: "Monthly Price" },
+      { type: "string", name: "cadence", label: "Cadence" },
+      {
+        type: "string",
+        name: "summary",
+        label: "Summary",
+        ui: { component: "textarea" }
+      }
+    ]
+  },
   { type: "string", name: "bestFor", label: "Best For" },
   { type: "string", name: "revisions", label: "Revisions Policy" }
 ];

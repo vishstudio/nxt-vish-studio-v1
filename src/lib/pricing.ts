@@ -5,6 +5,13 @@ export interface CtaLink {
   linkValue: string;
 }
 
+export interface PricingCarePlan {
+  title: string;
+  price: string;
+  cadence: string;
+  summary: string;
+}
+
 /** Build the final href string from a structured CtaLink */
 export function buildCtaHref(link: CtaLink): string {
   switch (link.linkType) {
@@ -43,6 +50,7 @@ export interface PricingPlan {
   ctaLabel: string;
   ctaLink: CtaLink;
   features: string[];
+  carePlan?: PricingCarePlan;
   bestFor: string;
   revisions: string;
 }
@@ -83,6 +91,7 @@ interface PricingPlanJson {
   /** @deprecated use ctaLink */
   ctaHref?: string;
   features?: string[];
+  carePlan?: Partial<PricingCarePlan>;
   bestFor?: string;
   revisions?: string;
 }
@@ -127,6 +136,14 @@ function mapPricingPlan(p: PricingPlanJson): PricingPlan {
         }
       : { linkType: "url" as CtaLinkType, linkValue: p.ctaHref ?? "" },
     features: (p.features ?? []).filter(Boolean),
+    carePlan: p.carePlan
+      ? {
+          title: p.carePlan.title ?? "",
+          price: p.carePlan.price ?? "",
+          cadence: p.carePlan.cadence ?? "",
+          summary: p.carePlan.summary ?? "",
+        }
+      : undefined,
     bestFor: p.bestFor ?? "",
     revisions: p.revisions ?? "",
   };

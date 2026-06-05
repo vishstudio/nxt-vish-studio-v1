@@ -217,6 +217,13 @@ fragment PricingPageParts on PricingPage {
         linkValue
       }
       features
+      carePlan {
+        __typename
+        title
+        price
+        cadence
+        summary
+      }
       bestFor
       revisions
     }

@@ -630,6 +630,13 @@ type PricingPagePricingCategoriesPlansCtaLink {
   linkValue: String
 }
 
+type PricingPagePricingCategoriesPlansCarePlan {
+  title: String
+  price: String
+  cadence: String
+  summary: String
+}
+
 type PricingPagePricingCategoriesPlans {
   label: String
   name: String!
@@ -642,6 +649,7 @@ type PricingPagePricingCategoriesPlans {
   ctaLabel: String
   ctaLink: PricingPagePricingCategoriesPlansCtaLink
   features: [String]
+  carePlan: PricingPagePricingCategoriesPlansCarePlan
   bestFor: String
   revisions: String
 }
@@ -697,6 +705,13 @@ input PricingPagePricingCategoriesPlansCtaLinkFilter {
   linkValue: StringFilter
 }
 
+input PricingPagePricingCategoriesPlansCarePlanFilter {
+  title: StringFilter
+  price: StringFilter
+  cadence: StringFilter
+  summary: StringFilter
+}
+
 input PricingPagePricingCategoriesPlansFilter {
   label: StringFilter
   name: StringFilter
@@ -709,6 +724,7 @@ input PricingPagePricingCategoriesPlansFilter {
   ctaLabel: StringFilter
   ctaLink: PricingPagePricingCategoriesPlansCtaLinkFilter
   features: StringFilter
+  carePlan: PricingPagePricingCategoriesPlansCarePlanFilter
   bestFor: StringFilter
   revisions: StringFilter
 }
@@ -998,6 +1014,13 @@ input PricingPagePricingCategoriesPlansCtaLinkMutation {
   linkValue: String
 }
 
+input PricingPagePricingCategoriesPlansCarePlanMutation {
+  title: String
+  price: String
+  cadence: String
+  summary: String
+}
+
 input PricingPagePricingCategoriesPlansMutation {
   label: String
   name: String
@@ -1010,6 +1033,7 @@ input PricingPagePricingCategoriesPlansMutation {
   ctaLabel: String
   ctaLink: PricingPagePricingCategoriesPlansCtaLinkMutation
   features: [String]
+  carePlan: PricingPagePricingCategoriesPlansCarePlanMutation
   bestFor: String
   revisions: String
 }
