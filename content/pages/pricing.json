@@ -212,9 +212,11 @@
           "features": [
             "Custom app interface system",
             "Authentication and user profiles",
+            "Custom UI/UX Design",
             "Dashboard or account screens",
             "Database-backed workflows",
             "Push-ready architecture planning",
+            "Admin interface (App based)",
             "Launch testing and handoff",
             "10 Features"
           ],
