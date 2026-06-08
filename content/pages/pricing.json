@@ -67,7 +67,7 @@
           "label": "PRO",
           "name": "Premium",
           "price": "Rs 38,000",
-          "discountedPrice": "Rs 35,500",
+          "discountedPrice": "Rs 35,500+",
           "priceNote": "On start 50% - End 50%",
           "delivery": "2–4 weeks",
           "tagline": "A premium web system engineered for credibility, SEO, and scale.",
@@ -122,7 +122,7 @@
         {
           "label": "STUDIO",
           "name": "Growth",
-          "price": "Rs 95,000",
+          "price": "Rs 85,000",
           "priceNote": "STARTING FROM",
           "delivery": "7–10 weeks",
           "tagline": "A polished mobile application for authenticated customer or team workflows.",
