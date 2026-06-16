@@ -10,6 +10,7 @@ import { CustomCursor } from '../components/custom-cursor/custom-cursor';
 import { Contact } from '../components/contact/contact';
 import { Button } from '../components/ui/button/button';
 import { useState, useEffect, useCallback } from 'react';
+import { trackProjectSiteClick } from '@/src/lib/analytics';
 
 export const ProjectDetail = () => {
   const params = useParams();
@@ -119,6 +120,7 @@ export const ProjectDetail = () => {
               href={project.siteUrl}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackProjectSiteClick(slug, project.title)}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.15 }}
@@ -166,6 +168,7 @@ export const ProjectDetail = () => {
                     href={project.siteUrl}
                     variant="external"
                     size="xs"
+                    onClick={() => trackProjectSiteClick(slug, project.title)}
                     icon={<ExternalLink className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />}
                     iconPosition="right"
                   >
@@ -231,7 +234,7 @@ export const ProjectDetail = () => {
                   </div>
                   {hasImage && (
                     <div className={`lg:col-span-7 ${isReversed ? 'lg:order-1' : ''}`}>
-                      <div className="aspect-[16/10] overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+                      <div className="aspect-16/10 overflow-hidden rounded-2xl border border-white/10 bg-white/5">
                         <img
                           src={getImageUrl(section.image || '')}
                           alt={`${project.title} ${section.title}`}

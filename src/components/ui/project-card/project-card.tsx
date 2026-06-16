@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { ArrowUpRight, ExternalLink } from 'lucide-react';
 import { getImageUrl } from '../../../utils/imageUrl';
 import { Button } from '../button/button';
+import { trackProjectSiteClick } from '@/src/lib/analytics';
 
 interface ProjectCardProject {
   slug: string;
@@ -90,6 +91,7 @@ export const ProjectCard = ({ project, index, alternate = true }: ProjectCardPro
               href={project.siteUrl}
               variant="external"
               size="xs"
+              onClick={() => trackProjectSiteClick(project.slug, project.title)}
               icon={<ExternalLink className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />}
               iconPosition="right"
             >

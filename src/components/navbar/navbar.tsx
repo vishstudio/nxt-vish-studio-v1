@@ -1,13 +1,18 @@
-'use client';
-import { useState, useEffect, useRef } from 'react';
-import { usePathname } from 'next/navigation';
-import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, ArrowRight } from 'lucide-react';
-import { Button } from '../ui/button/button';
-import { CookieSettingsTrigger } from '../cookie-settings/cookie-settings';
-import { useTinaSettings } from '../../hooks/useTinaVisualEditing';
-import { LogoText } from '../logo-text/logo-text';
-import { openProjectInquiryModal, PROJECT_INQUIRY_ACTION, PROJECT_INQUIRY_ARIA_LABEL } from '../../lib/conversion';
+"use client";
+import { trackEmailClick, trackSocialLinkClick } from "@/src/lib/analytics";
+import { ArrowRight, Menu, X } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
+import { useTinaSettings } from "../../hooks/useTinaVisualEditing";
+import {
+  openProjectInquiryModal,
+  PROJECT_INQUIRY_ACTION,
+  PROJECT_INQUIRY_ARIA_LABEL,
+} from "../../lib/conversion";
+import { CookieSettingsTrigger } from "../cookie-settings/cookie-settings";
+import { LogoText } from "../logo-text/logo-text";
+import { Button } from "../ui/button/button";
 
 const bottomBarDelayMs = 2000;
 const scrollIdleMs = 160;
@@ -24,29 +29,34 @@ export const Navbar = () => {
   const bottomBarShowTimer = useRef<number | null>(null);
 
   const navItems = [
-    { name: 'Home', href: '/' },
-    { name: 'Projects', href: '/projects', activePaths: ['/project'] },
-    { name: 'Services', href: '/services' },
-    { name: 'Pricing', href: '/pricing' },
-    { name: 'About', href: '/about' },
-    { name: 'Testimonials', href: '/testimonials' }
+    { name: "Home", href: "/" },
+    { name: "Projects", href: "/projects", activePaths: ["/project"] },
+    { name: "Services", href: "/services" },
+    { name: "Pricing", href: "/pricing" },
+    { name: "About", href: "/about" },
+    { name: "Testimonials", href: "/testimonials" },
   ];
 
-  const normalizePath = (path: string) => path.replace(/\/$/, '') || '/';
-  const currentPath = normalizePath(pathname || '/');
+  const normalizePath = (path: string) => path.replace(/\/$/, "") || "/";
+  const currentPath = normalizePath(pathname || "/");
   const isActiveLink = (href: string, activePaths: string[] = []) => {
     const normalizedHref = normalizePath(href);
 
-    if (normalizedHref === '/') {
-      return currentPath === '/';
+    if (normalizedHref === "/") {
+      return currentPath === "/";
     }
 
-    return currentPath === normalizedHref
-      || currentPath.startsWith(`${normalizedHref}/`)
-      || activePaths.some((path) => {
+    return (
+      currentPath === normalizedHref ||
+      currentPath.startsWith(`${normalizedHref}/`) ||
+      activePaths.some((path) => {
         const normalizedPath = normalizePath(path);
-        return currentPath === normalizedPath || currentPath.startsWith(`${normalizedPath}/`);
-      });
+        return (
+          currentPath === normalizedPath ||
+          currentPath.startsWith(`${normalizedPath}/`)
+        );
+      })
+    );
   };
 
   useEffect(() => {
@@ -54,8 +64,8 @@ export const Navbar = () => {
       setIsScrolled(window.scrollY > 20);
     };
     handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
@@ -88,10 +98,10 @@ export const Navbar = () => {
       }, scrollIdleMs);
     };
 
-    window.addEventListener('scroll', handleScrollActivity, { passive: true });
+    window.addEventListener("scroll", handleScrollActivity, { passive: true });
 
     return () => {
-      window.removeEventListener('scroll', handleScrollActivity);
+      window.removeEventListener("scroll", handleScrollActivity);
       if (scrollStopTimer.current) {
         window.clearTimeout(scrollStopTimer.current);
       }
@@ -105,12 +115,12 @@ export const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    if (currentPath !== '/') {
+    if (currentPath !== "/") {
       setIsInSelectedProjects(false);
       return undefined;
     }
 
-    const selectedProjectsSection = document.getElementById('work');
+    const selectedProjectsSection = document.getElementById("work");
     if (!selectedProjectsSection) {
       setIsInSelectedProjects(false);
       return undefined;
@@ -142,7 +152,10 @@ export const Navbar = () => {
     return () => observer.disconnect();
   }, [currentPath]);
 
-  const shouldShowBottomBar = currentPath !== '/pricing' && !isMobileMenuOpen && (isInSelectedProjects || isBottomBarVisible);
+  const shouldShowBottomBar =
+    currentPath !== "/pricing" &&
+    !isMobileMenuOpen &&
+    (isInSelectedProjects || isBottomBarVisible);
 
   return (
     <div className="navbar contents">
@@ -153,17 +166,18 @@ export const Navbar = () => {
         className="fixed top-6 left-0 right-0 z-50 flex justify-center pointer-events-none px-4"
       >
         <div
-          className={`pointer-events-auto flex items-center justify-between transition-all duration-300 w-full max-w-[1400px] ${isScrolled
-            ? 'pl-4 pr-2 py-2 md:pl-4 md:pr-2 rounded-full bg-black/80 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/50'
-            : 'px-6 md:px-12 py-6 rounded-none bg-transparent border-transparent'
-            }`}
+          className={`pointer-events-auto flex items-center justify-between transition-all duration-300 w-full max-w-[1400px] ${
+            isScrolled
+              ? "pl-4 pr-2 py-2 md:pl-4 md:pr-2 rounded-full bg-black/80 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/50"
+              : "px-6 md:px-12 py-6 rounded-none bg-transparent border-transparent"
+          }`}
         >
           <div className="flex items-center gap-3">
             <AnimatePresence>
               {isScrolled && (
                 <motion.div
                   initial={{ scale: 0, opacity: 0, width: 0 }}
-                  animate={{ scale: 1, opacity: 1, width: 'auto' }}
+                  animate={{ scale: 1, opacity: 1, width: "auto" }}
                   exit={{ scale: 0, opacity: 0, width: 0 }}
                   transition={{ duration: 0.3 }}
                 >
@@ -191,14 +205,17 @@ export const Navbar = () => {
                     const isActive = isActiveLink(item.href, item.activePaths);
 
                     return (
-                      <li key={item.name} className='flex items-center justify-center'>
+                      <li
+                        key={item.name}
+                        className="flex items-center justify-center"
+                      >
                         <a
                           href={item.href}
-                          aria-current={isActive ? 'page' : undefined}
+                          aria-current={isActive ? "page" : undefined}
                           className={`px-5 py-2 rounded-full font-sans text-sm font-medium transition-all ${
                             isActive
-                              ? 'text-white bg-white/10'
-                              : 'text-gray-300 hover:text-white hover:bg-white/10'
+                              ? "text-white bg-white/10"
+                              : "text-gray-300 hover:text-white hover:bg-white/10"
                           }`}
                         >
                           {item.name}
@@ -206,7 +223,7 @@ export const Navbar = () => {
                       </li>
                     );
                   })}
-               </ol>
+                </ol>
               </motion.nav>
             )}
           </AnimatePresence>
@@ -225,7 +242,9 @@ export const Navbar = () => {
                     variant="cta"
                     size="sm"
                     onClick={openProjectInquiryModal}
-                    icon={<ArrowRight className="w-4 h-4 transition-transform group-hover:-rotate-45" />}
+                    icon={
+                      <ArrowRight className="w-4 h-4 transition-transform group-hover:-rotate-45" />
+                    }
                     iconPosition="right"
                     ariaLabel={PROJECT_INQUIRY_ARIA_LABEL}
                     dataConversionAction={PROJECT_INQUIRY_ACTION}
@@ -241,7 +260,7 @@ export const Navbar = () => {
               variant="secondary"
               size="icon"
               onClick={() => setIsMobileMenuOpen(true)}
-              className={isScrolled ? 'flex' : 'flex lg:hidden'}
+              className={isScrolled ? "flex" : "flex lg:hidden"}
             >
               <Menu className="w-5 h-5" />
             </Button>
@@ -252,9 +271,9 @@ export const Navbar = () => {
       <AnimatePresence>
         {shouldShowBottomBar && (
           <motion.div
-            initial={{ y: 40, opacity: 0, filter: 'blur(4px)' }}
-            animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
-            exit={{ y: 32, opacity: 0, filter: 'blur(4px)' }}
+            initial={{ y: 40, opacity: 0, filter: "blur(4px)" }}
+            animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+            exit={{ y: 32, opacity: 0, filter: "blur(4px)" }}
             transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
             className="fixed bottom-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none"
           >
@@ -268,19 +287,25 @@ export const Navbar = () => {
               <motion.div
                 animate={{
                   boxShadow: [
-                    '0 0 0 0 rgba(255,214,0,0)',
-                    '0 0 22px 0 rgba(255,214,0,0.28)',
-                    '0 0 0 0 rgba(255,214,0,0)',
+                    "0 0 0 0 rgba(255,214,0,0)",
+                    "0 0 22px 0 rgba(255,214,0,0.28)",
+                    "0 0 0 0 rgba(255,214,0,0)",
                   ],
                 }}
-                transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
+                transition={{
+                  duration: 2.8,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
                 className="rounded-full"
               >
                 <Button
                   variant="cta"
                   size="sm"
                   onClick={openProjectInquiryModal}
-                  icon={<ArrowRight className="w-4 h-4 transition-transform group-hover:-rotate-45" />}
+                  icon={
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:-rotate-45" />
+                  }
                   iconPosition="right"
                   ariaLabel={PROJECT_INQUIRY_ARIA_LABEL}
                   dataConversionAction={PROJECT_INQUIRY_ACTION}
@@ -331,12 +356,12 @@ export const Navbar = () => {
 
               <div className="flex-1 overflow-y-auto py-8 px-8 flex flex-col gap-2">
                 {[
-                  { name: 'Projects', href: '/projects', id: '01' },
-                  { name: 'Services', href: '/services', id: '02' },
-                  { name: 'Pricing', href: '/pricing', id: '03' },
-                  { name: 'About', href: '/about', id: '04' },
-                  { name: 'Testimonials', href: '/testimonials', id: '05' },
-                  { name: 'Contact', href: '/contact', id: '06' }
+                  { name: "Projects", href: "/projects", id: "01" },
+                  { name: "Services", href: "/services", id: "02" },
+                  { name: "Pricing", href: "/pricing", id: "03" },
+                  { name: "About", href: "/about", id: "04" },
+                  { name: "Testimonials", href: "/testimonials", id: "05" },
+                  { name: "Contact", href: "/contact", id: "06" },
                 ].map((item, i) => (
                   <motion.a
                     key={item.name}
@@ -344,7 +369,11 @@ export const Navbar = () => {
                     onClick={() => setIsMobileMenuOpen(false)}
                     initial={{ x: 50, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: 0.1 + i * 0.05, duration: 0.4, ease: "easeOut" }}
+                    transition={{
+                      delay: 0.1 + i * 0.05,
+                      duration: 0.4,
+                      ease: "easeOut",
+                    }}
                     className="group block py-4"
                   >
                     <div className="flex items-baseline gap-4 group-hover:translate-x-2 transition-transform duration-300 ease-out">
@@ -364,8 +393,14 @@ export const Navbar = () => {
                   transition={{ delay: 0.4, duration: 0.5 }}
                   className="mt-auto pt-12 pb-8"
                 >
-                  <p className="font-mono text-xs text-white/30 uppercase tracking-widest mb-6">Connect</p>
-                  <a href="mailto:hello@vish.studio" className="block font-display text-2xl text-white hover:text-vish-accent transition-colors mb-8">
+                  <p className="font-mono text-xs text-white/30 uppercase tracking-widest mb-6">
+                    Connect
+                  </p>
+                  <a
+                    href="mailto:hello@vish.studio"
+                    onClick={trackEmailClick}
+                    className="block font-display text-2xl text-white hover:text-vish-accent transition-colors mb-8"
+                  >
                     hello@vish.studio
                   </a>
 
@@ -374,8 +409,15 @@ export const Navbar = () => {
                       <a
                         key={social.name}
                         href={social.url}
-                        target={social.openInNewTab ? '_blank' : undefined}
-                        rel={social.openInNewTab ? 'noopener noreferrer' : undefined}
+                        target={social.openInNewTab ? "_blank" : undefined}
+                        rel={
+                          social.openInNewTab
+                            ? "noopener noreferrer"
+                            : undefined
+                        }
+                        onClick={() =>
+                          trackSocialLinkClick(social.name, "mobile_menu")
+                        }
                         className="text-white/40 hover:text-white text-xs font-mono uppercase tracking-widest transition-colors"
                       >
                         {social.name}

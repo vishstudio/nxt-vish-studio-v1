@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Prompt, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { AppShell } from "./AppShell";
-import { GoogleAnalytics } from "../components/google-analytics/google-analytics";
+import { GoogleAnalytics } from "../components/google-analytics";
 
 const inter = Inter({
   subsets: ["latin"],
