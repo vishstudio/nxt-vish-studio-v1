@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { motion } from 'motion/react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import { trackButtonClick } from '@/src/lib/analytics';
 
 type ButtonVariant =
   | 'cta'
@@ -63,6 +64,12 @@ export const Button = ({
   ariaExpanded,
   id,
 }: ButtonProps) => {
+  const handleClick = dataConversionAction
+    ? () => {
+        trackButtonClick(dataConversionAction, dataConversionAction);
+        onClick?.();
+      }
+    : onClick;
   const baseStyles = "inline-flex items-center justify-center rounded-full font-medium transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-vish-accent/70 focus-visible:ring-offset-2 focus-visible:ring-offset-black disabled:opacity-50 disabled:pointer-events-none group";
 
   const variants = {
@@ -117,7 +124,7 @@ export const Button = ({
           className={classes}
           target={opensInNewTab ? '_blank' : undefined}
           rel={opensInNewTab ? 'noopener noreferrer' : undefined}
-          onClick={onClick}
+          onClick={handleClick}
           aria-label={ariaLabel}
           aria-selected={ariaSelected}
           aria-controls={ariaControls}
@@ -138,7 +145,7 @@ export const Button = ({
           whileTap={{ scale: 0.98 }}
           href={href}
           className={classes}
-          onClick={onClick}
+          onClick={handleClick}
           aria-label={ariaLabel}
           aria-selected={ariaSelected}
           aria-controls={ariaControls}

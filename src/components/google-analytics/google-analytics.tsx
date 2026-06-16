@@ -1,10 +1,13 @@
-import Script from 'next/script';
-import { COOKIE_CONSENT_EVENT, COOKIE_CONSENT_KEY } from '@/src/lib/cookie-consent';
-import { GoogleAnalyticsPageView } from './google-analytics-page-view';
+import {
+  COOKIE_CONSENT_EVENT,
+  COOKIE_CONSENT_KEY,
+} from "@/src/lib/cookie-consent";
+import Script from "next/script";
+import { GoogleAnalyticsPageView } from "./google-analytics-page-view";
 
-const GA_MEASUREMENT_ID = (process.env.NEXT_PUBLIC_GA_ID ?? '')
+const GA_MEASUREMENT_ID = (process.env.NEXT_PUBLIC_GA_ID ?? "")
   .trim()
-  .replace(/^['"]+|['"]+$/g, '');
+  .replace(/^['"]+|['"]+$/g, "");
 
 export function GoogleAnalytics() {
   if (!GA_MEASUREMENT_ID) {
@@ -80,7 +83,7 @@ export function GoogleAnalytics() {
                   analytics_storage: 'granted'
                 });
                 window.gtag('js', new Date());
-                window.gtag('config', measurementId);
+                window.gtag('config', measurementId, { send_page_view: false });
 
                 var googleTag = document.createElement('script');
                 googleTag.async = true;

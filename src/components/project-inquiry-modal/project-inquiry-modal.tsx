@@ -1,72 +1,89 @@
-'use client';
+"use client";
 
-import { FormEvent, useEffect, useMemo, useState } from 'react';
-import { AnimatePresence, motion } from 'motion/react';
-import { ArrowRight, Check, X } from 'lucide-react';
-import { Button } from '../ui/button/button';
-import { PROJECT_INQUIRY_MODAL_EVENT } from '../../lib/conversion';
+import {
+  trackProjectInquiryError,
+  trackProjectInquiryOpen,
+  trackProjectInquiryStep,
+  trackProjectInquirySubmit,
+} from "@/src/lib/analytics";
+import { ArrowRight, Check, X } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
+import { PROJECT_INQUIRY_MODAL_EVENT } from "../../lib/conversion";
+import { Button } from "../ui/button/button";
 
 export type ProjectType =
-  | 'Custom Web Application'
-  | 'High-Performance Website'
-  | 'Brand Architecture & Design';
+  | "Custom Web Application"
+  | "High-Performance Website"
+  | "Brand Architecture & Design";
 
-export type Timeline = 'Urgent: Under 1 Month' | 'Standard: 2-3 Months' | 'Flexible';
+export type Timeline =
+  | "Urgent: Under 1 Month"
+  | "Standard: 2-3 Months"
+  | "Flexible";
 
-export type BudgetTier = '$5,000 - $10,000' | '$10,000 - $25,000' | '$25,000+';
+export type BudgetTier = "$5,000 - $10,000" | "$10,000 - $25,000" | "$25,000+";
 
 export interface ProjectInquiryFormState {
-  projectType: ProjectType | '';
-  timeline: Timeline | '';
-  budgetTier: BudgetTier | '';
+  projectType: ProjectType | "";
+  timeline: Timeline | "";
+  budgetTier: BudgetTier | "";
   name: string;
   companyName: string;
   contactEmail: string;
   projectDescription: string;
 }
 
-type SubmissionState = 'idle' | 'submitting' | 'success' | 'error';
+type SubmissionState = "idle" | "submitting" | "success" | "error";
 
 const initialFormState: ProjectInquiryFormState = {
-  projectType: '',
-  timeline: '',
-  budgetTier: '',
-  name: '',
-  companyName: '',
-  contactEmail: '',
-  projectDescription: '',
+  projectType: "",
+  timeline: "",
+  budgetTier: "",
+  name: "",
+  companyName: "",
+  contactEmail: "",
+  projectDescription: "",
 };
 
 const projectTypes: ProjectType[] = [
-  'Custom Web Application',
-  'High-Performance Website',
-  'Brand Architecture & Design',
+  "Custom Web Application",
+  "High-Performance Website",
+  "Brand Architecture & Design",
 ];
 
-const timelines: Timeline[] = ['Urgent: Under 1 Month', 'Standard: 2-3 Months', 'Flexible'];
+const timelines: Timeline[] = [
+  "Urgent: Under 1 Month",
+  "Standard: 2-3 Months",
+  "Flexible",
+];
 
-const budgetTiers: BudgetTier[] = ['$5,000 - $10,000', '$10,000 - $25,000', '$25,000+'];
+const budgetTiers: BudgetTier[] = [
+  "$5,000 - $10,000",
+  "$10,000 - $25,000",
+  "$25,000+",
+];
 
-const steps = ['Project Type', 'Timeline', 'Budget', 'Client Info'];
+const steps = ["Project Type", "Timeline", "Budget", "Client Info"];
 
 const inputClassName =
-  'w-full rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4 font-sans text-sm text-white outline-none transition-colors placeholder:text-white/25 focus:border-vish-accent/60 focus:bg-white/[0.05]';
+  "w-full rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4 font-sans text-sm text-white outline-none transition-colors placeholder:text-white/25 focus:border-vish-accent/60 focus:bg-white/[0.05]";
 
 function formatInquiryMessage(form: ProjectInquiryFormState) {
   return [
-    'New project inquiry received via vish.studio',
-    '',
+    "New project inquiry received via vish.studio",
+    "",
     `Project Type: ${form.projectType}`,
     `Timeline: ${form.timeline}`,
     `Budget Tier: ${form.budgetTier}`,
-    '',
+    "",
     `Name: ${form.name}`,
     `Company Name: ${form.companyName}`,
     `Contact Email: ${form.contactEmail}`,
-    '',
-    'Brief Project Description:',
+    "",
+    "Brief Project Description:",
     form.projectDescription,
-  ].join('\n');
+  ].join("\n");
 }
 
 async function submitProjectInquiry(form: ProjectInquiryFormState) {
@@ -76,10 +93,10 @@ async function submitProjectInquiry(form: ProjectInquiryFormState) {
 
   if (endpoint) {
     const response = await fetch(endpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        to: 'hello@vish.studio',
+        to: "hello@vish.studio",
         subject,
         form,
         message,
@@ -87,7 +104,7 @@ async function submitProjectInquiry(form: ProjectInquiryFormState) {
     });
 
     if (!response.ok) {
-      throw new Error('Project inquiry endpoint failed.');
+      throw new Error("Project inquiry endpoint failed.");
     }
 
     return;
@@ -98,18 +115,18 @@ async function submitProjectInquiry(form: ProjectInquiryFormState) {
   const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
   if (!serviceId || !templateId || !publicKey) {
-    throw new Error('Email service is not configured.');
+    throw new Error("Email service is not configured.");
   }
 
-  const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+  const response = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       service_id: serviceId,
       template_id: templateId,
       user_id: publicKey,
       template_params: {
-        to_email: 'hello@vish.studio',
+        to_email: "hello@vish.studio",
         subject,
         company_name: form.companyName,
         client_name: form.name,
@@ -124,7 +141,7 @@ async function submitProjectInquiry(form: ProjectInquiryFormState) {
   });
 
   if (!response.ok) {
-    throw new Error('EmailJS submission failed.');
+    throw new Error("EmailJS submission failed.");
   }
 }
 
@@ -132,8 +149,9 @@ export const ProjectInquiryModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [form, setForm] = useState<ProjectInquiryFormState>(initialFormState);
-  const [submissionState, setSubmissionState] = useState<SubmissionState>('idle');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [submissionState, setSubmissionState] =
+    useState<SubmissionState>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const isFinalStep = currentStep === steps.length - 1;
 
@@ -150,24 +168,28 @@ export const ProjectInquiryModal = () => {
   }, [currentStep, form]);
 
   useEffect(() => {
-    const openModal = () => setIsOpen(true);
+    const openModal = () => {
+      setIsOpen(true);
+      trackProjectInquiryOpen();
+    };
     window.addEventListener(PROJECT_INQUIRY_MODAL_EVENT, openModal);
-    return () => window.removeEventListener(PROJECT_INQUIRY_MODAL_EVENT, openModal);
+    return () =>
+      window.removeEventListener(PROJECT_INQUIRY_MODAL_EVENT, openModal);
   }, []);
 
   useEffect(() => {
     if (!isOpen) return;
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setIsOpen(false);
+      if (event.key === "Escape") setIsOpen(false);
     };
 
-    document.body.style.overflow = 'hidden';
-    window.addEventListener('keydown', handleKeyDown);
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      document.body.style.overflow = '';
-      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, [isOpen]);
 
@@ -175,8 +197,8 @@ export const ProjectInquiryModal = () => {
     setIsOpen(false);
     window.setTimeout(() => {
       setCurrentStep(0);
-      setSubmissionState('idle');
-      setErrorMessage('');
+      setSubmissionState("idle");
+      setErrorMessage("");
       setForm(initialFormState);
     }, 250);
   };
@@ -185,21 +207,31 @@ export const ProjectInquiryModal = () => {
     event.preventDefault();
 
     if (!isFinalStep) {
-      setCurrentStep((step) => Math.min(step + 1, steps.length - 1));
+      const nextStep = Math.min(currentStep + 1, steps.length - 1);
+      trackProjectInquiryStep(nextStep, steps[nextStep]);
+      setCurrentStep(nextStep);
       return;
     }
 
     if (!canProceed) return;
 
-    setSubmissionState('submitting');
-    setErrorMessage('');
+    setSubmissionState("submitting");
+    setErrorMessage("");
 
     try {
       await submitProjectInquiry(form);
-      setSubmissionState('success');
+      setSubmissionState("success");
+      trackProjectInquirySubmit(
+        form.projectType,
+        form.budgetTier,
+        form.timeline,
+      );
     } catch (error) {
-      setSubmissionState('error');
-      setErrorMessage(error instanceof Error ? error.message : 'Unable to submit inquiry.');
+      setSubmissionState("error");
+      setErrorMessage(
+        error instanceof Error ? error.message : "Unable to submit inquiry.",
+      );
+      trackProjectInquiryError();
     }
   };
 
@@ -211,7 +243,10 @@ export const ProjectInquiryModal = () => {
   };
 
   const renderChoiceGroup = <Value extends string>(
-    field: keyof Pick<ProjectInquiryFormState, 'projectType' | 'timeline' | 'budgetTier'>,
+    field: keyof Pick<
+      ProjectInquiryFormState,
+      "projectType" | "timeline" | "budgetTier"
+    >,
     options: Value[],
   ) => (
     <div className="grid grid-cols-1 gap-3">
@@ -222,11 +257,16 @@ export const ProjectInquiryModal = () => {
           <button
             key={option}
             type="button"
-            onClick={() => updateField(field, option as ProjectInquiryFormState[typeof field])}
+            onClick={() =>
+              updateField(
+                field,
+                option as ProjectInquiryFormState[typeof field],
+              )
+            }
             className={`group flex items-center justify-between rounded-2xl border px-5 py-4 text-left transition-all duration-300 ${
               isSelected
-                ? 'border-vish-accent bg-vish-accent text-black shadow-[0_0_24px_rgba(255,214,0,0.18)]'
-                : 'border-white/10 bg-white/[0.03] text-white hover:border-white/25 hover:bg-white/[0.055]'
+                ? "border-vish-accent bg-vish-accent text-black shadow-[0_0_24px_rgba(255,214,0,0.18)]"
+                : "border-white/10 bg-white/[0.03] text-white hover:border-white/25 hover:bg-white/[0.055]"
             }`}
           >
             <span className="font-mono text-xs font-semibold uppercase tracking-widest">
@@ -234,7 +274,9 @@ export const ProjectInquiryModal = () => {
             </span>
             <span
               className={`flex h-6 w-6 items-center justify-center rounded-full border transition-colors ${
-                isSelected ? 'border-black/20 bg-black text-vish-accent' : 'border-white/10 text-white/30'
+                isSelected
+                  ? "border-black/20 bg-black text-vish-accent"
+                  : "border-white/10 text-white/30"
               }`}
             >
               {isSelected && <Check className="h-3.5 w-3.5" />}
@@ -276,18 +318,27 @@ export const ProjectInquiryModal = () => {
             </button>
 
             <div className="max-h-[92vh] overflow-y-auto p-6 md:p-8">
-              {submissionState === 'success' ? (
+              {submissionState === "success" ? (
                 <div className="py-12">
                   <div className="mb-8 flex h-14 w-14 items-center justify-center rounded-full bg-vish-accent text-black">
                     <Check className="h-6 w-6" />
                   </div>
-                  <h2 id="project-inquiry-title" className="font-display text-4xl leading-tight text-white md:text-5xl">
-                    Inquiry Sent Successfully<span className="text-vish-accent">.</span>
+                  <h2
+                    id="project-inquiry-title"
+                    className="font-display text-4xl leading-tight text-white md:text-5xl"
+                  >
+                    Inquiry Sent Successfully
+                    <span className="text-vish-accent">.</span>
                   </h2>
                   <p className="mt-6 max-w-xl font-sans text-base leading-relaxed text-gray-400">
                     We will review your project parameters within 24 hours.
                   </p>
-                  <Button onClick={closeModal} variant="navigation" size="md" className="mt-10">
+                  <Button
+                    onClick={closeModal}
+                    variant="navigation"
+                    size="md"
+                    className="mt-10"
+                  >
                     Close
                   </Button>
                 </div>
@@ -297,20 +348,30 @@ export const ProjectInquiryModal = () => {
                     <p className="mb-4 font-mono text-xs uppercase tracking-widest text-vish-accent">
                       Project Inquiry / 0{currentStep + 1}
                     </p>
-                    <h2 id="project-inquiry-title" className="font-display text-4xl leading-tight text-white md:text-5xl">
-                      {steps[currentStep]}<span className="text-vish-accent">.</span>
+                    <h2
+                      id="project-inquiry-title"
+                      className="font-display text-4xl leading-tight text-white md:text-5xl"
+                    >
+                      {steps[currentStep]}
+                      <span className="text-vish-accent">.</span>
                     </h2>
                     <p className="mt-4 max-w-lg font-sans text-sm leading-relaxed text-gray-400 md:text-base">
-                      Help us understand the project parameters so we can respond with the right strategic direction.
+                      Help us understand the project parameters so we can
+                      respond with the right strategic direction.
                     </p>
                   </div>
 
-                  <div className="mb-8 grid grid-cols-4 gap-2" aria-hidden="true">
+                  <div
+                    className="mb-8 grid grid-cols-4 gap-2"
+                    aria-hidden="true"
+                  >
                     {steps.map((step, index) => (
                       <div
                         key={step}
                         className={`h-1 rounded-full transition-colors ${
-                          index <= currentStep ? 'bg-vish-accent' : 'bg-white/10'
+                          index <= currentStep
+                            ? "bg-vish-accent"
+                            : "bg-white/10"
                         }`}
                       />
                     ))}
@@ -325,22 +386,29 @@ export const ProjectInquiryModal = () => {
                       transition={{ duration: 0.25 }}
                       className="min-h-[260px]"
                     >
-                      {currentStep === 0 && renderChoiceGroup('projectType', projectTypes)}
-                      {currentStep === 1 && renderChoiceGroup('timeline', timelines)}
-                      {currentStep === 2 && renderChoiceGroup('budgetTier', budgetTiers)}
+                      {currentStep === 0 &&
+                        renderChoiceGroup("projectType", projectTypes)}
+                      {currentStep === 1 &&
+                        renderChoiceGroup("timeline", timelines)}
+                      {currentStep === 2 &&
+                        renderChoiceGroup("budgetTier", budgetTiers)}
                       {currentStep === 3 && (
                         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                           <input
                             className={inputClassName}
                             value={form.name}
-                            onChange={(event) => updateField('name', event.target.value)}
+                            onChange={(event) =>
+                              updateField("name", event.target.value)
+                            }
                             placeholder="Name"
                             autoComplete="name"
                           />
                           <input
                             className={inputClassName}
                             value={form.companyName}
-                            onChange={(event) => updateField('companyName', event.target.value)}
+                            onChange={(event) =>
+                              updateField("companyName", event.target.value)
+                            }
                             placeholder="Company Name"
                             autoComplete="organization"
                           />
@@ -348,14 +416,21 @@ export const ProjectInquiryModal = () => {
                             className={`${inputClassName} md:col-span-2`}
                             type="email"
                             value={form.contactEmail}
-                            onChange={(event) => updateField('contactEmail', event.target.value)}
+                            onChange={(event) =>
+                              updateField("contactEmail", event.target.value)
+                            }
                             placeholder="Contact Email"
                             autoComplete="email"
                           />
                           <textarea
                             className={`${inputClassName} min-h-36 resize-none md:col-span-2`}
                             value={form.projectDescription}
-                            onChange={(event) => updateField('projectDescription', event.target.value)}
+                            onChange={(event) =>
+                              updateField(
+                                "projectDescription",
+                                event.target.value,
+                              )
+                            }
                             placeholder="Brief Project Description"
                           />
                         </div>
@@ -363,7 +438,7 @@ export const ProjectInquiryModal = () => {
                     </motion.div>
                   </AnimatePresence>
 
-                  {submissionState === 'error' && (
+                  {submissionState === "error" && (
                     <p className="mt-5 rounded-2xl border border-red-500/20 bg-red-500/10 px-4 py-3 font-sans text-sm text-red-200">
                       {errorMessage}
                     </p>
@@ -372,8 +447,12 @@ export const ProjectInquiryModal = () => {
                   <div className="mt-8 flex items-center justify-between gap-4 border-t border-white/10 pt-6">
                     <button
                       type="button"
-                      onClick={() => setCurrentStep((step) => Math.max(step - 1, 0))}
-                      disabled={currentStep === 0 || submissionState === 'submitting'}
+                      onClick={() =>
+                        setCurrentStep((step) => Math.max(step - 1, 0))
+                      }
+                      disabled={
+                        currentStep === 0 || submissionState === "submitting"
+                      }
                       className="font-mono text-xs uppercase tracking-widest text-white/45 transition-colors hover:text-white disabled:pointer-events-none disabled:opacity-30"
                     >
                       Back
@@ -383,16 +462,18 @@ export const ProjectInquiryModal = () => {
                       type="submit"
                       variant="cta"
                       size="md"
-                      disabled={!canProceed || submissionState === 'submitting'}
-                      icon={<ArrowRight className="h-4 w-4 transition-transform group-hover:-rotate-45" />}
+                      disabled={!canProceed || submissionState === "submitting"}
+                      icon={
+                        <ArrowRight className="h-4 w-4 transition-transform group-hover:-rotate-45" />
+                      }
                       iconPosition="right"
                       className="px-6 py-4 font-mono text-xs font-semibold uppercase tracking-widest"
                     >
-                      {submissionState === 'submitting'
-                        ? 'Sending'
+                      {submissionState === "submitting"
+                        ? "Sending"
                         : isFinalStep
-                          ? 'Submit Inquiry'
-                          : 'Continue'}
+                        ? "Submit Inquiry"
+                        : "Continue"}
                     </Button>
                   </div>
                 </form>

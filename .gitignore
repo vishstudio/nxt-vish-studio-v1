@@ -5,6 +5,7 @@ out/
 .DS_Store
 node_modules/
 .next/
+*.tsbuildinfo
 
 # TinaCMS (generated files are committed so vite build always works)
 # tina/__generated__/
