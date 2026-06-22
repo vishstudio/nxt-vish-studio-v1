@@ -1,0 +1,4 @@
+interface:
+  display_name: "VISH Studio Project"
+  short_description: "Build consistently within the VISH Studio system"
+  default_prompt: "Use $vish-studio-project to implement this change consistently and update the project README."

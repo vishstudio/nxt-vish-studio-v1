@@ -13,11 +13,6 @@ const CookieSettings = dynamic(
   { ssr: false },
 );
 
-const ProjectInquiryModal = dynamic(
-  () => import('@/src/components/project-inquiry-modal/project-inquiry-modal').then((mod) => mod.ProjectInquiryModal),
-  { ssr: false },
-);
-
 const ServiceWorkerRegistration = dynamic(
   () => import('@/src/components/service-worker-registration/service-worker-registration').then((mod) => mod.ServiceWorkerRegistration),
   { ssr: false },
@@ -47,7 +42,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       {/* Custom cursor lives here so it works on every page */}
       <CustomCursor />
       <ServiceWorkerRegistration />
-      <ProjectInquiryModal />
       <CookieSettings />
       <AnimatePresence>
         {loadingPath === '/' && (

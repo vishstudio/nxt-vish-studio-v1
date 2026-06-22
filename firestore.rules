@@ -1,0 +1,24 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /briefs/{briefId} {
+      allow create: if
+        request.resource.data.keys().hasOnly([
+          'service', 'package', 'answers', 'contact', 'status',
+          'source', 'createdAt', 'submittedAt'
+        ]) &&
+        request.resource.data.status == 'new' &&
+        request.resource.data.source == 'vish.studio/start-project' &&
+        request.resource.data.createdAt == request.time &&
+        request.resource.data.contact.name is string &&
+        request.resource.data.contact.name.size() >= 2 &&
+        request.resource.data.contact.email is string &&
+        request.resource.data.contact.email.size() >= 5 &&
+        request.resource.data.contact.phone is string &&
+        request.resource.data.contact.phone.size() >= 7;
+
+      allow read, update, delete: if false;
+    }
+  }
+}

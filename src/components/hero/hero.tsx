@@ -7,7 +7,7 @@ import { PageHero } from '../ui/page-hero/page-hero';
 import { useTinaHome } from '../../hooks/useTinaVisualEditing';
 import { HeroWaveDots } from '../hero-wave-dots/hero-wave-dots';
 import { Button } from '../ui/button/button';
-import { openProjectInquiryModal, PROJECT_INQUIRY_ACTION, PROJECT_INQUIRY_ARIA_LABEL } from '../../lib/conversion';
+import { PROJECT_INQUIRY_HREF, PROJECT_INQUIRY_ACTION, PROJECT_INQUIRY_ARIA_LABEL } from '../../lib/conversion';
 import { APP_READY_EVENT, HERO_REVEALED_EVENT } from '../../lib/site-events';
 import { getProjects } from '../../lib/projects';
 import { getImageUrl } from '../../utils/imageUrl';
@@ -258,7 +258,7 @@ export const Hero = () => {
               <Button
                 variant="cta"
                 size="md"
-                onClick={openProjectInquiryModal}
+                href={PROJECT_INQUIRY_HREF}
                 icon={<ArrowRight className="h-4 w-4 transition-transform group-hover:-rotate-45" />}
                 iconPosition="right"
                 ariaLabel={PROJECT_INQUIRY_ARIA_LABEL}

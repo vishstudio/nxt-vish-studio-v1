@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useTinaSettings } from "../../hooks/useTinaVisualEditing";
 import {
-  openProjectInquiryModal,
+  PROJECT_INQUIRY_HREF,
   PROJECT_INQUIRY_ACTION,
   PROJECT_INQUIRY_ARIA_LABEL,
 } from "../../lib/conversion";
@@ -154,6 +154,7 @@ export const Navbar = () => {
 
   const shouldShowBottomBar =
     currentPath !== "/pricing" &&
+    currentPath !== "/start-project" &&
     !isMobileMenuOpen &&
     (isInSelectedProjects || isBottomBarVisible);
 
@@ -241,7 +242,7 @@ export const Navbar = () => {
                   <Button
                     variant="cta"
                     size="sm"
-                    onClick={openProjectInquiryModal}
+                    href={PROJECT_INQUIRY_HREF}
                     icon={
                       <ArrowRight className="w-4 h-4 transition-transform group-hover:-rotate-45" />
                     }
@@ -302,7 +303,7 @@ export const Navbar = () => {
                 <Button
                   variant="cta"
                   size="sm"
-                  onClick={openProjectInquiryModal}
+                  href={PROJECT_INQUIRY_HREF}
                   icon={
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:-rotate-45" />
                   }
