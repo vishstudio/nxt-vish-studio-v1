@@ -8,6 +8,7 @@ VISH Studio is the public website and project-onboarding platform for a Mauritiu
 - TypeScript
 - Tailwind CSS 4
 - Motion for interaction and reveal animation
+- React Hook Form for structured multi-step form state
 - TinaCMS for JSON-backed content and visual editing
 - Firebase Firestore for project brief submissions
 - Google Analytics and consent-aware cookie settings
@@ -66,7 +67,7 @@ Core primitives include `Button`, `PageLayout`, `PageHero`, `Section`, `SectionT
 - `/about`, `/testimonials`, `/contact`: company and contact content
 - `/privacy`, `/terms`: legal content
 
-The Start Project flow reads packages from the canonical pricing data and writes submissions to the Firestore `briefs` collection. The page uses its own fixed progress/action bar and suppresses the global floating project CTA.
+The Start Project flow reads packages from the canonical pricing data, manages the multi-step questionnaire with React Hook Form, and writes submissions to the Firestore `briefs` collection. Each Firestore document includes the selected service, selected package, contact details, raw answer map, and a labelled `questionnaire` array for easier review. After a successful submission, the page shows a confirmation modal with the brief reference plus the studio email and phone number from site settings; its primary action returns the user to the home page. The page uses website-style step headings with white display text, grey intro copy, and yellow accent punctuation. Its own fixed progress/action bar is always visible so the user can proceed through the multi-step form, step changes scroll the page back to the top, validation blocks only missing essentials, and choice-based questionnaire answers remain optional context instead of hard blockers. The page suppresses the global floating project CTA.
 
 ## Content and TinaCMS
 
@@ -94,7 +95,7 @@ NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
 NEXT_PUBLIC_FIREBASE_APP_ID
 ```
 
-Client initialization and brief creation live in `src/lib/firebase.ts`. Firestore access rules are in `firestore.rules`; deploy them with the Firebase CLI before enabling production submissions.
+Client initialization and brief creation live in `src/lib/firebase.ts`. Firestore access rules are in `firestore.rules`; deploy them with the Firebase CLI before enabling production submissions. The deployed rules must allow the current `briefs` payload shape, including `service`, `package`, `answers`, `questionnaire`, `contact`, `status`, `source`, `createdAt`, and `submittedAt`.
 
 ## Local development
 

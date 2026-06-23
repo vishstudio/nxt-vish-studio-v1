@@ -5,18 +5,18 @@ service cloud.firestore {
     match /briefs/{briefId} {
       allow create: if
         request.resource.data.keys().hasOnly([
-          'service', 'package', 'answers', 'contact', 'status',
+          'service', 'package', 'answers', 'questionnaire', 'contact', 'status',
           'source', 'createdAt', 'submittedAt'
         ]) &&
         request.resource.data.status == 'new' &&
         request.resource.data.source == 'vish.studio/start-project' &&
         request.resource.data.createdAt == request.time &&
         request.resource.data.contact.name is string &&
-        request.resource.data.contact.name.size() >= 2 &&
+        request.resource.data.contact.name.size() >= 1 &&
         request.resource.data.contact.email is string &&
         request.resource.data.contact.email.size() >= 5 &&
         request.resource.data.contact.phone is string &&
-        request.resource.data.contact.phone.size() >= 7;
+        request.resource.data.contact.phone.size() >= 5;
 
       allow read, update, delete: if false;
     }

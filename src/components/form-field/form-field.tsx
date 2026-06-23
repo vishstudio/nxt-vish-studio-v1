@@ -20,7 +20,7 @@ export function FormField({ id, label, value, onChange, type = "text", placehold
 
   return (
     <div>
-      <label htmlFor={id} className="mb-3 block font-sans text-sm font-medium text-white">
+      <label htmlFor={id} className="mb-3 block font-sans text-base font-medium text-white">
         {label}{required ? <span className="ml-1 text-vish-accent">*</span> : null}
       </label>
       {hint ? <p className="mb-3 font-sans text-sm leading-relaxed text-gray-500">{hint}</p> : null}
