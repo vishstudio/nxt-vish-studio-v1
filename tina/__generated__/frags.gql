@@ -75,6 +75,14 @@ fragment HomePageParts on HomePage {
   heroTitleLine1
   heroTitleLine2
   heroDescription
+  heroStats {
+    __typename
+    label
+    value
+    prefix
+    suffix
+    format
+  }
   aboutHeading
   aboutParagraph1
   aboutParagraph2

@@ -71,6 +71,14 @@ export interface ProcessStep {
   tags: string[];
 }
 
+export interface HeroStat {
+  label: string;
+  value: number;
+  suffix?: string;
+  prefix?: string;
+  format?: "number" | "year";
+}
+
 export interface Testimonial {
   quote: string;
   name: string;
@@ -83,6 +91,7 @@ export interface HomePageContent {
   heroTitleLine1: string;
   heroTitleLine2: string;
   heroDescription: string;
+  heroStats: HeroStat[];
   aboutHeading: string;
   aboutParagraph1: string;
   aboutParagraph2: string;

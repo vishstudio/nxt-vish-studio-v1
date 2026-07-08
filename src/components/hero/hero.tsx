@@ -6,6 +6,7 @@ import { ArrowRight } from 'lucide-react';
 import { PageHero } from '../ui/page-hero/page-hero';
 import { useTinaHome } from '../../hooks/useTinaVisualEditing';
 import { HeroWaveDots } from '../hero-wave-dots/hero-wave-dots';
+import { HeroStats } from '../hero-stats/hero-stats';
 import { Button } from '../ui/button/button';
 import { PROJECT_INQUIRY_HREF, PROJECT_INQUIRY_ACTION, PROJECT_INQUIRY_ARIA_LABEL } from '../../lib/conversion';
 import { APP_READY_EVENT, HERO_REVEALED_EVENT } from '../../lib/site-events';
@@ -275,6 +276,13 @@ export const Hero = () => {
             {/* <HeroWaveDots /> */}
             <HeroRecentProjects isHeroRevealed={isHeroRevealed} />
           </>
+        )}
+        foregroundLayer={(
+          <HeroStats
+            stats={content.heroStats}
+            isHeroRevealed={isHeroRevealed}
+            className="absolute bottom-10 left-6 right-6 z-20 w-auto max-w-none md:bottom-8 md:left-[max(3rem,calc((100vw-1400px)/2))] md:right-auto md:w-[min(43rem,calc(100%-12rem))]"
+          />
         )}
       />
     </div>

@@ -35,6 +35,14 @@ export const metadata: Metadata = {
     "Digital product strategy",
     "Premium UI/UX web systems",
   ],
+  icons: {
+    icon: [
+      { url: "/assets/favicon.png", type: "image/png" },
+      // { url: "/assets/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/assets/icon.svg",
+    shortcut: "/assets/favicon.png",
+  },
   openGraph: {
     title: "VISH Studio | Creative Web Agency Mauritius",
     description:
