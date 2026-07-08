@@ -5,6 +5,11 @@
   "heroDescription": "VISH Studio is a creative agency partnering with global businesses to build immersive websites, custom applications, and distinct brand systems that drive measurable impact.",
   "heroStats": [
     {
+      "label": "Established",
+      "value": 2019,
+      "format": "year"
+    },
+    {
       "label": "Projects",
       "value": 4,
       "suffix": "+"
@@ -18,11 +23,6 @@
       "label": "Products",
       "value": 4,
       "suffix": "+"
-    },
-    {
-      "label": "Established",
-      "value": 2019,
-      "format": "year"
     }
   ],
   "aboutHeading": "About Us",

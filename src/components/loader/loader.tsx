@@ -2,6 +2,7 @@
 import { motion, animate } from 'motion/react';
 import { useEffect, useState } from 'react';
 import { LogoText } from '../logo-text/logo-text';
+import { BrandWatermark } from '../brand-watermark/brand-watermark';
 
 export const Loader = ({ onLoadingComplete }: { onLoadingComplete: () => void }) => {
   const [progress, setProgress] = useState(0);
@@ -21,11 +22,13 @@ export const Loader = ({ onLoadingComplete }: { onLoadingComplete: () => void })
 
   return (
     <motion.div
-      className="loader fixed inset-0 z-[9999] bg-black text-white flex flex-col justify-between p-8 md:p-12 cursor-wait"
+      className="loader fixed inset-0 z-[9999] flex cursor-wait flex-col justify-between overflow-hidden bg-black p-8 text-white md:p-12"
       exit={{ opacity: 0, transition: { duration: 0.8, ease: "easeInOut" } }}
     >
+      <BrandWatermark />
+
       {/* Top Row */}
-      <div className="flex justify-between items-center lg:item-start w-full">
+      <div className="relative z-10 flex w-full items-center justify-between lg:item-start">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -44,7 +47,7 @@ export const Loader = ({ onLoadingComplete }: { onLoadingComplete: () => void })
       </div>
 
       {/* Center - Huge Counter */}
-      <div className="flex-1 flex items-center justify-center relative">
+      <div className="relative z-10 flex flex-1 items-center justify-center">
         <motion.div
           className="font-display text-[25vw] md:text-[20vw] font-bold leading-none tracking-tighter tabular-nums text-gray-500"
           initial={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
@@ -62,7 +65,7 @@ export const Loader = ({ onLoadingComplete }: { onLoadingComplete: () => void })
       </div>
 
       {/* Bottom Row */}
-      <div className="flex justify-between items-end w-full">
+      <div className="relative z-10 flex w-full items-end justify-between">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}

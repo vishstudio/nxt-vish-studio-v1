@@ -10,7 +10,7 @@ export const ScrollCircular = () => {
   const rotate = useSpring(rawRotate, { stiffness: 100, damping: 30 });
 
   return (
-    <div className="scroll-circular fixed bottom-8 -8 z-50 hidden md:flex items-center justify-center pointer-events-none mix-blend-difference">
+    <div className="scroll-circular fixed bottom-8 right-8 z-50 hidden md:flex items-center justify-center pointer-events-none mix-blend-difference">
       <div className="relative flex items-center justify-center">
         {/* Rotating Text Ring */}
         <motion.div
