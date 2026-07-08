@@ -3,6 +3,28 @@
   "heroTitleLine1": "We scale brands",
   "heroTitleLine2": "digitally",
   "heroDescription": "VISH Studio is a creative agency partnering with global businesses to build immersive websites, custom applications, and distinct brand systems that drive measurable impact.",
+  "heroStats": [
+    {
+      "label": "Established",
+      "value": 2019,
+      "format": "year"
+    },
+    {
+      "label": "Projects",
+      "value": 4,
+      "suffix": "+"
+    },
+    {
+      "label": "Clients",
+      "value": 7,
+      "suffix": "+"
+    },
+    {
+      "label": "Products",
+      "value": 4,
+      "suffix": "+"
+    }
+  ],
   "aboutHeading": "About Us",
   "aboutParagraph1": "VISH Studio is a collective of designers, developers, and strategists dedicated to crafting digital experiences that deliver real impact. We believe in simplicity, functional clarity, and the transformative power of design to elevate businesses.",
   "aboutParagraph2": "From our studio in Mauritius, we partner with ambitious clients to build distinct brands, high-conversion websites, and digital products that stand out in an increasingly competitive landscape.",

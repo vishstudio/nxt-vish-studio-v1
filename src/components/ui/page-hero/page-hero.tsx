@@ -27,6 +27,8 @@ interface PageHeroProps {
   backgroundImageClassName?: string;
   /** Optional decorative layer rendered behind hero content */
   decorativeLayer?: React.ReactNode;
+  /** Optional foreground layer for anchored hero content outside the main copy column */
+  foregroundLayer?: React.ReactNode;
   /** Controls hero content reveal timing when a page-level loader is present */
   isRevealed?: boolean;
   /** Adds subtle scroll-linked movement to the hero copy/content */
@@ -46,6 +48,7 @@ export const PageHero = ({
   backgroundImage,
   backgroundImageClassName = '',
   decorativeLayer,
+  foregroundLayer,
   isRevealed = true,
   contentParallax = false,
 }: PageHeroProps) => {
@@ -125,6 +128,8 @@ export const PageHero = ({
           {action}
         </div>
       </motion.div>
+
+      {foregroundLayer}
     </section>
   );
 };

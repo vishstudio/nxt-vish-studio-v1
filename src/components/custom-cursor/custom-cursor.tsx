@@ -1,7 +1,8 @@
 'use client';
-import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+
+import { AnimatePresence, motion } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 type CursorVariant = 'default' | 'hover' | 'project';
 
@@ -13,7 +14,13 @@ export const CustomCursor = () => {
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(min-width: 1024px) and (pointer: fine)');
-    const updatePointerMode = () => setIsDesktopPointer(mediaQuery.matches);
+    const updatePointerMode = () => {
+      const active = mediaQuery.matches;
+      setIsDesktopPointer(active);
+      if (!active) {
+        setVisible(false);
+      }
+    };
 
     updatePointerMode();
     mediaQuery.addEventListener('change', updatePointerMode);
@@ -22,25 +29,24 @@ export const CustomCursor = () => {
   }, []);
 
   useEffect(() => {
-    if (!isDesktopPointer) {
-      setVisible(false);
-      return;
-    }
+    if (!isDesktopPointer) return;
 
-    const updateMousePosition = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-      if (!visible) setVisible(true);
+    const updateMousePosition = (event: MouseEvent) => {
+      setMousePosition({ x: event.clientX, y: event.clientY });
+      setVisible(true);
     };
 
-    const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (target.closest('[data-cursor="project"]')) {
+    const handleMouseOver = (event: MouseEvent) => {
+      const target = event.target;
+      const element = target instanceof Element ? target : null;
+
+      if (element?.closest('[data-cursor="project"]')) {
         setCursorVariant('project');
       } else if (
-        target.tagName === 'A' ||
-        target.tagName === 'BUTTON' ||
-        target.closest('a') ||
-        target.closest('button')
+        element?.tagName === 'A' ||
+        element?.tagName === 'BUTTON' ||
+        element?.closest('a') ||
+        element?.closest('button')
       ) {
         setCursorVariant('hover');
       } else {
@@ -51,7 +57,7 @@ export const CustomCursor = () => {
     const handleMouseLeave = () => setVisible(false);
     const handleMouseEnter = () => setVisible(true);
 
-    window.addEventListener('mousemove', updateMousePosition);
+    window.addEventListener('mousemove', updateMousePosition, { passive: true });
     window.addEventListener('mouseover', handleMouseOver);
     document.documentElement.addEventListener('mouseleave', handleMouseLeave);
     document.documentElement.addEventListener('mouseenter', handleMouseEnter);
@@ -62,7 +68,7 @@ export const CustomCursor = () => {
       document.documentElement.removeEventListener('mouseleave', handleMouseLeave);
       document.documentElement.removeEventListener('mouseenter', handleMouseEnter);
     };
-  }, [isDesktopPointer, visible]);
+  }, [isDesktopPointer]);
 
   if (!isDesktopPointer) {
     return null;
@@ -90,7 +96,8 @@ export const CustomCursor = () => {
 
   return (
     <motion.div
-      className="custom-cursor fixed top-0 left-0 rounded-full pointer-events-none z-[9999] flex items-center justify-center border-2"
+      aria-hidden="true"
+      className="custom-cursor fixed left-0 top-0 z-[9999] flex items-center justify-center rounded-full border-2 pointer-events-none"
       animate={{
         x: mousePosition.x - w / 2,
         y: mousePosition.y - h / 2,
@@ -117,7 +124,7 @@ export const CustomCursor = () => {
             exit={{ opacity: 0, scale: 0 }}
             transition={{ duration: 0.2 }}
           >
-            <ArrowUpRight className="w-8 h-8 text-black" />
+            <ArrowUpRight className="h-8 w-8 text-black" />
           </motion.div>
         )}
       </AnimatePresence>

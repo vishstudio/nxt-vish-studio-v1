@@ -334,6 +334,14 @@ type PartnersConnection implements Connection {
   edges: [PartnersConnectionEdges]
 }
 
+type HomePageHeroStats {
+  label: String!
+  value: Float!
+  prefix: String
+  suffix: String
+  format: String
+}
+
 type HomePageServices {
   id: String
   title: String!
@@ -352,6 +360,7 @@ type HomePage implements Node & Document {
   heroTitleLine1: String
   heroTitleLine2: String
   heroDescription: String
+  heroStats: [HomePageHeroStats]
   aboutHeading: String
   aboutParagraph1: String
   aboutParagraph2: String
@@ -365,6 +374,14 @@ type HomePage implements Node & Document {
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
+}
+
+input HomePageHeroStatsFilter {
+  label: StringFilter
+  value: NumberFilter
+  prefix: StringFilter
+  suffix: StringFilter
+  format: StringFilter
 }
 
 input HomePageServicesFilter {
@@ -385,6 +402,7 @@ input HomePageFilter {
   heroTitleLine1: StringFilter
   heroTitleLine2: StringFilter
   heroDescription: StringFilter
+  heroStats: HomePageHeroStatsFilter
   aboutHeading: StringFilter
   aboutParagraph1: StringFilter
   aboutParagraph2: StringFilter
@@ -855,6 +873,14 @@ input PartnersMutation {
   partners: [PartnersPartnersMutation]
 }
 
+input HomePageHeroStatsMutation {
+  label: String
+  value: Float
+  prefix: String
+  suffix: String
+  format: String
+}
+
 input HomePageServicesMutation {
   id: String
   title: String
@@ -873,6 +899,7 @@ input HomePageMutation {
   heroTitleLine1: String
   heroTitleLine2: String
   heroDescription: String
+  heroStats: [HomePageHeroStatsMutation]
   aboutHeading: String
   aboutParagraph1: String
   aboutParagraph2: String

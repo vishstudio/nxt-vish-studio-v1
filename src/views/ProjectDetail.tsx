@@ -6,7 +6,6 @@ import { ArrowLeft, ExternalLink, X, ChevronLeft, ChevronRight, ZoomIn } from 'l
 import { useTinaProjectDetail } from '../hooks/useTinaVisualEditing';
 import { getImageUrl } from '../utils/imageUrl';
 import { Navbar } from '../components/navbar/navbar';
-import { CustomCursor } from '../components/custom-cursor/custom-cursor';
 import { Contact } from '../components/contact/contact';
 import { Button } from '../components/ui/button/button';
 import { useState, useEffect, useCallback } from 'react';
@@ -93,7 +92,6 @@ export const ProjectDetail = () => {
 
   return (
     <div className="bg-vish-bg min-h-screen text-white selection:bg-vish-accent selection:text-black">
-      <CustomCursor />
       <Navbar />
 
       <main className="pt-32 pb-12 px-6 md:px-12 max-w-350 mx-auto">

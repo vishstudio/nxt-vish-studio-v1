@@ -563,6 +563,15 @@ export type PartnersConnection = Connection & {
   edges?: Maybe<Array<Maybe<PartnersConnectionEdges>>>;
 };
 
+export type HomePageHeroStats = {
+  __typename?: 'HomePageHeroStats';
+  label: Scalars['String']['output'];
+  value: Scalars['Float']['output'];
+  prefix?: Maybe<Scalars['String']['output']>;
+  suffix?: Maybe<Scalars['String']['output']>;
+  format?: Maybe<Scalars['String']['output']>;
+};
+
 export type HomePageServices = {
   __typename?: 'HomePageServices';
   id?: Maybe<Scalars['String']['output']>;
@@ -584,6 +593,7 @@ export type HomePage = Node & Document & {
   heroTitleLine1?: Maybe<Scalars['String']['output']>;
   heroTitleLine2?: Maybe<Scalars['String']['output']>;
   heroDescription?: Maybe<Scalars['String']['output']>;
+  heroStats?: Maybe<Array<Maybe<HomePageHeroStats>>>;
   aboutHeading?: Maybe<Scalars['String']['output']>;
   aboutParagraph1?: Maybe<Scalars['String']['output']>;
   aboutParagraph2?: Maybe<Scalars['String']['output']>;
@@ -597,6 +607,14 @@ export type HomePage = Node & Document & {
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
+};
+
+export type HomePageHeroStatsFilter = {
+  label?: InputMaybe<StringFilter>;
+  value?: InputMaybe<NumberFilter>;
+  prefix?: InputMaybe<StringFilter>;
+  suffix?: InputMaybe<StringFilter>;
+  format?: InputMaybe<StringFilter>;
 };
 
 export type HomePageServicesFilter = {
@@ -617,6 +635,7 @@ export type HomePageFilter = {
   heroTitleLine1?: InputMaybe<StringFilter>;
   heroTitleLine2?: InputMaybe<StringFilter>;
   heroDescription?: InputMaybe<StringFilter>;
+  heroStats?: InputMaybe<HomePageHeroStatsFilter>;
   aboutHeading?: InputMaybe<StringFilter>;
   aboutParagraph1?: InputMaybe<StringFilter>;
   aboutParagraph2?: InputMaybe<StringFilter>;
@@ -1267,6 +1286,14 @@ export type PartnersMutation = {
   partners?: InputMaybe<Array<InputMaybe<PartnersPartnersMutation>>>;
 };
 
+export type HomePageHeroStatsMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  value?: InputMaybe<Scalars['Float']['input']>;
+  prefix?: InputMaybe<Scalars['String']['input']>;
+  suffix?: InputMaybe<Scalars['String']['input']>;
+  format?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type HomePageServicesMutation = {
   id?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
@@ -1285,6 +1312,7 @@ export type HomePageMutation = {
   heroTitleLine1?: InputMaybe<Scalars['String']['input']>;
   heroTitleLine2?: InputMaybe<Scalars['String']['input']>;
   heroDescription?: InputMaybe<Scalars['String']['input']>;
+  heroStats?: InputMaybe<Array<InputMaybe<HomePageHeroStatsMutation>>>;
   aboutHeading?: InputMaybe<Scalars['String']['input']>;
   aboutParagraph1?: InputMaybe<Scalars['String']['input']>;
   aboutParagraph2?: InputMaybe<Scalars['String']['input']>;
@@ -1427,7 +1455,7 @@ export type SiteSettingsPartsFragment = { __typename: 'SiteSettings', email: str
 
 export type PartnersPartsFragment = { __typename: 'Partners', partnersLabel: string, partners?: Array<{ __typename: 'PartnersPartners', name: string, url?: string | null } | null> | null };
 
-export type HomePagePartsFragment = { __typename: 'HomePage', heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroDescription?: string | null, aboutHeading?: string | null, aboutParagraph1?: string | null, aboutParagraph2?: string | null, servicesHeading?: string | null, servicesSubtext?: string | null, servicesButtonText?: string | null, processHeading?: string | null, processSubtext?: string | null, services?: Array<{ __typename: 'HomePageServices', id?: string | null, title: string, description?: string | null } | null> | null, processSteps?: Array<{ __typename: 'HomePageProcessSteps', num?: string | null, title: string, description?: string | null, tags?: Array<string | null> | null } | null> | null };
+export type HomePagePartsFragment = { __typename: 'HomePage', heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroDescription?: string | null, aboutHeading?: string | null, aboutParagraph1?: string | null, aboutParagraph2?: string | null, servicesHeading?: string | null, servicesSubtext?: string | null, servicesButtonText?: string | null, processHeading?: string | null, processSubtext?: string | null, heroStats?: Array<{ __typename: 'HomePageHeroStats', label: string, value: number, prefix?: string | null, suffix?: string | null, format?: string | null } | null> | null, services?: Array<{ __typename: 'HomePageServices', id?: string | null, title: string, description?: string | null } | null> | null, processSteps?: Array<{ __typename: 'HomePageProcessSteps', num?: string | null, title: string, description?: string | null, tags?: Array<string | null> | null } | null> | null };
 
 export type TestimonialsPagePartsFragment = { __typename: 'TestimonialsPage', heading: string, subtext?: string | null, testimonials?: Array<{ __typename: 'TestimonialsPageTestimonials', quote: string, name: string, role: string, company?: string | null } | null> | null };
 
@@ -1520,7 +1548,7 @@ export type HomePageQueryVariables = Exact<{
 }>;
 
 
-export type HomePageQuery = { __typename?: 'Query', homePage: { __typename: 'HomePage', id: string, heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroDescription?: string | null, aboutHeading?: string | null, aboutParagraph1?: string | null, aboutParagraph2?: string | null, servicesHeading?: string | null, servicesSubtext?: string | null, servicesButtonText?: string | null, processHeading?: string | null, processSubtext?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, services?: Array<{ __typename: 'HomePageServices', id?: string | null, title: string, description?: string | null } | null> | null, processSteps?: Array<{ __typename: 'HomePageProcessSteps', num?: string | null, title: string, description?: string | null, tags?: Array<string | null> | null } | null> | null } };
+export type HomePageQuery = { __typename?: 'Query', homePage: { __typename: 'HomePage', id: string, heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroDescription?: string | null, aboutHeading?: string | null, aboutParagraph1?: string | null, aboutParagraph2?: string | null, servicesHeading?: string | null, servicesSubtext?: string | null, servicesButtonText?: string | null, processHeading?: string | null, processSubtext?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, heroStats?: Array<{ __typename: 'HomePageHeroStats', label: string, value: number, prefix?: string | null, suffix?: string | null, format?: string | null } | null> | null, services?: Array<{ __typename: 'HomePageServices', id?: string | null, title: string, description?: string | null } | null> | null, processSteps?: Array<{ __typename: 'HomePageProcessSteps', num?: string | null, title: string, description?: string | null, tags?: Array<string | null> | null } | null> | null } };
 
 export type HomePageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1532,7 +1560,7 @@ export type HomePageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type HomePageConnectionQuery = { __typename?: 'Query', homePageConnection: { __typename?: 'HomePageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'HomePageConnectionEdges', cursor: string, node?: { __typename: 'HomePage', id: string, heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroDescription?: string | null, aboutHeading?: string | null, aboutParagraph1?: string | null, aboutParagraph2?: string | null, servicesHeading?: string | null, servicesSubtext?: string | null, servicesButtonText?: string | null, processHeading?: string | null, processSubtext?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, services?: Array<{ __typename: 'HomePageServices', id?: string | null, title: string, description?: string | null } | null> | null, processSteps?: Array<{ __typename: 'HomePageProcessSteps', num?: string | null, title: string, description?: string | null, tags?: Array<string | null> | null } | null> | null } | null } | null> | null } };
+export type HomePageConnectionQuery = { __typename?: 'Query', homePageConnection: { __typename?: 'HomePageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'HomePageConnectionEdges', cursor: string, node?: { __typename: 'HomePage', id: string, heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroDescription?: string | null, aboutHeading?: string | null, aboutParagraph1?: string | null, aboutParagraph2?: string | null, servicesHeading?: string | null, servicesSubtext?: string | null, servicesButtonText?: string | null, processHeading?: string | null, processSubtext?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, heroStats?: Array<{ __typename: 'HomePageHeroStats', label: string, value: number, prefix?: string | null, suffix?: string | null, format?: string | null } | null> | null, services?: Array<{ __typename: 'HomePageServices', id?: string | null, title: string, description?: string | null } | null> | null, processSteps?: Array<{ __typename: 'HomePageProcessSteps', num?: string | null, title: string, description?: string | null, tags?: Array<string | null> | null } | null> | null } | null } | null> | null } };
 
 export type TestimonialsPageQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1711,6 +1739,14 @@ export const HomePagePartsFragmentDoc = gql`
   heroTitleLine1
   heroTitleLine2
   heroDescription
+  heroStats {
+    __typename
+    label
+    value
+    prefix
+    suffix
+    format
+  }
   aboutHeading
   aboutParagraph1
   aboutParagraph2

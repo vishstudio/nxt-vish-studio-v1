@@ -14,6 +14,13 @@ export function useTinaHome() {
         heroTitleLine1: qd.homePage.heroTitleLine1 ?? "",
         heroTitleLine2: qd.homePage.heroTitleLine2 ?? "",
         heroDescription: qd.homePage.heroDescription ?? "",
+        heroStats: (qd.homePage.heroStats ?? []).map((s: any) => ({
+          label: s?.label ?? "",
+          value: s?.value ?? 0,
+          suffix: s?.suffix ?? "",
+          prefix: s?.prefix ?? "",
+          format: s?.format ?? "number",
+        })),
         aboutHeading: qd.homePage.aboutHeading ?? "",
         aboutParagraph1: qd.homePage.aboutParagraph1 ?? "",
         aboutParagraph2: qd.homePage.aboutParagraph2 ?? "",

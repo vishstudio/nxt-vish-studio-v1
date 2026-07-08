@@ -23,7 +23,7 @@ export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isBottomBarVisible, setIsBottomBarVisible] = useState(true);
-  const [isInSelectedProjects, setIsInSelectedProjects] = useState(false);
+  const [hasPassedSelectedProjects, setHasPassedSelectedProjects] = useState(false);
   const scrollStopTimer = useRef<number | null>(null);
   const bottomBarHideTimer = useRef<number | null>(null);
   const bottomBarShowTimer = useRef<number | null>(null);
@@ -116,47 +116,36 @@ export const Navbar = () => {
 
   useEffect(() => {
     if (currentPath !== "/") {
-      setIsInSelectedProjects(false);
+      setHasPassedSelectedProjects(false);
       return undefined;
     }
 
-    const selectedProjectsSection = document.getElementById("work");
-    if (!selectedProjectsSection) {
-      setIsInSelectedProjects(false);
-      return undefined;
-    }
+    const updateHasPassedSelectedProjects = () => {
+      const selectedProjectsSection = document.getElementById("work");
+      if (!selectedProjectsSection) {
+        setHasPassedSelectedProjects(false);
+        return;
+      }
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsInSelectedProjects(entry.isIntersecting);
-        if (entry.isIntersecting) {
-          setIsBottomBarVisible(true);
+      setHasPassedSelectedProjects(selectedProjectsSection.getBoundingClientRect().bottom <= 0);
+    };
 
-          if (bottomBarHideTimer.current) {
-            window.clearTimeout(bottomBarHideTimer.current);
-            bottomBarHideTimer.current = null;
-          }
-          if (bottomBarShowTimer.current) {
-            window.clearTimeout(bottomBarShowTimer.current);
-            bottomBarShowTimer.current = null;
-          }
-        }
-      },
-      {
-        threshold: 0.08,
-      },
-    );
+    updateHasPassedSelectedProjects();
+    window.addEventListener("scroll", updateHasPassedSelectedProjects, { passive: true });
+    window.addEventListener("resize", updateHasPassedSelectedProjects);
 
-    observer.observe(selectedProjectsSection);
-
-    return () => observer.disconnect();
+    return () => {
+      window.removeEventListener("scroll", updateHasPassedSelectedProjects);
+      window.removeEventListener("resize", updateHasPassedSelectedProjects);
+    };
   }, [currentPath]);
 
   const shouldShowBottomBar =
     currentPath !== "/pricing" &&
     currentPath !== "/start-project" &&
     !isMobileMenuOpen &&
-    (isInSelectedProjects || isBottomBarVisible);
+    isBottomBarVisible &&
+    (currentPath !== "/" || hasPassedSelectedProjects);
 
   return (
     <div className="navbar contents">
@@ -167,11 +156,10 @@ export const Navbar = () => {
         className="fixed top-6 left-0 right-0 z-50 flex justify-center pointer-events-none px-4"
       >
         <div
-          className={`pointer-events-auto flex items-center justify-between transition-all duration-300 w-full max-w-[1400px] ${
-            isScrolled
+          className={`pointer-events-auto flex items-center justify-between transition-all duration-300 w-full max-w-[1400px] ${isScrolled
               ? "pl-4 pr-2 py-2 md:pl-4 md:pr-2 rounded-full bg-black/80 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/50"
               : "px-6 md:px-12 py-6 rounded-none bg-transparent border-transparent"
-          }`}
+            }`}
         >
           <div className="flex items-center gap-3">
             <AnimatePresence>
@@ -213,11 +201,10 @@ export const Navbar = () => {
                         <a
                           href={item.href}
                           aria-current={isActive ? "page" : undefined}
-                          className={`px-5 py-2 rounded-full font-sans text-sm font-medium transition-all ${
-                            isActive
+                          className={`px-5 py-2 rounded-full font-sans text-sm font-medium transition-all ${isActive
                               ? "text-white bg-white/10"
                               : "text-gray-300 hover:text-white hover:bg-white/10"
-                          }`}
+                            }`}
                         >
                           {item.name}
                         </a>
@@ -282,7 +269,7 @@ export const Navbar = () => {
               <div className="flex min-w-0 items-center gap-2">
                 <CookieSettingsTrigger compact className="h-10 w-10 shrink-0" />
                 <span className="hidden font-mono text-[10px] font-semibold uppercase tracking-widest text-white/40 sm:inline">
-                  Ready?
+                  Need help with your business?
                 </span>
               </div>
               <motion.div

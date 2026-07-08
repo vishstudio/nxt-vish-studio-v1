@@ -526,6 +526,27 @@ export default defineConfig({
             label: "Hero Description",
             ui: { component: "textarea" },
           },
+          {
+            type: "object",
+            name: "heroStats",
+            label: "Hero Stats",
+            list: true,
+            fields: [
+              { type: "string", name: "label", label: "Label", required: true },
+              { type: "number", name: "value", label: "Value", required: true },
+              { type: "string", name: "prefix", label: "Prefix" },
+              { type: "string", name: "suffix", label: "Suffix" },
+              {
+                type: "string",
+                name: "format",
+                label: "Format",
+                options: [
+                  { label: "Number", value: "number" },
+                  { label: "Year", value: "year" },
+                ],
+              },
+            ],
+          },
           { type: "string", name: "aboutHeading", label: "About Heading" },
           {
             type: "string",

@@ -69,6 +69,10 @@ Core primitives include `Button`, `PageLayout`, `PageHero`, `Section`, `SectionT
 
 The Start Project flow reads packages from the canonical pricing data, manages the multi-step questionnaire with React Hook Form, and writes submissions to the Firestore `briefs` collection. Each Firestore document includes the selected service, selected package, contact details, raw answer map, and a labelled `questionnaire` array for easier review. After a successful submission, the page shows a confirmation modal with the brief reference plus the studio email and phone number from site settings; its primary action returns the user to the home page. The page uses website-style step headings with white display text, grey intro copy, and yellow accent punctuation. Its own fixed progress/action bar is always visible so the user can proceed through the multi-step form, step changes scroll the page back to the top, validation blocks only missing essentials, and choice-based questionnaire answers remain optional context instead of hard blockers. The page suppresses the global floating project CTA.
 
+The home hero includes editable animated studio stats from `content/pages/home.json` (`heroStats`) and renders them with `src/components/hero-stats/hero-stats.tsx`. The stats use a two-column grid on mobile and a four-column grid on larger viewports, anchored to the hero bottom with the same layout gutters as the main text CTA. The loader and home hero share the discreet center-left brand watermark from `src/components/brand-watermark/brand-watermark.tsx`, which renders `public/assets/icon-rounded.svg`.
+
+The global bottom project CTA is suppressed on the homepage until the visitor has scrolled past the selected Projects section, then it resumes the standard idle-aware floating behavior. Pricing and Start Project continue to suppress the global floating CTA.
+
 ## Content and TinaCMS
 
 Editable content lives under `content`. TinaCMS schemas are defined in `tina/config.ts`, with visual-editing hooks under `src/hooks/tina`.
