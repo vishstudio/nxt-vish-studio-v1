@@ -157,6 +157,8 @@ function HeroRecentProjects({ isHeroRevealed }: { isHeroRevealed: boolean }) {
                     alt=""
                     className="h-full w-full object-cover opacity-90 saturate-75"
                     loading="lazy"
+                    decoding="async"
+                    fetchPriority="low"
                   />
                   <div className="absolute inset-0 bg-black/20 lg:bg-black/10" />
                 </div>
@@ -246,17 +248,7 @@ export const Hero = () => {
             onAnimationComplete={handleHeroRevealComplete}
             className="mt-8 flex"
           >
-            <motion.div
-              animate={{
-                boxShadow: [
-                  '0 0 0 0 rgba(255,214,0,0)',
-                  '0 0 28px 0 rgba(255,214,0,0.24)',
-                  '0 0 0 0 rgba(255,214,0,0)',
-                ],
-              }}
-              transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
-              className="rounded-full"
-            >
+            <div className="rounded-full shadow-[0_0_28px_rgba(255,214,0,0.22)]">
               <Button
                 variant="cta"
                 size="md"
@@ -269,7 +261,7 @@ export const Hero = () => {
               >
                 Start a Project
               </Button>
-            </motion.div>
+            </div>
           </motion.div>
         }
         decorativeLayer={(

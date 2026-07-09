@@ -10,7 +10,7 @@ import {
   PROJECT_INQUIRY_ACTION,
   PROJECT_INQUIRY_ARIA_LABEL,
 } from "../../lib/conversion";
-import { CookieSettingsTrigger } from "../cookie-settings/cookie-settings";
+import { CookieSettingsTrigger } from "../cookie-settings/cookie-settings-trigger";
 import { LogoText } from "../logo-text/logo-text";
 import { Button } from "../ui/button/button";
 
@@ -272,21 +272,7 @@ export const Navbar = () => {
                   Need help with your business?
                 </span>
               </div>
-              <motion.div
-                animate={{
-                  boxShadow: [
-                    "0 0 0 0 rgba(255,214,0,0)",
-                    "0 0 22px 0 rgba(255,214,0,0.28)",
-                    "0 0 0 0 rgba(255,214,0,0)",
-                  ],
-                }}
-                transition={{
-                  duration: 2.8,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="rounded-full"
-              >
+              <div className="rounded-full shadow-[0_0_22px_rgba(255,214,0,0.24)]">
                 <Button
                   variant="cta"
                   size="sm"
@@ -301,7 +287,7 @@ export const Navbar = () => {
                 >
                   Start a Project
                 </Button>
-              </motion.div>
+              </div>
             </div>
           </motion.div>
         )}

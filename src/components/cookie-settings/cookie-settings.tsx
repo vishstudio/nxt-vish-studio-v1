@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion } from 'motion/react';
-import { Cookie, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { Button } from '../ui/button/button';
 import {
   COOKIE_CONSENT_EVENT,
@@ -16,6 +16,10 @@ import {
   serializeCookieConsent,
 } from '@/src/lib/cookie-consent';
 import { HERO_REVEALED_EVENT } from '@/src/lib/site-events';
+
+interface CookieSettingsProps {
+  openSignal?: number;
+}
 
 function readConsent(): CookieConsent | null {
   if (typeof window === 'undefined') return null;
@@ -47,33 +51,7 @@ function writeConsent(consent: CookieConsent) {
   window.dispatchEvent(new CustomEvent(COOKIE_CONSENT_EVENT, { detail: consent }));
 }
 
-export function openCookieSettings() {
-  if (typeof window === 'undefined') return;
-  window.dispatchEvent(new Event(COOKIE_SETTINGS_OPEN_EVENT));
-}
-
-interface CookieSettingsTriggerProps {
-  compact?: boolean;
-  className?: string;
-}
-
-export function CookieSettingsTrigger({ compact = false, className }: CookieSettingsTriggerProps) {
-  return (
-    <Button
-      variant="secondary"
-      size={compact ? 'icon' : 'sm'}
-      onClick={openCookieSettings}
-      ariaLabel="Open cookie settings"
-      className={className}
-      icon={!compact ? <Cookie className="h-4 w-4" /> : undefined}
-      iconPosition="left"
-    >
-      {compact ? <Cookie className="h-4 w-4" /> : 'Cookie Settings'}
-    </Button>
-  );
-}
-
-export function CookieSettings() {
+export function CookieSettings({ openSignal = 0 }: CookieSettingsProps) {
   const pathname = usePathname();
   const [hasLoaded, setHasLoaded] = useState(false);
   const [hasHeroRevealed, setHasHeroRevealed] = useState(false);
@@ -118,15 +96,20 @@ export function CookieSettings() {
     return () => window.clearTimeout(bannerTimer);
   }, [consent, hasHeroRevealed, hasLoaded]);
 
-  const openPanel = () => {
+  const openPanel = useCallback(() => {
     setDraftConsent(consent ?? defaultCookieConsent);
     setIsPanelOpen(true);
-  };
+  }, [consent]);
 
   useEffect(() => {
     window.addEventListener(COOKIE_SETTINGS_OPEN_EVENT, openPanel);
     return () => window.removeEventListener(COOKIE_SETTINGS_OPEN_EVENT, openPanel);
-  });
+  }, [openPanel]);
+
+  useEffect(() => {
+    if (!hasLoaded || openSignal === 0) return;
+    openPanel();
+  }, [hasLoaded, openPanel, openSignal]);
 
   const saveConsent = (nextConsent: CookieConsent) => {
     writeConsent(nextConsent);

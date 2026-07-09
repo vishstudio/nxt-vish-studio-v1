@@ -3,7 +3,7 @@ import { trackEmailClick, trackSocialLinkClick } from "@/src/lib/analytics";
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
 import { useTinaSettings } from "../../hooks/useTinaVisualEditing";
-import { CookieSettingsTrigger } from "../cookie-settings/cookie-settings";
+import { CookieSettingsTrigger } from "../cookie-settings/cookie-settings-trigger";
 
 export const Contact = () => {
   const { data: settings, tinaField, rawSiteSettings } = useTinaSettings();

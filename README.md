@@ -73,6 +73,8 @@ The home hero includes editable animated studio stats from `content/pages/home.j
 
 The global bottom project CTA is suppressed on the homepage until the visitor has scrolled past the selected Projects section, then it resumes the standard idle-aware floating behavior. Pricing and Start Project continue to suppress the global floating CTA.
 
+The global custom cursor is desktop-only and keeps pointer movement outside React render state, using Motion values and pointer events for smoother tracking. Cookie settings are split into a lightweight trigger (`src/components/cookie-settings/cookie-settings-trigger.tsx`) and a deferred settings panel so navbar/footer triggers do not eagerly load the full consent UI.
+
 ## Content and TinaCMS
 
 Editable content lives under `content`. TinaCMS schemas are defined in `tina/config.ts`, with visual-editing hooks under `src/hooks/tina`.
