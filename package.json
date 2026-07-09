@@ -10,6 +10,8 @@
     "start": "next start",
     "clean": "rm -rf .next out",
     "lint": "tsc --noEmit",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
     "deploy": "npm run build && touch out/.nojekyll && cp public/CNAME out/CNAME 2>/dev/null; echo 'Build ready in out/ — push to gh-pages branch to deploy'"
   },
   "homepage": "https://vish.studio",
@@ -27,13 +29,18 @@
     "tinacms": "^3.6.0"
   },
   "devDependencies": {
+    "@storybook/addon-a11y": "^10.4.6",
+    "@storybook/addon-docs": "^10.4.6",
+    "@storybook/nextjs-vite": "^10.4.6",
     "@tinacms/cli": "^2.1.8",
     "@types/node": "^22.14.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "autoprefixer": "^10.4.21",
+    "storybook": "^10.4.6",
     "tailwindcss": "^4.1.14",
     "tsx": "^4.21.0",
-    "typescript": "~5.8.2"
+    "typescript": "~5.8.2",
+    "vite": "^8.1.3"
   }
 }

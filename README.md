@@ -8,6 +8,7 @@ VISH Studio is the public website and project-onboarding platform for a Mauritiu
 - TypeScript
 - Tailwind CSS 4
 - Motion for interaction and reveal animation
+- Storybook for component review and visual QA
 - React Hook Form for structured multi-step form state
 - TinaCMS for JSON-backed content and visual editing
 - Firebase Firestore for project brief submissions
@@ -56,6 +57,8 @@ The source of truth is `src/app/globals.css` and the shared components in `src/c
 Typography uses Space Grotesk for display headings, Inter for body and controls, and Prompt for the logo. The layout uses true-black backgrounds, high-contrast typography, restrained yellow accents, thin translucent borders, rounded controls, generous spacing, and a maximum standard content width of 1400px.
 
 Core primitives include `Button`, `PageLayout`, `PageHero`, `Section`, `SectionTitle`, `ProjectCard`, and `FormField`.
+
+Storybook is configured with `@storybook/nextjs-vite` and imports the global VISH design system from `src/app/globals.css`. Stories live next to their component files as `*.stories.tsx` inside the relevant `src/components/<component-name>` folder, including shared UI primitives and renderable section components. Runtime-only integrations such as analytics and service-worker registration are not given visual stories because they render no inspectable UI.
 
 ## Routes and features
 
@@ -119,6 +122,8 @@ Useful commands:
 ```bash
 npm run lint       # TypeScript validation
 npm run build      # Tina build plus production static export
+npm run storybook  # Run Storybook locally on port 6006
+npm run build-storybook # Build static Storybook output
 npm run clean      # Remove .next and out
 npm run deploy     # Build the static deployment output
 ```
