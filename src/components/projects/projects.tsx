@@ -50,6 +50,9 @@ const StickyProjectSlide = ({
             src={getImageUrl(project.image)}
             alt={project.title}
             className="h-full w-full object-cover opacity-90 transition-opacity duration-500 group-hover:opacity-100"
+            loading="lazy"
+            decoding="async"
+            fetchPriority="low"
           />
           <div className="absolute inset-0 bg-black/20 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
           <div className="absolute left-5 top-5 rounded-full border border-white/10 bg-black/50 px-3 py-1 font-mono text-xs text-white/70 backdrop-blur-sm">

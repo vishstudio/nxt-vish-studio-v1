@@ -8,6 +8,7 @@ VISH Studio is the public website and project-onboarding platform for a Mauritiu
 - TypeScript
 - Tailwind CSS 4
 - Motion for interaction and reveal animation
+- Storybook for component review and visual QA
 - React Hook Form for structured multi-step form state
 - TinaCMS for JSON-backed content and visual editing
 - Firebase Firestore for project brief submissions
@@ -57,6 +58,8 @@ Typography uses Space Grotesk for display headings, Inter for body and controls,
 
 Core primitives include `Button`, `PageLayout`, `PageHero`, `Section`, `SectionTitle`, `ProjectCard`, and `FormField`.
 
+Storybook is configured with `@storybook/nextjs-vite` and imports the global VISH design system from `src/app/globals.css`. Stories live next to their component files as `*.stories.tsx` inside the relevant `src/components/<component-name>` folder, including shared UI primitives and renderable section components. Runtime-only integrations such as analytics and service-worker registration are not given visual stories because they render no inspectable UI.
+
 ## Routes and features
 
 - `/`: studio overview, selected work, services, process, pricing, and contact
@@ -72,6 +75,8 @@ The Start Project flow reads packages from the canonical pricing data, manages t
 The home hero includes editable animated studio stats from `content/pages/home.json` (`heroStats`) and renders them with `src/components/hero-stats/hero-stats.tsx`. The stats use a two-column grid on mobile and a four-column grid on larger viewports, anchored to the hero bottom with the same layout gutters as the main text CTA. The loader and home hero share the discreet center-left brand watermark from `src/components/brand-watermark/brand-watermark.tsx`, which renders `public/assets/icon-rounded.svg`.
 
 The global bottom project CTA is suppressed on the homepage until the visitor has scrolled past the selected Projects section, then it resumes the standard idle-aware floating behavior. Pricing and Start Project continue to suppress the global floating CTA.
+
+The global custom cursor is desktop-only and keeps pointer movement outside React render state, using Motion values and pointer events for smoother tracking. Cookie settings are split into a lightweight trigger (`src/components/cookie-settings/cookie-settings-trigger.tsx`) and a deferred settings panel so navbar/footer triggers do not eagerly load the full consent UI.
 
 ## Content and TinaCMS
 
@@ -117,6 +122,8 @@ Useful commands:
 ```bash
 npm run lint       # TypeScript validation
 npm run build      # Tina build plus production static export
+npm run storybook  # Run Storybook locally on port 6006
+npm run build-storybook # Build static Storybook output
 npm run clean      # Remove .next and out
 npm run deploy     # Build the static deployment output
 ```

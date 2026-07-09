@@ -47,6 +47,9 @@ export const ProjectCard = ({ project, index, alternate = true }: ProjectCardPro
             src={getImageUrl(project.image)}
             alt={project.title}
             className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500"
+            loading="lazy"
+            decoding="async"
+            fetchPriority="low"
           />
         </motion.div>
 
