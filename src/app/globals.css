@@ -1,9 +1,10 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Google Sans", "Google Sans Text", "Product Sans", Arial, ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Google Sans", "Google Sans Text", "Product Sans", Arial, ui-sans-serif, system-ui, sans-serif;
   --font-logo: "Prompt", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Google Sans", "Google Sans Text", "Product Sans", Arial, ui-sans-serif, system-ui, sans-serif;
 
   /* Palette */
   --color-vish-bg: #000000;

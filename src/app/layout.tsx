@@ -1,22 +1,8 @@
 import type { Metadata } from "next";
-import { Inter, Prompt, Space_Grotesk } from "next/font/google";
+import { Prompt } from "next/font/google";
 import "./globals.css";
 import { AppShell } from "./AppShell";
 import { GoogleAnalytics } from "../components/google-analytics";
-
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  display: "swap",
-  variable: "--font-sans",
-});
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  display: "swap",
-  variable: "--font-display",
-});
 
 const prompt = Prompt({
   subsets: ["latin"],
@@ -60,7 +46,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${spaceGrotesk.variable} ${prompt.variable}`} style={{ overflowX: 'clip' }}>
+      <body className={prompt.variable} style={{ overflowX: 'clip' }}>
         <GoogleAnalytics />
         <AppShell>{children}</AppShell>
       </body>

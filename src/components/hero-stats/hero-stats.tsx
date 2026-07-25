@@ -82,7 +82,7 @@ export function HeroStats({ stats, isHeroRevealed, className = '' }: HeroStatsPr
         ? { opacity: 1, y: 0, filter: 'blur(0px)' }
         : { opacity: 0, y: 18, filter: 'blur(8px)' }}
       transition={{ duration: 0.75, delay: 0.95, ease: revealEase }}
-      className={`grid grid-cols-2 gap-x-5 gap-y-4 rounded-2xl border border-white/10 bg-black/55 px-5 py-4 backdrop-blur-md md:grid-cols-4 ${className}`}
+      className={`grid grid-cols-2 gap-x-5 gap-y-3 rounded-2xl border border-white/10 bg-black/55 px-4 py-3 backdrop-blur-md sm:px-5 sm:py-4 md:grid-cols-4 ${className}`}
       aria-label="Studio stats"
     >
       {stats.map((stat) => (
@@ -90,7 +90,7 @@ export function HeroStats({ stats, isHeroRevealed, className = '' }: HeroStatsPr
           <dt className="font-mono text-[0.62rem] font-semibold uppercase leading-none tracking-widest text-vish-gray">
             {stat.label}
           </dt>
-          <dd className="mt-2 font-display text-2xl font-medium leading-none tracking-normal text-white lg:text-3xl">
+          <dd className="mt-2 font-display text-xl font-medium leading-none tracking-normal text-white sm:text-2xl lg:text-3xl">
             <AnimatedStatValue stat={stat} isActive={shouldAnimateNumbers} />
           </dd>
         </div>

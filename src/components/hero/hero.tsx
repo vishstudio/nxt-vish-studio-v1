@@ -1,18 +1,15 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { AnimatePresence, motion, useScroll, useTransform } from 'motion/react';
-import { ArrowRight } from 'lucide-react';
+import { motion } from 'motion/react';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { PageHero } from '../ui/page-hero/page-hero';
 import { useTinaHome } from '../../hooks/useTinaVisualEditing';
-import { HeroWaveDots } from '../hero-wave-dots/hero-wave-dots';
 import { HeroStats } from '../hero-stats/hero-stats';
 import { BrandWatermark } from '../brand-watermark/brand-watermark';
 import { Button } from '../ui/button/button';
 import { PROJECT_INQUIRY_HREF, PROJECT_INQUIRY_ACTION, PROJECT_INQUIRY_ARIA_LABEL } from '../../lib/conversion';
 import { APP_READY_EVENT, HERO_REVEALED_EVENT } from '../../lib/site-events';
-import { getProjects } from '../../lib/projects';
-import { getImageUrl } from '../../utils/imageUrl';
 
 const revealEase = [0.16, 1, 0.3, 1] as const;
 
@@ -36,139 +33,30 @@ const headlineLineVariants = {
   },
 };
 
-const recentProjects = getProjects().filter((project) => project.featuredOnHome).slice(0, 4);
-
-const projectCardSizes = [
-  'h-24 w-36 lg:h-32 lg:w-48 xl:h-36 xl:w-56',
-  'h-24 w-36 lg:h-28 lg:w-44 xl:h-32 xl:w-52',
-  'h-28 w-44 lg:h-32 lg:w-52 xl:h-36 xl:w-60',
+const conversionSignals = [
+  'Strategy-led delivery',
+  'Conversion-focused UX',
+  'Launch-ready engineering',
 ];
 
-interface HeroProjectCard {
-  id: number;
-  projectIndex: number;
-  left: number;
-  top: number;
-  rotation: number;
-  sizeClass: string;
-}
+const typingPhrases = [
+  { prefix: 'We build your', text: 'digital business.' },
+  { prefix: 'We build your', text: 'websites.' },
+  { prefix: 'We build your', text: 'internal tools.' },
+  { prefix: 'We build your', text: 'Saas products.' },
+  { prefix: 'We build your', text: 'brands.' },
+];
 
-function getRandomProjectCard(id: number, previousCards: HeroProjectCard[]): HeroProjectCard {
-  const visibleProjectIndexes = new Set(previousCards.map((card) => card.projectIndex));
-  const availableProjectIndexes = recentProjects
-    .map((_, index) => index)
-    .filter((index) => !visibleProjectIndexes.has(index));
-  const projectPool = availableProjectIndexes.length > 0
-    ? availableProjectIndexes
-    : recentProjects.map((_, index) => index);
-  const projectIndex = projectPool[Math.floor(Math.random() * projectPool.length)] ?? 0;
+const completedPhraseHoldMs = 5000;
+
+function splitTypingPhrase(text: string) {
+  const hasPeriod = text.endsWith('.');
+  const textWithoutPeriod = (hasPeriod ? text.slice(0, -1) : text).trimEnd();
 
   return {
-    id,
-    projectIndex,
-    left: 8 + Math.random() * 54,
-    top: 8 + Math.random() * 58,
-    rotation: -10 + Math.random() * 20,
-    sizeClass: projectCardSizes[id % projectCardSizes.length],
+    text: textWithoutPeriod,
+    hasPeriod,
   };
-}
-
-function HeroRecentProjects({ isHeroRevealed }: { isHeroRevealed: boolean }) {
-  const visibleProjectCount = Math.min(3, recentProjects.length);
-  const nextCardId = useRef(0);
-  const [visibleCards, setVisibleCards] = useState<HeroProjectCard[]>([]);
-  const { scrollYProgress } = useScroll();
-  const clusterY = useTransform(scrollYProgress, [0, 0.24], [0, -92]);
-
-  useEffect(() => {
-    if (!isHeroRevealed || visibleProjectCount === 0) {
-      setVisibleCards([]);
-      return undefined;
-    }
-
-    nextCardId.current = 0;
-    setVisibleCards([]);
-
-    const revealTimer = window.setInterval(() => {
-      setVisibleCards((currentCards) => {
-        const nextCard = getRandomProjectCard(nextCardId.current, currentCards);
-        nextCardId.current += 1;
-
-        return [...currentCards, nextCard].slice(-visibleProjectCount);
-      });
-    }, 1150);
-
-    return () => window.clearInterval(revealTimer);
-  }, [isHeroRevealed, visibleProjectCount]);
-
-  if (recentProjects.length === 0) {
-    return null;
-  }
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: 26, filter: 'blur(10px)' }}
-      animate={isHeroRevealed
-        ? { opacity: 1, x: 0, filter: 'blur(0px)' }
-        : { opacity: 0, x: 26, filter: 'blur(10px)' }}
-      transition={{ duration: 0.85, delay: 0.65, ease: revealEase }}
-      className="pointer-events-none absolute right-[-8%] top-[50%] hidden h-[19rem] w-[24rem] -translate-y-1/2 md:block lg:right-0 lg:top-[46%] lg:h-[23rem] lg:w-[32rem] xl:right-[8%] xl:h-[27rem] xl:w-[38rem]"
-      aria-hidden="true"
-    >
-      <motion.div className="absolute inset-0 will-change-transform" style={{ y: clusterY }}>
-        <AnimatePresence>
-          {visibleCards.map((card, positionIndex) => {
-            const project = recentProjects[card.projectIndex];
-
-            return (
-              <motion.div
-                key={`${project.slug}-${card.id}`}
-                initial={{
-                  opacity: 0,
-                  scale: 0.82,
-                  y: 22,
-                  rotate: card.rotation * 0.6,
-                  filter: 'blur(12px)',
-                }}
-                animate={{
-                  opacity: 1,
-                  scale: 1,
-                  y: 0,
-                  rotate: card.rotation,
-                  filter: 'blur(0px)',
-                }}
-                exit={{
-                  opacity: 0,
-                  scale: 0.86,
-                  y: -18,
-                  rotate: card.rotation * 1.25,
-                  filter: 'blur(10px)',
-                }}
-                transition={{ duration: 0.72, delay: positionIndex * 0.08, ease: revealEase }}
-                className={`absolute overflow-hidden rounded-2xl border border-white/5 bg-white/[0.025] shadow-2xl shadow-black/50 lg:border-white/10 lg:bg-white/[0.035] ${card.sizeClass}`}
-                style={{
-                  left: `${card.left}%`,
-                  top: `${card.top}%`,
-                }}
-              >
-                <div className="h-full w-full opacity-35 lg:opacity-100">
-                  <img
-                    src={getImageUrl(project.image)}
-                    alt=""
-                    className="h-full w-full object-cover opacity-90 saturate-75"
-                    loading="lazy"
-                    decoding="async"
-                    fetchPriority="low"
-                  />
-                  <div className="absolute inset-0 bg-black/20 lg:bg-black/10" />
-                </div>
-              </motion.div>
-            );
-          })}
-        </AnimatePresence>
-      </motion.div>
-    </motion.div>
-  );
 }
 
 export const Hero = () => {
@@ -176,6 +64,12 @@ export const Hero = () => {
   const pathname = usePathname();
   const hasDispatchedHeroReveal = useRef(false);
   const [isHeroRevealed, setIsHeroRevealed] = useState(pathname !== '/');
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [characterIndex, setCharacterIndex] = useState(typingPhrases[0].text.length);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const currentPhrase = typingPhrases[phraseIndex];
+  const typedTitle = currentPhrase.text.slice(0, characterIndex);
+  const { text: typedTitleText, hasPeriod: typedTitleHasPeriod } = splitTypingPhrase(typedTitle);
 
   useEffect(() => {
     if (pathname !== '/') {
@@ -194,6 +88,34 @@ export const Hero = () => {
     return () => window.removeEventListener(APP_READY_EVENT, handleAppReady);
   }, [pathname]);
 
+  useEffect(() => {
+    if (!isHeroRevealed) return undefined;
+
+    const isFullPhrase = characterIndex === currentPhrase.text.length;
+    const isAtTypingFloor = characterIndex <= 0;
+    const typingDelay = isDeleting ? 36 : 72;
+    const nextDelay = isFullPhrase && !isDeleting ? completedPhraseHoldMs : typingDelay;
+
+    const typingTimer = window.setTimeout(() => {
+      if (isFullPhrase && !isDeleting) {
+        setIsDeleting(true);
+        return;
+      }
+
+      if (isAtTypingFloor && isDeleting) {
+        const nextPhraseIndex = (phraseIndex + 1) % typingPhrases.length;
+        setPhraseIndex(nextPhraseIndex);
+        setIsDeleting(false);
+        setCharacterIndex(0);
+        return;
+      }
+
+      setCharacterIndex((currentIndex) => currentIndex + (isDeleting ? -1 : 1));
+    }, nextDelay);
+
+    return () => window.clearTimeout(typingTimer);
+  }, [characterIndex, isDeleting, isHeroRevealed, phraseIndex]);
+
   const handleHeroRevealComplete = () => {
     if (!isHeroRevealed) return;
     if (hasDispatchedHeroReveal.current) return;
@@ -206,6 +128,7 @@ export const Hero = () => {
     <div className="hero contents">
       <PageHero
         label={content.heroLabel}
+        labelTinaField={tinaField('heroLabel')}
         labelStyle="pill"
         size="full"
         isRevealed={isHeroRevealed}
@@ -215,29 +138,30 @@ export const Hero = () => {
             variants={headlineVariants}
             initial="hidden"
             animate={isHeroRevealed ? 'visible' : 'hidden'}
-            className="font-display text-5xl md:text-6xl lg:text-8xl font-medium tracking-tight leading-[0.95] text-white mb-12"
+            className="mb-4 min-h-[8.5rem] max-w-[14ch] font-display text-5xl font-medium leading-[0.9] tracking-normal text-white md:min-h-[11.25rem] md:text-8xl"
           >
             <span className="block overflow-hidden pb-1">
               <motion.span
                 variants={headlineLineVariants}
                 className="inline-block will-change-transform"
-                data-tina-field={tinaField('heroTitleLine1')}
               >
-                {content.heroTitleLine1}
+                {currentPhrase.prefix}
               </motion.span>
             </span>
-            <span className="block overflow-hidden pb-1 text-gray-500">
+            <span className="block overflow-hidden pb-1 text-vish-gray">
               <motion.span
                 variants={headlineLineVariants}
                 className="inline-block will-change-transform"
               >
-                <span data-tina-field={tinaField('heroTitleLine2')}>{content.heroTitleLine2}</span>
-                <span className="text-vish-accent">.</span>
+                <span>{typedTitleText || '\u00a0'}</span>
+                <span className="text-vish-accent">{typedTitleHasPeriod ? '.' : ''}</span>
+                <span className="ml-1 inline-block h-[0.8em] w-[0.08em] translate-y-[0.08em] bg-vish-accent" aria-hidden="true" />
               </motion.span>
             </span>
           </motion.h1>
         }
         description={content.heroDescription}
+        descriptionTinaField={tinaField('heroDescription')}
         action={
           <motion.div
             initial={{ opacity: 0, y: 18, filter: 'blur(8px)' }}
@@ -246,36 +170,55 @@ export const Hero = () => {
               : { opacity: 0, y: 18, filter: 'blur(8px)' }}
             transition={{ duration: 0.75, delay: 0.75, ease: [0.16, 1, 0.3, 1] }}
             onAnimationComplete={handleHeroRevealComplete}
-            className="mt-8 flex"
+            className="mt-7 max-w-3xl"
           >
-            <div className="rounded-full shadow-[0_0_28px_rgba(255,214,0,0.22)]">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+              <div className="rounded-full shadow-[0_0_28px_rgba(255,214,0,0.22)]">
+                <Button
+                  variant="cta"
+                  size="md"
+                  href={PROJECT_INQUIRY_HREF}
+                  icon={<ArrowRight className="h-4 w-4 transition-transform group-hover:-rotate-45" />}
+                  iconPosition="right"
+                  ariaLabel={PROJECT_INQUIRY_ARIA_LABEL}
+                  dataConversionAction={PROJECT_INQUIRY_ACTION}
+                  className="w-full px-6 py-4 font-mono text-xs font-semibold uppercase tracking-widest sm:w-auto"
+                >
+                  Start a Project
+                </Button>
+              </div>
               <Button
-                variant="cta"
+                variant="outline"
                 size="md"
-                href={PROJECT_INQUIRY_HREF}
-                icon={<ArrowRight className="h-4 w-4 transition-transform group-hover:-rotate-45" />}
+                href="/projects"
+                icon={<ArrowUpRight className="h-4 w-4" />}
                 iconPosition="right"
-                ariaLabel={PROJECT_INQUIRY_ARIA_LABEL}
-                dataConversionAction={PROJECT_INQUIRY_ACTION}
-                className="px-6 py-4 font-mono text-xs font-semibold uppercase tracking-widest"
+                ariaLabel="View selected VISH Studio projects"
+                className="w-full px-6 py-4 font-mono text-xs font-semibold uppercase tracking-widest sm:w-auto"
               >
-                Start a Project
+                See the Work
               </Button>
             </div>
+            <ul className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[0.66rem] font-semibold uppercase tracking-widest text-vish-gray">
+              {conversionSignals.map((signal) => (
+                <li key={signal} className="flex items-center gap-2.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-vish-accent" aria-hidden="true" />
+                  <span>{signal}</span>
+                </li>
+              ))}
+            </ul>
           </motion.div>
         }
         decorativeLayer={(
           <>
-            {/* <BrandWatermark isVisible={isHeroRevealed} /> */}
-            {/* <HeroWaveDots /> */}
-            <HeroRecentProjects isHeroRevealed={isHeroRevealed} />
+            <BrandWatermark isVisible={isHeroRevealed} className="opacity-[0.03]" />
           </>
         )}
         foregroundLayer={(
           <HeroStats
             stats={content.heroStats}
             isHeroRevealed={isHeroRevealed}
-            className="absolute bottom-10 left-6 right-6 z-20 w-auto max-w-none md:bottom-8 md:left-[max(3rem,calc((100vw-1400px)/2))] md:right-auto md:w-[min(43rem,calc(100%-12rem))]"
+            className="absolute bottom-0 left-14 right-6 z-20 w-auto max-w-none md:bottom-8 md:left-[max(3rem,calc((100vw-1400px)/2))] md:right-auto md:w-[min(43rem,calc(100%-12rem))]"
           />
         )}
       />
