@@ -300,6 +300,11 @@ type SiteSettingsConnection implements Connection {
   edges: [SiteSettingsConnectionEdges]
 }
 
+type PartnersProofPoints {
+  value: String
+  label: String
+}
+
 type PartnersPartners {
   name: String!
   url: String
@@ -307,10 +312,19 @@ type PartnersPartners {
 
 type Partners implements Node & Document {
   partnersLabel: String!
+  trustHeading: String
+  trustDescription: String
+  ctaLabel: String
+  proofPoints: [PartnersProofPoints]
   partners: [PartnersPartners]
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
+}
+
+input PartnersProofPointsFilter {
+  value: StringFilter
+  label: StringFilter
 }
 
 input PartnersPartnersFilter {
@@ -320,6 +334,10 @@ input PartnersPartnersFilter {
 
 input PartnersFilter {
   partnersLabel: StringFilter
+  trustHeading: StringFilter
+  trustDescription: StringFilter
+  ctaLabel: StringFilter
+  proofPoints: PartnersProofPointsFilter
   partners: PartnersPartnersFilter
 }
 
@@ -364,6 +382,10 @@ type HomePage implements Node & Document {
   aboutHeading: String
   aboutParagraph1: String
   aboutParagraph2: String
+  projectsLabel: String
+  projectsHeading: String
+  projectsDescription: String
+  projectsButtonText: String
   servicesHeading: String
   servicesSubtext: String
   servicesButtonText: String
@@ -406,6 +428,10 @@ input HomePageFilter {
   aboutHeading: StringFilter
   aboutParagraph1: StringFilter
   aboutParagraph2: StringFilter
+  projectsLabel: StringFilter
+  projectsHeading: StringFilter
+  projectsDescription: StringFilter
+  projectsButtonText: StringFilter
   servicesHeading: StringFilter
   servicesSubtext: StringFilter
   servicesButtonText: StringFilter
@@ -863,6 +889,11 @@ input SiteSettingsMutation {
   footerLinks: [SiteSettingsFooterLinksMutation]
 }
 
+input PartnersProofPointsMutation {
+  value: String
+  label: String
+}
+
 input PartnersPartnersMutation {
   name: String
   url: String
@@ -870,6 +901,10 @@ input PartnersPartnersMutation {
 
 input PartnersMutation {
   partnersLabel: String
+  trustHeading: String
+  trustDescription: String
+  ctaLabel: String
+  proofPoints: [PartnersProofPointsMutation]
   partners: [PartnersPartnersMutation]
 }
 
@@ -903,6 +938,10 @@ input HomePageMutation {
   aboutHeading: String
   aboutParagraph1: String
   aboutParagraph2: String
+  projectsLabel: String
+  projectsHeading: String
+  projectsDescription: String
+  projectsButtonText: String
   servicesHeading: String
   servicesSubtext: String
   servicesButtonText: String

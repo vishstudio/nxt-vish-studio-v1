@@ -6,14 +6,9 @@ import { Button } from '../ui/button/button';
 import { SectionTitle } from '../ui/section-title/section-title';
 
 export const TrustedPartners = () => {
-  const { data } = useTinaPartners();
+  const { data, tinaField } = useTinaPartners();
   const partners = data.partners;
-  const partnerCount = partners.length;
-  const proofPoints = [
-    { value: `${partnerCount}+`, label: 'Partners served' },
-    { value: '4+', label: 'Digital products launched' },
-    { value: '2019', label: 'Building since' },
-  ];
+  const proofPoints = data.proofPoints;
 
   return (
     <section className="trusted-partners bg-vish-bg px-6 py-20 md:px-12 md:py-28">
@@ -26,15 +21,25 @@ export const TrustedPartners = () => {
             transition={{ duration: 0.6 }}
             className="lg:col-span-5"
           >
-            <p className="mb-4 font-mono text-xs font-semibold uppercase tracking-widest text-vish-accent">
+            <p
+              className="mb-4 font-mono text-xs font-semibold uppercase tracking-widest text-vish-accent"
+              data-tina-field={tinaField('partnersLabel')}
+            >
               {data.partnersLabel}
             </p>
-            <SectionTitle size="sm" className="max-w-xl leading-[1.04]">
-              Chosen by serious teams
+            <SectionTitle
+              size="sm"
+              className="max-w-xl leading-[1.04]"
+              tinaField={tinaField('trustHeading')}
+            >
+              {data.trustHeading}
             </SectionTitle>
 
-            <p className="mt-6 max-w-md font-sans text-base leading-relaxed text-vish-gray md:text-lg">
-              Businesses trust VISH Studio when their website, product, or brand system needs to feel credible before the first conversation.
+            <p
+              className="mt-6 max-w-md font-sans text-base leading-relaxed text-vish-gray md:text-lg"
+              data-tina-field={tinaField('trustDescription')}
+            >
+              {data.trustDescription}
             </p>
             <div className="mt-8">
               <Button
@@ -45,8 +50,9 @@ export const TrustedPartners = () => {
                 iconPosition="right"
                 dataConversionAction="trusted_partners_start_project"
                 className="w-full font-mono text-xs font-semibold uppercase tracking-widest sm:w-auto"
+                data-tina-field={tinaField('ctaLabel')}
               >
-                Start Project
+                {data.ctaLabel}
               </Button>
             </div>
           </motion.div>

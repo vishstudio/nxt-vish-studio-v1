@@ -465,6 +465,32 @@ export default defineConfig({
             required: true,
           },
           {
+            type: "string",
+            name: "trustHeading",
+            label: "Trust Heading",
+          },
+          {
+            type: "string",
+            name: "trustDescription",
+            label: "Trust Description",
+            ui: { component: "textarea" },
+          },
+          {
+            type: "string",
+            name: "ctaLabel",
+            label: "CTA Label",
+          },
+          {
+            type: "object",
+            name: "proofPoints",
+            label: "Proof Points",
+            list: true,
+            fields: [
+              { type: "string", name: "value", label: "Value" },
+              { type: "string", name: "label", label: "Label" },
+            ],
+          },
+          {
             type: "object",
             name: "partners",
             label: "Partners",
@@ -559,6 +585,27 @@ export default defineConfig({
             name: "aboutParagraph2",
             label: "About Paragraph 2",
             ui: { component: "textarea" },
+          },
+          {
+            type: "string",
+            name: "projectsLabel",
+            label: "Projects Label",
+          },
+          {
+            type: "string",
+            name: "projectsHeading",
+            label: "Projects Heading",
+          },
+          {
+            type: "string",
+            name: "projectsDescription",
+            label: "Projects Description",
+            ui: { component: "textarea" },
+          },
+          {
+            type: "string",
+            name: "projectsButtonText",
+            label: "Projects Button Text",
           },
           {
             type: "string",

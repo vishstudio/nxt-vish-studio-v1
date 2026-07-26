@@ -36,8 +36,17 @@ export interface Partner {
   url?: string;
 }
 
+export interface PartnerProofPoint {
+  value: string;
+  label: string;
+}
+
 export interface PartnersData {
   partnersLabel: string;
+  trustHeading: string;
+  trustDescription: string;
+  ctaLabel: string;
+  proofPoints: PartnerProofPoint[];
   partners: Partner[];
 }
 
@@ -95,6 +104,10 @@ export interface HomePageContent {
   aboutHeading: string;
   aboutParagraph1: string;
   aboutParagraph2: string;
+  projectsLabel: string;
+  projectsHeading: string;
+  projectsDescription: string;
+  projectsButtonText: string;
   servicesHeading: string;
   servicesSubtext: string;
   servicesButtonText: string;
