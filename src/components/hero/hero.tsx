@@ -39,6 +39,13 @@ const conversionSignals = [
   'Launch-ready engineering',
 ];
 
+const capabilityProofItems = [
+  'Websites',
+  'Internal tools',
+  'SaaS products',
+  'Brand systems',
+];
+
 const typingPhrases = [
   { prefix: 'We build your', text: 'digital business.' },
   { prefix: 'We build your', text: 'websites.' },
@@ -57,6 +64,38 @@ function splitTypingPhrase(text: string) {
     text: textWithoutPeriod,
     hasPeriod,
   };
+}
+
+function HeroCapabilityProof({ isHeroRevealed }: { isHeroRevealed: boolean }) {
+  return (
+    <motion.aside
+      initial={{ opacity: 0, x: 24, filter: 'blur(10px)' }}
+      animate={isHeroRevealed
+        ? { opacity: 1, x: 0, filter: 'blur(0px)' }
+        : { opacity: 0, x: 24, filter: 'blur(10px)' }}
+      transition={{ duration: 0.85, delay: 0.75, ease: revealEase }}
+      className="pointer-events-none absolute right-[max(3rem,calc((100vw-1400px)/2))] top-[25%] z-10 hidden w-[22rem] xl:block"
+      aria-label="Digital business capabilities"
+    >
+      <div className="rounded-3xl border border-white/10 bg-black/55 p-5 shadow-2xl shadow-black/50 backdrop-blur-md">
+        <div className="h-px w-14 bg-vish-accent" aria-hidden="true" />
+        <p className="mt-5 font-mono text-[0.64rem] font-semibold uppercase tracking-widest text-vish-gray">
+          Digital business stack
+        </p>
+        <p className="mt-3 max-w-[16rem] font-display text-2xl font-medium leading-tight tracking-normal text-white">
+          Strategy, design, and engineering under one roof<span className="text-vish-accent">.</span>
+        </p>
+        <ul className="mt-6 space-y-3">
+          {capabilityProofItems.map((item) => (
+            <li key={item} className="flex items-center justify-between border-t border-white/10 pt-3">
+              <span className="font-sans text-sm text-vish-gray">{item}</span>
+              <span className="h-1.5 w-1.5 rounded-full bg-vish-accent" aria-hidden="true" />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </motion.aside>
+  );
 }
 
 export const Hero = () => {
@@ -170,8 +209,17 @@ export const Hero = () => {
               : { opacity: 0, y: 18, filter: 'blur(8px)' }}
             transition={{ duration: 0.75, delay: 0.75, ease: [0.16, 1, 0.3, 1] }}
             onAnimationComplete={handleHeroRevealComplete}
-            className="mt-7 max-w-3xl"
+            className="mt-4 max-w-3xl flex flex-col gap-10"
           >
+            <ul className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[0.66rem] font-semibold uppercase tracking-widest text-vish-gray">
+              {conversionSignals.map((signal) => (
+                <li key={signal} className="flex items-center gap-2.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-vish-accent" aria-hidden="true" />
+                  <span>{signal}</span>
+                </li>
+              ))}
+            </ul>
+
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
               <div className="rounded-full shadow-[0_0_28px_rgba(255,214,0,0.22)]">
                 <Button
@@ -199,27 +247,29 @@ export const Hero = () => {
                 See the Work
               </Button>
             </div>
-            <ul className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[0.66rem] font-semibold uppercase tracking-widest text-vish-gray">
-              {conversionSignals.map((signal) => (
-                <li key={signal} className="flex items-center gap-2.5">
-                  <span className="h-1.5 w-1.5 rounded-full bg-vish-accent" aria-hidden="true" />
-                  <span>{signal}</span>
-                </li>
-              ))}
-            </ul>
+
+            <HeroStats
+              stats={content.heroStats}
+              isHeroRevealed={isHeroRevealed}
+              className="w-full max-w-[36rem] xl:hidden"
+            />
           </motion.div>
         }
         decorativeLayer={(
           <>
-            <BrandWatermark isVisible={isHeroRevealed} className="opacity-[0.03]" />
+            <BrandWatermark isVisible animateOnReveal={false} className="opacity-[0.03]" />
           </>
         )}
         foregroundLayer={(
-          <HeroStats
-            stats={content.heroStats}
-            isHeroRevealed={isHeroRevealed}
-            className="absolute bottom-0 left-14 right-6 z-20 w-auto max-w-none md:bottom-8 md:left-[max(3rem,calc((100vw-1400px)/2))] md:right-auto md:w-[min(43rem,calc(100%-12rem))]"
-          />
+          <>
+            <HeroCapabilityProof isHeroRevealed={isHeroRevealed} />
+            <HeroStats
+              stats={content.heroStats}
+              isHeroRevealed={isHeroRevealed}
+              layout="compact"
+              className="absolute right-[max(3rem,calc((100vw-1400px)/2))] top-[calc(25%+24.5rem)] z-20 hidden w-[22rem] xl:grid"
+            />
+          </>
         )}
       />
     </div>

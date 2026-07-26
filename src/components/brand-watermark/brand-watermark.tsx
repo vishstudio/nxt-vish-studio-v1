@@ -5,17 +5,21 @@ import { motion } from 'motion/react';
 interface BrandWatermarkProps {
   isVisible?: boolean;
   className?: string;
+  animateOnReveal?: boolean;
 }
 
-export function BrandWatermark({ isVisible = true, className = '' }: BrandWatermarkProps) {
+export function BrandWatermark({ isVisible = true, className = '', animateOnReveal = true }: BrandWatermarkProps) {
+  const visibleState = { opacity: 0.055, x: 0, filter: 'blur(0px)' };
+  const hiddenState = { opacity: 0, x: -18, filter: 'blur(8px)' };
+
   return (
     <motion.div
       aria-hidden="true"
-      initial={{ opacity: 0, x: -18, filter: 'blur(8px)' }}
-      animate={isVisible
-        ? { opacity: 0.055, x: 0, filter: 'blur(0px)' }
-        : { opacity: 0, x: -18, filter: 'blur(8px)' }}
-      transition={{ duration: 0.95, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+      initial={animateOnReveal ? hiddenState : visibleState}
+      animate={isVisible ? visibleState : hiddenState}
+      transition={animateOnReveal
+        ? { duration: 0.95, delay: 0.35, ease: [0.16, 1, 0.3, 1] }
+        : { duration: 0 }}
       className={`pointer-events-none absolute top-1/2 z-0  -translate-y-1/2 left-[-30rem] h-[50rem] w-[50rem] md:left-[-20rem] md:h-[40rem] md:w-[40rem] lg:left-[-40rem] lg:h-[75rem] lg:w-[75rem] ${className}`}
     >
       <img
