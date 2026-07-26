@@ -24,6 +24,9 @@ export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isBottomBarVisible, setIsBottomBarVisible] = useState(true);
   const [hasPassedSelectedProjects, setHasPassedSelectedProjects] = useState(false);
+  const isScrolledRef = useRef(false);
+  const hasPassedSelectedProjectsRef = useRef(false);
+  const scrollRaf = useRef<number | null>(null);
   const scrollStopTimer = useRef<number | null>(null);
   const bottomBarHideTimer = useRef<number | null>(null);
   const bottomBarShowTimer = useRef<number | null>(null);
@@ -60,16 +63,43 @@ export const Navbar = () => {
   };
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    const syncScrollState = () => {
+      scrollRaf.current = null;
 
-  useEffect(() => {
-    const handleScrollActivity = () => {
+      const nextIsScrolled = window.scrollY > 20;
+      if (isScrolledRef.current !== nextIsScrolled) {
+        isScrolledRef.current = nextIsScrolled;
+        setIsScrolled(nextIsScrolled);
+      }
+
+      if (currentPath !== "/") {
+        if (hasPassedSelectedProjectsRef.current) {
+          hasPassedSelectedProjectsRef.current = false;
+          setHasPassedSelectedProjects(false);
+        }
+        return;
+      }
+
+      const selectedProjectsSection = document.getElementById("work");
+      const nextHasPassedSelectedProjects = selectedProjectsSection
+        ? selectedProjectsSection.getBoundingClientRect().bottom <= 0
+        : false;
+
+      if (hasPassedSelectedProjectsRef.current !== nextHasPassedSelectedProjects) {
+        hasPassedSelectedProjectsRef.current = nextHasPassedSelectedProjects;
+        setHasPassedSelectedProjects(nextHasPassedSelectedProjects);
+      }
+    };
+
+    const queueScrollState = () => {
+      if (scrollRaf.current === null) {
+        scrollRaf.current = window.requestAnimationFrame(syncScrollState);
+      }
+    };
+
+    const handleScroll = () => {
+      queueScrollState();
+
       if (bottomBarShowTimer.current) {
         window.clearTimeout(bottomBarShowTimer.current);
         bottomBarShowTimer.current = null;
@@ -98,10 +128,16 @@ export const Navbar = () => {
       }, scrollIdleMs);
     };
 
-    window.addEventListener("scroll", handleScrollActivity, { passive: true });
+    syncScrollState();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", queueScrollState);
 
     return () => {
-      window.removeEventListener("scroll", handleScrollActivity);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", queueScrollState);
+      if (scrollRaf.current !== null) {
+        window.cancelAnimationFrame(scrollRaf.current);
+      }
       if (scrollStopTimer.current) {
         window.clearTimeout(scrollStopTimer.current);
       }
@@ -111,32 +147,6 @@ export const Navbar = () => {
       if (bottomBarShowTimer.current) {
         window.clearTimeout(bottomBarShowTimer.current);
       }
-    };
-  }, []);
-
-  useEffect(() => {
-    if (currentPath !== "/") {
-      setHasPassedSelectedProjects(false);
-      return undefined;
-    }
-
-    const updateHasPassedSelectedProjects = () => {
-      const selectedProjectsSection = document.getElementById("work");
-      if (!selectedProjectsSection) {
-        setHasPassedSelectedProjects(false);
-        return;
-      }
-
-      setHasPassedSelectedProjects(selectedProjectsSection.getBoundingClientRect().bottom <= 0);
-    };
-
-    updateHasPassedSelectedProjects();
-    window.addEventListener("scroll", updateHasPassedSelectedProjects, { passive: true });
-    window.addEventListener("resize", updateHasPassedSelectedProjects);
-
-    return () => {
-      window.removeEventListener("scroll", updateHasPassedSelectedProjects);
-      window.removeEventListener("resize", updateHasPassedSelectedProjects);
     };
   }, [currentPath]);
 
@@ -162,87 +172,79 @@ export const Navbar = () => {
             }`}
         >
           <div className="flex items-center gap-3">
-            <AnimatePresence>
-              {isScrolled && (
-                <motion.div
-                  initial={{ scale: 0, opacity: 0, width: 0 }}
-                  animate={{ scale: 1, opacity: 1, width: "auto" }}
-                  exit={{ scale: 0, opacity: 0, width: 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <img src="/assets/icon.svg" alt="" className="w-5 h-5" />
-                </motion.div>
-              )}
-            </AnimatePresence>
+            <div
+              className={`grid h-5 shrink-0 transition-[opacity,width,transform] duration-200 ease-out ${
+                isScrolled ? "w-5 scale-100 opacity-100" : "w-0 scale-95 opacity-0"
+              }`}
+              aria-hidden="true"
+            >
+              <img src="/assets/icon.svg" alt="" className="h-5 w-5" />
+            </div>
             <a href="/" className="relative z-50">
               <LogoText />
             </a>
           </div>
 
           {/* Desktop Navigation */}
-          <AnimatePresence>
-            {!isScrolled && (
-              <motion.nav
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.2 }}
-                className="hidden lg:flex items-center gap-1 bg-white/5 rounded-full p-1 border border-white/5 absolute left-1/2 -translate-x-1/2"
-              >
-                <ol className="flex items-center">
-                  {navItems.map((item) => {
-                    const isActive = isActiveLink(item.href, item.activePaths);
+          <nav
+            className={`absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 rounded-full border border-white/5 bg-white/5 p-1 transition-[opacity,transform] duration-200 ease-out lg:flex ${
+              isScrolled
+                ? "pointer-events-none scale-95 opacity-0"
+                : "pointer-events-auto scale-100 opacity-100"
+            }`}
+            aria-hidden={isScrolled}
+          >
+            <ol className="flex items-center">
+              {navItems.map((item) => {
+                const isActive = isActiveLink(item.href, item.activePaths);
 
-                    return (
-                      <li
-                        key={item.name}
-                        className="flex items-center justify-center"
-                      >
-                        <a
-                          href={item.href}
-                          aria-current={isActive ? "page" : undefined}
-                          className={`px-5 py-2 rounded-full font-sans text-sm font-medium transition-all ${isActive
-                              ? "text-white bg-white/10"
-                              : "text-gray-300 hover:text-white hover:bg-white/10"
-                            }`}
-                        >
-                          {item.name}
-                        </a>
-                      </li>
-                    );
-                  })}
-                </ol>
-              </motion.nav>
-            )}
-          </AnimatePresence>
+                return (
+                  <li
+                    key={item.name}
+                    className="flex items-center justify-center"
+                  >
+                    <a
+                      href={item.href}
+                      aria-current={isActive ? "page" : undefined}
+                      tabIndex={isScrolled ? -1 : undefined}
+                      className={`px-5 py-2 rounded-full font-sans text-sm font-medium transition-all ${isActive
+                          ? "text-white bg-white/10"
+                          : "text-gray-300 hover:text-white hover:bg-white/10"
+                        }`}
+                    >
+                      {item.name}
+                    </a>
+                  </li>
+                );
+              })}
+            </ol>
+          </nav>
 
           <div className="flex items-center gap-3">
-            <AnimatePresence>
-              {!isScrolled && (
-                <motion.div
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 10 }}
-                  transition={{ duration: 0.2 }}
-                  className="hidden lg:flex"
-                >
-                  <Button
-                    variant="cta"
-                    size="sm"
-                    href={PROJECT_INQUIRY_HREF}
-                    icon={
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover:-rotate-45" />
-                    }
-                    iconPosition="right"
-                    ariaLabel={PROJECT_INQUIRY_ARIA_LABEL}
-                    dataConversionAction={PROJECT_INQUIRY_ACTION}
-                    className="font-sans"
-                  >
-                    Start Project
-                  </Button>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            <div
+              className={`hidden transition-[opacity,transform] duration-200 ease-out lg:flex ${
+                isScrolled
+                  ? "pointer-events-none translate-x-2 opacity-0"
+                  : "pointer-events-auto translate-x-0 opacity-100"
+              }`}
+              aria-hidden={isScrolled}
+            >
+              <Button
+                variant="cta"
+                size="sm"
+                href={PROJECT_INQUIRY_HREF}
+                icon={
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:-rotate-45" />
+                }
+                iconPosition="right"
+                ariaLabel={PROJECT_INQUIRY_ARIA_LABEL}
+                dataConversionAction={PROJECT_INQUIRY_ACTION}
+                className="font-sans"
+                tabIndex={isScrolled ? -1 : undefined}
+              >
+                Start Project
+              </Button>
+            </div>
 
             <Button
               variant="secondary"

@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 import Link from 'next/link';
-import { motion, useScroll, useTransform } from 'motion/react';
+import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react';
 
 interface RecentProjectStripItem {
   slug: string;
@@ -18,27 +18,11 @@ interface RecentProjectStripMotionProps {
 interface RecentProjectTileProps {
   project: RecentProjectStripItem;
   index: number;
-  progress: ReturnType<typeof useScroll>['scrollYProgress'];
 }
 
-function getInitialYOffset(index: number) {
-  if (index === 1 || index === 2) {
-    return index === 1 ? 38 : 56;
-  }
-
-  return index === 0 ? 132 : 112;
-}
-
-function RecentProjectTile({ project, index, progress }: RecentProjectTileProps) {
-  const y = useTransform(progress, [0, 0.82], [getInitialYOffset(index), 0]);
-  const opacity = useTransform(progress, [0, 0.55], [0.72, 1]);
-  const scale = useTransform(progress, [0, 0.82], [0.985, 1]);
-
+function RecentProjectTile({ project, index }: RecentProjectTileProps) {
   return (
-    <motion.div
-      style={{ y, opacity, scale }}
-      className={index === 3 ? 'block md:hidden lg:block' : undefined}
-    >
+    <div className={index === 3 ? 'block md:hidden lg:block' : undefined}>
       <Link
         href={`/project/${project.slug}`}
         className="group relative block overflow-hidden rounded-xl border border-white/10 bg-white/[0.035] md:rounded-2xl"
@@ -50,9 +34,9 @@ function RecentProjectTile({ project, index, progress }: RecentProjectTileProps)
             src={project.image}
             alt={project.title}
             className="h-full w-full object-cover opacity-90 transition duration-700 ease-out group-hover:scale-[1.035] group-hover:opacity-100"
-            loading="eager"
+            loading={index === 0 ? 'eager' : 'lazy'}
             decoding="async"
-            fetchPriority="low"
+            fetchPriority={index === 0 ? 'high' : 'low'}
           />
           <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/5 to-black/0 opacity-80 transition-opacity duration-500 group-hover:opacity-60" />
           <div className="absolute bottom-3 left-3 right-3 md:bottom-5 md:left-5 md:right-5">
@@ -65,15 +49,22 @@ function RecentProjectTile({ project, index, progress }: RecentProjectTileProps)
           </div>
         </div>
       </Link>
-    </motion.div>
+    </div>
   );
 }
 
 export function RecentProjectStripMotion({ projects }: RecentProjectStripMotionProps) {
   const sectionRef = useRef<HTMLElement>(null);
+  const shouldReduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start end', 'center center'],
+    offset: ['start end', 'end start'],
+  });
+  const rawParallaxY = useTransform(scrollYProgress, [0, 1], [64, -42]);
+  const parallaxY = useSpring(rawParallaxY, {
+    stiffness: 90,
+    damping: 28,
+    mass: 0.45,
   });
 
   return (
@@ -84,15 +75,19 @@ export function RecentProjectStripMotion({ projects }: RecentProjectStripMotionP
       aria-label="Recent project images"
     >
       <div className="overflow-hidden pb-20 pt-4 md:pb-28 md:pt-8 lg:pb-32">
-        <div className="mx-[calc(50%-50vw)] grid w-[148vw] -translate-x-[24vw] grid-cols-4 gap-3 md:w-[116vw] md:-translate-x-[8vw] md:grid-cols-3 md:gap-4 lg:w-[112vw] lg:-translate-x-[6vw] lg:grid-cols-4">
-          {projects.map((project, index) => (
-            <RecentProjectTile
-              key={project.slug}
-              project={project}
-              index={index}
-              progress={scrollYProgress}
-            />
-          ))}
+        <div className="mx-[calc(50%-50vw)] w-[148vw] -translate-x-[24vw] md:w-[116vw] md:-translate-x-[8vw] lg:w-[112vw] lg:-translate-x-[6vw]">
+          <motion.div
+            style={shouldReduceMotion ? undefined : { y: parallaxY }}
+            className="grid grid-cols-4 gap-3 will-change-transform md:grid-cols-3 md:gap-4 lg:grid-cols-4"
+          >
+            {projects.map((project, index) => (
+              <RecentProjectTile
+                key={project.slug}
+                project={project}
+                index={index}
+              />
+            ))}
+          </motion.div>
         </div>
       </div>
     </section>
