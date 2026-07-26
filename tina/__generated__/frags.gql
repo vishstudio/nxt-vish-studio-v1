@@ -62,6 +62,14 @@ fragment SiteSettingsParts on SiteSettings {
 fragment PartnersParts on Partners {
   __typename
   partnersLabel
+  trustHeading
+  trustDescription
+  ctaLabel
+  proofPoints {
+    __typename
+    value
+    label
+  }
   partners {
     __typename
     name
@@ -86,6 +94,10 @@ fragment HomePageParts on HomePage {
   aboutHeading
   aboutParagraph1
   aboutParagraph2
+  projectsLabel
+  projectsHeading
+  projectsDescription
+  projectsButtonText
   servicesHeading
   servicesSubtext
   servicesButtonText

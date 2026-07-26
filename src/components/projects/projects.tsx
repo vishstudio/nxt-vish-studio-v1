@@ -2,7 +2,7 @@
 import { motion } from 'motion/react';
 import { ArrowUpRight, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
-import { useTinaProjectsList } from '../../hooks/useTinaVisualEditing';
+import { useTinaHome, useTinaProjectsList } from '../../hooks/useTinaVisualEditing';
 import { Button } from '../ui/button/button';
 import { SectionTitle } from '../ui/section-title/section-title';
 import { getImageUrl } from '../../utils/imageUrl';
@@ -133,6 +133,7 @@ const ProjectShowcaseCard = ({
 
 export const Projects = ({ showViewAll = true }: { showViewAll?: boolean }) => {
   const { data: allProjects } = useTinaProjectsList();
+  const { data: content, tinaField } = useTinaHome();
   const projects = allProjects.filter((p) => p.featuredOnHome).slice(0, 4);
   const [featuredProject, ...supportingProjects] = projects;
 
@@ -154,14 +155,24 @@ export const Projects = ({ showViewAll = true }: { showViewAll?: boolean }) => {
             transition={{ duration: 0.6 }}
             className="max-w-3xl"
           >
-            <p className="mb-4 font-mono text-xs font-semibold uppercase tracking-widest text-vish-accent">
-              Client work
+            <p
+              className="mb-4 font-mono text-xs font-semibold uppercase tracking-widest text-vish-accent"
+              data-tina-field={tinaField('projectsLabel')}
+            >
+              {content.projectsLabel}
             </p>
-            <SectionTitle size="md" className="mb-4 md:mb-6 md:text-6xl lg:text-7xl">
-              Selected Case Studies
+            <SectionTitle
+              size="md"
+              className="mb-4 md:mb-6 md:text-6xl lg:text-7xl"
+              tinaField={tinaField('projectsHeading')}
+            >
+              {content.projectsHeading}
             </SectionTitle>
-            <p className="max-w-2xl font-sans text-base leading-relaxed text-vish-gray md:text-lg">
-              A focused look at websites, products, and brand systems built to make businesses easier to trust and easier to choose.
+            <p
+              className="max-w-2xl font-sans text-base leading-relaxed text-vish-gray md:text-lg"
+              data-tina-field={tinaField('projectsDescription')}
+            >
+              {content.projectsDescription}
             </p>
           </motion.div>
           {showViewAll && (
@@ -173,7 +184,7 @@ export const Projects = ({ showViewAll = true }: { showViewAll?: boolean }) => {
               iconPosition="right"
               className="hidden w-fit md:inline-flex"
             >
-              View All Projects
+              {content.projectsButtonText}
             </Button>
           )}
         </div>
@@ -204,7 +215,7 @@ export const Projects = ({ showViewAll = true }: { showViewAll?: boolean }) => {
               iconPosition="right"
               className="w-full"
             >
-              View All Projects
+              {content.projectsButtonText}
             </Button>
           </div>
         )}

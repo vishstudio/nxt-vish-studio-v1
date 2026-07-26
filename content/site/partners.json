@@ -1,5 +1,22 @@
 {
   "partnersLabel": "Trusted by industry leaders",
+  "trustHeading": "Chosen by serious teams",
+  "trustDescription": "Businesses trust VISH Studio when their website, product, or brand system needs to feel credible before the first conversation.",
+  "ctaLabel": "Start Project",
+  "proofPoints": [
+    {
+      "value": "7+",
+      "label": "Partners served"
+    },
+    {
+      "value": "4+",
+      "label": "Digital products launched"
+    },
+    {
+      "value": "2019",
+      "label": "Building since"
+    }
+  ],
   "partners": [
     {
       "name": "PlanitSwiss",

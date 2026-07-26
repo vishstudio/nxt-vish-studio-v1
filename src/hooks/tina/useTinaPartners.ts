@@ -3,6 +3,7 @@ import {
   getPartners,
   type PartnersData,
   type Partner,
+  type PartnerProofPoint,
 } from "../../lib/content";
 import { rawTinaField, useTinaData } from "./core";
 
@@ -15,6 +16,18 @@ export function useTinaPartners() {
     (qd: any) =>
       ({
         partnersLabel: qd.partners.partnersLabel ?? "",
+        trustHeading: qd.partners.trustHeading ?? "",
+        trustDescription: qd.partners.trustDescription ?? "",
+        ctaLabel: qd.partners.ctaLabel ?? "",
+        proofPoints: (qd.partners.proofPoints ?? [])
+          .filter(Boolean)
+          .map(
+            (p: any) =>
+              ({
+                value: p?.value ?? "",
+                label: p?.label ?? "",
+              }) as PartnerProofPoint,
+          ),
         partners: (qd.partners.partners ?? [])
           .filter(Boolean)
           .map(
