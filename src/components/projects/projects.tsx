@@ -1,120 +1,114 @@
 'use client';
-import { useRef, useState } from 'react';
-import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'motion/react';
+import { motion } from 'motion/react';
 import { ArrowUpRight, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 import { useTinaProjectsList } from '../../hooks/useTinaVisualEditing';
 import { Button } from '../ui/button/button';
 import { SectionTitle } from '../ui/section-title/section-title';
-import { CarouselProgress } from '../carousel-progress/CarouselProgress';
 import { getImageUrl } from '../../utils/imageUrl';
 import type { Project } from '../../lib/projects';
 
-interface StickyProjectSlideProps {
+interface ProjectShowcaseCardProps {
   project: Project;
-  isActive: boolean;
+  index: number;
+  featured?: boolean;
 }
 
-const StickyProjectSlide = ({
+const getCategoryLabel = (project: Project) => project.category.join(' / ');
+
+const ProjectShowcaseCard = ({
   project,
-  isActive,
-}: StickyProjectSlideProps) => {
-  const category = Array.isArray(project.category) ? project.category.join(' / ') : project.category;
+  index,
+  featured = false,
+}: ProjectShowcaseCardProps) => {
+  const category = getCategoryLabel(project);
+  const caseNumber = String(index + 1).padStart(2, '0');
 
   return (
     <motion.article
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.36, ease: [0.33, 1, 0.68, 1] }}
-      className={`absolute inset-0 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-center lg:gap-16 ${
-        isActive ? 'pointer-events-auto' : 'pointer-events-none'
-      }`}
-      aria-hidden={!isActive}
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-12%' }}
+      transition={{ duration: 0.55, delay: Math.min(index * 0.06, 0.18), ease: [0.16, 1, 0.3, 1] }}
+      className={
+        featured
+          ? 'group grid gap-6 lg:grid-cols-12 lg:items-stretch lg:gap-8'
+          : 'group flex h-full flex-col'
+      }
     >
       <Link
         href={`/project/${project.slug}`}
-        className="group block overflow-hidden rounded-2xl bg-white/[0.035] lg:col-span-7"
+        className={
+          featured
+            ? 'block overflow-hidden rounded-2xl bg-white/[0.035] lg:col-span-7'
+            : 'block overflow-hidden rounded-2xl bg-white/[0.035]'
+        }
         data-cursor="project"
-        tabIndex={isActive ? 0 : -1}
       >
-        <motion.div
-          initial={{ opacity: 0, x: -28, scale: 0.985 }}
-          animate={{ opacity: 1, x: 0, scale: 1 }}
-          exit={{ opacity: 0, x: -18, scale: 0.985 }}
-          whileHover={{ scale: 1.03 }}
-          transition={{ duration: 0.58, ease: [0.33, 1, 0.68, 1] }}
-          className="relative aspect-16/10"
+        <div
+          className={
+            featured
+              ? 'relative aspect-16/10 overflow-hidden lg:h-full lg:min-h-[34rem]'
+              : 'relative aspect-16/11 overflow-hidden'
+          }
         >
           <img
             src={getImageUrl(project.image)}
             alt={project.title}
-            className="h-full w-full object-cover opacity-90 transition-opacity duration-500 group-hover:opacity-100"
-            loading="lazy"
+            className="h-full w-full object-cover opacity-90 transition duration-500 group-hover:scale-[1.025] group-hover:opacity-100"
+            loading={featured ? 'eager' : 'lazy'}
             decoding="async"
-            fetchPriority="low"
+            fetchPriority={featured ? 'high' : 'low'}
           />
-          <div className="absolute inset-0 bg-black/20 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-          <div className="absolute left-5 top-5 rounded-full border border-white/10 bg-black/50 px-3 py-1 font-mono text-xs text-white/70 backdrop-blur-sm">
+          <div className="absolute inset-0 bg-linear-to-t from-black/75 via-black/10 to-transparent" />
+          <div className="absolute left-4 top-4 rounded-full border border-white/10 bg-black/55 px-3 py-1 font-mono text-[0.7rem] font-semibold uppercase tracking-widest text-white/75 backdrop-blur-sm md:left-5 md:top-5">
+            Case {caseNumber}
+          </div>
+          <div className="absolute bottom-4 left-4 rounded-full bg-vish-accent px-3 py-1 font-mono text-[0.68rem] font-semibold uppercase tracking-widest text-black md:bottom-5 md:left-5">
             {project.year}
           </div>
-          <div className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full bg-vish-accent text-black opacity-0 transition-all duration-500 group-hover:opacity-100">
-            <ArrowUpRight className="h-5 w-5" />
+          <div className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-white text-black opacity-0 transition-opacity duration-300 group-hover:opacity-100 md:right-5 md:top-5">
+            <ArrowUpRight className="h-4 w-4" />
           </div>
-        </motion.div>
+        </div>
       </Link>
 
-      <motion.div
-        initial={{ opacity: 0, x: 24 }}
-        animate={{ opacity: 1, x: 0 }}
-        exit={{ opacity: 0, x: 18 }}
-        transition={{ duration: 0.5, delay: 0.08, ease: [0.33, 1, 0.68, 1] }}
-        className="relative lg:col-span-5 lg:pr-16 xl:pr-20"
+      <div
+        className={
+          featured
+            ? 'flex flex-col justify-between rounded-2xl border border-white/10 bg-white/[0.025] p-6 lg:col-span-5 lg:p-8'
+            : 'flex flex-1 flex-col pt-5'
+        }
       >
-        <motion.span
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          transition={{ duration: 0.42, delay: 0.14, ease: [0.33, 1, 0.68, 1] }}
-          className="mb-5 block font-mono text-xs font-semibold uppercase tracking-widest text-vish-accent"
-        >
-          {category}
-        </motion.span>
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -12 }}
-          transition={{ duration: 0.48, delay: 0.18, ease: [0.33, 1, 0.68, 1] }}
-        >
-          <Link href={`/project/${project.slug}`} tabIndex={isActive ? 0 : -1}>
-            <h3 className="font-display text-4xl font-medium leading-[0.98] tracking-tight text-white transition-colors hover:text-gray-300 md:text-6xl xl:text-7xl">
+        <div>
+          <span className="mb-4 block font-mono text-[0.68rem] font-semibold uppercase tracking-widest text-vish-accent">
+            {category}
+          </span>
+          <Link href={`/project/${project.slug}`} className="block">
+            <h3
+              className={
+                featured
+                  ? 'font-display text-4xl font-medium leading-[1.02] text-white transition-colors duration-300 group-hover:text-vish-gray md:text-5xl xl:text-6xl'
+                  : 'font-display text-2xl font-medium leading-[1.08] text-white transition-colors duration-300 group-hover:text-vish-gray md:text-3xl'
+              }
+            >
               {project.title}
             </h3>
           </Link>
-        </motion.div>
-        <motion.p
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -12 }}
-          transition={{ duration: 0.48, delay: 0.22, ease: [0.33, 1, 0.68, 1] }}
-          className="mt-6 max-w-md font-sans text-base leading-relaxed text-gray-400 md:text-lg"
-        >
-          {project.description}
-        </motion.p>
+          <p
+            className={
+              featured
+                ? 'mt-5 max-w-md font-sans text-base leading-relaxed text-vish-gray md:text-lg'
+                : 'mt-3 max-w-md font-sans text-sm leading-relaxed text-vish-gray'
+            }
+          >
+            {project.description}
+          </p>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -12 }}
-          transition={{ duration: 0.48, delay: 0.26, ease: [0.33, 1, 0.68, 1] }}
-          className="mt-9 flex flex-wrap items-center gap-4"
-        >
-          <span className="rounded-full border border-white/10 px-4 py-2 font-mono text-sm text-gray-400">
-            {project.year}
-          </span>
+        <div className={featured ? 'mt-8 flex flex-wrap items-center gap-4' : 'mt-5 flex flex-wrap items-center gap-4'}>
           <Button
             href={`/project/${project.slug}`}
-            tabIndex={isActive ? 0 : -1}
             variant="caseStudy"
             size="text"
           >
@@ -123,7 +117,6 @@ const StickyProjectSlide = ({
           {project.siteUrl && (
             <Button
               href={project.siteUrl}
-              tabIndex={isActive ? 0 : -1}
               variant="external"
               size="xs"
               icon={<ExternalLink className="h-3 w-3" />}
@@ -132,8 +125,8 @@ const StickyProjectSlide = ({
               View Site
             </Button>
           )}
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </motion.article>
   );
 };
@@ -141,19 +134,7 @@ const StickyProjectSlide = ({
 export const Projects = ({ showViewAll = true }: { showViewAll?: boolean }) => {
   const { data: allProjects } = useTinaProjectsList();
   const projects = allProjects.filter((p) => p.featuredOnHome).slice(0, 4);
-  const sectionRef = useRef<HTMLElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start start', 'end end'],
-  });
-
-  useMotionValueEvent(scrollYProgress, 'change', (latest) => {
-    if (projects.length === 0) return;
-
-    const nextIndex = Math.min(projects.length - 1, Math.max(0, Math.floor(latest * projects.length)));
-    setActiveIndex(nextIndex);
-  });
+  const [featuredProject, ...supportingProjects] = projects;
 
   if (projects.length === 0) {
     return null;
@@ -161,64 +142,72 @@ export const Projects = ({ showViewAll = true }: { showViewAll?: boolean }) => {
 
   return (
     <section
-      ref={sectionRef}
-      className="projects relative bg-vish-bg px-6 md:px-12"
+      className="projects relative bg-vish-bg px-6 py-24 md:px-12 md:py-32"
       id="work"
-      style={{ height: `${projects.length * 115}svh` }}
     >
-      <div className="sticky top-0 flex min-h-svh items-center overflow-hidden py-20 md:py-32">
-        <div className="mx-auto w-full max-w-[1400px]">
-          <div className="mb-8 flex flex-col gap-6 md:mb-16 md:flex-row md:items-end md:justify-between">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="max-w-3xl"
-            >
-              <SectionTitle size="md" className="mb-4 md:mb-6 md:text-6xl lg:text-7xl">
-                Selected Case Studies
-              </SectionTitle>
-              <p className="max-w-2xl font-sans text-base leading-relaxed text-gray-400 md:text-lg">
-                Engineered for aesthetic authority and commercial impact.
-              </p>
-            </motion.div>
-            <div className="hidden md:block font-mono text-sm text-gray-500 uppercase tracking-widest">
-              // RECENT WORK 2024-2026
-            </div>
-          </div>
-
-          <div className="relative min-h-[430px] sm:min-h-[500px] md:min-h-[680px] lg:min-h-[540px]">
-            <CarouselProgress
-              count={projects.length}
-              activeIndex={activeIndex}
-              orientation="vertical"
-              className="absolute right-0 top-1/2 z-10 hidden -translate-y-1/2 lg:flex"
-            />
-            <AnimatePresence mode="wait">
-              <StickyProjectSlide
-                key={projects[activeIndex].slug}
-                project={projects[activeIndex]}
-                isActive
-              />
-            </AnimatePresence>
-          </div>
-
+      <div className="mx-auto w-full max-w-[1400px]">
+        <div className="mb-10 flex flex-col gap-6 md:mb-16 md:flex-row md:items-end md:justify-between">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="max-w-3xl"
+          >
+            <p className="mb-4 font-mono text-xs font-semibold uppercase tracking-widest text-vish-accent">
+              Client work
+            </p>
+            <SectionTitle size="md" className="mb-4 md:mb-6 md:text-6xl lg:text-7xl">
+              Selected Case Studies
+            </SectionTitle>
+            <p className="max-w-2xl font-sans text-base leading-relaxed text-vish-gray md:text-lg">
+              A focused look at websites, products, and brand systems built to make businesses easier to trust and easier to choose.
+            </p>
+          </motion.div>
           {showViewAll && (
-            <div className="mt-10 flex items-center justify-between gap-6">
-              <CarouselProgress count={projects.length} activeIndex={activeIndex} className="flex lg:hidden" />
-              <Button
-                href="/projects"
-                variant="navigation"
-                size="md"
-                icon={<ArrowUpRight className="w-5 h-5" />}
-                iconPosition="right"
-              >
-                View All Projects
-              </Button>
-            </div>
+            <Button
+              href="/projects"
+              variant="navigation"
+              size="md"
+              icon={<ArrowUpRight className="w-5 h-5" />}
+              iconPosition="right"
+              className="hidden w-fit md:inline-flex"
+            >
+              View All Projects
+            </Button>
           )}
         </div>
+
+        {featuredProject && (
+          <ProjectShowcaseCard project={featuredProject} index={0} featured />
+        )}
+
+        {supportingProjects.length > 0 && (
+          <div className="mt-8 grid gap-8 md:grid-cols-3">
+            {supportingProjects.map((project, index) => (
+              <ProjectShowcaseCard
+                key={project.slug}
+                project={project}
+                index={index + 1}
+              />
+            ))}
+          </div>
+        )}
+
+        {showViewAll && (
+          <div className="mt-12 flex md:hidden">
+            <Button
+              href="/projects"
+              variant="navigation"
+              size="md"
+              icon={<ArrowUpRight className="w-5 h-5" />}
+              iconPosition="right"
+              className="w-full"
+            >
+              View All Projects
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   );

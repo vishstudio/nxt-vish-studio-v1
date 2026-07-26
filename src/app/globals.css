@@ -1,16 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Google Sans", "Google Sans Text", "Product Sans", Arial, ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Google Sans", "Google Sans Text", "Product Sans", Arial, ui-sans-serif, system-ui, sans-serif;
   --font-logo: "Prompt", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Google Sans", "Google Sans Text", "Product Sans", Arial, ui-sans-serif, system-ui, sans-serif;
 
   /* Palette */
   --color-vish-bg: #000000;
   --color-vish-text: #ffffff;
   --color-vish-subtle: #111111;
   --color-vish-accent: #ffd600;
-  --color-vish-gray: #a1a1aa;
+  --color-vish-gray: #6A7282;
   --color-vish-border: #333333;
 }
 

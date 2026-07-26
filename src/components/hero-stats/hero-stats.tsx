@@ -13,6 +13,7 @@ interface HeroStatsProps {
   stats: HeroStat[];
   isHeroRevealed: boolean;
   className?: string;
+  layout?: 'standard' | 'compact';
 }
 
 const revealEase = [0.16, 1, 0.3, 1] as const;
@@ -65,7 +66,7 @@ function AnimatedStatValue({ stat, isActive }: AnimatedStatValueProps) {
   );
 }
 
-export function HeroStats({ stats, isHeroRevealed, className = '' }: HeroStatsProps) {
+export function HeroStats({ stats, isHeroRevealed, className = '', layout = 'standard' }: HeroStatsProps) {
   const statsRef = useRef<HTMLDListElement>(null);
   const isInView = useInView(statsRef, { once: true, amount: 0.55 });
   const shouldAnimateNumbers = isHeroRevealed && isInView;
@@ -73,6 +74,16 @@ export function HeroStats({ stats, isHeroRevealed, className = '' }: HeroStatsPr
   if (stats.length === 0) {
     return null;
   }
+
+  const gridClasses = layout === 'compact'
+    ? 'grid-cols-2 gap-x-5 gap-y-4 px-5 py-5'
+    : 'grid-cols-2 gap-x-5 gap-y-3 px-4 py-3 sm:px-5 sm:py-4 md:grid-cols-4';
+  const itemClasses = layout === 'compact'
+    ? 'min-w-0 border-l border-white/10 pl-4 odd:border-l-0 odd:pl-0'
+    : 'min-w-0 border-l border-white/10 pl-4 odd:border-l-0 odd:pl-0 md:odd:border-l md:odd:pl-4 md:first:border-l-0 md:first:pl-0';
+  const valueClasses = layout === 'compact'
+    ? 'mt-2 font-display text-2xl font-medium leading-none tracking-normal text-white'
+    : 'mt-2 font-display text-xl font-medium leading-none tracking-normal text-white sm:text-2xl lg:text-3xl';
 
   return (
     <motion.dl
@@ -82,15 +93,15 @@ export function HeroStats({ stats, isHeroRevealed, className = '' }: HeroStatsPr
         ? { opacity: 1, y: 0, filter: 'blur(0px)' }
         : { opacity: 0, y: 18, filter: 'blur(8px)' }}
       transition={{ duration: 0.75, delay: 0.95, ease: revealEase }}
-      className={`grid grid-cols-2 gap-x-5 gap-y-4 rounded-2xl border border-white/10 bg-black/55 px-5 py-4 backdrop-blur-md md:grid-cols-4 ${className}`}
+      className={`grid rounded-2xl border border-white/10 bg-black/55 backdrop-blur-md ${gridClasses} ${className}`}
       aria-label="Studio stats"
     >
       {stats.map((stat) => (
-        <div key={stat.label} className="min-w-0 border-l border-white/10 pl-4 odd:border-l-0 odd:pl-0 md:odd:border-l md:odd:pl-4 md:first:border-l-0 md:first:pl-0">
+        <div key={stat.label} className={itemClasses}>
           <dt className="font-mono text-[0.62rem] font-semibold uppercase leading-none tracking-widest text-vish-gray">
             {stat.label}
           </dt>
-          <dd className="mt-2 font-display text-2xl font-medium leading-none tracking-normal text-white lg:text-3xl">
+          <dd className={valueClasses}>
             <AnimatedStatValue stat={stat} isActive={shouldAnimateNumbers} />
           </dd>
         </div>

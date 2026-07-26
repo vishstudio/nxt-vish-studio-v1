@@ -7,6 +7,7 @@
  */
 import { Navbar } from '../components/navbar/navbar';
 import { Hero } from '../components/hero/hero';
+import { RecentProjectStrip } from '../components/recent-project-strip/recent-project-strip';
 import { TrustedPartners } from '../components/trusted-partners/trusted-partners';
 import { About } from '../components/about/about';
 import { Team } from '../components/team/team';
@@ -61,6 +62,7 @@ export const Home = () => {
           VISH Studio is a premium web agency in Mauritius engineering high-performance custom software, immersive frontend platforms, and strategic brand architecture globally.
         </p>
         <Hero />
+        <RecentProjectStrip />
         <TrustedPartners />
         <About />
         <Projects />

@@ -17,7 +17,7 @@ interface PageHeroProps {
   action?: React.ReactNode;
   /** data-tina-field value for the description paragraph */
   descriptionTinaField?: string;
-  /** Hero size variant: 'full' for homepage (min-h-screen), 'large' for sub-pages (min-h-[60vh]) */
+  /** Hero size variant: 'full' for homepage, 'large' for sub-pages (min-h-[60vh]) */
   size?: 'full' | 'large';
   /** Additional className for the section wrapper */
   className?: string;
@@ -59,14 +59,16 @@ export const PageHero = ({
   });
   const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '12%']);
   const contentY = useTransform(scrollYProgress, [0, 1], [0, 72]);
+  const decorativeY = useTransform(scrollYProgress, [0, 1], [0, -96]);
+  const foregroundY = useTransform(scrollYProgress, [0, 1], [0, 42]);
 
   const sizeClasses = {
-    full: 'min-h-screen flex flex-col justify-center',
+    full: 'lg:min-h-screen xl:min-h-[56rem] flex flex-col justify-center',
     large: 'min-h-[60vh] flex flex-col justify-end',
   };
 
   return (
-    <section ref={sectionRef} className={`page-hero ${className} relative overflow-hidden bg-black px-6 md:px-12 py-20 md:py-32 ${sizeClasses[size]}`}>
+    <section ref={sectionRef} className={`page-hero ${className} relative overflow-hidden bg-black px-6 md:px-12 py-20 md:py-32 mt-14 ${sizeClasses[size]}`}>
       {backgroundImage && (
         <>
           <motion.img
@@ -82,9 +84,13 @@ export const PageHero = ({
       )}
 
       {decorativeLayer && (
-        <div className="absolute inset-0 z-0" aria-hidden="true">
+        <motion.div
+          className="absolute inset-0 z-0 will-change-transform"
+          style={{ y: contentParallax ? decorativeY : 0 }}
+          aria-hidden="true"
+        >
           {decorativeLayer}
-        </div>
+        </motion.div>
       )}
 
       <motion.div
@@ -129,7 +135,14 @@ export const PageHero = ({
         </div>
       </motion.div>
 
-      {foregroundLayer}
+      {foregroundLayer && (
+        <motion.div
+          className="pointer-events-none absolute inset-0 z-20 will-change-transform"
+          style={{ y: contentParallax ? foregroundY : 0 }}
+        >
+          {foregroundLayer}
+        </motion.div>
+      )}
     </section>
   );
 };
