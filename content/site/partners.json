@@ -19,12 +19,12 @@
   ],
   "partners": [
     {
-      "name": "PlanitSwiss",
-      "url": "https://www.planitswiss.com/"
+      "name": "Ikigai Learning NGO",
+      "url": "https://ikigai-learning.org"
     },
     {
-      "name": "MorisMetrics",
-      "url": "https://morismetrics.com/"
+      "name": "Imagine3d",
+      "url": "https://react-imagine3d.vercel.app/"
     },
     {
       "name": "PaxPack",
@@ -35,16 +35,16 @@
       "url": "https://vish-studio.github.io/nxt-go-garage-marketing/"
     },
     {
+      "name": "MorisMetrics",
+      "url": "https://morismetrics.com/"
+    },
+    {
+      "name": "PlanitSwiss",
+      "url": "https://www.planitswiss.com/"
+    },
+    {
       "name": "ForwardPsychology",
       "url": "https://www.forwardpsychology.mu/"
-    },
-    {
-      "name": "Imagine3d",
-      "url": "https://react-imagine3d.vercel.app/"
-    },
-    {
-      "name": "Ikigai Learning NGO",
-      "url": "https://ikigai-learning.org"
     }
   ]
 }
