@@ -16,8 +16,8 @@
         {
           "label": "STARTER",
           "name": "Essentials",
-          "price": "Rs 9,500",
-          "discountedPrice": "Rs 8,500",
+          "price": "Rs 14,500",
+          "discountedPrice": "",
           "priceNote": "ONE-TIME",
           "delivery": "4–7 business days",
           "tagline": "A focused, conversion-ready website for getting online quickly.",
@@ -41,8 +41,8 @@
         {
           "label": "STUDIO",
           "name": "Growth",
-          "price": "Rs 15,500",
-          "discountedPrice": "Rs 14,500",
+          "price": "Rs 28,000",
+          "discountedPrice": "",
           "priceNote": "One-time",
           "delivery": "7–13 business days",
           "tagline": "A polished multi-page website for brands ready to grow online.",
@@ -66,8 +66,8 @@
         {
           "label": "PRO",
           "name": "Premium",
-          "price": "Rs 38,000",
-          "discountedPrice": "Rs 35,500+",
+          "price": "Rs 45,500",
+          "discountedPrice": "",
           "priceNote": "On start 50% - End 50%",
           "delivery": "2–4 weeks",
           "tagline": "A premium web system engineered for credibility, SEO, and scale.",
