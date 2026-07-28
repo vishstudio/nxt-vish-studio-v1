@@ -8,6 +8,7 @@ import { PageLayout } from '../components/ui/page-layout/page-layout';
 import { PageHero } from '../components/ui/page-hero/page-hero';
 import { Contact } from '../components/contact/contact';
 import { Button } from '../components/ui/button/button';
+import { SectionTitle } from '../components/ui/section-title/section-title';
 import { Tabs } from '../components/tabs/Tabs';
 import { type PricingCarePlan, type PricingCategory, type PricingPlan } from '../lib/pricing';
 
@@ -227,12 +228,12 @@ function ActivePricingSection({
             <span className="mb-4 block font-mono text-xs uppercase tracking-widest text-vish-accent">
               {String(categoryIndex + 1).padStart(2, '0')} / Service Pricing
             </span>
-            <h2
-              className="font-display text-4xl font-medium tracking-tight text-white md:text-6xl"
-              data-tina-field={rawCategory ? tinaField(rawCategory, 'label') : undefined}
+            <SectionTitle
+              size="md"
+              tinaField={rawCategory ? tinaField(rawCategory, 'label') : undefined}
             >
-              {category.label}<span className="text-vish-accent">.</span>
-            </h2>
+              {category.label}
+            </SectionTitle>
           </div>
           <p className="max-w-2xl font-sans text-base leading-relaxed text-gray-400 md:text-lg">
             Compare starter, growth, and premium scopes for {category.label.toLowerCase()} projects. Below the packages, you will find the matching care plan and common additional costs for this service.

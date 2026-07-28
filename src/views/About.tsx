@@ -62,15 +62,15 @@ export const AboutPage = () => {
             </motion.div>
 
             <div className="space-y-12 lg:pt-24">
-              <motion.h2
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="font-display text-4xl md:text-5xl leading-tight"
-                data-tina-field={tinaField('introHeading')}
               >
-                {content.introHeading}
-              </motion.h2>
+                <SectionTitle size="sm" tinaField={tinaField('introHeading')}>
+                  {content.introHeading}
+                </SectionTitle>
+              </motion.div>
               <div className="space-y-12">
                 <TextReveal
                   className="font-sans text-xl text-gray-400 leading-relaxed"
@@ -105,7 +105,7 @@ export const AboutPage = () => {
               {content.valuesLabel}
             </span>
             <SectionTitle
-              size="2xl"
+              size="lg"
               tinaField={tinaField('valuesHeading')}
             >
               {content.valuesHeading}

@@ -4,51 +4,99 @@
   "heroTitleLine2": "& Capabilities",
   "categories": [
     {
-      "category": "Strategy",
-      "description": "Aligning your digital presence with long-term business goals. We focus on brand positioning, client onboarding automation, and workflow optimization to turn your traffic into measurable revenue.",
+      "category": "Website",
+      "description": "High-converting websites, landing pages, e-commerce experiences, and CMS-backed marketing sites built for speed, clarity, and trust.",
       "items": [
-        "Brand Strategy",
-        "UX Research",
-        "Content Strategy",
-        "Market Analysis",
-        "Digital Transformation",
-        "Product Roadmap"
+        "Business websites",
+        "Landing pages",
+        "E-commerce websites",
+        "CMS integration",
+        "SEO-ready structure",
+        "Performance optimization"
       ]
     },
     {
-      "category": "Design",
-      "description": "High-end, minimalist visual identities designed for the modern web. We build intuitive, high-contrast user interfaces with rhythmic typography that elevates your brand authority and guarantees a seamless user experience.",
+      "category": "Mobile Apps",
+      "description": "Mobile-first product experiences for customer portals, booking flows, internal teams, and launch-ready iOS or Android app concepts.",
       "items": [
-        "UI/UX Design",
-        "Visual Identity",
-        "Motion Design",
-        "Design Systems",
-        "Prototyping",
-        "Interaction Design"
+        "App interface design",
+        "User flows",
+        "Account screens",
+        "Booking workflows",
+        "Push notification flows",
+        "Launch-ready prototypes"
       ]
     },
     {
-      "category": "Development",
-      "description": "Engineering fast, reliable, and highly scalable digital products. Specialized in robust React, TypeScript, and Next.js architectures, secure backend integrations, and custom applications built to perform under pressure.",
+      "category": "SaaS Products",
+      "description": "Subscription-ready product platforms with authentication, workflows, dashboards, billing logic, and scalable product architecture.",
       "items": [
-        "Frontend Development",
-        "Backend Engineering",
-        "CMS Integration",
-        "Creative Coding",
-        "E-commerce Solutions",
-        "API Development"
+        "Product architecture",
+        "Authentication",
+        "Subscription logic",
+        "User roles",
+        "Admin portals",
+        "Release planning"
       ]
     },
     {
-      "category": "Marketing",
-      "description": "Amplifying your message to reach the right audience and drive meaningful growth for your brand.",
+      "category": "CRM",
+      "description": "Custom CRM systems that organize leads, clients, follow-ups, sales stages, and team workflows around the way your business actually operates.",
       "items": [
-        "SEO Optimization",
-        "Social Media Strategy",
-        "Email Marketing",
-        "Analytics & Reporting",
-        "Performance Marketing",
-        "Content Creation"
+        "Lead pipelines",
+        "Client records",
+        "Follow-up workflows",
+        "Sales stages",
+        "Team permissions",
+        "CRM automations"
+      ]
+    },
+    {
+      "category": "Softwares",
+      "description": "Bespoke business software for operations, portals, approvals, reporting, automation, and internal systems that replace scattered manual work.",
+      "items": [
+        "Internal tools",
+        "Customer portals",
+        "Approval systems",
+        "Workflow automation",
+        "File management",
+        "API integrations"
+      ]
+    },
+    {
+      "category": "Branding",
+      "description": "Strategic brand identity, visual systems, launch assets, and digital guidelines that make your business easier to recognize and trust.",
+      "items": [
+        "Logo systems",
+        "Visual identity",
+        "Brand guidelines",
+        "Launch assets",
+        "Social templates",
+        "Campaign visuals"
+      ]
+    },
+    {
+      "category": "Dashboard",
+      "description": "Operational dashboards that turn business data, activity, and performance indicators into clear interfaces for faster decisions.",
+      "items": [
+        "Admin dashboards",
+        "Analytics views",
+        "Reporting modules",
+        "Data filters",
+        "Export workflows",
+        "Performance tracking"
+      ]
+    },
+    {
+      "category": "ERP",
+      "description": "Custom ERP systems that connect inventory, finance, operations, reporting, and team workflows into one reliable business platform.",
+      "items": [
+        "Inventory management",
+        "Finance workflows",
+        "Operations modules",
+        "Procurement tracking",
+        "Role-based access",
+        "Business reporting"
       ]
     }
   ]

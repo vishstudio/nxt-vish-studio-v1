@@ -1,6 +1,6 @@
 'use client';
 interface SectionTitleProps {
-  /** The heading text. The last word renders grey with an accent '.' appended. */
+  /** The heading text. Multi-word titles render the last word grey with an accent '.' appended. */
   children: string;
   /** Responsive size variant */
   size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
@@ -26,15 +26,17 @@ export const SectionTitle = ({
 }: SectionTitleProps) => {
   const text = children.trim().replace(/\.+$/, '');
   const words = text.split(/\s+/).filter(Boolean);
-  const lastWord = words.pop();
-  const leadingText = words.join(' ');
+  const shouldMuteLastWord = words.length > 1;
+  const lastWord = shouldMuteLastWord ? words[words.length - 1] : undefined;
+  const leadingText = shouldMuteLastWord ? words.slice(0, -1).join(' ') : text;
 
   return (
     <h2
       className={`section-title ${className} font-display text-white ${sizes[size]}`}
       data-tina-field={tinaField}
     >
-      {leadingText && `${leadingText} `}
+      {leadingText}
+      {lastWord && ' '}
       {lastWord && <span className="text-vish-gray">{lastWord}</span>}
       <span className="text-vish-accent">.</span>
     </h2>

@@ -8,6 +8,7 @@ import { getImageUrl } from '../utils/imageUrl';
 import { Navbar } from '../components/navbar/navbar';
 import { Contact } from '../components/contact/contact';
 import { Button } from '../components/ui/button/button';
+import { SectionTitle } from '../components/ui/section-title/section-title';
 import { useState, useEffect, useCallback } from 'react';
 import { trackProjectSiteClick } from '@/src/lib/analytics';
 
@@ -216,9 +217,9 @@ export const ProjectDetail = () => {
                   <div className={`${hasImage ? `lg:col-span-5 ${isReversed ? 'lg:order-2' : ''}` : 'max-w-4xl'} space-y-6`}>
                     <div>
                       <span className="font-mono text-xs text-vish-accent">{section.eyebrow}</span>
-                      <h2 className="font-display text-4xl md:text-6xl leading-none text-white mt-4">
+                      <SectionTitle size="md" className="mt-4">
                         {section.title}
-                      </h2>
+                      </SectionTitle>
                     </div>
                     <div className="space-y-5">
                       {section.content ? (

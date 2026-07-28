@@ -60,16 +60,16 @@ Core primitives include `Button`, `PageLayout`, `PageHero`, `Section`, `SectionT
 
 Storybook is configured with `@storybook/nextjs-vite` and imports the global VISH design system from `src/app/globals.css`. Stories live next to their component files as `*.stories.tsx` inside the relevant `src/components/<component-name>` folder, including shared UI primitives and renderable section components. Runtime-only integrations such as analytics and service-worker registration are not given visual stories because they render no inspectable UI.
 
-Shared section headings use `src/components/ui/section-title/section-title.tsx`, which renders the title text in white, the final word in muted grey (`#6A7282` via `text-vish-gray`), and the closing period in the yellow accent to mirror the homepage hero title treatment.
+Shared section headings use `src/components/ui/section-title/section-title.tsx`, which renders one-word titles fully white with the closing period in yellow accent, and multi-word titles with the final word muted grey (`#6A7282` via `text-vish-gray`) plus the same accent period. Non-home content sections should use this primitive for visible section titles unless they are compact card labels, modal titles, hero titles, or transactional form step headings.
 
 ## Routes and features
 
 - `/`: studio overview, selected work, services, process, pricing, and contact
 - `/projects` and `/project/[slug]`: portfolio index and case studies
-- `/services`: capabilities and service categories
+- `/services`: capabilities and service categories for Website, Mobile Apps, SaaS Products, CRM, Softwares, Branding, Dashboard, and ERP work
 - `/pricing`: service-specific packages, care plans, and add-ons
 - `/start-project`: five-step client brief flow for service, package, questionnaire, contact details, and review
-- `/about`, `/testimonials`, `/contact`: company and contact content
+- `/about`, `/testimonials`, `/contact`: company and contact content. The About page team section uses the shared `Team` component with CMS-backed member data and presents each person as a compact editorial profile card with a square portrait, role, bio, icon, and ordered index. Team cards render as a swipeable snap carousel with progress dots on mobile and as a three-column grid from tablet widths upward.
 - `/privacy`, `/terms`: legal content
 
 The Start Project flow reads packages from the canonical pricing data, manages the multi-step questionnaire with React Hook Form, and writes submissions to the Firestore `briefs` collection. Each Firestore document includes the selected service, selected package, contact details, raw answer map, and a labelled `questionnaire` array for easier review. After a successful submission, the page shows a confirmation modal with the brief reference plus the studio email and phone number from site settings; its primary action returns the user to the home page. The page uses website-style step headings with white display text, grey intro copy, and yellow accent punctuation. Its own fixed progress/action bar is always visible so the user can proceed through the multi-step form, step changes scroll the page back to the top, validation blocks only missing essentials, and choice-based questionnaire answers remain optional context instead of hard blockers. The page suppresses the global floating project CTA.

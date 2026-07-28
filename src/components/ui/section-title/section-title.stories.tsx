@@ -16,6 +16,7 @@ export const Sizes: Story = {
   },
   render: () => (
     <div className="space-y-8 p-8">
+      <SectionTitle size="md">Website</SectionTitle>
       <SectionTitle size="sm">Small section title</SectionTitle>
       <SectionTitle size="md">Medium section title</SectionTitle>
       <SectionTitle size="lg">Large section title</SectionTitle>

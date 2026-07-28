@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import { PageLayout } from '../components/ui/page-layout/page-layout';
 import { PageHero } from '../components/ui/page-hero/page-hero';
 import { Contact } from '../components/contact/contact';
+import { SectionTitle } from '../components/ui/section-title/section-title';
 import { useTinaLegalPage } from '../hooks/useTinaVisualEditing';
 
 interface LegalPageProps {
@@ -83,12 +84,13 @@ export const LegalPage = ({ slug }: LegalPageProps) => {
                       <span className="font-mono text-xs text-vish-accent">
                         {String(index + 1).padStart(2, '0')}
                       </span>
-                      <h2
-                        className="font-display text-3xl md:text-4xl text-white leading-tight mt-3"
-                        data-tina-field={rawSection ? tinaField(rawSection, 'title') : undefined}
+                      <SectionTitle
+                        size="sm"
+                        className="mt-3"
+                        tinaField={rawSection ? tinaField(rawSection, 'title') : undefined}
                       >
                         {section.title}
-                      </h2>
+                      </SectionTitle>
                     </div>
                     <div
                       className="md:col-span-8 space-y-5"

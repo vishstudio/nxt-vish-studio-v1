@@ -38,23 +38,43 @@
   "services": [
     {
       "id": "01",
-      "title": "Strategy",
-      "description": "Aligning your digital presence with long-term business goals. We focus on brand positioning, client onboarding automation, and workflow optimization to turn your traffic into measurable revenue."
+      "title": "Website",
+      "description": "High-converting websites, landing pages, e-commerce experiences, and CMS-backed marketing sites built for speed, clarity, and trust."
     },
     {
       "id": "02",
-      "title": "Design",
-      "description": "High-end, minimalist visual identities designed for the modern web. We build intuitive, high-contrast user interfaces with rhythmic typography that elevates your brand authority and guarantees a seamless user experience."
+      "title": "Mobile Apps",
+      "description": "Mobile-first product experiences for customer portals, booking flows, internal teams, and launch-ready iOS or Android app concepts."
     },
     {
       "id": "03",
-      "title": "Development",
-      "description": "Engineering fast, reliable, and highly scalable digital products. Specialized in robust React, TypeScript, and Next.js architectures, secure backend integrations, and custom applications built to perform under pressure."
+      "title": "Softwares",
+      "description": "Bespoke business software for operations, portals, approvals, reporting, automation, and internal systems that replace scattered manual work."
     },
     {
       "id": "04",
-      "title": "Marketing",
-      "description": "Amplifying your voice to reach the right audience with precision and impact."
+      "title": "Branding",
+      "description": "Strategic brand identity, visual systems, launch assets, and digital guidelines that make your business easier to recognize and trust."
+    },
+    {
+      "id": "05",
+      "title": "SaaS Products",
+      "description": "Subscription-ready product platforms with authentication, workflows, dashboards, billing logic, and scalable product architecture."
+    },
+    {
+      "id": "06",
+      "title": "CRM",
+      "description": "Custom CRM systems that organize leads, clients, follow-ups, sales stages, and team workflows around the way your business actually operates."
+    },
+    {
+      "id": "07",
+      "title": "Dashboard",
+      "description": "Operational dashboards that turn business data, activity, and performance indicators into clear interfaces for faster decisions."
+    },
+    {
+      "id": "08",
+      "title": "ERP",
+      "description": "Custom ERP systems that connect inventory, finance, operations, reporting, and team workflows into one reliable business platform."
     }
   ],
   "processHeading": "How We Partner",
