@@ -1,0 +1,67 @@
+[debug] [2026-07-29T02:54:55.839Z] ----------------------------------------------------------------------
+[debug] [2026-07-29T02:54:55.840Z] Command:       /Users/vishseen/.nvm/versions/node/v24.12.0/bin/node /Users/vishseen/.npm/_npx/f9d8a3ecface27c9/node_modules/.bin/firebase deploy --only firestore:rules --project studio-portal-b03fe
+[debug] [2026-07-29T02:54:55.840Z] CLI Version:   14.17.0
+[debug] [2026-07-29T02:54:55.840Z] Platform:      darwin
+[debug] [2026-07-29T02:54:55.840Z] Node Version:  v24.12.0
+[debug] [2026-07-29T02:54:55.840Z] Time:          Wed Jul 29 2026 06:54:55 GMT+0400 (Mauritius Standard Time)
+[debug] [2026-07-29T02:54:55.840Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-07-29T02:54:55.841Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2026-07-29T02:54:55.929Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-07-29T02:54:55.929Z] > authorizing via signed-in user (vishstudio.ltd@gmail.com)
+[debug] [2026-07-29T02:54:55.929Z] [iam] checking project studio-portal-b03fe for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get"]
+[debug] [2026-07-29T02:54:55.930Z] Checked if tokens are valid: false, expires at: 1785285448235
+[debug] [2026-07-29T02:54:55.930Z] Checked if tokens are valid: false, expires at: 1785285448235
+[debug] [2026-07-29T02:54:55.930Z] > refreshing access token with scopes: []
+[debug] [2026-07-29T02:54:55.930Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-07-29T02:54:55.930Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-07-29T02:54:56.582Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2026-07-29T02:54:56.582Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-07-29T02:54:56.595Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/studio-portal-b03fe:testIamPermissions [none]
+[debug] [2026-07-29T02:54:56.595Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/studio-portal-b03fe:testIamPermissions x-goog-quota-user=projects/studio-portal-b03fe
+[debug] [2026-07-29T02:54:56.595Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/studio-portal-b03fe:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get"]}
+[debug] [2026-07-29T02:54:56.929Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2026-07-29T02:54:56.929Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2026-07-29T02:54:58.684Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/studio-portal-b03fe:testIamPermissions 200
+[debug] [2026-07-29T02:54:58.684Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/studio-portal-b03fe:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get"]}
+[info] 
+[info] === Deploying to 'studio-portal-b03fe'...
+[info] 
+[info] i  deploying firestore 
+[info] i  cloud.firestore: checking firestore.rules for compilation errors... 
+[debug] [2026-07-29T02:54:58.691Z] Checked if tokens are valid: true, expires at: 1785297295583
+[debug] [2026-07-29T02:54:58.691Z] Checked if tokens are valid: true, expires at: 1785297295583
+[debug] [2026-07-29T02:54:58.691Z] >>> [apiv2][query] POST https://firebaserules.googleapis.com/v1/projects/studio-portal-b03fe:test [none]
+[debug] [2026-07-29T02:54:58.691Z] >>> [apiv2][body] POST https://firebaserules.googleapis.com/v1/projects/studio-portal-b03fe:test [omitted]
+[debug] [2026-07-29T02:54:59.978Z] <<< [apiv2][status] POST https://firebaserules.googleapis.com/v1/projects/studio-portal-b03fe:test 200
+[debug] [2026-07-29T02:54:59.978Z] <<< [apiv2][body] POST https://firebaserules.googleapis.com/v1/projects/studio-portal-b03fe:test {}
+[info] ✔  cloud.firestore: rules file firestore.rules compiled successfully 
+[debug] [2026-07-29T02:54:59.980Z] Checked if tokens are valid: true, expires at: 1785297295583
+[debug] [2026-07-29T02:54:59.980Z] Checked if tokens are valid: true, expires at: 1785297295583
+[debug] [2026-07-29T02:54:59.980Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/studio-portal-b03fe/databases/(default) [none]
+[debug] [2026-07-29T02:55:00.737Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/studio-portal-b03fe/databases/(default) 200
+[debug] [2026-07-29T02:55:00.737Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/studio-portal-b03fe/databases/(default) {"name":"projects/studio-portal-b03fe/databases/(default)","uid":"78af0958-d96d-4a50-8020-f11b64a39a53","createTime":"2026-05-13T18:47:11.335251Z","updateTime":"2026-05-13T18:47:11.335251Z","locationId":"africa-south1","type":"FIRESTORE_NATIVE","concurrencyMode":"PESSIMISTIC","versionRetentionPeriod":"3600s","earliestVersionTime":"2026-07-29T01:55:00.938695Z","appEngineIntegrationMode":"DISABLED","pointInTimeRecoveryEnablement":"POINT_IN_TIME_RECOVERY_DISABLED","deleteProtectionState":"DELETE_PROTECTION_DISABLED","databaseEdition":"STANDARD","freeTier":true,"realtimeUpdatesMode":"REALTIME_UPDATES_MODE_ENABLED","etag":"IKf09Kbx9pUDMIH3iv28vJQD"}
+[debug] [2026-07-29T02:55:00.738Z] Checked if tokens are valid: true, expires at: 1785297295583
+[debug] [2026-07-29T02:55:00.738Z] Checked if tokens are valid: true, expires at: 1785297295583
+[debug] [2026-07-29T02:55:00.738Z] >>> [apiv2][query] GET https://firebaserules.googleapis.com/v1/projects/studio-portal-b03fe/releases pageSize=10&pageToken=
+[debug] [2026-07-29T02:55:01.671Z] <<< [apiv2][status] GET https://firebaserules.googleapis.com/v1/projects/studio-portal-b03fe/releases 200
+[debug] [2026-07-29T02:55:01.671Z] <<< [apiv2][body] GET https://firebaserules.googleapis.com/v1/projects/studio-portal-b03fe/releases {"releases":[{"name":"projects/studio-portal-b03fe/releases/cloud.firestore","rulesetName":"projects/studio-portal-b03fe/rulesets/760433e2-1bea-454d-96d7-e7168eae9caa","createTime":"2026-05-13T18:47:15.836767Z","updateTime":"2026-06-23T03:43:34.598911Z"}]}
+[debug] [2026-07-29T02:55:01.671Z] Checked if tokens are valid: true, expires at: 1785297295583
+[debug] [2026-07-29T02:55:01.671Z] Checked if tokens are valid: true, expires at: 1785297295583
+[debug] [2026-07-29T02:55:01.672Z] >>> [apiv2][query] GET https://firebaserules.googleapis.com/v1/projects/studio-portal-b03fe/rulesets/760433e2-1bea-454d-96d7-e7168eae9caa [none]
+[debug] [2026-07-29T02:55:02.697Z] <<< [apiv2][status] GET https://firebaserules.googleapis.com/v1/projects/studio-portal-b03fe/rulesets/760433e2-1bea-454d-96d7-e7168eae9caa 200
+[debug] [2026-07-29T02:55:02.698Z] <<< [apiv2][body] GET https://firebaserules.googleapis.com/v1/projects/studio-portal-b03fe/rulesets/760433e2-1bea-454d-96d7-e7168eae9caa [omitted]
+[info] i  firestore: uploading rules firestore.rules... 
+[debug] [2026-07-29T02:55:02.700Z] Checked if tokens are valid: true, expires at: 1785297295583
+[debug] [2026-07-29T02:55:02.700Z] Checked if tokens are valid: true, expires at: 1785297295583
+[debug] [2026-07-29T02:55:02.700Z] >>> [apiv2][query] POST https://firebaserules.googleapis.com/v1/projects/studio-portal-b03fe/rulesets [none]
+[debug] [2026-07-29T02:55:02.700Z] >>> [apiv2][body] POST https://firebaserules.googleapis.com/v1/projects/studio-portal-b03fe/rulesets [omitted]
+[debug] [2026-07-29T02:55:03.784Z] <<< [apiv2][status] POST https://firebaserules.googleapis.com/v1/projects/studio-portal-b03fe/rulesets 200
+[debug] [2026-07-29T02:55:03.784Z] <<< [apiv2][body] POST https://firebaserules.googleapis.com/v1/projects/studio-portal-b03fe/rulesets {"name":"projects/studio-portal-b03fe/rulesets/59f672d0-68f9-4850-88d3-fdf225667bf1","source":{"files":[{"content":"rules_version = '2';\n\nservice cloud.firestore {\n  match /databases/{database}/documents {\n    match /briefs/{briefId} {\n      allow create: if\n        request.resource.data.keys().hasOnly([\n          'service', 'package', 'answers', 'questionnaire', 'contact', 'status',\n          'source', 'createdAt', 'submittedAt'\n        ]) &&\n        request.resource.data.status == 'new' &&\n        request.resource.data.source == 'vish.studio/start-project' &&\n        request.resource.data.createdAt == request.time &&\n        request.resource.data.contact.name is string &&\n        request.resource.data.contact.name.size() >= 1 &&\n        request.resource.data.contact.email is string &&\n        request.resource.data.contact.email.size() >= 5 &&\n        request.resource.data.contact.phone is string &&\n        request.resource.data.contact.phone.size() >= 5;\n\n      allow read, update, delete: if false;\n    }\n\n    match /bookings/{bookingId} {\n      allow create: if\n        request.resource.data.keys().hasOnly([\n          'name', 'email', 'company', 'selectedDate', 'selectedTime',\n          'startAt', 'endAt', 'durationMinutes', 'timezone', 'status',\n          'source', 'hostEmail', 'publicEmail', 'meetLink',\n          'calendarEventId', 'notes', 'createdAt', 'updatedAt',\n          'submittedAt'\n        ]) &&\n        request.resource.data.name is string &&\n        request.resource.data.name.size() >= 1 &&\n        request.resource.data.email is string &&\n        request.resource.data.email.size() >= 5 &&\n        request.resource.data.company is string &&\n        request.resource.data.selectedDate is string &&\n        request.resource.data.selectedTime in [\n          '09:30', '10:00', '10:30', '13:00', '13:30',\n          '14:00', '14:30', '15:00', '15:30'\n        ] &&\n        request.resource.data.startAt is timestamp &&\n        request.resource.data.endAt is timestamp &&\n        request.resource.data.durationMinutes == 30 &&\n        request.resource.data.timezone == 'Indian/Mauritius' &&\n        request.resource.data.status == 'pending' &&\n        request.resource.data.source == 'vish.studio/book-call' &&\n        request.resource.data.hostEmail == 'vishstudio.ltd@gmail.com' &&\n        request.resource.data.publicEmail == 'hello@vish.studio' &&\n        request.resource.data.meetLink == '' &&\n        request.resource.data.calendarEventId == '' &&\n        request.resource.data.notes == '' &&\n        request.resource.data.createdAt == request.time &&\n        request.resource.data.updatedAt == request.time &&\n        request.resource.data.submittedAt is string;\n\n      allow read, update, delete: if false;\n    }\n  }\n}\n","name":"firestore.rules"}]},"createTime":"2026-07-29T02:55:03.821151Z","metadata":{"services":["cloud.firestore"]}}
+[debug] [2026-07-29T02:55:03.784Z] [rules] created ruleset projects/studio-portal-b03fe/rulesets/59f672d0-68f9-4850-88d3-fdf225667bf1
+[debug] [2026-07-29T02:55:03.787Z] [rules] releasing cloud.firestore/(default) with ruleset projects/studio-portal-b03fe/rulesets/59f672d0-68f9-4850-88d3-fdf225667bf1
+[debug] [2026-07-29T02:55:03.788Z] Checked if tokens are valid: true, expires at: 1785297295583
+[debug] [2026-07-29T02:55:03.788Z] Checked if tokens are valid: true, expires at: 1785297295583
+[debug] [2026-07-29T02:55:03.788Z] >>> [apiv2][query] PATCH https://firebaserules.googleapis.com/v1/projects/studio-portal-b03fe/releases/cloud.firestore/(default) [none]
+[debug] [2026-07-29T02:55:03.789Z] >>> [apiv2][body] PATCH https://firebaserules.googleapis.com/v1/projects/studio-portal-b03fe/releases/cloud.firestore/(default) {"release":{"name":"projects/studio-portal-b03fe/releases/cloud.firestore/(default)","rulesetName":"projects/studio-portal-b03fe/rulesets/59f672d0-68f9-4850-88d3-fdf225667bf1"}}
+[debug] [2026-07-29T02:55:04.900Z] <<< [apiv2][status] PATCH https://firebaserules.googleapis.com/v1/projects/studio-portal-b03fe/releases/cloud.firestore/(default) 200
