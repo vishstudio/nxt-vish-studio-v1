@@ -91,9 +91,9 @@ export function BookCallConfirmationModal({
                   <span className="text-vish-accent">.</span>
                 </h2>
                 <p className="mt-6 max-w-xl font-sans text-base leading-relaxed text-gray-400 md:text-lg">
-                  We will review the slot and email the calendar invite with the
+                  We received your selected slot and will email the calendar invite with the
                   Google Meet link to <span className="text-white">{email}</span>{" "}
-                  during the day.
+                  shortly.
                 </p>
 
                 <div className="mt-8 grid gap-3 rounded-2xl border border-white/10 bg-white/[0.025] p-5 sm:grid-cols-2">

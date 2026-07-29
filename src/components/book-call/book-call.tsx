@@ -174,7 +174,7 @@ export function BookCall() {
           <div className="mt-12 grid gap-4">
             {[
               { icon: Clock, title: '20-30 minutes', description: 'Booked in a 30-minute slot so there is enough room for context.' },
-              { icon: Video, title: 'Google Meet invite', description: 'We will create the Meet manually and send the calendar invite to your email.' },
+              { icon: Video, title: 'Google Meet invite', description: 'We will send the calendar invite with the Google Meet link to your email shortly.' },
               { icon: CalendarDays, title: 'Clear next step', description: 'You leave with direction on scope, budget range, timeline, or the Start Project brief.' },
             ].map((item) => (
               <div key={item.title} className="flex gap-4 border-t border-white/10 pt-5">
