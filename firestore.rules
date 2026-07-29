@@ -20,5 +20,42 @@ service cloud.firestore {
 
       allow read, update, delete: if false;
     }
+
+    match /bookings/{bookingId} {
+      allow create: if
+        request.resource.data.keys().hasOnly([
+          'name', 'email', 'company', 'selectedDate', 'selectedTime',
+          'startAt', 'endAt', 'durationMinutes', 'timezone', 'status',
+          'source', 'hostEmail', 'publicEmail', 'meetLink',
+          'calendarEventId', 'notes', 'createdAt', 'updatedAt',
+          'submittedAt'
+        ]) &&
+        request.resource.data.name is string &&
+        request.resource.data.name.size() >= 1 &&
+        request.resource.data.email is string &&
+        request.resource.data.email.size() >= 5 &&
+        request.resource.data.company is string &&
+        request.resource.data.selectedDate is string &&
+        request.resource.data.selectedTime in [
+          '09:30', '10:00', '10:30', '13:00', '13:30',
+          '14:00', '14:30', '15:00', '15:30'
+        ] &&
+        request.resource.data.startAt is timestamp &&
+        request.resource.data.endAt is timestamp &&
+        request.resource.data.durationMinutes == 30 &&
+        request.resource.data.timezone == 'Indian/Mauritius' &&
+        request.resource.data.status == 'pending' &&
+        request.resource.data.source == 'vish.studio/book-call' &&
+        request.resource.data.hostEmail == 'vishstudio.ltd@gmail.com' &&
+        request.resource.data.publicEmail == 'hello@vish.studio' &&
+        request.resource.data.meetLink == '' &&
+        request.resource.data.calendarEventId == '' &&
+        request.resource.data.notes == '' &&
+        request.resource.data.createdAt == request.time &&
+        request.resource.data.updatedAt == request.time &&
+        request.resource.data.submittedAt is string;
+
+      allow read, update, delete: if false;
+    }
   }
 }

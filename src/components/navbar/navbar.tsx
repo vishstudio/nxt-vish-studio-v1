@@ -10,26 +10,16 @@ import {
   PROJECT_INQUIRY_ACTION,
   PROJECT_INQUIRY_ARIA_LABEL,
 } from "../../lib/conversion";
-import { CookieSettingsTrigger } from "../cookie-settings/cookie-settings-trigger";
 import { LogoText } from "../logo-text/logo-text";
 import { Button } from "../ui/button/button";
-
-const bottomBarDelayMs = 2000;
-const scrollIdleMs = 160;
 
 export const Navbar = () => {
   const { data: settings } = useTinaSettings();
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isBottomBarVisible, setIsBottomBarVisible] = useState(true);
-  const [hasPassedSelectedProjects, setHasPassedSelectedProjects] = useState(false);
   const isScrolledRef = useRef(false);
-  const hasPassedSelectedProjectsRef = useRef(false);
   const scrollRaf = useRef<number | null>(null);
-  const scrollStopTimer = useRef<number | null>(null);
-  const bottomBarHideTimer = useRef<number | null>(null);
-  const bottomBarShowTimer = useRef<number | null>(null);
 
   const navItems = [
     { name: "Home", href: "/" },
@@ -71,24 +61,6 @@ export const Navbar = () => {
         isScrolledRef.current = nextIsScrolled;
         setIsScrolled(nextIsScrolled);
       }
-
-      if (currentPath !== "/") {
-        if (hasPassedSelectedProjectsRef.current) {
-          hasPassedSelectedProjectsRef.current = false;
-          setHasPassedSelectedProjects(false);
-        }
-        return;
-      }
-
-      const selectedProjectsSection = document.getElementById("work");
-      const nextHasPassedSelectedProjects = selectedProjectsSection
-        ? selectedProjectsSection.getBoundingClientRect().bottom <= 0
-        : false;
-
-      if (hasPassedSelectedProjectsRef.current !== nextHasPassedSelectedProjects) {
-        hasPassedSelectedProjectsRef.current = nextHasPassedSelectedProjects;
-        setHasPassedSelectedProjects(nextHasPassedSelectedProjects);
-      }
     };
 
     const queueScrollState = () => {
@@ -97,65 +69,18 @@ export const Navbar = () => {
       }
     };
 
-    const handleScroll = () => {
-      queueScrollState();
-
-      if (bottomBarShowTimer.current) {
-        window.clearTimeout(bottomBarShowTimer.current);
-        bottomBarShowTimer.current = null;
-      }
-
-      if (!bottomBarHideTimer.current) {
-        bottomBarHideTimer.current = window.setTimeout(() => {
-          setIsBottomBarVisible(false);
-          bottomBarHideTimer.current = null;
-        }, bottomBarDelayMs);
-      }
-
-      if (scrollStopTimer.current) {
-        window.clearTimeout(scrollStopTimer.current);
-      }
-
-      scrollStopTimer.current = window.setTimeout(() => {
-        if (bottomBarShowTimer.current) {
-          window.clearTimeout(bottomBarShowTimer.current);
-        }
-
-        bottomBarShowTimer.current = window.setTimeout(() => {
-          setIsBottomBarVisible(true);
-          bottomBarShowTimer.current = null;
-        }, bottomBarDelayMs);
-      }, scrollIdleMs);
-    };
-
     syncScrollState();
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("scroll", queueScrollState, { passive: true });
     window.addEventListener("resize", queueScrollState);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", queueScrollState);
       window.removeEventListener("resize", queueScrollState);
       if (scrollRaf.current !== null) {
         window.cancelAnimationFrame(scrollRaf.current);
       }
-      if (scrollStopTimer.current) {
-        window.clearTimeout(scrollStopTimer.current);
-      }
-      if (bottomBarHideTimer.current) {
-        window.clearTimeout(bottomBarHideTimer.current);
-      }
-      if (bottomBarShowTimer.current) {
-        window.clearTimeout(bottomBarShowTimer.current);
-      }
     };
   }, [currentPath]);
-
-  const shouldShowBottomBar =
-    currentPath !== "/pricing" &&
-    currentPath !== "/start-project" &&
-    !isMobileMenuOpen &&
-    isBottomBarVisible &&
-    (currentPath !== "/" || hasPassedSelectedProjects);
 
   return (
     <div className="navbar contents">
@@ -242,7 +167,7 @@ export const Navbar = () => {
                 className="font-sans"
                 tabIndex={isScrolled ? -1 : undefined}
               >
-                Start Project
+                Book Free Call
               </Button>
             </div>
 
@@ -257,43 +182,6 @@ export const Navbar = () => {
           </div>
         </div>
       </motion.header>
-
-      <AnimatePresence>
-        {shouldShowBottomBar && (
-          <motion.div
-            initial={{ y: 40, opacity: 0, filter: "blur(4px)" }}
-            animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-            exit={{ y: 32, opacity: 0, filter: "blur(4px)" }}
-            transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed bottom-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none"
-          >
-            <div className="pointer-events-auto flex w-full max-w-[420px] items-center justify-between gap-3 rounded-full border border-white/10 bg-black/80 py-2.5 pl-2.5 pr-2 shadow-2xl shadow-black/50 backdrop-blur-xl sm:max-w-[460px]">
-              <div className="flex min-w-0 items-center gap-2">
-                <CookieSettingsTrigger compact className="h-10 w-10 shrink-0" />
-                <span className="hidden font-mono text-[10px] font-semibold uppercase tracking-widest text-white/40 sm:inline">
-                  Need help with your business?
-                </span>
-              </div>
-              <div className="rounded-full shadow-[0_0_22px_rgba(255,214,0,0.24)]">
-                <Button
-                  variant="cta"
-                  size="sm"
-                  href={PROJECT_INQUIRY_HREF}
-                  icon={
-                    <ArrowRight className="w-4 h-4 transition-transform group-hover:-rotate-45" />
-                  }
-                  iconPosition="right"
-                  ariaLabel={PROJECT_INQUIRY_ARIA_LABEL}
-                  dataConversionAction={PROJECT_INQUIRY_ACTION}
-                  className="py-3 font-mono text-[10px] font-semibold uppercase tracking-widest"
-                >
-                  Start a Project
-                </Button>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* Mobile Menu Overlay */}
       <AnimatePresence>

@@ -5,8 +5,9 @@ import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { useRef, useState } from "react";
 import { useTinaPricing } from "../../hooks/useTinaVisualEditing";
-import { buildCtaHref, type PricingPlan } from "../../lib/pricing";
+import { type PricingPlan } from "../../lib/pricing";
 import { CarouselProgress } from "../carousel-progress/CarouselProgress";
+import { PricingPlanChoiceModal } from "../pricing-plan-choice-modal/pricing-plan-choice-modal";
 import { Tabs } from "../tabs/Tabs";
 import { Button } from "../ui/button/button";
 import { SectionTitle } from "../ui/section-title/section-title";
@@ -18,6 +19,7 @@ function PlanCard({
   rawPlan,
   isExpanded,
   onToggleDetails,
+  onChoosePlan,
 }: {
   plan: PricingPlan;
   index: number;
@@ -25,9 +27,8 @@ function PlanCard({
   rawPlan: any;
   isExpanded: boolean;
   onToggleDetails: () => void;
+  onChoosePlan: (plan: PricingPlan) => void;
 }) {
-  const href = buildCtaHref(plan.ctaLink);
-
   return (
     <motion.div
       data-pricing-card
@@ -112,15 +113,16 @@ function PlanCard({
       {/* CTA */}
       <div className="mt-auto space-y-3 lg:order-last">
         <Button
-          href={href}
+          type="button"
           variant={plan.featured ? "cta" : "outline"}
           size="md"
-          onClick={() => trackPricingCtaClick(plan.name, plan.ctaLink.linkType)}
+          onClick={() => onChoosePlan(plan)}
           icon={<ArrowRight className="w-4 h-4" />}
           iconPosition="right"
+          ariaLabel={`Choose the ${plan.name} plan`}
           className="w-full rounded-xl py-3.5 font-mono text-xs font-semibold uppercase tracking-widest sm:text-sm sm:normal-case sm:tracking-normal"
         >
-          {plan.ctaLabel}
+          Choose Plan
         </Button>
 
         <Button
@@ -159,7 +161,7 @@ function PlanCard({
         )}
       </AnimatePresence>
 
-      <div className="hidden lg:block lg:flex-1">
+      <div className="hidden lg:block lg:flex-1 lg:pb-10">
         <PlanDetails plan={plan} tinaField={tinaField} rawPlan={rawPlan} />
       </div>
     </motion.div>
@@ -248,6 +250,7 @@ export const Pricing = () => {
   const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
   const [isDetailsExpanded, setIsDetailsExpanded] = useState(false);
   const [activePlanIndex, setActivePlanIndex] = useState(0);
+  const [selectedPlan, setSelectedPlan] = useState<PricingPlan | null>(null);
   const activeCategory =
     pricingCategories[activeCategoryIndex] ?? pricingCategories[0];
   const activeRawCategory =
@@ -285,6 +288,11 @@ export const Pricing = () => {
     }, 0);
 
     setActivePlanIndex(closestIndex);
+  };
+
+  const handleChoosePlan = (plan: PricingPlan) => {
+    trackPricingCtaClick(plan.name, "choose_plan_open");
+    setSelectedPlan(plan);
   };
 
   return (
@@ -388,6 +396,7 @@ export const Pricing = () => {
                   onToggleDetails={() =>
                     setIsDetailsExpanded((current) => !current)
                   }
+                  onChoosePlan={handleChoosePlan}
                 />
               );
             })}
@@ -445,6 +454,12 @@ export const Pricing = () => {
           </Link>
         </div>
       </div>
+
+      <PricingPlanChoiceModal
+        isOpen={Boolean(selectedPlan)}
+        planName={selectedPlan?.name ?? ""}
+        onClose={() => setSelectedPlan(null)}
+      />
     </section>
   );
 };

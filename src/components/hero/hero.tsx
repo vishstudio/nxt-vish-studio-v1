@@ -232,7 +232,7 @@ export const Hero = () => {
                   dataConversionAction={PROJECT_INQUIRY_ACTION}
                   className="w-full px-6 py-4 font-mono text-xs font-semibold uppercase tracking-widest sm:w-auto"
                 >
-                  Start a Project
+                  Book Free Call
                 </Button>
               </div>
               <Button

@@ -11,17 +11,30 @@ interface FormFieldProps {
   required?: boolean;
   multiline?: boolean;
   autoComplete?: string;
+  requiredIndicatorClassName?: string;
 }
 
 const fieldClassName = "w-full rounded-2xl border border-white/10 bg-white/[0.025] px-5 py-4 font-sans text-base text-white outline-none transition-colors placeholder:text-white/25 focus:border-vish-accent focus:bg-white/[0.045]";
 
-export function FormField({ id, label, value, onChange, type = "text", placeholder, hint, required, multiline, autoComplete }: FormFieldProps) {
+export function FormField({
+  id,
+  label,
+  value,
+  onChange,
+  type = "text",
+  placeholder,
+  hint,
+  required,
+  multiline,
+  autoComplete,
+  requiredIndicatorClassName = "text-vish-accent",
+}: FormFieldProps) {
   const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => onChange(event.target.value);
 
   return (
     <div>
       <label htmlFor={id} className="mb-3 block font-sans text-base font-medium text-white">
-        {label}{required ? <span className="ml-1 text-vish-accent">*</span> : null}
+        {label}{required ? <span className={`ml-1 ${requiredIndicatorClassName}`}>*</span> : null}
       </label>
       {hint ? <p className="mb-3 font-sans text-sm leading-relaxed text-gray-500">{hint}</p> : null}
       {multiline ? (

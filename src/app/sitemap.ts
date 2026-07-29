@@ -10,10 +10,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     '',
     '/about',
+    '/book-call',
     '/projects',
     '/services',
     '/pricing',
     '/testimonials',
+    '/walkthrough',
     '/contact',
     '/privacy',
     '/terms',

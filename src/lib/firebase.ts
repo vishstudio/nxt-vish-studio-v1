@@ -31,3 +31,44 @@ export async function createProjectBrief(payload: Record<string, unknown>) {
 
   return document.id;
 }
+
+export async function createCallBooking(payload: Record<string, unknown>) {
+  if (!isFirebaseConfigured()) {
+    throw new Error("Call booking storage is not configured yet. Please contact hello@vish.studio.");
+  }
+
+  const selectedDate = String(payload.selectedDate ?? "");
+  const selectedTime = String(payload.selectedTime ?? "");
+  const name = String(payload.name ?? "").trim();
+  const email = String(payload.email ?? "").trim();
+  const company = String(payload.company ?? "").trim();
+  const [hour = "0", minute = "0"] = selectedTime.split(":");
+  const startDate = new Date(`${selectedDate}T${hour.padStart(2, "0")}:${minute.padStart(2, "0")}:00+04:00`);
+  const endDate = new Date(startDate.getTime() + 30 * 60 * 1000);
+
+  const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+  const database = getFirestore(app);
+  const document = await addDoc(collection(database, "bookings"), {
+    name,
+    email,
+    company,
+    selectedDate,
+    selectedTime,
+    startAt: startDate,
+    endAt: endDate,
+    durationMinutes: 30,
+    timezone: "Indian/Mauritius",
+    status: "pending",
+    source: "vish.studio/book-call",
+    hostEmail: "vishstudio.ltd@gmail.com",
+    publicEmail: "hello@vish.studio",
+    meetLink: "",
+    calendarEventId: "",
+    notes: "",
+    createdAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
+    submittedAt: new Date().toISOString(),
+  });
+
+  return document.id;
+}

@@ -2,6 +2,7 @@
 import { motion } from 'motion/react';
 import { ArrowUpRight, ShieldCheck } from 'lucide-react';
 import { useTinaPartners } from '../../hooks/useTinaVisualEditing';
+import { PROJECT_INQUIRY_ACTION, PROJECT_INQUIRY_HREF } from '../../lib/conversion';
 import { Button } from '../ui/button/button';
 import { SectionTitle } from '../ui/section-title/section-title';
 
@@ -43,12 +44,12 @@ export const TrustedPartners = () => {
             </p>
             <div className="mt-8">
               <Button
-                href="/start-project"
+                href={PROJECT_INQUIRY_HREF}
                 variant="cta"
                 size="md"
                 icon={<ArrowUpRight className="h-4 w-4" />}
                 iconPosition="right"
-                dataConversionAction="trusted_partners_start_project"
+                dataConversionAction={PROJECT_INQUIRY_ACTION}
                 className="w-full font-mono text-xs font-semibold uppercase tracking-widest sm:w-auto"
                 data-tina-field={tinaField('ctaLabel')}
               >

@@ -15,6 +15,7 @@ export const AnalyticsEvent = {
   OUTBOUND_LINK_CLICK: "outbound_link_click",
   SOCIAL_LINK_CLICK: "social_link_click",
   PRICING_CTA_CLICK: "pricing_cta_click",
+  PRICING_PLAN_CHOICE: "pricing_plan_choice",
   PROJECT_SITE_CLICK: "project_site_click",
 } as const;
 
@@ -179,6 +180,22 @@ export const trackPricingCtaClick = (planName: string, ctaType: string) => {
   send(AnalyticsEvent.PRICING_CTA_CLICK, {
     plan_name: planName,
     cta_type: ctaType,
+  });
+};
+
+/**
+ * Tracks the route selected from the pricing Choose Plan modal.
+ *
+ * @param planName - The pricing plan name
+ * @param choice - The selected path from the modal
+ */
+export const trackPricingPlanChoice = (
+  planName: string,
+  choice: "book_free_call" | "start_project",
+) => {
+  send(AnalyticsEvent.PRICING_PLAN_CHOICE, {
+    plan_name: planName,
+    choice,
   });
 };
 

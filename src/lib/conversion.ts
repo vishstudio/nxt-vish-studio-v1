@@ -1,6 +1,6 @@
-export const PROJECT_INQUIRY_HREF = '/start-project';
-export const PROJECT_INQUIRY_ARIA_LABEL = 'Start a project inquiry with VISH Studio';
-export const PROJECT_INQUIRY_ACTION = 'project_inquiry_start';
+export const PROJECT_INQUIRY_HREF = '/book-call';
+export const PROJECT_INQUIRY_ARIA_LABEL = 'Book a free discovery call with VISH Studio';
+export const PROJECT_INQUIRY_ACTION = 'book_free_call_start';
 export const PROJECT_INQUIRY_MODAL_EVENT = 'vish:open-project-inquiry';
 
 export function openProjectInquiryModal() {
