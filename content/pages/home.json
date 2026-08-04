@@ -120,5 +120,29 @@
         "Launch"
       ]
     }
+  ],
+  "faqHeading": "Common Questions",
+  "faqSubtext": "Clear answers for founders, operators, and teams considering a website, software platform, or digital product build with VISH Studio.",
+  "faqItems": [
+    {
+      "question": "What kinds of projects does VISH Studio take on?",
+      "answer": "We build high-converting websites, custom software, SaaS products, dashboards, CRM systems, ERP workflows, mobile app concepts, and brand systems for businesses that need a polished digital presence or a practical internal tool."
+    },
+    {
+      "question": "How does a new project usually start?",
+      "answer": "Most projects begin with a free discovery call or a structured project brief. We use that first step to understand your goals, users, scope, timeline, and budget before recommending the right package or custom plan."
+    },
+    {
+      "question": "Can you work with clients outside Mauritius?",
+      "answer": "Yes. VISH Studio is based in Mauritius and works with local and international clients. Calls, planning, reviews, and delivery can all run remotely with clear milestones and async updates."
+    },
+    {
+      "question": "Do you only design, or do you also build the final product?",
+      "answer": "We handle strategy, interface design, and production engineering. That means the work can move from concept and high-fidelity design into a performant React, Next.js, Firebase, or CMS-backed implementation without changing teams."
+    },
+    {
+      "question": "What happens after launch?",
+      "answer": "After launch, we can support performance checks, CMS updates, analytics review, improvements, and ongoing care plans. The level of support depends on the package or maintenance plan selected for the project."
+    }
   ]
 }

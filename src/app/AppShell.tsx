@@ -19,7 +19,7 @@ const ServiceWorkerRegistration = dynamic(
   { ssr: false },
 );
 
-export function AppShell({ children }: { children: React.ReactNode }) {
+export const AppShell = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
   const [loadingPath, setLoadingPath] = useState<string | null>(
     pathname === '/' ? pathname : null,

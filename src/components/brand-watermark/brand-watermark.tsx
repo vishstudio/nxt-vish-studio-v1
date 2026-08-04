@@ -8,7 +8,7 @@ interface BrandWatermarkProps {
   animateOnReveal?: boolean;
 }
 
-export function BrandWatermark({ isVisible = true, className = '', animateOnReveal = true }: BrandWatermarkProps) {
+export const BrandWatermark = ({ isVisible = true, className = '', animateOnReveal = true }: BrandWatermarkProps) => {
   const visibleState = { opacity: 0.055, x: 0, filter: 'blur(0px)' };
   const hiddenState = { opacity: 0, x: -18, filter: 'blur(8px)' };
 

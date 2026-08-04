@@ -6,6 +6,8 @@ export const metadata: Metadata = {
   description: 'Get in touch with VISH Studio. Start a project inquiry or reach out to discuss your digital vision.',
 };
 
-export default function Contact() {
+const Contact = () => {
   return <ContactPage />;
 }
+
+export default Contact;

@@ -2,21 +2,21 @@
 
 interface LogoTextProps {
   suffix?: string;
+  className?: string;
 }
 
-export const LogoText = ({ suffix }: LogoTextProps) => (
-  <span
-    className="logo-text"
-    style={{
-      fontFamily: 'var(--font-logo)',
-      fontSize: '1.2rem',
-      letterSpacing: '0',
-      fontOpticalSizing: 'auto',
-      fontVariationSettings: '"GRAD" 0',
-    } as React.CSSProperties}
-  >
-    <span className="text-white" style={{ fontWeight: 900 }}>vish</span>
-    <span className="text-white" style={{ fontWeight: 900 }}> studio</span>
-    {suffix ? <span className="text-white" style={{ fontWeight: 400 }}> {suffix}</span> : null}
+export const LogoText = ({ suffix, className = '' }: LogoTextProps) => (
+  <span className={`logo-text inline-flex items-center gap-1.5 ${className}`}>
+    <img
+      src="/assets/logo-text.svg"
+      alt="vish studio"
+      className="h-auto w-[7rem] select-none md:w-[6rem]"
+      draggable={false}
+    />
+    {suffix ? (
+      <span className="font-logo text-[1.2rem] font-normal leading-none text-white">
+        {suffix}
+      </span>
+    ) : null}
   </span>
 );

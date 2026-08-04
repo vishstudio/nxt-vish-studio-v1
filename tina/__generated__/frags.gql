@@ -116,6 +116,13 @@ fragment HomePageParts on HomePage {
     description
     tags
   }
+  faqHeading
+  faqSubtext
+  faqItems {
+    __typename
+    question
+    answer
+  }
 }
 
 fragment TestimonialsPageParts on TestimonialsPage {

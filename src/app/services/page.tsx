@@ -6,6 +6,8 @@ export const metadata: Metadata = {
   description: 'Custom web application development, high-performance website engineering, and brand architecture services from VISH Studio.',
 };
 
-export default function Services() {
+const Services = () => {
   return <ServicesPage />;
 }
+
+export default Services;

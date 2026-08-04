@@ -86,7 +86,7 @@ const defaultValues: BriefFormValues = {
   contact: initialContact,
 };
 
-function Choice({
+const Choice = ({
   label,
   description,
   selected,
@@ -96,7 +96,7 @@ function Choice({
   description?: string;
   selected: boolean;
   onClick: () => void;
-}) {
+}) => {
   return (
     <Button
       type="button"
@@ -131,7 +131,7 @@ function Choice({
   );
 }
 
-function QuestionField({
+const QuestionField = ({
   question,
   value,
   onChange,
@@ -139,7 +139,7 @@ function QuestionField({
   question: BriefQuestion;
   value: AnswerValue | undefined;
   onChange: (value: AnswerValue) => void;
-}) {
+}) => {
   if (question.type === "text" || question.type === "textarea") {
     return (
       <FormField
@@ -197,7 +197,7 @@ function QuestionField({
   );
 }
 
-export function BriefForm() {
+export const BriefForm = () => {
   const [step, setStep] = useState(0);
   const [submissionState, setSubmissionState] =
     useState<SubmissionState>("idle");
@@ -681,7 +681,7 @@ export function BriefForm() {
   );
 }
 
-function SummaryItem({ label, value }: { label: string; value: string }) {
+const SummaryItem = ({ label, value }: { label: string; value: string }) => {
   return (
     <div>
       <dt className="text-gray-500">{label}</dt>
@@ -690,7 +690,7 @@ function SummaryItem({ label, value }: { label: string; value: string }) {
   );
 }
 
-function ReviewSection({ title, lines }: { title: string; lines: string[] }) {
+const ReviewSection = ({ title, lines }: { title: string; lines: string[] }) => {
   return (
     <section className="rounded-2xl border border-white/10 bg-white/[0.02] p-6">
       <h3 className="font-display text-2xl font-medium text-white">{title}</h3>

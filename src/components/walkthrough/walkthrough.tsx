@@ -41,7 +41,7 @@ const activityItems = [
   'Next milestone scheduled',
 ];
 
-export function Walkthrough() {
+export const Walkthrough = () => {
   return (
     <div className="min-h-screen bg-black px-6 pb-20 pt-24 text-white md:px-12 md:pt-28">
       <div className="mx-auto grid max-w-[1400px] gap-8 lg:grid-cols-[17rem_minmax(0,1fr)]">

@@ -9,7 +9,7 @@ const GA_MEASUREMENT_ID = (process.env.NEXT_PUBLIC_GA_ID ?? "")
   .trim()
   .replace(/^['"]+|['"]+$/g, "");
 
-export function GoogleAnalytics() {
+export const GoogleAnalytics = () => {
   if (!GA_MEASUREMENT_ID) {
     return null;
   }

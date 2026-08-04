@@ -4,7 +4,7 @@ import { AnalyticsEvent, trackEvent } from "@/src/lib/analytics";
 import { usePathname, useSearchParams } from "next/navigation";
 import { Suspense, useEffect } from "react";
 
-function GoogleAnalyticsPageViewInner() {
+const GoogleAnalyticsPageViewInner = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -22,7 +22,7 @@ function GoogleAnalyticsPageViewInner() {
   return null;
 }
 
-export function GoogleAnalyticsPageView() {
+export const GoogleAnalyticsPageView = () => {
   return (
     <Suspense fallback={null}>
       <GoogleAnalyticsPageViewInner />

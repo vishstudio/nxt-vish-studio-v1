@@ -66,7 +66,7 @@ function splitTypingPhrase(text: string) {
   };
 }
 
-function HeroCapabilityProof({ isHeroRevealed }: { isHeroRevealed: boolean }) {
+const HeroCapabilityProof = ({ isHeroRevealed }: { isHeroRevealed: boolean }) => {
   return (
     <motion.aside
       initial={{ opacity: 0, x: 24, filter: 'blur(10px)' }}
@@ -123,8 +123,13 @@ export const Hero = () => {
       setIsHeroRevealed(true);
     };
 
+    const revealFallbackTimer = window.setTimeout(handleAppReady, 4200);
+
     window.addEventListener(APP_READY_EVENT, handleAppReady);
-    return () => window.removeEventListener(APP_READY_EVENT, handleAppReady);
+    return () => {
+      window.clearTimeout(revealFallbackTimer);
+      window.removeEventListener(APP_READY_EVENT, handleAppReady);
+    };
   }, [pathname]);
 
   useEffect(() => {

@@ -2,6 +2,6 @@
 
 import { ProjectDetail } from '@/src/views/ProjectDetail';
 
-export function ProjectDetailWrapper() {
+export const ProjectDetailWrapper = () => {
   return <ProjectDetail />;
 }

@@ -6,6 +6,8 @@ export const metadata: Metadata = {
   description: 'VISH Studio terms and conditions governing use of our website and services.',
 };
 
-export default function TermsPage() {
+const TermsPage = () => {
   return <LegalPage slug="terms" />;
 }
+
+export default TermsPage;

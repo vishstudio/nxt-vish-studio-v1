@@ -17,6 +17,7 @@ import { Projects } from '../components/projects/projects';
 import { ProjectsCta } from '../components/projects-cta/projects-cta';
 import { Pricing } from '../components/pricing/pricing';
 import { Testimonials } from '../components/testimonials/testimonials';
+import { Faq } from '../components/faq/faq';
 import { Contact } from '../components/contact/contact';
 import { ScrollCircular } from '../components/scroll-circular/scroll-circular';
 
@@ -73,6 +74,7 @@ export const Home = () => {
         {/* <Team /> */}
         <Pricing />
         <Testimonials />
+        <Faq />
         <Contact />
       </main>
     </>

@@ -27,6 +27,8 @@ export async function generateMetadata(
   };
 }
 
-export default function ProjectDetailPage() {
+const ProjectDetailPage = () => {
   return <ProjectDetailWrapper />;
 }
+
+export default ProjectDetailPage;

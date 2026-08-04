@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 1557 277" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1,0,0,1,-6893,-8543.445826)">
+        <g transform="matrix(1,0,0,1,16,0)">
+            <g id="logo" transform="matrix(0.519,0,0,0.276607,7396,8543.445826)">
+                <g transform="matrix(1.691715,0,0,3.615242,-297.092647,-1296.748368)">
+                    <g transform="matrix(2.487002,0,0,2.183588,-1543.519068,-412.080648)">
+                        <g transform="matrix(1,0,0,1,162.44348,-52.790526)">
+                            <text x="299.424px" y="515.739px" style="font-family:'Prompt-Black', 'Prompt';font-weight:900;font-size:125px;fill:white;">vish</text>
+                            <g transform="matrix(125,0,0,125,969.673793,515.738748)">
+                            </g>
+                            <text x="602.174px" y="515.739px" style="font-family:'Prompt-Light', 'Prompt';font-weight:300;font-size:125px;fill:white;fill-opacity:0.61;">s<tspan x="660.174px 705.174px " y="515.739px 515.739px ">tu</tspan>dio</text>
+                        </g>
+                    </g>
+                    <g transform="matrix(2.487002,0,0,2.183588,-1572.455572,-147.080648)">
+                        <g transform="matrix(1,0,0,1,840.730938,-243.393687)">
+                            <g transform="matrix(36.25532,0,0,36.25532,328.246773,515.738748)">
+                            </g>
+                            <text x="299.424px" y="515.739px" style="font-family:'Prompt-Bold', 'Prompt';font-weight:700;font-size:36.255px;fill:white;">®</text>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -6,6 +6,8 @@ export const metadata: Metadata = {
   description: 'Learn about VISH Studio — a creative web agency based in Mauritius building high-performance digital products for scaling brands globally.',
 };
 
-export default function About() {
+const About = () => {
   return <AboutPage />;
 }
+
+export default About;

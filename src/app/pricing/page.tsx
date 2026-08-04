@@ -6,6 +6,8 @@ export const metadata: Metadata = {
   description: 'Transparent pricing for custom web applications, high-performance websites, and brand architecture. Find the right plan for your project.',
 };
 
-export default function Pricing() {
+const Pricing = () => {
   return <PricingPage />;
 }
+
+export default Pricing;

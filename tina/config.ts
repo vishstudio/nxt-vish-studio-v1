@@ -657,6 +657,38 @@ export default defineConfig({
               { type: "string", name: "tags", label: "Tags", list: true },
             ],
           },
+          { type: "string", name: "faqHeading", label: "FAQ Heading" },
+          {
+            type: "string",
+            name: "faqSubtext",
+            label: "FAQ Subtext",
+            ui: { component: "textarea" },
+          },
+          {
+            type: "object",
+            name: "faqItems",
+            label: "FAQ Items",
+            list: true,
+            ui: {
+              itemProps: (item) => ({
+                label: item?.question || "New FAQ",
+              }),
+            },
+            fields: [
+              {
+                type: "string",
+                name: "question",
+                label: "Question",
+                required: true,
+              },
+              {
+                type: "string",
+                name: "answer",
+                label: "Answer",
+                ui: { component: "textarea" },
+              },
+            ],
+          },
         ],
       },
 

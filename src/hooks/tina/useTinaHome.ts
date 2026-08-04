@@ -44,6 +44,12 @@ export function useTinaHome() {
           description: s?.description ?? "",
           tags: (s?.tags ?? []).filter(Boolean),
         })),
+        faqHeading: qd.homePage.faqHeading ?? "",
+        faqSubtext: qd.homePage.faqSubtext ?? "",
+        faqItems: (qd.homePage.faqItems ?? []).map((item: any) => ({
+          question: item?.question ?? "",
+          answer: item?.answer ?? "",
+        })),
       } as HomePageContent),
   );
 

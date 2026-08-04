@@ -94,7 +94,7 @@ function getPackageCarePlan(plan: PricingPlan, detail: typeof fallbackServiceDet
   return detail.carePlans[index] ?? detail.carePlans[detail.carePlans.length - 1] ?? fallbackServiceDetail.carePlans[0];
 }
 
-function PackageRow({
+const PackageRow = ({
   plan,
   index,
   tinaField,
@@ -104,7 +104,7 @@ function PackageRow({
   index: number;
   tinaField: (obj: any, field: string) => string | undefined;
   rawPlan: any;
-}) {
+}) => {
   return (
     <motion.article
       initial={{ opacity: 0, y: 18 }}
@@ -198,7 +198,7 @@ function PackageRow({
   );
 }
 
-function ActivePricingSection({
+const ActivePricingSection = ({
   category,
   categoryIndex,
   tinaField,
@@ -208,7 +208,7 @@ function ActivePricingSection({
   categoryIndex: number;
   tinaField: (obj: any, field: string) => string | undefined;
   rawCategory: any;
-}) {
+}) => {
   const detail = serviceDetails[category.slug as keyof typeof serviceDetails] ?? fallbackServiceDetail;
 
   return (

@@ -16,7 +16,7 @@ interface FormFieldProps {
 
 const fieldClassName = "w-full rounded-2xl border border-white/10 bg-white/[0.025] px-5 py-4 font-sans text-base text-white outline-none transition-colors placeholder:text-white/25 focus:border-vish-accent focus:bg-white/[0.045]";
 
-export function FormField({
+export const FormField = ({
   id,
   label,
   value,
@@ -28,7 +28,7 @@ export function FormField({
   multiline,
   autoComplete,
   requiredIndicatorClassName = "text-vish-accent",
-}: FormFieldProps) {
+}: FormFieldProps) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => onChange(event.target.value);
 
   return (

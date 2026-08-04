@@ -7,10 +7,12 @@ export const metadata: Metadata = {
   description: "A guided walkthrough of the VISH Studio client portal experience.",
 };
 
-export default function WalkthroughPage() {
+const WalkthroughPage = () => {
   return (
     <PageLayout showScrollPrompt={false}>
       <Walkthrough />
     </PageLayout>
   );
 }
+
+export default WalkthroughPage;

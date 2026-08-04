@@ -59,7 +59,7 @@ export const PageHero = ({
   });
   const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '12%']);
   const contentY = useTransform(scrollYProgress, [0, 1], [0, 72]);
-  const decorativeY = useTransform(scrollYProgress, [0, 1], [0, -96]);
+  const decorativeY = useTransform(scrollYProgress, [0, 1], [0, 56]);
   const foregroundY = useTransform(scrollYProgress, [0, 1], [0, 42]);
 
   const sizeClasses = {

@@ -14,7 +14,7 @@ interface CookieSettingsTriggerProps {
   className?: string;
 }
 
-export function CookieSettingsTrigger({ compact = false, className }: CookieSettingsTriggerProps) {
+export const CookieSettingsTrigger = ({ compact = false, className }: CookieSettingsTriggerProps) => {
   return (
     <Button
       variant="secondary"

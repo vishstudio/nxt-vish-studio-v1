@@ -6,6 +6,8 @@ export const metadata: Metadata = {
   description: 'VISH Studio privacy policy — how we collect, use, and protect your data.',
 };
 
-export default function PrivacyPage() {
+const PrivacyPage = () => {
   return <LegalPage slug="privacy" />;
 }
+
+export default PrivacyPage;

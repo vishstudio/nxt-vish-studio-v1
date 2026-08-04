@@ -14,11 +14,11 @@ interface BriefConfirmationModalProps {
 
 const settings = getSiteSettings();
 
-export function BriefConfirmationModal({
+export const BriefConfirmationModal = ({
   isOpen,
   briefId,
   onClose,
-}: BriefConfirmationModalProps) {
+}: BriefConfirmationModalProps) => {
   useEffect(() => {
     if (!isOpen) return;
 

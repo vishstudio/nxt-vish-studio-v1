@@ -39,13 +39,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+const RootLayout = ({
   children,
 }: {
   children: React.ReactNode;
-}) {
+}) => {
   return (
-    <html lang="en">
+    <html lang="en" style={{ backgroundColor: "#000000", color: "#ffffff" }}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
@@ -54,10 +54,15 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className={prompt.variable} style={{ overflowX: 'clip' }}>
+      <body
+        className={prompt.variable}
+        style={{ backgroundColor: "#000000", color: "#ffffff", overflowX: "clip" }}
+      >
         <GoogleAnalytics />
         <AppShell>{children}</AppShell>
       </body>
     </html>
   );
 }
+
+export default RootLayout;

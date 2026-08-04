@@ -181,7 +181,7 @@ export const Contact = () => {
                   },
                 },
               }}
-              className="font-logo lowercase leading-none text-white/[0.03] text-[18vw] sm:text-[17vw] md:text-[16vw] lg:text-[15vw] whitespace-nowrap select-none"
+              className="font-logo lowercase leading-none text-white/[0.055] text-[18vw] sm:text-[17vw] md:text-[16vw] lg:text-[15vw] whitespace-nowrap select-none"
             >
               {footerLogoLetters.map((letter, index) => (
                 <motion.span

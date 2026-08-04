@@ -28,7 +28,7 @@ function formatStatValue(value: number, format: HeroStat['format']) {
   }).format(Math.round(value));
 }
 
-function AnimatedStatValue({ stat, isActive }: AnimatedStatValueProps) {
+const AnimatedStatValue = ({ stat, isActive }: AnimatedStatValueProps) => {
   const [displayValue, setDisplayValue] = useState(0);
 
   useEffect(() => {
@@ -66,7 +66,7 @@ function AnimatedStatValue({ stat, isActive }: AnimatedStatValueProps) {
   );
 }
 
-export function HeroStats({ stats, isHeroRevealed, className = '', layout = 'standard' }: HeroStatsProps) {
+export const HeroStats = ({ stats, isHeroRevealed, className = '', layout = 'standard' }: HeroStatsProps) => {
   const statsRef = useRef<HTMLDListElement>(null);
   const isInView = useInView(statsRef, { once: true, amount: 0.55 });
   const shouldAnimateNumbers = isHeroRevealed && isInView;

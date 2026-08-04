@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: "Book a free 20-30 minute discovery call with VISH Studio.",
 };
 
-export default function BookCallPage() {
+const BookCallPage = () => {
   return (
     <PageLayout showScrollPrompt={false}>
       <Section className="pb-24 pt-10 md:pb-32 md:pt-16">
@@ -17,3 +17,5 @@ export default function BookCallPage() {
     </PageLayout>
   );
 }
+
+export default BookCallPage;

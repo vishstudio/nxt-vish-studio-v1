@@ -51,7 +51,7 @@ function writeConsent(consent: CookieConsent) {
   window.dispatchEvent(new CustomEvent(COOKIE_CONSENT_EVENT, { detail: consent }));
 }
 
-export function CookieSettings({ openSignal = 0 }: CookieSettingsProps) {
+export const CookieSettings = ({ openSignal = 0 }: CookieSettingsProps) => {
   const pathname = usePathname();
   const [hasLoaded, setHasLoaded] = useState(false);
   const [hasHeroRevealed, setHasHeroRevealed] = useState(false);

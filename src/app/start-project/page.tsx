@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   description: "Tell VISH Studio about your website, mobile app, software, or branding project.",
 };
 
-export default function StartProjectPage() {
+const StartProjectPage = () => {
   return <PageLayout showScrollPrompt={false}><Section className="pb-24 pt-10 md:pb-32 md:pt-16"><BriefForm /></Section></PageLayout>;
 }
+
+export default StartProjectPage;

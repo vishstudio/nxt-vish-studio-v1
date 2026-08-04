@@ -2,7 +2,7 @@ import { getProjects } from '../../lib/projects';
 import { getImageUrl } from '../../utils/imageUrl';
 import { RecentProjectStripMotion } from './recent-project-strip-motion';
 
-export function RecentProjectStrip() {
+export const RecentProjectStrip = () => {
   const projects = getProjects()
     .filter((project) => project.featuredOnHome)
     .slice(0, 4)

@@ -80,6 +80,11 @@ export interface ProcessStep {
   tags: string[];
 }
 
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
 export interface HeroStat {
   label: string;
   value: number;
@@ -115,6 +120,9 @@ export interface HomePageContent {
   processHeading: string;
   processSubtext: string;
   processSteps: ProcessStep[];
+  faqHeading: string;
+  faqSubtext: string;
+  faqItems: FaqItem[];
 }
 
 export interface TestimonialsPageContent {

@@ -6,6 +6,8 @@ export const metadata: Metadata = {
   description: 'Explore our portfolio of custom web applications, immersive frontend platforms, and brand architecture projects.',
 };
 
-export default function Projects() {
+const Projects = () => {
   return <ProjectsPage />;
 }
+
+export default Projects;

@@ -19,14 +19,14 @@ function formatDisplayTime(value: string) {
   return minute === "00" ? `${Number(hour)}h` : `${Number(hour)}h${minute}`;
 }
 
-export function BookCallConfirmationModal({
+export const BookCallConfirmationModal = ({
   isOpen,
   bookingId,
   selectedDate,
   selectedTime,
   email,
   onClose,
-}: BookCallConfirmationModalProps) {
+}: BookCallConfirmationModalProps) => {
   useEffect(() => {
     if (!isOpen) return;
 

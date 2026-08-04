@@ -10,6 +10,7 @@ import {
   PROJECT_INQUIRY_ACTION,
   PROJECT_INQUIRY_ARIA_LABEL,
 } from "../../lib/conversion";
+import { LanguageSelector } from "../language-selector/language-selector";
 import { LogoText } from "../logo-text/logo-text";
 import { Button } from "../ui/button/button";
 
@@ -88,35 +89,33 @@ export const Navbar = () => {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-        className="fixed top-6 left-0 right-0 z-50 flex justify-center pointer-events-none px-4"
+        className="fixed top-6 left-0 right-0 z-50 flex justify-center pointer-events-none px-6 md:px-12"
       >
         <div
           className={`pointer-events-auto flex items-center justify-between transition-all duration-300 w-full max-w-[1400px] ${isScrolled
-              ? "pl-4 pr-2 py-2 md:pl-4 md:pr-2 rounded-full bg-black/80 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/50"
-              : "px-6 md:px-12 py-6 rounded-none bg-transparent border-transparent"
+            ? "pl-4 pr-2 py-2 md:pl-4 md:pr-2 rounded-full bg-black/80 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/50"
+            : "px-0 py-6 rounded-none bg-transparent border-transparent"
             }`}
         >
-          <div className="flex items-center gap-3">
+          <div className={`flex items-center ${isScrolled ? "gap-3" : "gap-0"}`}>
             <div
-              className={`grid h-5 shrink-0 transition-[opacity,width,transform] duration-200 ease-out ${
-                isScrolled ? "w-5 scale-100 opacity-100" : "w-0 scale-95 opacity-0"
-              }`}
+              className={`grid h-5 shrink-0 transition-[opacity,width,transform] duration-200 ease-out ${isScrolled ? "w-5 scale-100 opacity-100" : "w-0 scale-95 opacity-0"
+                }`}
               aria-hidden="true"
             >
               <img src="/assets/icon.svg" alt="" className="h-5 w-5" />
             </div>
-            <a href="/" className="relative z-50">
+            <a href="/" className="relative z-50 flex items-center justify-center">
               <LogoText />
             </a>
           </div>
 
           {/* Desktop Navigation */}
           <nav
-            className={`absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 rounded-full border border-white/5 bg-white/5 p-1 transition-[opacity,transform] duration-200 ease-out lg:flex ${
-              isScrolled
-                ? "pointer-events-none scale-95 opacity-0"
-                : "pointer-events-auto scale-100 opacity-100"
-            }`}
+            className={`absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 rounded-full border border-white/5 bg-white/5 p-1 transition-[opacity,transform] duration-200 ease-out lg:flex ${isScrolled
+              ? "pointer-events-none scale-95 opacity-0"
+              : "pointer-events-auto scale-100 opacity-100"
+              }`}
             aria-hidden={isScrolled}
           >
             <ol className="flex items-center">
@@ -133,8 +132,8 @@ export const Navbar = () => {
                       aria-current={isActive ? "page" : undefined}
                       tabIndex={isScrolled ? -1 : undefined}
                       className={`px-5 py-2 rounded-full font-sans text-sm font-medium transition-all ${isActive
-                          ? "text-white bg-white/10"
-                          : "text-gray-300 hover:text-white hover:bg-white/10"
+                        ? "text-white bg-white/10"
+                        : "text-gray-300 hover:text-white hover:bg-white/10"
                         }`}
                     >
                       {item.name}
@@ -147,13 +146,13 @@ export const Navbar = () => {
 
           <div className="flex items-center gap-3">
             <div
-              className={`hidden transition-[opacity,transform] duration-200 ease-out lg:flex ${
-                isScrolled
-                  ? "pointer-events-none translate-x-2 opacity-0"
-                  : "pointer-events-auto translate-x-0 opacity-100"
-              }`}
+              className={`hidden items-center gap-4 transition-[opacity,transform] duration-200 ease-out lg:flex ${isScrolled
+                ? "pointer-events-none translate-x-2 opacity-0"
+                : "pointer-events-auto translate-x-0 opacity-100"
+                }`}
               aria-hidden={isScrolled}
             >
+              <LanguageSelector />
               <Button
                 variant="cta"
                 size="sm"
@@ -175,6 +174,7 @@ export const Navbar = () => {
               variant="secondary"
               size="icon"
               onClick={() => setIsMobileMenuOpen(true)}
+              ariaLabel="Open menu"
               className={isScrolled ? "flex" : "flex lg:hidden"}
             >
               <Menu className="w-5 h-5" />
@@ -212,6 +212,7 @@ export const Navbar = () => {
                   variant="secondary"
                   size="icon"
                   onClick={() => setIsMobileMenuOpen(false)}
+                  ariaLabel="Close menu"
                   className="w-12 h-12"
                 >
                   <X className="w-5 h-5 transition-transform duration-300 group-hover:rotate-90" />
@@ -250,6 +251,18 @@ export const Navbar = () => {
                     </div>
                   </motion.a>
                 ))}
+
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.35, duration: 0.4 }}
+                  className="mt-8"
+                >
+                  <p className="mb-4 font-mono text-xs uppercase tracking-widest text-white/30">
+                    Translate
+                  </p>
+                  <LanguageSelector compact />
+                </motion.div>
 
                 <motion.div
                   initial={{ opacity: 0 }}

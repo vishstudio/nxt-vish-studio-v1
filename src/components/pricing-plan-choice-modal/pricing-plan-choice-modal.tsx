@@ -13,11 +13,11 @@ interface PricingPlanChoiceModalProps {
   onClose: () => void;
 }
 
-export function PricingPlanChoiceModal({
+export const PricingPlanChoiceModal = ({
   isOpen,
   planName,
   onClose,
-}: PricingPlanChoiceModalProps) {
+}: PricingPlanChoiceModalProps) => {
   useEffect(() => {
     if (!isOpen) return;
 

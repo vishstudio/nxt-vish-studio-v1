@@ -12,7 +12,7 @@ import { Tabs } from "../tabs/Tabs";
 import { Button } from "../ui/button/button";
 import { SectionTitle } from "../ui/section-title/section-title";
 
-function PlanCard({
+const PlanCard = ({
   plan,
   index,
   tinaField,
@@ -28,7 +28,7 @@ function PlanCard({
   isExpanded: boolean;
   onToggleDetails: () => void;
   onChoosePlan: (plan: PricingPlan) => void;
-}) {
+}) => {
   return (
     <motion.div
       data-pricing-card
@@ -168,7 +168,7 @@ function PlanCard({
   );
 }
 
-function PlanDetails({
+const PlanDetails = ({
   plan,
   tinaField,
   rawPlan,
@@ -176,7 +176,7 @@ function PlanDetails({
   plan: PricingPlan;
   tinaField: (obj: any, field: string) => string | undefined;
   rawPlan: any;
-}) {
+}) => {
   return (
     <div className="mt-8 border-t border-white/8 pt-8 lg:border-t-0 lg:pt-0">
       <ul

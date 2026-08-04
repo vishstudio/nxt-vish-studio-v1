@@ -1,5 +1,7 @@
 import { NotFound } from '@/src/views/NotFound';
 
-export default function NotFoundPage() {
+const NotFoundPage = () => {
   return <NotFound />;
 }
+
+export default NotFoundPage;

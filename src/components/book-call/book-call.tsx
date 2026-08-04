@@ -116,7 +116,7 @@ function getBookingErrorMessage(error: unknown) {
   return error instanceof Error ? error.message : 'Unable to save your booking request. Please email hello@vish.studio.';
 }
 
-export function BookCall() {
+export const BookCall = () => {
   const today = useMemo(() => toDateValue(new Date()), []);
   const firstAvailableDate = useMemo(() => getNextWeekdayDateValue(), []);
   const [selectedDate, setSelectedDate] = useState(firstAvailableDate);

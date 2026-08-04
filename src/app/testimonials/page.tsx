@@ -6,6 +6,8 @@ export const metadata: Metadata = {
   description: 'What our clients say about working with VISH Studio — real feedback from scaling brands worldwide.',
 };
 
-export default function Testimonials() {
+const Testimonials = () => {
   return <TestimonialsPage />;
 }
+
+export default Testimonials;

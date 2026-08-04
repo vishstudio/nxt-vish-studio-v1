@@ -20,7 +20,7 @@ interface RecentProjectTileProps {
   index: number;
 }
 
-function RecentProjectTile({ project, index }: RecentProjectTileProps) {
+const RecentProjectTile = ({ project, index }: RecentProjectTileProps) => {
   return (
     <div className={index === 3 ? 'block md:hidden lg:block' : undefined}>
       <Link
@@ -53,7 +53,7 @@ function RecentProjectTile({ project, index }: RecentProjectTileProps) {
   );
 }
 
-export function RecentProjectStripMotion({ projects }: RecentProjectStripMotionProps) {
+export const RecentProjectStripMotion = ({ projects }: RecentProjectStripMotionProps) => {
   const sectionRef = useRef<HTMLElement>(null);
   const shouldReduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
