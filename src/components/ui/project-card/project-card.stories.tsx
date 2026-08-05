@@ -13,7 +13,7 @@ const project = {
   slug: 'imagine3d',
   title: 'Imagine3D',
   category: ['Website', 'UX'],
-  image: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1600&auto=format&fit=crop',
+  image: '/assets/img/home-cta-1.avif',
   year: '2026',
   description: 'A polished case study card with image, metadata, and action states.',
   siteUrl: 'https://vish.studio',

@@ -17,7 +17,7 @@ export const AboutPage = () => {
       <PageHero
         label={content.heroLabel}
         labelTinaField={tinaField('heroLabel')}
-        backgroundImage="https://images.unsplash.com/photo-1519155031214-e8d583928bf2?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        backgroundImage="/assets/img/about-hero.jpg"
         title={
           <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-medium tracking-tight leading-[0.95] text-white mb-12">
             <motion.span

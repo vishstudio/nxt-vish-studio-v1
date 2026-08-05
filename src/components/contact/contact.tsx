@@ -68,7 +68,6 @@ export const Contact = () => {
               >
                 <motion.span
                   className="notranslate font-display text-4xl md:text-7xl text-white"
-                  translate="no"
                   variants={{
                     hover: {
                       color: "#000000",
@@ -185,7 +184,6 @@ export const Contact = () => {
                 },
               }}
               className="notranslate font-logo lowercase leading-none text-white/[0.055] text-[18vw] sm:text-[17vw] md:text-[16vw] lg:text-[15vw] whitespace-nowrap select-none"
-              translate="no"
             >
               {footerLogoLetters.map((letter, index) => (
                 <motion.span

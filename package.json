@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "tinacms dev -c \"next dev --port 3000\"",
-    "dev:next": "next dev --port 3000",
+    "dev": "tinacms dev -c \"next dev\"",
+    "dev:next": "next dev",
     "build": "(tinacms build && rm -f public/admin/.gitignore) || echo 'Tina build skipped (missing token), using committed generated files' && next build",
     "start": "next start",
     "clean": "rm -rf .next out",

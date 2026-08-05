@@ -45,8 +45,8 @@ const homePageJsonLd = {
 };
 
 const homeCtaBackgroundImages = [
-  'https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0',
-  'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0',
+  '/assets/img/home-cta-1.avif',
+  '/assets/img/home-cta-2.avif',
 ];
 
 export const Home = () => {

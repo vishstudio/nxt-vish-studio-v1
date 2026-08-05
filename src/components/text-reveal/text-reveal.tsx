@@ -20,7 +20,7 @@ export const TextReveal = ({ children, className, tinaField }: TextRevealProps) 
   return (
     <p
       ref={element}
-      className={`text-reveal flex flex-wrap ${className}`}
+      className={`text-reveal relative flex flex-wrap ${className}`}
       data-tina-field={tinaField}
     >
       {words.map((word, i) => {

@@ -51,7 +51,7 @@ export const Testimonials = () => {
   return (
     <section ref={sectionRef} className="testimonials relative py-32 px-6 md:px-12 bg-black overflow-hidden" id="testimonials">
       <motion.img
-        src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2342&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        src="/assets/img/testimonials-hero.avif"
         alt=""
         className="absolute -top-[10%] left-0 w-full h-[120%] object-cover opacity-30 grayscale will-change-transform"
         style={{ y: backgroundY }}

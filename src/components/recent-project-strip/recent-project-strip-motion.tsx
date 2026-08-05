@@ -71,7 +71,7 @@ export const RecentProjectStripMotion = ({ projects }: RecentProjectStripMotionP
     <section
       ref={sectionRef}
       id="recent-work"
-      className="recent-project-strip bg-vish-bg pb-10 pt-20 md:pb-14 md:pt-24 lg:py-16"
+      className="recent-project-strip relative bg-vish-bg pb-10 pt-20 md:pb-14 md:pt-24 lg:py-16"
       aria-label="Recent project images"
     >
       <div className="overflow-hidden pb-20 pt-4 md:pb-28 md:pt-8 lg:pb-32">

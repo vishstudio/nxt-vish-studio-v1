@@ -144,7 +144,11 @@ npm run clean      # Remove .next and out
 npm run deploy     # Build the static deployment output
 ```
 
-The development site runs at `http://localhost:3000`.
+The development site normally runs at `http://localhost:3000`. The `dev` and `dev:next` scripts intentionally do not force a port; if another local project is already using `3000`, Next.js will choose the next available port and print the actual local URL.
+
+If `npm run dev` fails with `Tina Dev server is already in use. Datalayer server is busy on port 9000`, a stale Tina process is already listening from a previous run. Check it with `lsof -nP -iTCP:9000 -sTCP:LISTEN`, stop the stale project process, and rerun `npm run dev`.
+
+Former remote stock images used by runtime pages and Storybook stories are now mapped to local files in `docs/unsplash-image-inventory.md`. Keep those image paths under `public/assets/img/` when replacing or recompressing assets.
 
 ## Environment variables
 

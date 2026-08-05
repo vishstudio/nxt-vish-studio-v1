@@ -64,7 +64,7 @@ export const LegalPage = ({ slug }: LegalPageProps) => {
       <PageHero
         label={content.heroLabel}
         labelTinaField={tinaField('heroLabel')}
-        backgroundImage="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0"
+        backgroundImage="/assets/img/legal-hero.jpg"
         title={
           <h1
             className="font-display text-6xl md:text-8xl lg:text-9xl font-medium tracking-tight leading-[0.95] text-white mb-12"

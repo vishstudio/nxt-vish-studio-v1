@@ -12,6 +12,6 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     index: 0,
-    backgroundImage: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1800&auto=format&fit=crop',
+    backgroundImage: '/assets/img/home-cta-1.avif',
   },
 };

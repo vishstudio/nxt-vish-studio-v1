@@ -28,7 +28,7 @@ export const Services = () => {
   return (
     <section ref={sectionRef} className="services relative py-32 px-6 md:px-12 bg-black overflow-hidden" id="services">
       <motion.img
-        src="https://images.unsplash.com/photo-1646617747561-9b91464e780a?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        src="/assets/img/services-section.jpg"
         alt=""
         className="absolute -top-[10%] left-0 w-full h-[120%] object-cover opacity-30 will-change-transform"
         style={{ y: backgroundY }}

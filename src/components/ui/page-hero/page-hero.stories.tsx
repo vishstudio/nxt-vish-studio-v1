@@ -21,7 +21,7 @@ export const Large: Story = {
       title={<h1 className="font-display text-6xl font-medium leading-none md:text-8xl">Digital systems<span className="text-vish-accent">.</span></h1>}
       description="A restrained page hero using the site typography, spacing, and black/yellow design language."
       action={<Button className="mt-8" variant="cta" icon={<ArrowRight className="h-4 w-4" />}>Book Free Call</Button>}
-      backgroundImage="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1800&auto=format&fit=crop"
+      backgroundImage="/assets/img/home-cta-1.avif"
     />
   ),
 };
