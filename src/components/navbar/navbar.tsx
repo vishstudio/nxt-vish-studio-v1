@@ -276,7 +276,8 @@ export const Navbar = () => {
                   <a
                     href="mailto:hello@vish.studio"
                     onClick={trackEmailClick}
-                    className="block font-display text-2xl text-white hover:text-vish-accent transition-colors mb-8"
+                    className="notranslate block font-display text-2xl text-white hover:text-vish-accent transition-colors mb-8"
+                    translate="no"
                   >
                     hello@vish.studio
                   </a>

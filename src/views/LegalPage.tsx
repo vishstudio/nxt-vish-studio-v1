@@ -1,4 +1,5 @@
 'use client';
+import type React from 'react';
 import { motion } from 'motion/react';
 import { PageLayout } from '../components/ui/page-layout/page-layout';
 import { PageHero } from '../components/ui/page-hero/page-hero';
@@ -10,17 +11,38 @@ interface LegalPageProps {
   slug: 'privacy' | 'terms';
 }
 
-function renderParagraphs(body: string) {
+const protectedEmail = 'hello@vish.studio';
+
+const renderTextWithProtectedEmail = (text: string) =>
+  text.split(protectedEmail).flatMap((part, index, parts) => {
+    const nodes: React.ReactNode[] = [];
+
+    if (part) {
+      nodes.push(part);
+    }
+
+    if (index < parts.length - 1) {
+      nodes.push(
+        <span key={`email-${index}`} className="notranslate" translate="no">
+          {protectedEmail}
+        </span>,
+      );
+    }
+
+    return nodes;
+  });
+
+const renderParagraphs = (body: string) => {
   return body
     .split(/\n+/)
     .map((paragraph) => paragraph.trim())
     .filter(Boolean)
     .map((paragraph) => (
       <p key={paragraph} className="font-sans text-lg md:text-xl text-gray-400 leading-relaxed">
-        {paragraph}
+        {renderTextWithProtectedEmail(paragraph)}
       </p>
     ));
-}
+};
 
 export const LegalPage = ({ slug }: LegalPageProps) => {
   const { data: content, tinaField, rawLegalPage } = useTinaLegalPage(slug);

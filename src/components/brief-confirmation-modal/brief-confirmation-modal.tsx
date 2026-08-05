@@ -99,7 +99,9 @@ export const BriefConfirmationModal = ({
                       variant="outline"
                       size="sm"
                     >
-                      {settings.email}
+                      <span className="notranslate" translate="no">
+                        {settings.email}
+                      </span>
                     </Button>
                     <Button
                       href={settings.phoneLink}

@@ -49,9 +49,10 @@ export const Contact = () => {
           <div className="mb-24">
             <a
               href={`mailto:${settings.email}`}
-              className="block w-full"
+              className="notranslate block w-full"
               aria-label="Start a project inquiry with VISH Studio by email"
               onClick={trackEmailClick}
+              translate="no"
             >
               <motion.div
                 initial="initial"
@@ -66,7 +67,8 @@ export const Contact = () => {
                 className="flex items-center justify-between border-b border-white/10 py-8 px-4 md:px-8 -mx-4 md:-mx-8 rounded-xl"
               >
                 <motion.span
-                  className="font-display text-4xl md:text-7xl text-white"
+                  className="notranslate font-display text-4xl md:text-7xl text-white"
+                  translate="no"
                   variants={{
                     hover: {
                       color: "#000000",
@@ -166,7 +168,8 @@ export const Contact = () => {
 
           <div
             aria-hidden="true"
-            className="absolute bottom-10 pointer-events-none left-1/2 w-screen -translate-x-1/2 overflow-hidden px-4 text-center"
+            className="notranslate absolute bottom-10 pointer-events-none left-1/2 w-screen -translate-x-1/2 overflow-hidden px-4 text-center"
+            translate="no"
           >
             <motion.div
               initial="hidden"
@@ -181,7 +184,8 @@ export const Contact = () => {
                   },
                 },
               }}
-              className="font-logo lowercase leading-none text-white/[0.055] text-[18vw] sm:text-[17vw] md:text-[16vw] lg:text-[15vw] whitespace-nowrap select-none"
+              className="notranslate font-logo lowercase leading-none text-white/[0.055] text-[18vw] sm:text-[17vw] md:text-[16vw] lg:text-[15vw] whitespace-nowrap select-none"
+              translate="no"
             >
               {footerLogoLetters.map((letter, index) => (
                 <motion.span
@@ -212,7 +216,7 @@ export const Contact = () => {
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-xs font-mono text-gray-600 uppercase tracking-wider">
           <span>
             {settings.copyright}{" "}
-            <span className="text-[16px] lg:text-[14px] font-logo lowercase">
+            <span className="notranslate text-[16px] lg:text-[14px] font-logo lowercase" translate="no">
               <strong>vish</strong> studio.
             </span>
           </span>
