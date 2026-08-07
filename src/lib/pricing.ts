@@ -8,8 +8,16 @@ export interface CtaLink {
 export interface PricingCarePlan {
   title: string;
   price: string;
+  priceGbp?: string;
   cadence: string;
   summary: string;
+}
+
+export interface PricingAddOn {
+  label: string;
+  price: string;
+  priceGbp?: string;
+  note: string;
 }
 
 /** Build the final href string from a structured CtaLink */
@@ -42,7 +50,9 @@ export interface PricingPlan {
   label: string;
   name: string;
   price: string;
+  priceGbp?: string;
   discountedPrice: string;
+  discountedPriceGbp?: string;
   priceNote: string;
   delivery: string;
   tagline: string;
@@ -59,6 +69,8 @@ export interface PricingCategory {
   label: string;
   slug: string;
   plans: PricingPlan[];
+  carePlans: PricingCarePlan[];
+  addOns: PricingAddOn[];
 }
 
 export interface PricingPageContent {
@@ -82,7 +94,9 @@ interface PricingPlanJson {
   label: string;
   name: string;
   price: string;
+  priceGbp?: string;
   discountedPrice?: string;
+  discountedPriceGbp?: string;
   priceNote: string;
   delivery: string;
   tagline: string;
@@ -111,6 +125,8 @@ interface PricingPageJson {
     label?: string;
     slug?: string;
     plans?: PricingPlanJson[];
+    carePlans?: Partial<PricingCarePlan>[];
+    addOns?: Partial<PricingAddOn>[];
   }[];
   customLabel: string;
   customDescription: string;
@@ -125,7 +141,9 @@ function mapPricingPlan(p: PricingPlanJson): PricingPlan {
     label: p.label ?? "",
     name: p.name ?? "",
     price: p.price ?? "",
+    priceGbp: p.priceGbp ?? "",
     discountedPrice: p.discountedPrice ?? "",
+    discountedPriceGbp: p.discountedPriceGbp ?? "",
     priceNote: p.priceNote ?? "",
     delivery: p.delivery ?? "",
     tagline: p.tagline ?? "",
@@ -142,12 +160,32 @@ function mapPricingPlan(p: PricingPlanJson): PricingPlan {
       ? {
           title: p.carePlan.title ?? "",
           price: p.carePlan.price ?? "",
+          priceGbp: p.carePlan.priceGbp ?? "",
           cadence: p.carePlan.cadence ?? "",
           summary: p.carePlan.summary ?? "",
         }
       : undefined,
     bestFor: p.bestFor ?? "",
     revisions: p.revisions ?? "",
+  };
+}
+
+function mapPricingCarePlan(p: Partial<PricingCarePlan>): PricingCarePlan {
+  return {
+    title: p.title ?? "",
+    price: p.price ?? "",
+    priceGbp: p.priceGbp ?? "",
+    cadence: p.cadence ?? "",
+    summary: p.summary ?? "",
+  };
+}
+
+function mapPricingAddOn(p: Partial<PricingAddOn>): PricingAddOn {
+  return {
+    label: p.label ?? "",
+    price: p.price ?? "",
+    priceGbp: p.priceGbp ?? "",
+    note: p.note ?? "",
   };
 }
 
@@ -158,6 +196,12 @@ export function getPricingPage(): PricingPageContent {
       label: category.label ?? "",
       slug: category.slug ?? "",
       plans: (category.plans ?? []).map(mapPricingPlan),
+      carePlans: (category.carePlans ?? [])
+        .map(mapPricingCarePlan)
+        .filter((carePlan) => carePlan.title && carePlan.price),
+      addOns: (category.addOns ?? [])
+        .map(mapPricingAddOn)
+        .filter((addOn) => addOn.label && addOn.price),
     }))
     .filter((category) => category.label && category.plans.length > 0);
 

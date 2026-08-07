@@ -11,7 +11,9 @@ function mapPricingPlan(p: any) {
     label: p?.label ?? "",
     name: p?.name ?? "",
     price: p?.price ?? "",
+    priceGbp: p?.priceGbp ?? "",
     discountedPrice: p?.discountedPrice ?? "",
+    discountedPriceGbp: p?.discountedPriceGbp ?? "",
     priceNote: p?.priceNote ?? "",
     delivery: p?.delivery ?? "",
     tagline: p?.tagline ?? "",
@@ -28,12 +30,32 @@ function mapPricingPlan(p: any) {
       ? {
           title: p.carePlan.title ?? "",
           price: p.carePlan.price ?? "",
+          priceGbp: p.carePlan.priceGbp ?? "",
           cadence: p.carePlan.cadence ?? "",
           summary: p.carePlan.summary ?? "",
         }
       : undefined,
     bestFor: p?.bestFor ?? "",
     revisions: p?.revisions ?? "",
+  };
+}
+
+function mapPricingCarePlan(p: any) {
+  return {
+    title: p?.title ?? "",
+    price: p?.price ?? "",
+    priceGbp: p?.priceGbp ?? "",
+    cadence: p?.cadence ?? "",
+    summary: p?.summary ?? "",
+  };
+}
+
+function mapPricingAddOn(p: any) {
+  return {
+    label: p?.label ?? "",
+    price: p?.price ?? "",
+    priceGbp: p?.priceGbp ?? "",
+    note: p?.note ?? "",
   };
 }
 
@@ -62,6 +84,12 @@ export function useTinaPricing() {
             label: category?.label ?? "",
             slug: category?.slug ?? "",
             plans: (category?.plans ?? []).map(mapPricingPlan),
+            carePlans: (category?.carePlans ?? [])
+              .map(mapPricingCarePlan)
+              .filter((carePlan: any) => carePlan.title && carePlan.price),
+            addOns: (category?.addOns ?? [])
+              .map(mapPricingAddOn)
+              .filter((addOn: any) => addOn.label && addOn.price),
           }))
           .filter((category: any) => category.label && category.plans.length > 0),
         customLabel: qd.pricingPage.customLabel ?? "",

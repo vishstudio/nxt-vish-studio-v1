@@ -15,14 +15,26 @@ var pricingPlanFields = [
   {
     type: "string",
     name: "price",
-    label: "Price (e.g. Rs 14,000)",
+    label: "Mauritius Price (e.g. Rs 14,000)",
     required: true
   },
   {
     type: "string",
+    name: "priceGbp",
+    label: "International Price (GBP)",
+    description: "Shown to visitors outside Mauritius, e.g. \xA3230 or \xA31,590+."
+  },
+  {
+    type: "string",
     name: "discountedPrice",
-    label: "Discounted Price",
-    description: "Optional sale price shown before the regular price."
+    label: "Discounted Mauritius Price",
+    description: "Optional sale price shown before the regular Mauritius price."
+  },
+  {
+    type: "string",
+    name: "discountedPriceGbp",
+    label: "Discounted International Price (GBP)",
+    description: "Optional sale price shown before the regular GBP price."
   },
   {
     type: "string",
@@ -84,7 +96,8 @@ var pricingPlanFields = [
     description: "Optional package-specific maintenance plan. This appears on the pricing page and in homepage package details.",
     fields: [
       { type: "string", name: "title", label: "Care Plan Title" },
-      { type: "string", name: "price", label: "Monthly Price" },
+      { type: "string", name: "price", label: "Monthly Mauritius Price" },
+      { type: "string", name: "priceGbp", label: "Monthly International Price (GBP)" },
       { type: "string", name: "cadence", label: "Cadence" },
       {
         type: "string",
@@ -96,6 +109,37 @@ var pricingPlanFields = [
   },
   { type: "string", name: "bestFor", label: "Best For" },
   { type: "string", name: "revisions", label: "Revisions Policy" }
+];
+var pricingCarePlanFields = [
+  { type: "string", name: "title", label: "Care Plan Title" },
+  { type: "string", name: "price", label: "Monthly Mauritius Price" },
+  {
+    type: "string",
+    name: "priceGbp",
+    label: "Monthly International Price (GBP)"
+  },
+  { type: "string", name: "cadence", label: "Cadence" },
+  {
+    type: "string",
+    name: "summary",
+    label: "Summary",
+    ui: { component: "textarea" }
+  }
+];
+var pricingAddOnFields = [
+  { type: "string", name: "label", label: "Add-on Label" },
+  { type: "string", name: "price", label: "Mauritius Price" },
+  {
+    type: "string",
+    name: "priceGbp",
+    label: "International Price (GBP)"
+  },
+  {
+    type: "string",
+    name: "note",
+    label: "Note",
+    ui: { component: "textarea" }
+  }
 ];
 var config_default = defineConfig({
   branch: process.env.GITHUB_BRANCH || process.env.TINA_BRANCH || process.env.HEAD || "main",
@@ -1034,6 +1078,32 @@ var config_default = defineConfig({
                   })
                 },
                 fields: pricingPlanFields
+              },
+              {
+                type: "object",
+                name: "carePlans",
+                label: "Pricing Page Care Plans",
+                description: "Fallback monthly care rows shown on the full pricing page when a package does not define its own care plan.",
+                list: true,
+                ui: {
+                  itemProps: (item) => ({
+                    label: `${item?.title || "Care plan"}${item?.price ? ` (${item.price})` : ""}`
+                  })
+                },
+                fields: pricingCarePlanFields
+              },
+              {
+                type: "object",
+                name: "addOns",
+                label: "Pricing Page Add-ons",
+                description: "Common additional-cost rows shown below packages on the full pricing page.",
+                list: true,
+                ui: {
+                  itemProps: (item) => ({
+                    label: `${item?.label || "Add-on"}${item?.price ? ` (${item.price})` : ""}`
+                  })
+                },
+                fields: pricingAddOnFields
               }
             ]
           },

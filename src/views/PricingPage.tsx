@@ -10,101 +10,68 @@ import { Contact } from '../components/contact/contact';
 import { Button } from '../components/ui/button/button';
 import { SectionTitle } from '../components/ui/section-title/section-title';
 import { Tabs } from '../components/tabs/Tabs';
-import { type PricingCarePlan, type PricingCategory, type PricingPlan } from '../lib/pricing';
-
-const serviceDetails = {
-  website: {
-    carePlans: [
-      { title: 'Essentials Care', price: 'Rs 1,500 / mo', cadence: 'Monthly', summary: 'Core uptime checks, light content edits, backups, and monthly health monitoring.' },
-      { title: 'Growth Care', price: 'Rs 2,500 / mo', cadence: 'Monthly', summary: 'Performance checks, minor content updates, SEO hygiene, uptime monitoring, and hosting support.' },
-      { title: 'Premium Care', price: 'Rs 4,500 / mo', cadence: 'Monthly', summary: 'Priority support, conversion checks, technical SEO review, analytics monitoring, and monthly improvement planning.' },
-    ],
-    addOns: [
-      { label: 'Additional content page', price: 'Rs 1,500 / page', note: 'For service, landing, legal, or campaign pages.' },
-      { label: 'Additional homepage section', price: 'Rs 900 / section', note: 'Useful for testimonials, FAQs, galleries, or conversion blocks.' },
-      { label: 'Blog article setup', price: 'Rs 600 / article', note: 'Formatting, metadata, image placement, and publishing support.' },
-      { label: 'Advanced SEO pass', price: 'Rs 3,500', note: 'Keyword structure, metadata, schema, and internal linking review.' },
-    ],
-  },
-  softwares: {
-    carePlans: [
-      { title: 'Essentials Software Support', price: 'Rs 5,500 / mo', cadence: 'Monthly', summary: 'Bug triage, dependency checks, uptime review, and minor workflow support.' },
-      { title: 'Growth Software Support', price: 'Rs 8,500 / mo', cadence: 'Monthly', summary: 'Bug triage, dependency updates, small workflow improvements, and release support.' },
-      { title: 'Premium Software Support', price: 'Rs 15,000 / mo', cadence: 'Monthly', summary: 'Priority engineering support, monitoring review, release planning, reporting checks, and iterative product improvements.' },
-    ],
-    addOns: [
-      { label: 'Additional dashboard screen', price: 'Rs 5,500 / screen', note: 'Designed and engineered into the active product flow.' },
-      { label: 'Advanced user role', price: 'Rs 6,500 / role', note: 'Permissions, routing, and interface states for a new role.' },
-      { label: 'Third-party integration', price: 'From Rs 12,000', note: 'API, CRM, payment, booking, automation, or analytics connection.' },
-      { label: 'Reporting module', price: 'From Rs 15,000', note: 'Metrics, filtering, export, and admin visibility.' },
-    ],
-  },
-  'mobile-apps': {
-    carePlans: [
-      { title: 'Essentials App Support', price: 'Rs 6,500 / mo', cadence: 'Monthly', summary: 'Basic QA support, app health checks, issue triage, and store readiness checks.' },
-      { title: 'Growth App Support', price: 'Rs 10,000 / mo', cadence: 'Monthly', summary: 'App monitoring, QA support, minor improvements, release support, and launch-readiness maintenance.' },
-      { title: 'Premium App Support', price: 'Rs 18,000 / mo', cadence: 'Monthly', summary: 'Priority mobile support, release planning, feature iteration, analytics checks, and store optimization guidance.' },
-    ],
-    addOns: [
-      { label: 'Additional app screen', price: 'Rs 6,500 / screen', note: 'Interface, state handling, and implementation for one new screen.' },
-      { label: 'Push notification flow', price: 'From Rs 9,500', note: 'Notification triggers, copy, setup, and testing.' },
-      { label: 'App store launch support', price: 'Rs 12,000', note: 'Listing guidance, assets, metadata, and submission support.' },
-      { label: 'Advanced app workflow', price: 'From Rs 18,000', note: 'Multi-step flows, permissions, data rules, or integrations.' },
-    ],
-  },
-  branding: {
-    carePlans: [
-      { title: 'Essentials Brand Support', price: 'Rs 1,200 / mo', cadence: 'Monthly', summary: 'Light brand file upkeep, small export requests, and visual consistency checks.' },
-      { title: 'Growth Brand Support', price: 'Rs 1,800 / mo', cadence: 'Monthly', summary: 'Social asset support, campaign graphics, brand file maintenance, and monthly creative guidance.' },
-      { title: 'Premium Brand Support', price: 'Rs 3,500 / mo', cadence: 'Monthly', summary: 'Priority creative support, campaign system refinement, launch assets, and ongoing brand direction.' },
-    ],
-    addOns: [
-      { label: 'Additional logo lockup', price: 'Rs 1,200', note: 'Alternative layout or usage-specific mark.' },
-      { label: 'Social media template', price: 'Rs 750 / template', note: 'Reusable branded layout for posts, stories, or promos.' },
-      { label: 'Campaign creative set', price: 'Rs 4,500', note: 'A compact set of campaign visuals for one launch or offer.' },
-      { label: 'Extended brand guideline page', price: 'Rs 1,000 / page', note: 'More detail for usage, tone, layouts, or production rules.' },
-    ],
-  },
-} satisfies Record<string, {
-  carePlans: PricingCarePlan[];
-  addOns: { label: string; price: string; note: string }[];
-}>;
+import { usePricingCurrency } from '../hooks/usePricingCurrency';
+import {
+  getLocalizedCarePlanPrice,
+  getLocalizedPlanPrice,
+  type PricingCurrency,
+} from '../lib/pricing-currency';
+import {
+  type PricingAddOn,
+  type PricingCarePlan,
+  type PricingCategory,
+  type PricingPlan,
+} from '../lib/pricing';
 
 const fallbackServiceDetail = {
   carePlans: [
-    { title: 'Care Plan', price: 'Scoped monthly', cadence: 'Monthly', summary: 'Ongoing support, technical checks, small updates, and launch-readiness maintenance.' },
+    { title: 'Care Plan', price: 'Scoped monthly', priceGbp: 'Scoped monthly', cadence: 'Monthly', summary: 'Ongoing support, technical checks, small updates, and launch-readiness maintenance.' },
   ],
   addOns: [
-    { label: 'Additional scoped feature', price: 'Quoted after review', note: 'Priced according to complexity, dependencies, and delivery timeline.' },
+    { label: 'Additional scoped feature', price: 'Quoted after review', priceGbp: 'Quoted after review', note: 'Priced according to complexity, dependencies, and delivery timeline.' },
   ],
 };
 
 const serviceOrder = ['website', 'mobile-apps', 'softwares', 'branding'];
 
-function getPackageCarePlan(plan: PricingPlan, detail: typeof fallbackServiceDetail, index: number): PricingCarePlan {
+const getPackageCarePlan = (
+  plan: PricingPlan,
+  detail: { carePlans: PricingCarePlan[] },
+  index: number,
+): PricingCarePlan => {
   if (plan.carePlan?.price) {
     return {
       title: plan.carePlan.title || `${plan.name} Care`,
       price: plan.carePlan.price,
+      priceGbp: plan.carePlan.priceGbp,
       cadence: plan.carePlan.cadence || 'Monthly',
       summary: plan.carePlan.summary || 'Ongoing support, technical checks, small updates, and launch-readiness maintenance.',
     };
   }
 
   return detail.carePlans[index] ?? detail.carePlans[detail.carePlans.length - 1] ?? fallbackServiceDetail.carePlans[0];
-}
+};
+
+const getLocalizedAddOnPrice = (
+  addOn: PricingAddOn,
+  currency: PricingCurrency,
+) => (currency === 'GBP' && addOn.priceGbp ? addOn.priceGbp : addOn.price);
 
 const PackageRow = ({
   plan,
   index,
   tinaField,
   rawPlan,
+  currency,
 }: {
   plan: PricingPlan;
   index: number;
   tinaField: (obj: any, field: string) => string | undefined;
   rawPlan: any;
+  currency: PricingCurrency;
 }) => {
+  const localizedPrice = getLocalizedPlanPrice(plan, currency);
+
   return (
     <motion.article
       initial={{ opacity: 0, y: 18 }}
@@ -148,16 +115,27 @@ const PackageRow = ({
         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
           <span
             className="font-display text-4xl font-medium tracking-tight text-white md:text-5xl"
-            data-tina-field={rawPlan ? tinaField(rawPlan, plan.discountedPrice ? 'discountedPrice' : 'price') : undefined}
+            data-tina-field={
+              rawPlan
+                ? tinaField(
+                    rawPlan,
+                    localizedPrice.discountedPrice
+                      ? localizedPrice.discountedPriceField
+                      : localizedPrice.priceField,
+                  )
+                : undefined
+            }
           >
-            {plan.discountedPrice || plan.price}
+            {localizedPrice.discountedPrice || localizedPrice.price}
           </span>
-          {plan.discountedPrice && (
+          {localizedPrice.discountedPrice && (
             <span
               className="font-mono text-sm text-gray-500 line-through"
-              data-tina-field={rawPlan ? tinaField(rawPlan, 'price') : undefined}
+              data-tina-field={
+                rawPlan ? tinaField(rawPlan, localizedPrice.priceField) : undefined
+              }
             >
-              {plan.price}
+              {localizedPrice.price}
             </span>
           )}
         </div>
@@ -203,13 +181,20 @@ const ActivePricingSection = ({
   categoryIndex,
   tinaField,
   rawCategory,
+  currency,
 }: {
   category: PricingCategory;
   categoryIndex: number;
   tinaField: (obj: any, field: string) => string | undefined;
   rawCategory: any;
+  currency: PricingCurrency;
 }) => {
-  const detail = serviceDetails[category.slug as keyof typeof serviceDetails] ?? fallbackServiceDetail;
+  const detail = {
+    carePlans: category.carePlans.length
+      ? category.carePlans
+      : fallbackServiceDetail.carePlans,
+    addOns: category.addOns.length ? category.addOns : fallbackServiceDetail.addOns,
+  };
 
   return (
     <motion.div
@@ -248,6 +233,7 @@ const ActivePricingSection = ({
               index={index}
               tinaField={tinaField}
               rawPlan={rawCategory?.plans?.[index]}
+              currency={currency}
             />
           ))}
         </div>
@@ -282,6 +268,12 @@ const ActivePricingSection = ({
           </div>
           {category.plans.map((plan, index) => {
             const carePlan = getPackageCarePlan(plan, detail, index);
+            const localizedCarePlanPrice = getLocalizedCarePlanPrice(
+              carePlan,
+              currency,
+            );
+            const carePlanPriceField =
+              currency === 'GBP' && carePlan.priceGbp ? 'priceGbp' : 'price';
 
             return (
               <div
@@ -302,9 +294,16 @@ const ActivePricingSection = ({
                 <div>
                   <p
                     className="font-display text-2xl font-medium text-white md:text-3xl"
-                    data-tina-field={rawCategory?.plans?.[index]?.carePlan ? tinaField(rawCategory.plans[index].carePlan, 'price') : undefined}
+                    data-tina-field={
+                      rawCategory?.plans?.[index]?.carePlan
+                        ? tinaField(
+                            rawCategory.plans[index].carePlan,
+                            carePlanPriceField,
+                          )
+                        : undefined
+                    }
                   >
-                    {carePlan.price}
+                    {localizedCarePlanPrice}
                   </p>
                   <p
                     className="mt-2 font-mono text-xs uppercase tracking-widest text-gray-500"
@@ -349,7 +348,7 @@ const ActivePricingSection = ({
                 {addOn.label}
               </h4>
               <p className="font-mono text-xs uppercase tracking-widest text-vish-accent">
-                {addOn.price}
+                {getLocalizedAddOnPrice(addOn, currency)}
               </p>
               <p className="font-sans text-sm leading-relaxed text-gray-400">
                 {addOn.note}
@@ -364,6 +363,7 @@ const ActivePricingSection = ({
 
 export const PricingPage = () => {
   const { data: content, tinaField, rawPricingPage } = useTinaPricing();
+  const pricingCurrency = usePricingCurrency();
   const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
   const [isPricingNavVisible, setIsPricingNavVisible] = useState(false);
   const heroBackgroundImage = content.heroBackgroundImageUrl || content.heroBackgroundImage;
@@ -462,6 +462,7 @@ export const PricingPage = () => {
               categoryIndex={activeCategoryIndex}
               tinaField={tinaField}
               rawCategory={activeRawCategory}
+              currency={pricingCurrency}
             />
           )}
 

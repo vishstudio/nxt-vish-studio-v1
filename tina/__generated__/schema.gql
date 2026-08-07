@@ -672,6 +672,7 @@ type PricingPagePricingCategoriesPlansCtaLink {
 type PricingPagePricingCategoriesPlansCarePlan {
   title: String
   price: String
+  priceGbp: String
   cadence: String
   summary: String
 }
@@ -680,7 +681,9 @@ type PricingPagePricingCategoriesPlans {
   label: String
   name: String!
   price: String!
+  priceGbp: String
   discountedPrice: String
+  discountedPriceGbp: String
   priceNote: String
   delivery: String
   tagline: String
@@ -693,10 +696,27 @@ type PricingPagePricingCategoriesPlans {
   revisions: String
 }
 
+type PricingPagePricingCategoriesCarePlans {
+  title: String
+  price: String
+  priceGbp: String
+  cadence: String
+  summary: String
+}
+
+type PricingPagePricingCategoriesAddOns {
+  label: String
+  price: String
+  priceGbp: String
+  note: String
+}
+
 type PricingPagePricingCategories {
   label: String!
   slug: String
   plans: [PricingPagePricingCategoriesPlans]
+  carePlans: [PricingPagePricingCategoriesCarePlans]
+  addOns: [PricingPagePricingCategoriesAddOns]
 }
 
 type PricingPage implements Node & Document {
@@ -734,6 +754,7 @@ input PricingPagePricingCategoriesPlansCtaLinkFilter {
 input PricingPagePricingCategoriesPlansCarePlanFilter {
   title: StringFilter
   price: StringFilter
+  priceGbp: StringFilter
   cadence: StringFilter
   summary: StringFilter
 }
@@ -742,7 +763,9 @@ input PricingPagePricingCategoriesPlansFilter {
   label: StringFilter
   name: StringFilter
   price: StringFilter
+  priceGbp: StringFilter
   discountedPrice: StringFilter
+  discountedPriceGbp: StringFilter
   priceNote: StringFilter
   delivery: StringFilter
   tagline: StringFilter
@@ -755,10 +778,27 @@ input PricingPagePricingCategoriesPlansFilter {
   revisions: StringFilter
 }
 
+input PricingPagePricingCategoriesCarePlansFilter {
+  title: StringFilter
+  price: StringFilter
+  priceGbp: StringFilter
+  cadence: StringFilter
+  summary: StringFilter
+}
+
+input PricingPagePricingCategoriesAddOnsFilter {
+  label: StringFilter
+  price: StringFilter
+  priceGbp: StringFilter
+  note: StringFilter
+}
+
 input PricingPagePricingCategoriesFilter {
   label: StringFilter
   slug: StringFilter
   plans: PricingPagePricingCategoriesPlansFilter
+  carePlans: PricingPagePricingCategoriesCarePlansFilter
+  addOns: PricingPagePricingCategoriesAddOnsFilter
 }
 
 input PricingPageFilter {
@@ -1053,6 +1093,7 @@ input PricingPagePricingCategoriesPlansCtaLinkMutation {
 input PricingPagePricingCategoriesPlansCarePlanMutation {
   title: String
   price: String
+  priceGbp: String
   cadence: String
   summary: String
 }
@@ -1061,7 +1102,9 @@ input PricingPagePricingCategoriesPlansMutation {
   label: String
   name: String
   price: String
+  priceGbp: String
   discountedPrice: String
+  discountedPriceGbp: String
   priceNote: String
   delivery: String
   tagline: String
@@ -1074,10 +1117,27 @@ input PricingPagePricingCategoriesPlansMutation {
   revisions: String
 }
 
+input PricingPagePricingCategoriesCarePlansMutation {
+  title: String
+  price: String
+  priceGbp: String
+  cadence: String
+  summary: String
+}
+
+input PricingPagePricingCategoriesAddOnsMutation {
+  label: String
+  price: String
+  priceGbp: String
+  note: String
+}
+
 input PricingPagePricingCategoriesMutation {
   label: String
   slug: String
   plans: [PricingPagePricingCategoriesPlansMutation]
+  carePlans: [PricingPagePricingCategoriesCarePlansMutation]
+  addOns: [PricingPagePricingCategoriesAddOnsMutation]
 }
 
 input PricingPageMutation {

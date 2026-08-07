@@ -928,6 +928,7 @@ export type PricingPagePricingCategoriesPlansCarePlan = {
   __typename?: 'PricingPagePricingCategoriesPlansCarePlan';
   title?: Maybe<Scalars['String']['output']>;
   price?: Maybe<Scalars['String']['output']>;
+  priceGbp?: Maybe<Scalars['String']['output']>;
   cadence?: Maybe<Scalars['String']['output']>;
   summary?: Maybe<Scalars['String']['output']>;
 };
@@ -937,7 +938,9 @@ export type PricingPagePricingCategoriesPlans = {
   label?: Maybe<Scalars['String']['output']>;
   name: Scalars['String']['output'];
   price: Scalars['String']['output'];
+  priceGbp?: Maybe<Scalars['String']['output']>;
   discountedPrice?: Maybe<Scalars['String']['output']>;
+  discountedPriceGbp?: Maybe<Scalars['String']['output']>;
   priceNote?: Maybe<Scalars['String']['output']>;
   delivery?: Maybe<Scalars['String']['output']>;
   tagline?: Maybe<Scalars['String']['output']>;
@@ -950,11 +953,30 @@ export type PricingPagePricingCategoriesPlans = {
   revisions?: Maybe<Scalars['String']['output']>;
 };
 
+export type PricingPagePricingCategoriesCarePlans = {
+  __typename?: 'PricingPagePricingCategoriesCarePlans';
+  title?: Maybe<Scalars['String']['output']>;
+  price?: Maybe<Scalars['String']['output']>;
+  priceGbp?: Maybe<Scalars['String']['output']>;
+  cadence?: Maybe<Scalars['String']['output']>;
+  summary?: Maybe<Scalars['String']['output']>;
+};
+
+export type PricingPagePricingCategoriesAddOns = {
+  __typename?: 'PricingPagePricingCategoriesAddOns';
+  label?: Maybe<Scalars['String']['output']>;
+  price?: Maybe<Scalars['String']['output']>;
+  priceGbp?: Maybe<Scalars['String']['output']>;
+  note?: Maybe<Scalars['String']['output']>;
+};
+
 export type PricingPagePricingCategories = {
   __typename?: 'PricingPagePricingCategories';
   label: Scalars['String']['output'];
   slug?: Maybe<Scalars['String']['output']>;
   plans?: Maybe<Array<Maybe<PricingPagePricingCategoriesPlans>>>;
+  carePlans?: Maybe<Array<Maybe<PricingPagePricingCategoriesCarePlans>>>;
+  addOns?: Maybe<Array<Maybe<PricingPagePricingCategoriesAddOns>>>;
 };
 
 export type PricingPage = Node & Document & {
@@ -993,6 +1015,7 @@ export type PricingPagePricingCategoriesPlansCtaLinkFilter = {
 export type PricingPagePricingCategoriesPlansCarePlanFilter = {
   title?: InputMaybe<StringFilter>;
   price?: InputMaybe<StringFilter>;
+  priceGbp?: InputMaybe<StringFilter>;
   cadence?: InputMaybe<StringFilter>;
   summary?: InputMaybe<StringFilter>;
 };
@@ -1001,7 +1024,9 @@ export type PricingPagePricingCategoriesPlansFilter = {
   label?: InputMaybe<StringFilter>;
   name?: InputMaybe<StringFilter>;
   price?: InputMaybe<StringFilter>;
+  priceGbp?: InputMaybe<StringFilter>;
   discountedPrice?: InputMaybe<StringFilter>;
+  discountedPriceGbp?: InputMaybe<StringFilter>;
   priceNote?: InputMaybe<StringFilter>;
   delivery?: InputMaybe<StringFilter>;
   tagline?: InputMaybe<StringFilter>;
@@ -1014,10 +1039,27 @@ export type PricingPagePricingCategoriesPlansFilter = {
   revisions?: InputMaybe<StringFilter>;
 };
 
+export type PricingPagePricingCategoriesCarePlansFilter = {
+  title?: InputMaybe<StringFilter>;
+  price?: InputMaybe<StringFilter>;
+  priceGbp?: InputMaybe<StringFilter>;
+  cadence?: InputMaybe<StringFilter>;
+  summary?: InputMaybe<StringFilter>;
+};
+
+export type PricingPagePricingCategoriesAddOnsFilter = {
+  label?: InputMaybe<StringFilter>;
+  price?: InputMaybe<StringFilter>;
+  priceGbp?: InputMaybe<StringFilter>;
+  note?: InputMaybe<StringFilter>;
+};
+
 export type PricingPagePricingCategoriesFilter = {
   label?: InputMaybe<StringFilter>;
   slug?: InputMaybe<StringFilter>;
   plans?: InputMaybe<PricingPagePricingCategoriesPlansFilter>;
+  carePlans?: InputMaybe<PricingPagePricingCategoriesCarePlansFilter>;
+  addOns?: InputMaybe<PricingPagePricingCategoriesAddOnsFilter>;
 };
 
 export type PricingPageFilter = {
@@ -1468,6 +1510,7 @@ export type PricingPagePricingCategoriesPlansCtaLinkMutation = {
 export type PricingPagePricingCategoriesPlansCarePlanMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   price?: InputMaybe<Scalars['String']['input']>;
+  priceGbp?: InputMaybe<Scalars['String']['input']>;
   cadence?: InputMaybe<Scalars['String']['input']>;
   summary?: InputMaybe<Scalars['String']['input']>;
 };
@@ -1476,7 +1519,9 @@ export type PricingPagePricingCategoriesPlansMutation = {
   label?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   price?: InputMaybe<Scalars['String']['input']>;
+  priceGbp?: InputMaybe<Scalars['String']['input']>;
   discountedPrice?: InputMaybe<Scalars['String']['input']>;
+  discountedPriceGbp?: InputMaybe<Scalars['String']['input']>;
   priceNote?: InputMaybe<Scalars['String']['input']>;
   delivery?: InputMaybe<Scalars['String']['input']>;
   tagline?: InputMaybe<Scalars['String']['input']>;
@@ -1489,10 +1534,27 @@ export type PricingPagePricingCategoriesPlansMutation = {
   revisions?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type PricingPagePricingCategoriesCarePlansMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  price?: InputMaybe<Scalars['String']['input']>;
+  priceGbp?: InputMaybe<Scalars['String']['input']>;
+  cadence?: InputMaybe<Scalars['String']['input']>;
+  summary?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PricingPagePricingCategoriesAddOnsMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  price?: InputMaybe<Scalars['String']['input']>;
+  priceGbp?: InputMaybe<Scalars['String']['input']>;
+  note?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type PricingPagePricingCategoriesMutation = {
   label?: InputMaybe<Scalars['String']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
   plans?: InputMaybe<Array<InputMaybe<PricingPagePricingCategoriesPlansMutation>>>;
+  carePlans?: InputMaybe<Array<InputMaybe<PricingPagePricingCategoriesCarePlansMutation>>>;
+  addOns?: InputMaybe<Array<InputMaybe<PricingPagePricingCategoriesAddOnsMutation>>>;
 };
 
 export type PricingPageMutation = {
@@ -1530,7 +1592,7 @@ export type ServicesPagePartsFragment = { __typename: 'ServicesPage', heroLabel:
 
 export type ContactPagePartsFragment = { __typename: 'ContactPage', heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroTitlePunctuation?: string | null, heroDescription?: string | null, trustIndicators?: Array<{ __typename: 'ContactPageTrustIndicators', icon?: string | null, title: string, description?: string | null } | null> | null };
 
-export type PricingPagePartsFragment = { __typename: 'PricingPage', heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroSubtext?: string | null, heroBackgroundImage?: string | null, heroBackgroundImageUrl?: string | null, sectionLabel?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, customLabel?: string | null, customDescription?: string | null, customCtaLabel?: string | null, customCtaHref?: string | null, pricingCategories?: Array<{ __typename: 'PricingPagePricingCategories', label: string, slug?: string | null, plans?: Array<{ __typename: 'PricingPagePricingCategoriesPlans', label?: string | null, name: string, price: string, discountedPrice?: string | null, priceNote?: string | null, delivery?: string | null, tagline?: string | null, featured?: boolean | null, ctaLabel?: string | null, features?: Array<string | null> | null, bestFor?: string | null, revisions?: string | null, ctaLink?: { __typename: 'PricingPagePricingCategoriesPlansCtaLink', linkType?: string | null, linkValue?: string | null } | null, carePlan?: { __typename: 'PricingPagePricingCategoriesPlansCarePlan', title?: string | null, price?: string | null, cadence?: string | null, summary?: string | null } | null } | null> | null } | null> | null };
+export type PricingPagePartsFragment = { __typename: 'PricingPage', heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroSubtext?: string | null, heroBackgroundImage?: string | null, heroBackgroundImageUrl?: string | null, sectionLabel?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, customLabel?: string | null, customDescription?: string | null, customCtaLabel?: string | null, customCtaHref?: string | null, pricingCategories?: Array<{ __typename: 'PricingPagePricingCategories', label: string, slug?: string | null, plans?: Array<{ __typename: 'PricingPagePricingCategoriesPlans', label?: string | null, name: string, price: string, priceGbp?: string | null, discountedPrice?: string | null, discountedPriceGbp?: string | null, priceNote?: string | null, delivery?: string | null, tagline?: string | null, featured?: boolean | null, ctaLabel?: string | null, features?: Array<string | null> | null, bestFor?: string | null, revisions?: string | null, ctaLink?: { __typename: 'PricingPagePricingCategoriesPlansCtaLink', linkType?: string | null, linkValue?: string | null } | null, carePlan?: { __typename: 'PricingPagePricingCategoriesPlansCarePlan', title?: string | null, price?: string | null, priceGbp?: string | null, cadence?: string | null, summary?: string | null } | null } | null> | null, carePlans?: Array<{ __typename: 'PricingPagePricingCategoriesCarePlans', title?: string | null, price?: string | null, priceGbp?: string | null, cadence?: string | null, summary?: string | null } | null> | null, addOns?: Array<{ __typename: 'PricingPagePricingCategoriesAddOns', label?: string | null, price?: string | null, priceGbp?: string | null, note?: string | null } | null> | null } | null> | null };
 
 export type ProjectQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1708,7 +1770,7 @@ export type PricingPageQueryVariables = Exact<{
 }>;
 
 
-export type PricingPageQuery = { __typename?: 'Query', pricingPage: { __typename: 'PricingPage', id: string, heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroSubtext?: string | null, heroBackgroundImage?: string | null, heroBackgroundImageUrl?: string | null, sectionLabel?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, customLabel?: string | null, customDescription?: string | null, customCtaLabel?: string | null, customCtaHref?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, pricingCategories?: Array<{ __typename: 'PricingPagePricingCategories', label: string, slug?: string | null, plans?: Array<{ __typename: 'PricingPagePricingCategoriesPlans', label?: string | null, name: string, price: string, discountedPrice?: string | null, priceNote?: string | null, delivery?: string | null, tagline?: string | null, featured?: boolean | null, ctaLabel?: string | null, features?: Array<string | null> | null, bestFor?: string | null, revisions?: string | null, ctaLink?: { __typename: 'PricingPagePricingCategoriesPlansCtaLink', linkType?: string | null, linkValue?: string | null } | null, carePlan?: { __typename: 'PricingPagePricingCategoriesPlansCarePlan', title?: string | null, price?: string | null, cadence?: string | null, summary?: string | null } | null } | null> | null } | null> | null } };
+export type PricingPageQuery = { __typename?: 'Query', pricingPage: { __typename: 'PricingPage', id: string, heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroSubtext?: string | null, heroBackgroundImage?: string | null, heroBackgroundImageUrl?: string | null, sectionLabel?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, customLabel?: string | null, customDescription?: string | null, customCtaLabel?: string | null, customCtaHref?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, pricingCategories?: Array<{ __typename: 'PricingPagePricingCategories', label: string, slug?: string | null, plans?: Array<{ __typename: 'PricingPagePricingCategoriesPlans', label?: string | null, name: string, price: string, priceGbp?: string | null, discountedPrice?: string | null, discountedPriceGbp?: string | null, priceNote?: string | null, delivery?: string | null, tagline?: string | null, featured?: boolean | null, ctaLabel?: string | null, features?: Array<string | null> | null, bestFor?: string | null, revisions?: string | null, ctaLink?: { __typename: 'PricingPagePricingCategoriesPlansCtaLink', linkType?: string | null, linkValue?: string | null } | null, carePlan?: { __typename: 'PricingPagePricingCategoriesPlansCarePlan', title?: string | null, price?: string | null, priceGbp?: string | null, cadence?: string | null, summary?: string | null } | null } | null> | null, carePlans?: Array<{ __typename: 'PricingPagePricingCategoriesCarePlans', title?: string | null, price?: string | null, priceGbp?: string | null, cadence?: string | null, summary?: string | null } | null> | null, addOns?: Array<{ __typename: 'PricingPagePricingCategoriesAddOns', label?: string | null, price?: string | null, priceGbp?: string | null, note?: string | null } | null> | null } | null> | null } };
 
 export type PricingPageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1720,7 +1782,7 @@ export type PricingPageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type PricingPageConnectionQuery = { __typename?: 'Query', pricingPageConnection: { __typename?: 'PricingPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PricingPageConnectionEdges', cursor: string, node?: { __typename: 'PricingPage', id: string, heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroSubtext?: string | null, heroBackgroundImage?: string | null, heroBackgroundImageUrl?: string | null, sectionLabel?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, customLabel?: string | null, customDescription?: string | null, customCtaLabel?: string | null, customCtaHref?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, pricingCategories?: Array<{ __typename: 'PricingPagePricingCategories', label: string, slug?: string | null, plans?: Array<{ __typename: 'PricingPagePricingCategoriesPlans', label?: string | null, name: string, price: string, discountedPrice?: string | null, priceNote?: string | null, delivery?: string | null, tagline?: string | null, featured?: boolean | null, ctaLabel?: string | null, features?: Array<string | null> | null, bestFor?: string | null, revisions?: string | null, ctaLink?: { __typename: 'PricingPagePricingCategoriesPlansCtaLink', linkType?: string | null, linkValue?: string | null } | null, carePlan?: { __typename: 'PricingPagePricingCategoriesPlansCarePlan', title?: string | null, price?: string | null, cadence?: string | null, summary?: string | null } | null } | null> | null } | null> | null } | null } | null> | null } };
+export type PricingPageConnectionQuery = { __typename?: 'Query', pricingPageConnection: { __typename?: 'PricingPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PricingPageConnectionEdges', cursor: string, node?: { __typename: 'PricingPage', id: string, heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroSubtext?: string | null, heroBackgroundImage?: string | null, heroBackgroundImageUrl?: string | null, sectionLabel?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, customLabel?: string | null, customDescription?: string | null, customCtaLabel?: string | null, customCtaHref?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, pricingCategories?: Array<{ __typename: 'PricingPagePricingCategories', label: string, slug?: string | null, plans?: Array<{ __typename: 'PricingPagePricingCategoriesPlans', label?: string | null, name: string, price: string, priceGbp?: string | null, discountedPrice?: string | null, discountedPriceGbp?: string | null, priceNote?: string | null, delivery?: string | null, tagline?: string | null, featured?: boolean | null, ctaLabel?: string | null, features?: Array<string | null> | null, bestFor?: string | null, revisions?: string | null, ctaLink?: { __typename: 'PricingPagePricingCategoriesPlansCtaLink', linkType?: string | null, linkValue?: string | null } | null, carePlan?: { __typename: 'PricingPagePricingCategoriesPlansCarePlan', title?: string | null, price?: string | null, priceGbp?: string | null, cadence?: string | null, summary?: string | null } | null } | null> | null, carePlans?: Array<{ __typename: 'PricingPagePricingCategoriesCarePlans', title?: string | null, price?: string | null, priceGbp?: string | null, cadence?: string | null, summary?: string | null } | null> | null, addOns?: Array<{ __typename: 'PricingPagePricingCategoriesAddOns', label?: string | null, price?: string | null, priceGbp?: string | null, note?: string | null } | null> | null } | null> | null } | null } | null> | null } };
 
 export const ProjectPartsFragmentDoc = gql`
     fragment ProjectParts on Project {
@@ -1948,7 +2010,9 @@ export const PricingPagePartsFragmentDoc = gql`
       label
       name
       price
+      priceGbp
       discountedPrice
+      discountedPriceGbp
       priceNote
       delivery
       tagline
@@ -1964,11 +2028,27 @@ export const PricingPagePartsFragmentDoc = gql`
         __typename
         title
         price
+        priceGbp
         cadence
         summary
       }
       bestFor
       revisions
+    }
+    carePlans {
+      __typename
+      title
+      price
+      priceGbp
+      cadence
+      summary
+    }
+    addOns {
+      __typename
+      label
+      price
+      priceGbp
+      note
     }
   }
   customLabel

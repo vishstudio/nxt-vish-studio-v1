@@ -4,8 +4,14 @@ import { ArrowRight, Check, ChevronDown, Sparkles } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { useRef, useState } from "react";
+import { usePricingCurrency } from "../../hooks/usePricingCurrency";
 import { useTinaPricing } from "../../hooks/useTinaVisualEditing";
 import { type PricingPlan } from "../../lib/pricing";
+import {
+  getLocalizedCarePlanPrice,
+  getLocalizedPlanPrice,
+  type PricingCurrency,
+} from "../../lib/pricing-currency";
 import { CarouselProgress } from "../carousel-progress/CarouselProgress";
 import { PricingPlanChoiceModal } from "../pricing-plan-choice-modal/pricing-plan-choice-modal";
 import { Tabs } from "../tabs/Tabs";
@@ -20,6 +26,7 @@ const PlanCard = ({
   isExpanded,
   onToggleDetails,
   onChoosePlan,
+  currency,
 }: {
   plan: PricingPlan;
   index: number;
@@ -28,7 +35,10 @@ const PlanCard = ({
   isExpanded: boolean;
   onToggleDetails: () => void;
   onChoosePlan: (plan: PricingPlan) => void;
+  currency: PricingCurrency;
 }) => {
+  const localizedPrice = getLocalizedPlanPrice(plan, currency);
+
   return (
     <motion.div
       data-pricing-card
@@ -72,21 +82,23 @@ const PlanCard = ({
               rawPlan
                 ? tinaField(
                     rawPlan,
-                    plan.discountedPrice ? "discountedPrice" : "price",
+                    localizedPrice.discountedPrice
+                      ? localizedPrice.discountedPriceField
+                      : localizedPrice.priceField,
                   )
                 : undefined
             }
           >
-            {plan.discountedPrice || plan.price}
+            {localizedPrice.discountedPrice || localizedPrice.price}
           </span>
-          {plan.discountedPrice && (
+          {localizedPrice.discountedPrice && (
             <span
               className="font-mono text-xs text-gray-500 line-through sm:text-sm"
               data-tina-field={
-                rawPlan ? tinaField(rawPlan, "price") : undefined
+                rawPlan ? tinaField(rawPlan, localizedPrice.priceField) : undefined
               }
             >
-              {plan.price}
+              {localizedPrice.price}
             </span>
           )}
         </div>
@@ -156,13 +168,23 @@ const PlanCard = ({
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="overflow-hidden lg:hidden"
           >
-            <PlanDetails plan={plan} tinaField={tinaField} rawPlan={rawPlan} />
+            <PlanDetails
+              plan={plan}
+              tinaField={tinaField}
+              rawPlan={rawPlan}
+              currency={currency}
+            />
           </motion.div>
         )}
       </AnimatePresence>
 
       <div className="hidden lg:block lg:flex-1 lg:pb-10">
-        <PlanDetails plan={plan} tinaField={tinaField} rawPlan={rawPlan} />
+        <PlanDetails
+          plan={plan}
+          tinaField={tinaField}
+          rawPlan={rawPlan}
+          currency={currency}
+        />
       </div>
     </motion.div>
   );
@@ -172,10 +194,12 @@ const PlanDetails = ({
   plan,
   tinaField,
   rawPlan,
+  currency,
 }: {
   plan: PricingPlan;
   tinaField: (obj: any, field: string) => string | undefined;
   rawPlan: any;
+  currency: PricingCurrency;
 }) => {
   return (
     <div className="mt-8 border-t border-white/8 pt-8 lg:border-t-0 lg:pt-0">
@@ -209,12 +233,17 @@ const PlanDetails = ({
             className="font-mono text-xs text-gray-500"
             data-tina-field={
               rawPlan?.carePlan
-                ? tinaField(rawPlan.carePlan, "price")
+                ? tinaField(
+                    rawPlan.carePlan,
+                    currency === "GBP" && plan.carePlan.priceGbp
+                      ? "priceGbp"
+                      : "price",
+                  )
                 : undefined
             }
           >
             <span className="text-gray-600">Care plan: </span>
-            {plan.carePlan.price}
+            {getLocalizedCarePlanPrice(plan.carePlan, currency)}
           </p>
         )}
         {plan.bestFor && (
@@ -236,6 +265,7 @@ const PlanDetails = ({
 
 export const Pricing = () => {
   const { data: content, tinaField, rawPricingPage } = useTinaPricing();
+  const pricingCurrency = usePricingCurrency();
   const carouselRef = useRef<HTMLDivElement>(null);
   const pricingCategories =
     content.pricingCategories.length > 0
@@ -245,6 +275,8 @@ export const Pricing = () => {
             label: "Website",
             slug: "website",
             plans: [],
+            carePlans: [],
+            addOns: [],
           },
         ];
   const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
@@ -397,6 +429,7 @@ export const Pricing = () => {
                     setIsDetailsExpanded((current) => !current)
                   }
                   onChoosePlan={handleChoosePlan}
+                  currency={pricingCurrency}
                 />
               );
             })}

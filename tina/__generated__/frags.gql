@@ -214,7 +214,9 @@ fragment PricingPageParts on PricingPage {
       label
       name
       price
+      priceGbp
       discountedPrice
+      discountedPriceGbp
       priceNote
       delivery
       tagline
@@ -230,11 +232,27 @@ fragment PricingPageParts on PricingPage {
         __typename
         title
         price
+        priceGbp
         cadence
         summary
       }
       bestFor
       revisions
+    }
+    carePlans {
+      __typename
+      title
+      price
+      priceGbp
+      cadence
+      summary
+    }
+    addOns {
+      __typename
+      label
+      price
+      priceGbp
+      note
     }
   }
   customLabel

@@ -8,6 +8,7 @@ import { Button } from '../ui/button/button';
 const LANGUAGE_STORAGE_KEY = 'vish_language';
 const GOOGLE_TRANSLATE_SCRIPT_ID = 'google-translate-script';
 const GOOGLE_TRANSLATE_ELEMENT_ID = 'google_translate_element';
+const GOOGLE_TRANSLATE_STYLE_ID = 'vish-google-translate-chrome-style';
 
 const languages = [
   { code: 'en', label: 'English' },
@@ -35,6 +36,7 @@ declare global {
       };
     };
     __vishGoogleTranslateInitialized?: boolean;
+    __vishGoogleTranslateObserver?: MutationObserver;
     googleTranslateElementInit?: () => void;
   }
 }
@@ -57,6 +59,7 @@ function setTranslateCookie(languageCode: string) {
 }
 
 function applyGoogleTranslate(languageCode: string) {
+  suppressGoogleTranslateChrome();
   setTranslateCookie(languageCode);
 
   const combo = document.querySelector<HTMLSelectElement>('.goog-te-combo');
@@ -67,8 +70,106 @@ function applyGoogleTranslate(languageCode: string) {
   return true;
 }
 
+function suppressGoogleTranslateChrome() {
+  if (typeof document === 'undefined') return;
+
+  if (!document.getElementById(GOOGLE_TRANSLATE_STYLE_ID)) {
+    const style = document.createElement('style');
+    style.id = GOOGLE_TRANSLATE_STYLE_ID;
+    style.textContent = `
+      #${GOOGLE_TRANSLATE_ELEMENT_ID},
+      #${GOOGLE_TRANSLATE_ELEMENT_ID} *,
+      body > .skiptranslate,
+      .skiptranslate,
+      .goog-te-banner-frame,
+      .goog-te-balloon-frame,
+      .goog-te-menu-frame,
+      .goog-te-gadget,
+      .goog-te-spinner-pos,
+      .goog-te-spinner,
+      .goog-tooltip,
+      .goog-tooltip:hover,
+      #goog-gt-tt,
+      #goog-gt-vt,
+      .VIpgJd-ZVi9od-aZ2wEe-wOHMyf,
+      .VIpgJd-ZVi9od-ORHb-OEVmcd,
+      .VIpgJd-ZVi9od-xl07Ob-OEVmcd,
+      .VIpgJd-yAWNEb-L7lbkb,
+      iframe.skiptranslate,
+      iframe[id*="goog"],
+      iframe[src*="translate.google"] {
+        display: none !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+        height: 0 !important;
+        width: 0 !important;
+        opacity: 0 !important;
+        max-height: 0 !important;
+        max-width: 0 !important;
+        overflow: hidden !important;
+      }
+
+      body,
+      html.translated-ltr,
+      html.translated-rtl {
+        top: 0 !important;
+        margin-top: 0 !important;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  document.body.style.top = '0px';
+  document.documentElement.style.marginTop = '0px';
+
+  document
+    .querySelectorAll<HTMLElement>(
+      [
+        `#${GOOGLE_TRANSLATE_ELEMENT_ID}`,
+        'body > .skiptranslate',
+        '.goog-te-banner-frame',
+        '.goog-te-balloon-frame',
+        '.goog-te-menu-frame',
+        '.goog-te-gadget',
+        '.goog-te-spinner-pos',
+        '.goog-tooltip',
+        '#goog-gt-tt',
+        '#goog-gt-vt',
+        'iframe.skiptranslate',
+        'iframe[id*="goog"]',
+        'iframe[src*="translate.google"]',
+      ].join(','),
+    )
+    .forEach((element) => {
+      element.setAttribute('aria-hidden', 'true');
+      element.style.setProperty('display', 'none', 'important');
+      element.style.setProperty('visibility', 'hidden', 'important');
+      element.style.setProperty('pointer-events', 'none', 'important');
+      element.style.setProperty('height', '0', 'important');
+      element.style.setProperty('width', '0', 'important');
+      element.style.setProperty('opacity', '0', 'important');
+    });
+}
+
+function observeGoogleTranslateChrome() {
+  if (typeof window === 'undefined') return;
+  if (window.__vishGoogleTranslateObserver) return;
+
+  suppressGoogleTranslateChrome();
+
+  window.__vishGoogleTranslateObserver = new MutationObserver(() => {
+    suppressGoogleTranslateChrome();
+  });
+
+  window.__vishGoogleTranslateObserver.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+  });
+}
+
 function loadGoogleTranslate() {
   if (typeof window === 'undefined') return;
+  observeGoogleTranslateChrome();
 
   window.googleTranslateElementInit = () => {
     if (!window.google?.translate?.TranslateElement) return;
@@ -93,6 +194,7 @@ function loadGoogleTranslate() {
     }
 
     window.setTimeout(() => {
+      suppressGoogleTranslateChrome();
       applyGoogleTranslate(getStoredLanguage());
     }, 250);
   };

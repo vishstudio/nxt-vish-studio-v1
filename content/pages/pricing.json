@@ -36,7 +36,8 @@
             "6 months hosting"
           ],
           "bestFor": "Freelancers, consultants, pop-up businesses",
-          "revisions": "1 revision round"
+          "revisions": "1 revision round",
+          "priceGbp": "£230"
         },
         {
           "label": "STUDIO",
@@ -61,7 +62,8 @@
             "12 months hosting"
           ],
           "bestFor": "Restaurants, salons, clinics, local services",
-          "revisions": "2 revision rounds"
+          "revisions": "2 revision rounds",
+          "priceGbp": "£445"
         },
         {
           "label": "PRO",
@@ -86,7 +88,57 @@
             "Priority launch support"
           ],
           "bestFor": "Tourism, real estate, retail, established brands",
-          "revisions": "Unlimited during project"
+          "revisions": "Unlimited during project",
+          "priceGbp": "£725"
+        }
+      ],
+      "carePlans": [
+        {
+          "title": "Essentials Care",
+          "price": "Rs 1,500 / mo",
+          "priceGbp": "£25 / mo",
+          "cadence": "Monthly",
+          "summary": "Core uptime checks, light content edits, backups, and monthly health monitoring."
+        },
+        {
+          "title": "Growth Care",
+          "price": "Rs 2,500 / mo",
+          "priceGbp": "£40 / mo",
+          "cadence": "Monthly",
+          "summary": "Performance checks, minor content updates, SEO hygiene, uptime monitoring, and hosting support."
+        },
+        {
+          "title": "Premium Care",
+          "price": "Rs 4,500 / mo",
+          "priceGbp": "£70 / mo",
+          "cadence": "Monthly",
+          "summary": "Priority support, conversion checks, technical SEO review, analytics monitoring, and monthly improvement planning."
+        }
+      ],
+      "addOns": [
+        {
+          "label": "Additional content page",
+          "price": "Rs 1,500 / page",
+          "priceGbp": "£25 / page",
+          "note": "For service, landing, legal, or campaign pages."
+        },
+        {
+          "label": "Additional homepage section",
+          "price": "Rs 900 / section",
+          "priceGbp": "£15 / section",
+          "note": "Useful for testimonials, FAQs, galleries, or conversion blocks."
+        },
+        {
+          "label": "Blog article setup",
+          "price": "Rs 600 / article",
+          "priceGbp": "£10 / article",
+          "note": "Formatting, metadata, image placement, and publishing support."
+        },
+        {
+          "label": "Advanced SEO pass",
+          "price": "Rs 3,500",
+          "priceGbp": "£55",
+          "note": "Keyword structure, metadata, schema, and internal linking review."
         }
       ]
     },
@@ -117,7 +169,8 @@
             "4 Features"
           ],
           "bestFor": "MVPs, booking tools, client intake apps",
-          "revisions": "1 revision round"
+          "revisions": "1 revision round",
+          "priceGbp": "£1,035"
         },
         {
           "label": "STUDIO",
@@ -144,7 +197,8 @@
             "10 Features"
           ],
           "bestFor": "Customer portals, booking apps, operational tools",
-          "revisions": "2 revision rounds"
+          "revisions": "2 revision rounds",
+          "priceGbp": "£1,350"
         },
         {
           "label": "PRO",
@@ -171,7 +225,57 @@
             "15 - 20 Features"
           ],
           "bestFor": "Marketplaces, SaaS apps, internal platforms, funded products",
-          "revisions": "Scoped iteration cycles"
+          "revisions": "Scoped iteration cycles",
+          "priceGbp": "£1,590+"
+        }
+      ],
+      "carePlans": [
+        {
+          "title": "Essentials App Support",
+          "price": "Rs 6,500 / mo",
+          "priceGbp": "£105 / mo",
+          "cadence": "Monthly",
+          "summary": "Basic QA support, app health checks, issue triage, and store readiness checks."
+        },
+        {
+          "title": "Growth App Support",
+          "price": "Rs 10,000 / mo",
+          "priceGbp": "£160 / mo",
+          "cadence": "Monthly",
+          "summary": "App monitoring, QA support, minor improvements, release support, and launch-readiness maintenance."
+        },
+        {
+          "title": "Premium App Support",
+          "price": "Rs 18,000 / mo",
+          "priceGbp": "£285 / mo",
+          "cadence": "Monthly",
+          "summary": "Priority mobile support, release planning, feature iteration, analytics checks, and store optimization guidance."
+        }
+      ],
+      "addOns": [
+        {
+          "label": "Additional app screen",
+          "price": "Rs 6,500 / screen",
+          "priceGbp": "£105 / screen",
+          "note": "Interface, state handling, and implementation for one new screen."
+        },
+        {
+          "label": "Push notification flow",
+          "price": "From Rs 9,500",
+          "priceGbp": "From £150",
+          "note": "Notification triggers, copy, setup, and testing."
+        },
+        {
+          "label": "App store launch support",
+          "price": "Rs 12,000",
+          "priceGbp": "£190",
+          "note": "Listing guidance, assets, metadata, and submission support."
+        },
+        {
+          "label": "Advanced app workflow",
+          "price": "From Rs 18,000",
+          "priceGbp": "From £285",
+          "note": "Multi-step flows, permissions, data rules, or integrations."
         }
       ]
     },
@@ -201,7 +305,8 @@
             "Deployment and handoff"
           ],
           "bestFor": "Internal tools, lead capture systems, workflow prototypes",
-          "revisions": "1 revision round"
+          "revisions": "1 revision round",
+          "priceGbp": "£1,195"
         },
         {
           "label": "STUDIO",
@@ -225,7 +330,8 @@
             "Performance-focused deployment"
           ],
           "bestFor": "Client portals, booking systems, operational dashboards",
-          "revisions": "2 revision rounds"
+          "revisions": "2 revision rounds",
+          "priceGbp": "£1,430"
         },
         {
           "label": "PRO",
@@ -249,7 +355,57 @@
             "Launch, testing, and growth support"
           ],
           "bestFor": "SaaS products, CRM systems, marketplaces, enterprise workflows",
-          "revisions": "Scoped iteration cycles"
+          "revisions": "Scoped iteration cycles",
+          "priceGbp": "£2,385+"
+        }
+      ],
+      "carePlans": [
+        {
+          "title": "Essentials Software Support",
+          "price": "Rs 5,500 / mo",
+          "priceGbp": "£85 / mo",
+          "cadence": "Monthly",
+          "summary": "Bug triage, dependency checks, uptime review, and minor workflow support."
+        },
+        {
+          "title": "Growth Software Support",
+          "price": "Rs 8,500 / mo",
+          "priceGbp": "£135 / mo",
+          "cadence": "Monthly",
+          "summary": "Bug triage, dependency updates, small workflow improvements, and release support."
+        },
+        {
+          "title": "Premium Software Support",
+          "price": "Rs 15,000 / mo",
+          "priceGbp": "£240 / mo",
+          "cadence": "Monthly",
+          "summary": "Priority engineering support, monitoring review, release planning, reporting checks, and iterative product improvements."
+        }
+      ],
+      "addOns": [
+        {
+          "label": "Additional dashboard screen",
+          "price": "Rs 5,500 / screen",
+          "priceGbp": "£85 / screen",
+          "note": "Designed and engineered into the active product flow."
+        },
+        {
+          "label": "Advanced user role",
+          "price": "Rs 6,500 / role",
+          "priceGbp": "£105 / role",
+          "note": "Permissions, routing, and interface states for a new role."
+        },
+        {
+          "label": "Third-party integration",
+          "price": "From Rs 12,000",
+          "priceGbp": "From £190",
+          "note": "API, CRM, payment, booking, automation, or analytics connection."
+        },
+        {
+          "label": "Reporting module",
+          "price": "From Rs 15,000",
+          "priceGbp": "From £240",
+          "note": "Metrics, filtering, export, and admin visibility."
         }
       ]
     },
@@ -279,7 +435,8 @@
             "Export-ready brand files"
           ],
           "bestFor": "New ventures, freelancers, small teams",
-          "revisions": "1 revision round"
+          "revisions": "1 revision round",
+          "priceGbp": "£200"
         },
         {
           "label": "STUDIO",
@@ -303,7 +460,8 @@
             "Launch asset exports"
           ],
           "bestFor": "Growing brands, boutiques, hospitality, service businesses",
-          "revisions": "2 revision rounds"
+          "revisions": "2 revision rounds",
+          "priceGbp": "£550"
         },
         {
           "label": "PRO",
@@ -327,7 +485,57 @@
             "Priority rollout support"
           ],
           "bestFor": "Scaling brands, product launches, premium repositioning",
-          "revisions": "Unlimited during project"
+          "revisions": "Unlimited during project",
+          "priceGbp": "£1,375"
+        }
+      ],
+      "carePlans": [
+        {
+          "title": "Essentials Brand Support",
+          "price": "Rs 1,200 / mo",
+          "priceGbp": "£20 / mo",
+          "cadence": "Monthly",
+          "summary": "Light brand file upkeep, small export requests, and visual consistency checks."
+        },
+        {
+          "title": "Growth Brand Support",
+          "price": "Rs 1,800 / mo",
+          "priceGbp": "£30 / mo",
+          "cadence": "Monthly",
+          "summary": "Social asset support, campaign graphics, brand file maintenance, and monthly creative guidance."
+        },
+        {
+          "title": "Premium Brand Support",
+          "price": "Rs 3,500 / mo",
+          "priceGbp": "£55 / mo",
+          "cadence": "Monthly",
+          "summary": "Priority creative support, campaign system refinement, launch assets, and ongoing brand direction."
+        }
+      ],
+      "addOns": [
+        {
+          "label": "Additional logo lockup",
+          "price": "Rs 1,200",
+          "priceGbp": "£20",
+          "note": "Alternative layout or usage-specific mark."
+        },
+        {
+          "label": "Social media template",
+          "price": "Rs 750 / template",
+          "priceGbp": "£10 / template",
+          "note": "Reusable branded layout for posts, stories, or promos."
+        },
+        {
+          "label": "Campaign creative set",
+          "price": "Rs 4,500",
+          "priceGbp": "£70",
+          "note": "A compact set of campaign visuals for one launch or offer."
+        },
+        {
+          "label": "Extended brand guideline page",
+          "price": "Rs 1,000 / page",
+          "priceGbp": "£15 / page",
+          "note": "More detail for usage, tone, layouts, or production rules."
         }
       ]
     }

@@ -15,14 +15,26 @@ const pricingPlanFields: any[] = [
   {
     type: "string" as const,
     name: "price",
-    label: "Price (e.g. Rs 14,000)",
+    label: "Mauritius Price (e.g. Rs 14,000)",
     required: true,
   },
   {
     type: "string" as const,
+    name: "priceGbp",
+    label: "International Price (GBP)",
+    description: "Shown to visitors outside Mauritius, e.g. £230 or £1,590+.",
+  },
+  {
+    type: "string" as const,
     name: "discountedPrice",
-    label: "Discounted Price",
-    description: "Optional sale price shown before the regular price.",
+    label: "Discounted Mauritius Price",
+    description: "Optional sale price shown before the regular Mauritius price.",
+  },
+  {
+    type: "string" as const,
+    name: "discountedPriceGbp",
+    label: "Discounted International Price (GBP)",
+    description: "Optional sale price shown before the regular GBP price.",
   },
   {
     type: "string" as const,
@@ -86,7 +98,8 @@ const pricingPlanFields: any[] = [
       "Optional package-specific maintenance plan. This appears on the pricing page and in homepage package details.",
     fields: [
       { type: "string" as const, name: "title", label: "Care Plan Title" },
-      { type: "string" as const, name: "price", label: "Monthly Price" },
+      { type: "string" as const, name: "price", label: "Monthly Mauritius Price" },
+      { type: "string" as const, name: "priceGbp", label: "Monthly International Price (GBP)" },
       { type: "string" as const, name: "cadence", label: "Cadence" },
       {
         type: "string" as const,
@@ -98,6 +111,39 @@ const pricingPlanFields: any[] = [
   },
   { type: "string" as const, name: "bestFor", label: "Best For" },
   { type: "string" as const, name: "revisions", label: "Revisions Policy" },
+];
+
+const pricingCarePlanFields: any[] = [
+  { type: "string" as const, name: "title", label: "Care Plan Title" },
+  { type: "string" as const, name: "price", label: "Monthly Mauritius Price" },
+  {
+    type: "string" as const,
+    name: "priceGbp",
+    label: "Monthly International Price (GBP)",
+  },
+  { type: "string" as const, name: "cadence", label: "Cadence" },
+  {
+    type: "string" as const,
+    name: "summary",
+    label: "Summary",
+    ui: { component: "textarea" },
+  },
+];
+
+const pricingAddOnFields: any[] = [
+  { type: "string" as const, name: "label", label: "Add-on Label" },
+  { type: "string" as const, name: "price", label: "Mauritius Price" },
+  {
+    type: "string" as const,
+    name: "priceGbp",
+    label: "International Price (GBP)",
+  },
+  {
+    type: "string" as const,
+    name: "note",
+    label: "Note",
+    ui: { component: "textarea" },
+  },
 ];
 
 export default defineConfig({
@@ -1075,6 +1121,34 @@ export default defineConfig({
                   }),
                 },
                 fields: pricingPlanFields,
+              },
+              {
+                type: "object",
+                name: "carePlans",
+                label: "Pricing Page Care Plans",
+                description:
+                  "Fallback monthly care rows shown on the full pricing page when a package does not define its own care plan.",
+                list: true,
+                ui: {
+                  itemProps: (item) => ({
+                    label: `${item?.title || "Care plan"}${item?.price ? ` (${item.price})` : ""}`,
+                  }),
+                },
+                fields: pricingCarePlanFields,
+              },
+              {
+                type: "object",
+                name: "addOns",
+                label: "Pricing Page Add-ons",
+                description:
+                  "Common additional-cost rows shown below packages on the full pricing page.",
+                list: true,
+                ui: {
+                  itemProps: (item) => ({
+                    label: `${item?.label || "Add-on"}${item?.price ? ` (${item.price})` : ""}`,
+                  }),
+                },
+                fields: pricingAddOnFields,
               },
             ],
           },
