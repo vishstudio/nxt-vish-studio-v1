@@ -1,6 +1,6 @@
 "use client";
 import { trackEmailClick, trackSocialLinkClick } from "@/src/lib/analytics";
-import { ArrowRight, Menu, X } from "lucide-react";
+import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -18,21 +18,68 @@ export const Navbar = () => {
   const { data: settings } = useTinaSettings();
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
+  const [isDesktopSubmenuOpen, setIsDesktopSubmenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const isScrolledRef = useRef(false);
   const scrollRaf = useRef<number | null>(null);
 
+  const serviceSubItems = [
+    {
+      name: "SaaS Products",
+      href: "/services/saas-products",
+      description: "Client-ready applications",
+    },
+    {
+      name: "Templates",
+      href: "/services/templates",
+      description: "Launch assets coming soon",
+    },
+    {
+      name: "AI Automations",
+      href: "/services/ai-automations",
+      description: "Workflow systems coming soon",
+    },
+  ];
+
+  const serviceMenuItems = [
+    ...serviceSubItems,
+    {
+      name: "See all services",
+      href: "/services",
+      description: "Full service overview",
+    },
+  ];
+
   const navItems = [
     { name: "Home", href: "/" },
     { name: "Projects", href: "/projects", activePaths: ["/project"] },
-    { name: "Services", href: "/services" },
+    { name: "Services", href: "/services", children: serviceMenuItems },
     { name: "Pricing", href: "/pricing" },
     { name: "About", href: "/about" },
     { name: "Testimonials", href: "/testimonials" },
   ];
 
+  const mobileNavItems = [
+    { name: "Projects", href: "/projects", id: "01" },
+    { name: "Services", id: "02", children: serviceMenuItems },
+    { name: "Pricing", href: "/pricing", id: "03" },
+    { name: "About", href: "/about", id: "04" },
+    { name: "Testimonials", href: "/testimonials", id: "05" },
+    { name: "Contact", href: "/contact", id: "06" },
+  ];
+
   const normalizePath = (path: string) => path.replace(/\/$/, "") || "/";
   const currentPath = normalizePath(pathname || "/");
+  const effectiveIsScrolled = isScrolled && !isDesktopSubmenuOpen;
+  const openMobileMenu = () => {
+    setIsMobileServicesOpen(false);
+    setIsMobileMenuOpen(true);
+  };
+  const closeMobileMenu = () => {
+    setIsMobileServicesOpen(false);
+    setIsMobileMenuOpen(false);
+  };
   const isActiveLink = (href: string, activePaths: string[] = []) => {
     const normalizedHref = normalizePath(href);
 
@@ -92,14 +139,14 @@ export const Navbar = () => {
         className="fixed top-6 left-0 right-0 z-50 flex justify-center pointer-events-none px-6 md:px-12"
       >
         <div
-          className={`pointer-events-auto flex items-center justify-between transition-all duration-300 w-full max-w-[1400px] ${isScrolled
+          className={`pointer-events-auto flex items-center justify-between transition-all duration-300 w-full max-w-[1400px] ${effectiveIsScrolled
             ? "pl-4 pr-2 py-2 md:pl-4 md:pr-2 rounded-full bg-black/80 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/50"
             : "px-0 py-6 rounded-none bg-transparent border-transparent"
             }`}
         >
-          <div className={`flex items-center ${isScrolled ? "gap-3" : "gap-0"}`}>
+          <div className={`flex items-center ${effectiveIsScrolled ? "gap-3" : "gap-0"}`}>
             <div
-              className={`grid h-5 shrink-0 transition-[opacity,width,transform] duration-200 ease-out ${isScrolled ? "w-5 scale-100 opacity-100" : "w-0 scale-95 opacity-0"
+              className={`grid h-5 shrink-0 transition-[opacity,width,transform] duration-200 ease-out ${effectiveIsScrolled ? "w-5 scale-100 opacity-100" : "w-0 scale-95 opacity-0"
                 }`}
               aria-hidden="true"
             >
@@ -112,11 +159,11 @@ export const Navbar = () => {
 
           {/* Desktop Navigation */}
           <nav
-            className={`absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 rounded-full border border-white/5 bg-white/5 p-1 transition-[opacity,transform] duration-200 ease-out lg:flex ${isScrolled
+            className={`absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 rounded-full border border-white/5 bg-white/5 p-1 transition-[opacity,transform] duration-200 ease-out lg:flex ${effectiveIsScrolled
               ? "pointer-events-none scale-95 opacity-0"
               : "pointer-events-auto scale-100 opacity-100"
               }`}
-            aria-hidden={isScrolled}
+            aria-hidden={effectiveIsScrolled}
           >
             <ol className="flex items-center">
               {navItems.map((item) => {
@@ -125,19 +172,95 @@ export const Navbar = () => {
                 return (
                   <li
                     key={item.name}
-                    className="flex items-center justify-center"
+                    className="group relative flex items-center justify-center"
+                    onMouseEnter={
+                      item.children ? () => setIsDesktopSubmenuOpen(true) : undefined
+                    }
+                    onMouseLeave={
+                      item.children ? () => setIsDesktopSubmenuOpen(false) : undefined
+                    }
+                    onFocus={
+                      item.children ? () => setIsDesktopSubmenuOpen(true) : undefined
+                    }
+                    onBlur={
+                      item.children
+                        ? (event) => {
+                            if (
+                              !event.currentTarget.contains(
+                                event.relatedTarget as Node | null,
+                              )
+                            ) {
+                              setIsDesktopSubmenuOpen(false);
+                            }
+                          }
+                        : undefined
+                    }
                   >
-                    <a
-                      href={item.href}
-                      aria-current={isActive ? "page" : undefined}
-                      tabIndex={isScrolled ? -1 : undefined}
-                      className={`px-5 py-2 rounded-full font-sans text-sm font-medium transition-all ${isActive
-                        ? "text-white bg-white/10"
-                        : "text-gray-300 hover:text-white hover:bg-white/10"
-                        }`}
-                    >
-                      {item.name}
-                    </a>
+                    {item.children ? (
+                      <button
+                        type="button"
+                        aria-current={isActive ? "page" : undefined}
+                        aria-expanded={isDesktopSubmenuOpen}
+                        aria-haspopup="menu"
+                        tabIndex={effectiveIsScrolled ? -1 : undefined}
+                        className={`inline-flex items-center gap-1.5 px-5 py-2 rounded-full font-sans text-sm font-medium transition-all ${isActive
+                          ? "text-white bg-white/10"
+                          : "text-gray-300 hover:text-white hover:bg-white/10"
+                          }`}
+                        onClick={() =>
+                          setIsDesktopSubmenuOpen((isOpen) => !isOpen)
+                        }
+                      >
+                        {item.name}
+                        <ChevronDown
+                          className="h-3.5 w-3.5 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180"
+                          aria-hidden="true"
+                        />
+                      </button>
+                    ) : (
+                      <a
+                        href={item.href}
+                        aria-current={isActive ? "page" : undefined}
+                        tabIndex={effectiveIsScrolled ? -1 : undefined}
+                        className={`inline-flex items-center gap-1.5 px-5 py-2 rounded-full font-sans text-sm font-medium transition-all ${isActive
+                          ? "text-white bg-white/10"
+                          : "text-gray-300 hover:text-white hover:bg-white/10"
+                          }`}
+                      >
+                        {item.name}
+                      </a>
+                    )}
+                    {item.children ? (
+                      <div
+                        className="pointer-events-none absolute left-1/2 top-full z-50 w-[18rem] -translate-x-1/2 pt-3 group-hover:pointer-events-auto group-focus-within:pointer-events-auto"
+                        role="menu"
+                      >
+                        <div className="translate-y-2 rounded-2xl border border-white/10 bg-black/95 p-2 opacity-0 shadow-2xl shadow-black/50 backdrop-blur-xl transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100">
+                          <div className="mb-1 px-3 py-2 font-mono text-[10px] uppercase tracking-widest text-vish-accent">
+                            Service tracks
+                          </div>
+                          {item.children.map((child) => (
+                            <a
+                              key={child.name}
+                              href={child.href}
+                              role="menuitem"
+                              tabIndex={effectiveIsScrolled ? -1 : undefined}
+                              className="group/item block rounded-xl px-3 py-3 transition-colors hover:bg-white/10 focus-visible:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vish-accent/70 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                            >
+                              <span className="flex items-center justify-between gap-3">
+                                <span className="font-sans text-sm font-medium text-white">
+                                  {child.name}
+                                </span>
+                                <ArrowRight className="h-3.5 w-3.5 text-vish-accent opacity-0 transition-all group-hover/item:translate-x-0.5 group-hover/item:opacity-100" />
+                              </span>
+                              <span className="mt-1 block font-sans text-xs leading-relaxed text-gray-500">
+                                {child.description}
+                              </span>
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    ) : null}
                   </li>
                 );
               })}
@@ -146,11 +269,11 @@ export const Navbar = () => {
 
           <div className="flex items-center gap-3">
             <div
-              className={`hidden items-center gap-4 transition-[opacity,transform] duration-200 ease-out lg:flex ${isScrolled
+              className={`hidden items-center gap-4 transition-[opacity,transform] duration-200 ease-out lg:flex ${effectiveIsScrolled
                 ? "pointer-events-none translate-x-2 opacity-0"
                 : "pointer-events-auto translate-x-0 opacity-100"
                 }`}
-              aria-hidden={isScrolled}
+              aria-hidden={effectiveIsScrolled}
             >
               <LanguageSelector />
               <Button
@@ -164,7 +287,7 @@ export const Navbar = () => {
                 ariaLabel={PROJECT_INQUIRY_ARIA_LABEL}
                 dataConversionAction={PROJECT_INQUIRY_ACTION}
                 className="font-sans"
-                tabIndex={isScrolled ? -1 : undefined}
+                tabIndex={effectiveIsScrolled ? -1 : undefined}
               >
                 Book Free Call
               </Button>
@@ -173,9 +296,9 @@ export const Navbar = () => {
             <Button
               variant="secondary"
               size="icon"
-              onClick={() => setIsMobileMenuOpen(true)}
+              onClick={openMobileMenu}
               ariaLabel="Open menu"
-              className={isScrolled ? "flex" : "flex lg:hidden"}
+              className={effectiveIsScrolled ? "flex" : "flex lg:hidden"}
             >
               <Menu className="w-5 h-5" />
             </Button>
@@ -194,7 +317,7 @@ export const Navbar = () => {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
               className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm"
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={closeMobileMenu}
             />
             <motion.div
               key="panel"
@@ -211,7 +334,7 @@ export const Navbar = () => {
                 <Button
                   variant="secondary"
                   size="icon"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={closeMobileMenu}
                   ariaLabel="Close menu"
                   className="w-12 h-12"
                 >
@@ -220,18 +343,9 @@ export const Navbar = () => {
               </div>
 
               <div className="flex-1 overflow-y-auto py-8 px-8 flex flex-col gap-2">
-                {[
-                  { name: "Projects", href: "/projects", id: "01" },
-                  { name: "Services", href: "/services", id: "02" },
-                  { name: "Pricing", href: "/pricing", id: "03" },
-                  { name: "About", href: "/about", id: "04" },
-                  { name: "Testimonials", href: "/testimonials", id: "05" },
-                  { name: "Contact", href: "/contact", id: "06" },
-                ].map((item, i) => (
-                  <motion.a
+                {mobileNavItems.map((item, i) => (
+                  <motion.div
                     key={item.name}
-                    href={item.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
                     initial={{ x: 50, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     transition={{
@@ -239,17 +353,89 @@ export const Navbar = () => {
                       duration: 0.4,
                       ease: "easeOut",
                     }}
-                    className="group block py-4"
+                    className="group block py-3"
                   >
-                    <div className="flex items-baseline gap-4 group-hover:translate-x-2 transition-transform duration-300 ease-out">
-                      <span className="font-mono text-sm text-white/20 group-hover:text-vish-accent transition-colors">
-                        {item.id}
-                      </span>
-                      <span className="font-display text-4xl sm:text-5xl font-medium text-white group-hover:text-white/80 transition-colors tracking-tight">
-                        {item.name}
-                      </span>
-                    </div>
-                  </motion.a>
+                    {item.children ? (
+                      <button
+                        type="button"
+                        aria-expanded={isMobileServicesOpen}
+                        aria-controls="mobile-services-submenu"
+                        onClick={() =>
+                          setIsMobileServicesOpen((isOpen) => !isOpen)
+                        }
+                        className="block w-full text-left"
+                      >
+                        <div className="flex items-baseline justify-between gap-4 transition-transform duration-300 ease-out group-hover:translate-x-2">
+                          <span className="flex items-baseline gap-4">
+                            <span className="font-mono text-sm text-white/20 transition-colors group-hover:text-vish-accent">
+                              {item.id}
+                            </span>
+                            <span className="font-display text-4xl font-medium tracking-tight text-white transition-colors group-hover:text-white/80 sm:text-5xl">
+                              {item.name}
+                            </span>
+                          </span>
+                          <ChevronDown
+                            className={`mt-1 h-6 w-6 shrink-0 text-vish-accent transition-transform duration-300 ${isMobileServicesOpen ? "rotate-180" : ""
+                              }`}
+                            aria-hidden="true"
+                          />
+                        </div>
+                      </button>
+                    ) : (
+                      <a
+                        href={item.href}
+                        onClick={closeMobileMenu}
+                        className="block"
+                      >
+                        <div className="flex items-baseline gap-4 transition-transform duration-300 ease-out group-hover:translate-x-2">
+                          <span className="font-mono text-sm text-white/20 transition-colors group-hover:text-vish-accent">
+                            {item.id}
+                          </span>
+                          <span className="font-display text-4xl font-medium tracking-tight text-white transition-colors group-hover:text-white/80 sm:text-5xl">
+                            {item.name}
+                          </span>
+                        </div>
+                      </a>
+                    )}
+                    {item.children ? (
+                      <AnimatePresence initial={false}>
+                        {isMobileServicesOpen ? (
+                          <motion.div
+                            id="mobile-services-submenu"
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{
+                              duration: 0.24,
+                              ease: [0.22, 1, 0.36, 1],
+                            }}
+                            className="overflow-hidden"
+                          >
+                            <div className="ml-10 mt-4 grid gap-2 border-l border-white/10 pl-4 sm:ml-12">
+                              {item.children.map((child) => (
+                                <a
+                                  key={child.name}
+                                  href={child.href}
+                                  onClick={closeMobileMenu}
+                                  className="rounded-2xl border border-white/8 bg-white/[0.025] px-4 py-3 transition-colors hover:border-white/20 hover:bg-white/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vish-accent/70 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                                >
+                                  <span className="flex items-center justify-between gap-3">
+                                    <span className="font-sans text-base font-medium text-white">
+                                      {child.name}
+                                    </span>
+                                    <ArrowRight className="h-4 w-4 text-vish-accent" />
+                                  </span>
+                                  <span className="mt-1 block font-sans text-sm leading-relaxed text-gray-500">
+                                    {child.description}
+                                  </span>
+                                </a>
+                              ))}
+                            </div>
+                          </motion.div>
+                        ) : null}
+                      </AnimatePresence>
+                    ) : null}
+                  </motion.div>
                 ))}
 
                 <motion.div
