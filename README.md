@@ -54,7 +54,7 @@ The source of truth is `src/app/globals.css` and the shared components in `src/c
 | Secondary/title muted text | `vish-gray` / `#6A7282` |
 | Border | `vish-border` / `#333333` |
 
-Typography uses Google Sans for display headings, body copy, controls, and compact labels. Google Sans is loaded in `src/app/layout.tsx` with the Google Fonts stylesheet embed, while Prompt remains loaded through `next/font/google` and reserved for logo-adjacent text. `LogoText` renders the `public/assets/logo-text.svg` wordmark and keeps optional suffixes such as `portal` as regular-weight Prompt text. The layout uses true-black backgrounds, high-contrast typography, restrained yellow accents, thin translucent borders, rounded controls, generous spacing, and a maximum standard content width of 1400px.
+Typography uses Google Sans for display headings, body copy, controls, and compact labels. Google Sans is loaded in `src/app/layout.tsx` with the Google Fonts stylesheet embed, while Prompt remains loaded through `next/font/google` and reserved for logo-adjacent text. `LogoText` renders the VISH Studio wordmark as an inline outlined SVG so Safari and translated pages do not depend on runtime font rendering for the logo; optional suffixes such as `portal` remain regular-weight Prompt text. The layout uses true-black backgrounds, high-contrast typography, restrained yellow accents, thin translucent borders, rounded controls, generous spacing, and a maximum standard content width of 1400px.
 
 Core primitives include `Button`, `PageLayout`, `PageHero`, `Section`, `SectionTitle`, `ProjectCard`, and `FormField`.
 
