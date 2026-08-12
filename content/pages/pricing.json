@@ -16,7 +16,8 @@
         {
           "label": "STARTER",
           "name": "Essentials",
-          "price": "Rs 14,500",
+          "price": "Rs 16,899",
+          "priceGbp": "£269",
           "discountedPrice": "",
           "priceNote": "ONE-TIME",
           "delivery": "4–7 business days",
@@ -36,13 +37,13 @@
             "6 months hosting"
           ],
           "bestFor": "Freelancers, consultants, pop-up businesses",
-          "revisions": "1 revision round",
-          "priceGbp": "£230"
+          "revisions": "1 revision round"
         },
         {
           "label": "STUDIO",
           "name": "Growth",
           "price": "Rs 28,000",
+          "priceGbp": "£445",
           "discountedPrice": "",
           "priceNote": "One-time",
           "delivery": "7–13 business days",
@@ -62,13 +63,13 @@
             "12 months hosting"
           ],
           "bestFor": "Restaurants, salons, clinics, local services",
-          "revisions": "2 revision rounds",
-          "priceGbp": "£445"
+          "revisions": "2 revision rounds"
         },
         {
           "label": "PRO",
           "name": "Premium",
           "price": "Rs 45,500",
+          "priceGbp": "£725",
           "discountedPrice": "",
           "priceNote": "On start 50% - End 50%",
           "delivery": "2–4 weeks",
@@ -88,8 +89,7 @@
             "Priority launch support"
           ],
           "bestFor": "Tourism, real estate, retail, established brands",
-          "revisions": "Unlimited during project",
-          "priceGbp": "£725"
+          "revisions": "Unlimited during project"
         }
       ],
       "carePlans": [
@@ -150,6 +150,7 @@
           "label": "STARTER",
           "name": "Essentials",
           "price": "Rs 65,000",
+          "priceGbp": "£1,035",
           "priceNote": "STARTING FROM",
           "delivery": "4–6 weeks",
           "tagline": "A focused mobile app prototype for validating a core product flow.",
@@ -169,13 +170,13 @@
             "4 Features"
           ],
           "bestFor": "MVPs, booking tools, client intake apps",
-          "revisions": "1 revision round",
-          "priceGbp": "£1,035"
+          "revisions": "1 revision round"
         },
         {
           "label": "STUDIO",
           "name": "Growth",
           "price": "Rs 85,000",
+          "priceGbp": "£1,350",
           "priceNote": "STARTING FROM",
           "delivery": "7–10 weeks",
           "tagline": "A polished mobile application for authenticated customer or team workflows.",
@@ -197,13 +198,13 @@
             "10 Features"
           ],
           "bestFor": "Customer portals, booking apps, operational tools",
-          "revisions": "2 revision rounds",
-          "priceGbp": "£1,350"
+          "revisions": "2 revision rounds"
         },
         {
           "label": "PRO",
           "name": "Premium",
           "price": "Rs 100,000+",
+          "priceGbp": "£1,590+",
           "priceNote": "CUSTOM SCOPE",
           "delivery": "10–16+ weeks",
           "tagline": "A scalable mobile product build with advanced workflows and growth-ready architecture.",
@@ -225,8 +226,7 @@
             "15 - 20 Features"
           ],
           "bestFor": "Marketplaces, SaaS apps, internal platforms, funded products",
-          "revisions": "Scoped iteration cycles",
-          "priceGbp": "£1,590+"
+          "revisions": "Scoped iteration cycles"
         }
       ],
       "carePlans": [
@@ -287,6 +287,7 @@
           "label": "STARTER",
           "name": "Essentials",
           "price": "Rs 75,000",
+          "priceGbp": "£1,195",
           "priceNote": "STARTING FROM",
           "delivery": "4–6 weeks",
           "tagline": "A focused custom tool to automate one high-value workflow.",
@@ -305,13 +306,13 @@
             "Deployment and handoff"
           ],
           "bestFor": "Internal tools, lead capture systems, workflow prototypes",
-          "revisions": "1 revision round",
-          "priceGbp": "£1,195"
+          "revisions": "1 revision round"
         },
         {
           "label": "STUDIO",
           "name": "Growth",
           "price": "Rs 90,000",
+          "priceGbp": "£1,430",
           "priceNote": "STARTING FROM",
           "delivery": "5–8 weeks",
           "tagline": "A scalable web app foundation with authenticated workflows.",
@@ -330,13 +331,13 @@
             "Performance-focused deployment"
           ],
           "bestFor": "Client portals, booking systems, operational dashboards",
-          "revisions": "2 revision rounds",
-          "priceGbp": "£1,430"
+          "revisions": "2 revision rounds"
         },
         {
           "label": "PRO",
           "name": "Premium",
           "price": "Rs 150,000+",
+          "priceGbp": "£2,385+",
           "priceNote": "CUSTOM SCOPE",
           "delivery": "8–12+ weeks",
           "tagline": "A production-grade software build for serious operational scale.",
@@ -355,8 +356,7 @@
             "Launch, testing, and growth support"
           ],
           "bestFor": "SaaS products, CRM systems, marketplaces, enterprise workflows",
-          "revisions": "Scoped iteration cycles",
-          "priceGbp": "£2,385+"
+          "revisions": "Scoped iteration cycles"
         }
       ],
       "carePlans": [
@@ -417,6 +417,7 @@
           "label": "STARTER",
           "name": "Essentials",
           "price": "Rs 12,500",
+          "priceGbp": "£200",
           "priceNote": "ONE-TIME",
           "delivery": "5–8 business days",
           "tagline": "A lean brand identity foundation for clear market presence.",
@@ -435,13 +436,13 @@
             "Export-ready brand files"
           ],
           "bestFor": "New ventures, freelancers, small teams",
-          "revisions": "1 revision round",
-          "priceGbp": "£200"
+          "revisions": "1 revision round"
         },
         {
           "label": "STUDIO",
           "name": "Growth",
           "price": "Rs 34,600",
+          "priceGbp": "£550",
           "priceNote": "ONE-TIME",
           "delivery": "2–3 weeks",
           "tagline": "A complete visual identity system for a more premium brand presence.",
@@ -460,13 +461,13 @@
             "Launch asset exports"
           ],
           "bestFor": "Growing brands, boutiques, hospitality, service businesses",
-          "revisions": "2 revision rounds",
-          "priceGbp": "£550"
+          "revisions": "2 revision rounds"
         },
         {
           "label": "PRO",
           "name": "Premium",
           "price": "Rs 86,500",
+          "priceGbp": "£1,375",
           "priceNote": "ONE-TIME",
           "delivery": "3–6 weeks",
           "tagline": "A strategic brand architecture package for scaling companies.",
@@ -485,8 +486,7 @@
             "Priority rollout support"
           ],
           "bestFor": "Scaling brands, product launches, premium repositioning",
-          "revisions": "Unlimited during project",
-          "priceGbp": "£1,375"
+          "revisions": "Unlimited during project"
         }
       ],
       "carePlans": [
