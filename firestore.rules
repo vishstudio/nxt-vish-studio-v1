@@ -57,5 +57,23 @@ service cloud.firestore {
 
       allow read, update, delete: if false;
     }
+
+    match /newsletter/{subscriptionId} {
+      allow create: if
+        request.resource.data.keys().hasOnly([
+          'email', 'status', 'source', 'createdAt', 'submittedAt'
+        ]) &&
+        request.resource.data.email is string &&
+        request.resource.data.email.size() >= 5 &&
+        request.resource.data.email.matches('^.+@.+\\..+$') &&
+        request.resource.data.status == 'subscribed' &&
+        request.resource.data.source in [
+          'vish.studio/popup', 'vish.studio/footer'
+        ] &&
+        request.resource.data.createdAt == request.time &&
+        request.resource.data.submittedAt is string;
+
+      allow read, update, delete: if false;
+    }
   }
 }

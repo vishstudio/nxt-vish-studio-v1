@@ -88,7 +88,7 @@ export const PricingPlanChoiceModal = ({
                 <span className="text-vish-accent">?</span>
               </h2>
               <p className="mt-5 max-w-xl font-sans text-base leading-relaxed text-gray-400">
-                You selected the {planName} plan. Book a quick call if you want guidance, or start the full project brief if you already know the scope.
+                You selected the {planName} plan. Schedule a quick strategy call if you want guidance, or start the full project brief if you already know the scope.
               </p>
 
               <div className="mt-8 grid gap-4 md:grid-cols-2">
@@ -99,9 +99,9 @@ export const PricingPlanChoiceModal = ({
                   onClick={handleBookCall}
                   icon={<CalendarDays className="h-4 w-4" />}
                   className="min-h-16 justify-between rounded-2xl font-mono text-xs font-semibold uppercase tracking-widest"
-                  ariaLabel={`Book a free call for the ${planName} plan`}
+                  ariaLabel={`Schedule a free strategy call for the ${planName} plan`}
                 >
-                  Book Free Call
+                  Schedule a Free Call
                 </Button>
                 <Button
                   href="/start-project"

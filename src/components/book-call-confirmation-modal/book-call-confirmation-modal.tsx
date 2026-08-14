@@ -87,7 +87,7 @@ export const BookCallConfirmationModal = ({
                   id="book-call-confirmation-title"
                   className="font-display text-4xl font-medium leading-tight text-white md:text-5xl"
                 >
-                  Your free call request has been received
+                  Your strategy call request has been received
                   <span className="text-vish-accent">.</span>
                 </h2>
                 <p className="mt-6 max-w-xl font-sans text-base leading-relaxed text-gray-400 md:text-lg">

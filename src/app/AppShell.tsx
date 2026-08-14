@@ -19,6 +19,11 @@ const ServiceWorkerRegistration = dynamic(
   { ssr: false },
 );
 
+const NewsletterPopup = dynamic(
+  () => import('@/src/components/newsletter-popup/newsletter-popup').then((mod) => mod.NewsletterPopup),
+  { ssr: false },
+);
+
 export const AppShell = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
   const [loadingPath, setLoadingPath] = useState<string | null>(
@@ -71,6 +76,7 @@ export const AppShell = ({ children }: { children: React.ReactNode }) => {
       {/* Custom cursor lives here so it works on every page */}
       <CustomCursor />
       <ServiceWorkerRegistration />
+      <NewsletterPopup />
       {shouldLoadCookieSettings && (
         <CookieSettings openSignal={cookieSettingsOpenSignal} />
       )}

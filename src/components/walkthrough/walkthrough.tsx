@@ -90,7 +90,7 @@ export const Walkthrough = () => {
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Button href="/book-call" variant="cta" size="md" icon={<ArrowRight className="h-4 w-4" />}>
-                  Book Free Call
+                  Schedule a Free Call
                 </Button>
                 <Button href="#step-1" variant="outline" size="md">
                   View Flow
@@ -151,12 +151,12 @@ export const Walkthrough = () => {
               <div>
                 <h2 className="font-display text-3xl font-medium text-white">Ready to use the portal?</h2>
                 <p className="mt-3 max-w-2xl font-sans text-base leading-relaxed text-gray-400">
-                  Book a call first and we will set up the right project space once the scope is confirmed.
+                  Schedule a strategy call first and we will set up the right project space once the scope is confirmed.
                 </p>
               </div>
             </div>
             <Button href="/book-call" variant="outline" size="lg" icon={<MessageSquareText className="h-4 w-4" />}>
-              Book Free Call
+              Schedule a Free Call
             </Button>
           </section>
         </main>

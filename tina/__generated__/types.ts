@@ -480,6 +480,12 @@ export type SiteSettings = Node & Document & {
   copyright?: Maybe<Scalars['String']['output']>;
   contactHeadingLine1?: Maybe<Scalars['String']['output']>;
   contactHeadingLine2?: Maybe<Scalars['String']['output']>;
+  newsletterHeading?: Maybe<Scalars['String']['output']>;
+  newsletterDescription?: Maybe<Scalars['String']['output']>;
+  newsletterButtonLabel?: Maybe<Scalars['String']['output']>;
+  newsletterConsent?: Maybe<Scalars['String']['output']>;
+  footerNewsletterHeading?: Maybe<Scalars['String']['output']>;
+  footerNewsletterDescription?: Maybe<Scalars['String']['output']>;
   scrollText?: Maybe<Scalars['String']['output']>;
   socials?: Maybe<Array<Maybe<SiteSettingsSocials>>>;
   footerLinks?: Maybe<Array<Maybe<SiteSettingsFooterLinks>>>;
@@ -507,6 +513,12 @@ export type SiteSettingsFilter = {
   copyright?: InputMaybe<StringFilter>;
   contactHeadingLine1?: InputMaybe<StringFilter>;
   contactHeadingLine2?: InputMaybe<StringFilter>;
+  newsletterHeading?: InputMaybe<StringFilter>;
+  newsletterDescription?: InputMaybe<StringFilter>;
+  newsletterButtonLabel?: InputMaybe<StringFilter>;
+  newsletterConsent?: InputMaybe<StringFilter>;
+  footerNewsletterHeading?: InputMaybe<StringFilter>;
+  footerNewsletterDescription?: InputMaybe<StringFilter>;
   scrollText?: InputMaybe<StringFilter>;
   socials?: InputMaybe<SiteSettingsSocialsFilter>;
   footerLinks?: InputMaybe<SiteSettingsFooterLinksFilter>;
@@ -1357,6 +1369,12 @@ export type SiteSettingsMutation = {
   copyright?: InputMaybe<Scalars['String']['input']>;
   contactHeadingLine1?: InputMaybe<Scalars['String']['input']>;
   contactHeadingLine2?: InputMaybe<Scalars['String']['input']>;
+  newsletterHeading?: InputMaybe<Scalars['String']['input']>;
+  newsletterDescription?: InputMaybe<Scalars['String']['input']>;
+  newsletterButtonLabel?: InputMaybe<Scalars['String']['input']>;
+  newsletterConsent?: InputMaybe<Scalars['String']['input']>;
+  footerNewsletterHeading?: InputMaybe<Scalars['String']['input']>;
+  footerNewsletterDescription?: InputMaybe<Scalars['String']['input']>;
   scrollText?: InputMaybe<Scalars['String']['input']>;
   socials?: InputMaybe<Array<InputMaybe<SiteSettingsSocialsMutation>>>;
   footerLinks?: InputMaybe<Array<InputMaybe<SiteSettingsFooterLinksMutation>>>;
@@ -1578,7 +1596,7 @@ export type ProjectPartsFragment = { __typename: 'Project', title: string, slug:
 
 export type LegalPagePartsFragment = { __typename: 'LegalPage', title: string, slug: string, heroLabel?: string | null, intro?: string | null, lastUpdated?: string | null, sections?: Array<{ __typename: 'LegalPageSections', title: string, body?: string | null } | null> | null };
 
-export type SiteSettingsPartsFragment = { __typename: 'SiteSettings', email: string, phone: string, phoneLink?: string | null, address?: string | null, copyright?: string | null, contactHeadingLine1?: string | null, contactHeadingLine2?: string | null, scrollText?: string | null, socials?: Array<{ __typename: 'SiteSettingsSocials', name: string, url: string, openInNewTab?: boolean | null } | null> | null, footerLinks?: Array<{ __typename: 'SiteSettingsFooterLinks', label: string, url: string } | null> | null };
+export type SiteSettingsPartsFragment = { __typename: 'SiteSettings', email: string, phone: string, phoneLink?: string | null, address?: string | null, copyright?: string | null, contactHeadingLine1?: string | null, contactHeadingLine2?: string | null, newsletterHeading?: string | null, newsletterDescription?: string | null, newsletterButtonLabel?: string | null, newsletterConsent?: string | null, footerNewsletterHeading?: string | null, footerNewsletterDescription?: string | null, scrollText?: string | null, socials?: Array<{ __typename: 'SiteSettingsSocials', name: string, url: string, openInNewTab?: boolean | null } | null> | null, footerLinks?: Array<{ __typename: 'SiteSettingsFooterLinks', label: string, url: string } | null> | null };
 
 export type PartnersPartsFragment = { __typename: 'Partners', partnersLabel: string, trustHeading?: string | null, trustDescription?: string | null, ctaLabel?: string | null, proofPoints?: Array<{ __typename: 'PartnersProofPoints', value?: string | null, label?: string | null } | null> | null, partners?: Array<{ __typename: 'PartnersPartners', name: string, url?: string | null } | null> | null };
 
@@ -1637,7 +1655,7 @@ export type SiteSettingsQueryVariables = Exact<{
 }>;
 
 
-export type SiteSettingsQuery = { __typename?: 'Query', siteSettings: { __typename: 'SiteSettings', id: string, email: string, phone: string, phoneLink?: string | null, address?: string | null, copyright?: string | null, contactHeadingLine1?: string | null, contactHeadingLine2?: string | null, scrollText?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, socials?: Array<{ __typename: 'SiteSettingsSocials', name: string, url: string, openInNewTab?: boolean | null } | null> | null, footerLinks?: Array<{ __typename: 'SiteSettingsFooterLinks', label: string, url: string } | null> | null } };
+export type SiteSettingsQuery = { __typename?: 'Query', siteSettings: { __typename: 'SiteSettings', id: string, email: string, phone: string, phoneLink?: string | null, address?: string | null, copyright?: string | null, contactHeadingLine1?: string | null, contactHeadingLine2?: string | null, newsletterHeading?: string | null, newsletterDescription?: string | null, newsletterButtonLabel?: string | null, newsletterConsent?: string | null, footerNewsletterHeading?: string | null, footerNewsletterDescription?: string | null, scrollText?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, socials?: Array<{ __typename: 'SiteSettingsSocials', name: string, url: string, openInNewTab?: boolean | null } | null> | null, footerLinks?: Array<{ __typename: 'SiteSettingsFooterLinks', label: string, url: string } | null> | null } };
 
 export type SiteSettingsConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1649,7 +1667,7 @@ export type SiteSettingsConnectionQueryVariables = Exact<{
 }>;
 
 
-export type SiteSettingsConnectionQuery = { __typename?: 'Query', siteSettingsConnection: { __typename?: 'SiteSettingsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'SiteSettingsConnectionEdges', cursor: string, node?: { __typename: 'SiteSettings', id: string, email: string, phone: string, phoneLink?: string | null, address?: string | null, copyright?: string | null, contactHeadingLine1?: string | null, contactHeadingLine2?: string | null, scrollText?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, socials?: Array<{ __typename: 'SiteSettingsSocials', name: string, url: string, openInNewTab?: boolean | null } | null> | null, footerLinks?: Array<{ __typename: 'SiteSettingsFooterLinks', label: string, url: string } | null> | null } | null } | null> | null } };
+export type SiteSettingsConnectionQuery = { __typename?: 'Query', siteSettingsConnection: { __typename?: 'SiteSettingsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'SiteSettingsConnectionEdges', cursor: string, node?: { __typename: 'SiteSettings', id: string, email: string, phone: string, phoneLink?: string | null, address?: string | null, copyright?: string | null, contactHeadingLine1?: string | null, contactHeadingLine2?: string | null, newsletterHeading?: string | null, newsletterDescription?: string | null, newsletterButtonLabel?: string | null, newsletterConsent?: string | null, footerNewsletterHeading?: string | null, footerNewsletterDescription?: string | null, scrollText?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, socials?: Array<{ __typename: 'SiteSettingsSocials', name: string, url: string, openInNewTab?: boolean | null } | null> | null, footerLinks?: Array<{ __typename: 'SiteSettingsFooterLinks', label: string, url: string } | null> | null } | null } | null> | null } };
 
 export type PartnersQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1834,6 +1852,12 @@ export const SiteSettingsPartsFragmentDoc = gql`
   copyright
   contactHeadingLine1
   contactHeadingLine2
+  newsletterHeading
+  newsletterDescription
+  newsletterButtonLabel
+  newsletterConsent
+  footerNewsletterHeading
+  footerNewsletterDescription
   scrollText
   socials {
     __typename

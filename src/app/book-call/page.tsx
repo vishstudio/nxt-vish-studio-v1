@@ -4,8 +4,8 @@ import { PageLayout } from "@/src/components/ui/page-layout/page-layout";
 import { Section } from "@/src/components/ui/section/section";
 
 export const metadata: Metadata = {
-  title: "Book Free Call | VISH Studio",
-  description: "Book a free 20-30 minute discovery call with VISH Studio.",
+  title: "Schedule a Free Call | VISH Studio",
+  description: "Choose a time for a free 20-30 minute strategy call with VISH Studio.",
 };
 
 const BookCallPage = () => {

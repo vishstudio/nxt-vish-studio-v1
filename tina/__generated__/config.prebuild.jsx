@@ -432,6 +432,38 @@ var config_default = defineConfig({
             name: "contactHeadingLine2",
             label: "Contact Heading Line 2"
           },
+          {
+            type: "string",
+            name: "newsletterHeading",
+            label: "Newsletter Popup Heading"
+          },
+          {
+            type: "string",
+            name: "newsletterDescription",
+            label: "Newsletter Popup Description",
+            ui: { component: "textarea" }
+          },
+          {
+            type: "string",
+            name: "newsletterButtonLabel",
+            label: "Newsletter Button Label"
+          },
+          {
+            type: "string",
+            name: "newsletterConsent",
+            label: "Newsletter Consent Copy"
+          },
+          {
+            type: "string",
+            name: "footerNewsletterHeading",
+            label: "Footer Newsletter Heading"
+          },
+          {
+            type: "string",
+            name: "footerNewsletterDescription",
+            label: "Footer Newsletter Description",
+            ui: { component: "textarea" }
+          },
           { type: "string", name: "scrollText", label: "Scroll Circle Text" },
           {
             type: "object",

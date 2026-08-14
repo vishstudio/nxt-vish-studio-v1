@@ -72,3 +72,25 @@ export async function createCallBooking(payload: Record<string, unknown>) {
 
   return document.id;
 }
+
+export async function createNewsletterSubscription(
+  email: string,
+  source: "popup" | "footer",
+) {
+  if (!isFirebaseConfigured()) {
+    throw new Error("Newsletter signup is not configured yet. Please contact hello@vish.studio.");
+  }
+
+  const normalizedEmail = email.trim().toLowerCase();
+  const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+  const database = getFirestore(app);
+  const document = await addDoc(collection(database, "newsletter"), {
+    email: normalizedEmail,
+    status: "subscribed",
+    source: `vish.studio/${source}`,
+    createdAt: serverTimestamp(),
+    submittedAt: new Date().toISOString(),
+  });
+
+  return document.id;
+}

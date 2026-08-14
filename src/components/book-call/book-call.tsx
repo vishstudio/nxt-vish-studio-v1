@@ -162,10 +162,10 @@ export const BookCall = () => {
       <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
         <div className="lg:sticky lg:top-32">
           <p className="mb-4 font-mono text-xs font-semibold uppercase tracking-widest text-vish-accent">
-            Free discovery call
+            Schedule a strategy call
           </p>
           <SectionTitle size="lg" className="max-w-3xl">
-            Book Free Call
+            Schedule a Free Call
           </SectionTitle>
           <p className="mt-8 max-w-2xl font-sans text-lg leading-relaxed text-gray-400 md:text-xl">
             A focused 20-30 minute call to understand your goals, clarify the best next step, and decide whether a project brief is needed.
@@ -350,7 +350,7 @@ export const BookCall = () => {
             icon={<ArrowRight className="h-4 w-4" />}
             className="mt-8 w-full font-mono text-xs font-semibold uppercase tracking-widest"
           >
-            {isSubmitting ? 'Saving Request' : 'Book Free Call'}
+            {isSubmitting ? 'Saving Request' : 'Schedule a Free Call'}
           </Button>
         </form>
 

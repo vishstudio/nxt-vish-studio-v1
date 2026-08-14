@@ -18,6 +18,12 @@ export function useTinaSettings() {
         copyright: s.copyright ?? "",
         contactHeadingLine1: s.contactHeadingLine1 ?? "",
         contactHeadingLine2: s.contactHeadingLine2 ?? "",
+        newsletterHeading: s.newsletterHeading ?? "",
+        newsletterDescription: s.newsletterDescription ?? "",
+        newsletterButtonLabel: s.newsletterButtonLabel ?? "",
+        newsletterConsent: s.newsletterConsent ?? "",
+        footerNewsletterHeading: s.footerNewsletterHeading ?? "",
+        footerNewsletterDescription: s.footerNewsletterDescription ?? "",
         scrollText: s.scrollText ?? "",
         socials: (s.socials ?? []).map((x: any) => ({
           name: x?.name ?? "",

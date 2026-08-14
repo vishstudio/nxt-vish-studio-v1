@@ -80,7 +80,7 @@ export const ProjectsCta = ({ index, backgroundImage, contained = true }: Projec
               dataConversionAction={PROJECT_INQUIRY_ACTION}
               className="px-6 py-4 font-mono text-xs font-semibold uppercase tracking-widest"
             >
-              Book Free Call
+              Schedule a Free Call
             </Button>
           </div>
         </div>

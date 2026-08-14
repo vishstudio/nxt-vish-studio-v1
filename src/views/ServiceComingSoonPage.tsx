@@ -64,7 +64,7 @@ export const ServiceComingSoonPage = ({
               dataConversionAction={PROJECT_INQUIRY_ACTION}
               className="font-mono text-xs font-semibold uppercase tracking-widest"
             >
-              Book Free Call
+              Schedule a Free Call
             </Button>
             <Button
               href="/services/saas-products"
@@ -86,7 +86,7 @@ export const ServiceComingSoonPage = ({
               Coming Soon
             </span>
             <p className="font-sans text-xl leading-relaxed text-gray-400 md:text-2xl">
-              This service track is being prepared. For now, book a call and we can scope the same work directly with you.
+              This service track is being prepared. For now, schedule a strategy call and we can scope the same work directly with you.
             </p>
           </div>
         </div>

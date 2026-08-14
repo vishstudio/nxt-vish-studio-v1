@@ -19,6 +19,12 @@ export interface SiteSettings {
   copyright: string;
   contactHeadingLine1: string;
   contactHeadingLine2: string;
+  newsletterHeading: string;
+  newsletterDescription: string;
+  newsletterButtonLabel: string;
+  newsletterConsent: string;
+  footerNewsletterHeading: string;
+  footerNewsletterDescription: string;
   socials: Social[];
   footerLinks: FooterLink[];
   scrollText: string;

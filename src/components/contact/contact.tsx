@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
 import { useTinaSettings } from "../../hooks/useTinaVisualEditing";
 import { CookieSettingsTrigger } from "../cookie-settings/cookie-settings-trigger";
+import { NewsletterSignup } from "../newsletter-signup/newsletter-signup";
 
 export const Contact = () => {
   const { data: settings, tinaField, rawSiteSettings } = useTinaSettings();
@@ -102,6 +103,16 @@ export const Contact = () => {
               Based in Mauritius, partnering with scaling brands globally to
               engineer distinct digital ecosystems.
             </motion.p>
+          </div>
+
+          <div className="mb-24 grid gap-8 border-y border-white/10 py-10 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] md:items-center md:gap-16 md:py-12">
+            <div>
+              <p className="font-mono text-xs uppercase tracking-[0.18em] text-vish-accent">Stay connected</p>
+              <p className="mt-4 max-w-sm font-sans text-sm leading-relaxed text-gray-500 md:text-base">
+                Useful thinking for the next version of your digital business.
+              </p>
+            </div>
+            <NewsletterSignup source="footer" settings={settings} tinaField={tinaField} />
           </div>
 
           {/* Secondary Details Grid */}

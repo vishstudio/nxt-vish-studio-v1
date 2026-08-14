@@ -45,6 +45,12 @@ fragment SiteSettingsParts on SiteSettings {
   copyright
   contactHeadingLine1
   contactHeadingLine2
+  newsletterHeading
+  newsletterDescription
+  newsletterButtonLabel
+  newsletterConsent
+  footerNewsletterHeading
+  footerNewsletterDescription
   scrollText
   socials {
     __typename

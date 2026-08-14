@@ -257,6 +257,12 @@ type SiteSettings implements Node & Document {
   copyright: String
   contactHeadingLine1: String
   contactHeadingLine2: String
+  newsletterHeading: String
+  newsletterDescription: String
+  newsletterButtonLabel: String
+  newsletterConsent: String
+  footerNewsletterHeading: String
+  footerNewsletterDescription: String
   scrollText: String
   socials: [SiteSettingsSocials]
   footerLinks: [SiteSettingsFooterLinks]
@@ -284,6 +290,12 @@ input SiteSettingsFilter {
   copyright: StringFilter
   contactHeadingLine1: StringFilter
   contactHeadingLine2: StringFilter
+  newsletterHeading: StringFilter
+  newsletterDescription: StringFilter
+  newsletterButtonLabel: StringFilter
+  newsletterConsent: StringFilter
+  footerNewsletterHeading: StringFilter
+  footerNewsletterDescription: StringFilter
   scrollText: StringFilter
   socials: SiteSettingsSocialsFilter
   footerLinks: SiteSettingsFooterLinksFilter
@@ -940,6 +952,12 @@ input SiteSettingsMutation {
   copyright: String
   contactHeadingLine1: String
   contactHeadingLine2: String
+  newsletterHeading: String
+  newsletterDescription: String
+  newsletterButtonLabel: String
+  newsletterConsent: String
+  footerNewsletterHeading: String
+  footerNewsletterDescription: String
   scrollText: String
   socials: [SiteSettingsSocialsMutation]
   footerLinks: [SiteSettingsFooterLinksMutation]

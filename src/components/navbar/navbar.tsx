@@ -289,7 +289,7 @@ export const Navbar = () => {
                 className="font-sans"
                 tabIndex={effectiveIsScrolled ? -1 : undefined}
               >
-                Book Free Call
+                Schedule a Free Call
               </Button>
             </div>
 

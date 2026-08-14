@@ -17,6 +17,7 @@ export const AnalyticsEvent = {
   PRICING_CTA_CLICK: "pricing_cta_click",
   PRICING_PLAN_CHOICE: "pricing_plan_choice",
   PROJECT_SITE_CLICK: "project_site_click",
+  NEWSLETTER_SUBSCRIBE: "newsletter_subscribe",
 } as const;
 
 /**
@@ -210,4 +211,9 @@ export const trackProjectSiteClick = (slug: string, title?: string) => {
     project_slug: slug,
     ...(title ? { project_title: title } : {}),
   });
+};
+
+/** Tracks a successful newsletter signup without sending the subscriber email. */
+export const trackNewsletterSubscribe = (source: "popup" | "footer") => {
+  send(AnalyticsEvent.NEWSLETTER_SUBSCRIBE, { source });
 };
