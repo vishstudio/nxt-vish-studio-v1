@@ -12,7 +12,7 @@ VISH Studio is the public website and project-onboarding platform for a Mauritiu
 - React Hook Form for structured multi-step form state
 - TinaCMS for JSON-backed content and visual editing
 - Firebase Firestore for project brief submissions and call booking requests
-- Google Analytics and consent-aware cookie settings
+- Production-only Google Analytics and consent-aware cookie settings
 
 The site is statically exported. Features must remain compatible with `output: "export"` unless the deployment architecture is deliberately changed.
 
@@ -166,7 +166,7 @@ Former remote stock images used by runtime pages and Storybook stories are now m
 
 ## Environment variables
 
-Start from `.env.example`. It documents variables for site configuration, TinaCMS, Google Analytics, and Firebase. Never commit real tokens or private credentials.
+Start from `.env.example`. It documents variables for site configuration, TinaCMS, Google Analytics, and Firebase. Google Analytics runs only in production after analytics consent is granted, keeping local development free from analytics script and event logging. Never commit real tokens or private credentials.
 
 ## Development workflow
 

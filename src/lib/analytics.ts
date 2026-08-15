@@ -57,10 +57,8 @@ const send = (
   eventName: string,
   params?: Record<string, string | number | boolean>,
 ) => {
-  if (process.env.NODE_ENV === "development") {
-    console.debug("[GA]", eventName, params);
-  }
   if (typeof window === "undefined") return;
+  if (process.env.NODE_ENV !== "production") return;
   if (!window.gtag) return;
   if (!hasConsent()) return;
   window.gtag("event", eventName, params);

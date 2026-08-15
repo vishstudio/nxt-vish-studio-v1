@@ -10,7 +10,7 @@ const GA_MEASUREMENT_ID = (process.env.NEXT_PUBLIC_GA_ID ?? "")
   .replace(/^['"]+|['"]+$/g, "");
 
 export const GoogleAnalytics = () => {
-  if (!GA_MEASUREMENT_ID) {
+  if (process.env.NODE_ENV !== "production" || !GA_MEASUREMENT_ID) {
     return null;
   }
 
