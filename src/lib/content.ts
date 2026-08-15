@@ -180,6 +180,9 @@ export function getAboutPage(): AboutPageContent {
 export interface ServiceCategory {
   category: string;
   description: string;
+  image: string;
+  imageAlt: string;
+  plan: string[];
   items: string[];
 }
 

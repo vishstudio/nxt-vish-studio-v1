@@ -6,6 +6,14 @@
     {
       "category": "Website",
       "description": "High-converting websites, landing pages, e-commerce experiences, and CMS-backed marketing sites built for speed, clarity, and trust.",
+      "image": "/assets/img/services-hero.jpg",
+      "imageAlt": "VISH Studio website work on screen",
+      "plan": [
+        "Clarify your offer, audience, and conversion path",
+        "Map the information architecture and key page journeys",
+        "Design the visual system and responsive interface",
+        "Build, test, optimize, and prepare the launch"
+      ],
       "items": [
         "Business websites",
         "Landing pages",
@@ -18,6 +26,14 @@
     {
       "category": "Mobile Apps",
       "description": "Mobile-first product experiences for customer portals, booking flows, internal teams, and launch-ready iOS or Android app concepts.",
+      "image": "/assets/img/home-cta-1.avif",
+      "imageAlt": "Mobile product interface concept",
+      "plan": [
+        "Define the core job, users, and success moments",
+        "Shape the app map and task-by-task user flows",
+        "Prototype the highest-value screens and interactions",
+        "Prepare a focused handoff or build roadmap"
+      ],
       "items": [
         "App interface design",
         "User flows",
@@ -30,6 +46,14 @@
     {
       "category": "SaaS Products",
       "description": "Subscription-ready product platforms with authentication, workflows, dashboards, billing logic, and scalable product architecture.",
+      "image": "/assets/img/pricing-hero.avif",
+      "imageAlt": "SaaS product interface and planning workspace",
+      "plan": [
+        "Frame the product model, users, and core workflows",
+        "Prioritize the first release and platform architecture",
+        "Design the product system, roles, and key states",
+        "Build in clear milestones with launch-ready QA"
+      ],
       "items": [
         "Product architecture",
         "Authentication",
@@ -42,6 +66,14 @@
     {
       "category": "CRM",
       "description": "Custom CRM systems that organize leads, clients, follow-ups, sales stages, and team workflows around the way your business actually operates.",
+      "image": "/assets/img/projects-hero.avif",
+      "imageAlt": "CRM workflow and client pipeline interface",
+      "plan": [
+        "Audit the current sales process and information gaps",
+        "Model pipelines, records, ownership, and handoffs",
+        "Design the views your team needs every day",
+        "Configure automation, permissions, reporting, and rollout"
+      ],
       "items": [
         "Lead pipelines",
         "Client records",
@@ -54,6 +86,14 @@
     {
       "category": "Softwares",
       "description": "Bespoke business software for operations, portals, approvals, reporting, automation, and internal systems that replace scattered manual work.",
+      "image": "/assets/img/home-cta-2.avif",
+      "imageAlt": "Custom business software workspace",
+      "plan": [
+        "Map the manual work worth replacing first",
+        "Define rules, roles, data, and exceptions together",
+        "Design a clear operational interface and workflows",
+        "Build, integrate, test, and improve with your team"
+      ],
       "items": [
         "Internal tools",
         "Customer portals",
@@ -66,6 +106,14 @@
     {
       "category": "Branding",
       "description": "Strategic brand identity, visual systems, launch assets, and digital guidelines that make your business easier to recognize and trust.",
+      "image": "/assets/img/about-hero.jpg",
+      "imageAlt": "VISH Studio brand identity work",
+      "plan": [
+        "Find the position, personality, and story to own",
+        "Create the identity routes and visual direction",
+        "Refine the selected system across real touchpoints",
+        "Package guidelines and launch-ready brand assets"
+      ],
       "items": [
         "Logo systems",
         "Visual identity",
@@ -78,6 +126,14 @@
     {
       "category": "Dashboard",
       "description": "Operational dashboards that turn business data, activity, and performance indicators into clear interfaces for faster decisions.",
+      "image": "/assets/img/services-section.jpg",
+      "imageAlt": "Operational dashboard and reporting view",
+      "plan": [
+        "Identify the decisions, metrics, and users that matter",
+        "Structure the data views and reporting hierarchy",
+        "Design filters, states, and actionable insight panels",
+        "Connect sources, validate outputs, and refine adoption"
+      ],
       "items": [
         "Admin dashboards",
         "Analytics views",
@@ -90,6 +146,14 @@
     {
       "category": "ERP",
       "description": "Custom ERP systems that connect inventory, finance, operations, reporting, and team workflows into one reliable business platform.",
+      "image": "/assets/img/legal-hero.jpg",
+      "imageAlt": "Business operations planning workspace",
+      "plan": [
+        "Assess the operating model and system dependencies",
+        "Prioritize the modules and shared data foundation",
+        "Design permissions, workflows, and exception handling",
+        "Deliver in phases with migration and team enablement"
+      ],
       "items": [
         "Inventory management",
         "Finance workflows",

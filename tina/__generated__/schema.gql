@@ -595,6 +595,9 @@ type AboutPageConnection implements Connection {
 type ServicesPageCategories {
   category: String!
   description: String
+  image: String
+  imageAlt: String
+  plan: [String]
   items: [String]
 }
 
@@ -608,9 +611,19 @@ type ServicesPage implements Node & Document {
   _values: JSON!
 }
 
+input ImageFilter {
+  startsWith: String
+  eq: String
+  exists: Boolean
+  in: [String]
+}
+
 input ServicesPageCategoriesFilter {
   category: StringFilter
   description: StringFilter
+  image: ImageFilter
+  imageAlt: StringFilter
+  plan: StringFilter
   items: StringFilter
 }
 
@@ -749,13 +762,6 @@ type PricingPage implements Node & Document {
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
-}
-
-input ImageFilter {
-  startsWith: String
-  eq: String
-  exists: Boolean
-  in: [String]
 }
 
 input PricingPagePricingCategoriesPlansCtaLinkFilter {
@@ -1078,6 +1084,9 @@ input AboutPageMutation {
 input ServicesPageCategoriesMutation {
   category: String
   description: String
+  image: String
+  imageAlt: String
+  plan: [String]
   items: [String]
 }
 

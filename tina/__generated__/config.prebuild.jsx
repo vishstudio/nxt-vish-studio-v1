@@ -948,6 +948,22 @@ var config_default = defineConfig({
                 ui: { component: "textarea" }
               },
               {
+                type: "image",
+                name: "image",
+                label: "Service Image"
+              },
+              {
+                type: "string",
+                name: "imageAlt",
+                label: "Service Image Alt Text"
+              },
+              {
+                type: "string",
+                name: "plan",
+                label: "Delivery Plan Steps",
+                list: true
+              },
+              {
                 type: "string",
                 name: "items",
                 label: "Service Items",

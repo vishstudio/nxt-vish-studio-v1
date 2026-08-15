@@ -16,6 +16,9 @@ export function useTinaServices() {
         categories: (qd.servicesPage.categories ?? []).map((c: any) => ({
           category: c?.category ?? "",
           description: c?.description ?? "",
+          image: c?.image ?? "",
+          imageAlt: c?.imageAlt ?? "",
+          plan: (c?.plan ?? []).filter(Boolean),
           items: (c?.items ?? []).filter(Boolean),
         })),
       } as ServicesPageContent),

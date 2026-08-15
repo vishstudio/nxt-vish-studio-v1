@@ -181,6 +181,9 @@ fragment ServicesPageParts on ServicesPage {
     __typename
     category
     description
+    image
+    imageAlt
+    plan
     items
   }
 }

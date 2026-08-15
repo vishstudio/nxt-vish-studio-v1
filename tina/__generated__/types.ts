@@ -842,6 +842,9 @@ export type ServicesPageCategories = {
   __typename?: 'ServicesPageCategories';
   category: Scalars['String']['output'];
   description?: Maybe<Scalars['String']['output']>;
+  image?: Maybe<Scalars['String']['output']>;
+  imageAlt?: Maybe<Scalars['String']['output']>;
+  plan?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   items?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
 };
 
@@ -856,9 +859,19 @@ export type ServicesPage = Node & Document & {
   _values: Scalars['JSON']['output'];
 };
 
+export type ImageFilter = {
+  startsWith?: InputMaybe<Scalars['String']['input']>;
+  eq?: InputMaybe<Scalars['String']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
 export type ServicesPageCategoriesFilter = {
   category?: InputMaybe<StringFilter>;
   description?: InputMaybe<StringFilter>;
+  image?: InputMaybe<ImageFilter>;
+  imageAlt?: InputMaybe<StringFilter>;
+  plan?: InputMaybe<StringFilter>;
   items?: InputMaybe<StringFilter>;
 };
 
@@ -1010,13 +1023,6 @@ export type PricingPage = Node & Document & {
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
-};
-
-export type ImageFilter = {
-  startsWith?: InputMaybe<Scalars['String']['input']>;
-  eq?: InputMaybe<Scalars['String']['input']>;
-  exists?: InputMaybe<Scalars['Boolean']['input']>;
-  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type PricingPagePricingCategoriesPlansCtaLinkFilter = {
@@ -1495,6 +1501,9 @@ export type AboutPageMutation = {
 export type ServicesPageCategoriesMutation = {
   category?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  imageAlt?: InputMaybe<Scalars['String']['input']>;
+  plan?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   items?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
@@ -1606,7 +1615,7 @@ export type TestimonialsPagePartsFragment = { __typename: 'TestimonialsPage', he
 
 export type AboutPagePartsFragment = { __typename: 'AboutPage', heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, studioImage?: string | null, studioImageAlt?: string | null, introHeading?: string | null, introParagraph1?: string | null, introParagraph2?: string | null, valuesLabel?: string | null, valuesHeading?: string | null, values?: Array<{ __typename: 'AboutPageValues', id?: string | null, title: string, description?: string | null } | null> | null, teamMembers?: Array<{ __typename: 'AboutPageTeamMembers', name: string, role: string, image?: string | null, bio?: string | null, order?: number | null } | null> | null };
 
-export type ServicesPagePartsFragment = { __typename: 'ServicesPage', heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, categories?: Array<{ __typename: 'ServicesPageCategories', category: string, description?: string | null, items?: Array<string | null> | null } | null> | null };
+export type ServicesPagePartsFragment = { __typename: 'ServicesPage', heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, categories?: Array<{ __typename: 'ServicesPageCategories', category: string, description?: string | null, image?: string | null, imageAlt?: string | null, plan?: Array<string | null> | null, items?: Array<string | null> | null } | null> | null };
 
 export type ContactPagePartsFragment = { __typename: 'ContactPage', heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroTitlePunctuation?: string | null, heroDescription?: string | null, trustIndicators?: Array<{ __typename: 'ContactPageTrustIndicators', icon?: string | null, title: string, description?: string | null } | null> | null };
 
@@ -1750,7 +1759,7 @@ export type ServicesPageQueryVariables = Exact<{
 }>;
 
 
-export type ServicesPageQuery = { __typename?: 'Query', servicesPage: { __typename: 'ServicesPage', id: string, heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, categories?: Array<{ __typename: 'ServicesPageCategories', category: string, description?: string | null, items?: Array<string | null> | null } | null> | null } };
+export type ServicesPageQuery = { __typename?: 'Query', servicesPage: { __typename: 'ServicesPage', id: string, heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, categories?: Array<{ __typename: 'ServicesPageCategories', category: string, description?: string | null, image?: string | null, imageAlt?: string | null, plan?: Array<string | null> | null, items?: Array<string | null> | null } | null> | null } };
 
 export type ServicesPageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1762,7 +1771,7 @@ export type ServicesPageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ServicesPageConnectionQuery = { __typename?: 'Query', servicesPageConnection: { __typename?: 'ServicesPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ServicesPageConnectionEdges', cursor: string, node?: { __typename: 'ServicesPage', id: string, heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, categories?: Array<{ __typename: 'ServicesPageCategories', category: string, description?: string | null, items?: Array<string | null> | null } | null> | null } | null } | null> | null } };
+export type ServicesPageConnectionQuery = { __typename?: 'Query', servicesPageConnection: { __typename?: 'ServicesPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ServicesPageConnectionEdges', cursor: string, node?: { __typename: 'ServicesPage', id: string, heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, categories?: Array<{ __typename: 'ServicesPageCategories', category: string, description?: string | null, image?: string | null, imageAlt?: string | null, plan?: Array<string | null> | null, items?: Array<string | null> | null } | null> | null } | null } | null> | null } };
 
 export type ContactPageQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1993,6 +2002,9 @@ export const ServicesPagePartsFragmentDoc = gql`
     __typename
     category
     description
+    image
+    imageAlt
+    plan
     items
   }
 }
@@ -2761,7 +2773,7 @@ export const ExperimentalGetTinaClient = () =>
   getSdk(
     generateRequester(
       createClient({
-        url: "https://content.tinajs.io/2.1/content/94cff29e-b158-496c-b456-9850440a0fb9/github/main",
+        url: "http://localhost:4001/graphql",
         queries,
       })
     )
