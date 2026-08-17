@@ -72,7 +72,7 @@ export const Home = () => {
         <Process />
         <ProjectsCta index={1} backgroundImage={homeCtaBackgroundImages[1]} />
         {/* <Team /> */}
-        <Pricing />
+        {/* <Pricing /> */}
         <Testimonials />
         <Faq />
         <Contact />

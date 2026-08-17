@@ -55,7 +55,7 @@ export const Navbar = () => {
     { name: "Home", href: "/" },
     { name: "Projects", href: "/projects", activePaths: ["/project"] },
     { name: "Services", href: "/services", children: serviceMenuItems },
-    { name: "Pricing", href: "/pricing" },
+    // { name: "Pricing", href: "/pricing" },
     { name: "About", href: "/about" },
     { name: "Testimonials", href: "/testimonials" },
   ];
@@ -63,7 +63,7 @@ export const Navbar = () => {
   const mobileNavItems = [
     { name: "Projects", href: "/projects", id: "01" },
     { name: "Services", id: "02", children: serviceMenuItems },
-    { name: "Pricing", href: "/pricing", id: "03" },
+    // { name: "Pricing", href: "/pricing", id: "03" },
     { name: "About", href: "/about", id: "04" },
     { name: "Testimonials", href: "/testimonials", id: "05" },
     { name: "Contact", href: "/contact", id: "06" },
@@ -185,14 +185,14 @@ export const Navbar = () => {
                     onBlur={
                       item.children
                         ? (event) => {
-                            if (
-                              !event.currentTarget.contains(
-                                event.relatedTarget as Node | null,
-                              )
-                            ) {
-                              setIsDesktopSubmenuOpen(false);
-                            }
+                          if (
+                            !event.currentTarget.contains(
+                              event.relatedTarget as Node | null,
+                            )
+                          ) {
+                            setIsDesktopSubmenuOpen(false);
                           }
+                        }
                         : undefined
                     }
                   >
