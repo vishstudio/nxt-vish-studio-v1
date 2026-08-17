@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { BookCall } from "@/src/components/book-call/book-call";
+import { Contact } from "@/src/components/contact/contact";
 import { PageLayout } from "@/src/components/ui/page-layout/page-layout";
 import { Section } from "@/src/components/ui/section/section";
 
@@ -14,6 +15,7 @@ const BookCallPage = () => {
       <Section className="pb-24 pt-10 md:pb-32 md:pt-16">
         <BookCall />
       </Section>
+      <Contact />
     </PageLayout>
   );
 }

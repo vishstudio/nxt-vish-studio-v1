@@ -22,8 +22,17 @@ export const ServiceCatalogue = ({ services, rawCategories, tinaField, id }: Ser
   if (!selectedService) return null;
 
   return (
-    <section id={id} className="bg-black px-6 py-24 md:px-12 md:py-32" aria-labelledby="service-catalogue-title">
-      <div className="mx-auto max-w-[1400px]">
+    <section id={id} className="relative overflow-hidden bg-black px-6 py-24 md:px-12 md:py-32" aria-labelledby="service-catalogue-title">
+      <img
+        src="/assets/img/services-section.jpg"
+        alt=""
+        className="absolute -top-[10%] left-0 h-[120%] w-full object-cover opacity-30 grayscale"
+        aria-hidden="true"
+      />
+      <div className="absolute inset-0 bg-black/55" aria-hidden="true" />
+      <div className="absolute inset-0 bg-linear-to-b from-vish-bg/85 via-black/35 to-vish-bg/90" aria-hidden="true" />
+
+      <div className="relative z-10 mx-auto max-w-[1400px]">
         <div className="mb-12 flex flex-col justify-between gap-5 md:mb-16 md:flex-row md:items-end">
           <div>
             <p className="font-mono text-xs uppercase tracking-[0.18em] text-vish-accent">Service catalogue</p>
@@ -36,56 +45,59 @@ export const ServiceCatalogue = ({ services, rawCategories, tinaField, id }: Ser
           </p>
         </div>
 
-        <div className="mx-auto max-w-5xl">
-          <AnimatePresence mode="wait" initial={false}>
-            {!isDetailOpen ? (
-              <motion.div
-                key="mobile-service-list"
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                className="overflow-hidden rounded-3xl bg-white text-black shadow-[0_24px_70px_rgba(0,0,0,0.28)]"
-              >
-                <div className="border-b border-black/10 px-6 py-7">
-                  <p className="font-mono text-xs uppercase tracking-[0.18em] text-black/45">Our services</p>
-                  <p className="mt-3 font-display text-2xl leading-tight">Select a service to see the plan<span className="text-vish-accent">.</span></p>
-                </div>
-                <div className="px-6 pb-4 pt-2">
-                  {services.map((service, index) => {
-                    const rawCategory = rawCategories?.[index];
+        <div className="w-full">
+          <motion.div
+            layout
+            className="overflow-hidden rounded-3xl bg-white text-black shadow-[0_24px_70px_rgba(0,0,0,0.28)]"
+            data-testid="service-catalogue-panel"
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              {!isDetailOpen ? (
+                <motion.div
+                  key="mobile-service-list"
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -12 }}
+                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <div className="border-b border-black/10 px-6 py-7">
+                    <p className="font-mono text-xs uppercase tracking-[0.18em] text-black/45">Our services</p>
+                    <p className="mt-3 font-display text-2xl leading-tight">Select a service to see the plan<span className="text-vish-accent">.</span></p>
+                  </div>
+                  <div className="px-6 pb-4 pt-2">
+                    {services.map((service, index) => {
+                      const rawCategory = rawCategories?.[index];
 
-                    return (
-                      <button
-                        key={service.category}
-                        type="button"
-                        onClick={() => {
-                          setSelectedIndex(index);
-                          setIsDetailOpen(true);
-                        }}
-                        className="group flex w-full items-center gap-3 border-b border-black/10 py-4 text-left last:border-b-0"
-                      >
-                        <span className="font-mono text-xs text-black/40">{String(index + 1).padStart(2, '0')}</span>
-                        <span
-                          className="flex-1 font-display text-xl leading-none transition-transform group-hover:translate-x-1"
-                          data-tina-field={rawCategory ? tinaField(rawCategory, 'category') : undefined}
+                      return (
+                        <button
+                          key={service.category}
+                          type="button"
+                          onClick={() => {
+                            setSelectedIndex(index);
+                            setIsDetailOpen(true);
+                          }}
+                          className="group flex w-full items-center gap-3 border-b border-black/10 py-4 text-left last:border-b-0"
                         >
-                          {service.category}
-                        </span>
-                        <Plus className="size-4 shrink-0 text-black/60 transition-transform group-hover:rotate-90" aria-hidden="true" />
-                      </button>
-                    );
-                  })}
-                </div>
-              </motion.div>
-            ) : (
+                          <span className="font-mono text-xs text-black/40">{String(index + 1).padStart(2, '0')}</span>
+                          <span
+                            className="flex-1 font-display text-xl leading-none transition-transform group-hover:translate-x-1"
+                            data-tina-field={rawCategory ? tinaField(rawCategory, 'category') : undefined}
+                          >
+                            {service.category}
+                          </span>
+                          <Plus className="size-4 shrink-0 text-black/60 transition-transform group-hover:rotate-90" aria-hidden="true" />
+                        </button>
+                      );
+                    })}
+                  </div>
+                </motion.div>
+              ) : (
               <motion.article
                 key={selectedService.category}
                 initial={{ opacity: 0, x: 16 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -16 }}
                 transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
-                className="overflow-hidden rounded-3xl bg-white text-black shadow-[0_24px_70px_rgba(0,0,0,0.28)]"
               >
                 <div className="flex items-center justify-between border-b border-black/10 px-6 py-5">
                   <button
@@ -150,8 +162,9 @@ export const ServiceCatalogue = ({ services, rawCategories, tinaField, id }: Ser
                   </div>
                 </div>
               </motion.article>
-            )}
-          </AnimatePresence>
+              )}
+            </AnimatePresence>
+          </motion.div>
         </div>
 
       </div>

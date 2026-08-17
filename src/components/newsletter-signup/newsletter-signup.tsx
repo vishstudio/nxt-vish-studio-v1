@@ -2,7 +2,6 @@
 
 import { FormEvent, useId, useState } from 'react';
 import { ArrowRight, Check } from 'lucide-react';
-import { createNewsletterSubscription } from '@/src/lib/firebase';
 import { trackNewsletterSubscribe } from '@/src/lib/analytics';
 import type { SiteSettings } from '@/src/lib/content';
 import { Button } from '../ui/button/button';
@@ -49,6 +48,7 @@ export const NewsletterSignup = ({ source, settings, tinaField, onSuccess }: New
     setErrorMessage('');
 
     try {
+      const { createNewsletterSubscription } = await import('@/src/lib/firebase');
       await createNewsletterSubscription(email, source);
       window.localStorage.setItem(NEWSLETTER_PROMPT_KEY, 'subscribed');
       setStatus('success');
