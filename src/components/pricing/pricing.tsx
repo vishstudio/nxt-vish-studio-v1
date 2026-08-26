@@ -272,8 +272,8 @@ export const Pricing = () => {
       ? content.pricingCategories
       : [
           {
-            label: "Website",
-            slug: "website",
+            label: "Websites",
+            slug: "websites",
             plans: [],
             carePlans: [],
             addOns: [],

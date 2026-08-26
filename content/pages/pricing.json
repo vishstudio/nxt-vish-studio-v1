@@ -7,11 +7,11 @@
   "heroBackgroundImageUrl": "/assets/img/pricing-hero.avif",
   "sectionLabel": "Pricing",
   "sectionHeading": "Choose your plan",
-  "sectionSubtext": "Every plan includes free hosting. All websites are custom-designed, mobile-first, and performance-optimised.",
+  "sectionSubtext": "Browse starting scopes for every VISH Studio service. Final pricing is confirmed around your goals, requirements, and delivery timeline.",
   "pricingCategories": [
     {
-      "label": "Website",
-      "slug": "website",
+      "label": "Websites",
+      "slug": "websites",
       "plans": [
         {
           "label": "STARTER",
@@ -538,10 +538,102 @@
           "note": "More detail for usage, tone, layouts, or production rules."
         }
       ]
+    },
+    {
+      "label": "Social Media Marketing",
+      "slug": "social-media-marketing",
+      "plans": [
+        {
+          "label": "CUSTOM",
+          "name": "Campaign Scope",
+          "price": "Custom quote",
+          "priceGbp": "Custom quote",
+          "priceNote": "TAILORED TO YOUR GOALS",
+          "delivery": "Scoped after discovery",
+          "tagline": "A tailored social media marketing plan built around your audience, channels, campaign needs, and growth targets.",
+          "featured": false,
+          "ctaLabel": "Schedule a Free Call",
+          "ctaLink": { "linkType": "internal", "linkValue": "/book-call" },
+          "features": ["Channel and audience strategy", "Content and campaign planning", "Creative direction", "Performance reporting"],
+          "bestFor": "Businesses ready to build a consistent, measurable social presence",
+          "revisions": "Scoped with the campaign"
+        }
+      ],
+      "carePlans": [],
+      "addOns": []
+    },
+    {
+      "label": "SaaS Products",
+      "slug": "saas-products",
+      "plans": [
+        {
+          "label": "CUSTOM",
+          "name": "Product Scope",
+          "price": "Custom quote",
+          "priceGbp": "Custom quote",
+          "priceNote": "TAILORED TO YOUR PRODUCT",
+          "delivery": "Scoped after discovery",
+          "tagline": "A product roadmap and delivery scope shaped around your users, core workflows, subscriptions, and launch priorities.",
+          "featured": false,
+          "ctaLabel": "Schedule a Free Call",
+          "ctaLink": { "linkType": "internal", "linkValue": "/book-call" },
+          "features": ["Product architecture", "User roles and workflows", "Subscription-ready planning", "Launch roadmap"],
+          "bestFor": "Founders and teams creating a customer-facing digital product",
+          "revisions": "Scoped with the product"
+        }
+      ],
+      "carePlans": [],
+      "addOns": []
+    },
+    {
+      "label": "Website Templates",
+      "slug": "website-templates",
+      "plans": [
+        {
+          "label": "CUSTOM",
+          "name": "Template Setup",
+          "price": "Custom quote",
+          "priceGbp": "Custom quote",
+          "priceNote": "BASED ON CUSTOMISATION",
+          "delivery": "Scoped after discovery",
+          "tagline": "A launch-ready website template adapted to your brand, content, required pages, and conversion journey.",
+          "featured": false,
+          "ctaLabel": "Schedule a Free Call",
+          "ctaLink": { "linkType": "internal", "linkValue": "/book-call" },
+          "features": ["Template selection", "Brand and content adaptation", "Essential page setup", "Launch preparation"],
+          "bestFor": "Teams that need a polished website foundation on a focused timeline",
+          "revisions": "Scoped with the setup"
+        }
+      ],
+      "carePlans": [],
+      "addOns": []
+    },
+    {
+      "label": "AI Integrations & Automations",
+      "slug": "ai-integrations-automations",
+      "plans": [
+        {
+          "label": "CUSTOM",
+          "name": "Automation Scope",
+          "price": "Custom quote",
+          "priceGbp": "Custom quote",
+          "priceNote": "TAILORED TO YOUR SYSTEMS",
+          "delivery": "Scoped after discovery",
+          "tagline": "A practical AI integration or automation plan shaped around your current tools, operational bottlenecks, and approval paths.",
+          "featured": false,
+          "ctaLabel": "Schedule a Free Call",
+          "ctaLink": { "linkType": "internal", "linkValue": "/book-call" },
+          "features": ["Workflow audit", "AI integration design", "Connected systems", "Testing and team handoff"],
+          "bestFor": "Teams ready to remove repetitive work and improve handoffs",
+          "revisions": "Scoped with the automation"
+        }
+      ],
+      "carePlans": [],
+      "addOns": []
     }
   ],
   "customLabel": "Need Something Custom?",
-  "customDescription": "Don't see exactly what you need? Every project is unique — whether it's a web app, CRM integration, or a fully bespoke platform, we scope and price it together.",
+  "customDescription": "Don't see exactly what you need? Every project is unique — whether it is social media marketing, a digital product, a website, or an AI integration, we scope and price it together.",
   "customCtaLabel": "Discuss Your Project",
   "customCtaHref": "/contact"
 }

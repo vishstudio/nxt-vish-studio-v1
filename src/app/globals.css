@@ -33,6 +33,11 @@ body {
   overflow-x: clip;
 }
 
+::selection {
+  background: transparent;
+  color: inherit;
+}
+
 .skiptranslate,
 .goog-te-banner-frame,
 .goog-te-gadget,

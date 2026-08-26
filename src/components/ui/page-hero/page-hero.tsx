@@ -21,6 +21,8 @@ interface PageHeroProps {
   size?: 'full' | 'large';
   /** Additional className for the section wrapper */
   className?: string;
+  /** Additional className for the main hero content wrapper */
+  contentClassName?: string;
   /** Optional background image URL for landing page heroes */
   backgroundImage?: string;
   /** Optional extra classes for the background image layer */
@@ -45,6 +47,7 @@ export const PageHero = ({
   descriptionTinaField,
   size = 'large',
   className = '',
+  contentClassName = '',
   backgroundImage,
   backgroundImageClassName = '',
   decorativeLayer,
@@ -63,7 +66,7 @@ export const PageHero = ({
   const foregroundY = useTransform(scrollYProgress, [0, 1], [0, 42]);
 
   const sizeClasses = {
-    full: 'lg:min-h-screen xl:min-h-[56rem] flex flex-col justify-center',
+    full: 'lg:min-h-screen xl:min-h-[66rem] flex flex-col justify-center',
     large: 'min-h-[60vh] flex flex-col justify-end',
   };
 
@@ -94,7 +97,7 @@ export const PageHero = ({
       )}
 
       <motion.div
-        className="relative z-10 max-w-[1400px] mx-auto w-full will-change-transform"
+        className={`relative z-10 mx-auto w-full max-w-[1400px] will-change-transform ${contentClassName}`}
         style={{ y: contentParallax ? contentY : 0 }}
       >
         {label && (

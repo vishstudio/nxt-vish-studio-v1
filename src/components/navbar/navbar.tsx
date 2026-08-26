@@ -1,6 +1,18 @@
 "use client";
 import { trackEmailClick, trackSocialLinkClick } from "@/src/lib/analytics";
-import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
+import {
+  ArrowRight,
+  Bot,
+  Box,
+  ChevronDown,
+  LayoutTemplate,
+  Megaphone,
+  Menu,
+  Monitor,
+  Palette,
+  Smartphone,
+  X,
+} from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -26,19 +38,52 @@ export const Navbar = () => {
 
   const serviceSubItems = [
     {
+      name: "Social Media Marketing",
+      href: "/services/social-media-marketing",
+      description: "Strategy, campaigns, and creative direction",
+      icon: Megaphone,
+    },
+    {
       name: "SaaS Products",
       href: "/services/saas-products",
       description: "Client-ready applications",
+      icon: Box,
     },
     {
-      name: "Templates",
+      name: "Websites",
+      href: "/services/websites",
+      description: "High-converting digital experiences",
+      icon: Monitor,
+    },
+    {
+      name: "Website Templates",
       href: "/services/templates",
-      description: "Launch assets coming soon",
+      description: "Launch-ready website foundations",
+      icon: LayoutTemplate,
     },
     {
-      name: "AI Automations",
+      name: "Softwares",
+      href: "/services/softwares",
+      description: "Custom tools and operational systems",
+      icon: Box,
+    },
+    {
+      name: "Mobile Apps",
+      href: "/services/mobile-apps",
+      description: "Customer and team mobile experiences",
+      icon: Smartphone,
+    },
+    {
+      name: "Branding",
+      href: "/services/branding",
+      description: "Identity systems built to be remembered",
+      icon: Palette,
+    },
+    {
+      name: "AI Integrations & Automations",
       href: "/services/ai-automations",
-      description: "Workflow systems coming soon",
+      description: "Connected workflow systems",
+      icon: Bot,
     },
   ];
 
@@ -48,6 +93,7 @@ export const Navbar = () => {
       name: "See all services",
       href: "/services",
       description: "Full service overview",
+      icon: ArrowRight,
     },
   ];
 
@@ -139,12 +185,24 @@ export const Navbar = () => {
         className="fixed top-6 left-0 right-0 z-50 flex justify-center pointer-events-none px-6 md:px-12"
       >
         <div
-          className={`pointer-events-auto flex items-center justify-between transition-all duration-300 w-full max-w-[1400px] ${effectiveIsScrolled
+          className={`pointer-events-auto relative flex w-full max-w-[1400px] items-center justify-between transition-all duration-300 ${effectiveIsScrolled
             ? "pl-4 pr-2 py-2 md:pl-4 md:pr-2 rounded-full bg-black/80 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/50"
             : "px-0 py-6 rounded-none bg-transparent border-transparent"
             }`}
         >
-          <div className={`flex items-center ${effectiveIsScrolled ? "gap-3" : "gap-0"}`}>
+          {effectiveIsScrolled && (
+            <Button
+              variant="secondary"
+              size="icon"
+              onClick={openMobileMenu}
+              ariaLabel="Open menu"
+              className="flex shrink-0"
+            >
+              <Menu className="w-5 h-5" />
+            </Button>
+          )}
+
+          <div className={`flex items-center ${effectiveIsScrolled ? "absolute left-1/2 -translate-x-1/2 gap-3" : "gap-0"}`}>
             <div
               className={`grid h-5 shrink-0 transition-[opacity,width,transform] duration-200 ease-out ${effectiveIsScrolled ? "w-5 scale-100 opacity-100" : "w-0 scale-95 opacity-0"
                 }`}
@@ -232,32 +290,53 @@ export const Navbar = () => {
                     )}
                     {item.children ? (
                       <div
-                        className="pointer-events-none absolute left-1/2 top-full z-50 w-[18rem] -translate-x-1/2 pt-3 group-hover:pointer-events-auto group-focus-within:pointer-events-auto"
+                        className="pointer-events-none absolute left-1/2 top-full z-50 w-[min(1400px,calc(100vw-6rem))] -translate-x-1/2 pt-3 group-hover:pointer-events-auto group-focus-within:pointer-events-auto"
                         role="menu"
                       >
-                        <div className="translate-y-2 rounded-2xl border border-white/10 bg-black/95 p-2 opacity-0 shadow-2xl shadow-black/50 backdrop-blur-xl transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100">
-                          <div className="mb-1 px-3 py-2 font-mono text-[10px] uppercase tracking-widest text-vish-accent">
-                            Service tracks
+                        <div className="translate-y-2 rounded-3xl border border-white/10 bg-black/95 p-4 opacity-0 shadow-2xl shadow-black/50 backdrop-blur-xl transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100">
+                          <div className="mb-3 flex items-center justify-between px-2 pt-1">
+                            <span className="font-mono text-[10px] uppercase tracking-widest text-vish-accent">
+                              Our services
+                            </span>
+                            <span className="font-mono text-[10px] uppercase tracking-widest text-white/35">
+                              Strategy, design & technology
+                            </span>
                           </div>
-                          {item.children.map((child) => (
+                          <div className="grid grid-cols-4 gap-2">
+                          {item.children.slice(0, 8).map((child) => {
+                            const Icon = child.icon;
+
+                            return (
                             <a
                               key={child.name}
                               href={child.href}
                               role="menuitem"
                               tabIndex={effectiveIsScrolled ? -1 : undefined}
-                              className="group/item block rounded-xl px-3 py-3 transition-colors hover:bg-white/10 focus-visible:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vish-accent/70 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                              className="group/item rounded-2xl border border-white/6 bg-white/[0.025] px-4 py-4 transition-colors hover:border-white/15 hover:bg-white/[0.07] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vish-accent/70 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                             >
-                              <span className="flex items-center justify-between gap-3">
-                                <span className="font-sans text-sm font-medium text-white">
-                                  {child.name}
-                                </span>
+                              <span className="flex items-start justify-between gap-3">
+                                <Icon className="h-5 w-5 shrink-0 text-vish-accent" aria-hidden="true" />
                                 <ArrowRight className="h-3.5 w-3.5 text-vish-accent opacity-0 transition-all group-hover/item:translate-x-0.5 group-hover/item:opacity-100" />
+                              </span>
+                              <span className="mt-5 block font-sans text-sm font-medium text-white">
+                                  {child.name}
                               </span>
                               <span className="mt-1 block font-sans text-xs leading-relaxed text-gray-500">
                                 {child.description}
                               </span>
                             </a>
-                          ))}
+                            );
+                          })}
+                          </div>
+                          <a
+                            href="/services"
+                            role="menuitem"
+                            tabIndex={effectiveIsScrolled ? -1 : undefined}
+                            className="mt-2 flex items-center justify-between rounded-2xl border border-white/10 px-4 py-3 transition-colors hover:border-vish-accent/60 hover:bg-vish-accent/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vish-accent/70 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                          >
+                            <span className="font-sans text-sm font-medium text-white">See all services</span>
+                            <ArrowRight className="h-4 w-4 text-vish-accent" aria-hidden="true" />
+                          </a>
                         </div>
                       </div>
                     ) : null}
@@ -269,39 +348,40 @@ export const Navbar = () => {
 
           <div className="flex items-center gap-3">
             <div
-              className={`hidden items-center gap-4 transition-[opacity,transform] duration-200 ease-out lg:flex ${effectiveIsScrolled
-                ? "pointer-events-none translate-x-2 opacity-0"
-                : "pointer-events-auto translate-x-0 opacity-100"
-                }`}
+              className={effectiveIsScrolled
+                ? "hidden"
+                : "hidden items-center gap-4 transition-[opacity,transform] duration-200 ease-out lg:flex pointer-events-auto translate-x-0 opacity-100"}
               aria-hidden={effectiveIsScrolled}
             >
               <LanguageSelector />
-              <Button
-                variant="cta"
-                size="sm"
-                href={PROJECT_INQUIRY_HREF}
-                icon={
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:-rotate-45" />
-                }
-                iconPosition="right"
-                ariaLabel={PROJECT_INQUIRY_ARIA_LABEL}
-                dataConversionAction={PROJECT_INQUIRY_ACTION}
-                className="font-sans"
-                tabIndex={effectiveIsScrolled ? -1 : undefined}
-              >
-                Schedule a Free Call
-              </Button>
             </div>
 
             <Button
-              variant="secondary"
-              size="icon"
-              onClick={openMobileMenu}
-              ariaLabel="Open menu"
-              className={effectiveIsScrolled ? "flex" : "flex lg:hidden"}
+              variant="cta"
+              size="sm"
+              href={PROJECT_INQUIRY_HREF}
+              icon={
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:-rotate-45" />
+              }
+              iconPosition="right"
+              ariaLabel={PROJECT_INQUIRY_ARIA_LABEL}
+              dataConversionAction={PROJECT_INQUIRY_ACTION}
+              className="hidden font-sans lg:inline-flex"
             >
-              <Menu className="w-5 h-5" />
+              Schedule a Free Call
             </Button>
+
+            {!effectiveIsScrolled && (
+              <Button
+                variant="secondary"
+                size="icon"
+                onClick={openMobileMenu}
+                ariaLabel="Open menu"
+                className="flex lg:hidden"
+              >
+                <Menu className="w-5 h-5" />
+              </Button>
+            )}
           </div>
         </div>
       </motion.header>
@@ -321,11 +401,11 @@ export const Navbar = () => {
             />
             <motion.div
               key="panel"
-              initial={{ opacity: 0, x: 20 }}
+              initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 20 }}
+              exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="fixed top-0 right-0 bottom-0 w-full sm:w-[420px] z-[70] bg-[#050505] border-l border-white/10 flex flex-col shadow-2xl overflow-hidden"
+              className="fixed top-0 bottom-0 left-0 z-[70] flex w-full flex-col overflow-hidden border-r border-white/10 bg-[#050505] shadow-2xl sm:w-[420px]"
             >
               <div className="flex justify-between items-center p-8">
                 <span className="font-display text-2xl font-semibold text-white tracking-tight">
@@ -412,7 +492,10 @@ export const Navbar = () => {
                             className="overflow-hidden"
                           >
                             <div className="ml-10 mt-4 grid gap-2 border-l border-white/10 pl-4 sm:ml-12">
-                              {item.children.map((child) => (
+                              {item.children.map((child) => {
+                                const Icon = child.icon;
+
+                                return (
                                 <a
                                   key={child.name}
                                   href={child.href}
@@ -420,7 +503,8 @@ export const Navbar = () => {
                                   className="rounded-2xl border border-white/8 bg-white/[0.025] px-4 py-3 transition-colors hover:border-white/20 hover:bg-white/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vish-accent/70 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                                 >
                                   <span className="flex items-center justify-between gap-3">
-                                    <span className="font-sans text-base font-medium text-white">
+                                    <span className="flex items-center gap-3 font-sans text-base font-medium text-white">
+                                      <Icon className="h-4 w-4 shrink-0 text-vish-accent" aria-hidden="true" />
                                       {child.name}
                                     </span>
                                     <ArrowRight className="h-4 w-4 text-vish-accent" />
@@ -429,7 +513,8 @@ export const Navbar = () => {
                                     {child.description}
                                   </span>
                                 </a>
-                              ))}
+                                );
+                              })}
                             </div>
                           </motion.div>
                         ) : null}

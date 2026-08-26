@@ -4,43 +4,23 @@
   "heroTitleLine2": "& Capabilities",
   "categories": [
     {
-      "category": "Website",
-      "description": "High-converting websites, landing pages, e-commerce experiences, and CMS-backed marketing sites built for speed, clarity, and trust.",
-      "image": "/assets/img/services-hero.jpg",
-      "imageAlt": "VISH Studio website work on screen",
+      "category": "Social Media Marketing",
+      "description": "Strategic social media marketing, campaign planning, content direction, and performance-focused creative that keep your brand visible and relevant.",
+      "image": "/assets/img/home-cta-2.avif",
+      "imageAlt": "Social media marketing creative work",
       "plan": [
-        "Clarify your offer, audience, and conversion path",
-        "Map the information architecture and key page journeys",
-        "Design the visual system and responsive interface",
-        "Build, test, optimize, and prepare the launch"
+        "Understand your audience, offer, and growth goals",
+        "Build a clear content and campaign direction",
+        "Create on-brand creative systems for key channels",
+        "Review performance and refine the next cycle"
       ],
       "items": [
-        "Business websites",
-        "Landing pages",
-        "E-commerce websites",
-        "CMS integration",
-        "SEO-ready structure",
-        "Performance optimization"
-      ]
-    },
-    {
-      "category": "Mobile Apps",
-      "description": "Mobile-first product experiences for customer portals, booking flows, internal teams, and launch-ready iOS or Android app concepts.",
-      "image": "/assets/img/home-cta-1.avif",
-      "imageAlt": "Mobile product interface concept",
-      "plan": [
-        "Define the core job, users, and success moments",
-        "Shape the app map and task-by-task user flows",
-        "Prototype the highest-value screens and interactions",
-        "Prepare a focused handoff or build roadmap"
-      ],
-      "items": [
-        "App interface design",
-        "User flows",
-        "Account screens",
-        "Booking workflows",
-        "Push notification flows",
-        "Launch-ready prototypes"
+        "Content strategy",
+        "Campaign planning",
+        "Social creative direction",
+        "Content calendars",
+        "Performance reporting",
+        "Community growth support"
       ]
     },
     {
@@ -64,23 +44,43 @@
       ]
     },
     {
-      "category": "CRM",
-      "description": "Custom CRM systems that organize leads, clients, follow-ups, sales stages, and team workflows around the way your business actually operates.",
-      "image": "/assets/img/projects-hero.avif",
-      "imageAlt": "CRM workflow and client pipeline interface",
+      "category": "Websites",
+      "description": "High-converting websites, landing pages, e-commerce experiences, and CMS-backed marketing sites built for speed, clarity, and trust.",
+      "image": "/assets/img/services-hero.jpg",
+      "imageAlt": "VISH Studio website work on screen",
       "plan": [
-        "Audit the current sales process and information gaps",
-        "Model pipelines, records, ownership, and handoffs",
-        "Design the views your team needs every day",
-        "Configure automation, permissions, reporting, and rollout"
+        "Clarify your offer, audience, and conversion path",
+        "Map the information architecture and key page journeys",
+        "Design the visual system and responsive interface",
+        "Build, test, optimize, and prepare the launch"
       ],
       "items": [
-        "Lead pipelines",
-        "Client records",
-        "Follow-up workflows",
-        "Sales stages",
-        "Team permissions",
-        "CRM automations"
+        "Business websites",
+        "Landing pages",
+        "E-commerce websites",
+        "CMS integration",
+        "SEO-ready structure",
+        "Performance optimization"
+      ]
+    },
+    {
+      "category": "Website Templates",
+      "description": "Launch-ready website templates for teams that need a faster, polished starting point without losing the VISH Studio visual standard.",
+      "image": "/assets/img/services-hero.jpg",
+      "imageAlt": "Website template layouts on screen",
+      "plan": [
+        "Choose the template direction that fits your offer",
+        "Adapt the structure, content, and visual identity",
+        "Configure the essential pages and conversion paths",
+        "Test, optimize, and prepare the launch"
+      ],
+      "items": [
+        "Marketing site templates",
+        "Landing page templates",
+        "Portfolio templates",
+        "Content adaptation",
+        "Brand customization",
+        "Launch support"
       ]
     },
     {
@@ -104,6 +104,26 @@
       ]
     },
     {
+      "category": "Mobile Apps",
+      "description": "Mobile-first product experiences for customer portals, booking flows, internal teams, and launch-ready iOS or Android app concepts.",
+      "image": "/assets/img/home-cta-1.avif",
+      "imageAlt": "Mobile product interface concept",
+      "plan": [
+        "Define the core job, users, and success moments",
+        "Shape the app map and task-by-task user flows",
+        "Prototype the highest-value screens and interactions",
+        "Prepare a focused handoff or build roadmap"
+      ],
+      "items": [
+        "App interface design",
+        "User flows",
+        "Account screens",
+        "Booking workflows",
+        "Push notification flows",
+        "Launch-ready prototypes"
+      ]
+    },
+    {
       "category": "Branding",
       "description": "Strategic brand identity, visual systems, launch assets, and digital guidelines that make your business easier to recognize and trust.",
       "image": "/assets/img/about-hero.jpg",
@@ -124,43 +144,23 @@
       ]
     },
     {
-      "category": "Dashboard",
-      "description": "Operational dashboards that turn business data, activity, and performance indicators into clear interfaces for faster decisions.",
+      "category": "AI Integrations & Automations",
+      "description": "Practical AI integrations and automations that connect your tools, streamline handoffs, and remove repetitive work from everyday operations.",
       "image": "/assets/img/services-section.jpg",
-      "imageAlt": "Operational dashboard and reporting view",
+      "imageAlt": "AI automation workflow and integrated tools",
       "plan": [
-        "Identify the decisions, metrics, and users that matter",
-        "Structure the data views and reporting hierarchy",
-        "Design filters, states, and actionable insight panels",
-        "Connect sources, validate outputs, and refine adoption"
+        "Audit repetitive work and the systems involved",
+        "Identify the highest-value AI and automation opportunities",
+        "Design the integrations, approvals, and exception paths",
+        "Implement, test, and refine the workflows with your team"
       ],
       "items": [
-        "Admin dashboards",
-        "Analytics views",
-        "Reporting modules",
-        "Data filters",
-        "Export workflows",
-        "Performance tracking"
-      ]
-    },
-    {
-      "category": "ERP",
-      "description": "Custom ERP systems that connect inventory, finance, operations, reporting, and team workflows into one reliable business platform.",
-      "image": "/assets/img/legal-hero.jpg",
-      "imageAlt": "Business operations planning workspace",
-      "plan": [
-        "Assess the operating model and system dependencies",
-        "Prioritize the modules and shared data foundation",
-        "Design permissions, workflows, and exception handling",
-        "Deliver in phases with migration and team enablement"
-      ],
-      "items": [
-        "Inventory management",
-        "Finance workflows",
-        "Operations modules",
-        "Procurement tracking",
-        "Role-based access",
-        "Business reporting"
+        "AI assistants",
+        "Workflow automation",
+        "System integrations",
+        "Lead routing",
+        "Document processing",
+        "Operational reporting"
       ]
     }
   ]

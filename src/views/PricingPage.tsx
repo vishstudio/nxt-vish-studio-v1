@@ -32,7 +32,16 @@ const fallbackServiceDetail = {
   ],
 };
 
-const serviceOrder = ['website', 'mobile-apps', 'softwares', 'branding'];
+const serviceOrder = [
+  'social-media-marketing',
+  'saas-products',
+  'websites',
+  'website-templates',
+  'softwares',
+  'mobile-apps',
+  'branding',
+  'ai-integrations-automations',
+];
 
 const getPackageCarePlan = (
   plan: PricingPlan,

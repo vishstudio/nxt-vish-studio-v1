@@ -30,14 +30,14 @@
     {
       "name": "Vishroy Seenarain",
       "role": "Founder & Creative Director",
-      "image": "/assets/img/vishroy.jpg",
+      "image": "/assets/img/team/vishroy.jpg",
       "bio": "Leading the vision with a passion for minimalist design and functional aesthetics.",
       "order": 1
     },
     {
       "name": "Divesh Heeramun",
       "role": "Cofounder & Technical Lead",
-      "image": "https://picsum.photos/seed/david/800/800",
+      "image": "/assets/img/team/divesh.jpg",
       "bio": "Architecting robust and scalable digital solutions.",
       "order": 2
     },
@@ -51,7 +51,7 @@
     {
       "name": "Pravesh Boodhoo",
       "role": "AI Engineer",
-      "image": "https://picsum.photos/seed/pravesh/800/800",
+      "image": "/assets/img/team/pravesh.jpg",
       "bio": "Designing practical AI workflows and intelligent product systems.",
       "order": 4
     }

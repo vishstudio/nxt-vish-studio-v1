@@ -1112,7 +1112,7 @@ var config_default = defineConfig({
                 type: "string",
                 name: "slug",
                 label: "Tab Slug",
-                description: "Lowercase identifier, e.g. website, branding, softwares, mobile-apps"
+                description: "Lowercase identifier, e.g. social-media-marketing, websites, branding, ai-integrations-automations"
               },
               {
                 type: "object",

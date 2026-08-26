@@ -2,7 +2,7 @@
   "heroLabel": "Digital Design Agency",
   "heroTitleLine1": "We scale brands",
   "heroTitleLine2": "digitally",
-  "heroDescription": "VISH Studio is a creative agency partnering with global businesses to build immersive websites, custom applications, and distinct brand systems that drive measurable impact.",
+  "heroDescription": "VISH Studio is a creative agency partnering with global businesses on social media marketing, websites, digital products, AI automations, and distinct brand systems that drive measurable impact.",
   "heroStats": [
     {
       "label": "Established",
@@ -26,55 +26,55 @@
     }
   ],
   "aboutHeading": "About VISH Studio",
-  "aboutParagraph1": "VISH Studio is a digital agency for businesses that need a sharper online presence, from high-converting websites to practical internal tools.",
+  "aboutParagraph1": "VISH Studio is a digital agency for businesses that need a sharper online presence, from social media marketing and high-converting websites to practical digital products and AI automations.",
   "aboutParagraph2": "We keep strategy, design, and engineering in one focused process, so your brand looks credible and your digital systems are ready to work.",
   "projectsLabel": "Client work",
   "projectsHeading": "Selected Case Studies",
   "projectsDescription": "A focused look at websites, products, and brand systems built to make businesses easier to trust and easier to choose.",
   "projectsButtonText": "View All Projects",
   "servicesHeading": "Our Expertise",
-  "servicesSubtext": "Comprehensive digital solutions tailored to elevate your business in an evolving landscape.",
+  "servicesSubtext": "From social media marketing to AI integrations, our digital services are tailored to help your business grow.",
   "servicesButtonText": "Explore All Services",
   "services": [
     {
       "id": "01",
-      "title": "Website",
-      "description": "High-converting websites, landing pages, e-commerce experiences, and CMS-backed marketing sites built for speed, clarity, and trust."
+      "title": "Social Media Marketing",
+      "description": "Strategic social media marketing, campaign planning, content direction, and performance-focused creative that keep your brand visible and relevant."
     },
     {
       "id": "02",
-      "title": "Mobile Apps",
-      "description": "Mobile-first product experiences for customer portals, booking flows, internal teams, and launch-ready iOS or Android app concepts."
-    },
-    {
-      "id": "03",
-      "title": "Softwares",
-      "description": "Bespoke business software for operations, portals, approvals, reporting, automation, and internal systems that replace scattered manual work."
-    },
-    {
-      "id": "04",
-      "title": "Branding",
-      "description": "Strategic brand identity, visual systems, launch assets, and digital guidelines that make your business easier to recognize and trust."
-    },
-    {
-      "id": "05",
       "title": "SaaS Products",
       "description": "Subscription-ready product platforms with authentication, workflows, dashboards, billing logic, and scalable product architecture."
     },
     {
+      "id": "03",
+      "title": "Websites",
+      "description": "High-converting websites, landing pages, e-commerce experiences, and CMS-backed marketing sites built for speed, clarity, and trust."
+    },
+    {
+      "id": "04",
+      "title": "Website Templates",
+      "description": "Launch-ready website templates for teams that need a faster, polished starting point without losing the VISH Studio visual standard."
+    },
+    {
+      "id": "05",
+      "title": "Softwares",
+      "description": "Bespoke business software for operations, portals, approvals, reporting, automation, and internal systems that replace scattered manual work."
+    },
+    {
       "id": "06",
-      "title": "CRM",
-      "description": "Custom CRM systems that organize leads, clients, follow-ups, sales stages, and team workflows around the way your business actually operates."
+      "title": "Mobile Apps",
+      "description": "Mobile-first product experiences for customer portals, booking flows, internal teams, and launch-ready iOS or Android app concepts."
     },
     {
       "id": "07",
-      "title": "Dashboard",
-      "description": "Operational dashboards that turn business data, activity, and performance indicators into clear interfaces for faster decisions."
+      "title": "Branding",
+      "description": "Strategic brand identity, visual systems, launch assets, and digital guidelines that make your business easier to recognize and trust."
     },
     {
       "id": "08",
-      "title": "ERP",
-      "description": "Custom ERP systems that connect inventory, finance, operations, reporting, and team workflows into one reliable business platform."
+      "title": "AI Integrations & Automations",
+      "description": "Practical AI integrations and automations that connect your tools, streamline handoffs, and remove repetitive work from everyday operations."
     }
   ],
   "processHeading": "How We Partner",
@@ -122,11 +122,11 @@
     }
   ],
   "faqHeading": "Common Questions",
-  "faqSubtext": "Clear answers for founders, operators, and teams considering a website, software platform, or digital product build with VISH Studio.",
+  "faqSubtext": "Clear answers for founders, operators, and teams considering social media marketing, websites, digital products, or AI automation with VISH Studio.",
   "faqItems": [
     {
       "question": "What kinds of projects does VISH Studio take on?",
-      "answer": "We build high-converting websites, custom software, SaaS products, dashboards, CRM systems, ERP workflows, mobile app concepts, and brand systems for businesses that need a polished digital presence or a practical internal tool."
+      "answer": "We provide social media marketing, SaaS products, websites, website templates, custom software, mobile apps, branding, and AI integrations and automations for businesses that need a polished digital presence or more efficient operations."
     },
     {
       "question": "How does a new project usually start?",

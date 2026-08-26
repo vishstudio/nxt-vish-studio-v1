@@ -10,6 +10,7 @@ import { BrandWatermark } from '../brand-watermark/brand-watermark';
 import { Button } from '../ui/button/button';
 import { PROJECT_INQUIRY_HREF, PROJECT_INQUIRY_ACTION, PROJECT_INQUIRY_ARIA_LABEL } from '../../lib/conversion';
 import { APP_READY_EVENT, HERO_REVEALED_EVENT } from '../../lib/site-events';
+import type { HeroStat } from '../../lib/content';
 
 const revealEase = [0.16, 1, 0.3, 1] as const;
 
@@ -40,18 +41,22 @@ const conversionSignals = [
 ];
 
 const capabilityProofItems = [
-  'Websites',
-  'Internal tools',
+  'Social media marketing',
   'SaaS products',
-  'Brand systems',
+  'Websites',
+  'Website templates',
+  'Softwares',
+  'Mobile apps',
+  'Branding',
+  'AI integrations & automations',
 ];
 
 const typingPhrases = [
-  { prefix: 'We build your', text: 'digital business.' },
   { prefix: 'We build your', text: 'websites.' },
-  { prefix: 'We build your', text: 'internal tools.' },
-  { prefix: 'We build your', text: 'Saas products.' },
-  { prefix: 'We build your', text: 'brands.' },
+  { prefix: 'We build your', text: 'SaaS products.' },
+  { prefix: 'We build your', text: 'mobile apps.' },
+  { prefix: 'We build your', text: 'brand systems.' },
+  { prefix: 'We build your', text: 'AI automations.' },
 ];
 
 const completedPhraseHoldMs = 5000;
@@ -66,35 +71,47 @@ function splitTypingPhrase(text: string) {
   };
 }
 
-const HeroCapabilityProof = ({ isHeroRevealed }: { isHeroRevealed: boolean }) => {
+const HeroCapabilityProof = ({
+  isHeroRevealed,
+  stats,
+}: {
+  isHeroRevealed: boolean;
+  stats: HeroStat[];
+}) => {
   return (
-    <motion.aside
+    <motion.div
       initial={{ opacity: 0, x: 24, filter: 'blur(10px)' }}
       animate={isHeroRevealed
         ? { opacity: 1, x: 0, filter: 'blur(0px)' }
         : { opacity: 0, x: 24, filter: 'blur(10px)' }}
       transition={{ duration: 0.85, delay: 0.75, ease: revealEase }}
-      className="pointer-events-none absolute right-[max(3rem,calc((100vw-1400px)/2))] top-[25%] z-10 hidden w-[22rem] xl:block"
-      aria-label="Digital business capabilities"
+      className="pointer-events-none absolute right-[max(3rem,calc((100vw-1400px)/2))] top-[16%] z-10 hidden w-[24rem] xl:block"
     >
-      <div className="rounded-3xl border border-white/10 bg-black/55 p-5 shadow-2xl shadow-black/50 backdrop-blur-md">
-        <div className="h-px w-14 bg-vish-accent" aria-hidden="true" />
-        <p className="mt-5 font-mono text-[0.64rem] font-semibold uppercase tracking-widest text-vish-gray">
-          Digital business stack
-        </p>
-        <p className="mt-3 max-w-[16rem] font-display text-2xl font-medium leading-tight tracking-normal text-white">
-          Strategy, design, and engineering under one roof<span className="text-vish-accent">.</span>
-        </p>
-        <ul className="mt-6 space-y-3">
-          {capabilityProofItems.map((item) => (
-            <li key={item} className="flex items-center justify-between border-t border-white/10 pt-3">
-              <span className="font-sans text-sm text-vish-gray">{item}</span>
-              <span className="h-1.5 w-1.5 rounded-full bg-vish-accent" aria-hidden="true" />
-            </li>
-          ))}
-        </ul>
-      </div>
-    </motion.aside>
+      <aside aria-label="Digital business capabilities">
+        <div className="rounded-3xl border border-white/10 bg-black/55 p-5 shadow-2xl shadow-black/50 backdrop-blur-md">
+          <p className="mt-5 font-mono text-[0.64rem] font-semibold uppercase tracking-widest text-vish-gray">
+            Digital business stack
+          </p>
+          <p className="mt-3 max-w-[16rem] font-display text-2xl font-medium leading-tight tracking-normal text-white">
+            Strategy, design, and engineering under one roof<span className="text-vish-accent">.</span>
+          </p>
+          <ul className="mt-6 grid grid-cols-2 gap-x-5 gap-y-3">
+            {capabilityProofItems.map((item) => (
+              <li key={item} className="flex items-center justify-between border-t border-white/10 pt-3">
+                <span className="font-sans text-sm text-vish-gray">{item}</span>
+                <span className="h-1.5 w-1.5 rounded-full bg-vish-accent" aria-hidden="true" />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </aside>
+      <HeroStats
+        stats={stats}
+        isHeroRevealed={isHeroRevealed}
+        layout="compact"
+        className="mt-6 w-full"
+      />
+    </motion.div>
   );
 }
 
@@ -175,6 +192,7 @@ export const Hero = () => {
         labelTinaField={tinaField('heroLabel')}
         labelStyle="pill"
         size="full"
+        contentClassName="xl:pb-48"
         isRevealed={isHeroRevealed}
         contentParallax
         title={
@@ -267,12 +285,9 @@ export const Hero = () => {
         )}
         foregroundLayer={(
           <>
-            <HeroCapabilityProof isHeroRevealed={isHeroRevealed} />
-            <HeroStats
-              stats={content.heroStats}
+            <HeroCapabilityProof
               isHeroRevealed={isHeroRevealed}
-              layout="compact"
-              className="absolute right-[max(3rem,calc((100vw-1400px)/2))] top-[calc(25%+24.5rem)] z-20 hidden w-[22rem] xl:grid"
+              stats={content.heroStats}
             />
           </>
         )}

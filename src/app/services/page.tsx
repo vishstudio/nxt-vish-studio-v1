@@ -3,7 +3,7 @@ import { ServicesPage } from '@/src/views/ServicesPage';
 
 export const metadata: Metadata = {
   title: 'Services | VISH Studio',
-  description: 'Custom web application development, high-performance website engineering, and brand architecture services from VISH Studio.',
+  description: 'Social media marketing, SaaS products, websites, website templates, software, mobile apps, branding, and AI integrations from VISH Studio.',
 };
 
 const Services = () => {

@@ -13,12 +13,6 @@ const GOOGLE_TRANSLATE_STYLE_ID = 'vish-google-translate-chrome-style';
 const languages = [
   { code: 'en', label: 'English' },
   { code: 'fr', label: 'French' },
-  { code: 'es', label: 'Spanish' },
-  { code: 'de', label: 'German' },
-  { code: 'it', label: 'Italian' },
-  { code: 'hi', label: 'Hindi' },
-  { code: 'zh-CN', label: 'Chinese' },
-  { code: 'ar', label: 'Arabic' },
 ];
 
 declare global {
@@ -43,7 +37,10 @@ declare global {
 
 function getStoredLanguage() {
   if (typeof window === 'undefined') return 'en';
-  return window.localStorage.getItem(LANGUAGE_STORAGE_KEY) || 'en';
+  const storedLanguage = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
+  return languages.some((language) => language.code === storedLanguage)
+    ? storedLanguage!
+    : 'en';
 }
 
 function setTranslateCookie(languageCode: string) {
@@ -307,7 +304,7 @@ export const LanguageSelector = ({ compact = false }: LanguageSelectorProps) => 
                   onClick={() => handleLanguageSelect(language.code)}
                   className={`flex w-full items-center justify-between rounded-xl px-4 py-3 text-left font-sans text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vish-accent focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
                     isSelected
-                      ? 'bg-vish-accent text-black'
+                      ? 'bg-white text-black'
                       : 'text-gray-300 hover:bg-white/10 hover:text-white'
                   }`}
                 >

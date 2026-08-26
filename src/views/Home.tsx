@@ -29,18 +29,22 @@ const homePageJsonLd = {
   areaServed: ['Mauritius', 'Global'],
   slogan: 'We scale brands digitally.',
   description:
-    'VISH Studio is a premium web agency in Mauritius engineering high-performance custom software, immersive frontend platforms, and strategic brand architecture globally.',
+    'VISH Studio is a creative technology studio in Mauritius providing social media marketing, SaaS products, websites, website templates, software, mobile apps, branding, and AI integrations globally.',
   keywords: [
-    'Creative web agency Mauritius',
-    'Custom React and Next.js developer',
-    'Digital product strategy',
-    'Premium UI/UX web systems',
+    'Social media marketing Mauritius',
+    'SaaS product development',
+    'Website design and development',
+    'AI integrations and automations',
   ],
   serviceType: [
-    'Creative web agency',
-    'Custom React and Next.js development',
-    'Digital product strategy',
-    'Premium UI/UX web systems',
+    'Social Media Marketing',
+    'SaaS Products',
+    'Websites',
+    'Website Templates',
+    'Softwares',
+    'Mobile Apps',
+    'Branding',
+    'AI Integrations & Automations',
   ],
 };
 
@@ -60,7 +64,7 @@ export const Home = () => {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(homePageJsonLd) }}
         />
         <p className="sr-only">
-          VISH Studio is a premium web agency in Mauritius engineering high-performance custom software, immersive frontend platforms, and strategic brand architecture globally.
+          VISH Studio provides social media marketing, SaaS products, websites, website templates, software, mobile apps, branding, and AI integrations and automations.
         </p>
         <Hero />
         <RecentProjectStrip />

@@ -26,10 +26,14 @@ import { Button } from "../ui/button/button";
 
 const steps = ["Service", "Package", "Project brief", "Contact", "Review"];
 const serviceLabels: Record<ServiceSlug, string> = {
-  website: "Website",
+  "social-media-marketing": "Social Media Marketing",
+  "saas-products": "SaaS Products",
+  websites: "Websites",
+  "website-templates": "Website Templates",
+  softwares: "Softwares",
   "mobile-apps": "Mobile Apps",
-  softwares: "Software",
   branding: "Branding",
+  "ai-integrations-automations": "AI Integrations & Automations",
 };
 const stepHeadings = [
   {

@@ -14,7 +14,7 @@ const prompt = Prompt({
 export const metadata: Metadata = {
   title: "VISH Studio | Creative Web Agency Mauritius",
   description:
-    "Premium web agency in Mauritius engineering high-performance custom software, immersive frontend platforms, strategic brand architecture, and premium UI/UX web systems globally.",
+    "Creative technology studio in Mauritius providing social media marketing, SaaS products, websites, software, mobile apps, branding, and AI integrations globally.",
   keywords: [
     "Creative web agency Mauritius",
     "Custom React and Next.js developer",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "VISH Studio | Creative Web Agency Mauritius",
     description:
-      "Premium web agency in Mauritius engineering high-performance custom software, immersive frontend platforms, strategic brand architecture, and premium UI/UX web systems globally.",
+      "Creative technology studio in Mauritius providing social media marketing, SaaS products, websites, software, mobile apps, branding, and AI integrations globally.",
     url: "https://vish.studio",
     siteName: "VISH Studio",
     type: "website",

@@ -5,7 +5,7 @@ import { Section } from "@/src/components/ui/section/section";
 
 export const metadata: Metadata = {
   title: "Start a Project | VISH Studio",
-  description: "Tell VISH Studio about your website, mobile app, software, or branding project.",
+  description: "Tell VISH Studio about your social media marketing, SaaS, website, software, mobile app, branding, or AI automation project.",
 };
 
 const StartProjectPage = () => {
