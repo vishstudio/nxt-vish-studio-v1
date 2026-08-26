@@ -538,6 +538,7 @@ type AboutPage implements Node & Document {
   heroLabel: String!
   heroTitleLine1: String
   heroTitleLine2: String
+  heroDescription: String
   studioImage: String
   studioImageAlt: String
   introHeading: String
@@ -570,6 +571,7 @@ input AboutPageFilter {
   heroLabel: StringFilter
   heroTitleLine1: StringFilter
   heroTitleLine2: StringFilter
+  heroDescription: StringFilter
   studioImage: StringFilter
   studioImageAlt: StringFilter
   introHeading: StringFilter
@@ -1070,6 +1072,7 @@ input AboutPageMutation {
   heroLabel: String
   heroTitleLine1: String
   heroTitleLine2: String
+  heroDescription: String
   studioImage: String
   studioImageAlt: String
   introHeading: String

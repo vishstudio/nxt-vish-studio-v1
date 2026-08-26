@@ -217,7 +217,7 @@ export const Navbar = () => {
 
           {/* Desktop Navigation */}
           <nav
-            className={`absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 rounded-full border border-white/5 bg-white/5 p-1 transition-[opacity,transform] duration-200 ease-out lg:flex ${effectiveIsScrolled
+            className={`absolute left-1/2 hidden select-none -translate-x-1/2 items-center gap-1 rounded-full border border-white/5 bg-white/5 p-1 transition-[opacity,transform] duration-200 ease-out lg:flex ${effectiveIsScrolled
               ? "pointer-events-none scale-95 opacity-0"
               : "pointer-events-auto scale-100 opacity-100"
               }`}
@@ -257,6 +257,7 @@ export const Navbar = () => {
                     {item.children ? (
                       <button
                         type="button"
+                        data-nav-link
                         aria-current={isActive ? "page" : undefined}
                         aria-expanded={isDesktopSubmenuOpen}
                         aria-haspopup="menu"
@@ -278,6 +279,7 @@ export const Navbar = () => {
                     ) : (
                       <a
                         href={item.href}
+                        data-nav-link
                         aria-current={isActive ? "page" : undefined}
                         tabIndex={effectiveIsScrolled ? -1 : undefined}
                         className={`inline-flex items-center gap-1.5 px-5 py-2 rounded-full font-sans text-sm font-medium transition-all ${isActive
@@ -405,7 +407,7 @@ export const Navbar = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="fixed top-0 bottom-0 left-0 z-[70] flex w-full flex-col overflow-hidden border-r border-white/10 bg-[#050505] shadow-2xl sm:w-[420px]"
+              className="fixed top-0 bottom-0 left-0 z-[70] flex w-full select-none flex-col overflow-hidden border-r border-white/10 bg-[#050505] shadow-2xl sm:w-[420px]"
             >
               <div className="flex justify-between items-center p-8">
                 <span className="font-display text-2xl font-semibold text-white tracking-tight">
@@ -438,6 +440,7 @@ export const Navbar = () => {
                     {item.children ? (
                       <button
                         type="button"
+                        data-nav-link
                         aria-expanded={isMobileServicesOpen}
                         aria-controls="mobile-services-submenu"
                         onClick={() =>
@@ -464,6 +467,7 @@ export const Navbar = () => {
                     ) : (
                       <a
                         href={item.href}
+                        data-nav-link
                         onClick={closeMobileMenu}
                         className="block"
                       >

@@ -782,6 +782,7 @@ export type AboutPage = Node & Document & {
   heroLabel: Scalars['String']['output'];
   heroTitleLine1?: Maybe<Scalars['String']['output']>;
   heroTitleLine2?: Maybe<Scalars['String']['output']>;
+  heroDescription?: Maybe<Scalars['String']['output']>;
   studioImage?: Maybe<Scalars['String']['output']>;
   studioImageAlt?: Maybe<Scalars['String']['output']>;
   introHeading?: Maybe<Scalars['String']['output']>;
@@ -814,6 +815,7 @@ export type AboutPageFilter = {
   heroLabel?: InputMaybe<StringFilter>;
   heroTitleLine1?: InputMaybe<StringFilter>;
   heroTitleLine2?: InputMaybe<StringFilter>;
+  heroDescription?: InputMaybe<StringFilter>;
   studioImage?: InputMaybe<StringFilter>;
   studioImageAlt?: InputMaybe<StringFilter>;
   introHeading?: InputMaybe<StringFilter>;
@@ -1487,6 +1489,7 @@ export type AboutPageMutation = {
   heroLabel?: InputMaybe<Scalars['String']['input']>;
   heroTitleLine1?: InputMaybe<Scalars['String']['input']>;
   heroTitleLine2?: InputMaybe<Scalars['String']['input']>;
+  heroDescription?: InputMaybe<Scalars['String']['input']>;
   studioImage?: InputMaybe<Scalars['String']['input']>;
   studioImageAlt?: InputMaybe<Scalars['String']['input']>;
   introHeading?: InputMaybe<Scalars['String']['input']>;
@@ -1613,7 +1616,7 @@ export type HomePagePartsFragment = { __typename: 'HomePage', heroLabel: string,
 
 export type TestimonialsPagePartsFragment = { __typename: 'TestimonialsPage', heading: string, subtext?: string | null, testimonials?: Array<{ __typename: 'TestimonialsPageTestimonials', quote: string, name: string, role: string, company?: string | null } | null> | null };
 
-export type AboutPagePartsFragment = { __typename: 'AboutPage', heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, studioImage?: string | null, studioImageAlt?: string | null, introHeading?: string | null, introParagraph1?: string | null, introParagraph2?: string | null, valuesLabel?: string | null, valuesHeading?: string | null, values?: Array<{ __typename: 'AboutPageValues', id?: string | null, title: string, description?: string | null } | null> | null, teamMembers?: Array<{ __typename: 'AboutPageTeamMembers', name: string, role: string, image?: string | null, bio?: string | null, order?: number | null } | null> | null };
+export type AboutPagePartsFragment = { __typename: 'AboutPage', heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroDescription?: string | null, studioImage?: string | null, studioImageAlt?: string | null, introHeading?: string | null, introParagraph1?: string | null, introParagraph2?: string | null, valuesLabel?: string | null, valuesHeading?: string | null, values?: Array<{ __typename: 'AboutPageValues', id?: string | null, title: string, description?: string | null } | null> | null, teamMembers?: Array<{ __typename: 'AboutPageTeamMembers', name: string, role: string, image?: string | null, bio?: string | null, order?: number | null } | null> | null };
 
 export type ServicesPagePartsFragment = { __typename: 'ServicesPage', heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, categories?: Array<{ __typename: 'ServicesPageCategories', category: string, description?: string | null, image?: string | null, imageAlt?: string | null, plan?: Array<string | null> | null, items?: Array<string | null> | null } | null> | null };
 
@@ -1740,7 +1743,7 @@ export type AboutPageQueryVariables = Exact<{
 }>;
 
 
-export type AboutPageQuery = { __typename?: 'Query', aboutPage: { __typename: 'AboutPage', id: string, heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, studioImage?: string | null, studioImageAlt?: string | null, introHeading?: string | null, introParagraph1?: string | null, introParagraph2?: string | null, valuesLabel?: string | null, valuesHeading?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, values?: Array<{ __typename: 'AboutPageValues', id?: string | null, title: string, description?: string | null } | null> | null, teamMembers?: Array<{ __typename: 'AboutPageTeamMembers', name: string, role: string, image?: string | null, bio?: string | null, order?: number | null } | null> | null } };
+export type AboutPageQuery = { __typename?: 'Query', aboutPage: { __typename: 'AboutPage', id: string, heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroDescription?: string | null, studioImage?: string | null, studioImageAlt?: string | null, introHeading?: string | null, introParagraph1?: string | null, introParagraph2?: string | null, valuesLabel?: string | null, valuesHeading?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, values?: Array<{ __typename: 'AboutPageValues', id?: string | null, title: string, description?: string | null } | null> | null, teamMembers?: Array<{ __typename: 'AboutPageTeamMembers', name: string, role: string, image?: string | null, bio?: string | null, order?: number | null } | null> | null } };
 
 export type AboutPageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1752,7 +1755,7 @@ export type AboutPageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type AboutPageConnectionQuery = { __typename?: 'Query', aboutPageConnection: { __typename?: 'AboutPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'AboutPageConnectionEdges', cursor: string, node?: { __typename: 'AboutPage', id: string, heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, studioImage?: string | null, studioImageAlt?: string | null, introHeading?: string | null, introParagraph1?: string | null, introParagraph2?: string | null, valuesLabel?: string | null, valuesHeading?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, values?: Array<{ __typename: 'AboutPageValues', id?: string | null, title: string, description?: string | null } | null> | null, teamMembers?: Array<{ __typename: 'AboutPageTeamMembers', name: string, role: string, image?: string | null, bio?: string | null, order?: number | null } | null> | null } | null } | null> | null } };
+export type AboutPageConnectionQuery = { __typename?: 'Query', aboutPageConnection: { __typename?: 'AboutPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'AboutPageConnectionEdges', cursor: string, node?: { __typename: 'AboutPage', id: string, heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroDescription?: string | null, studioImage?: string | null, studioImageAlt?: string | null, introHeading?: string | null, introParagraph1?: string | null, introParagraph2?: string | null, valuesLabel?: string | null, valuesHeading?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, values?: Array<{ __typename: 'AboutPageValues', id?: string | null, title: string, description?: string | null } | null> | null, teamMembers?: Array<{ __typename: 'AboutPageTeamMembers', name: string, role: string, image?: string | null, bio?: string | null, order?: number | null } | null> | null } | null } | null> | null } };
 
 export type ServicesPageQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1969,6 +1972,7 @@ export const AboutPagePartsFragmentDoc = gql`
   heroLabel
   heroTitleLine1
   heroTitleLine2
+  heroDescription
   studioImage
   studioImageAlt
   introHeading

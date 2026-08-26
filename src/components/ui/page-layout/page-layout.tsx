@@ -11,7 +11,7 @@ interface PageLayoutProps {
 
 export const PageLayout = ({ children, className = '', showScrollPrompt = true }: PageLayoutProps) => {
   return (
-    <div className={`page-layout ${className} bg-vish-bg min-h-screen text-white selection:bg-vish-accent selection:text-black`}>
+    <div className={`page-layout ${className} min-h-screen bg-vish-bg text-white`}>
       <Navbar />
       {showScrollPrompt ? <ScrollCircular /> : null}
       <main className="pt-32">

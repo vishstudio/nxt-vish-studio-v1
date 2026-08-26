@@ -1,13 +1,21 @@
 'use client';
+import { ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Contact } from '../components/contact/contact';
+import { ProjectsCta } from '../components/projects-cta/projects-cta';
 import { Team } from '../components/team/team';
 import { TextReveal } from '../components/text-reveal/text-reveal';
 import { TrustedPartners } from '../components/trusted-partners/trusted-partners';
+import { Button } from '../components/ui/button/button';
 import { PageLayout } from '../components/ui/page-layout/page-layout';
 import { PageHero } from '../components/ui/page-hero/page-hero';
 import { SectionTitle } from '../components/ui/section-title/section-title';
 import { useTinaAbout } from '../hooks/useTinaVisualEditing';
+import {
+  PROJECT_INQUIRY_ACTION,
+  PROJECT_INQUIRY_ARIA_LABEL,
+  PROJECT_INQUIRY_HREF,
+} from '../lib/conversion';
 
 export const AboutPage = () => {
   const { data: content, tinaField, rawAboutPage } = useTinaAbout();
@@ -19,7 +27,7 @@ export const AboutPage = () => {
         labelTinaField={tinaField('heroLabel')}
         backgroundImage="/assets/img/about-hero.jpg"
         title={
-          <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-medium tracking-tight leading-[0.95] text-white mb-12">
+          <h1 className="mb-10 font-display text-6xl font-medium leading-[0.95] tracking-tight text-white md:text-8xl lg:text-9xl">
             <motion.span
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -40,74 +48,103 @@ export const AboutPage = () => {
             </motion.span>
           </h1>
         }
+        description={content.heroDescription}
+        descriptionTinaField={tinaField('heroDescription')}
+        action={
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-9"
+          >
+            <Button
+              variant="cta"
+              size="lg"
+              href={PROJECT_INQUIRY_HREF}
+              icon={<ArrowRight className="h-5 w-5" />}
+              iconPosition="right"
+              ariaLabel={PROJECT_INQUIRY_ARIA_LABEL}
+              dataConversionAction={PROJECT_INQUIRY_ACTION}
+              className="font-mono text-xs font-semibold uppercase tracking-widest"
+            >
+              Schedule a Free Call
+            </Button>
+          </motion.div>
+        }
       />
 
-      {/* Image & Intro Section */}
-      <section className="px-6 md:px-12 py-20">
-        <div className="max-w-[1400px] mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="relative aspect-[4/3] lg:aspect-square overflow-hidden rounded-sm"
-              data-tina-field={tinaField('studioImage')}
-            >
-              <img
-                src={content.studioImage}
-                alt={content.studioImageAlt}
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-              />
-            </motion.div>
+      <section className="bg-vish-bg px-6 py-24 md:px-12 md:py-32">
+        <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-start gap-14 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] lg:gap-24">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-white/10 lg:aspect-square"
+            data-tina-field={tinaField('studioImage')}
+          >
+            <img
+              src={content.studioImage}
+              alt={content.studioImageAlt}
+              className="h-full w-full object-cover grayscale transition-all duration-700 hover:grayscale-0"
+            />
+          </motion.div>
 
-            <div className="space-y-12 lg:pt-24">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+          <div className="space-y-10 lg:py-14">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <span className="mb-5 block font-mono text-xs uppercase tracking-widest text-vish-accent">
+                The VISH story
+              </span>
+              <SectionTitle size="sm" tinaField={tinaField('introHeading')}>
+                {content.introHeading}
+              </SectionTitle>
+            </motion.div>
+            <div className="max-w-2xl space-y-7">
+              <TextReveal
+                className="font-sans text-lg leading-relaxed text-gray-400 md:text-xl"
+                tinaField={tinaField('introParagraph1')}
               >
-                <SectionTitle size="sm" tinaField={tinaField('introHeading')}>
-                  {content.introHeading}
-                </SectionTitle>
-              </motion.div>
-              <div className="space-y-12">
-                <TextReveal
-                  className="font-sans text-xl text-gray-400 leading-relaxed"
-                  tinaField={tinaField('introParagraph1')}
-                >
-                  {content.introParagraph1}
-                </TextReveal>
-                <TextReveal
-                  className="font-sans text-xl text-gray-400 leading-relaxed"
-                  tinaField={tinaField('introParagraph2')}
-                >
-                  {content.introParagraph2}
-                </TextReveal>
-              </div>
+                {content.introParagraph1}
+              </TextReveal>
+              <TextReveal
+                className="font-sans text-lg leading-relaxed text-gray-400 md:text-xl"
+                tinaField={tinaField('introParagraph2')}
+              >
+                {content.introParagraph2}
+              </TextReveal>
             </div>
+            <Button
+              variant="outline"
+              size="md"
+              href="/projects"
+              icon={<ArrowRight className="h-4 w-4" />}
+              iconPosition="right"
+              className="font-mono text-xs font-semibold uppercase tracking-widest"
+            >
+              See the work
+            </Button>
           </div>
         </div>
       </section>
 
-      <TrustedPartners />
-
       <Team members={content.teamMembers} rawTinaMembers={rawAboutPage?.teamMembers} tinaField={tinaField} />
 
-      {/* Values Section */}
-      <section className="px-6 md:px-12 py-32 bg-vish-bg text-white">
-        <div className="max-w-[1400px] mx-auto">
-          <div className="mb-24">
+      <TrustedPartners />
+
+      <section className="bg-vish-bg px-6 py-24 text-white md:px-12 md:py-32">
+        <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-16 lg:grid-cols-[minmax(18rem,0.7fr)_minmax(0,1.3fr)] lg:gap-24">
+          <div className="lg:sticky lg:top-32 lg:self-start">
             <span
-              className="font-mono text-sm text-vish-accent uppercase tracking-widest block mb-4"
+              className="mb-4 block font-mono text-sm uppercase tracking-widest text-vish-accent"
               data-tina-field={tinaField('valuesLabel')}
             >
               {content.valuesLabel}
             </span>
-            <SectionTitle
-              size="lg"
-              tinaField={tinaField('valuesHeading')}
-            >
+            <SectionTitle size="lg" tinaField={tinaField('valuesHeading')}>
               {content.valuesHeading}
             </SectionTitle>
           </div>
@@ -115,16 +152,16 @@ export const AboutPage = () => {
           <div className="grid grid-cols-1 border-t border-white/10">
             {content.values.map((value, index) => (
               <div
-                key={index}
-                className="group grid grid-cols-1 md:grid-cols-12 gap-8 py-16 border-b border-white/10 transition-colors duration-500 hover:bg-white/[0.02]"
+                key={value.id}
+                className="group grid grid-cols-1 gap-7 border-b border-white/10 py-12 transition-colors duration-500 hover:bg-white/[0.02] md:grid-cols-12 md:py-14"
                 data-tina-field={rawAboutPage?.values?.[index] ? tinaField(rawAboutPage.values[index], 'id') : undefined}
               >
-                <div className="md:col-span-1 font-mono text-sm text-vish-accent pt-2">
+                <div className="pt-2 font-mono text-sm text-vish-accent md:col-span-1">
                   /{value.id}
                 </div>
                 <div className="md:col-span-5">
                   <h3
-                    className="font-display text-4xl md:text-5xl font-medium text-white group-hover:translate-x-2 transition-transform duration-500"
+                    className="font-display text-4xl font-medium text-white transition-transform duration-500 group-hover:translate-x-2 md:text-5xl"
                     data-tina-field={rawAboutPage?.values?.[index] ? tinaField(rawAboutPage.values[index], 'title') : undefined}
                   >
                     {value.title}
@@ -132,7 +169,7 @@ export const AboutPage = () => {
                 </div>
                 <div className="md:col-span-6">
                   <p
-                    className="font-sans text-xl text-gray-400 leading-relaxed max-w-lg group-hover:text-gray-300 transition-colors duration-500"
+                    className="max-w-lg font-sans text-lg leading-relaxed text-gray-400 transition-colors duration-500 group-hover:text-gray-300 md:text-xl"
                     data-tina-field={rawAboutPage?.values?.[index] ? tinaField(rawAboutPage.values[index], 'description') : undefined}
                   >
                     {value.description}
@@ -143,6 +180,8 @@ export const AboutPage = () => {
           </div>
         </div>
       </section>
+
+      <ProjectsCta index={2} backgroundImage="/assets/img/about-studio.jpg" />
 
       <Contact />
     </PageLayout>

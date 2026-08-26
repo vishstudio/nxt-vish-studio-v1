@@ -38,6 +38,13 @@ body {
   color: inherit;
 }
 
+[data-nav-link],
+[data-nav-link] * {
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  -webkit-touch-callout: none;
+}
+
 .skiptranslate,
 .goog-te-banner-frame,
 .goog-te-gadget,

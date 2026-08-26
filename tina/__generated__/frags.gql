@@ -149,6 +149,7 @@ fragment AboutPageParts on AboutPage {
   heroLabel
   heroTitleLine1
   heroTitleLine2
+  heroDescription
   studioImage
   studioImageAlt
   introHeading

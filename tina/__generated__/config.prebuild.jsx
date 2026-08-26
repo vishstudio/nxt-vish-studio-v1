@@ -824,6 +824,12 @@ var config_default = defineConfig({
           },
           {
             type: "string",
+            name: "heroDescription",
+            label: "Hero Description",
+            ui: { component: "textarea" }
+          },
+          {
+            type: "string",
             name: "studioImage",
             label: "Studio Image URL",
             description: "Paste an image URL"

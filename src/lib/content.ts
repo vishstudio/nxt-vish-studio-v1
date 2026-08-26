@@ -159,6 +159,7 @@ export interface AboutPageContent {
   heroLabel: string;
   heroTitleLine1: string;
   heroTitleLine2: string;
+  heroDescription: string;
   studioImage: string;
   studioImageAlt: string;
   introHeading: string;

@@ -35,7 +35,7 @@ const ProjectPreview = ({ project }: ProjectPreviewProps) => {
             fetchPriority="low"
           />
           <div className="absolute inset-0 bg-linear-to-t from-black/75 via-transparent to-transparent" />
-          <div className="absolute bottom-4 left-4 font-mono text-[0.68rem] font-semibold uppercase tracking-widest text-vish-accent md:bottom-5 md:left-5">
+          <div className="absolute bottom-4 left-4 font-mono text-[0.68rem] font-semibold uppercase tracking-widest text-white/60 md:bottom-5 md:left-5">
             {project.year}
           </div>
           <div className="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-white text-black transition-transform duration-300 group-hover:scale-110 md:bottom-5 md:right-5">
@@ -45,7 +45,7 @@ const ProjectPreview = ({ project }: ProjectPreviewProps) => {
       </Link>
 
       <div className="pt-4">
-        <p className="font-mono text-[0.68rem] font-semibold uppercase tracking-widest text-vish-accent">
+        <p className="font-mono text-[0.68rem] font-semibold uppercase tracking-widest text-vish-gray">
           {category}
         </p>
         <Link href={`/project/${project.slug}`} className="mt-2 block">
@@ -58,7 +58,7 @@ const ProjectPreview = ({ project }: ProjectPreviewProps) => {
             href={project.siteUrl}
             variant="link"
             size="text"
-            className="mt-4 text-sm"
+            className="mt-4 text-sm text-gray-300 hover:text-vish-accent"
             onClick={() => trackProjectSiteClick(project.slug, project.title)}
             icon={<ExternalLink className="h-3.5 w-3.5" />}
             iconPosition="right"

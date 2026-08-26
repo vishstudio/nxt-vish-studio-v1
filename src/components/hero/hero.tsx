@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { motion } from 'motion/react';
-import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Crosshair, MousePointerClick, Rocket } from 'lucide-react';
 import { PageHero } from '../ui/page-hero/page-hero';
 import { useTinaHome } from '../../hooks/useTinaVisualEditing';
 import { HeroStats } from '../hero-stats/hero-stats';
@@ -35,9 +35,9 @@ const headlineLineVariants = {
 };
 
 const conversionSignals = [
-  'Strategy-led delivery',
-  'Conversion-focused UX',
-  'Launch-ready engineering',
+  { label: 'Strategy-led delivery', icon: Crosshair },
+  { label: 'Conversion-focused UX', icon: MousePointerClick },
+  { label: 'Launch-ready engineering', icon: Rocket },
 ];
 
 const capabilityProofItems = [
@@ -99,7 +99,6 @@ const HeroCapabilityProof = ({
             {capabilityProofItems.map((item) => (
               <li key={item} className="flex items-center justify-between border-t border-white/10 pt-3">
                 <span className="font-sans text-sm text-vish-gray">{item}</span>
-                <span className="h-1.5 w-1.5 rounded-full bg-vish-accent" aria-hidden="true" />
               </li>
             ))}
           </ul>
@@ -235,10 +234,10 @@ export const Hero = () => {
             className="mt-4 max-w-3xl flex flex-col gap-10"
           >
             <ul className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[0.66rem] font-semibold uppercase tracking-widest text-vish-gray">
-              {conversionSignals.map((signal) => (
-                <li key={signal} className="flex items-center gap-2.5">
-                  <span className="h-1.5 w-1.5 rounded-full bg-vish-accent" aria-hidden="true" />
-                  <span>{signal}</span>
+              {conversionSignals.map(({ label, icon: Icon }) => (
+                <li key={label} className="flex items-center gap-2.5">
+                  <Icon className="size-4 shrink-0 text-white" aria-hidden="true" strokeWidth={1.8} />
+                  <span>{label}</span>
                 </li>
               ))}
             </ul>

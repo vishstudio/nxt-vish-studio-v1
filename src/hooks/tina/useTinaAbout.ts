@@ -13,6 +13,7 @@ export function useTinaAbout() {
         heroLabel: qd.aboutPage.heroLabel ?? "",
         heroTitleLine1: qd.aboutPage.heroTitleLine1 ?? "",
         heroTitleLine2: qd.aboutPage.heroTitleLine2 ?? "",
+        heroDescription: qd.aboutPage.heroDescription ?? "",
         studioImage: qd.aboutPage.studioImage ?? "",
         studioImageAlt: qd.aboutPage.studioImageAlt ?? "",
         introHeading: qd.aboutPage.introHeading ?? "",

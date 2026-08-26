@@ -3,7 +3,7 @@ import { AboutPage } from '@/src/views/About';
 
 export const metadata: Metadata = {
   title: 'About | VISH Studio',
-  description: 'Learn about VISH Studio — a creative web agency based in Mauritius building high-performance digital products for scaling brands globally.',
+  description: 'Meet VISH Studio, the Mauritius creative technology agency helping ambitious businesses turn their next chapter into a trusted digital presence.',
 };
 
 const About = () => {
