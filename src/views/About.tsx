@@ -1,5 +1,5 @@
 'use client';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, CalendarCheck } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Contact } from '../components/contact/contact';
 import { ProjectsCta } from '../components/projects-cta/projects-cta';
@@ -61,7 +61,7 @@ export const AboutPage = () => {
               variant="cta"
               size="lg"
               href={PROJECT_INQUIRY_HREF}
-              icon={<ArrowRight className="h-5 w-5" />}
+              icon={<CalendarCheck className="h-5 w-5" />}
               iconPosition="right"
               ariaLabel={PROJECT_INQUIRY_ARIA_LABEL}
               dataConversionAction={PROJECT_INQUIRY_ACTION}

@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowRight } from 'lucide-react';
+import { CalendarCheck } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Contact } from '../components/contact/contact';
 import { Button } from '../components/ui/button/button';
@@ -47,7 +47,7 @@ export const ServiceLandingPage = ({
             href={PROJECT_INQUIRY_HREF}
             variant="cta"
             size="lg"
-            icon={<ArrowRight className="h-4 w-4" />}
+            icon={<CalendarCheck className="h-4 w-4" />}
             iconPosition="right"
             ariaLabel={PROJECT_INQUIRY_ARIA_LABEL}
             dataConversionAction={PROJECT_INQUIRY_ACTION}

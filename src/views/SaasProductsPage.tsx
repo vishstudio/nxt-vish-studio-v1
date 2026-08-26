@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowRight, Boxes, ChartNoAxesCombined, ShieldCheck, Workflow } from 'lucide-react';
+import { ArrowRight, Boxes, CalendarCheck, ChartNoAxesCombined, ShieldCheck, Workflow } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Contact } from '../components/contact/contact';
 import { Button } from '../components/ui/button/button';
@@ -94,7 +94,7 @@ export const SaasProductsPage = () => {
               href={PROJECT_INQUIRY_HREF}
               variant="cta"
               size="lg"
-              icon={<ArrowRight className="h-4 w-4" />}
+              icon={<CalendarCheck className="h-4 w-4" />}
               iconPosition="right"
               ariaLabel={PROJECT_INQUIRY_ARIA_LABEL}
               dataConversionAction={PROJECT_INQUIRY_ACTION}

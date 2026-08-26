@@ -104,9 +104,9 @@ export const Button = ({
 
   const content = (
     <>
-      {icon && iconPosition === 'left' && <span className="mr-2 transform group-hover:-translate-x-1 transition-transform">{icon}</span>}
+      {icon && iconPosition === 'left' && <span className={size === 'icon' ? 'flex items-center justify-center' : 'mr-2 transform group-hover:-translate-x-1 transition-transform'}>{icon}</span>}
       {children}
-      {icon && iconPosition === 'right' && <span className="ml-2 transform group-hover:translate-x-1 transition-transform">{icon}</span>}
+      {icon && iconPosition === 'right' && <span className={size === 'icon' ? 'flex items-center justify-center' : 'ml-2 transform group-hover:translate-x-1 transition-transform'}>{icon}</span>}
     </>
   );
 

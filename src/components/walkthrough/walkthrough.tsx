@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowRight, CalendarDays, CheckCircle2, FileText, FolderKanban, LayoutDashboard, MessageSquareText, Sparkles, UsersRound } from 'lucide-react';
+import { ArrowRight, CalendarCheck, CalendarDays, CheckCircle2, FileText, FolderKanban, LayoutDashboard, Sparkles, UsersRound } from 'lucide-react';
 import { LogoText } from '../logo-text/logo-text';
 import { Button } from '../ui/button/button';
 
@@ -89,7 +89,7 @@ export const Walkthrough = () => {
                 A guided view of how clients move from discovery to delivery inside the VISH Studio portal.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Button href="/book-call" variant="cta" size="md" icon={<ArrowRight className="h-4 w-4" />}>
+                <Button href="/book-call" variant="cta" size="md" icon={<CalendarCheck className="h-4 w-4" />}>
                   Schedule a Free Call
                 </Button>
                 <Button href="#step-1" variant="outline" size="md">
@@ -155,7 +155,7 @@ export const Walkthrough = () => {
                 </p>
               </div>
             </div>
-            <Button href="/book-call" variant="outline" size="lg" icon={<MessageSquareText className="h-4 w-4" />}>
+            <Button href="/book-call" variant="outline" size="lg" icon={<CalendarCheck className="h-4 w-4" />}>
               Schedule a Free Call
             </Button>
           </section>

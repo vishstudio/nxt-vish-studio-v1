@@ -1,7 +1,7 @@
 'use client';
 
 import { FormEvent, useMemo, useState } from 'react';
-import { ArrowRight, CalendarDays, ChevronLeft, ChevronRight, Clock, Sparkles, Video } from 'lucide-react';
+import { ArrowRight, CalendarCheck, CalendarDays, ChevronLeft, ChevronRight, Clock, Sparkles, Video } from 'lucide-react';
 import { createCallBooking } from '@/src/lib/firebase';
 import { BookCallConfirmationModal } from '../book-call-confirmation-modal/book-call-confirmation-modal';
 import { Button } from '../ui/button/button';
@@ -347,7 +347,7 @@ export const BookCall = () => {
             variant="cta"
             size="lg"
             disabled={isSubmitting}
-            icon={<ArrowRight className="h-4 w-4" />}
+            icon={<CalendarCheck className="h-4 w-4" />}
             className="mt-8 w-full font-mono text-xs font-semibold uppercase tracking-widest"
           >
             {isSubmitting ? 'Saving Request' : 'Schedule a Free Call'}

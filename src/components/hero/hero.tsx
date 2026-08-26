@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { motion } from 'motion/react';
-import { ArrowRight, ArrowUpRight, Crosshair, MousePointerClick, Rocket } from 'lucide-react';
+import { ArrowUpRight, CalendarCheck, Crosshair, MousePointerClick, Rocket } from 'lucide-react';
 import { PageHero } from '../ui/page-hero/page-hero';
 import { useTinaHome } from '../../hooks/useTinaVisualEditing';
 import { HeroStats } from '../hero-stats/hero-stats';
@@ -248,7 +248,7 @@ export const Hero = () => {
                   variant="cta"
                   size="md"
                   href={PROJECT_INQUIRY_HREF}
-                  icon={<ArrowRight className="h-4 w-4 transition-transform group-hover:-rotate-45" />}
+                  icon={<CalendarCheck className="h-4 w-4" />}
                   iconPosition="right"
                   ariaLabel={PROJECT_INQUIRY_ARIA_LABEL}
                   dataConversionAction={PROJECT_INQUIRY_ACTION}

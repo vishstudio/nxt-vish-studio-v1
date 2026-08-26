@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowRight, CalendarDays, FileText, X } from 'lucide-react';
+import { ArrowRight, CalendarCheck, FileText, X } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useEffect } from 'react';
 import { trackButtonClick, trackPricingPlanChoice } from '@/src/lib/analytics';
@@ -97,7 +97,7 @@ export const PricingPlanChoiceModal = ({
                   variant="cta"
                   size="lg"
                   onClick={handleBookCall}
-                  icon={<CalendarDays className="h-4 w-4" />}
+                  icon={<CalendarCheck className="h-4 w-4" />}
                   className="min-h-16 justify-between rounded-2xl font-mono text-xs font-semibold uppercase tracking-widest"
                   ariaLabel={`Schedule a free strategy call for the ${planName} plan`}
                 >

@@ -1,6 +1,6 @@
 'use client';
 import { motion } from 'motion/react';
-import { ArrowUpRight, ShieldCheck } from 'lucide-react';
+import { ArrowUpRight, CalendarCheck, ShieldCheck } from 'lucide-react';
 import { useTinaPartners } from '../../hooks/useTinaVisualEditing';
 import { PROJECT_INQUIRY_ACTION, PROJECT_INQUIRY_HREF } from '../../lib/conversion';
 import { Button } from '../ui/button/button';
@@ -47,7 +47,7 @@ export const TrustedPartners = () => {
                 href={PROJECT_INQUIRY_HREF}
                 variant="cta"
                 size="md"
-                icon={<ArrowUpRight className="h-4 w-4" />}
+                icon={<CalendarCheck className="h-4 w-4" />}
                 iconPosition="right"
                 dataConversionAction={PROJECT_INQUIRY_ACTION}
                 className="w-full font-mono text-xs font-semibold uppercase tracking-widest sm:w-auto"

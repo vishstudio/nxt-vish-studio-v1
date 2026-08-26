@@ -4,6 +4,7 @@ import {
   ArrowRight,
   Bot,
   Box,
+  CalendarCheck,
   ChevronDown,
   LayoutTemplate,
   Megaphone,
@@ -196,15 +197,30 @@ export const Navbar = () => {
               size="icon"
               onClick={openMobileMenu}
               ariaLabel="Open menu"
-              className="flex shrink-0"
+              className="hidden shrink-0 lg:flex"
             >
               <Menu className="w-5 h-5" />
             </Button>
           )}
 
-          <div className={`flex items-center ${effectiveIsScrolled ? "absolute left-1/2 -translate-x-1/2 gap-3" : "gap-0"}`}>
+          <Button
+            variant="secondary"
+            size="icon"
+            onClick={openMobileMenu}
+            ariaLabel="Open menu"
+            className="flex shrink-0 lg:hidden"
+          >
+            <Menu className="w-5 h-5" />
+          </Button>
+
+          <div
+            className={`flex items-center ${effectiveIsScrolled
+              ? "absolute left-1/2 -translate-x-1/2 gap-3"
+              : "absolute left-1/2 -translate-x-1/2 gap-0 lg:static lg:translate-x-0"
+              }`}
+          >
             <div
-              className={`grid h-5 shrink-0 transition-[opacity,width,transform] duration-200 ease-out ${effectiveIsScrolled ? "w-5 scale-100 opacity-100" : "w-0 scale-95 opacity-0"
+              className={`hidden h-5 shrink-0 transition-[opacity,width,transform] duration-200 ease-out lg:grid ${effectiveIsScrolled ? "lg:w-5 lg:scale-100 lg:opacity-100" : "lg:w-0 lg:scale-95 lg:opacity-0"
                 }`}
               aria-hidden="true"
             >
@@ -362,9 +378,7 @@ export const Navbar = () => {
               variant="cta"
               size="sm"
               href={PROJECT_INQUIRY_HREF}
-              icon={
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:-rotate-45" />
-              }
+              icon={<CalendarCheck className="h-4 w-4" />}
               iconPosition="right"
               ariaLabel={PROJECT_INQUIRY_ARIA_LABEL}
               dataConversionAction={PROJECT_INQUIRY_ACTION}
@@ -373,16 +387,43 @@ export const Navbar = () => {
               Schedule a Free Call
             </Button>
 
-            {!effectiveIsScrolled && (
+            {effectiveIsScrolled ? (
               <Button
-                variant="secondary"
+                variant="cta"
                 size="icon"
-                onClick={openMobileMenu}
-                ariaLabel="Open menu"
-                className="flex lg:hidden"
+                href={PROJECT_INQUIRY_HREF}
+                icon={<CalendarCheck className="h-4 w-4" />}
+                ariaLabel={PROJECT_INQUIRY_ARIA_LABEL}
+                dataConversionAction={PROJECT_INQUIRY_ACTION}
+                className="lg:hidden"
               >
-                <Menu className="w-5 h-5" />
+                <span className="sr-only">Schedule a Free Call</span>
               </Button>
+            ) : (
+              <>
+                <Button
+                  variant="cta"
+                  size="sm"
+                  href={PROJECT_INQUIRY_HREF}
+                  icon={<CalendarCheck className="h-4 w-4" />}
+                  ariaLabel={PROJECT_INQUIRY_ARIA_LABEL}
+                  dataConversionAction={PROJECT_INQUIRY_ACTION}
+                  className="hidden font-sans sm:inline-flex lg:hidden"
+                >
+                  Schedule a Call
+                </Button>
+                <Button
+                  variant="cta"
+                  size="icon"
+                  href={PROJECT_INQUIRY_HREF}
+                  icon={<CalendarCheck className="h-4 w-4" />}
+                  ariaLabel={PROJECT_INQUIRY_ARIA_LABEL}
+                  dataConversionAction={PROJECT_INQUIRY_ACTION}
+                  className="sm:hidden"
+                >
+                  <span className="sr-only">Schedule a Free Call</span>
+                </Button>
+              </>
             )}
           </div>
         </div>

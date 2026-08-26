@@ -22,6 +22,7 @@ import {
   type PricingCategory,
   type PricingPlan,
 } from '../lib/pricing';
+import { sortByCanonicalServiceOrder } from '../lib/services';
 
 const fallbackServiceDetail = {
   carePlans: [
@@ -31,17 +32,6 @@ const fallbackServiceDetail = {
     { label: 'Additional scoped feature', price: 'Quoted after review', priceGbp: 'Quoted after review', note: 'Priced according to complexity, dependencies, and delivery timeline.' },
   ],
 };
-
-const serviceOrder = [
-  'social-media-marketing',
-  'saas-products',
-  'websites',
-  'website-templates',
-  'softwares',
-  'mobile-apps',
-  'branding',
-  'ai-integrations-automations',
-];
 
 const getPackageCarePlan = (
   plan: PricingPlan,
@@ -379,12 +369,7 @@ export const PricingPage = () => {
   const unsortedPricingCategories = content.pricingCategories.length > 0
     ? content.pricingCategories
     : [];
-  const pricingCategories = [...unsortedPricingCategories].sort((a, b) => {
-    const aIndex = serviceOrder.indexOf(a.slug);
-    const bIndex = serviceOrder.indexOf(b.slug);
-
-    return (aIndex === -1 ? serviceOrder.length : aIndex) - (bIndex === -1 ? serviceOrder.length : bIndex);
-  });
+  const pricingCategories = sortByCanonicalServiceOrder(unsortedPricingCategories);
   const activeCategory = pricingCategories[activeCategoryIndex] ?? pricingCategories[0];
   const activeRawCategory = rawPricingPage?.pricingCategories?.find((category: any) => category?.slug === activeCategory?.slug);
   const tabItems = pricingCategories.map((category) => ({

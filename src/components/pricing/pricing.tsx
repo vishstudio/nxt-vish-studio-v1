@@ -7,6 +7,7 @@ import { useRef, useState } from "react";
 import { usePricingCurrency } from "../../hooks/usePricingCurrency";
 import { useTinaPricing } from "../../hooks/useTinaVisualEditing";
 import { type PricingPlan } from "../../lib/pricing";
+import { sortByCanonicalServiceOrder } from "../../lib/services";
 import {
   getLocalizedCarePlanPrice,
   getLocalizedPlanPrice,
@@ -269,7 +270,7 @@ export const Pricing = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const pricingCategories =
     content.pricingCategories.length > 0
-      ? content.pricingCategories
+      ? sortByCanonicalServiceOrder(content.pricingCategories)
       : [
           {
             label: "Websites",
@@ -285,16 +286,24 @@ export const Pricing = () => {
   const [selectedPlan, setSelectedPlan] = useState<PricingPlan | null>(null);
   const activeCategory =
     pricingCategories[activeCategoryIndex] ?? pricingCategories[0];
-  const activeRawCategory =
-    rawPricingPage?.pricingCategories?.[activeCategoryIndex];
+  const activeRawCategory = rawPricingPage?.pricingCategories?.find(
+    (category: any) => category?.slug === activeCategory?.slug,
+  );
   const activeRawPlans = activeRawCategory?.plans;
   const tabItems = pricingCategories.map((category, index) => ({
     id: `pricing-${
       category.slug || category.label.toLowerCase().replace(/\s+/g, "-")
     }`,
     label: category.label,
-    tinaField: rawPricingPage?.pricingCategories?.[index]
-      ? tinaField(rawPricingPage.pricingCategories[index], "label")
+    tinaField: rawPricingPage?.pricingCategories?.find(
+      (rawCategory: any) => rawCategory?.slug === category.slug,
+    )
+      ? tinaField(
+          rawPricingPage.pricingCategories.find(
+            (rawCategory: any) => rawCategory?.slug === category.slug,
+          ),
+          "label",
+        )
       : undefined,
   }));
 
