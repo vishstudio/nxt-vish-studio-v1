@@ -12,7 +12,7 @@ VISH Studio is the public website and project-onboarding platform for a Mauritiu
 - React Hook Form for structured multi-step form state
 - TinaCMS for JSON-backed content and visual editing
 - Firebase Firestore for project brief submissions and call booking requests
-- Production-only Google Analytics and consent-aware cookie settings
+- Production-only Google Analytics and Microsoft Clarity, with consent-aware cookie settings
 
 The site is statically exported. Features must remain compatible with `output: "export"` unless the deployment architecture is deliberately changed.
 
@@ -167,7 +167,7 @@ Former remote stock images used by runtime pages and Storybook stories are now m
 
 ## Environment variables
 
-Start from `.env.example`. It documents variables for site configuration, TinaCMS, Google Analytics, and Firebase. Google Analytics runs only in production after analytics consent is granted, keeping local development free from analytics script and event logging. Firebase is lazy-loaded only when a visitor submits a Firestore-backed form, so the newsletter popup does not initialise Firebase while merely being displayed. Never commit real tokens or private credentials.
+Start from `.env.example`. It documents variables for site configuration, TinaCMS, Google Analytics, Microsoft Clarity, and Firebase. Google Analytics and Microsoft Clarity run only in production after analytics consent is granted, keeping local development, Tina previews, and visitors who reject optional analytics free from tracking scripts. Set `NEXT_PUBLIC_CLARITY_PROJECT_ID` to the ID shown in Microsoft Clarity under **Settings → Setup**, and add the same variable as a GitHub Actions repository variable or secret so the static production build includes it. Firebase is lazy-loaded only when a visitor submits a Firestore-backed form, so the newsletter popup does not initialise Firebase while merely being displayed. Never commit real tokens or private credentials.
 
 ## Development workflow
 

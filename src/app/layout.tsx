@@ -3,6 +3,7 @@ import { Prompt } from "next/font/google";
 import "./globals.css";
 import { AppShell } from "./AppShell";
 import { GoogleAnalytics } from "../components/google-analytics";
+import { MicrosoftClarity } from "../components/microsoft-clarity/microsoft-clarity";
 
 const prompt = Prompt({
   subsets: ["latin"],
@@ -59,6 +60,7 @@ const RootLayout = ({
         style={{ backgroundColor: "#000000", color: "#ffffff", overflowX: "clip" }}
       >
         <GoogleAnalytics />
+        <MicrosoftClarity />
         <AppShell>{children}</AppShell>
       </body>
     </html>

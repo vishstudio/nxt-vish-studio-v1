@@ -235,7 +235,7 @@ export const CookieSettings = ({ openSignal = 0 }: CookieSettingsProps) => {
                     <div>
                       <h3 className="font-display text-xl text-white">Analytics cookies</h3>
                       <p className="mt-2 max-w-md font-sans text-sm leading-relaxed text-gray-500">
-                        Allows Google Analytics to measure traffic and page interactions without changing the website experience.
+                        Allows Google Analytics and Microsoft Clarity to measure traffic and understand website interactions without changing the website experience.
                       </p>
                     </div>
                     <Button
