@@ -187,7 +187,7 @@ export const Navbar = () => {
       >
         <div
           className={`pointer-events-auto relative flex w-full max-w-[1400px] items-center justify-between transition-all duration-300 ${effectiveIsScrolled
-            ? "pl-4 pr-2 py-2 md:pl-4 md:pr-2 rounded-full bg-black/80 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/50"
+            ? "px-2 py-2 md:px-2 rounded-full bg-black/80 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/50"
             : "px-0 py-6 rounded-none bg-transparent border-transparent"
             }`}
         >
@@ -311,50 +311,58 @@ export const Navbar = () => {
                         className="pointer-events-none absolute left-1/2 top-full z-50 w-[min(1400px,calc(100vw-6rem))] -translate-x-1/2 pt-3 group-hover:pointer-events-auto group-focus-within:pointer-events-auto"
                         role="menu"
                       >
-                        <div className="translate-y-2 rounded-3xl border border-white/10 bg-black/95 p-4 opacity-0 shadow-2xl shadow-black/50 backdrop-blur-xl transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100">
-                          <div className="mb-3 flex items-center justify-between px-2 pt-1">
-                            <span className="font-mono text-[10px] uppercase tracking-widest text-vish-accent">
-                              Our services
-                            </span>
-                            <span className="font-mono text-[10px] uppercase tracking-widest text-white/35">
-                              Strategy, design & technology
-                            </span>
-                          </div>
-                          <div className="grid grid-cols-4 gap-2">
-                          {item.children.slice(0, 8).map((child) => {
-                            const Icon = child.icon;
+                        <div className="translate-y-2 overflow-hidden rounded-[2rem] border border-white/10 bg-black/95 opacity-0 shadow-2xl shadow-black/50 backdrop-blur-xl transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100">
+                          <div className="grid grid-cols-[15rem_minmax(0,1fr)]">
+                            <div className="flex flex-col border-r border-white/10 bg-white/[0.035] p-6">
+                              <span className="font-mono text-[10px] uppercase tracking-widest text-vish-accent">
+                                Service tracks
+                              </span>
+                              <p className="mt-5 font-display text-2xl font-medium leading-tight text-white">
+                                Build the part of your business that matters next<span className="text-vish-accent">.</span>
+                              </p>
+                              <p className="mt-4 font-sans text-sm leading-relaxed text-gray-500">
+                                Strategy, design, and technology assembled around your next move.
+                              </p>
+                              <a
+                                href="/services"
+                                role="menuitem"
+                                tabIndex={effectiveIsScrolled ? -1 : undefined}
+                                className="group/overview mt-auto flex items-center justify-between border-t border-white/10 pt-5 font-sans text-sm font-medium text-white transition-colors hover:text-vish-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vish-accent/70 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                              >
+                                See all services
+                                <ArrowRight className="h-4 w-4 text-vish-accent transition-transform group-hover/overview:translate-x-1" aria-hidden="true" />
+                              </a>
+                            </div>
 
-                            return (
-                            <a
-                              key={child.name}
-                              href={child.href}
-                              role="menuitem"
-                              tabIndex={effectiveIsScrolled ? -1 : undefined}
-                              className="group/item rounded-2xl border border-white/6 bg-white/[0.025] px-4 py-4 transition-colors hover:border-white/15 hover:bg-white/[0.07] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vish-accent/70 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-                            >
-                              <span className="flex items-start justify-between gap-3">
-                                <Icon className="h-5 w-5 shrink-0 text-vish-accent" aria-hidden="true" />
-                                <ArrowRight className="h-3.5 w-3.5 text-vish-accent opacity-0 transition-all group-hover/item:translate-x-0.5 group-hover/item:opacity-100" />
-                              </span>
-                              <span className="mt-5 block font-sans text-sm font-medium text-white">
-                                  {child.name}
-                              </span>
-                              <span className="mt-1 block font-sans text-xs leading-relaxed text-gray-500">
-                                {child.description}
-                              </span>
-                            </a>
-                            );
-                          })}
+                            <div className="grid grid-cols-2 p-3">
+                              {item.children.slice(0, 8).map((child) => {
+                                const Icon = child.icon;
+
+                                return (
+                                  <a
+                                    key={child.name}
+                                    href={child.href}
+                                    role="menuitem"
+                                    tabIndex={effectiveIsScrolled ? -1 : undefined}
+                                    className="group/item grid min-h-28 grid-cols-[2.5rem_minmax(0,1fr)_1rem] items-center gap-4 border-b border-white/10 px-5 py-4 transition-colors hover:bg-white/[0.055] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vish-accent/70 focus-visible:ring-inset"
+                                  >
+                                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-white transition-colors group-hover/item:border-vish-accent/50 group-hover/item:text-vish-accent">
+                                      <Icon className="h-4 w-4" aria-hidden="true" />
+                                    </span>
+                                    <span className="min-w-0">
+                                      <span className="block font-sans text-sm font-medium text-white transition-colors group-hover/item:text-vish-accent">
+                                        {child.name}
+                                      </span>
+                                      <span className="mt-1 block font-sans text-xs leading-relaxed text-gray-500">
+                                        {child.description}
+                                      </span>
+                                    </span>
+                                    <ArrowRight className="h-3.5 w-3.5 justify-self-end text-vish-accent opacity-0 transition-all group-hover/item:translate-x-0.5 group-hover/item:opacity-100" aria-hidden="true" />
+                                  </a>
+                                );
+                              })}
+                            </div>
                           </div>
-                          <a
-                            href="/services"
-                            role="menuitem"
-                            tabIndex={effectiveIsScrolled ? -1 : undefined}
-                            className="mt-2 flex items-center justify-between rounded-2xl border border-white/10 px-4 py-3 transition-colors hover:border-vish-accent/60 hover:bg-vish-accent/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vish-accent/70 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-                          >
-                            <span className="font-sans text-sm font-medium text-white">See all services</span>
-                            <ArrowRight className="h-4 w-4 text-vish-accent" aria-hidden="true" />
-                          </a>
                         </div>
                       </div>
                     ) : null}
@@ -541,23 +549,23 @@ export const Navbar = () => {
                                 const Icon = child.icon;
 
                                 return (
-                                <a
-                                  key={child.name}
-                                  href={child.href}
-                                  onClick={closeMobileMenu}
-                                  className="rounded-2xl border border-white/8 bg-white/[0.025] px-4 py-3 transition-colors hover:border-white/20 hover:bg-white/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vish-accent/70 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-                                >
-                                  <span className="flex items-center justify-between gap-3">
-                                    <span className="flex items-center gap-3 font-sans text-base font-medium text-white">
-                                      <Icon className="h-4 w-4 shrink-0 text-vish-accent" aria-hidden="true" />
-                                      {child.name}
+                                  <a
+                                    key={child.name}
+                                    href={child.href}
+                                    onClick={closeMobileMenu}
+                                    className="rounded-2xl border border-white/8 bg-white/[0.025] px-4 py-3 transition-colors hover:border-white/20 hover:bg-white/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vish-accent/70 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                                  >
+                                    <span className="flex items-center justify-between gap-3">
+                                      <span className="flex items-center gap-3 font-sans text-base font-medium text-white">
+                                        <Icon className="h-4 w-4 shrink-0 text-vish-accent" aria-hidden="true" />
+                                        {child.name}
+                                      </span>
+                                      <ArrowRight className="h-4 w-4 text-vish-accent" />
                                     </span>
-                                    <ArrowRight className="h-4 w-4 text-vish-accent" />
-                                  </span>
-                                  <span className="mt-1 block font-sans text-sm leading-relaxed text-gray-500">
-                                    {child.description}
-                                  </span>
-                                </a>
+                                    <span className="mt-1 block font-sans text-sm leading-relaxed text-gray-500">
+                                      {child.description}
+                                    </span>
+                                  </a>
                                 );
                               })}
                             </div>

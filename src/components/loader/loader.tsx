@@ -45,7 +45,7 @@ export const Loader = ({ onLoadingComplete }: { onLoadingComplete: () => void })
         transition={{ duration: 0.65, delay: 0.22, ease: [0.16, 1, 0.3, 1] }}
         className="absolute bottom-8 left-1/2 z-10 w-max max-w-[calc(100%-3rem)] -translate-x-1/2 text-center font-sans text-xs tracking-wide text-vish-gray sm:bottom-10 sm:text-sm md:bottom-12"
       >
-        Functional clarity. Digital growth.
+        Design. Engineering. Social Growth.
       </motion.div>
     </motion.div>
   );

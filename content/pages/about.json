@@ -43,10 +43,10 @@
       "order": 2
     },
     {
-      "name": "Ayesha Bhudookan",
-      "role": "Consultant & Strategy Lead",
-      "image": "https://picsum.photos/seed/elena/800/800",
-      "bio": "Crafting data-driven growth strategies and navigating complex business challenges.",
+      "name": "Alice Antoinette",
+      "role": "Lead Creative designer",
+      "image": "/assets/img/team/alice-antoinette.jpeg",
+      "bio": "",
       "order": 3
     },
     {
@@ -55,6 +55,13 @@
       "image": "/assets/img/team/pravesh.jpg",
       "bio": "Designing practical AI workflows and intelligent product systems.",
       "order": 4
+    },
+    {
+      "name": "Ayesha Bhudookan",
+      "role": "Consultant & Strategy Lead",
+      "image": "/assets/img/team/ayesha-bhudookan.jpeg",
+      "bio": "Crafting data-driven growth strategies and navigating complex business challenges.",
+      "order": 5
     }
   ]
 }

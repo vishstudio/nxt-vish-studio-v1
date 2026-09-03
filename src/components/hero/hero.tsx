@@ -2,7 +2,20 @@
 import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { motion } from 'motion/react';
-import { ArrowUpRight, CalendarCheck, Crosshair, MousePointerClick, Rocket } from 'lucide-react';
+import {
+  ArrowUpRight,
+  Bot,
+  Box,
+  CalendarCheck,
+  Crosshair,
+  LayoutTemplate,
+  Megaphone,
+  Monitor,
+  MousePointerClick,
+  Palette,
+  Rocket,
+  Smartphone,
+} from 'lucide-react';
 import { PageHero } from '../ui/page-hero/page-hero';
 import { useTinaHome } from '../../hooks/useTinaVisualEditing';
 import { HeroStats } from '../hero-stats/hero-stats';
@@ -41,14 +54,14 @@ const conversionSignals = [
 ];
 
 const capabilityProofItems = [
-  'Social media marketing',
-  'SaaS products',
-  'Websites',
-  'Website templates',
-  'Softwares',
-  'Mobile apps',
-  'Branding',
-  'AI integrations & automations',
+  { label: 'Social media marketing', icon: Megaphone },
+  { label: 'SaaS products', icon: Box },
+  { label: 'Websites', icon: Monitor },
+  { label: 'Website templates', icon: LayoutTemplate },
+  { label: 'Softwares', icon: Box },
+  { label: 'Mobile apps', icon: Smartphone },
+  { label: 'Branding', icon: Palette },
+  { label: 'AI integrations & automations', icon: Bot },
 ];
 
 const typingPhrases = [
@@ -96,9 +109,10 @@ const HeroCapabilityProof = ({
             Strategy, design, and engineering under one roof<span className="text-vish-accent">.</span>
           </p>
           <ul className="mt-6 grid grid-cols-2 gap-x-5 gap-y-3">
-            {capabilityProofItems.map((item) => (
-              <li key={item} className="flex items-center justify-between border-t border-white/10 pt-3">
-                <span className="font-sans text-sm text-vish-gray">{item}</span>
+            {capabilityProofItems.map(({ label, icon: Icon }) => (
+              <li key={label} className="flex items-center gap-2.5 border-t border-white/10 pt-3">
+                <Icon className="h-4 w-4 shrink-0 text-white" aria-hidden="true" strokeWidth={1.8} />
+                <span className="font-sans text-sm text-vish-gray">{label}</span>
               </li>
             ))}
           </ul>
