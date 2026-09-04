@@ -2,7 +2,6 @@
 
 import {
   ArrowLeft,
-  ArrowUpRight,
   Bot,
   Box,
   CalendarCheck,
@@ -14,8 +13,8 @@ import {
   Smartphone,
   type LucideIcon,
 } from 'lucide-react';
-import { AnimatePresence, motion } from 'motion/react';
-import { useState } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
+import { useEffect, useState } from 'react';
 import type { ServiceCategory } from '../../lib/content';
 import { sortByCanonicalServiceOrder } from '../../lib/services';
 import { Button } from '../ui/button/button';
@@ -25,6 +24,7 @@ interface ServiceCatalogueProps {
   rawCategories?: unknown[];
   tinaField: (source: unknown, field?: string) => string | undefined;
   id?: string;
+  variant?: 'explorer' | 'showcase';
 }
 
 const serviceIcons: Record<string, LucideIcon> = {
@@ -38,7 +38,163 @@ const serviceIcons: Record<string, LucideIcon> = {
   'AI Integrations & Automations': Bot,
 };
 
-export const ServiceCatalogue = ({ services, rawCategories, tinaField, id }: ServiceCatalogueProps) => {
+const ServiceShowcase = ({ services, rawCategories, tinaField, id }: ServiceCatalogueProps) => {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
+  const orderedServices = sortByCanonicalServiceOrder(services);
+  const selectedService = orderedServices[selectedIndex] ?? orderedServices[0];
+  const selectedRawCategory = rawCategories?.find(
+    (category: any) => category?.category === selectedService?.category,
+  );
+
+  useEffect(() => {
+    if (shouldReduceMotion || isPaused || orderedServices.length < 2) {
+      return;
+    }
+
+    const interval = window.setInterval(() => {
+      setSelectedIndex((currentIndex) => (currentIndex + 1) % orderedServices.length);
+    }, 5000);
+
+    return () => window.clearInterval(interval);
+  }, [isPaused, orderedServices.length, shouldReduceMotion]);
+
+  if (!selectedService) return null;
+
+  return (
+    <section
+      id={id}
+      className="relative overflow-hidden bg-black px-6 py-24 md:px-12 md:py-32"
+      aria-labelledby="service-catalogue-title"
+    >
+      <img
+        src="/assets/img/services-section.jpg"
+        alt=""
+        className="absolute -top-[10%] left-0 h-[120%] w-full object-cover opacity-20 grayscale"
+        aria-hidden="true"
+      />
+      <div className="absolute inset-0 bg-black/75" aria-hidden="true" />
+      <div className="relative z-10 mx-auto max-w-[1400px]">
+        <div className="mb-12 grid gap-6 md:mb-16 lg:grid-cols-[minmax(0,0.92fr)_minmax(20rem,0.58fr)] lg:items-end lg:gap-16">
+          <div>
+            <p className="font-mono text-xs uppercase tracking-[0.18em] text-vish-accent">Service catalogue</p>
+            <h2 id="service-catalogue-title" className="mt-4 max-w-3xl font-display text-4xl font-medium leading-[0.98] tracking-tight text-white sm:text-5xl md:text-6xl">
+              Explore the work that moves your business forward<span className="text-vish-accent">.</span>
+            </h2>
+          </div>
+          <p className="max-w-lg font-sans text-base leading-relaxed text-gray-400 lg:pb-1">
+            Select a service to see the focused work and outcomes it brings. The view advances automatically when left untouched.
+          </p>
+        </div>
+
+        <div
+          className="overflow-hidden rounded-3xl border border-white/10 bg-black/80 shadow-2xl shadow-black/50 backdrop-blur-xl lg:grid lg:grid-cols-[minmax(19rem,0.7fr)_minmax(0,1.3fr)]"
+          onPointerEnter={() => setIsPaused(true)}
+          onPointerLeave={() => setIsPaused(false)}
+        >
+          <div className="flex flex-col border-b border-white/10 px-6 py-7 sm:px-8 sm:py-9 lg:border-b-0 lg:border-r">
+            <div className="flex items-center justify-between gap-4">
+              <p className="font-mono text-xs uppercase tracking-[0.18em] text-vish-accent">Our services</p>
+              <p className="font-mono text-xs tracking-[0.16em] text-white/45">
+                {String(selectedIndex + 1).padStart(2, '0')} / {String(orderedServices.length).padStart(2, '0')}
+              </p>
+            </div>
+
+            <nav className="mt-6" aria-label="Service catalogue">
+              {orderedServices.map((service, index) => {
+                const rawCategory = rawCategories?.find(
+                  (category: any) => category?.category === service.category,
+                );
+                const isSelected = index === selectedIndex;
+
+                return (
+                  <button
+                    key={service.category}
+                    type="button"
+                    onClick={() => setSelectedIndex(index)}
+                    onFocus={() => {
+                      setIsPaused(true);
+                      setSelectedIndex(index);
+                    }}
+                    onBlur={() => setIsPaused(false)}
+                    className={`group relative flex w-full items-center gap-4 border-b border-white/10 py-4 text-left last:border-b-0 ${
+                      isSelected ? 'text-white' : 'text-white/45 hover:text-white/80'
+                    }`}
+                    aria-pressed={isSelected}
+                  >
+                    <span className={`font-mono text-xs tracking-[0.16em] ${isSelected ? 'text-vish-accent' : 'text-white/30'}`}>
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <span
+                      className={`flex-1 font-display leading-none ${isSelected ? 'text-xl sm:text-2xl' : 'text-lg sm:text-xl'}`}
+                      data-tina-field={rawCategory ? tinaField(rawCategory, 'category') : undefined}
+                    >
+                      {service.category}
+                    </span>
+                    <span className={`size-1.5 shrink-0 rounded-full transition-colors ${isSelected ? 'bg-vish-accent' : 'bg-transparent group-hover:bg-white/60'}`} aria-hidden="true" />
+                    {isSelected && !shouldReduceMotion && (
+                      <motion.span
+                        key={service.category}
+                        initial={{ scaleX: 0 }}
+                        animate={{ scaleX: 1 }}
+                        transition={{ duration: 5, ease: 'linear' }}
+                        className="absolute bottom-0 left-0 h-px w-full origin-left bg-vish-accent"
+                      />
+                    )}
+                  </button>
+                );
+              })}
+            </nav>
+            <div className="mt-6">
+              <span className="font-mono text-xs uppercase tracking-[0.18em] text-white/45">
+                {shouldReduceMotion ? 'Manual selection' : isPaused ? 'Rotation paused' : 'Next service in 5 seconds'}
+              </span>
+            </div>
+          </div>
+
+          <div className="relative min-h-[26rem] overflow-hidden sm:min-h-[34rem] lg:min-h-full">
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.img
+                key={selectedService.category}
+                src={selectedService.image}
+                alt={selectedService.imageAlt}
+                initial={{ opacity: 0, scale: 1.04 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.98 }}
+                transition={{ duration: shouldReduceMotion ? 0 : 0.45, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute inset-0 size-full object-cover grayscale"
+                data-tina-field={selectedRawCategory ? tinaField(selectedRawCategory, 'image') : undefined}
+              />
+            </AnimatePresence>
+            <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent" aria-hidden="true" />
+            <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8 lg:p-10">
+              <p className="font-mono text-xs uppercase tracking-[0.18em] text-vish-accent">What this covers</p>
+              <h3
+                className="mt-4 max-w-2xl font-display text-4xl font-medium leading-[0.94] tracking-tight text-white sm:text-5xl"
+                data-tina-field={selectedRawCategory ? tinaField(selectedRawCategory, 'category') : undefined}
+              >
+                {selectedService.category}<span className="text-vish-accent">.</span>
+              </h3>
+              <p
+                className="mt-4 max-w-xl font-sans text-sm leading-relaxed text-gray-200 sm:text-base"
+                data-tina-field={selectedRawCategory ? tinaField(selectedRawCategory, 'description') : undefined}
+              >
+                {selectedService.description}
+              </p>
+              <p className="mt-6 max-w-2xl border-t border-white/20 pt-4 font-sans text-sm leading-relaxed text-white/75">
+                <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/45">Focus </span>
+                {selectedService.items.slice(0, 3).join(' · ')}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const ServiceExplorer = ({ services, rawCategories, tinaField, id }: ServiceCatalogueProps) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const orderedServices = sortByCanonicalServiceOrder(services);
@@ -213,4 +369,12 @@ export const ServiceCatalogue = ({ services, rawCategories, tinaField, id }: Ser
       </div>
     </section>
   );
+};
+
+export const ServiceCatalogue = ({ variant = 'explorer', ...props }: ServiceCatalogueProps) => {
+  if (variant === 'showcase') {
+    return <ServiceShowcase {...props} />;
+  }
+
+  return <ServiceExplorer {...props} />;
 };

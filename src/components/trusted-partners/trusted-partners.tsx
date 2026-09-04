@@ -1,15 +1,68 @@
 'use client';
-import { motion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
+import { useState } from 'react';
 import { ArrowUpRight, CalendarCheck, ShieldCheck } from 'lucide-react';
 import { useTinaPartners } from '../../hooks/useTinaVisualEditing';
 import { PROJECT_INQUIRY_ACTION, PROJECT_INQUIRY_HREF } from '../../lib/conversion';
 import { Button } from '../ui/button/button';
 import { SectionTitle } from '../ui/section-title/section-title';
 
-export const TrustedPartners = () => {
+interface TrustedPartnersProps {
+  variant?: 'full' | 'strip';
+}
+
+export const TrustedPartners = ({ variant = 'full' }: TrustedPartnersProps) => {
   const { data, tinaField } = useTinaPartners();
   const partners = data.partners;
   const proofPoints = data.proofPoints;
+  const shouldReduceMotion = useReducedMotion();
+  const [isMarqueePaused, setIsMarqueePaused] = useState(false);
+
+  if (variant === 'strip') {
+    return (
+      <section
+        className="trusted-partners-strip border-y border-white/10 bg-vish-bg text-white"
+        aria-label="Trusted partners"
+      >
+        <div
+          className="overflow-hidden"
+          onPointerEnter={() => setIsMarqueePaused(true)}
+          onPointerLeave={() => setIsMarqueePaused(false)}
+        >
+          <div
+            className="partner-marquee flex w-max items-center py-8 sm:py-10"
+            data-paused={shouldReduceMotion || isMarqueePaused ? 'true' : undefined}
+          >
+            {[...partners, ...partners].map((partner, index) => {
+                const isDuplicate = index >= partners.length;
+                const className = 'group inline-flex shrink-0 items-center gap-5 border-r border-white/10 px-6 font-display text-4xl font-semibold leading-none tracking-tight text-white/75 transition-colors hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-vish-accent focus-visible:ring-offset-4 focus-visible:ring-offset-black sm:px-9 sm:text-5xl md:px-12 md:text-6xl';
+                const name = <span>{partner.name}</span>;
+
+                return partner.url ? (
+                  <a
+                    key={`${partner.name}-${index}`}
+                    href={partner.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={className}
+                    aria-hidden={isDuplicate || undefined}
+                    tabIndex={isDuplicate ? -1 : undefined}
+                    onFocus={() => setIsMarqueePaused(true)}
+                    onBlur={() => setIsMarqueePaused(false)}
+                  >
+                    {name}
+                  </a>
+                ) : (
+                  <span key={`${partner.name}-${index}`} className={className} aria-hidden={isDuplicate || undefined}>
+                    {name}
+                  </span>
+                );
+            })}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="trusted-partners bg-vish-bg px-6 py-20 md:px-12 md:py-28">

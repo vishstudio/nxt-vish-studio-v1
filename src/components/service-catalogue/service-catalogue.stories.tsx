@@ -18,3 +18,12 @@ export const Default: Story = {
     tinaField: () => undefined,
   },
 };
+
+export const HomepageShowcase: Story = {
+  args: {
+    services: services.categories,
+    rawCategories: [],
+    tinaField: () => undefined,
+    variant: 'showcase',
+  },
+};

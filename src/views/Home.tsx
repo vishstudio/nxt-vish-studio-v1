@@ -8,8 +8,7 @@
 import { Navbar } from '../components/navbar/navbar';
 import { Hero } from '../components/hero/hero';
 import { RecentProjectStrip } from '../components/recent-project-strip/recent-project-strip';
-import { TrustedPartners } from '../components/trusted-partners/trusted-partners';
-import { About } from '../components/about/about';
+import { HomeImpact } from '../components/home-impact/home-impact';
 import { Team } from '../components/team/team';
 import { Services } from '../components/services/services';
 import { Process } from '../components/process/process';
@@ -67,12 +66,11 @@ export const Home = () => {
           VISH Studio provides social media marketing, SaaS products, websites, website templates, software, mobile apps, branding, and AI integrations and automations.
         </p>
         <Hero />
+        <HomeImpact />
         <RecentProjectStrip />
-        <TrustedPartners />
-        <About />
+        <Services />
         <Projects />
         <ProjectsCta index={0} backgroundImage={homeCtaBackgroundImages[0]} />
-        <Services />
         <Process />
         <ProjectsCta index={1} backgroundImage={homeCtaBackgroundImages[1]} />
         {/* <Team /> */}

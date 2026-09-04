@@ -13,7 +13,7 @@ interface HeroStatsProps {
   stats: HeroStat[];
   isHeroRevealed: boolean;
   className?: string;
-  layout?: 'standard' | 'compact';
+  layout?: 'standard' | 'compact' | 'impact';
 }
 
 const revealEase = [0.16, 1, 0.3, 1] as const;
@@ -73,6 +73,33 @@ export const HeroStats = ({ stats, isHeroRevealed, className = '', layout = 'sta
 
   if (stats.length === 0) {
     return null;
+  }
+
+  if (layout === 'impact') {
+    return (
+      <motion.dl
+        ref={statsRef}
+        initial={{ opacity: 0, y: 24 }}
+        animate={isHeroRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+        transition={{ duration: 0.7, delay: 0.12, ease: revealEase }}
+        className={`grid border-y border-white/10 md:grid-cols-3 ${className}`}
+        aria-label="Studio impact"
+      >
+        {stats.map((stat, index) => (
+          <div
+            key={stat.label}
+            className={`px-6 py-8 sm:px-8 sm:py-10 md:py-12 ${index > 0 ? 'border-t border-white/10 md:border-l md:border-t-0' : ''}`}
+          >
+            <dd className="font-display text-6xl font-medium leading-none tracking-tight text-white sm:text-7xl lg:text-8xl">
+              <AnimatedStatValue stat={stat} isActive={shouldAnimateNumbers} />
+            </dd>
+            <dt className="mt-5 font-display text-2xl font-medium leading-tight text-white sm:text-3xl">
+              {stat.label}
+            </dt>
+          </div>
+        ))}
+      </motion.dl>
+    );
   }
 
   const gridClasses = layout === 'compact'

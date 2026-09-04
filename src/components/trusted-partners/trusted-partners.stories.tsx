@@ -12,3 +12,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: () => <TrustedPartners />,
 };
+
+export const HomepageStrip: Story = {
+  render: () => <TrustedPartners variant="strip" />,
+};

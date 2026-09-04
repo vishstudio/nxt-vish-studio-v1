@@ -124,3 +124,28 @@ html.translated-rtl {
   -webkit-background-clip: text;
   color: transparent;
 }
+
+@keyframes partner-marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.partner-marquee {
+  animation: partner-marquee-scroll 34s linear infinite;
+  will-change: transform;
+}
+
+.partner-marquee[data-paused='true'] {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .partner-marquee {
+    animation: none;
+  }
+}

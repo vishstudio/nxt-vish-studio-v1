@@ -190,23 +190,22 @@ export const Team = ({ showTitle = true, members, rawTinaMembers, tinaField }: T
                       className="relative h-full w-full object-cover grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
                       loading={index < 3 ? 'eager' : 'lazy'}
                     />
-                  </div>
+                    <div className="absolute inset-x-4 bottom-4 rounded-2xl bg-black px-5 py-4 shadow-xl shadow-black/30 sm:inset-x-5 sm:bottom-5 sm:px-6 sm:py-5 text-center">
+                      <p
+                        className="mt-2 font-mono text-xs uppercase leading-relaxed tracking-wider text-vish-accent"
+                        data-tina-field={rawMember && tinaField ? tinaField(rawMember, 'role') : undefined}
+                      >
+                        {member.role}
+                      </p>
 
-                  <div className="mt-6">
-                    <h3
-                      className="font-display text-2xl font-medium leading-tight text-white transition-colors duration-500 group-hover:text-vish-gray md:text-3xl"
-                      data-tina-field={rawMember && tinaField ? tinaField(rawMember, 'name') : undefined}
-                    >
-                      {member.name}
-                      <span className="text-vish-accent">.</span>
-                    </h3>
-
-                    <p
-                      className="mt-3 font-mono text-xs uppercase leading-relaxed tracking-wider text-vish-accent"
-                      data-tina-field={rawMember && tinaField ? tinaField(rawMember, 'role') : undefined}
-                    >
-                      {member.role}
-                    </p>
+                      <h3
+                        className="font-display text-2xl font-medium leading-tight text-white md:text-3xl"
+                        data-tina-field={rawMember && tinaField ? tinaField(rawMember, 'name') : undefined}
+                      >
+                        {member.name}
+                        <span className="text-vish-accent">.</span>
+                      </h3>
+                    </div>
                   </div>
                 </motion.article>
               );
