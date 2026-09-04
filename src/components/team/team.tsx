@@ -190,21 +190,26 @@ export const Team = ({ showTitle = true, members, rawTinaMembers, tinaField }: T
                       className="relative h-full w-full object-cover grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
                       loading={index < 3 ? 'eager' : 'lazy'}
                     />
-                    <div className="absolute inset-x-4 bottom-4 rounded-2xl bg-black px-5 py-4 shadow-xl shadow-black/30 sm:inset-x-5 sm:bottom-5 sm:px-6 sm:py-5 text-center">
-                      <p
-                        className="mt-2 font-mono text-xs uppercase leading-relaxed tracking-wider text-vish-accent"
-                        data-tina-field={rawMember && tinaField ? tinaField(rawMember, 'role') : undefined}
-                      >
-                        {member.role}
-                      </p>
-
+                    <div className="absolute inset-x-4 bottom-4 rounded-2xl border border-white/10 bg-black/95 px-5 py-5 shadow-xl shadow-black/30 backdrop-blur-sm sm:inset-x-5 sm:bottom-5 sm:px-6 sm:py-6">
+                      <div className="flex items-start justify-between gap-4">
+                        <p
+                          className="font-mono text-[0.65rem] uppercase leading-relaxed tracking-[0.14em] text-vish-accent"
+                          data-tina-field={rawMember && tinaField ? tinaField(rawMember, 'role') : undefined}
+                        >
+                          {member.role}
+                        </p>
+                        <span className="font-mono text-xs tracking-[0.16em] text-white/35" aria-hidden="true">
+                          {String(index + 1).padStart(2, '0')}
+                        </span>
+                      </div>
                       <h3
-                        className="font-display text-2xl font-medium leading-tight text-white md:text-3xl"
+                        className="mt-3 font-display text-2xl font-medium leading-tight text-white md:text-3xl"
                         data-tina-field={rawMember && tinaField ? tinaField(rawMember, 'name') : undefined}
                       >
                         {member.name}
                         <span className="text-vish-accent">.</span>
                       </h3>
+                      <span className="mt-5 block h-px w-10 bg-vish-accent" aria-hidden="true" />
                     </div>
                   </div>
                 </motion.article>
