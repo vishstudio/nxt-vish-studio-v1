@@ -19,7 +19,7 @@ export const Process = () => {
 
   return (
     <Section className="process bg-vish-bg py-24 md:py-32" id="process">
-      <div className="grid gap-12 border-t border-white/10 pt-8 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:gap-20 lg:pt-10">
+      <div className="grid gap-12  pt-8 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:gap-20 lg:pt-10">
         <div className="lg:sticky lg:top-32 lg:self-start">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

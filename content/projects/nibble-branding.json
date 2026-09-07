@@ -1,0 +1,24 @@
+{
+  "title": "Nibble Ltd",
+  "slug": "nibble-branding",
+  "category": [
+    "Branding"
+  ],
+  "techStack": [
+    "Logo Design",
+    "Marketing"
+  ],
+  "image": "/assets/img/branding/branding-nibble.png",
+  "year": "2026",
+  "order": 4,
+  "featuredOnHome": true,
+  "description": "A playful, memorable visual identity for Nibble, a cookie brand built around tiny treats and big happiness.",
+  "fullDescription": "Nibble needed a complete brand system that could capture the charm of its small-batch cookies across packaging, digital touchpoints, and promotional moments.",
+  "overview": "We created a warm, energetic identity for Nibble, pairing a friendly wordmark with cookie-inspired illustrations, a cheerful colour palette, and flexible visual assets.",
+  "challenge": "The brand needed to feel playful and appetite-inducing while remaining clear and distinctive across small packaging, social media, and event materials.",
+  "strategy": "We established a rounded, expressive visual language with a clear hierarchy, memorable iconography, and a flexible palette that brings each flavour and campaign to life.",
+  "solution": "The finished brand gives Nibble a cohesive visual foundation across its logo, packaging, digital presence, and promotional assets, making every customer touchpoint feel recognisably Nibble.",
+  "gallery": [
+    "/assets/img/branding/branding-nibble.png"
+  ]
+}

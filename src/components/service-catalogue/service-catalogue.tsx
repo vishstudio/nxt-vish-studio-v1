@@ -17,6 +17,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { useEffect, useState } from 'react';
 import type { ServiceCategory } from '../../lib/content';
 import { sortByCanonicalServiceOrder } from '../../lib/services';
+import { getImageUrl } from '../../utils/imageUrl';
 import { Button } from '../ui/button/button';
 
 interface ServiceCatalogueProps {
@@ -71,7 +72,7 @@ const ServiceShowcase = ({ services, rawCategories, tinaField, id }: ServiceCata
       <img
         src="/assets/img/services-section.jpg"
         alt=""
-        className="absolute -top-[10%] left-0 h-[120%] w-full object-cover opacity-20 grayscale"
+        className="absolute -top-[10%] left-0 h-[120%] w-full object-cover opacity-20"
         aria-hidden="true"
       />
       <div className="absolute inset-0 bg-black/75" aria-hidden="true" />
@@ -157,32 +158,32 @@ const ServiceShowcase = ({ services, rawCategories, tinaField, id }: ServiceCata
             <AnimatePresence mode="wait" initial={false}>
               <motion.img
                 key={selectedService.category}
-                src={selectedService.image}
+                src={getImageUrl(selectedService.image)}
                 alt={selectedService.imageAlt}
                 initial={{ opacity: 0, scale: 1.04 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.98 }}
                 transition={{ duration: shouldReduceMotion ? 0 : 0.45, ease: [0.16, 1, 0.3, 1] }}
-                className="absolute inset-0 size-full object-cover grayscale"
+                className="absolute inset-0 size-full object-cover"
                 data-tina-field={selectedRawCategory ? tinaField(selectedRawCategory, 'image') : undefined}
               />
             </AnimatePresence>
-            <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent" aria-hidden="true" />
-            <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8 lg:p-10">
+            <div className="absolute inset-0 bg-linear-to-t from-black/65 via-black/10 to-transparent" aria-hidden="true" />
+            <div className="absolute inset-x-4 bottom-4 rounded-2xl border border-white/10 bg-black/95 px-5 py-5 shadow-xl shadow-black/30 backdrop-blur-sm sm:inset-x-5 sm:bottom-5 sm:px-6 sm:py-6">
               <p className="font-mono text-xs uppercase tracking-[0.18em] text-vish-accent">What this covers</p>
               <h3
-                className="mt-4 max-w-2xl font-display text-4xl font-medium leading-[0.94] tracking-tight text-white sm:text-5xl"
+                className="mt-3 max-w-2xl font-display text-3xl font-medium leading-[0.94] tracking-tight text-white sm:text-4xl"
                 data-tina-field={selectedRawCategory ? tinaField(selectedRawCategory, 'category') : undefined}
               >
                 {selectedService.category}<span className="text-vish-accent">.</span>
               </h3>
               <p
-                className="mt-4 max-w-xl font-sans text-sm leading-relaxed text-gray-200 sm:text-base"
+                className="mt-3 max-w-xl font-sans text-sm leading-relaxed text-gray-200 sm:text-base"
                 data-tina-field={selectedRawCategory ? tinaField(selectedRawCategory, 'description') : undefined}
               >
                 {selectedService.description}
               </p>
-              <p className="mt-6 max-w-2xl border-t border-white/20 pt-4 font-sans text-sm leading-relaxed text-white/75">
+              <p className="mt-5 max-w-2xl border-t border-white/20 pt-4 font-sans text-sm leading-relaxed text-white/75">
                 <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/45">Focus </span>
                 {selectedService.items.slice(0, 3).join(' · ')}
               </p>
@@ -210,7 +211,7 @@ const ServiceExplorer = ({ services, rawCategories, tinaField, id }: ServiceCata
       <img
         src="/assets/img/services-section.jpg"
         alt=""
-        className="absolute -top-[10%] left-0 h-[120%] w-full object-cover opacity-30 grayscale"
+        className="absolute -top-[10%] left-0 h-[120%] w-full object-cover opacity-30"
         aria-hidden="true"
       />
       <div className="absolute inset-0 bg-black/55" aria-hidden="true" />
@@ -349,9 +350,9 @@ const ServiceExplorer = ({ services, rawCategories, tinaField, id }: ServiceCata
                   </div>
                   <div className="relative hidden min-h-full overflow-hidden border-l border-white/10 md:block">
                     <img
-                      src={selectedService.image}
+                      src={getImageUrl(selectedService.image)}
                       alt={selectedService.imageAlt}
-                      className="absolute inset-0 size-full object-cover grayscale"
+                      className="absolute inset-0 size-full object-cover"
                       data-tina-field={selectedRawCategory ? tinaField(selectedRawCategory, 'image') : undefined}
                     />
                     <div className="absolute inset-0 bg-linear-to-t from-black/55 to-transparent" aria-hidden="true" />

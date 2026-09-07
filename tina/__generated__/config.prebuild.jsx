@@ -198,7 +198,8 @@ var config_default = defineConfig({
               "Development",
               "Product Design",
               "UI/UX Design",
-              "Mobile App"
+              "Mobile App",
+              "Social Media Management"
             ],
             ui: {
               validate: (value) => {

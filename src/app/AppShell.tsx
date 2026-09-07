@@ -7,7 +7,7 @@ import { AnimatePresence } from 'motion/react';
 import { Loader } from '@/src/components/loader/loader';
 import { CustomCursor } from '@/src/components/custom-cursor/custom-cursor';
 import { COOKIE_SETTINGS_OPEN_EVENT } from '@/src/lib/cookie-consent';
-import { APP_READY_EVENT } from '@/src/lib/site-events';
+import { APP_READY_EVENT, HERO_REVEALED_EVENT } from '@/src/lib/site-events';
 
 const CookieSettings = dynamic(
   () => import('@/src/components/cookie-settings/cookie-settings').then((mod) => mod.CookieSettings),
@@ -29,14 +29,17 @@ export const AppShell = ({ children }: { children: React.ReactNode }) => {
   const [loadingPath, setLoadingPath] = useState<string | null>(
     pathname === '/' ? pathname : null,
   );
+  const [isHomeScrollLocked, setIsHomeScrollLocked] = useState(pathname === '/');
   const [shouldLoadCookieSettings, setShouldLoadCookieSettings] = useState(false);
   const [cookieSettingsOpenSignal, setCookieSettingsOpenSignal] = useState(0);
 
   useEffect(() => {
     if (pathname === '/') {
       setLoadingPath(pathname);
+      setIsHomeScrollLocked(true);
     } else {
       setLoadingPath(null);
+      setIsHomeScrollLocked(false);
     }
   }, [pathname]);
 
@@ -44,6 +47,28 @@ export const AppShell = ({ children }: { children: React.ReactNode }) => {
     setLoadingPath(null);
     window.dispatchEvent(new Event(APP_READY_EVENT));
   }, []);
+
+  useEffect(() => {
+    const unlockHomeScroll = () => setIsHomeScrollLocked(false);
+
+    window.addEventListener(HERO_REVEALED_EVENT, unlockHomeScroll);
+    return () => window.removeEventListener(HERO_REVEALED_EVENT, unlockHomeScroll);
+  }, []);
+
+  useEffect(() => {
+    if (!isHomeScrollLocked) return undefined;
+
+    const htmlOverflow = document.documentElement.style.overflow;
+    const bodyOverflow = document.body.style.overflow;
+
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.documentElement.style.overflow = htmlOverflow;
+      document.body.style.overflow = bodyOverflow;
+    };
+  }, [isHomeScrollLocked]);
 
   useEffect(() => {
     const loadCookieSettings = () => {

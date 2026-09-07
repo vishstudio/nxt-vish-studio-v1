@@ -219,13 +219,15 @@ export const Navbar = () => {
               : "absolute left-1/2 -translate-x-1/2 gap-0 lg:static lg:translate-x-0"
               }`}
           >
-            <div
+            {/* Icon logo */}
+            {/* <div
               className={`hidden h-5 shrink-0 transition-[opacity,width,transform] duration-200 ease-out lg:grid ${effectiveIsScrolled ? "lg:w-5 lg:scale-100 lg:opacity-100" : "lg:w-0 lg:scale-95 lg:opacity-0"
                 }`}
               aria-hidden="true"
             >
               <img src="/assets/icon.svg" alt="" className="h-5 w-5" />
-            </div>
+            </div> */}
+
             <a href="/" className="relative z-50 flex items-center justify-center">
               <LogoText />
             </a>

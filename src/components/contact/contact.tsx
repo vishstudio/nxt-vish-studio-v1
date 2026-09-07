@@ -1,102 +1,118 @@
 'use client';
 
 import { trackEmailClick, trackSocialLinkClick } from '@/src/lib/analytics';
-import { ArrowUpRight } from 'lucide-react';
-import { motion } from 'motion/react';
+import {
+  PROJECT_INQUIRY_ACTION,
+  PROJECT_INQUIRY_ARIA_LABEL,
+  PROJECT_INQUIRY_HREF,
+} from '@/src/lib/conversion';
+import { ArrowUpRight, CalendarCheck } from 'lucide-react';
 import { useTinaSettings } from '../../hooks/useTinaVisualEditing';
 import { CookieSettingsTrigger } from '../cookie-settings/cookie-settings-trigger';
 import { LogoText } from '../logo-text/logo-text';
 import { NewsletterSignup } from '../newsletter-signup/newsletter-signup';
+import { Button } from '../ui/button/button';
+
+const exploreLinks = [
+  { label: 'Our work', href: '/projects' },
+  { label: 'About the studio', href: '/about' },
+  { label: 'Client stories', href: '/testimonials' },
+  { label: 'Contact', href: '/contact' },
+];
+
+const serviceLinks = [
+  { label: 'All services', href: '/services' },
+  { label: 'Websites', href: '/services/websites' },
+  { label: 'SaaS products', href: '/services/saas-products' },
+  { label: 'AI automations', href: '/services/ai-automations' },
+];
 
 export const Contact = () => {
   const { data: settings, tinaField, rawSiteSettings } = useTinaSettings();
 
   return (
-    <footer className="contact relative overflow-hidden bg-black px-6 py-20 pb-4 text-white md:px-12 md:py-24 md:pb-5" id="contact">
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_70%_55%_at_50%_0%,#000_45%,transparent_100%)]" />
+    <footer className="contact bg-black px-6 pb-8 pt-14 text-white md:px-12 md:pb-10 md:pt-20" id="contact">
+      <div className="mx-auto max-w-[1400px]">
+        <div className="grid gap-10 border-y border-white/10 py-10 md:grid-cols-[minmax(0,1fr)_auto] md:items-end md:py-14">
+          <div>
+            <LogoText logoClassName="w-32 md:w-40" />
+            <p className="mt-8 font-mono text-xs uppercase tracking-[0.18em] text-vish-accent">Let&apos;s connect</p>
+            <h2 className="mt-3 max-w-2xl font-display text-4xl font-medium tracking-tight text-white sm:text-5xl md:text-6xl">
+              <span className="text-white" data-tina-field={tinaField('contactHeadingLine1')}>
+                {settings.contactHeadingLine1}
+              </span>{' '}
+              <span className="text-vish-gray" data-tina-field={tinaField('contactHeadingLine2')}>
+                {settings.contactHeadingLine2}
+              </span>
+              <span className="text-vish-accent">.</span>
+            </h2>
+          </div>
+          <Button
+            href={PROJECT_INQUIRY_HREF}
+            variant="cta"
+            size="md"
+            ariaLabel={PROJECT_INQUIRY_ARIA_LABEL}
+            dataConversionAction={PROJECT_INQUIRY_ACTION}
+            icon={<CalendarCheck className="size-4" />}
+            className="w-fit"
+          >
+            Schedule a free call
+          </Button>
+        </div>
 
-      <div
-        aria-hidden="true"
-        className="notranslate pointer-events-none absolute inset-x-0 bottom-4 z-0 overflow-hidden text-center"
-        translate="no"
-      >
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.35 }}
-          variants={{
-            hidden: { opacity: 0, y: '0.3em', filter: 'blur(8px)' },
-            visible: {
-              opacity: 1,
-              y: 0,
-              filter: 'blur(0px)',
-              transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
-            },
-          }}
-          className="notranslate inline-flex text-white/[0.055] select-none"
-        >
-          <LogoText logoClassName="w-screen max-w-none md:w-screen" />
-        </motion.div>
-      </div>
-
-      <div className="relative z-10 mx-auto max-w-[1400px]">
-        <motion.h2
-          initial={{ opacity: 0, y: 28 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-4xl font-display text-5xl font-medium leading-[0.94] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl"
-        >
-          <span className="text-white" data-tina-field={tinaField('contactHeadingLine1')}>
-            {settings.contactHeadingLine1}
-          </span>{' '}
-          <span className="text-vish-gray" data-tina-field={tinaField('contactHeadingLine2')}>
-            {settings.contactHeadingLine2}
-          </span>
-          <span className="text-vish-accent">.</span>
-        </motion.h2>
-
-        <div className="mt-12 grid gap-10 border-y border-white/10 py-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(24rem,1.1fr)] lg:gap-20 lg:py-12">
-          <div className="flex flex-col justify-between">
-            <div>
-              <p className="font-mono text-xs uppercase tracking-[0.18em] text-vish-accent">Start a conversation</p>
+        <div className="grid gap-x-8 gap-y-12 border-b border-white/10 py-12 sm:grid-cols-2 lg:grid-cols-12 lg:py-16">
+          <div className="lg:col-span-3">
+            <h3 className="font-mono text-xs uppercase tracking-widest text-gray-500">Reach us</h3>
+            <div className="mt-4 grid gap-3">
               <a
                 href={`mailto:${settings.email}`}
-                className="notranslate mt-5 flex w-fit items-center gap-4 font-display text-3xl leading-none text-white transition-colors hover:text-vish-accent sm:text-4xl md:text-5xl"
+                className="notranslate group flex w-fit items-center gap-1.5 font-sans text-sm text-white transition-colors hover:text-vish-accent"
                 aria-label="Start a project inquiry with VISH Studio by email"
                 onClick={trackEmailClick}
                 translate="no"
               >
-                {settings.email}
-                <ArrowUpRight className="size-7 shrink-0 sm:size-8" aria-hidden="true" />
+                <span>{settings.email}</span>
+                <ArrowUpRight className="size-3.5 shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
+              </a>
+              <a
+                href={settings.phoneLink}
+                className="group flex w-fit items-center gap-1.5 font-sans text-sm text-white transition-colors hover:text-vish-accent"
+                aria-label="Call VISH Studio"
+              >
+                <span>{settings.phone}</span>
+                <ArrowUpRight className="size-3.5 shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
               </a>
             </div>
-            <p className="mt-8 max-w-md font-sans text-sm leading-relaxed text-gray-400 md:text-base">
-              Based in Mauritius, partnering with scaling brands globally to engineer distinct digital ecosystems.
-            </p>
-          </div>
-
-          <NewsletterSignup source="footer" settings={settings} tinaField={tinaField} />
-        </div>
-
-        <div className="grid gap-9 py-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-12">
-          <div>
-            <h3 className="font-mono text-xs uppercase tracking-widest text-gray-500">Call us</h3>
-            <a href={settings.phoneLink} className="mt-4 block font-display text-2xl text-white transition-colors hover:text-vish-accent">
-              {settings.phone}
-            </a>
-          </div>
-
-          <div>
-            <h3 className="font-mono text-xs uppercase tracking-widest text-gray-500">Visit us</h3>
-            <address className="mt-4 whitespace-pre-line font-sans text-base leading-relaxed text-gray-400 not-italic">
+            <address className="mt-6 whitespace-pre-line font-sans text-sm leading-relaxed text-gray-400 not-italic">
               {settings.address}
             </address>
           </div>
 
-          <div className="sm:col-span-2 lg:col-span-1">
-            <h3 className="font-mono text-xs uppercase tracking-widest text-gray-500">Follow the studio</h3>
-            <div className="mt-4 flex flex-wrap gap-x-5 gap-y-3">
+          <div className="lg:col-span-2">
+            <h3 className="font-mono text-xs uppercase tracking-widest text-gray-500">Explore</h3>
+            <nav className="mt-4 grid justify-items-start gap-3" aria-label="Footer navigation">
+              {exploreLinks.map((link) => (
+                <Button key={link.href} href={link.href} variant="link" size="text" className="text-sm font-normal text-gray-400 no-underline hover:text-white hover:no-underline">
+                  {link.label}
+                </Button>
+              ))}
+            </nav>
+          </div>
+
+          <div className="lg:col-span-2">
+            <h3 className="font-mono text-xs uppercase tracking-widest text-gray-500">Services</h3>
+            <nav className="mt-4 grid justify-items-start gap-3" aria-label="Service navigation">
+              {serviceLinks.map((link) => (
+                <Button key={link.href} href={link.href} variant="link" size="text" className="text-sm font-normal text-gray-400 no-underline hover:text-white hover:no-underline">
+                  {link.label}
+                </Button>
+              ))}
+            </nav>
+          </div>
+
+          <div className="lg:col-span-2">
+            <h3 className="font-mono text-xs uppercase tracking-widest text-gray-500">Follow</h3>
+            <div className="mt-4 grid justify-items-start gap-3">
               {settings.socials.map((social, index) => {
                 const rawSocial = rawSiteSettings?.socials?.[index];
                 return (
@@ -106,7 +122,7 @@ export const Contact = () => {
                     target={social.openInNewTab ? '_blank' : undefined}
                     rel={social.openInNewTab ? 'noopener noreferrer' : undefined}
                     onClick={() => trackSocialLinkClick(social.name, 'footer')}
-                    className="group flex items-center gap-1.5 font-sans text-base text-gray-400 transition-colors hover:text-white"
+                    className="group flex items-center gap-1.5 font-sans text-sm text-gray-400 transition-colors hover:text-white"
                   >
                     <span data-tina-field={rawSocial ? tinaField(rawSocial, 'name') : undefined}>{social.name}</span>
                     <ArrowUpRight className="size-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
@@ -115,20 +131,27 @@ export const Contact = () => {
               })}
             </div>
           </div>
+
+          <div className="border-t border-white/10 pt-8 sm:col-span-2 lg:col-span-3 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
+            <h3 className="font-mono text-xs uppercase tracking-widest text-vish-accent">Newsletter</h3>
+            <div className="mt-4">
+              <NewsletterSignup source="footer" settings={settings} tinaField={tinaField} />
+            </div>
+          </div>
         </div>
 
-        <div className="flex flex-col items-center justify-between gap-5 border-t border-white/10 pt-6 font-mono text-xs uppercase tracking-wider text-gray-600 md:flex-row">
+        <div className="flex flex-col gap-5 pt-6 font-mono text-xs uppercase tracking-wider text-gray-600 md:flex-row md:items-center md:justify-between">
           <span>
             {settings.copyright}{' '}
             <span className="notranslate font-logo text-sm lowercase" translate="no">
               <strong>vish</strong> studio.
             </span>
           </span>
-          <div className="flex flex-wrap items-center justify-center gap-5 md:justify-end md:gap-7">
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
             {settings.footerLinks.map((link) => (
-              <a key={link.label} href={link.url} className="transition-colors hover:text-white">
+              <Button key={link.label} href={link.url} variant="link" size="text" className="text-xs font-normal uppercase tracking-wider text-gray-600 no-underline hover:text-white hover:no-underline">
                 {link.label}
-              </a>
+              </Button>
             ))}
             <CookieSettingsTrigger className="h-auto bg-transparent p-0 font-mono text-xs uppercase tracking-wider text-gray-600 shadow-none hover:bg-transparent hover:text-white" />
           </div>

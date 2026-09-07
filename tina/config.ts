@@ -215,6 +215,7 @@ export default defineConfig({
               "Product Design",
               "UI/UX Design",
               "Mobile App",
+              "Social Media Management",
             ],
             ui: {
               validate: (value: string[] | undefined) => {

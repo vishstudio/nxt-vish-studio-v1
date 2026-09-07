@@ -45,16 +45,23 @@ interface ProjectJson {
 }
 
 // Statically imported project JSON files — fully static, no API needed
+import alaraSocialMediaJson from "@/content/projects/alara-social-media.json";
 import gogarageJson from "@/content/projects/gogarage.json";
-import imagine3dJson from "@/content/projects/imagine3d.json";
+import imaginePlusLtdJson from "@/content/projects/imagine-plus-ltd.json";
 import morisMetricsJson from "@/content/projects/moris-metrics.json";
+import nibbleBrandingJson from "@/content/projects/nibble-branding.json";
 import ssPowerProJson from "@/content/projects/ss-power-pro.json";
 
 const projectModules: Record<string, ProjectJson> = {
+  "/content/projects/alara-social-media.json":
+    alaraSocialMediaJson as unknown as ProjectJson,
   "/content/projects/gogarage.json": gogarageJson as unknown as ProjectJson,
-  "/content/projects/imagine3d.json": imagine3dJson as unknown as ProjectJson,
+  "/content/projects/imagine-plus-ltd.json":
+    imaginePlusLtdJson as unknown as ProjectJson,
   "/content/projects/moris-metrics.json":
     morisMetricsJson as unknown as ProjectJson,
+  "/content/projects/nibble-branding.json":
+    nibbleBrandingJson as unknown as ProjectJson,
   "/content/projects/ss-power-pro.json":
     ssPowerProJson as unknown as ProjectJson,
 };

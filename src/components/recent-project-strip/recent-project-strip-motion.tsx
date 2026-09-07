@@ -7,6 +7,7 @@ import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'mo
 interface RecentProjectStripItem {
   slug: string;
   title: string;
+  service: string;
   year: string;
   image: string;
 }
@@ -46,6 +47,9 @@ const RecentProjectTile = ({ project, index }: RecentProjectTileProps) => {
             <h2 className="mt-1 font-display text-sm font-medium leading-tight text-white sm:text-base md:mt-2 md:text-3xl">
               {project.title}
             </h2>
+            <p className="mt-1 font-mono text-[0.5625rem] font-medium uppercase leading-tight tracking-[0.16em] text-white/65 md:mt-2 md:text-[0.6875rem]">
+              {project.service}
+            </p>
           </div>
         </div>
       </Link>

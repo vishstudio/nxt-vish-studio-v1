@@ -10,8 +10,8 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const project = {
-  slug: 'imagine3d',
-  title: 'Imagine3D',
+  slug: 'imagine-plus-ltd',
+  title: 'ImaginePlus Ltd',
   category: ['Website', 'UX'],
   image: '/assets/img/home-cta-1.avif',
   year: '2026',

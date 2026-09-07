@@ -36,6 +36,7 @@ export const Team = ({ showTitle = true, members, rawTinaMembers, tinaField }: T
   const [activeMemberIndex, setActiveMemberIndex] = useState(0);
   const [isDesktop, setIsDesktop] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isCarouselVisible, setIsCarouselVisible] = useState(false);
   const [desktopTrackStep, setDesktopTrackStep] = useState(0);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -79,7 +80,28 @@ export const Team = ({ showTitle = true, members, rawTinaMembers, tinaField }: T
   }, [isDesktop, scrollYProgress]);
 
   useEffect(() => {
-    if (!isMobile || team.length < 2 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const carousel = carouselRef.current;
+    if (!isMobile || !carousel) {
+      setIsCarouselVisible(false);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsCarouselVisible(entry.isIntersecting),
+      { threshold: 0.2 },
+    );
+
+    observer.observe(carousel);
+    return () => observer.disconnect();
+  }, [isMobile]);
+
+  useEffect(() => {
+    if (
+      !isMobile
+      || !isCarouselVisible
+      || team.length < 2
+      || window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
       return;
     }
 
@@ -91,12 +113,17 @@ export const Team = ({ showTitle = true, members, rawTinaMembers, tinaField }: T
       if (cards.length === 0) return;
       const nextCard = cards[(activeMemberIndex + 1) % cards.length];
 
-      nextCard?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      if (!nextCard) return;
+
+      carousel.scrollTo({
+        left: nextCard.offsetLeft - (carousel.clientWidth - nextCard.offsetWidth) / 2,
+        behavior: 'smooth',
+      });
     };
 
     const interval = window.setInterval(advanceCarousel, 5000);
     return () => window.clearInterval(interval);
-  }, [activeMemberIndex, isMobile, team.length]);
+  }, [activeMemberIndex, isCarouselVisible, isMobile, team.length]);
 
   // Build a name → raw tina object map so sorting doesn't break index alignment
   const rawByName: Record<string, any> = {};
@@ -193,7 +220,7 @@ export const Team = ({ showTitle = true, members, rawTinaMembers, tinaField }: T
                     <div className="absolute inset-x-4 bottom-4 rounded-2xl border border-white/10 bg-black/95 px-5 py-5 shadow-xl shadow-black/30 backdrop-blur-sm sm:inset-x-5 sm:bottom-5 sm:px-6 sm:py-6">
                       <div className="flex items-start justify-between gap-4">
                         <p
-                          className="font-mono text-[0.65rem] uppercase leading-relaxed tracking-[0.14em] text-vish-accent"
+                          className="font-mono text-[0.4rem] md:text-[0.65rem] uppercase leading-relaxed tracking-[0.14em] text-vish-accent"
                           data-tina-field={rawMember && tinaField ? tinaField(rawMember, 'role') : undefined}
                         >
                           {member.role}
@@ -203,13 +230,13 @@ export const Team = ({ showTitle = true, members, rawTinaMembers, tinaField }: T
                         </span>
                       </div>
                       <h3
-                        className="mt-3 font-display text-2xl font-medium leading-tight text-white md:text-3xl"
+                        className="mt-3 font-display text-xl font-medium leading-tight text-white md:text-3xl"
                         data-tina-field={rawMember && tinaField ? tinaField(rawMember, 'name') : undefined}
                       >
                         {member.name}
                         <span className="text-vish-accent">.</span>
                       </h3>
-                      <span className="mt-5 block h-px w-10 bg-vish-accent" aria-hidden="true" />
+                      <span className="mt-5 hidden md:block h-px w-10 bg-vish-accent" aria-hidden="true" />
                     </div>
                   </div>
                 </motion.article>

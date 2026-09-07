@@ -9,6 +9,7 @@ export const RecentProjectStrip = () => {
     .map((project) => ({
       slug: project.slug,
       title: project.title,
+      service: project.category.join(' / '),
       year: project.year,
       image: getImageUrl(project.image),
     }));

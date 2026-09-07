@@ -1,0 +1,23 @@
+{
+  "title": "Alara Ltd",
+  "slug": "alara-social-media",
+  "category": [
+    "Social Media Management"
+  ],
+  "techStack": [
+    "Marketing"
+  ],
+  "image": "/assets/img/social/social-alara.png",
+  "year": "2026",
+  "order": 2,
+  "featuredOnHome": true,
+  "description": "A considered social media direction that turns Alara Creative Studio's visual identity into a polished, recognisable content presence.",
+  "fullDescription": "The Alara social media showcase demonstrates how a cohesive content system can extend a brand beyond its core identity and into a consistent day-to-day digital presence.",
+  "overview": "We translated Alara's visual identity into a versatile social content direction, balancing brand stories, service highlights, behind-the-scenes moments, and promotional posts across a cohesive feed.",
+  "challenge": "The content needed to retain the warmth and refinement of the brand while staying varied enough to engage an audience over time. It also had to work across different post formats without losing recognition.",
+  "strategy": "We built a modular visual language around the brand palette, typography, photography, and supporting graphic elements. This lets each post feel distinct while keeping the full feed immediately identifiable as Alara.",
+  "solution": "The resulting social system gives Alara a polished foundation for ongoing content. It demonstrates a clear visual rhythm across education, portfolio work, service messages, and studio storytelling.",
+  "gallery": [
+    "/assets/img/social/social-alara.png"
+  ]
+}
