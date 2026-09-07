@@ -2,6 +2,7 @@
 
 import {
   ArrowLeft,
+  ArrowRight,
   Bot,
   Box,
   CalendarCheck,
@@ -48,6 +49,16 @@ const ServiceShowcase = ({ services, rawCategories, tinaField, id }: ServiceCata
   const selectedRawCategory = rawCategories?.find(
     (category: any) => category?.category === selectedService?.category,
   );
+
+  const selectPreviousService = () => {
+    setSelectedIndex((currentIndex) =>
+      (currentIndex - 1 + orderedServices.length) % orderedServices.length,
+    );
+  };
+
+  const selectNextService = () => {
+    setSelectedIndex((currentIndex) => (currentIndex + 1) % orderedServices.length);
+  };
 
   useEffect(() => {
     if (shouldReduceMotion || isPaused || orderedServices.length < 2) {
@@ -169,7 +180,7 @@ const ServiceShowcase = ({ services, rawCategories, tinaField, id }: ServiceCata
               />
             </AnimatePresence>
             <div className="absolute inset-0 bg-linear-to-t from-black/65 via-black/10 to-transparent" aria-hidden="true" />
-            <div className="absolute inset-x-4 bottom-4 rounded-2xl border border-white/10 bg-black/95 px-5 py-5 shadow-xl shadow-black/30 backdrop-blur-sm sm:inset-x-5 sm:bottom-5 sm:px-6 sm:py-6">
+            <div className="absolute inset-x-4 bottom-16 rounded-2xl border border-white/15 bg-black/65 px-5 py-5 shadow-xl shadow-black/30 backdrop-blur-md sm:inset-x-5 sm:bottom-5 sm:px-6 sm:py-6">
               <p className="font-mono text-xs uppercase tracking-[0.18em] text-vish-accent">What this covers</p>
               <h3
                 className="mt-3 max-w-2xl font-display text-3xl font-medium leading-[0.94] tracking-tight text-white sm:text-4xl"
@@ -188,6 +199,34 @@ const ServiceShowcase = ({ services, rawCategories, tinaField, id }: ServiceCata
                 {selectedService.items.slice(0, 3).join(' · ')}
               </p>
             </div>
+            {orderedServices.length > 1 && (
+              <div className="absolute inset-x-4 bottom-4 z-10 flex items-center gap-2 sm:hidden">
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  className="flex-1 border-white/15 bg-black/65 font-mono uppercase tracking-[0.14em]"
+                  onClick={selectPreviousService}
+                  icon={<ArrowLeft className="size-3.5" />}
+                  iconPosition="left"
+                  ariaLabel="Previous service"
+                >
+                  Back
+                </Button>
+                <span className="min-w-12 text-center font-mono text-xs tracking-[0.16em] text-white/70" aria-live="polite">
+                  {String(selectedIndex + 1).padStart(2, '0')} / {String(orderedServices.length).padStart(2, '0')}
+                </span>
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  className="flex-1 border-white/15 bg-black/65 font-mono uppercase tracking-[0.14em]"
+                  onClick={selectNextService}
+                  icon={<ArrowRight className="size-3.5" />}
+                  ariaLabel="Next service"
+                >
+                  Next
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </div>

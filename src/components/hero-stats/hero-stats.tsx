@@ -93,7 +93,7 @@ export const HeroStats = ({ stats, isHeroRevealed, className = '', layout = 'sta
             <dd className="font-display text-6xl font-medium leading-none tracking-tight text-white sm:text-7xl lg:text-8xl">
               <AnimatedStatValue stat={stat} isActive={shouldAnimateNumbers} />
             </dd>
-            <dt className="mt-5 font-display text-2xl font-medium leading-tight text-white sm:text-3xl">
+            <dt className="mt-5 font-display text-2xl font-medium leading-tight text-vish-gray sm:text-3xl">
               {stat.label}
             </dt>
           </div>

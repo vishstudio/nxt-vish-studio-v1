@@ -20,7 +20,7 @@ export interface TinaQueryResult<T> {
 /**
  * Generic hook that:
  * 1. Takes static data as the starting value
- * 2. Attempts to fetch from TinaCMS GraphQL client
+ * 2. Optionally fetches from TinaCMS GraphQL client for local visual editing
  * 3. Uses `useTina()` for real-time sidebar sync
  * 4. Returns the live data (or static if fetch failed)
  */
@@ -31,6 +31,7 @@ export function useTinaData<
   staticData: TContent,
   fetchQuery: () => Promise<TinaQueryResult<TQueryData>>,
   extractContent: (queryData: TQueryData) => TContent,
+  fetchRemote = true,
 ): { data: TContent; tinaData: TQueryData | null } {
   const initialInput: TinaQueryResult<TQueryData> = {
     data: {} as TQueryData,
@@ -43,6 +44,10 @@ export function useTinaData<
   const [fetched, setFetched] = useState(false);
 
   useEffect(() => {
+    if (!fetchRemote) {
+      return;
+    }
+
     fetchQuery()
       .then((res) => {
         setQueryResult(res);
@@ -51,7 +56,7 @@ export function useTinaData<
       .catch(() => {
         // No TinaCMS server (production) — stay with static data
       });
-  }, []);
+  }, [fetchRemote]);
 
   const { data: liveData } = useTina(queryResult);
 

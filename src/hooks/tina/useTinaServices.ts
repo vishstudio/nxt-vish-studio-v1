@@ -22,6 +22,7 @@ export function useTinaServices() {
           items: (c?.items ?? []).filter(Boolean),
         })),
       } as ServicesPageContent),
+    process.env.NODE_ENV !== "production",
   );
 
   const rawServicesPage = result.tinaData
