@@ -55,13 +55,6 @@
       "image": "/assets/img/team/pravesh.jpg",
       "bio": "Designing practical AI workflows and intelligent product systems.",
       "order": 4
-    },
-    {
-      "name": "Ayesha Bhudookan",
-      "role": "Consultant & Strategy Lead",
-      "image": "/assets/img/team/ayesha-bhudookan.jpeg",
-      "bio": "Crafting data-driven growth strategies and navigating complex business challenges.",
-      "order": 5
     }
   ]
 }

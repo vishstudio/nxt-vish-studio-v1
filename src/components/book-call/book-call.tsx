@@ -171,7 +171,7 @@ export const BookCall = () => {
             A focused 20-30 minute call to understand your goals, clarify the best next step, and decide whether a project brief is needed.
           </p>
 
-          <div className="mt-12 grid gap-4">
+          <div className="mt-12 hidden md:grid gap-4">
             {[
               { icon: Clock, title: '20-30 minutes', description: 'Booked in a 30-minute slot so there is enough room for context.' },
               { icon: Video, title: 'Google Meet invite', description: 'We will send the calendar invite with the Google Meet link to your email shortly.' },
@@ -189,7 +189,7 @@ export const BookCall = () => {
             ))}
           </div>
 
-          <div className="mt-10 flex flex-col items-start rounded-2xl border border-white/8 bg-white/[0.02] p-8">
+          <div className="mt-10 hidden lg:flex flex-col items-start rounded-2xl border border-white/8 bg-white/[0.02] p-8">
             <div>
               <div className="mb-4 flex items-center gap-3">
                 <Sparkles className="h-5 w-5 text-vish-accent" aria-hidden="true" />
@@ -353,6 +353,29 @@ export const BookCall = () => {
             {isSubmitting ? 'Saving Request' : 'Schedule a Free Call'}
           </Button>
         </form>
+
+        <div className="flex lg:hidden flex-col items-start rounded-2xl border border-white/8 bg-white/[0.02] p-8">
+          <div>
+            <div className="mb-4 flex items-center gap-3">
+              <Sparkles className="h-5 w-5 text-vish-accent" aria-hidden="true" />
+              <h2 className="font-display text-2xl font-medium text-white md:text-3xl">
+                Already know the scope?
+              </h2>
+            </div>
+            <p className="max-w-2xl font-sans text-base leading-relaxed text-gray-400">
+              You can skip the call and send the full project brief instead.
+            </p>
+          </div>
+          <Button
+            href="/start-project"
+            variant="outline"
+            size="lg"
+            className="mt-7 w-full font-mono text-xs font-semibold uppercase tracking-widest sm:w-auto"
+            icon={<ArrowRight className="h-4 w-4" />}
+          >
+            Start a Project
+          </Button>
+        </div>
 
       </div>
 

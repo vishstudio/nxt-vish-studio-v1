@@ -70,8 +70,6 @@ type Query {
   aboutPageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: AboutPageFilter): AboutPageConnection!
   servicesPage(relativePath: String): ServicesPage!
   servicesPageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ServicesPageFilter): ServicesPageConnection!
-  contactPage(relativePath: String): ContactPage!
-  contactPageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ContactPageFilter): ContactPageConnection!
   pricingPage(relativePath: String): PricingPage!
   pricingPageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PricingPageFilter): PricingPageConnection!
 }
@@ -85,7 +83,6 @@ input DocumentFilter {
   testimonialsPage: TestimonialsPageFilter
   aboutPage: AboutPageFilter
   servicesPage: ServicesPageFilter
-  contactPage: ContactPageFilter
   pricingPage: PricingPageFilter
 }
 
@@ -112,7 +109,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Project | LegalPage | SiteSettings | Partners | HomePage | TestimonialsPage | AboutPage | ServicesPage | ContactPage | PricingPage | Folder
+union DocumentNode = Project | LegalPage | SiteSettings | Partners | HomePage | TestimonialsPage | AboutPage | ServicesPage | PricingPage | Folder
 
 type Project implements Node & Document {
   title: String!
@@ -647,50 +644,6 @@ type ServicesPageConnection implements Connection {
   edges: [ServicesPageConnectionEdges]
 }
 
-type ContactPageTrustIndicators {
-  icon: String
-  title: String!
-  description: String
-}
-
-type ContactPage implements Node & Document {
-  heroLabel: String!
-  heroTitleLine1: String
-  heroTitleLine2: String
-  heroTitlePunctuation: String
-  heroDescription: String
-  trustIndicators: [ContactPageTrustIndicators]
-  id: ID!
-  _sys: SystemInfo!
-  _values: JSON!
-}
-
-input ContactPageTrustIndicatorsFilter {
-  icon: StringFilter
-  title: StringFilter
-  description: StringFilter
-}
-
-input ContactPageFilter {
-  heroLabel: StringFilter
-  heroTitleLine1: StringFilter
-  heroTitleLine2: StringFilter
-  heroTitlePunctuation: StringFilter
-  heroDescription: StringFilter
-  trustIndicators: ContactPageTrustIndicatorsFilter
-}
-
-type ContactPageConnectionEdges {
-  cursor: String!
-  node: ContactPage
-}
-
-type ContactPageConnection implements Connection {
-  pageInfo: PageInfo!
-  totalCount: Float!
-  edges: [ContactPageConnectionEdges]
-}
-
 type PricingPagePricingCategoriesPlansCtaLink {
   linkType: String
   linkValue: String
@@ -871,8 +824,6 @@ type Mutation {
   createAboutPage(relativePath: String!, params: AboutPageMutation!): AboutPage!
   updateServicesPage(relativePath: String!, params: ServicesPageMutation!): ServicesPage!
   createServicesPage(relativePath: String!, params: ServicesPageMutation!): ServicesPage!
-  updateContactPage(relativePath: String!, params: ContactPageMutation!): ContactPage!
-  createContactPage(relativePath: String!, params: ContactPageMutation!): ContactPage!
   updatePricingPage(relativePath: String!, params: PricingPageMutation!): PricingPage!
   createPricingPage(relativePath: String!, params: PricingPageMutation!): PricingPage!
 }
@@ -886,7 +837,6 @@ input DocumentUpdateMutation {
   testimonialsPage: TestimonialsPageMutation
   aboutPage: AboutPageMutation
   servicesPage: ServicesPageMutation
-  contactPage: ContactPageMutation
   pricingPage: PricingPageMutation
   relativePath: String
 }
@@ -900,7 +850,6 @@ input DocumentMutation {
   testimonialsPage: TestimonialsPageMutation
   aboutPage: AboutPageMutation
   servicesPage: ServicesPageMutation
-  contactPage: ContactPageMutation
   pricingPage: PricingPageMutation
 }
 
@@ -1098,21 +1047,6 @@ input ServicesPageMutation {
   heroTitleLine1: String
   heroTitleLine2: String
   categories: [ServicesPageCategoriesMutation]
-}
-
-input ContactPageTrustIndicatorsMutation {
-  icon: String
-  title: String
-  description: String
-}
-
-input ContactPageMutation {
-  heroLabel: String
-  heroTitleLine1: String
-  heroTitleLine2: String
-  heroTitlePunctuation: String
-  heroDescription: String
-  trustIndicators: [ContactPageTrustIndicatorsMutation]
 }
 
 input PricingPagePricingCategoriesPlansCtaLinkMutation {

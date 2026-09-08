@@ -112,6 +112,12 @@ function suppressGoogleTranslateChrome() {
         top: 0 !important;
         margin-top: 0 !important;
       }
+
+      .goog-text-highlight {
+        background-color: transparent !important;
+        background-image: none !important;
+        box-shadow: none !important;
+      }
     `;
     document.head.appendChild(style);
   }

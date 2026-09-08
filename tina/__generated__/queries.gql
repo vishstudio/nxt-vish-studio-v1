@@ -438,61 +438,6 @@ query servicesPageConnection($before: String, $after: String, $first: Float, $la
   }
 }
 
-query contactPage($relativePath: String!) {
-  contactPage(relativePath: $relativePath) {
-    ... on Document {
-      _sys {
-        filename
-        basename
-        hasReferences
-        breadcrumbs
-        path
-        relativePath
-        extension
-      }
-      id
-    }
-    ...ContactPageParts
-  }
-}
-
-query contactPageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: ContactPageFilter) {
-  contactPageConnection(
-    before: $before
-    after: $after
-    first: $first
-    last: $last
-    sort: $sort
-    filter: $filter
-  ) {
-    pageInfo {
-      hasPreviousPage
-      hasNextPage
-      startCursor
-      endCursor
-    }
-    totalCount
-    edges {
-      cursor
-      node {
-        ... on Document {
-          _sys {
-            filename
-            basename
-            hasReferences
-            breadcrumbs
-            path
-            relativePath
-            extension
-          }
-          id
-        }
-        ...ContactPageParts
-      }
-    }
-  }
-}
-
 query pricingPage($relativePath: String!) {
   pricingPage(relativePath: $relativePath) {
     ... on Document {

@@ -14,7 +14,6 @@ import { Services } from '../components/services/services';
 import { Process } from '../components/process/process';
 import { Projects } from '../components/projects/projects';
 import { ProjectsCta } from '../components/projects-cta/projects-cta';
-import { Pricing } from '../components/pricing/pricing';
 import { Testimonials } from '../components/testimonials/testimonials';
 import { Faq } from '../components/faq/faq';
 import { Contact } from '../components/contact/contact';
@@ -67,14 +66,13 @@ export const Home = () => {
         </p>
         <Hero />
         <HomeImpact />
-        <RecentProjectStrip />
         <Services />
-        <Projects />
+        <RecentProjectStrip />
         <ProjectsCta index={0} backgroundImage={homeCtaBackgroundImages[0]} />
+        <Team />
         <Process />
         <ProjectsCta index={1} backgroundImage={homeCtaBackgroundImages[1]} />
-        {/* <Team /> */}
-        {/* <Pricing /> */}
+        <Projects />
         <Testimonials />
         <Faq />
         <Contact />

@@ -189,21 +189,6 @@ fragment ServicesPageParts on ServicesPage {
   }
 }
 
-fragment ContactPageParts on ContactPage {
-  __typename
-  heroLabel
-  heroTitleLine1
-  heroTitleLine2
-  heroTitlePunctuation
-  heroDescription
-  trustIndicators {
-    __typename
-    icon
-    title
-    description
-  }
-}
-
 fragment PricingPageParts on PricingPage {
   __typename
   heroLabel

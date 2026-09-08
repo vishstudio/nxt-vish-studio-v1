@@ -10,7 +10,6 @@ export { useTinaHome } from "./tina/useTinaHome";
 export { useTinaTestimonials } from "./tina/useTinaTestimonials";
 export { useTinaAbout } from "./tina/useTinaAbout";
 export { useTinaServices } from "./tina/useTinaServices";
-export { useTinaContact } from "./tina/useTinaContact";
 export { useTinaSettings } from "./tina/useTinaSettings";
 export { useTinaPartners } from "./tina/useTinaPartners";
 export { useTinaPricing } from "./tina/useTinaPricing";

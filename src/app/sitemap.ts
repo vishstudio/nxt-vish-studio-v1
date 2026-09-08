@@ -24,7 +24,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/pricing',
     '/testimonials',
     '/walkthrough',
-    '/contact',
     '/privacy',
     '/terms',
   ];

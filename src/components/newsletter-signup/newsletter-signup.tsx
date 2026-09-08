@@ -62,13 +62,13 @@ export const NewsletterSignup = ({ source, settings, tinaField, onSuccess }: New
 
   const copy = isPopup
     ? {
-        heading: settings.newsletterHeading,
-        description: settings.newsletterDescription,
-      }
+      heading: settings.newsletterHeading,
+      description: settings.newsletterDescription,
+    }
     : {
-        heading: settings.footerNewsletterHeading,
-        description: settings.footerNewsletterDescription,
-      };
+      heading: settings.footerNewsletterHeading,
+      description: settings.footerNewsletterDescription,
+    };
 
   if (status === 'success') {
     return (
@@ -120,7 +120,7 @@ export const NewsletterSignup = ({ source, settings, tinaField, onSuccess }: New
           />
           <Button
             type="submit"
-            variant="cta"
+            variant="navigation"
             size="md"
             disabled={status === 'submitting'}
             className={isPopup ? 'w-full' : 'min-h-12 whitespace-nowrap'}

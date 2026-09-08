@@ -113,7 +113,7 @@ export const Navbar = () => {
     // { name: "Pricing", href: "/pricing", id: "03" },
     { name: "About", href: "/about", id: "04" },
     { name: "Testimonials", href: "/testimonials", id: "05" },
-    { name: "Contact", href: "/contact", id: "06" },
+    { name: "Schedule a call", href: "/book-call", id: "06" },
   ];
 
   const normalizePath = (path: string) => path.replace(/\/$/, "") || "/";

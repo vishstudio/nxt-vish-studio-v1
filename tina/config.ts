@@ -68,7 +68,7 @@ const pricingPlanFields: any[] = [
         name: "linkType",
         label: "Link Type",
         options: [
-          { label: "Internal path (e.g. /contact)", value: "internal" },
+          { label: "Internal path (e.g. /book-call)", value: "internal" },
           { label: "External URL (https://...)", value: "url" },
           { label: "Phone number", value: "phone" },
           { label: "Email address", value: "email" },
@@ -1011,69 +1011,6 @@ export default defineConfig({
                 name: "items",
                 label: "Service Items",
                 list: true,
-              },
-            ],
-          },
-        ],
-      },
-
-      // ─── Contact Page (single file) ───
-      {
-        name: "contactPage",
-        label: "Contact Page",
-        path: "content/pages",
-        format: "json",
-        match: { include: "contact" },
-        ui: {
-          router: () => "/contact",
-          allowedActions: { create: false, delete: false },
-        },
-        fields: [
-          {
-            type: "string",
-            name: "heroLabel",
-            label: "Hero Label",
-            isTitle: true,
-            required: true,
-          },
-          {
-            type: "string",
-            name: "heroTitleLine1",
-            label: "Hero Title Line 1",
-          },
-          {
-            type: "string",
-            name: "heroTitleLine2",
-            label: "Hero Title Line 2",
-          },
-          {
-            type: "string",
-            name: "heroTitlePunctuation",
-            label: "Hero Punctuation (e.g. ? or .)",
-          },
-          {
-            type: "string",
-            name: "heroDescription",
-            label: "Hero Description",
-            ui: { component: "textarea" },
-          },
-          {
-            type: "object",
-            name: "trustIndicators",
-            label: "Trust Indicators",
-            list: true,
-            fields: [
-              {
-                type: "string",
-                name: "icon",
-                label: "Icon Name (e.g. MessageSquare, Clock, Zap)",
-              },
-              { type: "string", name: "title", label: "Title", required: true },
-              {
-                type: "string",
-                name: "description",
-                label: "Description",
-                ui: { component: "textarea" },
               },
             ],
           },

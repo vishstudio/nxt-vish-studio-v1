@@ -8,8 +8,7 @@ import { SectionTitle } from '../ui/section-title/section-title';
 
 const desktopTrackPositions = [
   '0%',
-  'calc(-20% - 0.3rem)',
-  'calc(-40% - 0.6rem)',
+  'calc(-25% - 0.375rem)',
 ] as const;
 
 const getInitials = (name: string) =>
@@ -71,7 +70,7 @@ export const Team = ({ showTitle = true, members, rawTinaMembers, tinaField }: T
     }
 
     const updateTrackStep = (progress: number) => {
-      const nextStep = progress < 0.34 ? 0 : progress < 0.67 ? 1 : 2;
+      const nextStep = progress < 0.5 ? 0 : 1;
       setDesktopTrackStep((currentStep) => currentStep === nextStep ? currentStep : nextStep);
     };
 
@@ -185,7 +184,7 @@ export const Team = ({ showTitle = true, members, rawTinaMembers, tinaField }: T
           aria-label="Team members"
         >
           <motion.div
-            className="flex snap-x snap-mandatory gap-6 lg:w-[calc(166.666667%+1rem)] lg:snap-none"
+            className="flex snap-x snap-mandatory gap-6 lg:w-[calc(133.333334%+0.5rem)] lg:snap-none"
             animate={{ x: isDesktop ? desktopTrackPositions[desktopTrackStep] : 0 }}
             transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
           >
@@ -200,7 +199,7 @@ export const Team = ({ showTitle = true, members, rawTinaMembers, tinaField }: T
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, amount: 0.35 }}
                   transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                  className="group min-w-[78%] snap-center text-left md:min-w-[48%] lg:w-[calc((100%-6rem)/5)] lg:min-w-0"
+                  className="group min-w-[78%] snap-center text-left md:min-w-[48%] lg:w-[calc((100%-4.5rem)/4)] lg:min-w-0"
                 >
                   <div
                     className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-white/10 bg-vish-subtle shadow-2xl shadow-black/40"
@@ -217,7 +216,7 @@ export const Team = ({ showTitle = true, members, rawTinaMembers, tinaField }: T
                       className="relative h-full w-full object-cover grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
                       loading={index < 3 ? 'eager' : 'lazy'}
                     />
-                    <div className="absolute inset-x-4 bottom-4 rounded-2xl border border-white/10 bg-black/95 px-5 py-5 shadow-xl shadow-black/30 backdrop-blur-sm sm:inset-x-5 sm:bottom-5 sm:px-6 sm:py-6">
+                    <div className="absolute inset-x-4 bottom-4 rounded-2xl border border-white/15 bg-black/65 px-5 py-5 shadow-xl shadow-black/30 backdrop-blur-md sm:inset-x-5 sm:bottom-5 sm:px-6 sm:py-6">
                       <div className="flex items-start justify-between gap-4">
                         <p
                           className="font-mono text-[0.4rem] md:text-[0.65rem] uppercase leading-relaxed tracking-[0.14em] text-vish-accent"

@@ -98,8 +98,6 @@ export type Query = {
   aboutPageConnection: AboutPageConnection;
   servicesPage: ServicesPage;
   servicesPageConnection: ServicesPageConnection;
-  contactPage: ContactPage;
-  contactPageConnection: ContactPageConnection;
   pricingPage: PricingPage;
   pricingPageConnection: PricingPageConnection;
 };
@@ -246,21 +244,6 @@ export type QueryServicesPageConnectionArgs = {
 };
 
 
-export type QueryContactPageArgs = {
-  relativePath?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-export type QueryContactPageConnectionArgs = {
-  before?: InputMaybe<Scalars['String']['input']>;
-  after?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<ContactPageFilter>;
-};
-
-
 export type QueryPricingPageArgs = {
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
@@ -284,7 +267,6 @@ export type DocumentFilter = {
   testimonialsPage?: InputMaybe<TestimonialsPageFilter>;
   aboutPage?: InputMaybe<AboutPageFilter>;
   servicesPage?: InputMaybe<ServicesPageFilter>;
-  contactPage?: InputMaybe<ContactPageFilter>;
   pricingPage?: InputMaybe<PricingPageFilter>;
 };
 
@@ -325,7 +307,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Project | LegalPage | SiteSettings | Partners | HomePage | TestimonialsPage | AboutPage | ServicesPage | ContactPage | PricingPage | Folder;
+export type DocumentNode = Project | LegalPage | SiteSettings | Partners | HomePage | TestimonialsPage | AboutPage | ServicesPage | PricingPage | Folder;
 
 export type Project = Node & Document & {
   __typename?: 'Project';
@@ -897,54 +879,6 @@ export type ServicesPageConnection = Connection & {
   edges?: Maybe<Array<Maybe<ServicesPageConnectionEdges>>>;
 };
 
-export type ContactPageTrustIndicators = {
-  __typename?: 'ContactPageTrustIndicators';
-  icon?: Maybe<Scalars['String']['output']>;
-  title: Scalars['String']['output'];
-  description?: Maybe<Scalars['String']['output']>;
-};
-
-export type ContactPage = Node & Document & {
-  __typename?: 'ContactPage';
-  heroLabel: Scalars['String']['output'];
-  heroTitleLine1?: Maybe<Scalars['String']['output']>;
-  heroTitleLine2?: Maybe<Scalars['String']['output']>;
-  heroTitlePunctuation?: Maybe<Scalars['String']['output']>;
-  heroDescription?: Maybe<Scalars['String']['output']>;
-  trustIndicators?: Maybe<Array<Maybe<ContactPageTrustIndicators>>>;
-  id: Scalars['ID']['output'];
-  _sys: SystemInfo;
-  _values: Scalars['JSON']['output'];
-};
-
-export type ContactPageTrustIndicatorsFilter = {
-  icon?: InputMaybe<StringFilter>;
-  title?: InputMaybe<StringFilter>;
-  description?: InputMaybe<StringFilter>;
-};
-
-export type ContactPageFilter = {
-  heroLabel?: InputMaybe<StringFilter>;
-  heroTitleLine1?: InputMaybe<StringFilter>;
-  heroTitleLine2?: InputMaybe<StringFilter>;
-  heroTitlePunctuation?: InputMaybe<StringFilter>;
-  heroDescription?: InputMaybe<StringFilter>;
-  trustIndicators?: InputMaybe<ContactPageTrustIndicatorsFilter>;
-};
-
-export type ContactPageConnectionEdges = {
-  __typename?: 'ContactPageConnectionEdges';
-  cursor: Scalars['String']['output'];
-  node?: Maybe<ContactPage>;
-};
-
-export type ContactPageConnection = Connection & {
-  __typename?: 'ContactPageConnection';
-  pageInfo: PageInfo;
-  totalCount: Scalars['Float']['output'];
-  edges?: Maybe<Array<Maybe<ContactPageConnectionEdges>>>;
-};
-
 export type PricingPagePricingCategoriesPlansCtaLink = {
   __typename?: 'PricingPagePricingCategoriesPlansCtaLink';
   linkType?: Maybe<Scalars['String']['output']>;
@@ -1135,8 +1069,6 @@ export type Mutation = {
   createAboutPage: AboutPage;
   updateServicesPage: ServicesPage;
   createServicesPage: ServicesPage;
-  updateContactPage: ContactPage;
-  createContactPage: ContactPage;
   updatePricingPage: PricingPage;
   createPricingPage: PricingPage;
 };
@@ -1271,18 +1203,6 @@ export type MutationCreateServicesPageArgs = {
 };
 
 
-export type MutationUpdateContactPageArgs = {
-  relativePath: Scalars['String']['input'];
-  params: ContactPageMutation;
-};
-
-
-export type MutationCreateContactPageArgs = {
-  relativePath: Scalars['String']['input'];
-  params: ContactPageMutation;
-};
-
-
 export type MutationUpdatePricingPageArgs = {
   relativePath: Scalars['String']['input'];
   params: PricingPageMutation;
@@ -1303,7 +1223,6 @@ export type DocumentUpdateMutation = {
   testimonialsPage?: InputMaybe<TestimonialsPageMutation>;
   aboutPage?: InputMaybe<AboutPageMutation>;
   servicesPage?: InputMaybe<ServicesPageMutation>;
-  contactPage?: InputMaybe<ContactPageMutation>;
   pricingPage?: InputMaybe<PricingPageMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
@@ -1317,7 +1236,6 @@ export type DocumentMutation = {
   testimonialsPage?: InputMaybe<TestimonialsPageMutation>;
   aboutPage?: InputMaybe<AboutPageMutation>;
   servicesPage?: InputMaybe<ServicesPageMutation>;
-  contactPage?: InputMaybe<ContactPageMutation>;
   pricingPage?: InputMaybe<PricingPageMutation>;
 };
 
@@ -1517,21 +1435,6 @@ export type ServicesPageMutation = {
   categories?: InputMaybe<Array<InputMaybe<ServicesPageCategoriesMutation>>>;
 };
 
-export type ContactPageTrustIndicatorsMutation = {
-  icon?: InputMaybe<Scalars['String']['input']>;
-  title?: InputMaybe<Scalars['String']['input']>;
-  description?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type ContactPageMutation = {
-  heroLabel?: InputMaybe<Scalars['String']['input']>;
-  heroTitleLine1?: InputMaybe<Scalars['String']['input']>;
-  heroTitleLine2?: InputMaybe<Scalars['String']['input']>;
-  heroTitlePunctuation?: InputMaybe<Scalars['String']['input']>;
-  heroDescription?: InputMaybe<Scalars['String']['input']>;
-  trustIndicators?: InputMaybe<Array<InputMaybe<ContactPageTrustIndicatorsMutation>>>;
-};
-
 export type PricingPagePricingCategoriesPlansCtaLinkMutation = {
   linkType?: InputMaybe<Scalars['String']['input']>;
   linkValue?: InputMaybe<Scalars['String']['input']>;
@@ -1619,8 +1522,6 @@ export type TestimonialsPagePartsFragment = { __typename: 'TestimonialsPage', he
 export type AboutPagePartsFragment = { __typename: 'AboutPage', heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroDescription?: string | null, studioImage?: string | null, studioImageAlt?: string | null, introHeading?: string | null, introParagraph1?: string | null, introParagraph2?: string | null, valuesLabel?: string | null, valuesHeading?: string | null, values?: Array<{ __typename: 'AboutPageValues', id?: string | null, title: string, description?: string | null } | null> | null, teamMembers?: Array<{ __typename: 'AboutPageTeamMembers', name: string, role: string, image?: string | null, bio?: string | null, order?: number | null } | null> | null };
 
 export type ServicesPagePartsFragment = { __typename: 'ServicesPage', heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, categories?: Array<{ __typename: 'ServicesPageCategories', category: string, description?: string | null, image?: string | null, imageAlt?: string | null, plan?: Array<string | null> | null, items?: Array<string | null> | null } | null> | null };
-
-export type ContactPagePartsFragment = { __typename: 'ContactPage', heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroTitlePunctuation?: string | null, heroDescription?: string | null, trustIndicators?: Array<{ __typename: 'ContactPageTrustIndicators', icon?: string | null, title: string, description?: string | null } | null> | null };
 
 export type PricingPagePartsFragment = { __typename: 'PricingPage', heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroSubtext?: string | null, heroBackgroundImage?: string | null, heroBackgroundImageUrl?: string | null, sectionLabel?: string | null, sectionHeading?: string | null, sectionSubtext?: string | null, customLabel?: string | null, customDescription?: string | null, customCtaLabel?: string | null, customCtaHref?: string | null, pricingCategories?: Array<{ __typename: 'PricingPagePricingCategories', label: string, slug?: string | null, plans?: Array<{ __typename: 'PricingPagePricingCategoriesPlans', label?: string | null, name: string, price: string, priceGbp?: string | null, discountedPrice?: string | null, discountedPriceGbp?: string | null, priceNote?: string | null, delivery?: string | null, tagline?: string | null, featured?: boolean | null, ctaLabel?: string | null, features?: Array<string | null> | null, bestFor?: string | null, revisions?: string | null, ctaLink?: { __typename: 'PricingPagePricingCategoriesPlansCtaLink', linkType?: string | null, linkValue?: string | null } | null, carePlan?: { __typename: 'PricingPagePricingCategoriesPlansCarePlan', title?: string | null, price?: string | null, priceGbp?: string | null, cadence?: string | null, summary?: string | null } | null } | null> | null, carePlans?: Array<{ __typename: 'PricingPagePricingCategoriesCarePlans', title?: string | null, price?: string | null, priceGbp?: string | null, cadence?: string | null, summary?: string | null } | null> | null, addOns?: Array<{ __typename: 'PricingPagePricingCategoriesAddOns', label?: string | null, price?: string | null, priceGbp?: string | null, note?: string | null } | null> | null } | null> | null };
 
@@ -1775,25 +1676,6 @@ export type ServicesPageConnectionQueryVariables = Exact<{
 
 
 export type ServicesPageConnectionQuery = { __typename?: 'Query', servicesPageConnection: { __typename?: 'ServicesPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ServicesPageConnectionEdges', cursor: string, node?: { __typename: 'ServicesPage', id: string, heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, categories?: Array<{ __typename: 'ServicesPageCategories', category: string, description?: string | null, image?: string | null, imageAlt?: string | null, plan?: Array<string | null> | null, items?: Array<string | null> | null } | null> | null } | null } | null> | null } };
-
-export type ContactPageQueryVariables = Exact<{
-  relativePath: Scalars['String']['input'];
-}>;
-
-
-export type ContactPageQuery = { __typename?: 'Query', contactPage: { __typename: 'ContactPage', id: string, heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroTitlePunctuation?: string | null, heroDescription?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, trustIndicators?: Array<{ __typename: 'ContactPageTrustIndicators', icon?: string | null, title: string, description?: string | null } | null> | null } };
-
-export type ContactPageConnectionQueryVariables = Exact<{
-  before?: InputMaybe<Scalars['String']['input']>;
-  after?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<ContactPageFilter>;
-}>;
-
-
-export type ContactPageConnectionQuery = { __typename?: 'Query', contactPageConnection: { __typename?: 'ContactPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ContactPageConnectionEdges', cursor: string, node?: { __typename: 'ContactPage', id: string, heroLabel: string, heroTitleLine1?: string | null, heroTitleLine2?: string | null, heroTitlePunctuation?: string | null, heroDescription?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, trustIndicators?: Array<{ __typename: 'ContactPageTrustIndicators', icon?: string | null, title: string, description?: string | null } | null> | null } | null } | null> | null } };
 
 export type PricingPageQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -2010,22 +1892,6 @@ export const ServicesPagePartsFragmentDoc = gql`
     imageAlt
     plan
     items
-  }
-}
-    `;
-export const ContactPagePartsFragmentDoc = gql`
-    fragment ContactPageParts on ContactPage {
-  __typename
-  heroLabel
-  heroTitleLine1
-  heroTitleLine2
-  heroTitlePunctuation
-  heroDescription
-  trustIndicators {
-    __typename
-    icon
-    title
-    description
   }
 }
     `;
@@ -2553,63 +2419,6 @@ export const ServicesPageConnectionDocument = gql`
   }
 }
     ${ServicesPagePartsFragmentDoc}`;
-export const ContactPageDocument = gql`
-    query contactPage($relativePath: String!) {
-  contactPage(relativePath: $relativePath) {
-    ... on Document {
-      _sys {
-        filename
-        basename
-        hasReferences
-        breadcrumbs
-        path
-        relativePath
-        extension
-      }
-      id
-    }
-    ...ContactPageParts
-  }
-}
-    ${ContactPagePartsFragmentDoc}`;
-export const ContactPageConnectionDocument = gql`
-    query contactPageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: ContactPageFilter) {
-  contactPageConnection(
-    before: $before
-    after: $after
-    first: $first
-    last: $last
-    sort: $sort
-    filter: $filter
-  ) {
-    pageInfo {
-      hasPreviousPage
-      hasNextPage
-      startCursor
-      endCursor
-    }
-    totalCount
-    edges {
-      cursor
-      node {
-        ... on Document {
-          _sys {
-            filename
-            basename
-            hasReferences
-            breadcrumbs
-            path
-            relativePath
-            extension
-          }
-          id
-        }
-        ...ContactPageParts
-      }
-    }
-  }
-}
-    ${ContactPagePartsFragmentDoc}`;
 export const PricingPageDocument = gql`
     query pricingPage($relativePath: String!) {
   pricingPage(relativePath: $relativePath) {
@@ -2717,12 +2526,6 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     servicesPageConnection(variables?: ServicesPageConnectionQueryVariables, options?: C): Promise<{data: ServicesPageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ServicesPageConnectionQueryVariables, query: string}> {
         return requester<{data: ServicesPageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ServicesPageConnectionQueryVariables, query: string}, ServicesPageConnectionQueryVariables>(ServicesPageConnectionDocument, variables, options);
-      },
-    contactPage(variables: ContactPageQueryVariables, options?: C): Promise<{data: ContactPageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ContactPageQueryVariables, query: string}> {
-        return requester<{data: ContactPageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ContactPageQueryVariables, query: string}, ContactPageQueryVariables>(ContactPageDocument, variables, options);
-      },
-    contactPageConnection(variables?: ContactPageConnectionQueryVariables, options?: C): Promise<{data: ContactPageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ContactPageConnectionQueryVariables, query: string}> {
-        return requester<{data: ContactPageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ContactPageConnectionQueryVariables, query: string}, ContactPageConnectionQueryVariables>(ContactPageConnectionDocument, variables, options);
       },
     pricingPage(variables: PricingPageQueryVariables, options?: C): Promise<{data: PricingPageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PricingPageQueryVariables, query: string}> {
         return requester<{data: PricingPageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PricingPageQueryVariables, query: string}, PricingPageQueryVariables>(PricingPageDocument, variables, options);

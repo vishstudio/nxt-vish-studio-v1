@@ -53,7 +53,7 @@ export const Process = () => {
               className="group relative grid grid-cols-[2.5rem_minmax(0,1fr)] gap-5 py-9 first:pt-0 last:pb-0 md:grid-cols-[3.125rem_minmax(0,1fr)_minmax(9rem,0.56fr)] md:gap-7"
             >
               <div className="relative z-10 flex pt-1">
-                <span className="flex size-9 items-center justify-center rounded-full border border-vish-accent/50 bg-vish-bg font-mono text-[10px] text-vish-accent transition-colors duration-300 group-hover:bg-vish-accent group-hover:text-black md:size-11 md:text-xs">
+                <span className="flex size-9 items-center justify-center rounded-full border border-white/50 bg-vish-bg font-mono text-[10px] text-white transition-colors duration-300 group-hover:bg-white group-hover:text-black md:size-11 md:text-xs">
                   {step.num}
                 </span>
               </div>

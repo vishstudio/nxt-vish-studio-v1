@@ -199,28 +199,6 @@ export function getServicesPage(): ServicesPageContent {
   return servicesJson as unknown as ServicesPageContent;
 }
 
-// ─── Contact Page ────────────────────────────────────────────────────────────
-
-export interface TrustIndicator {
-  icon: string;
-  title: string;
-  description: string;
-}
-
-export interface ContactPageContent {
-  heroLabel: string;
-  heroTitleLine1: string;
-  heroTitleLine2: string;
-  heroTitlePunctuation: string;
-  heroDescription: string;
-  trustIndicators: TrustIndicator[];
-}
-
-import contactJson from "@/content/pages/contact.json";
-export function getContactPage(): ContactPageContent {
-  return contactJson as unknown as ContactPageContent;
-}
-
 // ─── Legal Pages ─────────────────────────────────────────────────────────────
 
 export interface LegalSection {

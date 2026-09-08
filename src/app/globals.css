@@ -45,6 +45,24 @@ body {
   -webkit-touch-callout: none;
 }
 
+[data-nav-link]::selection,
+[data-nav-link] *::selection {
+  background: transparent !important;
+  color: inherit !important;
+}
+
+[data-nav-link]::-moz-selection,
+[data-nav-link] *::-moz-selection {
+  background: transparent !important;
+  color: inherit !important;
+}
+
+.goog-text-highlight {
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
 .skiptranslate,
 .goog-te-banner-frame,
 .goog-te-gadget,

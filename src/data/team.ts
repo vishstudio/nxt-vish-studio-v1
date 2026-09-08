@@ -13,13 +13,6 @@ export const team = [
     image: "https://picsum.photos/seed/david/800/800",
     bio: "Architecting robust and scalable digital solutions.",
   },
-  {
-    id: 3,
-    name: "Ayesha Bhudookan",
-    role: "Consultant & Strategy Lead",
-    image: "https://picsum.photos/seed/elena/800/800",
-    bio: "Crafting intuitive user experiences and pixel-perfect interfaces.",
-  },
   // {
   //   id: 3,
   //   name: "Elena Rodriguez",

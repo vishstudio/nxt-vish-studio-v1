@@ -17,7 +17,7 @@ const exploreLinks = [
   { label: 'Our work', href: '/projects' },
   { label: 'About the studio', href: '/about' },
   { label: 'Client stories', href: '/testimonials' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Schedule a call', href: '/book-call' },
 ];
 
 const serviceLinks = [
@@ -33,10 +33,9 @@ export const Contact = () => {
   return (
     <footer className="contact bg-black px-6 pb-8 pt-14 text-white md:px-12 md:pb-10 md:pt-20" id="contact">
       <div className="mx-auto max-w-[1400px]">
-        <div className="grid gap-10 border-y border-white/10 py-10 md:grid-cols-[minmax(0,1fr)_auto] md:items-end md:py-14">
+        <div className="grid gap-10 border-y border-white/10 py-10 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,0.82fr)] lg:gap-16 lg:py-14">
           <div>
-            <LogoText logoClassName="w-32 md:w-40" />
-            <p className="mt-8 font-mono text-xs uppercase tracking-[0.18em] text-vish-accent">Let&apos;s connect</p>
+            <p className="font-mono text-xs uppercase tracking-[0.18em] text-vish-accent">Let&apos;s connect</p>
             <h2 className="mt-3 max-w-2xl font-display text-4xl font-medium tracking-tight text-white sm:text-5xl md:text-6xl">
               <span className="text-white" data-tina-field={tinaField('contactHeadingLine1')}>
                 {settings.contactHeadingLine1}
@@ -46,22 +45,25 @@ export const Contact = () => {
               </span>
               <span className="text-vish-accent">.</span>
             </h2>
+            <Button
+              href={PROJECT_INQUIRY_HREF}
+              variant="cta"
+              size="md"
+              ariaLabel={PROJECT_INQUIRY_ARIA_LABEL}
+              dataConversionAction={PROJECT_INQUIRY_ACTION}
+              icon={<CalendarCheck className="size-4" />}
+              className="mt-8 w-fit"
+            >
+              Schedule a free call
+            </Button>
           </div>
-          <Button
-            href={PROJECT_INQUIRY_HREF}
-            variant="cta"
-            size="md"
-            ariaLabel={PROJECT_INQUIRY_ARIA_LABEL}
-            dataConversionAction={PROJECT_INQUIRY_ACTION}
-            icon={<CalendarCheck className="size-4" />}
-            className="w-fit"
-          >
-            Schedule a free call
-          </Button>
+          <div className="border-t border-white/10 pt-8 lg:border-l lg:border-t-0 lg:pl-12 lg:pt-0">
+            <NewsletterSignup source="footer" settings={settings} tinaField={tinaField} />
+          </div>
         </div>
 
-        <div className="grid gap-x-8 gap-y-12 border-b border-white/10 py-12 sm:grid-cols-2 lg:grid-cols-12 lg:py-16">
-          <div className="lg:col-span-3">
+        <div className="grid gap-x-8 gap-y-12 border-b border-white/10 py-12 sm:grid-cols-2 lg:grid-cols-4 lg:py-16">
+          <div className="sm:col-span-2 lg:col-span-1">
             <h3 className="font-mono text-xs uppercase tracking-widest text-gray-500">Reach us</h3>
             <div className="mt-4 grid gap-3">
               <a
@@ -88,7 +90,7 @@ export const Contact = () => {
             </address>
           </div>
 
-          <div className="lg:col-span-2">
+          <div>
             <h3 className="font-mono text-xs uppercase tracking-widest text-gray-500">Explore</h3>
             <nav className="mt-4 grid justify-items-start gap-3" aria-label="Footer navigation">
               {exploreLinks.map((link) => (
@@ -99,7 +101,7 @@ export const Contact = () => {
             </nav>
           </div>
 
-          <div className="lg:col-span-2">
+          <div>
             <h3 className="font-mono text-xs uppercase tracking-widest text-gray-500">Services</h3>
             <nav className="mt-4 grid justify-items-start gap-3" aria-label="Service navigation">
               {serviceLinks.map((link) => (
@@ -110,7 +112,7 @@ export const Contact = () => {
             </nav>
           </div>
 
-          <div className="lg:col-span-2">
+          <div>
             <h3 className="font-mono text-xs uppercase tracking-widest text-gray-500">Follow</h3>
             <div className="mt-4 grid justify-items-start gap-3">
               {settings.socials.map((social, index) => {
@@ -132,12 +134,10 @@ export const Contact = () => {
             </div>
           </div>
 
-          <div className="border-t border-white/10 pt-8 sm:col-span-2 lg:col-span-3 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
-            <h3 className="font-mono text-xs uppercase tracking-widest text-vish-accent">Newsletter</h3>
-            <div className="mt-4">
-              <NewsletterSignup source="footer" settings={settings} tinaField={tinaField} />
-            </div>
-          </div>
+        </div>
+
+        <div className="border-b border-white/10 py-10 md:py-14">
+          <LogoText className="flex w-full text-white" logoClassName="w-full max-w-none md:w-full" />
         </div>
 
         <div className="flex flex-col gap-5 pt-6 font-mono text-xs uppercase tracking-wider text-gray-600 md:flex-row md:items-center md:justify-between">
