@@ -143,6 +143,10 @@
     {
       "question": "5. Can VISH Studio validate an idea before we build it?",
       "answer": "Yes, we begin with discovery, product architecture, user flows and prototyping before moving into full development."
+    },
+    {
+      "question": "6. Can VISH Studio work with our existing team?",
+      "answer": "Yes. VISH Studio can collaborate with internal marketing teams, developers, product teams, founders or other stakeholders depending on the structure of the project."
     }
   ]
 }
