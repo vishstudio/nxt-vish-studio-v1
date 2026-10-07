@@ -11,11 +11,12 @@ import type { Project } from '../../lib/projects';
 
 interface ProjectPreviewProps {
   project: Project;
+  siteLinkLabel: string;
 }
 
 const getCategoryLabel = (project: Project) => project.category.join(' / ');
 
-const ProjectPreview = ({ project }: ProjectPreviewProps) => {
+const ProjectPreview = ({ project, siteLinkLabel }: ProjectPreviewProps) => {
   const category = getCategoryLabel(project);
 
   return (
@@ -63,7 +64,7 @@ const ProjectPreview = ({ project }: ProjectPreviewProps) => {
             icon={<ExternalLink className="h-3.5 w-3.5" />}
             iconPosition="right"
           >
-            View site
+            {siteLinkLabel}
           </Button>
         )}
       </div>
@@ -133,6 +134,7 @@ export const Projects = ({ showViewAll = true }: { showViewAll?: boolean }) => {
             <ProjectPreview
               key={project.slug}
               project={project}
+              siteLinkLabel={content.projectsSiteLinkLabel}
             />
           ))}
         </div>

@@ -1,5 +1,7 @@
 "use client";
 
+import { useTinaPage } from "@/src/hooks/tina/usePage";
+import { getStartProjectPage } from "@/src/lib/content";
 import { createProjectBrief } from "@/src/lib/firebase";
 import {
   AnswerValue,
@@ -24,7 +26,6 @@ import { BriefConfirmationModal } from "../brief-confirmation-modal/brief-confir
 import { FormField } from "../form-field/form-field";
 import { Button } from "../ui/button/button";
 
-const steps = ["Service", "Package", "Project brief", "Contact", "Review"];
 const serviceLabels: Record<ServiceSlug, string> = {
   "social-media-marketing": "Social Media Marketing",
   "saas-products": "SaaS Products",
@@ -35,33 +36,6 @@ const serviceLabels: Record<ServiceSlug, string> = {
   branding: "Branding",
   "ai-integrations-automations": "AI Integrations & Automations",
 };
-const stepHeadings = [
-  {
-    title: "Choose a service",
-    intro:
-      "Answer a few focused questions so we can understand your goals and recommend the right scope.",
-  },
-  {
-    title: "Choose a package",
-    intro:
-      "Pick the starting scope that feels closest to your project. We can refine the final scope after reviewing your brief.",
-  },
-  {
-    title: "Tell us about the project",
-    intro:
-      "Share the context, goals, features, and constraints that will help us understand what needs to be built.",
-  },
-  {
-    title: "How can we reach you",
-    intro:
-      "Add your contact details so the studio can follow up after reviewing the project brief.",
-  },
-  {
-    title: "Review your brief",
-    intro:
-      "Check the service, package, project answers, and contact details before submitting your brief.",
-  },
-];
 
 type ContactDetails = {
   name: string;
@@ -234,7 +208,14 @@ export const BriefForm = () => {
   const packages = service ? pricingByService[service] ?? [] : [];
   const questions = service ? questionsByService[service] : [];
   const selectedPackage = packages.find((plan) => plan.name === packageName);
-  const currentHeading = stepHeadings[step];
+  const { data: pageContent, tinaField, rawPage } = useTinaPage(
+    "start-project.json",
+    getStartProjectPage(),
+  );
+  const labels = pageContent.labels;
+  const steps = pageContent.steps.map((item) => item.label);
+  const currentHeading = pageContent.steps[step] ?? { label: "", title: "", intro: "" };
+  const rawCurrentHeading = rawPage?.steps?.[step];
 
   const scrollToPageTop = () => {
     window.requestAnimationFrame(() => {
@@ -318,7 +299,7 @@ export const BriefForm = () => {
       setErrorMessage(
         error instanceof Error
           ? error.message
-          : "Unable to submit your brief. Please try again.",
+          : labels.errorMessage,
       );
     }
   };
@@ -353,11 +334,17 @@ export const BriefForm = () => {
             <span className="font-mono text-xs uppercase tracking-widest text-vish-accent">
               Step {step + 1} of {steps.length}
             </span>
-            <h2 className="mt-4 font-display text-4xl font-medium tracking-tight text-white md:text-5xl">
+            <h2
+              className="mt-4 font-display text-4xl font-medium tracking-tight text-white md:text-5xl"
+              data-tina-field={rawCurrentHeading ? tinaField(rawCurrentHeading, "title") : undefined}
+            >
               {currentHeading.title}
               <span className="text-vish-accent">.</span>
             </h2>
-            <p className="mt-8 max-w-2xl text-sm leading-relaxed text-gray-400 md:text-md">
+            <p
+              className="mt-8 max-w-2xl text-sm leading-relaxed text-gray-400 md:text-md"
+              data-tina-field={rawCurrentHeading ? tinaField(rawCurrentHeading, "intro") : undefined}
+            >
               {currentHeading.intro}
             </p>
           </div>
@@ -418,7 +405,7 @@ export const BriefForm = () => {
                 render={({ field }) => (
                   <FormField
                     id="name"
-                    label="Full name"
+                    label={labels.nameLabel}
                     value={field.value}
                     onChange={field.onChange}
                     autoComplete="name"
@@ -432,7 +419,7 @@ export const BriefForm = () => {
                 render={({ field }) => (
                   <FormField
                     id="company"
-                    label="Company / organisation"
+                    label={labels.companyLabel}
                     value={field.value}
                     onChange={field.onChange}
                     autoComplete="organization"
@@ -449,7 +436,7 @@ export const BriefForm = () => {
                 render={({ field }) => (
                   <FormField
                     id="email"
-                    label="Email address"
+                    label={labels.emailLabel}
                     type="email"
                     value={field.value}
                     onChange={field.onChange}
@@ -468,7 +455,7 @@ export const BriefForm = () => {
                 render={({ field }) => (
                   <FormField
                     id="phone"
-                    label="Telephone number"
+                    label={labels.phoneLabel}
                     type="tel"
                     value={field.value}
                     onChange={field.onChange}
@@ -483,7 +470,7 @@ export const BriefForm = () => {
           {step === 4 ? (
             <div className="space-y-8">
               <ReviewSection
-                title="Service and package"
+                title={labels.reviewServiceHeading}
                 lines={[
                   service ? serviceLabels[service] : "",
                   selectedPackage
@@ -492,12 +479,12 @@ export const BriefForm = () => {
                     }`
                     : "",
                   selectedPackage?.delivery
-                    ? `Delivery: ${selectedPackage.delivery}`
+                    ? `${labels.deliveryPrefix} ${selectedPackage.delivery}`
                     : "",
                 ]}
               />
               <ReviewSection
-                title="Contact"
+                title={labels.reviewContactHeading}
                 lines={[
                   contact.name,
                   contact.company,
@@ -506,12 +493,12 @@ export const BriefForm = () => {
                 ]}
               />
               <ReviewSection
-                title="Project brief"
+                title={labels.reviewBriefHeading}
                 lines={questions.map((question) => {
                   const answer = answers[question.id];
                   return `${question.label}: ${Array.isArray(answer)
                     ? answer.join(", ")
-                    : answer || "Not provided"
+                    : answer || labels.notProvided
                     }`;
                 })}
               />
@@ -530,31 +517,29 @@ export const BriefForm = () => {
 
         <aside className="h-fit rounded-2xl border border-white/10 bg-white/[0.02] p-6 lg:sticky lg:top-32">
           <h3 className="font-display text-xl font-medium text-white">
-            Your selection
+            {labels.summaryHeading}
           </h3>
           <dl className="mt-6 space-y-5 text-sm">
             <SummaryItem
-              label="Service"
-              value={service ? serviceLabels[service] : "Not selected"}
+              label={labels.summaryServiceLabel}
+              value={service ? serviceLabels[service] : labels.notSelected}
             />
             <SummaryItem
-              label="Package"
+              label={labels.summaryPackageLabel}
               value={
                 selectedPackage
                   ? `${selectedPackage.name} — ${selectedPackage.discountedPrice || selectedPackage.price
                   }`
-                  : "Not selected"
+                  : labels.notSelected
               }
             />
           </dl>
           <div className="mt-8 border-t border-white/10 pt-6">
             <div className="flex items-center gap-2 text-sm font-medium text-white">
-              <ShieldCheck className="h-4 w-4 text-vish-accent" /> Your data is
-              secure
+              <ShieldCheck className="h-4 w-4 text-vish-accent" /> {labels.privacyHeading}
             </div>
             <p className="mt-3 text-sm leading-relaxed text-gray-500">
-              Your details are used only to review this brief and contact you
-              about the project.
+              {labels.privacyText}
             </p>
           </div>
         </aside>
@@ -569,10 +554,12 @@ export const BriefForm = () => {
                 <div className="mb-4 flex items-center justify-between gap-4">
                   <div>
                     <p className="font-mono text-[10px] uppercase tracking-widest text-vish-accent">
-                      Project brief progress
+                      {labels.progressLabel}
                     </p>
                     <h3 className="mt-1 font-display text-xl font-medium text-white">
-                      Step {step + 1} of {steps.length}
+                      {labels.stepCounter
+                        .replace("{current}", String(step + 1))
+                        .replace("{total}", String(steps.length))}
                     </h3>
                   </div>
                   <Button
@@ -651,7 +638,7 @@ export const BriefForm = () => {
                     ariaLabel="Back to previous step"
                     className="px-3"
                   >
-                    <span className="hidden sm:inline">Back</span>
+                    <span className="hidden sm:inline">{labels.backLabel}</span>
                   </Button>
                 ) : null}
                 <Button
@@ -666,9 +653,9 @@ export const BriefForm = () => {
                 >
                   {step === 4
                     ? submissionState === "submitting"
-                      ? "Submitting…"
-                      : "Submit"
-                    : "Continue"}
+                      ? labels.submittingLabel
+                      : labels.submitLabel
+                    : labels.continueLabel}
                 </Button>
               </div>
             </div>
@@ -679,6 +666,7 @@ export const BriefForm = () => {
       <BriefConfirmationModal
         isOpen={submissionState === "success"}
         briefId={briefId}
+        content={pageContent.confirmation}
         onClose={closeConfirmation}
       />
     </>

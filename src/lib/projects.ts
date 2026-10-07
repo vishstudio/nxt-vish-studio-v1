@@ -4,6 +4,7 @@ export interface Project {
   category: string[];
   image: string;
   year: string;
+  role?: string;
   order: number;
   description: string;
   fullDescription: string;
@@ -27,6 +28,7 @@ interface ProjectJson {
   category: string | string[];
   image: string;
   year: string;
+  role?: string;
   order?: number;
   description: string;
   fullDescription?: string;
@@ -74,6 +76,7 @@ export function getProjects(): Project[] {
       category: Array.isArray(data.category) ? data.category : [data.category],
       image: data.image,
       year: data.year,
+      role: data.role || "",
       order: data.order ?? 999,
       description: data.description,
       fullDescription: data.fullDescription || data.description,

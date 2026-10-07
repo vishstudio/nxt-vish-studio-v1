@@ -1,0 +1,31 @@
+{
+  "_template": "projects",
+  "seo": {
+    "title": "Projects | VISH Studio",
+    "description": "Explore our portfolio of custom web applications, immersive frontend platforms, and brand architecture projects."
+  },
+  "heroLabel": "Our Portfolio",
+  "heroTitleLine1": "Selected",
+  "heroTitleLine2": "works",
+  "heroDescription": "Explore a curated selection of our finest digital products. From immersive web experiences to comprehensive brand identities, each project represents our commitment to innovation and design excellence.",
+  "caseStudy": {
+    "backLabel": "Back to Projects",
+    "visitSiteLabel": "Visit Live Site",
+    "detailsHeading": "Project Details",
+    "yearLabel": "Year",
+    "categoryLabel": "Category",
+    "roleLabel": "Role",
+    "defaultRole": "Design & Development",
+    "liveSiteLabel": "Live Site",
+    "viewSiteLabel": "View Site",
+    "techStackLabel": "Tech Stack",
+    "overviewTitle": "Overview",
+    "challengeTitle": "The Challenge",
+    "strategyTitle": "The Strategy",
+    "solutionTitle": "The Solution",
+    "emptySectionText": "Details coming soon.",
+    "galleryLabel": "Gallery",
+    "notFoundHeading": "Project Not Found",
+    "notFoundCtaLabel": "Back to Home"
+  }
+}

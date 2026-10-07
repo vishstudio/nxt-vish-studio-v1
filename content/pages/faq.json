@@ -1,0 +1,40 @@
+{
+  "_template": "faq",
+  "seo": {
+    "title": "Frequently Asked Questions | VISH Studio",
+    "description": "Answers to common questions about working with VISH Studio on digital strategy, design, development, and automation."
+  },
+  "label": "FAQ",
+  "faqHeading": "Common Questions",
+  "faqSubtext": "Clear answers for founders, operators, and teams considering social media marketing, websites, digital products, or AI automation with VISH Studio.",
+  "faqItems": [
+    {
+      "question": "1. What does VISH Studio do?",
+      "answer": "We help businesses with social media marketing, websites, SaaS products, custom software, mobile applications, branding, website templates, and AI integrations & automations."
+    },
+    {
+      "question": "2. Where is VISH Studio based?",
+      "answer": "VISH Studio is based in Mauritius and works with both local and international clients."
+    },
+    {
+      "question": "3. What types of businesses do you work with?",
+      "answer": "We work with startups, SMEs, established businesses and organisations that want to improve how they present themselves, operate or serve their customers digitally."
+    },
+    {
+      "question": "4. What makes VISH Studio different from a traditional web agency?",
+      "answer": "Our team combines business strategy, UX/UI design, branding and engineering so that decisions are made around the overall business objective."
+    },
+    {
+      "question": "5. Can VISH Studio validate an idea before we build it?",
+      "answer": "Yes, we begin with discovery, product architecture, user flows and prototyping before moving into full development."
+    },
+    {
+      "question": "6. Can VISH Studio work with our existing team?",
+      "answer": "Yes. VISH Studio can collaborate with internal marketing teams, developers, product teams, founders or other stakeholders depending on the structure of the project."
+    },
+    {
+      "question": "7. Still have a question?",
+      "answer": "Every project is different. If you're exploring a new website, brand, SaaS platform, mobile application, custom software project or digital automation, schedule a free discovery call with VISH Studio, or reach out to us on email."
+    }
+  ]
+}

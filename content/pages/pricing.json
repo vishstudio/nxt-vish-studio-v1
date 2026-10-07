@@ -1,4 +1,9 @@
 {
+  "_template": "pricing",
+  "seo": {
+    "title": "Pricing | VISH Studio",
+    "description": "Transparent pricing for custom web applications, high-performance websites, and brand architecture. Find the right plan for your project."
+  },
   "heroLabel": "VISH STUDIO — PRICING",
   "heroTitleLine1": "Transparent pricing",
   "heroTitleLine2": "built for You",
@@ -553,8 +558,16 @@
           "tagline": "A tailored social media marketing plan built around your audience, channels, campaign needs, and growth targets.",
           "featured": false,
           "ctaLabel": "Schedule a Free Call",
-          "ctaLink": { "linkType": "internal", "linkValue": "/book-call" },
-          "features": ["Channel and audience strategy", "Content and campaign planning", "Creative direction", "Performance reporting"],
+          "ctaLink": {
+            "linkType": "internal",
+            "linkValue": "/book-call"
+          },
+          "features": [
+            "Channel and audience strategy",
+            "Content and campaign planning",
+            "Creative direction",
+            "Performance reporting"
+          ],
           "bestFor": "Businesses ready to build a consistent, measurable social presence",
           "revisions": "Scoped with the campaign"
         }
@@ -576,8 +589,16 @@
           "tagline": "A product roadmap and delivery scope shaped around your users, core workflows, subscriptions, and launch priorities.",
           "featured": false,
           "ctaLabel": "Schedule a Free Call",
-          "ctaLink": { "linkType": "internal", "linkValue": "/book-call" },
-          "features": ["Product architecture", "User roles and workflows", "Subscription-ready planning", "Launch roadmap"],
+          "ctaLink": {
+            "linkType": "internal",
+            "linkValue": "/book-call"
+          },
+          "features": [
+            "Product architecture",
+            "User roles and workflows",
+            "Subscription-ready planning",
+            "Launch roadmap"
+          ],
           "bestFor": "Founders and teams creating a customer-facing digital product",
           "revisions": "Scoped with the product"
         }
@@ -599,8 +620,16 @@
           "tagline": "A launch-ready website template adapted to your brand, content, required pages, and conversion journey.",
           "featured": false,
           "ctaLabel": "Schedule a Free Call",
-          "ctaLink": { "linkType": "internal", "linkValue": "/book-call" },
-          "features": ["Template selection", "Brand and content adaptation", "Essential page setup", "Launch preparation"],
+          "ctaLink": {
+            "linkType": "internal",
+            "linkValue": "/book-call"
+          },
+          "features": [
+            "Template selection",
+            "Brand and content adaptation",
+            "Essential page setup",
+            "Launch preparation"
+          ],
           "bestFor": "Teams that need a polished website foundation on a focused timeline",
           "revisions": "Scoped with the setup"
         }
@@ -622,8 +651,16 @@
           "tagline": "A practical AI integration or automation plan shaped around your current tools, operational bottlenecks, and approval paths.",
           "featured": false,
           "ctaLabel": "Schedule a Free Call",
-          "ctaLink": { "linkType": "internal", "linkValue": "/book-call" },
-          "features": ["Workflow audit", "AI integration design", "Connected systems", "Testing and team handoff"],
+          "ctaLink": {
+            "linkType": "internal",
+            "linkValue": "/book-call"
+          },
+          "features": [
+            "Workflow audit",
+            "AI integration design",
+            "Connected systems",
+            "Testing and team handoff"
+          ],
           "bestFor": "Teams ready to remove repetitive work and improve handoffs",
           "revisions": "Scoped with the automation"
         }
@@ -635,5 +672,22 @@
   "customLabel": "Need Something Custom?",
   "customDescription": "Don't see exactly what you need? Every project is unique — whether it is social media marketing, a digital product, a website, or an AI integration, we scope and price it together.",
   "customCtaLabel": "Discuss Your Project",
-  "customCtaHref": "/book-call"
+  "customCtaHref": "/book-call",
+  "labels": {
+    "mostPopular": "Most Popular",
+    "choosePlan": "Choose Plan",
+    "viewAllPlans": "View all plans",
+    "carePlanPrefix": "Care plan",
+    "bestForPrefix": "Best for",
+    "revisionsPrefix": "Revisions",
+    "careLabel": "Care Plans",
+    "careHeading": "Monthly care by package",
+    "careDescription": "Each {service} package can be paired with its own maintenance scope after launch, so support scales with the complexity of the work.",
+    "maintenanceLabel": "Maintenance",
+    "maintenanceHeading": "Package care",
+    "maintenanceDescription": "Monthly support is priced against the selected package tier, from essential checks to priority improvement cycles.",
+    "addOnsLabel": "Additional Costs",
+    "addOnsHeading": "Common add-ons",
+    "addOnsDescription": "These are typical add-on prices for {service} projects. Final pricing depends on complexity, content readiness, integrations, and timeline."
+  }
 }

@@ -5,8 +5,12 @@ import { ArrowRight } from 'lucide-react';
 import { PageLayout } from '../components/ui/page-layout/page-layout';
 import { Button } from '../components/ui/button/button';
 import { Contact } from '../components/contact/contact';
+import { useTinaPage } from '../hooks/tina/usePage';
+import { getNotFoundPage } from '../lib/content';
 
 export const NotFound = () => {
+  const { data: content, tinaField } = useTinaPage('not-found.json', getNotFoundPage());
+
   return (
     <PageLayout>
       <section className="min-h-[70vh] flex flex-col items-center justify-center px-6 md:px-12 relative overflow-hidden">
@@ -29,9 +33,12 @@ export const NotFound = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
-            <SectionTitle className="mb-8">Page Not Found</SectionTitle>
-            <p className="font-sans text-xl text-gray-400 leading-relaxed mb-12 max-w-xl mx-auto">
-              The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
+            <SectionTitle className="mb-8" tinaField={tinaField('heading')}>{content.heading}</SectionTitle>
+            <p
+              className="font-sans text-xl text-gray-400 leading-relaxed mb-12 max-w-xl mx-auto"
+              data-tina-field={tinaField('description')}
+            >
+              {content.description}
             </p>
           </motion.div>
 
@@ -44,8 +51,9 @@ export const NotFound = () => {
               href="/"
               variant="navigation"
               icon={<ArrowRight className="w-4 h-4" />}
+              tinaField={tinaField('ctaLabel')}
             >
-              Return Home
+              {content.ctaLabel}
             </Button>
           </motion.div>
         </div>

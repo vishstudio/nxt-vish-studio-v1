@@ -1,4 +1,9 @@
 {
+  "_template": "legal",
+  "seo": {
+    "title": "Terms & Conditions | VISH Studio",
+    "description": "VISH Studio terms and conditions governing use of our website and services."
+  },
   "title": "Terms of Service",
   "slug": "terms",
   "heroLabel": "Terms",

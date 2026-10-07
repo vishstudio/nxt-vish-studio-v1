@@ -1,3 +1,5 @@
+import type { PageSeo } from "./content";
+
 export type CtaLinkType = "internal" | "url" | "phone" | "email" | "whatsapp";
 
 export interface CtaLink {
@@ -73,7 +75,31 @@ export interface PricingCategory {
   addOns: PricingAddOn[];
 }
 
+export interface PricingLabels {
+  mostPopular: string;
+  choosePlan: string;
+  viewAllPlans: string;
+  carePlanPrefix: string;
+  bestForPrefix: string;
+  revisionsPrefix: string;
+  careLabel: string;
+  careHeading: string;
+  careDescription: string;
+  maintenanceLabel: string;
+  maintenanceHeading: string;
+  maintenanceDescription: string;
+  addOnsLabel: string;
+  addOnsHeading: string;
+  addOnsDescription: string;
+}
+
+/** Replaces the `{service}` token in CMS pricing copy with the service name. */
+export const withServiceName = (text: string, service: string) =>
+  text.replaceAll("{service}", service.toLowerCase());
+
 export interface PricingPageContent {
+  seo?: PageSeo;
+  labels: PricingLabels;
   heroLabel: string;
   heroTitleLine1: string;
   heroTitleLine2: string;
@@ -112,6 +138,8 @@ interface PricingPlanJson {
 }
 
 interface PricingPageJson {
+  seo?: PageSeo;
+  labels: PricingLabels;
   heroLabel: string;
   heroTitleLine1: string;
   heroTitleLine2: string;
@@ -206,6 +234,8 @@ export function getPricingPage(): PricingPageContent {
     .filter((category) => category.label && category.plans.length > 0);
 
   return {
+    seo: raw.seo,
+    labels: raw.labels,
     heroLabel: raw.heroLabel ?? "",
     heroTitleLine1: raw.heroTitleLine1 ?? "",
     heroTitleLine2: raw.heroTitleLine2 ?? "",

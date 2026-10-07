@@ -1,0 +1,55 @@
+import {
+  Bot,
+  Box,
+  Boxes,
+  CalendarDays,
+  ChartNoAxesCombined,
+  CheckCircle2,
+  Clock,
+  Crosshair,
+  FileText,
+  FolderKanban,
+  LayoutDashboard,
+  LayoutTemplate,
+  Megaphone,
+  Monitor,
+  MousePointerClick,
+  Palette,
+  Rocket,
+  ShieldCheck,
+  Smartphone,
+  UsersRound,
+  Video,
+  Workflow,
+  type LucideIcon,
+} from "lucide-react";
+import type { IconName } from "./icon-names";
+
+const icons: Record<IconName, LucideIcon> = {
+  megaphone: Megaphone,
+  box: Box,
+  boxes: Boxes,
+  monitor: Monitor,
+  "layout-template": LayoutTemplate,
+  smartphone: Smartphone,
+  palette: Palette,
+  bot: Bot,
+  crosshair: Crosshair,
+  "mouse-pointer-click": MousePointerClick,
+  rocket: Rocket,
+  clock: Clock,
+  video: Video,
+  "calendar-days": CalendarDays,
+  "layout-dashboard": LayoutDashboard,
+  "folder-kanban": FolderKanban,
+  "users-round": UsersRound,
+  "file-text": FileText,
+  "check-circle": CheckCircle2,
+  workflow: Workflow,
+  "shield-check": ShieldCheck,
+  chart: ChartNoAxesCombined,
+};
+
+/** Resolve a CMS icon name, falling back to a neutral icon for unknown values. */
+export const getIcon = (name?: string): LucideIcon =>
+  icons[name as IconName] ?? Box;

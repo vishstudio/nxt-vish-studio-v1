@@ -1,11 +1,10 @@
 import type { Metadata } from 'next';
+import { getServicePage } from '@/src/lib/content';
+import { toMetadata } from '@/src/lib/seo';
 import { ServiceLandingPage } from '@/src/views/ServiceLandingPage';
 
-export const metadata: Metadata = {
-  title: 'Social Media Marketing | VISH Studio',
-  description: 'Social media marketing, campaign planning, and creative direction from VISH Studio.',
-};
+export const metadata: Metadata = toMetadata(getServicePage('social-media-marketing').seo);
 
-const SocialMediaMarketing = () => <ServiceLandingPage label="Social Media Marketing" title="Social media marketing" description="Strategic social media marketing, campaign planning, content direction, and performance-focused creative that keep your brand visible and relevant." />;
+const SocialMediaMarketing = () => <ServiceLandingPage slug="social-media-marketing" />;
 
 export default SocialMediaMarketing;

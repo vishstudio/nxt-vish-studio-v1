@@ -1,11 +1,10 @@
 import type { Metadata } from 'next';
+import { getServicePage } from '@/src/lib/content';
+import { toMetadata } from '@/src/lib/seo';
 import { ServiceLandingPage } from '@/src/views/ServiceLandingPage';
 
-export const metadata: Metadata = {
-  title: 'Softwares | VISH Studio',
-  description: 'Custom business software, client portals, and operational systems from VISH Studio.',
-};
+export const metadata: Metadata = toMetadata(getServicePage('softwares').seo);
 
-const Softwares = () => <ServiceLandingPage label="Softwares" title="Softwares" description="Bespoke business software for operations, portals, approvals, reporting, automation, and internal systems that replace scattered manual work." />;
+const Softwares = () => <ServiceLandingPage slug="softwares" />;
 
 export default Softwares;

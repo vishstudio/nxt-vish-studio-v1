@@ -1,0 +1,65 @@
+{
+  "_template": "startProject",
+  "seo": {
+    "title": "Start a Project | VISH Studio",
+    "description": "Tell VISH Studio about your social media marketing, SaaS, website, software, mobile app, branding, or AI automation project."
+  },
+  "steps": [
+    {
+      "label": "Service",
+      "title": "Choose a service",
+      "intro": "Answer a few focused questions so we can understand your goals and recommend the right scope."
+    },
+    {
+      "label": "Package",
+      "title": "Choose a package",
+      "intro": "Pick the starting scope that feels closest to your project. We can refine the final scope after reviewing your brief."
+    },
+    {
+      "label": "Project brief",
+      "title": "Tell us about the project",
+      "intro": "Share the context, goals, features, and constraints that will help us understand what needs to be built."
+    },
+    {
+      "label": "Contact",
+      "title": "How can we reach you",
+      "intro": "Add your contact details so the studio can follow up after reviewing the project brief."
+    },
+    {
+      "label": "Review",
+      "title": "Review your brief",
+      "intro": "Check the service, package, project answers, and contact details before submitting your brief."
+    }
+  ],
+  "labels": {
+    "nameLabel": "Full name",
+    "companyLabel": "Company / organisation",
+    "emailLabel": "Email address",
+    "phoneLabel": "Telephone number",
+    "reviewServiceHeading": "Service and package",
+    "reviewContactHeading": "Contact",
+    "reviewBriefHeading": "Project brief",
+    "deliveryPrefix": "Delivery:",
+    "notProvided": "Not provided",
+    "notSelected": "Not selected",
+    "summaryHeading": "Your selection",
+    "summaryServiceLabel": "Service",
+    "summaryPackageLabel": "Package",
+    "privacyHeading": "Your data is secure",
+    "privacyText": "Your details are used only to review this brief and contact you about the project.",
+    "progressLabel": "Project brief progress",
+    "stepCounter": "Step {current} of {total}",
+    "backLabel": "Back",
+    "continueLabel": "Continue",
+    "submitLabel": "Submit",
+    "submittingLabel": "Submitting…",
+    "errorMessage": "Unable to submit your brief. Please try again."
+  },
+  "confirmation": {
+    "label": "Brief submitted",
+    "heading": "Your project brief has been submitted",
+    "description": "We’ll review the questionnaire and contact you with the next steps. Your reference is {reference}.",
+    "contactPrompt": "Need to add more information or make a request? Contact us directly:",
+    "homeCtaLabel": "Back to home"
+  }
+}

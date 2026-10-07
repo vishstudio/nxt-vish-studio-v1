@@ -1,6 +1,6 @@
 import client from "../../../tina/__generated__/client";
-import { getSiteSettings, type SiteSettings } from "../../lib/content";
-import { makeTinaField, useTinaData } from "./core";
+import { getSiteSettings } from "../../lib/content";
+import { makeTinaField, normalizeLike, useTinaData } from "./core";
 
 export function useTinaSettings() {
   const staticContent = getSiteSettings();
@@ -8,34 +8,7 @@ export function useTinaSettings() {
   const result = useTinaData(
     staticContent,
     () => client.queries.siteSettings({ relativePath: "settings.json" }) as any,
-    (qd: any) => {
-      const s = qd.siteSettings;
-      return {
-        email: s.email ?? "",
-        phone: s.phone ?? "",
-        phoneLink: s.phoneLink ?? "",
-        address: s.address ?? "",
-        copyright: s.copyright ?? "",
-        contactHeadingLine1: s.contactHeadingLine1 ?? "",
-        contactHeadingLine2: s.contactHeadingLine2 ?? "",
-        newsletterHeading: s.newsletterHeading ?? "",
-        newsletterDescription: s.newsletterDescription ?? "",
-        newsletterButtonLabel: s.newsletterButtonLabel ?? "",
-        newsletterConsent: s.newsletterConsent ?? "",
-        footerNewsletterHeading: s.footerNewsletterHeading ?? "",
-        footerNewsletterDescription: s.footerNewsletterDescription ?? "",
-        scrollText: s.scrollText ?? "",
-        socials: (s.socials ?? []).map((x: any) => ({
-          name: x?.name ?? "",
-          url: x?.url ?? "",
-          openInNewTab: x?.openInNewTab ?? false,
-        })),
-        footerLinks: (s.footerLinks ?? []).map((x: any) => ({
-          label: x?.label ?? "",
-          url: x?.url ?? "",
-        })),
-      } as SiteSettings;
-    },
+    (queryData: any) => normalizeLike(queryData.siteSettings, staticContent),
   );
 
   const rawSiteSettings = result.tinaData

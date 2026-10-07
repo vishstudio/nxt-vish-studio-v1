@@ -99,7 +99,7 @@ export const Testimonials = () => {
                 href="/testimonials"
                 className="inline-flex items-center gap-2 ml-2 font-mono text-sm text-gray-400 hover:text-vish-accent transition-colors duration-300 group"
               >
-                View All
+                <span data-tina-field={tinaField('viewAllLabel')}>{content.viewAllLabel}</span>
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
               </Link>
             </div>

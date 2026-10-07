@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useRef, useState } from "react";
 import { usePricingCurrency } from "../../hooks/usePricingCurrency";
 import { useTinaPricing } from "../../hooks/useTinaVisualEditing";
-import { type PricingPlan } from "../../lib/pricing";
+import { type PricingLabels, type PricingPlan } from "../../lib/pricing";
 import { sortByCanonicalServiceOrder } from "../../lib/services";
 import {
   getLocalizedCarePlanPrice,
@@ -28,6 +28,7 @@ const PlanCard = ({
   onToggleDetails,
   onChoosePlan,
   currency,
+  labels,
 }: {
   plan: PricingPlan;
   index: number;
@@ -37,6 +38,7 @@ const PlanCard = ({
   onToggleDetails: () => void;
   onChoosePlan: (plan: PricingPlan) => void;
   currency: PricingCurrency;
+  labels: PricingLabels;
 }) => {
   const localizedPrice = getLocalizedPlanPrice(plan, currency);
 
@@ -57,7 +59,7 @@ const PlanCard = ({
         <div className="absolute -top-3.5 left-1/2 z-10 -translate-x-1/2">
           <span className="inline-flex items-center gap-1.5 px-4 py-1 rounded-full bg-vish-accent text-black font-mono text-xs font-bold tracking-wider uppercase">
             <Sparkles className="w-3 h-3" />
-            Most Popular
+            {labels.mostPopular}
           </span>
         </div>
       )}
@@ -135,7 +137,7 @@ const PlanCard = ({
           ariaLabel={`Choose the ${plan.name} plan`}
           className="w-full rounded-xl py-3.5 font-mono text-xs font-semibold uppercase tracking-widest sm:text-sm sm:normal-case sm:tracking-normal"
         >
-          Choose Plan
+          {labels.choosePlan}
         </Button>
 
         <Button
@@ -174,6 +176,7 @@ const PlanCard = ({
               tinaField={tinaField}
               rawPlan={rawPlan}
               currency={currency}
+              labels={labels}
             />
           </motion.div>
         )}
@@ -185,6 +188,7 @@ const PlanCard = ({
           tinaField={tinaField}
           rawPlan={rawPlan}
           currency={currency}
+          labels={labels}
         />
       </div>
     </motion.div>
@@ -196,11 +200,13 @@ const PlanDetails = ({
   tinaField,
   rawPlan,
   currency,
+  labels,
 }: {
   plan: PricingPlan;
   tinaField: (obj: any, field: string) => string | undefined;
   rawPlan: any;
   currency: PricingCurrency;
+  labels: PricingLabels;
 }) => {
   return (
     <div className="mt-8 border-t border-white/8 pt-8 lg:border-t-0 lg:pt-0">
@@ -243,19 +249,19 @@ const PlanDetails = ({
                 : undefined
             }
           >
-            <span className="text-gray-600">Care plan: </span>
+            <span className="text-gray-600">{labels.carePlanPrefix}: </span>
             {getLocalizedCarePlanPrice(plan.carePlan, currency)}
           </p>
         )}
         {plan.bestFor && (
           <p className="font-mono text-xs text-gray-500">
-            <span className="text-gray-600">Best for: </span>
+            <span className="text-gray-600">{labels.bestForPrefix}: </span>
             {plan.bestFor}
           </p>
         )}
         {plan.revisions && (
           <p className="font-mono text-xs text-gray-500">
-            <span className="text-gray-600">Revisions: </span>
+            <span className="text-gray-600">{labels.revisionsPrefix}: </span>
             {plan.revisions}
           </p>
         )}
@@ -375,7 +381,7 @@ export const Pricing = () => {
               href="/pricing"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/15 text-white font-sans text-sm hover:border-white/40 hover:bg-white/5 transition-all"
             >
-              View all plans
+              {content.labels.viewAllPlans}
               <ArrowRight className="w-4 h-4" />
             </Link>
           </motion.div>
@@ -438,6 +444,7 @@ export const Pricing = () => {
                     setIsDetailsExpanded((current) => !current)
                   }
                   onChoosePlan={handleChoosePlan}
+                  labels={content.labels}
                   currency={pricingCurrency}
                 />
               );
@@ -491,7 +498,7 @@ export const Pricing = () => {
             href="/pricing"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/15 text-white font-sans text-sm hover:border-white/40 hover:bg-white/5 transition-all"
           >
-            View all plans
+            {content.labels.viewAllPlans}
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

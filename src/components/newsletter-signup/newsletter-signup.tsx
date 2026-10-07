@@ -28,6 +28,9 @@ interface NewsletterSignupProps {
     | 'newsletterConsent'
     | 'footerNewsletterHeading'
     | 'footerNewsletterDescription'
+    | 'newsletterLabel'
+    | 'newsletterSuccessHeading'
+    | 'newsletterSuccessDescription'
   >;
   tinaField?: (fieldName: string) => string | undefined;
   onSuccess?: () => void;
@@ -78,9 +81,14 @@ export const NewsletterSignup = ({ source, settings, tinaField, onSuccess }: New
             <Check className="size-4" aria-hidden="true" />
           </span>
           <div>
-            <p className="font-display text-2xl text-white">You&apos;re on the list<span className="text-vish-accent">.</span></p>
-            <p className="mt-2 font-sans text-sm leading-relaxed text-gray-400">
-              Watch your inbox for the next VISH Studio note.
+            <p className="font-display text-2xl text-white" data-tina-field={tinaField?.('newsletterSuccessHeading')}>
+              {settings.newsletterSuccessHeading}<span className="text-vish-accent">.</span>
+            </p>
+            <p
+              className="mt-2 font-sans text-sm leading-relaxed text-gray-400"
+              data-tina-field={tinaField?.('newsletterSuccessDescription')}
+            >
+              {settings.newsletterSuccessDescription}
             </p>
           </div>
         </div>
@@ -90,7 +98,9 @@ export const NewsletterSignup = ({ source, settings, tinaField, onSuccess }: New
 
   return (
     <div>
-      <p className="font-mono text-xs uppercase tracking-[0.18em] text-vish-accent">Studio notes</p>
+      <p className="font-mono text-xs uppercase tracking-[0.18em] text-vish-accent" data-tina-field={tinaField?.('newsletterLabel')}>
+        {settings.newsletterLabel}
+      </p>
       <h2
         className={isPopup ? 'mt-4 font-display text-4xl leading-[0.98] text-white sm:text-5xl' : 'mt-3 font-display text-3xl leading-tight text-white'}
         data-tina-field={tinaField?.(isPopup ? 'newsletterHeading' : 'footerNewsletterHeading')}

@@ -1,4 +1,9 @@
 {
+  "_template": "testimonials",
+  "seo": {
+    "title": "Testimonials | VISH Studio",
+    "description": "What our clients say about working with VISH Studio — real feedback from scaling brands worldwide."
+  },
   "heading": "What Clients Say",
   "subtext": "Real words from real partners",
   "testimonials": [
@@ -26,5 +31,8 @@
       "role": "Co-Founder",
       "company": "GoGarage"
     }
-  ]
+  ],
+  "heroLabel": "Client Testimonials",
+  "emptyMessage": "No testimonials yet.",
+  "viewAllLabel": "View All"
 }

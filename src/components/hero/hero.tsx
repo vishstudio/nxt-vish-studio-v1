@@ -2,20 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { motion } from 'motion/react';
-import {
-  ArrowUpRight,
-  Bot,
-  Box,
-  CalendarCheck,
-  Crosshair,
-  LayoutTemplate,
-  Megaphone,
-  Monitor,
-  MousePointerClick,
-  Palette,
-  Rocket,
-  Smartphone,
-} from 'lucide-react';
+import { ArrowUpRight, CalendarCheck } from 'lucide-react';
 import { PageHero } from '../ui/page-hero/page-hero';
 import { useTinaHome } from '../../hooks/useTinaVisualEditing';
 import { HeroStats } from '../hero-stats/hero-stats';
@@ -23,7 +10,8 @@ import { BrandWatermark } from '../brand-watermark/brand-watermark';
 import { Button } from '../ui/button/button';
 import { PROJECT_INQUIRY_HREF, PROJECT_INQUIRY_ACTION, PROJECT_INQUIRY_ARIA_LABEL } from '../../lib/conversion';
 import { APP_READY_EVENT, HERO_REVEALED_EVENT } from '../../lib/site-events';
-import type { HeroStat } from '../../lib/content';
+import type { HeroStat, IconItem } from '../../lib/content';
+import { getIcon } from '../../lib/icons';
 
 const revealEase = [0.16, 1, 0.3, 1] as const;
 
@@ -47,31 +35,6 @@ const headlineLineVariants = {
   },
 };
 
-const conversionSignals = [
-  { label: 'Strategy-led delivery', icon: Crosshair },
-  { label: 'Conversion-focused UX', icon: MousePointerClick },
-  { label: 'Launch-ready engineering', icon: Rocket },
-];
-
-const capabilityProofItems = [
-  { label: 'Social media marketing', icon: Megaphone },
-  { label: 'SaaS products', icon: Box },
-  { label: 'Websites', icon: Monitor },
-  { label: 'Website templates', icon: LayoutTemplate },
-  { label: 'Softwares', icon: Box },
-  { label: 'Mobile apps', icon: Smartphone },
-  { label: 'Branding', icon: Palette },
-  { label: 'AI integrations & automations', icon: Bot },
-];
-
-const typingPhrases = [
-  { prefix: 'We build your', text: 'websites.' },
-  { prefix: 'We build your', text: 'SaaS products.' },
-  { prefix: 'We build your', text: 'mobile apps.' },
-  { prefix: 'We build your', text: 'brand systems.' },
-  { prefix: 'We build your', text: 'AI automations.' },
-];
-
 const completedPhraseHoldMs = 5000;
 
 function splitTypingPhrase(text: string) {
@@ -87,9 +50,17 @@ function splitTypingPhrase(text: string) {
 const HeroCapabilityProof = ({
   isHeroRevealed,
   stats,
+  label,
+  heading,
+  items,
+  tinaField,
 }: {
   isHeroRevealed: boolean;
   stats: HeroStat[];
+  label: string;
+  heading: string;
+  items: IconItem[];
+  tinaField: (field: string) => string | undefined;
 }) => {
   return (
     <motion.div
@@ -102,19 +73,29 @@ const HeroCapabilityProof = ({
     >
       <aside aria-label="Digital business capabilities">
         <div className="rounded-3xl border border-white/10 bg-black/55 p-5 shadow-2xl shadow-black/50 backdrop-blur-md">
-          <p className="mt-5 font-mono text-[0.64rem] font-semibold uppercase tracking-widest text-vish-gray">
-            Digital business stack
+          <p
+            className="mt-5 font-mono text-[0.64rem] font-semibold uppercase tracking-widest text-vish-gray"
+            data-tina-field={tinaField('heroCapabilityLabel')}
+          >
+            {label}
           </p>
-          <p className="mt-3 max-w-[16rem] font-display text-2xl font-medium leading-tight tracking-normal text-white">
-            Strategy, design, and engineering under one roof<span className="text-vish-accent">.</span>
+          <p
+            className="mt-3 max-w-[16rem] font-display text-2xl font-medium leading-tight tracking-normal text-white"
+            data-tina-field={tinaField('heroCapabilityHeading')}
+          >
+            {heading}<span className="text-vish-accent">.</span>
           </p>
-          <ul className="mt-6 grid grid-cols-2 gap-x-5 gap-y-3">
-            {capabilityProofItems.map(({ label, icon: Icon }) => (
-              <li key={label} className="flex items-center gap-2.5 border-t border-white/10 pt-3">
-                <Icon className="h-4 w-4 shrink-0 text-white" aria-hidden="true" strokeWidth={1.8} />
-                <span className="font-sans text-sm text-vish-gray">{label}</span>
-              </li>
-            ))}
+          <ul className="mt-6 grid grid-cols-2 gap-x-5 gap-y-3" data-tina-field={tinaField('heroCapabilityItems')}>
+            {items.map((item) => {
+              const Icon = getIcon(item.icon);
+
+              return (
+                <li key={item.label} className="flex items-center gap-2.5 border-t border-white/10 pt-3">
+                  <Icon className="h-4 w-4 shrink-0 text-white" aria-hidden="true" strokeWidth={1.8} />
+                  <span className="font-sans text-sm text-vish-gray">{item.label}</span>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </aside>
@@ -133,11 +114,12 @@ export const Hero = () => {
   const pathname = usePathname();
   const hasDispatchedHeroReveal = useRef(false);
   const [isHeroRevealed, setIsHeroRevealed] = useState(pathname !== '/');
+  const typingPhrases = content.heroTypingPhrases.length > 0 ? content.heroTypingPhrases : [''];
   const [phraseIndex, setPhraseIndex] = useState(0);
-  const [characterIndex, setCharacterIndex] = useState(typingPhrases[0].text.length);
+  const [characterIndex, setCharacterIndex] = useState(typingPhrases[0].length);
   const [isDeleting, setIsDeleting] = useState(false);
-  const currentPhrase = typingPhrases[phraseIndex];
-  const typedTitle = currentPhrase.text.slice(0, characterIndex);
+  const currentPhrase = typingPhrases[phraseIndex % typingPhrases.length];
+  const typedTitle = currentPhrase.slice(0, characterIndex);
   const { text: typedTitleText, hasPeriod: typedTitleHasPeriod } = splitTypingPhrase(typedTitle);
 
   useEffect(() => {
@@ -165,7 +147,7 @@ export const Hero = () => {
   useEffect(() => {
     if (!isHeroRevealed) return undefined;
 
-    const isFullPhrase = characterIndex === currentPhrase.text.length;
+    const isFullPhrase = characterIndex >= currentPhrase.length;
     const isAtTypingFloor = characterIndex <= 0;
     const typingDelay = isDeleting ? 36 : 72;
     const nextDelay = isFullPhrase && !isDeleting ? completedPhraseHoldMs : typingDelay;
@@ -188,7 +170,7 @@ export const Hero = () => {
     }, nextDelay);
 
     return () => window.clearTimeout(typingTimer);
-  }, [characterIndex, isDeleting, isHeroRevealed, phraseIndex]);
+  }, [characterIndex, currentPhrase, isDeleting, isHeroRevealed, phraseIndex, typingPhrases.length]);
 
   const handleHeroRevealComplete = () => {
     if (!isHeroRevealed) return;
@@ -219,14 +201,16 @@ export const Hero = () => {
               <motion.span
                 variants={headlineLineVariants}
                 className="inline-block will-change-transform"
+                data-tina-field={tinaField('heroTypingPrefix')}
               >
-                {currentPhrase.prefix}
+                {content.heroTypingPrefix}
               </motion.span>
             </span>
             <span className="block overflow-hidden pb-1 text-vish-gray">
               <motion.span
                 variants={headlineLineVariants}
                 className="inline-block will-change-transform"
+                data-tina-field={tinaField('heroTypingPhrases')}
               >
                 <span>{typedTitleText || '\u00a0'}</span>
                 <span className="text-vish-accent">{typedTitleHasPeriod ? '.' : ''}</span>
@@ -247,13 +231,20 @@ export const Hero = () => {
             onAnimationComplete={handleHeroRevealComplete}
             className="mt-4 max-w-3xl flex flex-col gap-10"
           >
-            <ul className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[0.66rem] font-semibold uppercase tracking-widest text-vish-gray">
-              {conversionSignals.map(({ label, icon: Icon }) => (
-                <li key={label} className="flex items-center gap-2.5">
-                  <Icon className="size-4 shrink-0 text-white" aria-hidden="true" strokeWidth={1.8} />
-                  <span>{label}</span>
-                </li>
-              ))}
+            <ul
+              className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[0.66rem] font-semibold uppercase tracking-widest text-vish-gray"
+              data-tina-field={tinaField('heroSignals')}
+            >
+              {content.heroSignals.map((signal) => {
+                const Icon = getIcon(signal.icon);
+
+                return (
+                  <li key={signal.label} className="flex items-center gap-2.5">
+                    <Icon className="size-4 shrink-0 text-white" aria-hidden="true" strokeWidth={1.8} />
+                    <span>{signal.label}</span>
+                  </li>
+                );
+              })}
             </ul>
 
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -267,8 +258,9 @@ export const Hero = () => {
                   ariaLabel={PROJECT_INQUIRY_ARIA_LABEL}
                   dataConversionAction={PROJECT_INQUIRY_ACTION}
                   className="w-full px-6 py-4 font-mono text-xs font-semibold uppercase tracking-widest sm:w-auto"
+                  tinaField={tinaField('heroPrimaryCtaLabel')}
                 >
-                  Schedule a Free Call
+                  {content.heroPrimaryCtaLabel}
                 </Button>
               </div>
               <Button
@@ -279,8 +271,9 @@ export const Hero = () => {
                 iconPosition="right"
                 ariaLabel="View selected VISH Studio projects"
                 className="w-full px-6 py-4 font-mono text-xs font-semibold uppercase tracking-widest sm:w-auto"
+                tinaField={tinaField('heroSecondaryCtaLabel')}
               >
-                See the Work
+                {content.heroSecondaryCtaLabel}
               </Button>
             </div>
 
@@ -301,6 +294,10 @@ export const Hero = () => {
             <HeroCapabilityProof
               isHeroRevealed={isHeroRevealed}
               stats={content.heroStats}
+              label={content.heroCapabilityLabel}
+              heading={content.heroCapabilityHeading}
+              items={content.heroCapabilityItems}
+              tinaField={tinaField}
             />
           </>
         )}

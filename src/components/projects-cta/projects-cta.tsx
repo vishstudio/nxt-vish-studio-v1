@@ -2,6 +2,7 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { CalendarCheck } from 'lucide-react';
+import { useTinaSettings } from '../../hooks/useTinaVisualEditing';
 import { Button } from '../ui/button/button';
 import { PROJECT_INQUIRY_HREF, PROJECT_INQUIRY_ACTION, PROJECT_INQUIRY_ARIA_LABEL } from '../../lib/conversion';
 
@@ -12,6 +13,10 @@ interface ProjectsCtaProps {
 }
 
 export const ProjectsCta = ({ index, backgroundImage, contained = true }: ProjectsCtaProps) => {
+  const { data: settings, tinaField, rawSiteSettings } = useTinaSettings();
+  const copy = settings.projectCta;
+  const rawCopy = rawSiteSettings?.projectCta;
+  const field = (name: string) => (rawCopy ? tinaField(rawCopy, name) : undefined);
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -51,21 +56,33 @@ export const ProjectsCta = ({ index, backgroundImage, contained = true }: Projec
           )}
           <div className="absolute inset-0 bg-black/45" aria-hidden="true" />
           <div className="absolute inset-0 bg-linear-to-b from-black/20 via-transparent to-black/70" aria-hidden="true" />
-          <div className="absolute bottom-5 left-5 font-mono text-xs uppercase tracking-widest text-white/45">
-            Next build
+          <div
+            className="absolute bottom-5 left-5 font-mono text-xs uppercase tracking-widest text-white/45"
+            data-tina-field={field('imageLabel')}
+          >
+            {copy.imageLabel}
           </div>
         </div>
 
         <div className="flex flex-col items-start">
           <div className="max-w-3xl">
-            <span className="mb-5 block font-mono text-xs uppercase tracking-widest text-vish-accent">
-              Open Slot {String(index + 1).padStart(2, '0')}
+            <span
+              className="mb-5 block font-mono text-xs uppercase tracking-widest text-vish-accent"
+              data-tina-field={field('slotLabel')}
+            >
+              {copy.slotLabel} {String(index + 1).padStart(2, '0')}
             </span>
-            <h2 className="max-w-3xl font-display text-4xl leading-[0.98] tracking-tight text-white md:text-6xl">
-              Have a project that needs this level of care?
+            <h2
+              className="max-w-3xl font-display text-4xl leading-[0.98] tracking-tight text-white md:text-6xl"
+              data-tina-field={field('heading')}
+            >
+              {copy.heading}
             </h2>
-            <p className="mt-6 max-w-xl font-sans text-base leading-relaxed text-gray-400 md:text-lg">
-              Let us shape the next digital product with the same strategy, design, and technical depth.
+            <p
+              className="mt-6 max-w-xl font-sans text-base leading-relaxed text-gray-400 md:text-lg"
+              data-tina-field={field('description')}
+            >
+              {copy.description}
             </p>
           </div>
 
@@ -79,8 +96,9 @@ export const ProjectsCta = ({ index, backgroundImage, contained = true }: Projec
               ariaLabel={PROJECT_INQUIRY_ARIA_LABEL}
               dataConversionAction={PROJECT_INQUIRY_ACTION}
               className="px-6 py-4 font-mono text-xs font-semibold uppercase tracking-widest"
+              tinaField={field('ctaLabel')}
             >
-              Schedule a Free Call
+              {copy.ctaLabel}
             </Button>
           </div>
         </div>

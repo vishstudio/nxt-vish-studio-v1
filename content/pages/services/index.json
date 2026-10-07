@@ -1,4 +1,9 @@
 {
+  "_template": "services",
+  "seo": {
+    "title": "Services | VISH Studio",
+    "description": "Social media marketing, SaaS products, websites, website templates, software, mobile apps, branding, and AI integrations from VISH Studio."
+  },
   "heroLabel": "Our Expertise",
   "heroTitleLine1": "Services",
   "heroTitleLine2": "& Capabilities",
@@ -163,5 +168,26 @@
         "Operational reporting"
       ]
     }
-  ]
+  ],
+  "showcase": {
+    "label": "Service catalogue",
+    "heading": "Explore the work that moves your business forward",
+    "description": "Select a service to see the focused work and outcomes it brings. The view advances automatically when left untouched.",
+    "listLabel": "Our services",
+    "coversLabel": "What this covers",
+    "focusLabel": "Focus"
+  },
+  "explorer": {
+    "label": "Service catalogue",
+    "heading": "Choose the work that moves your business forward",
+    "description": "Select a service to see the work we plan, the outcomes we focus on, and a relevant slice of our world.",
+    "listLabel": "Our services",
+    "listPrompt": "Select a service to see the plan",
+    "allServicesLabel": "All services",
+    "selectedLabel": "Selected service",
+    "planLabel": "How we plan it",
+    "scopeLabel": "Typical scope",
+    "ctaLabel": "Schedule a Free Call",
+    "imageLabel": "Project plan"
+  }
 }

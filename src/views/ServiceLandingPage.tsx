@@ -6,6 +6,8 @@ import { Contact } from '../components/contact/contact';
 import { Button } from '../components/ui/button/button';
 import { PageHero } from '../components/ui/page-hero/page-hero';
 import { PageLayout } from '../components/ui/page-layout/page-layout';
+import { useTinaPage } from '../hooks/tina/usePage';
+import { getServicePage } from '../lib/content';
 import {
   PROJECT_INQUIRY_ACTION,
   PROJECT_INQUIRY_ARIA_LABEL,
@@ -13,20 +15,18 @@ import {
 } from '../lib/conversion';
 
 interface ServiceLandingPageProps {
-  label: string;
-  title: string;
-  description: string;
+  /** File name in `content/pages/services`, e.g. `websites`. */
+  slug: string;
 }
 
-export const ServiceLandingPage = ({
-  label,
-  title,
-  description,
-}: ServiceLandingPageProps) => {
+export const ServiceLandingPage = ({ slug }: ServiceLandingPageProps) => {
+  const { data: content, tinaField } = useTinaPage(`services/${slug}.json`, getServicePage(slug));
+
   return (
     <PageLayout>
       <PageHero
-        label={label}
+        label={content.label}
+        labelTinaField={tinaField('label')}
         backgroundImage="/assets/img/services-hero.jpg"
         backgroundImageClassName="object-[60%_50%]"
         title={
@@ -36,12 +36,14 @@ export const ServiceLandingPage = ({
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="block"
+              data-tina-field={tinaField('title')}
             >
-              {title}<span className="text-vish-accent">.</span>
+              {content.title}<span className="text-vish-accent">.</span>
             </motion.span>
           </h1>
         }
-        description={description}
+        description={content.description}
+        descriptionTinaField={tinaField('description')}
         action={
           <Button
             href={PROJECT_INQUIRY_HREF}
@@ -52,8 +54,9 @@ export const ServiceLandingPage = ({
             ariaLabel={PROJECT_INQUIRY_ARIA_LABEL}
             dataConversionAction={PROJECT_INQUIRY_ACTION}
             className="mt-8 font-mono text-xs font-semibold uppercase tracking-widest"
+            tinaField={tinaField('primaryCtaLabel')}
           >
-            Schedule a Free Call
+            {content.primaryCtaLabel}
           </Button>
         }
       />

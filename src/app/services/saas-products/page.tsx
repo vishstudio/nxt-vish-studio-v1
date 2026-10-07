@@ -1,11 +1,9 @@
 import type { Metadata } from 'next';
+import { getSaasProductsPage } from '@/src/lib/content';
+import { toMetadata } from '@/src/lib/seo';
 import { SaasProductsPage } from '@/src/views/SaasProductsPage';
 
-export const metadata: Metadata = {
-  title: 'SaaS Products | VISH Studio',
-  description:
-    'SaaS product design and development for client portals, operational products, and subscription-ready web applications.',
-};
+export const metadata: Metadata = toMetadata(getSaasProductsPage().seo);
 
 const SaasProducts = () => {
   return <SaasProductsPage />;

@@ -1,0 +1,63 @@
+{
+  "_template": "saasProducts",
+  "seo": {
+    "title": "SaaS Products | VISH Studio",
+    "description": "SaaS product design and development for client portals, operational products, and subscription-ready web applications."
+  },
+  "heroLabel": "SaaS Products",
+  "heroTitleLine1": "Build the SaaS",
+  "heroTitleLine2": "your clients use",
+  "heroDescription": "We design and engineer browser-based SaaS applications for businesses that want to give clients, teams, or partners a polished product experience instead of another spreadsheet or manual workflow.",
+  "primaryCtaLabel": "Scope Your SaaS",
+  "secondaryCtaLabel": "View Pricing",
+  "tracksLabel": "Product Tracks",
+  "tracksHeading": "SaaS applications",
+  "productTypes": [
+    {
+      "title": "Client portals",
+      "description": "Secure spaces for onboarding, documents, requests, payments, bookings, and account activity."
+    },
+    {
+      "title": "Operational SaaS",
+      "description": "Subscription-ready tools for teams that need approvals, dashboards, records, workflows, and reporting."
+    },
+    {
+      "title": "Vertical products",
+      "description": "Focused applications for hospitality, property, fitness, clinics, agencies, education, and local service businesses."
+    }
+  ],
+  "capabilitiesLabel": "Capabilities",
+  "capabilitiesHeading": "Built for use",
+  "capabilitiesDescription": "Every SaaS build is structured around the core jobs users need to complete, with the admin and operational layer treated as part of the product.",
+  "capabilities": [
+    {
+      "title": "Product architecture",
+      "text": "We shape the data model, roles, flows, billing logic, and admin surfaces before the interface is built.",
+      "icon": "boxes"
+    },
+    {
+      "title": "Workflow design",
+      "text": "Core actions are mapped into repeatable flows so clients can complete work without manual follow-up.",
+      "icon": "workflow"
+    },
+    {
+      "title": "Access control",
+      "text": "User roles, permissions, account states, and protected routes are planned into the product from the start.",
+      "icon": "shield-check"
+    },
+    {
+      "title": "Growth visibility",
+      "text": "Dashboards, events, reports, and export paths give teams a clear view of usage and business performance.",
+      "icon": "chart"
+    }
+  ],
+  "deliveryLabel": "Delivery",
+  "deliveryHeading": "From idea to working application",
+  "phases": [
+    "Discovery and product scope",
+    "UX flows and clickable prototype",
+    "Design system and application UI",
+    "Frontend, backend, auth, and database build",
+    "Testing, deployment, analytics, and handoff"
+  ]
+}

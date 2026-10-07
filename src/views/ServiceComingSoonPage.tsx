@@ -6,6 +6,8 @@ import { Contact } from '../components/contact/contact';
 import { Button } from '../components/ui/button/button';
 import { PageHero } from '../components/ui/page-hero/page-hero';
 import { PageLayout } from '../components/ui/page-layout/page-layout';
+import { useTinaPage } from '../hooks/tina/usePage';
+import { getServicePage } from '../lib/content';
 import {
   PROJECT_INQUIRY_ACTION,
   PROJECT_INQUIRY_ARIA_LABEL,
@@ -13,22 +15,18 @@ import {
 } from '../lib/conversion';
 
 interface ServiceComingSoonPageProps {
-  label: string;
-  title: string;
-  mutedTitle: string;
-  description: string;
+  /** File name in `content/pages/services`, e.g. `templates`. */
+  slug: string;
 }
 
-export const ServiceComingSoonPage = ({
-  label,
-  title,
-  mutedTitle,
-  description,
-}: ServiceComingSoonPageProps) => {
+export const ServiceComingSoonPage = ({ slug }: ServiceComingSoonPageProps) => {
+  const { data: content, tinaField } = useTinaPage(`services/${slug}.json`, getServicePage(slug));
+
   return (
     <PageLayout>
       <PageHero
-        label={label}
+        label={content.label}
+        labelTinaField={tinaField('label')}
         backgroundImage="/assets/img/services-hero.jpg"
         backgroundImageClassName="object-[60%_50%]"
         title={
@@ -38,20 +36,23 @@ export const ServiceComingSoonPage = ({
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="block"
+              data-tina-field={tinaField('title')}
             >
-              {title}
+              {content.title}
             </motion.span>
             <motion.span
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="block text-gray-500"
+              data-tina-field={tinaField('mutedTitle')}
             >
-              {mutedTitle}<span className="text-vish-accent">.</span>
+              {content.mutedTitle}<span className="text-vish-accent">.</span>
             </motion.span>
           </h1>
         }
-        description={description}
+        description={content.description}
+        descriptionTinaField={tinaField('description')}
         action={
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
             <Button
@@ -63,18 +64,20 @@ export const ServiceComingSoonPage = ({
               ariaLabel={PROJECT_INQUIRY_ARIA_LABEL}
               dataConversionAction={PROJECT_INQUIRY_ACTION}
               className="font-mono text-xs font-semibold uppercase tracking-widest"
+              tinaField={tinaField('primaryCtaLabel')}
             >
-              Schedule a Free Call
+              {content.primaryCtaLabel}
             </Button>
             <Button
-              href="/services/saas-products"
+              href={content.secondaryCtaHref || '/services/saas-products'}
               variant="outline"
               size="lg"
               icon={<ArrowRight className="h-4 w-4" />}
               iconPosition="right"
               className="font-mono text-xs font-semibold uppercase tracking-widest"
+              tinaField={tinaField('secondaryCtaLabel')}
             >
-              Explore SaaS Products
+              {content.secondaryCtaLabel}
             </Button>
           </div>
         }
@@ -82,11 +85,17 @@ export const ServiceComingSoonPage = ({
       <section className="bg-black px-6 pb-28 pt-6 md:px-12 md:pb-36">
         <div className="mx-auto max-w-[1400px] border-t border-white/10 pt-12">
           <div className="max-w-3xl">
-            <span className="mb-5 block font-mono text-xs uppercase tracking-widest text-vish-accent">
-              Coming Soon
+            <span
+              className="mb-5 block font-mono text-xs uppercase tracking-widest text-vish-accent"
+              data-tina-field={tinaField('noticeLabel')}
+            >
+              {content.noticeLabel}
             </span>
-            <p className="font-sans text-xl leading-relaxed text-gray-400 md:text-2xl">
-              This service track is being prepared. For now, schedule a strategy call and we can scope the same work directly with you.
+            <p
+              className="font-sans text-xl leading-relaxed text-gray-400 md:text-2xl"
+              data-tina-field={tinaField('noticeText')}
+            >
+              {content.noticeText}
             </p>
           </div>
         </div>

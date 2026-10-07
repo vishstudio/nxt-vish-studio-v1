@@ -7,6 +7,7 @@
  */
 
 export { useTinaHome } from "./tina/useTinaHome";
+export { useTinaFaq } from "./tina/useTinaFaq";
 export { useTinaTestimonials } from "./tina/useTinaTestimonials";
 export { useTinaAbout } from "./tina/useTinaAbout";
 export { useTinaServices } from "./tina/useTinaServices";

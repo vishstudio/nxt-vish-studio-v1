@@ -21,6 +21,8 @@ import {
   type PricingCarePlan,
   type PricingCategory,
   type PricingPlan,
+  type PricingLabels,
+  withServiceName,
 } from '../lib/pricing';
 import { sortByCanonicalServiceOrder } from '../lib/services';
 
@@ -62,12 +64,14 @@ const PackageRow = ({
   tinaField,
   rawPlan,
   currency,
+  labels,
 }: {
   plan: PricingPlan;
   index: number;
   tinaField: (obj: any, field: string) => string | undefined;
   rawPlan: any;
   currency: PricingCurrency;
+  labels: PricingLabels;
 }) => {
   const localizedPrice = getLocalizedPlanPrice(plan, currency);
 
@@ -92,7 +96,7 @@ const PackageRow = ({
           {plan.featured && (
             <span className="inline-flex items-center gap-1.5 rounded-full bg-vish-accent px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-black">
               <Sparkles className="h-3 w-3" />
-              Most Popular
+              {labels.mostPopular}
             </span>
           )}
         </div>
@@ -181,12 +185,14 @@ const ActivePricingSection = ({
   tinaField,
   rawCategory,
   currency,
+  labels,
 }: {
   category: PricingCategory;
   categoryIndex: number;
   tinaField: (obj: any, field: string) => string | undefined;
   rawCategory: any;
   currency: PricingCurrency;
+  labels: PricingLabels;
 }) => {
   const detail = {
     carePlans: category.carePlans.length
@@ -233,6 +239,7 @@ const ActivePricingSection = ({
               tinaField={tinaField}
               rawPlan={rawCategory?.plans?.[index]}
               currency={currency}
+              labels={labels}
             />
           ))}
         </div>
@@ -241,13 +248,13 @@ const ActivePricingSection = ({
       <section className="grid gap-6 py-16 lg:grid-cols-[0.72fr_1.28fr] lg:items-stretch md:py-20">
         <div className="rounded-2xl border border-vish-accent/35 bg-vish-accent/[0.045] p-8 md:p-10">
           <span className="mb-5 block font-mono text-xs uppercase tracking-widest text-vish-accent">
-            Care Plans
+            {labels.careLabel}
           </span>
           <h3 className="font-display text-4xl font-medium text-white">
-            Monthly care by package
+            {labels.careHeading}
           </h3>
           <p className="mt-8 font-sans text-base leading-relaxed text-gray-400">
-            Each {category.label.toLowerCase()} package can be paired with its own maintenance scope after launch, so support scales with the complexity of the work.
+            {withServiceName(labels.careDescription, category.label)}
           </p>
         </div>
 
@@ -255,14 +262,14 @@ const ActivePricingSection = ({
           <div className="grid gap-6 border-b border-white/10 py-8 md:grid-cols-[0.42fr_1fr] md:items-end">
             <div>
               <span className="mb-4 block font-mono text-xs uppercase tracking-widest text-vish-accent">
-                Maintenance
+                {labels.maintenanceLabel}
               </span>
               <h3 className="font-display text-3xl font-medium text-white md:text-4xl">
-                Package care
+                {labels.maintenanceHeading}
               </h3>
             </div>
             <p className="font-sans text-sm leading-relaxed text-gray-400 md:text-base">
-              Monthly support is priced against the selected package tier, from essential checks to priority improvement cycles.
+              {labels.maintenanceDescription}
             </p>
           </div>
           {category.plans.map((plan, index) => {
@@ -328,14 +335,14 @@ const ActivePricingSection = ({
           <div className="grid gap-6 border-b border-white/10 py-8 md:grid-cols-[0.42fr_1fr] md:items-end">
             <div>
               <span className="mb-4 block font-mono text-xs uppercase tracking-widest text-vish-accent">
-                Additional Costs
+                {labels.addOnsLabel}
               </span>
               <h3 className="font-display text-3xl font-medium text-white md:text-4xl">
-                Common add-ons
+                {labels.addOnsHeading}
               </h3>
             </div>
             <p className="font-sans text-sm leading-relaxed text-gray-400 md:text-base">
-              These are typical add-on prices for {category.label.toLowerCase()} projects. Final pricing depends on complexity, content readiness, integrations, and timeline.
+              {withServiceName(labels.addOnsDescription, category.label)}
             </p>
           </div>
           {detail.addOns.map((addOn) => (
@@ -457,6 +464,7 @@ export const PricingPage = () => {
               tinaField={tinaField}
               rawCategory={activeRawCategory}
               currency={pricingCurrency}
+              labels={content.labels}
             />
           )}
 

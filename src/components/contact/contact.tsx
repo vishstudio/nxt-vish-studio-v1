@@ -13,29 +13,20 @@ import { LogoText } from '../logo-text/logo-text';
 import { NewsletterSignup } from '../newsletter-signup/newsletter-signup';
 import { Button } from '../ui/button/button';
 
-const exploreLinks = [
-  { label: 'Our work', href: '/projects' },
-  { label: 'About the studio', href: '/about' },
-  { label: 'Client stories', href: '/testimonials' },
-  { label: 'Schedule a call', href: '/book-call' },
-];
-
-const serviceLinks = [
-  { label: 'All services', href: '/services' },
-  { label: 'Websites', href: '/services/websites' },
-  { label: 'SaaS products', href: '/services/saas-products' },
-  { label: 'AI automations', href: '/services/ai-automations' },
-];
-
 export const Contact = () => {
   const { data: settings, tinaField, rawSiteSettings } = useTinaSettings();
+  const footer = settings.footer;
+  const rawFooter = rawSiteSettings?.footer;
+  const footerField = (name: string) => (rawFooter ? tinaField(rawFooter, name) : undefined);
 
   return (
     <footer className="contact bg-black px-6 pb-8 pt-14 text-white md:px-12 md:pb-10 md:pt-20" id="contact">
       <div className="mx-auto max-w-[1400px]">
         <div className="grid gap-10 border-y border-white/10 py-10 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,0.82fr)] lg:gap-16 lg:py-14">
           <div>
-            <p className="font-mono text-xs uppercase tracking-[0.18em] text-vish-accent">Let&apos;s connect</p>
+            <p className="font-mono text-xs uppercase tracking-[0.18em] text-vish-accent" data-tina-field={footerField('label')}>
+              {footer.label}
+            </p>
             <h2 className="mt-3 max-w-2xl font-display text-4xl font-medium tracking-tight text-white sm:text-5xl md:text-6xl">
               <span className="text-white" data-tina-field={tinaField('contactHeadingLine1')}>
                 {settings.contactHeadingLine1}
@@ -53,8 +44,9 @@ export const Contact = () => {
               dataConversionAction={PROJECT_INQUIRY_ACTION}
               icon={<CalendarCheck className="size-4" />}
               className="mt-8 w-fit"
+              tinaField={footerField('ctaLabel')}
             >
-              Schedule a free call
+              {footer.ctaLabel}
             </Button>
           </div>
           <div className="border-t border-white/10 pt-8 lg:border-l lg:border-t-0 lg:pl-12 lg:pt-0">
@@ -64,7 +56,9 @@ export const Contact = () => {
 
         <div className="grid gap-x-8 gap-y-12 border-b border-white/10 py-12 sm:grid-cols-2 lg:grid-cols-4 lg:py-16">
           <div className="sm:col-span-2 lg:col-span-1">
-            <h3 className="font-mono text-xs uppercase tracking-widest text-gray-500">Reach us</h3>
+            <h3 className="font-mono text-xs uppercase tracking-widest text-gray-500" data-tina-field={footerField('reachUsLabel')}>
+              {footer.reachUsLabel}
+            </h3>
             <div className="mt-4 grid gap-3">
               <a
                 href={`mailto:${settings.email}`}
@@ -85,16 +79,21 @@ export const Contact = () => {
                 <ArrowUpRight className="size-3.5 shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
               </a>
             </div>
-            <address className="mt-6 whitespace-pre-line font-sans text-sm leading-relaxed text-gray-400 not-italic">
+            <address
+              className="mt-6 whitespace-pre-line font-sans text-sm leading-relaxed text-gray-400 not-italic"
+              data-tina-field={tinaField('address')}
+            >
               {settings.address}
             </address>
           </div>
 
           <div>
-            <h3 className="font-mono text-xs uppercase tracking-widest text-gray-500">Explore</h3>
-            <nav className="mt-4 grid justify-items-start gap-3" aria-label="Footer navigation">
-              {exploreLinks.map((link) => (
-                <Button key={link.href} href={link.href} variant="link" size="text" className="text-sm font-normal text-gray-400 no-underline hover:text-white hover:no-underline">
+            <h3 className="font-mono text-xs uppercase tracking-widest text-gray-500" data-tina-field={footerField('exploreLabel')}>
+              {footer.exploreLabel}
+            </h3>
+            <nav className="mt-4 grid justify-items-start gap-3" aria-label="Footer navigation" data-tina-field={footerField('exploreLinks')}>
+              {footer.exploreLinks.map((link) => (
+                <Button key={link.url} href={link.url} variant="link" size="text" className="text-sm font-normal text-gray-400 no-underline hover:text-white hover:no-underline">
                   {link.label}
                 </Button>
               ))}
@@ -102,10 +101,12 @@ export const Contact = () => {
           </div>
 
           <div>
-            <h3 className="font-mono text-xs uppercase tracking-widest text-gray-500">Services</h3>
-            <nav className="mt-4 grid justify-items-start gap-3" aria-label="Service navigation">
-              {serviceLinks.map((link) => (
-                <Button key={link.href} href={link.href} variant="link" size="text" className="text-sm font-normal text-gray-400 no-underline hover:text-white hover:no-underline">
+            <h3 className="font-mono text-xs uppercase tracking-widest text-gray-500" data-tina-field={footerField('servicesLabel')}>
+              {footer.servicesLabel}
+            </h3>
+            <nav className="mt-4 grid justify-items-start gap-3" aria-label="Service navigation" data-tina-field={footerField('serviceLinks')}>
+              {footer.serviceLinks.map((link) => (
+                <Button key={link.url} href={link.url} variant="link" size="text" className="text-sm font-normal text-gray-400 no-underline hover:text-white hover:no-underline">
                   {link.label}
                 </Button>
               ))}
@@ -113,7 +114,9 @@ export const Contact = () => {
           </div>
 
           <div>
-            <h3 className="font-mono text-xs uppercase tracking-widest text-gray-500">Follow</h3>
+            <h3 className="font-mono text-xs uppercase tracking-widest text-gray-500" data-tina-field={footerField('followLabel')}>
+              {footer.followLabel}
+            </h3>
             <div className="mt-4 grid justify-items-start gap-3">
               {settings.socials.map((social, index) => {
                 const rawSocial = rawSiteSettings?.socials?.[index];
@@ -142,7 +145,7 @@ export const Contact = () => {
 
         <div className="flex flex-col gap-5 pt-6 font-mono text-xs uppercase tracking-wider text-gray-600 md:flex-row md:items-center md:justify-between">
           <span>
-            {settings.copyright}{' '}
+            <span data-tina-field={tinaField('copyright')}>{settings.copyright}</span>{' '}
             <span className="notranslate font-logo text-sm lowercase" translate="no">
               <strong>vish</strong> studio.
             </span>
@@ -153,7 +156,10 @@ export const Contact = () => {
                 {link.label}
               </Button>
             ))}
-            <CookieSettingsTrigger className="h-auto bg-transparent p-0 font-mono text-xs uppercase tracking-wider text-gray-600 shadow-none hover:bg-transparent hover:text-white" />
+            <CookieSettingsTrigger
+              label={settings.cookies.triggerLabel}
+              tinaField={rawSiteSettings?.cookies ? tinaField(rawSiteSettings.cookies, 'triggerLabel') : undefined}
+              className="h-auto bg-transparent p-0 font-mono text-xs uppercase tracking-wider text-gray-600 shadow-none hover:bg-transparent hover:text-white" />
           </div>
         </div>
       </div>

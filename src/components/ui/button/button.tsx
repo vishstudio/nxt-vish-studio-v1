@@ -38,6 +38,8 @@ interface ButtonProps {
   ariaControls?: string;
   ariaExpanded?: boolean;
   id?: string;
+  /** TinaCMS click-to-edit annotation for the button label. */
+  tinaField?: string;
 }
 
 function cn(...inputs: ClassValue[]) {
@@ -63,6 +65,7 @@ export const Button = ({
   ariaControls,
   ariaExpanded,
   id,
+  tinaField,
 }: ButtonProps) => {
   const handleClick = dataConversionAction
     ? () => {
@@ -130,6 +133,7 @@ export const Button = ({
           aria-controls={ariaControls}
           aria-expanded={ariaExpanded}
           data-conversion-action={dataConversionAction}
+          data-tina-field={tinaField}
           tabIndex={tabIndex}
           role={role}
           id={id}
@@ -151,6 +155,7 @@ export const Button = ({
           aria-controls={ariaControls}
           aria-expanded={ariaExpanded}
           data-conversion-action={dataConversionAction}
+          data-tina-field={tinaField}
           tabIndex={tabIndex}
           role={role}
           id={id}
@@ -170,6 +175,7 @@ export const Button = ({
         aria-controls={ariaControls}
         aria-expanded={ariaExpanded}
         data-conversion-action={dataConversionAction}
+        data-tina-field={tinaField}
         tabIndex={tabIndex}
         role={role}
         id={id}
@@ -191,6 +197,7 @@ export const Button = ({
       aria-controls={ariaControls}
       aria-expanded={ariaExpanded}
       data-conversion-action={dataConversionAction}
+      data-tina-field={tinaField}
       tabIndex={tabIndex}
       role={role}
       id={id}

@@ -1,4 +1,9 @@
 {
+  "_template": "legal",
+  "seo": {
+    "title": "Privacy Policy | VISH Studio",
+    "description": "VISH Studio privacy policy — how we collect, use, and protect your data."
+  },
   "title": "Privacy Policy",
   "slug": "privacy",
   "heroLabel": "Privacy",

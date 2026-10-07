@@ -66,8 +66,9 @@ export const AboutPage = () => {
               ariaLabel={PROJECT_INQUIRY_ARIA_LABEL}
               dataConversionAction={PROJECT_INQUIRY_ACTION}
               className="font-mono text-xs font-semibold uppercase tracking-widest"
+              tinaField={tinaField('heroCtaLabel')}
             >
-              Schedule a Free Call
+              {content.heroCtaLabel}
             </Button>
           </motion.div>
         }
@@ -96,8 +97,11 @@ export const AboutPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <span className="mb-5 block font-mono text-xs uppercase tracking-widest text-vish-accent">
-                The VISH story
+              <span
+                className="mb-5 block font-mono text-xs uppercase tracking-widest text-vish-accent"
+                data-tina-field={tinaField('storyLabel')}
+              >
+                {content.storyLabel}
               </span>
               <SectionTitle size="sm" tinaField={tinaField('introHeading')}>
                 {content.introHeading}
@@ -124,14 +128,15 @@ export const AboutPage = () => {
               icon={<ArrowRight className="h-4 w-4" />}
               iconPosition="right"
               className="font-mono text-xs font-semibold uppercase tracking-widest"
+              tinaField={tinaField('storyCtaLabel')}
             >
-              See the work
+              {content.storyCtaLabel}
             </Button>
           </div>
         </div>
       </section>
 
-      <Team members={content.teamMembers} rawTinaMembers={rawAboutPage?.teamMembers} tinaField={tinaField} />
+      <Team />
 
       <TrustedPartners />
 

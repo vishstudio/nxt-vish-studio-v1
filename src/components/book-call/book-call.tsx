@@ -1,8 +1,11 @@
 'use client';
 
 import { FormEvent, useMemo, useState } from 'react';
-import { ArrowRight, CalendarCheck, CalendarDays, ChevronLeft, ChevronRight, Clock, Sparkles, Video } from 'lucide-react';
+import { ArrowRight, CalendarCheck, CalendarDays, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
+import { useTinaPage } from '@/src/hooks/tina/usePage';
+import { getBookCallPage } from '@/src/lib/content';
 import { createCallBooking } from '@/src/lib/firebase';
+import { getIcon } from '@/src/lib/icons';
 import { BookCallConfirmationModal } from '../book-call-confirmation-modal/book-call-confirmation-modal';
 import { Button } from '../ui/button/button';
 import { FormField } from '../form-field/form-field';
@@ -103,7 +106,7 @@ function formatDisplayTime(value: string) {
   return minute === '00' ? `${Number(hour)}h` : `${Number(hour)}h${minute}`;
 }
 
-function getBookingErrorMessage(error: unknown) {
+function getBookingErrorMessage(error: unknown, fallback: string) {
   if (
     typeof error === 'object' &&
     error !== null &&
@@ -113,10 +116,11 @@ function getBookingErrorMessage(error: unknown) {
     return 'Booking storage permissions are not live yet. Please deploy the latest Firestore rules for the bookings collection, or email hello@vish.studio.';
   }
 
-  return error instanceof Error ? error.message : 'Unable to save your booking request. Please email hello@vish.studio.';
+  return error instanceof Error ? error.message : fallback;
 }
 
 export const BookCall = () => {
+  const { data: content, tinaField, rawPage } = useTinaPage('book-call.json', getBookCallPage());
   const today = useMemo(() => toDateValue(new Date()), []);
   const firstAvailableDate = useMemo(() => getNextWeekdayDateValue(), []);
   const [selectedDate, setSelectedDate] = useState(firstAvailableDate);
@@ -151,7 +155,7 @@ export const BookCall = () => {
       });
       setBookingId(id);
     } catch (bookingError) {
-      setError(getBookingErrorMessage(bookingError));
+      setError(getBookingErrorMessage(bookingError, content.errorMessage));
     } finally {
       setIsSubmitting(false);
     }
@@ -161,44 +165,61 @@ export const BookCall = () => {
     <>
       <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
         <div className="lg:sticky lg:top-32">
-          <p className="mb-4 font-mono text-xs font-semibold uppercase tracking-widest text-vish-accent">
-            Schedule a strategy call
+          <p
+            className="mb-4 font-mono text-xs font-semibold uppercase tracking-widest text-vish-accent"
+            data-tina-field={tinaField('label')}
+          >
+            {content.label}
           </p>
-          <SectionTitle size="lg" className="max-w-3xl">
-            Schedule a Free Call
+          <SectionTitle size="lg" className="max-w-3xl" tinaField={tinaField('heading')}>
+            {content.heading}
           </SectionTitle>
-          <p className="mt-8 max-w-2xl font-sans text-lg leading-relaxed text-gray-400 md:text-xl">
-            A focused 20-30 minute call to understand your goals, clarify the best next step, and decide whether a project brief is needed.
+          <p
+            className="mt-8 max-w-2xl font-sans text-lg leading-relaxed text-gray-400 md:text-xl"
+            data-tina-field={tinaField('description')}
+          >
+            {content.description}
           </p>
 
           <div className="mt-12 hidden md:grid gap-4">
-            {[
-              { icon: Clock, title: '20-30 minutes', description: 'Booked in a 30-minute slot so there is enough room for context.' },
-              { icon: Video, title: 'Google Meet invite', description: 'We will send the calendar invite with the Google Meet link to your email shortly.' },
-              { icon: CalendarDays, title: 'Clear next step', description: 'You leave with direction on scope, budget range, timeline, or the Start Project brief.' },
-            ].map((item) => (
-              <div key={item.title} className="flex gap-4 border-t border-white/10 pt-5">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/10 text-gray-400">
-                  <item.icon className="h-4 w-4" aria-hidden="true" />
+            {content.highlights.map((item, index) => {
+              const Icon = getIcon(item.icon);
+              const rawItem = rawPage?.highlights?.[index];
+
+              return (
+                <div key={item.title} className="flex gap-4 border-t border-white/10 pt-5">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/10 text-gray-400">
+                    <Icon className="h-4 w-4" aria-hidden="true" />
+                  </div>
+                  <div>
+                    <h2
+                      className="font-display text-xl font-medium text-white"
+                      data-tina-field={rawItem ? tinaField(rawItem, 'title') : undefined}
+                    >
+                      {item.title}
+                    </h2>
+                    <p
+                      className="mt-2 font-sans text-sm leading-relaxed text-gray-400"
+                      data-tina-field={rawItem ? tinaField(rawItem, 'description') : undefined}
+                    >
+                      {item.description}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h2 className="font-display text-xl font-medium text-white">{item.title}</h2>
-                  <p className="mt-2 font-sans text-sm leading-relaxed text-gray-400">{item.description}</p>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           <div className="mt-10 hidden lg:flex flex-col items-start rounded-2xl border border-white/8 bg-white/[0.02] p-8">
             <div>
               <div className="mb-4 flex items-center gap-3">
                 <Sparkles className="h-5 w-5 text-vish-accent" aria-hidden="true" />
-                <h2 className="font-display text-2xl font-medium text-white md:text-3xl">
-                  Already know the scope?
+                <h2 className="font-display text-2xl font-medium text-white md:text-3xl" data-tina-field={tinaField('scopeHeading')}>
+                  {content.scopeHeading}
                 </h2>
               </div>
-              <p className="max-w-2xl font-sans text-base leading-relaxed text-gray-400">
-                You can skip the call and send the full project brief instead.
+              <p className="max-w-2xl font-sans text-base leading-relaxed text-gray-400" data-tina-field={tinaField('scopeDescription')}>
+                {content.scopeDescription}
               </p>
             </div>
             <Button
@@ -207,8 +228,9 @@ export const BookCall = () => {
               size="lg"
               className="mt-7 w-full font-mono text-xs font-semibold uppercase tracking-widest sm:w-auto"
               icon={<ArrowRight className="h-4 w-4" />}
+              tinaField={tinaField('scopeCtaLabel')}
             >
-              Start a Project
+              {content.scopeCtaLabel}
             </Button>
           </div>
         </div>
@@ -219,15 +241,19 @@ export const BookCall = () => {
               <CalendarDays className="h-5 w-5" />
             </div>
             <div>
-              <h2 className="font-display text-2xl font-medium text-white">Choose your slot<span className="text-vish-accent">.</span></h2>
-              <p className="mt-1 font-sans text-sm text-gray-500">Timezone: Mauritius</p>
+              <h2 className="font-display text-2xl font-medium text-white" data-tina-field={tinaField('formHeading')}>
+                {content.formHeading}<span className="text-vish-accent">.</span>
+              </h2>
+              <p className="mt-1 font-sans text-sm text-gray-500" data-tina-field={tinaField('timezoneLabel')}>
+                {content.timezoneLabel}
+              </p>
             </div>
           </div>
 
           <div className="mt-8">
             <div className="flex items-center justify-between gap-4">
-              <p className="block font-sans text-base font-medium text-white">
-                Select date<span className="ml-1 text-white/45">*</span>
+              <p className="block font-sans text-base font-medium text-white" data-tina-field={tinaField('dateLabel')}>
+                {content.dateLabel}<span className="ml-1 text-white/45">*</span>
               </p>
               <div className="flex items-center gap-2">
                 <Button
@@ -257,7 +283,7 @@ export const BookCall = () => {
             <div className="mt-4 rounded-3xl border border-white/10 bg-black/40 p-4">
               <div className="flex items-center justify-between">
                 <p className="font-display text-xl font-medium text-white">{formatMonthLabel(visibleMonth)}</p>
-                <p className="font-mono text-[10px] uppercase tracking-widest text-gray-500">Weekdays</p>
+                <p className="font-mono text-[10px] uppercase tracking-widest text-gray-500" data-tina-field={tinaField('weekdaysLabel')}>{content.weekdaysLabel}</p>
               </div>
               <div className="mt-5 grid grid-cols-7 gap-1 text-center font-mono text-[10px] uppercase tracking-widest text-gray-500">
                 {weekdayLabels.map((weekday) => (
@@ -293,8 +319,8 @@ export const BookCall = () => {
           </div>
 
           <div className="mt-8">
-            <p className="mb-3 block font-sans text-base font-medium text-white">
-              Available time<span className="ml-1 text-white/45">*</span>
+            <p className="mb-3 block font-sans text-base font-medium text-white" data-tina-field={tinaField('timeLabel')}>
+              {content.timeLabel}<span className="ml-1 text-white/45">*</span>
             </p>
             <div className="grid grid-cols-3 gap-2">
               {timeSlots.map((slot) => (
@@ -316,7 +342,7 @@ export const BookCall = () => {
           <div className="mt-8 grid gap-5">
             <FormField
               id="booking-name"
-              label="Name"
+              label={content.nameLabel}
               value={name}
               onChange={setName}
               autoComplete="name"
@@ -325,7 +351,7 @@ export const BookCall = () => {
             />
             <FormField
               id="booking-email"
-              label="Email for the invite"
+              label={content.emailLabel}
               value={email}
               onChange={setEmail}
               type="email"
@@ -333,7 +359,7 @@ export const BookCall = () => {
               required
               requiredIndicatorClassName="text-white/45"
             />
-            <FormField id="booking-company" label="Company" value={company} onChange={setCompany} autoComplete="organization" />
+            <FormField id="booking-company" label={content.companyLabel} value={company} onChange={setCompany} autoComplete="organization" />
           </div>
 
           {error ? (
@@ -349,8 +375,9 @@ export const BookCall = () => {
             disabled={isSubmitting}
             icon={<CalendarCheck className="h-4 w-4" />}
             className="mt-8 w-full font-mono text-xs font-semibold uppercase tracking-widest"
+            tinaField={tinaField('submitLabel')}
           >
-            {isSubmitting ? 'Saving Request' : 'Schedule a Free Call'}
+            {isSubmitting ? content.submittingLabel : content.submitLabel}
           </Button>
         </form>
 
@@ -358,12 +385,12 @@ export const BookCall = () => {
           <div>
             <div className="mb-4 flex items-center gap-3">
               <Sparkles className="h-5 w-5 text-vish-accent" aria-hidden="true" />
-              <h2 className="font-display text-2xl font-medium text-white md:text-3xl">
-                Already know the scope?
+              <h2 className="font-display text-2xl font-medium text-white md:text-3xl" data-tina-field={tinaField('scopeHeading')}>
+                {content.scopeHeading}
               </h2>
             </div>
-            <p className="max-w-2xl font-sans text-base leading-relaxed text-gray-400">
-              You can skip the call and send the full project brief instead.
+            <p className="max-w-2xl font-sans text-base leading-relaxed text-gray-400" data-tina-field={tinaField('scopeDescription')}>
+              {content.scopeDescription}
             </p>
           </div>
           <Button
@@ -372,8 +399,9 @@ export const BookCall = () => {
             size="lg"
             className="mt-7 w-full font-mono text-xs font-semibold uppercase tracking-widest sm:w-auto"
             icon={<ArrowRight className="h-4 w-4" />}
+            tinaField={tinaField('scopeCtaLabel')}
           >
-            Start a Project
+            {content.scopeCtaLabel}
           </Button>
         </div>
 
@@ -385,6 +413,7 @@ export const BookCall = () => {
         selectedDate={selectedDate}
         selectedTime={selectedTime}
         email={email}
+        content={content.confirmation}
         onClose={() => setBookingId('')}
       />
     </>

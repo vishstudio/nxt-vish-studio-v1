@@ -54,36 +54,18 @@ type Query {
   collections: [Collection!]!
   node(id: String): Node!
   document(collection: String, relativePath: String): DocumentNode!
-  project(relativePath: String): Project!
-  projectConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ProjectFilter): ProjectConnection!
-  legalPage(relativePath: String): LegalPage!
-  legalPageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: LegalPageFilter): LegalPageConnection!
+  page(relativePath: String): Page!
+  pageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PageFilter): PageConnection!
   siteSettings(relativePath: String): SiteSettings!
   siteSettingsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: SiteSettingsFilter): SiteSettingsConnection!
-  partners(relativePath: String): Partners!
-  partnersConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PartnersFilter): PartnersConnection!
-  homePage(relativePath: String): HomePage!
-  homePageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: HomePageFilter): HomePageConnection!
-  testimonialsPage(relativePath: String): TestimonialsPage!
-  testimonialsPageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: TestimonialsPageFilter): TestimonialsPageConnection!
-  aboutPage(relativePath: String): AboutPage!
-  aboutPageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: AboutPageFilter): AboutPageConnection!
-  servicesPage(relativePath: String): ServicesPage!
-  servicesPageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ServicesPageFilter): ServicesPageConnection!
-  pricingPage(relativePath: String): PricingPage!
-  pricingPageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PricingPageFilter): PricingPageConnection!
+  project(relativePath: String): Project!
+  projectConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ProjectFilter): ProjectConnection!
 }
 
 input DocumentFilter {
-  project: ProjectFilter
-  legalPage: LegalPageFilter
+  page: PageFilter
   siteSettings: SiteSettingsFilter
-  partners: PartnersFilter
-  homePage: HomePageFilter
-  testimonialsPage: TestimonialsPageFilter
-  aboutPage: AboutPageFilter
-  servicesPage: ServicesPageFilter
-  pricingPage: PricingPageFilter
+  project: ProjectFilter
 }
 
 type DocumentConnectionEdges {
@@ -109,7 +91,1480 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Project | LegalPage | SiteSettings | Partners | HomePage | TestimonialsPage | AboutPage | ServicesPage | PricingPage | Folder
+union DocumentNode = PageHome | PageAbout | PageServices | PageServicePage | PageSaasProducts | PagePricing | PageTestimonials | PageFaq | PageProjects | PageBookCall | PageStartProject | PageWalkthrough | PageLegal | PageNotFound | SiteSettings | Project | Folder
+
+type PageHomeSeo {
+  title: String
+  description: String
+}
+
+type PageHomeHeroSignals {
+  label: String
+  icon: String
+}
+
+type PageHomeHeroCapabilityItems {
+  label: String
+  icon: String
+}
+
+type PageHomeHeroStats {
+  label: String!
+  value: Float!
+  prefix: String
+  suffix: String
+  format: String
+}
+
+type PageHomeProcessSteps {
+  num: String
+  title: String!
+  description: String
+  tags: [String]
+}
+
+type PageHome implements Node & Document {
+  seo: PageHomeSeo
+  heroLabel: String
+  heroTypingPrefix: String
+  heroTypingPhrases: [String]
+  heroDescription: String
+  heroSignals: [PageHomeHeroSignals]
+  heroPrimaryCtaLabel: String
+  heroSecondaryCtaLabel: String
+  heroCapabilityLabel: String
+  heroCapabilityHeading: String
+  heroCapabilityItems: [PageHomeHeroCapabilityItems]
+  heroStats: [PageHomeHeroStats]
+  aboutHeading: String
+  aboutParagraph1: String
+  aboutParagraph2: String
+  projectsLabel: String
+  projectsHeading: String
+  projectsDescription: String
+  projectsButtonText: String
+  projectsSiteLinkLabel: String
+  processLabel: String
+  processHeading: String
+  processSubtext: String
+  processSteps: [PageHomeProcessSteps]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+type PageAboutSeo {
+  title: String
+  description: String
+}
+
+type PageAboutValues {
+  id: String
+  title: String!
+  description: String
+}
+
+type PageAbout implements Node & Document {
+  seo: PageAboutSeo
+  heroLabel: String
+  heroTitleLine1: String
+  heroTitleLine2: String
+  heroDescription: String
+  heroCtaLabel: String
+  studioImage: String
+  studioImageAlt: String
+  storyLabel: String
+  introHeading: String
+  introParagraph1: String
+  introParagraph2: String
+  storyCtaLabel: String
+  valuesLabel: String
+  valuesHeading: String
+  values: [PageAboutValues]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+type PageServicesSeo {
+  title: String
+  description: String
+}
+
+type PageServicesCategories {
+  category: String!
+  description: String
+  image: String
+  imageAlt: String
+  plan: [String]
+  items: [String]
+}
+
+type PageServicesShowcase {
+  label: String
+  heading: String
+  description: String
+  listLabel: String
+  coversLabel: String
+  focusLabel: String
+}
+
+type PageServicesExplorer {
+  label: String
+  heading: String
+  description: String
+  listLabel: String
+  listPrompt: String
+  allServicesLabel: String
+  selectedLabel: String
+  planLabel: String
+  scopeLabel: String
+  ctaLabel: String
+  imageLabel: String
+}
+
+type PageServices implements Node & Document {
+  seo: PageServicesSeo
+  heroLabel: String
+  heroTitleLine1: String
+  heroTitleLine2: String
+  categories: [PageServicesCategories]
+  showcase: PageServicesShowcase
+  explorer: PageServicesExplorer
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+type PageServicePageSeo {
+  title: String
+  description: String
+}
+
+type PageServicePage implements Node & Document {
+  seo: PageServicePageSeo
+  label: String
+  title: String
+  mutedTitle: String
+  description: String
+  primaryCtaLabel: String
+  secondaryCtaLabel: String
+  secondaryCtaHref: String
+  noticeLabel: String
+  noticeText: String
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+type PageSaasProductsSeo {
+  title: String
+  description: String
+}
+
+type PageSaasProductsProductTypes {
+  title: String
+  description: String
+}
+
+type PageSaasProductsCapabilities {
+  title: String
+  text: String
+  icon: String
+}
+
+type PageSaasProducts implements Node & Document {
+  seo: PageSaasProductsSeo
+  heroLabel: String
+  heroTitleLine1: String
+  heroTitleLine2: String
+  heroDescription: String
+  primaryCtaLabel: String
+  secondaryCtaLabel: String
+  tracksLabel: String
+  tracksHeading: String
+  productTypes: [PageSaasProductsProductTypes]
+  capabilitiesLabel: String
+  capabilitiesHeading: String
+  capabilitiesDescription: String
+  capabilities: [PageSaasProductsCapabilities]
+  deliveryLabel: String
+  deliveryHeading: String
+  phases: [String]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+type PagePricingSeo {
+  title: String
+  description: String
+}
+
+type PagePricingPricingCategoriesPlansCtaLink {
+  linkType: String
+  linkValue: String
+}
+
+type PagePricingPricingCategoriesPlansCarePlan {
+  title: String
+  price: String
+  priceGbp: String
+  cadence: String
+  summary: String
+}
+
+type PagePricingPricingCategoriesPlans {
+  label: String
+  name: String!
+  price: String!
+  priceGbp: String
+  discountedPrice: String
+  discountedPriceGbp: String
+  priceNote: String
+  delivery: String
+  tagline: String
+  featured: Boolean
+  ctaLabel: String
+  ctaLink: PagePricingPricingCategoriesPlansCtaLink
+  features: [String]
+  carePlan: PagePricingPricingCategoriesPlansCarePlan
+  bestFor: String
+  revisions: String
+}
+
+type PagePricingPricingCategoriesCarePlans {
+  title: String
+  price: String
+  priceGbp: String
+  cadence: String
+  summary: String
+}
+
+type PagePricingPricingCategoriesAddOns {
+  label: String
+  price: String
+  priceGbp: String
+  note: String
+}
+
+type PagePricingPricingCategories {
+  label: String!
+  slug: String
+  plans: [PagePricingPricingCategoriesPlans]
+  carePlans: [PagePricingPricingCategoriesCarePlans]
+  addOns: [PagePricingPricingCategoriesAddOns]
+}
+
+type PagePricingLabels {
+  mostPopular: String
+  choosePlan: String
+  viewAllPlans: String
+  carePlanPrefix: String
+  bestForPrefix: String
+  revisionsPrefix: String
+  careLabel: String
+  careHeading: String
+  careDescription: String
+  maintenanceLabel: String
+  maintenanceHeading: String
+  maintenanceDescription: String
+  addOnsLabel: String
+  addOnsHeading: String
+  addOnsDescription: String
+}
+
+type PagePricing implements Node & Document {
+  seo: PagePricingSeo
+  heroLabel: String
+  heroTitleLine1: String
+  heroTitleLine2: String
+  heroSubtext: String
+  heroBackgroundImage: String
+  heroBackgroundImageUrl: String
+  sectionLabel: String
+  sectionHeading: String
+  sectionSubtext: String
+  pricingCategories: [PagePricingPricingCategories]
+  customLabel: String
+  customDescription: String
+  customCtaLabel: String
+  customCtaHref: String
+  labels: PagePricingLabels
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+type PageTestimonialsSeo {
+  title: String
+  description: String
+}
+
+type PageTestimonialsTestimonials {
+  quote: String!
+  name: String!
+  role: String!
+  company: String
+}
+
+type PageTestimonials implements Node & Document {
+  seo: PageTestimonialsSeo
+  heroLabel: String
+  heading: String
+  subtext: String
+  viewAllLabel: String
+  emptyMessage: String
+  testimonials: [PageTestimonialsTestimonials]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+type PageFaqSeo {
+  title: String
+  description: String
+}
+
+type PageFaqFaqItems {
+  question: String!
+  answer: String
+}
+
+type PageFaq implements Node & Document {
+  seo: PageFaqSeo
+  label: String
+  faqHeading: String
+  faqSubtext: String
+  faqItems: [PageFaqFaqItems]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+type PageProjectsSeo {
+  title: String
+  description: String
+}
+
+type PageProjectsCaseStudy {
+  backLabel: String
+  visitSiteLabel: String
+  detailsHeading: String
+  yearLabel: String
+  categoryLabel: String
+  roleLabel: String
+  defaultRole: String
+  liveSiteLabel: String
+  viewSiteLabel: String
+  techStackLabel: String
+  overviewTitle: String
+  challengeTitle: String
+  strategyTitle: String
+  solutionTitle: String
+  emptySectionText: String
+  galleryLabel: String
+  notFoundHeading: String
+  notFoundCtaLabel: String
+}
+
+type PageProjects implements Node & Document {
+  seo: PageProjectsSeo
+  heroLabel: String
+  heroTitleLine1: String
+  heroTitleLine2: String
+  heroDescription: String
+  caseStudy: PageProjectsCaseStudy
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+type PageBookCallSeo {
+  title: String
+  description: String
+}
+
+type PageBookCallHighlights {
+  title: String
+  description: String
+  icon: String
+}
+
+type PageBookCallConfirmation {
+  label: String
+  heading: String
+  description: String
+  slotLabel: String
+  slotJoiner: String
+  referenceLabel: String
+  homeCtaLabel: String
+  projectCtaLabel: String
+}
+
+type PageBookCall implements Node & Document {
+  seo: PageBookCallSeo
+  label: String
+  heading: String
+  description: String
+  highlights: [PageBookCallHighlights]
+  scopeHeading: String
+  scopeDescription: String
+  scopeCtaLabel: String
+  formHeading: String
+  timezoneLabel: String
+  submitLabel: String
+  submittingLabel: String
+  dateLabel: String
+  weekdaysLabel: String
+  timeLabel: String
+  nameLabel: String
+  emailLabel: String
+  companyLabel: String
+  errorMessage: String
+  confirmation: PageBookCallConfirmation
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+type PageStartProjectSeo {
+  title: String
+  description: String
+}
+
+type PageStartProjectSteps {
+  label: String
+  title: String
+  intro: String
+}
+
+type PageStartProjectLabels {
+  nameLabel: String
+  companyLabel: String
+  emailLabel: String
+  phoneLabel: String
+  reviewServiceHeading: String
+  reviewContactHeading: String
+  reviewBriefHeading: String
+  deliveryPrefix: String
+  notProvided: String
+  notSelected: String
+  summaryHeading: String
+  summaryServiceLabel: String
+  summaryPackageLabel: String
+  privacyHeading: String
+  privacyText: String
+  progressLabel: String
+  stepCounter: String
+  backLabel: String
+  continueLabel: String
+  submitLabel: String
+  submittingLabel: String
+  errorMessage: String
+}
+
+type PageStartProjectConfirmation {
+  label: String
+  heading: String
+  description: String
+  contactPrompt: String
+  homeCtaLabel: String
+}
+
+type PageStartProject implements Node & Document {
+  seo: PageStartProjectSeo
+  steps: [PageStartProjectSteps]
+  labels: PageStartProjectLabels
+  confirmation: PageStartProjectConfirmation
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+type PageWalkthroughSeo {
+  title: String
+  description: String
+}
+
+type PageWalkthroughNavigationItems {
+  label: String
+  icon: String
+}
+
+type PageWalkthroughSteps {
+  eyebrow: String
+  title: String
+  description: String
+  outcome: String
+  icon: String
+}
+
+type PageWalkthrough implements Node & Document {
+  seo: PageWalkthroughSeo
+  navigationItems: [PageWalkthroughNavigationItems]
+  statusLabel: String
+  statusText: String
+  label: String
+  heading: String
+  description: String
+  primaryCtaLabel: String
+  secondaryCtaLabel: String
+  todayLabel: String
+  todayBadge: String
+  activityItems: [String]
+  outcomeLabel: String
+  steps: [PageWalkthroughSteps]
+  closingHeading: String
+  closingDescription: String
+  closingCtaLabel: String
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+type PageLegalSeo {
+  title: String
+  description: String
+}
+
+type PageLegalSections {
+  title: String!
+  body: String
+}
+
+type PageLegal implements Node & Document {
+  seo: PageLegalSeo
+  title: String
+  slug: String
+  heroLabel: String
+  intro: String
+  lastUpdated: String
+  sections: [PageLegalSections]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+type PageNotFound implements Node & Document {
+  heading: String
+  description: String
+  ctaLabel: String
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+union Page = PageHome | PageAbout | PageServices | PageServicePage | PageSaasProducts | PagePricing | PageTestimonials | PageFaq | PageProjects | PageBookCall | PageStartProject | PageWalkthrough | PageLegal | PageNotFound
+
+input StringFilter {
+  startsWith: String
+  eq: String
+  exists: Boolean
+  in: [String]
+}
+
+input PageHomeSeoFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input PageHomeHeroSignalsFilter {
+  label: StringFilter
+  icon: StringFilter
+}
+
+input PageHomeHeroCapabilityItemsFilter {
+  label: StringFilter
+  icon: StringFilter
+}
+
+input NumberFilter {
+  lt: Float
+  lte: Float
+  gte: Float
+  gt: Float
+  eq: Float
+  exists: Boolean
+  in: [Float]
+}
+
+input PageHomeHeroStatsFilter {
+  label: StringFilter
+  value: NumberFilter
+  prefix: StringFilter
+  suffix: StringFilter
+  format: StringFilter
+}
+
+input PageHomeProcessStepsFilter {
+  num: StringFilter
+  title: StringFilter
+  description: StringFilter
+  tags: StringFilter
+}
+
+input PageHomeFilter {
+  seo: PageHomeSeoFilter
+  heroLabel: StringFilter
+  heroTypingPrefix: StringFilter
+  heroTypingPhrases: StringFilter
+  heroDescription: StringFilter
+  heroSignals: PageHomeHeroSignalsFilter
+  heroPrimaryCtaLabel: StringFilter
+  heroSecondaryCtaLabel: StringFilter
+  heroCapabilityLabel: StringFilter
+  heroCapabilityHeading: StringFilter
+  heroCapabilityItems: PageHomeHeroCapabilityItemsFilter
+  heroStats: PageHomeHeroStatsFilter
+  aboutHeading: StringFilter
+  aboutParagraph1: StringFilter
+  aboutParagraph2: StringFilter
+  projectsLabel: StringFilter
+  projectsHeading: StringFilter
+  projectsDescription: StringFilter
+  projectsButtonText: StringFilter
+  projectsSiteLinkLabel: StringFilter
+  processLabel: StringFilter
+  processHeading: StringFilter
+  processSubtext: StringFilter
+  processSteps: PageHomeProcessStepsFilter
+}
+
+input PageAboutSeoFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input PageAboutValuesFilter {
+  id: StringFilter
+  title: StringFilter
+  description: StringFilter
+}
+
+input PageAboutFilter {
+  seo: PageAboutSeoFilter
+  heroLabel: StringFilter
+  heroTitleLine1: StringFilter
+  heroTitleLine2: StringFilter
+  heroDescription: StringFilter
+  heroCtaLabel: StringFilter
+  studioImage: StringFilter
+  studioImageAlt: StringFilter
+  storyLabel: StringFilter
+  introHeading: StringFilter
+  introParagraph1: StringFilter
+  introParagraph2: StringFilter
+  storyCtaLabel: StringFilter
+  valuesLabel: StringFilter
+  valuesHeading: StringFilter
+  values: PageAboutValuesFilter
+}
+
+input PageServicesSeoFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input ImageFilter {
+  startsWith: String
+  eq: String
+  exists: Boolean
+  in: [String]
+}
+
+input PageServicesCategoriesFilter {
+  category: StringFilter
+  description: StringFilter
+  image: ImageFilter
+  imageAlt: StringFilter
+  plan: StringFilter
+  items: StringFilter
+}
+
+input PageServicesShowcaseFilter {
+  label: StringFilter
+  heading: StringFilter
+  description: StringFilter
+  listLabel: StringFilter
+  coversLabel: StringFilter
+  focusLabel: StringFilter
+}
+
+input PageServicesExplorerFilter {
+  label: StringFilter
+  heading: StringFilter
+  description: StringFilter
+  listLabel: StringFilter
+  listPrompt: StringFilter
+  allServicesLabel: StringFilter
+  selectedLabel: StringFilter
+  planLabel: StringFilter
+  scopeLabel: StringFilter
+  ctaLabel: StringFilter
+  imageLabel: StringFilter
+}
+
+input PageServicesFilter {
+  seo: PageServicesSeoFilter
+  heroLabel: StringFilter
+  heroTitleLine1: StringFilter
+  heroTitleLine2: StringFilter
+  categories: PageServicesCategoriesFilter
+  showcase: PageServicesShowcaseFilter
+  explorer: PageServicesExplorerFilter
+}
+
+input PageServicePageSeoFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input PageServicePageFilter {
+  seo: PageServicePageSeoFilter
+  label: StringFilter
+  title: StringFilter
+  mutedTitle: StringFilter
+  description: StringFilter
+  primaryCtaLabel: StringFilter
+  secondaryCtaLabel: StringFilter
+  secondaryCtaHref: StringFilter
+  noticeLabel: StringFilter
+  noticeText: StringFilter
+}
+
+input PageSaasProductsSeoFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input PageSaasProductsProductTypesFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input PageSaasProductsCapabilitiesFilter {
+  title: StringFilter
+  text: StringFilter
+  icon: StringFilter
+}
+
+input PageSaasProductsFilter {
+  seo: PageSaasProductsSeoFilter
+  heroLabel: StringFilter
+  heroTitleLine1: StringFilter
+  heroTitleLine2: StringFilter
+  heroDescription: StringFilter
+  primaryCtaLabel: StringFilter
+  secondaryCtaLabel: StringFilter
+  tracksLabel: StringFilter
+  tracksHeading: StringFilter
+  productTypes: PageSaasProductsProductTypesFilter
+  capabilitiesLabel: StringFilter
+  capabilitiesHeading: StringFilter
+  capabilitiesDescription: StringFilter
+  capabilities: PageSaasProductsCapabilitiesFilter
+  deliveryLabel: StringFilter
+  deliveryHeading: StringFilter
+  phases: StringFilter
+}
+
+input PagePricingSeoFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input BooleanFilter {
+  eq: Boolean
+  exists: Boolean
+}
+
+input PagePricingPricingCategoriesPlansCtaLinkFilter {
+  linkType: StringFilter
+  linkValue: StringFilter
+}
+
+input PagePricingPricingCategoriesPlansCarePlanFilter {
+  title: StringFilter
+  price: StringFilter
+  priceGbp: StringFilter
+  cadence: StringFilter
+  summary: StringFilter
+}
+
+input PagePricingPricingCategoriesPlansFilter {
+  label: StringFilter
+  name: StringFilter
+  price: StringFilter
+  priceGbp: StringFilter
+  discountedPrice: StringFilter
+  discountedPriceGbp: StringFilter
+  priceNote: StringFilter
+  delivery: StringFilter
+  tagline: StringFilter
+  featured: BooleanFilter
+  ctaLabel: StringFilter
+  ctaLink: PagePricingPricingCategoriesPlansCtaLinkFilter
+  features: StringFilter
+  carePlan: PagePricingPricingCategoriesPlansCarePlanFilter
+  bestFor: StringFilter
+  revisions: StringFilter
+}
+
+input PagePricingPricingCategoriesCarePlansFilter {
+  title: StringFilter
+  price: StringFilter
+  priceGbp: StringFilter
+  cadence: StringFilter
+  summary: StringFilter
+}
+
+input PagePricingPricingCategoriesAddOnsFilter {
+  label: StringFilter
+  price: StringFilter
+  priceGbp: StringFilter
+  note: StringFilter
+}
+
+input PagePricingPricingCategoriesFilter {
+  label: StringFilter
+  slug: StringFilter
+  plans: PagePricingPricingCategoriesPlansFilter
+  carePlans: PagePricingPricingCategoriesCarePlansFilter
+  addOns: PagePricingPricingCategoriesAddOnsFilter
+}
+
+input PagePricingLabelsFilter {
+  mostPopular: StringFilter
+  choosePlan: StringFilter
+  viewAllPlans: StringFilter
+  carePlanPrefix: StringFilter
+  bestForPrefix: StringFilter
+  revisionsPrefix: StringFilter
+  careLabel: StringFilter
+  careHeading: StringFilter
+  careDescription: StringFilter
+  maintenanceLabel: StringFilter
+  maintenanceHeading: StringFilter
+  maintenanceDescription: StringFilter
+  addOnsLabel: StringFilter
+  addOnsHeading: StringFilter
+  addOnsDescription: StringFilter
+}
+
+input PagePricingFilter {
+  seo: PagePricingSeoFilter
+  heroLabel: StringFilter
+  heroTitleLine1: StringFilter
+  heroTitleLine2: StringFilter
+  heroSubtext: StringFilter
+  heroBackgroundImage: ImageFilter
+  heroBackgroundImageUrl: StringFilter
+  sectionLabel: StringFilter
+  sectionHeading: StringFilter
+  sectionSubtext: StringFilter
+  pricingCategories: PagePricingPricingCategoriesFilter
+  customLabel: StringFilter
+  customDescription: StringFilter
+  customCtaLabel: StringFilter
+  customCtaHref: StringFilter
+  labels: PagePricingLabelsFilter
+}
+
+input PageTestimonialsSeoFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input PageTestimonialsTestimonialsFilter {
+  quote: StringFilter
+  name: StringFilter
+  role: StringFilter
+  company: StringFilter
+}
+
+input PageTestimonialsFilter {
+  seo: PageTestimonialsSeoFilter
+  heroLabel: StringFilter
+  heading: StringFilter
+  subtext: StringFilter
+  viewAllLabel: StringFilter
+  emptyMessage: StringFilter
+  testimonials: PageTestimonialsTestimonialsFilter
+}
+
+input PageFaqSeoFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input PageFaqFaqItemsFilter {
+  question: StringFilter
+  answer: StringFilter
+}
+
+input PageFaqFilter {
+  seo: PageFaqSeoFilter
+  label: StringFilter
+  faqHeading: StringFilter
+  faqSubtext: StringFilter
+  faqItems: PageFaqFaqItemsFilter
+}
+
+input PageProjectsSeoFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input PageProjectsCaseStudyFilter {
+  backLabel: StringFilter
+  visitSiteLabel: StringFilter
+  detailsHeading: StringFilter
+  yearLabel: StringFilter
+  categoryLabel: StringFilter
+  roleLabel: StringFilter
+  defaultRole: StringFilter
+  liveSiteLabel: StringFilter
+  viewSiteLabel: StringFilter
+  techStackLabel: StringFilter
+  overviewTitle: StringFilter
+  challengeTitle: StringFilter
+  strategyTitle: StringFilter
+  solutionTitle: StringFilter
+  emptySectionText: StringFilter
+  galleryLabel: StringFilter
+  notFoundHeading: StringFilter
+  notFoundCtaLabel: StringFilter
+}
+
+input PageProjectsFilter {
+  seo: PageProjectsSeoFilter
+  heroLabel: StringFilter
+  heroTitleLine1: StringFilter
+  heroTitleLine2: StringFilter
+  heroDescription: StringFilter
+  caseStudy: PageProjectsCaseStudyFilter
+}
+
+input PageBookCallSeoFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input PageBookCallHighlightsFilter {
+  title: StringFilter
+  description: StringFilter
+  icon: StringFilter
+}
+
+input PageBookCallConfirmationFilter {
+  label: StringFilter
+  heading: StringFilter
+  description: StringFilter
+  slotLabel: StringFilter
+  slotJoiner: StringFilter
+  referenceLabel: StringFilter
+  homeCtaLabel: StringFilter
+  projectCtaLabel: StringFilter
+}
+
+input PageBookCallFilter {
+  seo: PageBookCallSeoFilter
+  label: StringFilter
+  heading: StringFilter
+  description: StringFilter
+  highlights: PageBookCallHighlightsFilter
+  scopeHeading: StringFilter
+  scopeDescription: StringFilter
+  scopeCtaLabel: StringFilter
+  formHeading: StringFilter
+  timezoneLabel: StringFilter
+  submitLabel: StringFilter
+  submittingLabel: StringFilter
+  dateLabel: StringFilter
+  weekdaysLabel: StringFilter
+  timeLabel: StringFilter
+  nameLabel: StringFilter
+  emailLabel: StringFilter
+  companyLabel: StringFilter
+  errorMessage: StringFilter
+  confirmation: PageBookCallConfirmationFilter
+}
+
+input PageStartProjectSeoFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input PageStartProjectStepsFilter {
+  label: StringFilter
+  title: StringFilter
+  intro: StringFilter
+}
+
+input PageStartProjectLabelsFilter {
+  nameLabel: StringFilter
+  companyLabel: StringFilter
+  emailLabel: StringFilter
+  phoneLabel: StringFilter
+  reviewServiceHeading: StringFilter
+  reviewContactHeading: StringFilter
+  reviewBriefHeading: StringFilter
+  deliveryPrefix: StringFilter
+  notProvided: StringFilter
+  notSelected: StringFilter
+  summaryHeading: StringFilter
+  summaryServiceLabel: StringFilter
+  summaryPackageLabel: StringFilter
+  privacyHeading: StringFilter
+  privacyText: StringFilter
+  progressLabel: StringFilter
+  stepCounter: StringFilter
+  backLabel: StringFilter
+  continueLabel: StringFilter
+  submitLabel: StringFilter
+  submittingLabel: StringFilter
+  errorMessage: StringFilter
+}
+
+input PageStartProjectConfirmationFilter {
+  label: StringFilter
+  heading: StringFilter
+  description: StringFilter
+  contactPrompt: StringFilter
+  homeCtaLabel: StringFilter
+}
+
+input PageStartProjectFilter {
+  seo: PageStartProjectSeoFilter
+  steps: PageStartProjectStepsFilter
+  labels: PageStartProjectLabelsFilter
+  confirmation: PageStartProjectConfirmationFilter
+}
+
+input PageWalkthroughSeoFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input PageWalkthroughNavigationItemsFilter {
+  label: StringFilter
+  icon: StringFilter
+}
+
+input PageWalkthroughStepsFilter {
+  eyebrow: StringFilter
+  title: StringFilter
+  description: StringFilter
+  outcome: StringFilter
+  icon: StringFilter
+}
+
+input PageWalkthroughFilter {
+  seo: PageWalkthroughSeoFilter
+  navigationItems: PageWalkthroughNavigationItemsFilter
+  statusLabel: StringFilter
+  statusText: StringFilter
+  label: StringFilter
+  heading: StringFilter
+  description: StringFilter
+  primaryCtaLabel: StringFilter
+  secondaryCtaLabel: StringFilter
+  todayLabel: StringFilter
+  todayBadge: StringFilter
+  activityItems: StringFilter
+  outcomeLabel: StringFilter
+  steps: PageWalkthroughStepsFilter
+  closingHeading: StringFilter
+  closingDescription: StringFilter
+  closingCtaLabel: StringFilter
+}
+
+input PageLegalSeoFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input PageLegalSectionsFilter {
+  title: StringFilter
+  body: StringFilter
+}
+
+input PageLegalFilter {
+  seo: PageLegalSeoFilter
+  title: StringFilter
+  slug: StringFilter
+  heroLabel: StringFilter
+  intro: StringFilter
+  lastUpdated: StringFilter
+  sections: PageLegalSectionsFilter
+}
+
+input PageNotFoundFilter {
+  heading: StringFilter
+  description: StringFilter
+  ctaLabel: StringFilter
+}
+
+input PageFilter {
+  home: PageHomeFilter
+  about: PageAboutFilter
+  services: PageServicesFilter
+  servicePage: PageServicePageFilter
+  saasProducts: PageSaasProductsFilter
+  pricing: PagePricingFilter
+  testimonials: PageTestimonialsFilter
+  faq: PageFaqFilter
+  projects: PageProjectsFilter
+  bookCall: PageBookCallFilter
+  startProject: PageStartProjectFilter
+  walkthrough: PageWalkthroughFilter
+  legal: PageLegalFilter
+  notFound: PageNotFoundFilter
+}
+
+type PageConnectionEdges {
+  cursor: String!
+  node: Page
+}
+
+type PageConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [PageConnectionEdges]
+}
+
+type SiteSettingsSocials {
+  name: String!
+  url: String!
+  openInNewTab: Boolean
+}
+
+type SiteSettingsNavigationLinks {
+  label: String!
+  href: String!
+  activePaths: [String]
+  hasServicesMenu: Boolean
+  showOnDesktop: Boolean
+  showOnMobile: Boolean
+}
+
+type SiteSettingsNavigationServicesMenuItems {
+  label: String!
+  href: String!
+  description: String
+  icon: String
+}
+
+type SiteSettingsNavigationServicesMenu {
+  label: String
+  heading: String
+  description: String
+  overviewLabel: String
+  overviewDescription: String
+  items: [SiteSettingsNavigationServicesMenuItems]
+}
+
+type SiteSettingsNavigation {
+  ctaLabel: String
+  ctaShortLabel: String
+  links: [SiteSettingsNavigationLinks]
+  servicesMenu: SiteSettingsNavigationServicesMenu
+  mobileTranslateLabel: String
+  mobileConnectLabel: String
+}
+
+type SiteSettingsFooterExploreLinks {
+  label: String!
+  url: String!
+}
+
+type SiteSettingsFooterServiceLinks {
+  label: String!
+  url: String!
+}
+
+type SiteSettingsFooter {
+  label: String
+  ctaLabel: String
+  reachUsLabel: String
+  exploreLabel: String
+  exploreLinks: [SiteSettingsFooterExploreLinks]
+  servicesLabel: String
+  serviceLinks: [SiteSettingsFooterServiceLinks]
+  followLabel: String
+}
+
+type SiteSettingsFooterLinks {
+  label: String!
+  url: String!
+}
+
+type SiteSettingsProjectCta {
+  imageLabel: String
+  slotLabel: String
+  heading: String
+  description: String
+  ctaLabel: String
+}
+
+type SiteSettingsTeamMembers {
+  name: String!
+  role: String!
+  image: String
+  bio: String
+  order: Float
+}
+
+type SiteSettingsTeam {
+  heading: String
+  description: String
+  members: [SiteSettingsTeamMembers]
+}
+
+type SiteSettingsCookies {
+  bannerLabel: String
+  bannerHeading: String
+  bannerDescription: String
+  settingsButtonLabel: String
+  rejectButtonLabel: String
+  acceptButtonLabel: String
+  triggerLabel: String
+  panelLabel: String
+  panelHeading: String
+  panelDescription: String
+  necessaryTitle: String
+  necessaryDescription: String
+  alwaysOnLabel: String
+  analyticsTitle: String
+  analyticsDescription: String
+  analyticsOnLabel: String
+  analyticsOffLabel: String
+  cancelLabel: String
+  rejectOptionalLabel: String
+  saveLabel: String
+}
+
+type SiteSettingsPartnersProofPoints {
+  value: String
+  label: String
+}
+
+type SiteSettingsPartnersPartners {
+  name: String!
+  url: String
+}
+
+type SiteSettingsPartners {
+  partnersLabel: String
+  trustHeading: String
+  trustDescription: String
+  ctaLabel: String
+  proofPoints: [SiteSettingsPartnersProofPoints]
+  partners: [SiteSettingsPartnersPartners]
+}
+
+type SiteSettings implements Node & Document {
+  email: String!
+  phone: String!
+  phoneLink: String
+  address: String
+  copyright: String
+  contactHeadingLine1: String
+  contactHeadingLine2: String
+  scrollText: String
+  loaderMotto: String
+  socials: [SiteSettingsSocials]
+  newsletterLabel: String
+  newsletterHeading: String
+  newsletterDescription: String
+  newsletterButtonLabel: String
+  newsletterConsent: String
+  footerNewsletterHeading: String
+  footerNewsletterDescription: String
+  newsletterSuccessHeading: String
+  newsletterSuccessDescription: String
+  navigation: SiteSettingsNavigation
+  footer: SiteSettingsFooter
+  footerLinks: [SiteSettingsFooterLinks]
+  projectCta: SiteSettingsProjectCta
+  team: SiteSettingsTeam
+  cookies: SiteSettingsCookies
+  partners: SiteSettingsPartners
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input SiteSettingsSocialsFilter {
+  name: StringFilter
+  url: StringFilter
+  openInNewTab: BooleanFilter
+}
+
+input SiteSettingsNavigationLinksFilter {
+  label: StringFilter
+  href: StringFilter
+  activePaths: StringFilter
+  hasServicesMenu: BooleanFilter
+  showOnDesktop: BooleanFilter
+  showOnMobile: BooleanFilter
+}
+
+input SiteSettingsNavigationServicesMenuItemsFilter {
+  label: StringFilter
+  href: StringFilter
+  description: StringFilter
+  icon: StringFilter
+}
+
+input SiteSettingsNavigationServicesMenuFilter {
+  label: StringFilter
+  heading: StringFilter
+  description: StringFilter
+  overviewLabel: StringFilter
+  overviewDescription: StringFilter
+  items: SiteSettingsNavigationServicesMenuItemsFilter
+}
+
+input SiteSettingsNavigationFilter {
+  ctaLabel: StringFilter
+  ctaShortLabel: StringFilter
+  links: SiteSettingsNavigationLinksFilter
+  servicesMenu: SiteSettingsNavigationServicesMenuFilter
+  mobileTranslateLabel: StringFilter
+  mobileConnectLabel: StringFilter
+}
+
+input SiteSettingsFooterExploreLinksFilter {
+  label: StringFilter
+  url: StringFilter
+}
+
+input SiteSettingsFooterServiceLinksFilter {
+  label: StringFilter
+  url: StringFilter
+}
+
+input SiteSettingsFooterFilter {
+  label: StringFilter
+  ctaLabel: StringFilter
+  reachUsLabel: StringFilter
+  exploreLabel: StringFilter
+  exploreLinks: SiteSettingsFooterExploreLinksFilter
+  servicesLabel: StringFilter
+  serviceLinks: SiteSettingsFooterServiceLinksFilter
+  followLabel: StringFilter
+}
+
+input SiteSettingsFooterLinksFilter {
+  label: StringFilter
+  url: StringFilter
+}
+
+input SiteSettingsProjectCtaFilter {
+  imageLabel: StringFilter
+  slotLabel: StringFilter
+  heading: StringFilter
+  description: StringFilter
+  ctaLabel: StringFilter
+}
+
+input SiteSettingsTeamMembersFilter {
+  name: StringFilter
+  role: StringFilter
+  image: StringFilter
+  bio: StringFilter
+  order: NumberFilter
+}
+
+input SiteSettingsTeamFilter {
+  heading: StringFilter
+  description: StringFilter
+  members: SiteSettingsTeamMembersFilter
+}
+
+input SiteSettingsCookiesFilter {
+  bannerLabel: StringFilter
+  bannerHeading: StringFilter
+  bannerDescription: StringFilter
+  settingsButtonLabel: StringFilter
+  rejectButtonLabel: StringFilter
+  acceptButtonLabel: StringFilter
+  triggerLabel: StringFilter
+  panelLabel: StringFilter
+  panelHeading: StringFilter
+  panelDescription: StringFilter
+  necessaryTitle: StringFilter
+  necessaryDescription: StringFilter
+  alwaysOnLabel: StringFilter
+  analyticsTitle: StringFilter
+  analyticsDescription: StringFilter
+  analyticsOnLabel: StringFilter
+  analyticsOffLabel: StringFilter
+  cancelLabel: StringFilter
+  rejectOptionalLabel: StringFilter
+  saveLabel: StringFilter
+}
+
+input SiteSettingsPartnersProofPointsFilter {
+  value: StringFilter
+  label: StringFilter
+}
+
+input SiteSettingsPartnersPartnersFilter {
+  name: StringFilter
+  url: StringFilter
+}
+
+input SiteSettingsPartnersFilter {
+  partnersLabel: StringFilter
+  trustHeading: StringFilter
+  trustDescription: StringFilter
+  ctaLabel: StringFilter
+  proofPoints: SiteSettingsPartnersProofPointsFilter
+  partners: SiteSettingsPartnersPartnersFilter
+}
+
+input SiteSettingsFilter {
+  email: StringFilter
+  phone: StringFilter
+  phoneLink: StringFilter
+  address: StringFilter
+  copyright: StringFilter
+  contactHeadingLine1: StringFilter
+  contactHeadingLine2: StringFilter
+  scrollText: StringFilter
+  loaderMotto: StringFilter
+  socials: SiteSettingsSocialsFilter
+  newsletterLabel: StringFilter
+  newsletterHeading: StringFilter
+  newsletterDescription: StringFilter
+  newsletterButtonLabel: StringFilter
+  newsletterConsent: StringFilter
+  footerNewsletterHeading: StringFilter
+  footerNewsletterDescription: StringFilter
+  newsletterSuccessHeading: StringFilter
+  newsletterSuccessDescription: StringFilter
+  navigation: SiteSettingsNavigationFilter
+  footer: SiteSettingsFooterFilter
+  footerLinks: SiteSettingsFooterLinksFilter
+  projectCta: SiteSettingsProjectCtaFilter
+  team: SiteSettingsTeamFilter
+  cookies: SiteSettingsCookiesFilter
+  partners: SiteSettingsPartnersFilter
+}
+
+type SiteSettingsConnectionEdges {
+  cursor: String!
+  node: SiteSettings
+}
+
+type SiteSettingsConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [SiteSettingsConnectionEdges]
+}
 
 type Project implements Node & Document {
   title: String!
@@ -118,6 +1573,7 @@ type Project implements Node & Document {
   techStack: [String]
   image: String
   year: String!
+  role: String
   order: Float
   featuredOnHome: Boolean
   description: String!
@@ -137,28 +1593,6 @@ type Project implements Node & Document {
   _values: JSON!
 }
 
-input StringFilter {
-  startsWith: String
-  eq: String
-  exists: Boolean
-  in: [String]
-}
-
-input NumberFilter {
-  lt: Float
-  lte: Float
-  gte: Float
-  gt: Float
-  eq: Float
-  exists: Boolean
-  in: [Float]
-}
-
-input BooleanFilter {
-  eq: Boolean
-  exists: Boolean
-}
-
 input ProjectFilter {
   title: StringFilter
   slug: StringFilter
@@ -166,6 +1600,7 @@ input ProjectFilter {
   techStack: StringFilter
   image: StringFilter
   year: StringFilter
+  role: StringFilter
   order: NumberFilter
   featuredOnHome: BooleanFilter
   description: StringFilter
@@ -193,206 +1628,76 @@ type ProjectConnection implements Connection {
   edges: [ProjectConnectionEdges]
 }
 
-type LegalPageSections {
-  title: String!
-  body: String
+type Mutation {
+  addPendingDocument(collection: String!, relativePath: String!, template: String): DocumentNode!
+  updateDocument(collection: String, relativePath: String!, params: DocumentUpdateMutation!): DocumentNode!
+  deleteDocument(collection: String, relativePath: String!): DocumentNode!
+  createDocument(collection: String, relativePath: String!, params: DocumentMutation!): DocumentNode!
+  createFolder(collection: String, relativePath: String!): DocumentNode!
+  updatePage(relativePath: String!, params: PageMutation!): Page!
+  createPage(relativePath: String!, params: PageMutation!): Page!
+  updateSiteSettings(relativePath: String!, params: SiteSettingsMutation!): SiteSettings!
+  createSiteSettings(relativePath: String!, params: SiteSettingsMutation!): SiteSettings!
+  updateProject(relativePath: String!, params: ProjectMutation!): Project!
+  createProject(relativePath: String!, params: ProjectMutation!): Project!
 }
 
-type LegalPage implements Node & Document {
-  title: String!
-  slug: String!
-  heroLabel: String
-  intro: String
-  lastUpdated: String
-  sections: [LegalPageSections]
-  id: ID!
-  _sys: SystemInfo!
-  _values: JSON!
+input DocumentUpdateMutation {
+  page: PageMutation
+  siteSettings: SiteSettingsMutation
+  project: ProjectMutation
+  relativePath: String
 }
 
-input LegalPageSectionsFilter {
-  title: StringFilter
-  body: StringFilter
+input DocumentMutation {
+  page: PageMutation
+  siteSettings: SiteSettingsMutation
+  project: ProjectMutation
 }
 
-input LegalPageFilter {
-  title: StringFilter
-  slug: StringFilter
-  heroLabel: StringFilter
-  intro: StringFilter
-  lastUpdated: StringFilter
-  sections: LegalPageSectionsFilter
+input PageHomeSeoMutation {
+  title: String
+  description: String
 }
 
-type LegalPageConnectionEdges {
-  cursor: String!
-  node: LegalPage
-}
-
-type LegalPageConnection implements Connection {
-  pageInfo: PageInfo!
-  totalCount: Float!
-  edges: [LegalPageConnectionEdges]
-}
-
-type SiteSettingsSocials {
-  name: String!
-  url: String!
-  openInNewTab: Boolean
-}
-
-type SiteSettingsFooterLinks {
-  label: String!
-  url: String!
-}
-
-type SiteSettings implements Node & Document {
-  email: String!
-  phone: String!
-  phoneLink: String
-  address: String
-  copyright: String
-  contactHeadingLine1: String
-  contactHeadingLine2: String
-  newsletterHeading: String
-  newsletterDescription: String
-  newsletterButtonLabel: String
-  newsletterConsent: String
-  footerNewsletterHeading: String
-  footerNewsletterDescription: String
-  scrollText: String
-  socials: [SiteSettingsSocials]
-  footerLinks: [SiteSettingsFooterLinks]
-  id: ID!
-  _sys: SystemInfo!
-  _values: JSON!
-}
-
-input SiteSettingsSocialsFilter {
-  name: StringFilter
-  url: StringFilter
-  openInNewTab: BooleanFilter
-}
-
-input SiteSettingsFooterLinksFilter {
-  label: StringFilter
-  url: StringFilter
-}
-
-input SiteSettingsFilter {
-  email: StringFilter
-  phone: StringFilter
-  phoneLink: StringFilter
-  address: StringFilter
-  copyright: StringFilter
-  contactHeadingLine1: StringFilter
-  contactHeadingLine2: StringFilter
-  newsletterHeading: StringFilter
-  newsletterDescription: StringFilter
-  newsletterButtonLabel: StringFilter
-  newsletterConsent: StringFilter
-  footerNewsletterHeading: StringFilter
-  footerNewsletterDescription: StringFilter
-  scrollText: StringFilter
-  socials: SiteSettingsSocialsFilter
-  footerLinks: SiteSettingsFooterLinksFilter
-}
-
-type SiteSettingsConnectionEdges {
-  cursor: String!
-  node: SiteSettings
-}
-
-type SiteSettingsConnection implements Connection {
-  pageInfo: PageInfo!
-  totalCount: Float!
-  edges: [SiteSettingsConnectionEdges]
-}
-
-type PartnersProofPoints {
-  value: String
+input PageHomeHeroSignalsMutation {
   label: String
+  icon: String
 }
 
-type PartnersPartners {
-  name: String!
-  url: String
+input PageHomeHeroCapabilityItemsMutation {
+  label: String
+  icon: String
 }
 
-type Partners implements Node & Document {
-  partnersLabel: String!
-  trustHeading: String
-  trustDescription: String
-  ctaLabel: String
-  proofPoints: [PartnersProofPoints]
-  partners: [PartnersPartners]
-  id: ID!
-  _sys: SystemInfo!
-  _values: JSON!
-}
-
-input PartnersProofPointsFilter {
-  value: StringFilter
-  label: StringFilter
-}
-
-input PartnersPartnersFilter {
-  name: StringFilter
-  url: StringFilter
-}
-
-input PartnersFilter {
-  partnersLabel: StringFilter
-  trustHeading: StringFilter
-  trustDescription: StringFilter
-  ctaLabel: StringFilter
-  proofPoints: PartnersProofPointsFilter
-  partners: PartnersPartnersFilter
-}
-
-type PartnersConnectionEdges {
-  cursor: String!
-  node: Partners
-}
-
-type PartnersConnection implements Connection {
-  pageInfo: PageInfo!
-  totalCount: Float!
-  edges: [PartnersConnectionEdges]
-}
-
-type HomePageHeroStats {
-  label: String!
-  value: Float!
+input PageHomeHeroStatsMutation {
+  label: String
+  value: Float
   prefix: String
   suffix: String
   format: String
 }
 
-type HomePageServices {
-  id: String
-  title: String!
-  description: String
-}
-
-type HomePageProcessSteps {
+input PageHomeProcessStepsMutation {
   num: String
-  title: String!
+  title: String
   description: String
   tags: [String]
 }
 
-type HomePageFaqItems {
-  question: String!
-  answer: String
-}
-
-type HomePage implements Node & Document {
-  heroLabel: String!
-  heroTitleLine1: String
-  heroTitleLine2: String
+input PageHomeMutation {
+  seo: PageHomeSeoMutation
+  heroLabel: String
+  heroTypingPrefix: String
+  heroTypingPhrases: [String]
   heroDescription: String
-  heroStats: [HomePageHeroStats]
+  heroSignals: [PageHomeHeroSignalsMutation]
+  heroPrimaryCtaLabel: String
+  heroSecondaryCtaLabel: String
+  heroCapabilityLabel: String
+  heroCapabilityHeading: String
+  heroCapabilityItems: [PageHomeHeroCapabilityItemsMutation]
+  heroStats: [PageHomeHeroStatsMutation]
   aboutHeading: String
   aboutParagraph1: String
   aboutParagraph2: String
@@ -400,199 +1705,50 @@ type HomePage implements Node & Document {
   projectsHeading: String
   projectsDescription: String
   projectsButtonText: String
-  servicesHeading: String
-  servicesSubtext: String
-  servicesButtonText: String
-  services: [HomePageServices]
+  projectsSiteLinkLabel: String
+  processLabel: String
   processHeading: String
   processSubtext: String
-  processSteps: [HomePageProcessSteps]
-  faqHeading: String
-  faqSubtext: String
-  faqItems: [HomePageFaqItems]
-  id: ID!
-  _sys: SystemInfo!
-  _values: JSON!
+  processSteps: [PageHomeProcessStepsMutation]
 }
 
-input HomePageHeroStatsFilter {
-  label: StringFilter
-  value: NumberFilter
-  prefix: StringFilter
-  suffix: StringFilter
-  format: StringFilter
-}
-
-input HomePageServicesFilter {
-  id: StringFilter
-  title: StringFilter
-  description: StringFilter
-}
-
-input HomePageProcessStepsFilter {
-  num: StringFilter
-  title: StringFilter
-  description: StringFilter
-  tags: StringFilter
-}
-
-input HomePageFaqItemsFilter {
-  question: StringFilter
-  answer: StringFilter
-}
-
-input HomePageFilter {
-  heroLabel: StringFilter
-  heroTitleLine1: StringFilter
-  heroTitleLine2: StringFilter
-  heroDescription: StringFilter
-  heroStats: HomePageHeroStatsFilter
-  aboutHeading: StringFilter
-  aboutParagraph1: StringFilter
-  aboutParagraph2: StringFilter
-  projectsLabel: StringFilter
-  projectsHeading: StringFilter
-  projectsDescription: StringFilter
-  projectsButtonText: StringFilter
-  servicesHeading: StringFilter
-  servicesSubtext: StringFilter
-  servicesButtonText: StringFilter
-  services: HomePageServicesFilter
-  processHeading: StringFilter
-  processSubtext: StringFilter
-  processSteps: HomePageProcessStepsFilter
-  faqHeading: StringFilter
-  faqSubtext: StringFilter
-  faqItems: HomePageFaqItemsFilter
-}
-
-type HomePageConnectionEdges {
-  cursor: String!
-  node: HomePage
-}
-
-type HomePageConnection implements Connection {
-  pageInfo: PageInfo!
-  totalCount: Float!
-  edges: [HomePageConnectionEdges]
-}
-
-type TestimonialsPageTestimonials {
-  quote: String!
-  name: String!
-  role: String!
-  company: String
-}
-
-type TestimonialsPage implements Node & Document {
-  heading: String!
-  subtext: String
-  testimonials: [TestimonialsPageTestimonials]
-  id: ID!
-  _sys: SystemInfo!
-  _values: JSON!
-}
-
-input TestimonialsPageTestimonialsFilter {
-  quote: StringFilter
-  name: StringFilter
-  role: StringFilter
-  company: StringFilter
-}
-
-input TestimonialsPageFilter {
-  heading: StringFilter
-  subtext: StringFilter
-  testimonials: TestimonialsPageTestimonialsFilter
-}
-
-type TestimonialsPageConnectionEdges {
-  cursor: String!
-  node: TestimonialsPage
-}
-
-type TestimonialsPageConnection implements Connection {
-  pageInfo: PageInfo!
-  totalCount: Float!
-  edges: [TestimonialsPageConnectionEdges]
-}
-
-type AboutPageValues {
-  id: String
-  title: String!
+input PageAboutSeoMutation {
+  title: String
   description: String
 }
 
-type AboutPageTeamMembers {
-  name: String!
-  role: String!
-  image: String
-  bio: String
-  order: Float
+input PageAboutValuesMutation {
+  id: String
+  title: String
+  description: String
 }
 
-type AboutPage implements Node & Document {
-  heroLabel: String!
+input PageAboutMutation {
+  seo: PageAboutSeoMutation
+  heroLabel: String
   heroTitleLine1: String
   heroTitleLine2: String
   heroDescription: String
+  heroCtaLabel: String
   studioImage: String
   studioImageAlt: String
+  storyLabel: String
   introHeading: String
   introParagraph1: String
   introParagraph2: String
+  storyCtaLabel: String
   valuesLabel: String
   valuesHeading: String
-  values: [AboutPageValues]
-  teamMembers: [AboutPageTeamMembers]
-  id: ID!
-  _sys: SystemInfo!
-  _values: JSON!
+  values: [PageAboutValuesMutation]
 }
 
-input AboutPageValuesFilter {
-  id: StringFilter
-  title: StringFilter
-  description: StringFilter
+input PageServicesSeoMutation {
+  title: String
+  description: String
 }
 
-input AboutPageTeamMembersFilter {
-  name: StringFilter
-  role: StringFilter
-  image: StringFilter
-  bio: StringFilter
-  order: NumberFilter
-}
-
-input AboutPageFilter {
-  heroLabel: StringFilter
-  heroTitleLine1: StringFilter
-  heroTitleLine2: StringFilter
-  heroDescription: StringFilter
-  studioImage: StringFilter
-  studioImageAlt: StringFilter
-  introHeading: StringFilter
-  introParagraph1: StringFilter
-  introParagraph2: StringFilter
-  valuesLabel: StringFilter
-  valuesHeading: StringFilter
-  values: AboutPageValuesFilter
-  teamMembers: AboutPageTeamMembersFilter
-}
-
-type AboutPageConnectionEdges {
-  cursor: String!
-  node: AboutPage
-}
-
-type AboutPageConnection implements Connection {
-  pageInfo: PageInfo!
-  totalCount: Float!
-  edges: [AboutPageConnectionEdges]
-}
-
-type ServicesPageCategories {
-  category: String!
+input PageServicesCategoriesMutation {
+  category: String
   description: String
   image: String
   imageAlt: String
@@ -600,56 +1756,104 @@ type ServicesPageCategories {
   items: [String]
 }
 
-type ServicesPage implements Node & Document {
-  heroLabel: String!
+input PageServicesShowcaseMutation {
+  label: String
+  heading: String
+  description: String
+  listLabel: String
+  coversLabel: String
+  focusLabel: String
+}
+
+input PageServicesExplorerMutation {
+  label: String
+  heading: String
+  description: String
+  listLabel: String
+  listPrompt: String
+  allServicesLabel: String
+  selectedLabel: String
+  planLabel: String
+  scopeLabel: String
+  ctaLabel: String
+  imageLabel: String
+}
+
+input PageServicesMutation {
+  seo: PageServicesSeoMutation
+  heroLabel: String
   heroTitleLine1: String
   heroTitleLine2: String
-  categories: [ServicesPageCategories]
-  id: ID!
-  _sys: SystemInfo!
-  _values: JSON!
+  categories: [PageServicesCategoriesMutation]
+  showcase: PageServicesShowcaseMutation
+  explorer: PageServicesExplorerMutation
 }
 
-input ImageFilter {
-  startsWith: String
-  eq: String
-  exists: Boolean
-  in: [String]
+input PageServicePageSeoMutation {
+  title: String
+  description: String
 }
 
-input ServicesPageCategoriesFilter {
-  category: StringFilter
-  description: StringFilter
-  image: ImageFilter
-  imageAlt: StringFilter
-  plan: StringFilter
-  items: StringFilter
+input PageServicePageMutation {
+  seo: PageServicePageSeoMutation
+  label: String
+  title: String
+  mutedTitle: String
+  description: String
+  primaryCtaLabel: String
+  secondaryCtaLabel: String
+  secondaryCtaHref: String
+  noticeLabel: String
+  noticeText: String
 }
 
-input ServicesPageFilter {
-  heroLabel: StringFilter
-  heroTitleLine1: StringFilter
-  heroTitleLine2: StringFilter
-  categories: ServicesPageCategoriesFilter
+input PageSaasProductsSeoMutation {
+  title: String
+  description: String
 }
 
-type ServicesPageConnectionEdges {
-  cursor: String!
-  node: ServicesPage
+input PageSaasProductsProductTypesMutation {
+  title: String
+  description: String
 }
 
-type ServicesPageConnection implements Connection {
-  pageInfo: PageInfo!
-  totalCount: Float!
-  edges: [ServicesPageConnectionEdges]
+input PageSaasProductsCapabilitiesMutation {
+  title: String
+  text: String
+  icon: String
 }
 
-type PricingPagePricingCategoriesPlansCtaLink {
+input PageSaasProductsMutation {
+  seo: PageSaasProductsSeoMutation
+  heroLabel: String
+  heroTitleLine1: String
+  heroTitleLine2: String
+  heroDescription: String
+  primaryCtaLabel: String
+  secondaryCtaLabel: String
+  tracksLabel: String
+  tracksHeading: String
+  productTypes: [PageSaasProductsProductTypesMutation]
+  capabilitiesLabel: String
+  capabilitiesHeading: String
+  capabilitiesDescription: String
+  capabilities: [PageSaasProductsCapabilitiesMutation]
+  deliveryLabel: String
+  deliveryHeading: String
+  phases: [String]
+}
+
+input PagePricingSeoMutation {
+  title: String
+  description: String
+}
+
+input PagePricingPricingCategoriesPlansCtaLinkMutation {
   linkType: String
   linkValue: String
 }
 
-type PricingPagePricingCategoriesPlansCarePlan {
+input PagePricingPricingCategoriesPlansCarePlanMutation {
   title: String
   price: String
   priceGbp: String
@@ -657,10 +1861,10 @@ type PricingPagePricingCategoriesPlansCarePlan {
   summary: String
 }
 
-type PricingPagePricingCategoriesPlans {
+input PagePricingPricingCategoriesPlansMutation {
   label: String
-  name: String!
-  price: String!
+  name: String
+  price: String
   priceGbp: String
   discountedPrice: String
   discountedPriceGbp: String
@@ -669,14 +1873,14 @@ type PricingPagePricingCategoriesPlans {
   tagline: String
   featured: Boolean
   ctaLabel: String
-  ctaLink: PricingPagePricingCategoriesPlansCtaLink
+  ctaLink: PagePricingPricingCategoriesPlansCtaLinkMutation
   features: [String]
-  carePlan: PricingPagePricingCategoriesPlansCarePlan
+  carePlan: PagePricingPricingCategoriesPlansCarePlanMutation
   bestFor: String
   revisions: String
 }
 
-type PricingPagePricingCategoriesCarePlans {
+input PagePricingPricingCategoriesCarePlansMutation {
   title: String
   price: String
   priceGbp: String
@@ -684,23 +1888,42 @@ type PricingPagePricingCategoriesCarePlans {
   summary: String
 }
 
-type PricingPagePricingCategoriesAddOns {
+input PagePricingPricingCategoriesAddOnsMutation {
   label: String
   price: String
   priceGbp: String
   note: String
 }
 
-type PricingPagePricingCategories {
-  label: String!
+input PagePricingPricingCategoriesMutation {
+  label: String
   slug: String
-  plans: [PricingPagePricingCategoriesPlans]
-  carePlans: [PricingPagePricingCategoriesCarePlans]
-  addOns: [PricingPagePricingCategoriesAddOns]
+  plans: [PagePricingPricingCategoriesPlansMutation]
+  carePlans: [PagePricingPricingCategoriesCarePlansMutation]
+  addOns: [PagePricingPricingCategoriesAddOnsMutation]
 }
 
-type PricingPage implements Node & Document {
-  heroLabel: String!
+input PagePricingLabelsMutation {
+  mostPopular: String
+  choosePlan: String
+  viewAllPlans: String
+  carePlanPrefix: String
+  bestForPrefix: String
+  revisionsPrefix: String
+  careLabel: String
+  careHeading: String
+  careDescription: String
+  maintenanceLabel: String
+  maintenanceHeading: String
+  maintenanceDescription: String
+  addOnsLabel: String
+  addOnsHeading: String
+  addOnsDescription: String
+}
+
+input PagePricingMutation {
+  seo: PagePricingSeoMutation
+  heroLabel: String
   heroTitleLine1: String
   heroTitleLine2: String
   heroSubtext: String
@@ -709,148 +1932,423 @@ type PricingPage implements Node & Document {
   sectionLabel: String
   sectionHeading: String
   sectionSubtext: String
-  pricingCategories: [PricingPagePricingCategories]
+  pricingCategories: [PagePricingPricingCategoriesMutation]
   customLabel: String
   customDescription: String
   customCtaLabel: String
   customCtaHref: String
-  id: ID!
-  _sys: SystemInfo!
-  _values: JSON!
+  labels: PagePricingLabelsMutation
 }
 
-input PricingPagePricingCategoriesPlansCtaLinkFilter {
-  linkType: StringFilter
-  linkValue: StringFilter
+input PageTestimonialsSeoMutation {
+  title: String
+  description: String
 }
 
-input PricingPagePricingCategoriesPlansCarePlanFilter {
-  title: StringFilter
-  price: StringFilter
-  priceGbp: StringFilter
-  cadence: StringFilter
-  summary: StringFilter
+input PageTestimonialsTestimonialsMutation {
+  quote: String
+  name: String
+  role: String
+  company: String
 }
 
-input PricingPagePricingCategoriesPlansFilter {
-  label: StringFilter
-  name: StringFilter
-  price: StringFilter
-  priceGbp: StringFilter
-  discountedPrice: StringFilter
-  discountedPriceGbp: StringFilter
-  priceNote: StringFilter
-  delivery: StringFilter
-  tagline: StringFilter
-  featured: BooleanFilter
-  ctaLabel: StringFilter
-  ctaLink: PricingPagePricingCategoriesPlansCtaLinkFilter
-  features: StringFilter
-  carePlan: PricingPagePricingCategoriesPlansCarePlanFilter
-  bestFor: StringFilter
-  revisions: StringFilter
+input PageTestimonialsMutation {
+  seo: PageTestimonialsSeoMutation
+  heroLabel: String
+  heading: String
+  subtext: String
+  viewAllLabel: String
+  emptyMessage: String
+  testimonials: [PageTestimonialsTestimonialsMutation]
 }
 
-input PricingPagePricingCategoriesCarePlansFilter {
-  title: StringFilter
-  price: StringFilter
-  priceGbp: StringFilter
-  cadence: StringFilter
-  summary: StringFilter
+input PageFaqSeoMutation {
+  title: String
+  description: String
 }
 
-input PricingPagePricingCategoriesAddOnsFilter {
-  label: StringFilter
-  price: StringFilter
-  priceGbp: StringFilter
-  note: StringFilter
+input PageFaqFaqItemsMutation {
+  question: String
+  answer: String
 }
 
-input PricingPagePricingCategoriesFilter {
-  label: StringFilter
-  slug: StringFilter
-  plans: PricingPagePricingCategoriesPlansFilter
-  carePlans: PricingPagePricingCategoriesCarePlansFilter
-  addOns: PricingPagePricingCategoriesAddOnsFilter
+input PageFaqMutation {
+  seo: PageFaqSeoMutation
+  label: String
+  faqHeading: String
+  faqSubtext: String
+  faqItems: [PageFaqFaqItemsMutation]
 }
 
-input PricingPageFilter {
-  heroLabel: StringFilter
-  heroTitleLine1: StringFilter
-  heroTitleLine2: StringFilter
-  heroSubtext: StringFilter
-  heroBackgroundImage: ImageFilter
-  heroBackgroundImageUrl: StringFilter
-  sectionLabel: StringFilter
-  sectionHeading: StringFilter
-  sectionSubtext: StringFilter
-  pricingCategories: PricingPagePricingCategoriesFilter
-  customLabel: StringFilter
-  customDescription: StringFilter
-  customCtaLabel: StringFilter
-  customCtaHref: StringFilter
+input PageProjectsSeoMutation {
+  title: String
+  description: String
 }
 
-type PricingPageConnectionEdges {
-  cursor: String!
-  node: PricingPage
+input PageProjectsCaseStudyMutation {
+  backLabel: String
+  visitSiteLabel: String
+  detailsHeading: String
+  yearLabel: String
+  categoryLabel: String
+  roleLabel: String
+  defaultRole: String
+  liveSiteLabel: String
+  viewSiteLabel: String
+  techStackLabel: String
+  overviewTitle: String
+  challengeTitle: String
+  strategyTitle: String
+  solutionTitle: String
+  emptySectionText: String
+  galleryLabel: String
+  notFoundHeading: String
+  notFoundCtaLabel: String
 }
 
-type PricingPageConnection implements Connection {
-  pageInfo: PageInfo!
-  totalCount: Float!
-  edges: [PricingPageConnectionEdges]
+input PageProjectsMutation {
+  seo: PageProjectsSeoMutation
+  heroLabel: String
+  heroTitleLine1: String
+  heroTitleLine2: String
+  heroDescription: String
+  caseStudy: PageProjectsCaseStudyMutation
 }
 
-type Mutation {
-  addPendingDocument(collection: String!, relativePath: String!, template: String): DocumentNode!
-  updateDocument(collection: String, relativePath: String!, params: DocumentUpdateMutation!): DocumentNode!
-  deleteDocument(collection: String, relativePath: String!): DocumentNode!
-  createDocument(collection: String, relativePath: String!, params: DocumentMutation!): DocumentNode!
-  createFolder(collection: String, relativePath: String!): DocumentNode!
-  updateProject(relativePath: String!, params: ProjectMutation!): Project!
-  createProject(relativePath: String!, params: ProjectMutation!): Project!
-  updateLegalPage(relativePath: String!, params: LegalPageMutation!): LegalPage!
-  createLegalPage(relativePath: String!, params: LegalPageMutation!): LegalPage!
-  updateSiteSettings(relativePath: String!, params: SiteSettingsMutation!): SiteSettings!
-  createSiteSettings(relativePath: String!, params: SiteSettingsMutation!): SiteSettings!
-  updatePartners(relativePath: String!, params: PartnersMutation!): Partners!
-  createPartners(relativePath: String!, params: PartnersMutation!): Partners!
-  updateHomePage(relativePath: String!, params: HomePageMutation!): HomePage!
-  createHomePage(relativePath: String!, params: HomePageMutation!): HomePage!
-  updateTestimonialsPage(relativePath: String!, params: TestimonialsPageMutation!): TestimonialsPage!
-  createTestimonialsPage(relativePath: String!, params: TestimonialsPageMutation!): TestimonialsPage!
-  updateAboutPage(relativePath: String!, params: AboutPageMutation!): AboutPage!
-  createAboutPage(relativePath: String!, params: AboutPageMutation!): AboutPage!
-  updateServicesPage(relativePath: String!, params: ServicesPageMutation!): ServicesPage!
-  createServicesPage(relativePath: String!, params: ServicesPageMutation!): ServicesPage!
-  updatePricingPage(relativePath: String!, params: PricingPageMutation!): PricingPage!
-  createPricingPage(relativePath: String!, params: PricingPageMutation!): PricingPage!
+input PageBookCallSeoMutation {
+  title: String
+  description: String
 }
 
-input DocumentUpdateMutation {
-  project: ProjectMutation
-  legalPage: LegalPageMutation
-  siteSettings: SiteSettingsMutation
-  partners: PartnersMutation
-  homePage: HomePageMutation
-  testimonialsPage: TestimonialsPageMutation
-  aboutPage: AboutPageMutation
-  servicesPage: ServicesPageMutation
-  pricingPage: PricingPageMutation
-  relativePath: String
+input PageBookCallHighlightsMutation {
+  title: String
+  description: String
+  icon: String
 }
 
-input DocumentMutation {
-  project: ProjectMutation
-  legalPage: LegalPageMutation
-  siteSettings: SiteSettingsMutation
-  partners: PartnersMutation
-  homePage: HomePageMutation
-  testimonialsPage: TestimonialsPageMutation
-  aboutPage: AboutPageMutation
-  servicesPage: ServicesPageMutation
-  pricingPage: PricingPageMutation
+input PageBookCallConfirmationMutation {
+  label: String
+  heading: String
+  description: String
+  slotLabel: String
+  slotJoiner: String
+  referenceLabel: String
+  homeCtaLabel: String
+  projectCtaLabel: String
+}
+
+input PageBookCallMutation {
+  seo: PageBookCallSeoMutation
+  label: String
+  heading: String
+  description: String
+  highlights: [PageBookCallHighlightsMutation]
+  scopeHeading: String
+  scopeDescription: String
+  scopeCtaLabel: String
+  formHeading: String
+  timezoneLabel: String
+  submitLabel: String
+  submittingLabel: String
+  dateLabel: String
+  weekdaysLabel: String
+  timeLabel: String
+  nameLabel: String
+  emailLabel: String
+  companyLabel: String
+  errorMessage: String
+  confirmation: PageBookCallConfirmationMutation
+}
+
+input PageStartProjectSeoMutation {
+  title: String
+  description: String
+}
+
+input PageStartProjectStepsMutation {
+  label: String
+  title: String
+  intro: String
+}
+
+input PageStartProjectLabelsMutation {
+  nameLabel: String
+  companyLabel: String
+  emailLabel: String
+  phoneLabel: String
+  reviewServiceHeading: String
+  reviewContactHeading: String
+  reviewBriefHeading: String
+  deliveryPrefix: String
+  notProvided: String
+  notSelected: String
+  summaryHeading: String
+  summaryServiceLabel: String
+  summaryPackageLabel: String
+  privacyHeading: String
+  privacyText: String
+  progressLabel: String
+  stepCounter: String
+  backLabel: String
+  continueLabel: String
+  submitLabel: String
+  submittingLabel: String
+  errorMessage: String
+}
+
+input PageStartProjectConfirmationMutation {
+  label: String
+  heading: String
+  description: String
+  contactPrompt: String
+  homeCtaLabel: String
+}
+
+input PageStartProjectMutation {
+  seo: PageStartProjectSeoMutation
+  steps: [PageStartProjectStepsMutation]
+  labels: PageStartProjectLabelsMutation
+  confirmation: PageStartProjectConfirmationMutation
+}
+
+input PageWalkthroughSeoMutation {
+  title: String
+  description: String
+}
+
+input PageWalkthroughNavigationItemsMutation {
+  label: String
+  icon: String
+}
+
+input PageWalkthroughStepsMutation {
+  eyebrow: String
+  title: String
+  description: String
+  outcome: String
+  icon: String
+}
+
+input PageWalkthroughMutation {
+  seo: PageWalkthroughSeoMutation
+  navigationItems: [PageWalkthroughNavigationItemsMutation]
+  statusLabel: String
+  statusText: String
+  label: String
+  heading: String
+  description: String
+  primaryCtaLabel: String
+  secondaryCtaLabel: String
+  todayLabel: String
+  todayBadge: String
+  activityItems: [String]
+  outcomeLabel: String
+  steps: [PageWalkthroughStepsMutation]
+  closingHeading: String
+  closingDescription: String
+  closingCtaLabel: String
+}
+
+input PageLegalSeoMutation {
+  title: String
+  description: String
+}
+
+input PageLegalSectionsMutation {
+  title: String
+  body: String
+}
+
+input PageLegalMutation {
+  seo: PageLegalSeoMutation
+  title: String
+  slug: String
+  heroLabel: String
+  intro: String
+  lastUpdated: String
+  sections: [PageLegalSectionsMutation]
+}
+
+input PageNotFoundMutation {
+  heading: String
+  description: String
+  ctaLabel: String
+}
+
+input PageMutation {
+  home: PageHomeMutation
+  about: PageAboutMutation
+  services: PageServicesMutation
+  servicePage: PageServicePageMutation
+  saasProducts: PageSaasProductsMutation
+  pricing: PagePricingMutation
+  testimonials: PageTestimonialsMutation
+  faq: PageFaqMutation
+  projects: PageProjectsMutation
+  bookCall: PageBookCallMutation
+  startProject: PageStartProjectMutation
+  walkthrough: PageWalkthroughMutation
+  legal: PageLegalMutation
+  notFound: PageNotFoundMutation
+}
+
+input SiteSettingsSocialsMutation {
+  name: String
+  url: String
+  openInNewTab: Boolean
+}
+
+input SiteSettingsNavigationLinksMutation {
+  label: String
+  href: String
+  activePaths: [String]
+  hasServicesMenu: Boolean
+  showOnDesktop: Boolean
+  showOnMobile: Boolean
+}
+
+input SiteSettingsNavigationServicesMenuItemsMutation {
+  label: String
+  href: String
+  description: String
+  icon: String
+}
+
+input SiteSettingsNavigationServicesMenuMutation {
+  label: String
+  heading: String
+  description: String
+  overviewLabel: String
+  overviewDescription: String
+  items: [SiteSettingsNavigationServicesMenuItemsMutation]
+}
+
+input SiteSettingsNavigationMutation {
+  ctaLabel: String
+  ctaShortLabel: String
+  links: [SiteSettingsNavigationLinksMutation]
+  servicesMenu: SiteSettingsNavigationServicesMenuMutation
+  mobileTranslateLabel: String
+  mobileConnectLabel: String
+}
+
+input SiteSettingsFooterExploreLinksMutation {
+  label: String
+  url: String
+}
+
+input SiteSettingsFooterServiceLinksMutation {
+  label: String
+  url: String
+}
+
+input SiteSettingsFooterMutation {
+  label: String
+  ctaLabel: String
+  reachUsLabel: String
+  exploreLabel: String
+  exploreLinks: [SiteSettingsFooterExploreLinksMutation]
+  servicesLabel: String
+  serviceLinks: [SiteSettingsFooterServiceLinksMutation]
+  followLabel: String
+}
+
+input SiteSettingsFooterLinksMutation {
+  label: String
+  url: String
+}
+
+input SiteSettingsProjectCtaMutation {
+  imageLabel: String
+  slotLabel: String
+  heading: String
+  description: String
+  ctaLabel: String
+}
+
+input SiteSettingsTeamMembersMutation {
+  name: String
+  role: String
+  image: String
+  bio: String
+  order: Float
+}
+
+input SiteSettingsTeamMutation {
+  heading: String
+  description: String
+  members: [SiteSettingsTeamMembersMutation]
+}
+
+input SiteSettingsCookiesMutation {
+  bannerLabel: String
+  bannerHeading: String
+  bannerDescription: String
+  settingsButtonLabel: String
+  rejectButtonLabel: String
+  acceptButtonLabel: String
+  triggerLabel: String
+  panelLabel: String
+  panelHeading: String
+  panelDescription: String
+  necessaryTitle: String
+  necessaryDescription: String
+  alwaysOnLabel: String
+  analyticsTitle: String
+  analyticsDescription: String
+  analyticsOnLabel: String
+  analyticsOffLabel: String
+  cancelLabel: String
+  rejectOptionalLabel: String
+  saveLabel: String
+}
+
+input SiteSettingsPartnersProofPointsMutation {
+  value: String
+  label: String
+}
+
+input SiteSettingsPartnersPartnersMutation {
+  name: String
+  url: String
+}
+
+input SiteSettingsPartnersMutation {
+  partnersLabel: String
+  trustHeading: String
+  trustDescription: String
+  ctaLabel: String
+  proofPoints: [SiteSettingsPartnersProofPointsMutation]
+  partners: [SiteSettingsPartnersPartnersMutation]
+}
+
+input SiteSettingsMutation {
+  email: String
+  phone: String
+  phoneLink: String
+  address: String
+  copyright: String
+  contactHeadingLine1: String
+  contactHeadingLine2: String
+  scrollText: String
+  loaderMotto: String
+  socials: [SiteSettingsSocialsMutation]
+  newsletterLabel: String
+  newsletterHeading: String
+  newsletterDescription: String
+  newsletterButtonLabel: String
+  newsletterConsent: String
+  footerNewsletterHeading: String
+  footerNewsletterDescription: String
+  newsletterSuccessHeading: String
+  newsletterSuccessDescription: String
+  navigation: SiteSettingsNavigationMutation
+  footer: SiteSettingsFooterMutation
+  footerLinks: [SiteSettingsFooterLinksMutation]
+  projectCta: SiteSettingsProjectCtaMutation
+  team: SiteSettingsTeamMutation
+  cookies: SiteSettingsCookiesMutation
+  partners: SiteSettingsPartnersMutation
 }
 
 input ProjectMutation {
@@ -860,6 +2358,7 @@ input ProjectMutation {
   techStack: [String]
   image: String
   year: String
+  role: String
   order: Float
   featuredOnHome: Boolean
   description: String
@@ -874,251 +2373,6 @@ input ProjectMutation {
   solutionImage: String
   gallery: [String]
   siteUrl: String
-}
-
-input LegalPageSectionsMutation {
-  title: String
-  body: String
-}
-
-input LegalPageMutation {
-  title: String
-  slug: String
-  heroLabel: String
-  intro: String
-  lastUpdated: String
-  sections: [LegalPageSectionsMutation]
-}
-
-input SiteSettingsSocialsMutation {
-  name: String
-  url: String
-  openInNewTab: Boolean
-}
-
-input SiteSettingsFooterLinksMutation {
-  label: String
-  url: String
-}
-
-input SiteSettingsMutation {
-  email: String
-  phone: String
-  phoneLink: String
-  address: String
-  copyright: String
-  contactHeadingLine1: String
-  contactHeadingLine2: String
-  newsletterHeading: String
-  newsletterDescription: String
-  newsletterButtonLabel: String
-  newsletterConsent: String
-  footerNewsletterHeading: String
-  footerNewsletterDescription: String
-  scrollText: String
-  socials: [SiteSettingsSocialsMutation]
-  footerLinks: [SiteSettingsFooterLinksMutation]
-}
-
-input PartnersProofPointsMutation {
-  value: String
-  label: String
-}
-
-input PartnersPartnersMutation {
-  name: String
-  url: String
-}
-
-input PartnersMutation {
-  partnersLabel: String
-  trustHeading: String
-  trustDescription: String
-  ctaLabel: String
-  proofPoints: [PartnersProofPointsMutation]
-  partners: [PartnersPartnersMutation]
-}
-
-input HomePageHeroStatsMutation {
-  label: String
-  value: Float
-  prefix: String
-  suffix: String
-  format: String
-}
-
-input HomePageServicesMutation {
-  id: String
-  title: String
-  description: String
-}
-
-input HomePageProcessStepsMutation {
-  num: String
-  title: String
-  description: String
-  tags: [String]
-}
-
-input HomePageFaqItemsMutation {
-  question: String
-  answer: String
-}
-
-input HomePageMutation {
-  heroLabel: String
-  heroTitleLine1: String
-  heroTitleLine2: String
-  heroDescription: String
-  heroStats: [HomePageHeroStatsMutation]
-  aboutHeading: String
-  aboutParagraph1: String
-  aboutParagraph2: String
-  projectsLabel: String
-  projectsHeading: String
-  projectsDescription: String
-  projectsButtonText: String
-  servicesHeading: String
-  servicesSubtext: String
-  servicesButtonText: String
-  services: [HomePageServicesMutation]
-  processHeading: String
-  processSubtext: String
-  processSteps: [HomePageProcessStepsMutation]
-  faqHeading: String
-  faqSubtext: String
-  faqItems: [HomePageFaqItemsMutation]
-}
-
-input TestimonialsPageTestimonialsMutation {
-  quote: String
-  name: String
-  role: String
-  company: String
-}
-
-input TestimonialsPageMutation {
-  heading: String
-  subtext: String
-  testimonials: [TestimonialsPageTestimonialsMutation]
-}
-
-input AboutPageValuesMutation {
-  id: String
-  title: String
-  description: String
-}
-
-input AboutPageTeamMembersMutation {
-  name: String
-  role: String
-  image: String
-  bio: String
-  order: Float
-}
-
-input AboutPageMutation {
-  heroLabel: String
-  heroTitleLine1: String
-  heroTitleLine2: String
-  heroDescription: String
-  studioImage: String
-  studioImageAlt: String
-  introHeading: String
-  introParagraph1: String
-  introParagraph2: String
-  valuesLabel: String
-  valuesHeading: String
-  values: [AboutPageValuesMutation]
-  teamMembers: [AboutPageTeamMembersMutation]
-}
-
-input ServicesPageCategoriesMutation {
-  category: String
-  description: String
-  image: String
-  imageAlt: String
-  plan: [String]
-  items: [String]
-}
-
-input ServicesPageMutation {
-  heroLabel: String
-  heroTitleLine1: String
-  heroTitleLine2: String
-  categories: [ServicesPageCategoriesMutation]
-}
-
-input PricingPagePricingCategoriesPlansCtaLinkMutation {
-  linkType: String
-  linkValue: String
-}
-
-input PricingPagePricingCategoriesPlansCarePlanMutation {
-  title: String
-  price: String
-  priceGbp: String
-  cadence: String
-  summary: String
-}
-
-input PricingPagePricingCategoriesPlansMutation {
-  label: String
-  name: String
-  price: String
-  priceGbp: String
-  discountedPrice: String
-  discountedPriceGbp: String
-  priceNote: String
-  delivery: String
-  tagline: String
-  featured: Boolean
-  ctaLabel: String
-  ctaLink: PricingPagePricingCategoriesPlansCtaLinkMutation
-  features: [String]
-  carePlan: PricingPagePricingCategoriesPlansCarePlanMutation
-  bestFor: String
-  revisions: String
-}
-
-input PricingPagePricingCategoriesCarePlansMutation {
-  title: String
-  price: String
-  priceGbp: String
-  cadence: String
-  summary: String
-}
-
-input PricingPagePricingCategoriesAddOnsMutation {
-  label: String
-  price: String
-  priceGbp: String
-  note: String
-}
-
-input PricingPagePricingCategoriesMutation {
-  label: String
-  slug: String
-  plans: [PricingPagePricingCategoriesPlansMutation]
-  carePlans: [PricingPagePricingCategoriesCarePlansMutation]
-  addOns: [PricingPagePricingCategoriesAddOnsMutation]
-}
-
-input PricingPageMutation {
-  heroLabel: String
-  heroTitleLine1: String
-  heroTitleLine2: String
-  heroSubtext: String
-  heroBackgroundImage: String
-  heroBackgroundImageUrl: String
-  sectionLabel: String
-  sectionHeading: String
-  sectionSubtext: String
-  pricingCategories: [PricingPagePricingCategoriesMutation]
-  customLabel: String
-  customDescription: String
-  customCtaLabel: String
-  customCtaHref: String
 }
 
 schema {

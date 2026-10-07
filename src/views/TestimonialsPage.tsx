@@ -8,7 +8,7 @@ import { Contact } from '../components/contact/contact';
 import { useEffect } from 'react';
 
 export const TestimonialsPage = () => {
-  const { data: content } = useTinaTestimonials();
+  const { data: content, tinaField } = useTinaTestimonials();
   const testimonials = content.testimonials ?? [];
 
   useEffect(() => {
@@ -18,21 +18,25 @@ export const TestimonialsPage = () => {
   return (
     <PageLayout>
       <PageHero
-        label="Client Testimonials"
+        label={content.heroLabel}
+        labelTinaField={tinaField('heroLabel')}
         backgroundImage="/assets/img/testimonials-hero.avif"
         title={
           <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-medium tracking-tight leading-[0.95] text-white">
-            {content.heading || 'What Clients Say'}<span className="text-vish-accent">.</span>
+            <span data-tina-field={tinaField('heading')}>{content.heading || 'What Clients Say'}</span><span className="text-vish-accent">.</span>
           </h1>
         }
         description={content.subtext || 'Real words from real partners'}
+        descriptionTinaField={tinaField('subtext')}
       />
 
       <section className="py-24 px-6 md:px-12">
         <div className="max-w-350 mx-auto">
 
           {testimonials.length === 0 ? (
-            <p className="font-mono text-gray-500 text-center py-32">No testimonials yet.</p>
+            <p className="font-mono text-gray-500 text-center py-32" data-tina-field={tinaField('emptyMessage')}>
+              {content.emptyMessage}
+            </p>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
               {testimonials.map((t, index) => (

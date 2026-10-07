@@ -3,14 +3,34 @@
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { motion } from 'motion/react';
-import { useTinaHome } from '../../hooks/useTinaVisualEditing';
+import { useTinaFaq } from '../../hooks/useTinaVisualEditing';
+import { Button } from '../ui/button/button';
 import { Section } from '../ui/section/section';
 import { SectionTitle } from '../ui/section-title/section-title';
 
-export const Faq = () => {
-  const { data: content, tinaField } = useTinaHome();
+interface FaqProps {
+  paginate?: boolean;
+}
+
+const FAQ_PAGE_SIZE = 10;
+
+export const Faq = ({ paginate = false }: FaqProps) => {
+  const { data: content, tinaField, rawFaqPage } = useTinaFaq();
   const [openIndex, setOpenIndex] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
   const faqItems = content.faqItems ?? [];
+  const pageCount = Math.ceil(faqItems.length / FAQ_PAGE_SIZE);
+  const visibleItems = paginate
+    ? faqItems.slice(
+        currentPage * FAQ_PAGE_SIZE,
+        (currentPage + 1) * FAQ_PAGE_SIZE,
+      )
+    : faqItems;
+
+  const selectPage = (page: number) => {
+    setCurrentPage(page);
+    setOpenIndex(-1);
+  };
 
   if (!faqItems.length) return null;
 
@@ -24,8 +44,11 @@ export const Faq = () => {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="lg:sticky lg:top-32 lg:self-start"
         >
-          <p className="mb-5 font-mono text-xs uppercase tracking-widest text-vish-accent">
-            FAQ
+          <p
+            className="mb-5 font-mono text-xs uppercase tracking-widest text-vish-accent"
+            data-tina-field={tinaField('label')}
+          >
+            {content.label}
           </p>
           <SectionTitle
             size="lg"
@@ -43,13 +66,17 @@ export const Faq = () => {
         </motion.div>
 
         <div className="border-t border-white/10">
-          {faqItems.map((item, index) => {
-            const isOpen = openIndex === index;
-            const answerId = `faq-answer-${index}`;
+          {visibleItems.map((item, index) => {
+            const itemIndex = paginate
+              ? currentPage * FAQ_PAGE_SIZE + index
+              : index;
+            const isOpen = openIndex === itemIndex;
+            const answerId = `faq-answer-${itemIndex}`;
+            const rawItem = rawFaqPage?.faqItems?.[itemIndex];
 
             return (
               <motion.div
-                key={item.question}
+                key={`${item.question}-${itemIndex}`}
                 initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -59,16 +86,18 @@ export const Faq = () => {
                   ease: [0.16, 1, 0.3, 1],
                 }}
                 className="border-b border-white/10"
-                data-tina-field={tinaField('faqItems')}
               >
                 <button
                   type="button"
                   className="group flex w-full items-center justify-between gap-6 py-7 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vish-accent focus-visible:ring-offset-4 focus-visible:ring-offset-black md:py-8"
                   aria-expanded={isOpen}
                   aria-controls={answerId}
-                  onClick={() => setOpenIndex(isOpen ? -1 : index)}
+                  onClick={() => setOpenIndex(isOpen ? -1 : itemIndex)}
                 >
-                  <span className="font-display text-2xl font-medium leading-tight text-white transition-colors duration-300 group-hover:text-vish-accent md:text-3xl">
+                  <span
+                    className="font-display text-2xl font-medium leading-tight text-white transition-colors duration-300 group-hover:text-vish-accent md:text-3xl"
+                    data-tina-field={rawItem ? tinaField(rawItem, 'question') : undefined}
+                  >
                     {item.question}
                   </span>
                   <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/10 text-white/50 transition-colors duration-300 group-hover:border-vish-accent group-hover:text-vish-accent">
@@ -87,7 +116,10 @@ export const Faq = () => {
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <p className="max-w-3xl pb-8 font-sans text-base leading-relaxed text-gray-400 md:text-lg">
+                    <p
+                      className="max-w-3xl pb-8 font-sans text-base leading-relaxed text-gray-400 md:text-lg"
+                      data-tina-field={rawItem ? tinaField(rawItem, 'answer') : undefined}
+                    >
                       {item.answer}
                     </p>
                   </div>
@@ -95,6 +127,44 @@ export const Faq = () => {
               </motion.div>
             );
           })}
+          {paginate && pageCount > 1 ? (
+            <nav
+              className="flex flex-wrap items-center justify-between gap-4 pt-8"
+              aria-label="FAQ page navigation"
+            >
+              <Button
+                variant="outline"
+                size="sm"
+                disabled={currentPage === 0}
+                onClick={() => selectPage(currentPage - 1)}
+              >
+                Previous
+              </Button>
+              <div className="flex items-center gap-2" aria-label={`Page ${currentPage + 1} of ${pageCount}`}>
+                {Array.from({ length: pageCount }, (_, page) => (
+                  <Button
+                    key={page}
+                    variant={page === currentPage ? 'primary' : 'secondary'}
+                    size="icon"
+                    onClick={() => selectPage(page)}
+                    ariaLabel={`Show FAQ ${page * FAQ_PAGE_SIZE + 1} to ${Math.min((page + 1) * FAQ_PAGE_SIZE, faqItems.length)}`}
+                    ariaSelected={page === currentPage}
+                    role="tab"
+                  >
+                    {page + 1}
+                  </Button>
+                ))}
+              </div>
+              <Button
+                variant="outline"
+                size="sm"
+                disabled={currentPage === pageCount - 1}
+                onClick={() => selectPage(currentPage + 1)}
+              >
+                Next
+              </Button>
+            </nav>
+          ) : null}
         </div>
       </div>
     </Section>

@@ -92,3 +92,44 @@ export function makeTinaField(rawPage: any) {
     return undefined;
   };
 }
+
+const TINA_META_KEYS = new Set(["__typename", "_sys", "_values", "_internalSys", "_internalValues", "id"]);
+
+/**
+ * Shapes live Tina data like the static JSON it replaces: `null` becomes the
+ * static value's empty equivalent so components never receive `null` lists or
+ * strings, while fields the editor did fill always come from Tina.
+ */
+export function normalizeLike<T>(live: unknown, shape: T): T {
+  if (Array.isArray(shape)) {
+    if (!Array.isArray(live)) return [] as T;
+    const itemShape = shape[0];
+    return live
+      .filter((item) => item !== null && item !== undefined)
+      .map((item) => (itemShape === undefined ? item : normalizeLike(item, itemShape))) as T;
+  }
+
+  if (shape && typeof shape === "object") {
+    const source = (live && typeof live === "object" ? live : {}) as Record<string, unknown>;
+    const result: Record<string, unknown> = {};
+
+    for (const [key, value] of Object.entries(source)) {
+      if (!TINA_META_KEYS.has(key) && value !== null) result[key] = value;
+    }
+    for (const [key, value] of Object.entries(shape as Record<string, unknown>)) {
+      if (key === "_template") continue;
+      result[key] = normalizeLike(source[key], value);
+    }
+
+    return result as T;
+  }
+
+  if (live === null || live === undefined) {
+    if (typeof shape === "string") return "" as T;
+    if (typeof shape === "number") return 0 as T;
+    if (typeof shape === "boolean") return false as T;
+    return shape;
+  }
+
+  return live as T;
+}

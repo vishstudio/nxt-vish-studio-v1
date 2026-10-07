@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+import { getStartProjectPage } from '@/src/lib/content';
 import { BriefConfirmationModal } from './brief-confirmation-modal';
 
 const meta = {
@@ -13,6 +14,7 @@ export const Open: Story = {
   args: {
     isOpen: true,
     briefId: 'VISH-2026-001',
+    content: getStartProjectPage().confirmation,
     onClose: () => undefined,
   },
 };

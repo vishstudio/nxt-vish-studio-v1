@@ -1,0 +1,51 @@
+{
+  "_template": "bookCall",
+  "seo": {
+    "title": "Schedule a Free Call | VISH Studio",
+    "description": "Choose a time for a free 20-30 minute strategy call with VISH Studio."
+  },
+  "label": "Schedule a strategy call",
+  "heading": "Schedule a Free Call",
+  "description": "A focused 20-30 minute call to understand your goals, clarify the best next step, and decide whether a project brief is needed.",
+  "highlights": [
+    {
+      "title": "20-30 minutes",
+      "description": "Booked in a 30-minute slot so there is enough room for context.",
+      "icon": "clock"
+    },
+    {
+      "title": "Google Meet invite",
+      "description": "We will send the calendar invite with the Google Meet link to your email shortly.",
+      "icon": "video"
+    },
+    {
+      "title": "Clear next step",
+      "description": "You leave with direction on scope, budget range, timeline, or the Start Project brief.",
+      "icon": "calendar-days"
+    }
+  ],
+  "scopeHeading": "Already know the scope?",
+  "scopeDescription": "You can skip the call and send the full project brief instead.",
+  "scopeCtaLabel": "Start a Project",
+  "formHeading": "Choose your slot",
+  "timezoneLabel": "Timezone: Mauritius",
+  "submitLabel": "Schedule a Free Call",
+  "submittingLabel": "Saving Request",
+  "dateLabel": "Select date",
+  "weekdaysLabel": "Weekdays",
+  "timeLabel": "Available time",
+  "nameLabel": "Name",
+  "emailLabel": "Email for the invite",
+  "companyLabel": "Company",
+  "errorMessage": "Unable to save your booking request. Please email hello@vish.studio.",
+  "confirmation": {
+    "label": "Booking request received",
+    "heading": "Your strategy call request has been received",
+    "description": "We received your selected slot and will email the calendar invite with the Google Meet link to {email} shortly.",
+    "slotLabel": "Selected slot",
+    "slotJoiner": "at",
+    "referenceLabel": "Reference",
+    "homeCtaLabel": "Back to home",
+    "projectCtaLabel": "Start a Project"
+  }
+}

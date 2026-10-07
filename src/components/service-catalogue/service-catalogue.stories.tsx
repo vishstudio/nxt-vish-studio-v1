@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import services from '../../../content/pages/services.json';
+import services from '../../../content/pages/services/index.json';
 import { ServiceCatalogue } from './service-catalogue';
 
 const meta = {

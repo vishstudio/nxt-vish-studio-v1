@@ -4,7 +4,7 @@ import {
   type PricingPageContent,
   type CtaLinkType,
 } from "../../lib/pricing";
-import { rawTinaField, useTinaData } from "./core";
+import { normalizeLike, rawTinaField, useTinaData } from "./core";
 
 function mapPricingPlan(p: any) {
   return {
@@ -65,21 +65,21 @@ export function useTinaPricing() {
   const result = useTinaData(
     staticContent,
     () =>
-      client.queries.pricingPage({
+      client.queries.page({
         relativePath: "pricing.json",
       }),
     (qd: any) =>
       ({
-        heroLabel: qd.pricingPage.heroLabel ?? "",
-        heroTitleLine1: qd.pricingPage.heroTitleLine1 ?? "",
-        heroTitleLine2: qd.pricingPage.heroTitleLine2 ?? "",
-        heroSubtext: qd.pricingPage.heroSubtext ?? "",
-        heroBackgroundImage: qd.pricingPage.heroBackgroundImage ?? "",
-        heroBackgroundImageUrl: qd.pricingPage.heroBackgroundImageUrl ?? "",
-        sectionLabel: qd.pricingPage.sectionLabel ?? "",
-        sectionHeading: qd.pricingPage.sectionHeading ?? "",
-        sectionSubtext: qd.pricingPage.sectionSubtext ?? "",
-        pricingCategories: (qd.pricingPage.pricingCategories ?? [])
+        heroLabel: qd.page.heroLabel ?? "",
+        heroTitleLine1: qd.page.heroTitleLine1 ?? "",
+        heroTitleLine2: qd.page.heroTitleLine2 ?? "",
+        heroSubtext: qd.page.heroSubtext ?? "",
+        heroBackgroundImage: qd.page.heroBackgroundImage ?? "",
+        heroBackgroundImageUrl: qd.page.heroBackgroundImageUrl ?? "",
+        sectionLabel: qd.page.sectionLabel ?? "",
+        sectionHeading: qd.page.sectionHeading ?? "",
+        sectionSubtext: qd.page.sectionSubtext ?? "",
+        pricingCategories: (qd.page.pricingCategories ?? [])
           .map((category: any) => ({
             label: category?.label ?? "",
             slug: category?.slug ?? "",
@@ -92,14 +92,15 @@ export function useTinaPricing() {
               .filter((addOn: any) => addOn.label && addOn.price),
           }))
           .filter((category: any) => category.label && category.plans.length > 0),
-        customLabel: qd.pricingPage.customLabel ?? "",
-        customDescription: qd.pricingPage.customDescription ?? "",
-        customCtaLabel: qd.pricingPage.customCtaLabel ?? "",
-        customCtaHref: qd.pricingPage.customCtaHref ?? "",
+        customLabel: qd.page.customLabel ?? "",
+        customDescription: qd.page.customDescription ?? "",
+        customCtaLabel: qd.page.customCtaLabel ?? "",
+        customCtaHref: qd.page.customCtaHref ?? "",
+        labels: normalizeLike(qd.page.labels, staticContent.labels),
       } as PricingPageContent),
   );
 
-  const rawPage = result.tinaData ? (result.tinaData as any).pricingPage : null;
+  const rawPage = result.tinaData ? (result.tinaData as any).page : null;
 
   function tinaField(
     fieldNameOrObj: string | any,

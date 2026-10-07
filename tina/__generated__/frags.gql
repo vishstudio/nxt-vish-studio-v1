@@ -1,3 +1,616 @@
+fragment PageParts on Page {
+  __typename
+  ... on PageHome {
+    seo {
+      __typename
+      title
+      description
+    }
+    heroLabel
+    heroTypingPrefix
+    heroTypingPhrases
+    heroDescription
+    heroSignals {
+      __typename
+      label
+      icon
+    }
+    heroPrimaryCtaLabel
+    heroSecondaryCtaLabel
+    heroCapabilityLabel
+    heroCapabilityHeading
+    heroCapabilityItems {
+      __typename
+      label
+      icon
+    }
+    heroStats {
+      __typename
+      label
+      value
+      prefix
+      suffix
+      format
+    }
+    aboutHeading
+    aboutParagraph1
+    aboutParagraph2
+    projectsLabel
+    projectsHeading
+    projectsDescription
+    projectsButtonText
+    projectsSiteLinkLabel
+    processLabel
+    processHeading
+    processSubtext
+    processSteps {
+      __typename
+      num
+      title
+      description
+      tags
+    }
+  }
+  ... on PageAbout {
+    seo {
+      __typename
+      title
+      description
+    }
+    heroLabel
+    heroTitleLine1
+    heroTitleLine2
+    heroDescription
+    heroCtaLabel
+    studioImage
+    studioImageAlt
+    storyLabel
+    introHeading
+    introParagraph1
+    introParagraph2
+    storyCtaLabel
+    valuesLabel
+    valuesHeading
+    values {
+      __typename
+      id
+      title
+      description
+    }
+  }
+  ... on PageServices {
+    seo {
+      __typename
+      title
+      description
+    }
+    heroLabel
+    heroTitleLine1
+    heroTitleLine2
+    categories {
+      __typename
+      category
+      description
+      image
+      imageAlt
+      plan
+      items
+    }
+    showcase {
+      __typename
+      label
+      heading
+      description
+      listLabel
+      coversLabel
+      focusLabel
+    }
+    explorer {
+      __typename
+      label
+      heading
+      description
+      listLabel
+      listPrompt
+      allServicesLabel
+      selectedLabel
+      planLabel
+      scopeLabel
+      ctaLabel
+      imageLabel
+    }
+  }
+  ... on PageServicePage {
+    seo {
+      __typename
+      title
+      description
+    }
+    label
+    title
+    mutedTitle
+    description
+    primaryCtaLabel
+    secondaryCtaLabel
+    secondaryCtaHref
+    noticeLabel
+    noticeText
+  }
+  ... on PageSaasProducts {
+    seo {
+      __typename
+      title
+      description
+    }
+    heroLabel
+    heroTitleLine1
+    heroTitleLine2
+    heroDescription
+    primaryCtaLabel
+    secondaryCtaLabel
+    tracksLabel
+    tracksHeading
+    productTypes {
+      __typename
+      title
+      description
+    }
+    capabilitiesLabel
+    capabilitiesHeading
+    capabilitiesDescription
+    capabilities {
+      __typename
+      title
+      text
+      icon
+    }
+    deliveryLabel
+    deliveryHeading
+    phases
+  }
+  ... on PagePricing {
+    seo {
+      __typename
+      title
+      description
+    }
+    heroLabel
+    heroTitleLine1
+    heroTitleLine2
+    heroSubtext
+    heroBackgroundImage
+    heroBackgroundImageUrl
+    sectionLabel
+    sectionHeading
+    sectionSubtext
+    pricingCategories {
+      __typename
+      label
+      slug
+      plans {
+        __typename
+        label
+        name
+        price
+        priceGbp
+        discountedPrice
+        discountedPriceGbp
+        priceNote
+        delivery
+        tagline
+        featured
+        ctaLabel
+        ctaLink {
+          __typename
+          linkType
+          linkValue
+        }
+        features
+        carePlan {
+          __typename
+          title
+          price
+          priceGbp
+          cadence
+          summary
+        }
+        bestFor
+        revisions
+      }
+      carePlans {
+        __typename
+        title
+        price
+        priceGbp
+        cadence
+        summary
+      }
+      addOns {
+        __typename
+        label
+        price
+        priceGbp
+        note
+      }
+    }
+    customLabel
+    customDescription
+    customCtaLabel
+    customCtaHref
+    labels {
+      __typename
+      mostPopular
+      choosePlan
+      viewAllPlans
+      carePlanPrefix
+      bestForPrefix
+      revisionsPrefix
+      careLabel
+      careHeading
+      careDescription
+      maintenanceLabel
+      maintenanceHeading
+      maintenanceDescription
+      addOnsLabel
+      addOnsHeading
+      addOnsDescription
+    }
+  }
+  ... on PageTestimonials {
+    seo {
+      __typename
+      title
+      description
+    }
+    heroLabel
+    heading
+    subtext
+    viewAllLabel
+    emptyMessage
+    testimonials {
+      __typename
+      quote
+      name
+      role
+      company
+    }
+  }
+  ... on PageFaq {
+    seo {
+      __typename
+      title
+      description
+    }
+    label
+    faqHeading
+    faqSubtext
+    faqItems {
+      __typename
+      question
+      answer
+    }
+  }
+  ... on PageProjects {
+    seo {
+      __typename
+      title
+      description
+    }
+    heroLabel
+    heroTitleLine1
+    heroTitleLine2
+    heroDescription
+    caseStudy {
+      __typename
+      backLabel
+      visitSiteLabel
+      detailsHeading
+      yearLabel
+      categoryLabel
+      roleLabel
+      defaultRole
+      liveSiteLabel
+      viewSiteLabel
+      techStackLabel
+      overviewTitle
+      challengeTitle
+      strategyTitle
+      solutionTitle
+      emptySectionText
+      galleryLabel
+      notFoundHeading
+      notFoundCtaLabel
+    }
+  }
+  ... on PageBookCall {
+    seo {
+      __typename
+      title
+      description
+    }
+    label
+    heading
+    description
+    highlights {
+      __typename
+      title
+      description
+      icon
+    }
+    scopeHeading
+    scopeDescription
+    scopeCtaLabel
+    formHeading
+    timezoneLabel
+    submitLabel
+    submittingLabel
+    dateLabel
+    weekdaysLabel
+    timeLabel
+    nameLabel
+    emailLabel
+    companyLabel
+    errorMessage
+    confirmation {
+      __typename
+      label
+      heading
+      description
+      slotLabel
+      slotJoiner
+      referenceLabel
+      homeCtaLabel
+      projectCtaLabel
+    }
+  }
+  ... on PageStartProject {
+    seo {
+      __typename
+      title
+      description
+    }
+    steps {
+      __typename
+      label
+      title
+      intro
+    }
+    labels {
+      __typename
+      nameLabel
+      companyLabel
+      emailLabel
+      phoneLabel
+      reviewServiceHeading
+      reviewContactHeading
+      reviewBriefHeading
+      deliveryPrefix
+      notProvided
+      notSelected
+      summaryHeading
+      summaryServiceLabel
+      summaryPackageLabel
+      privacyHeading
+      privacyText
+      progressLabel
+      stepCounter
+      backLabel
+      continueLabel
+      submitLabel
+      submittingLabel
+      errorMessage
+    }
+    confirmation {
+      __typename
+      label
+      heading
+      description
+      contactPrompt
+      homeCtaLabel
+    }
+  }
+  ... on PageWalkthrough {
+    seo {
+      __typename
+      title
+      description
+    }
+    navigationItems {
+      __typename
+      label
+      icon
+    }
+    statusLabel
+    statusText
+    label
+    heading
+    description
+    primaryCtaLabel
+    secondaryCtaLabel
+    todayLabel
+    todayBadge
+    activityItems
+    outcomeLabel
+    steps {
+      __typename
+      eyebrow
+      title
+      description
+      outcome
+      icon
+    }
+    closingHeading
+    closingDescription
+    closingCtaLabel
+  }
+  ... on PageLegal {
+    seo {
+      __typename
+      title
+      description
+    }
+    title
+    slug
+    heroLabel
+    intro
+    lastUpdated
+    sections {
+      __typename
+      title
+      body
+    }
+  }
+  ... on PageNotFound {
+    heading
+    description
+    ctaLabel
+  }
+}
+
+fragment SiteSettingsParts on SiteSettings {
+  __typename
+  email
+  phone
+  phoneLink
+  address
+  copyright
+  contactHeadingLine1
+  contactHeadingLine2
+  scrollText
+  loaderMotto
+  socials {
+    __typename
+    name
+    url
+    openInNewTab
+  }
+  newsletterLabel
+  newsletterHeading
+  newsletterDescription
+  newsletterButtonLabel
+  newsletterConsent
+  footerNewsletterHeading
+  footerNewsletterDescription
+  newsletterSuccessHeading
+  newsletterSuccessDescription
+  navigation {
+    __typename
+    ctaLabel
+    ctaShortLabel
+    links {
+      __typename
+      label
+      href
+      activePaths
+      hasServicesMenu
+      showOnDesktop
+      showOnMobile
+    }
+    servicesMenu {
+      __typename
+      label
+      heading
+      description
+      overviewLabel
+      overviewDescription
+      items {
+        __typename
+        label
+        href
+        description
+        icon
+      }
+    }
+    mobileTranslateLabel
+    mobileConnectLabel
+  }
+  footer {
+    __typename
+    label
+    ctaLabel
+    reachUsLabel
+    exploreLabel
+    exploreLinks {
+      __typename
+      label
+      url
+    }
+    servicesLabel
+    serviceLinks {
+      __typename
+      label
+      url
+    }
+    followLabel
+  }
+  footerLinks {
+    __typename
+    label
+    url
+  }
+  projectCta {
+    __typename
+    imageLabel
+    slotLabel
+    heading
+    description
+    ctaLabel
+  }
+  team {
+    __typename
+    heading
+    description
+    members {
+      __typename
+      name
+      role
+      image
+      bio
+      order
+    }
+  }
+  cookies {
+    __typename
+    bannerLabel
+    bannerHeading
+    bannerDescription
+    settingsButtonLabel
+    rejectButtonLabel
+    acceptButtonLabel
+    triggerLabel
+    panelLabel
+    panelHeading
+    panelDescription
+    necessaryTitle
+    necessaryDescription
+    alwaysOnLabel
+    analyticsTitle
+    analyticsDescription
+    analyticsOnLabel
+    analyticsOffLabel
+    cancelLabel
+    rejectOptionalLabel
+    saveLabel
+  }
+  partners {
+    __typename
+    partnersLabel
+    trustHeading
+    trustDescription
+    ctaLabel
+    proofPoints {
+      __typename
+      value
+      label
+    }
+    partners {
+      __typename
+      name
+      url
+    }
+  }
+}
+
 fragment ProjectParts on Project {
   __typename
   title
@@ -6,6 +619,7 @@ fragment ProjectParts on Project {
   techStack
   image
   year
+  role
   order
   featuredOnHome
   description
@@ -20,238 +634,4 @@ fragment ProjectParts on Project {
   solutionImage
   gallery
   siteUrl
-}
-
-fragment LegalPageParts on LegalPage {
-  __typename
-  title
-  slug
-  heroLabel
-  intro
-  lastUpdated
-  sections {
-    __typename
-    title
-    body
-  }
-}
-
-fragment SiteSettingsParts on SiteSettings {
-  __typename
-  email
-  phone
-  phoneLink
-  address
-  copyright
-  contactHeadingLine1
-  contactHeadingLine2
-  newsletterHeading
-  newsletterDescription
-  newsletterButtonLabel
-  newsletterConsent
-  footerNewsletterHeading
-  footerNewsletterDescription
-  scrollText
-  socials {
-    __typename
-    name
-    url
-    openInNewTab
-  }
-  footerLinks {
-    __typename
-    label
-    url
-  }
-}
-
-fragment PartnersParts on Partners {
-  __typename
-  partnersLabel
-  trustHeading
-  trustDescription
-  ctaLabel
-  proofPoints {
-    __typename
-    value
-    label
-  }
-  partners {
-    __typename
-    name
-    url
-  }
-}
-
-fragment HomePageParts on HomePage {
-  __typename
-  heroLabel
-  heroTitleLine1
-  heroTitleLine2
-  heroDescription
-  heroStats {
-    __typename
-    label
-    value
-    prefix
-    suffix
-    format
-  }
-  aboutHeading
-  aboutParagraph1
-  aboutParagraph2
-  projectsLabel
-  projectsHeading
-  projectsDescription
-  projectsButtonText
-  servicesHeading
-  servicesSubtext
-  servicesButtonText
-  services {
-    __typename
-    id
-    title
-    description
-  }
-  processHeading
-  processSubtext
-  processSteps {
-    __typename
-    num
-    title
-    description
-    tags
-  }
-  faqHeading
-  faqSubtext
-  faqItems {
-    __typename
-    question
-    answer
-  }
-}
-
-fragment TestimonialsPageParts on TestimonialsPage {
-  __typename
-  heading
-  subtext
-  testimonials {
-    __typename
-    quote
-    name
-    role
-    company
-  }
-}
-
-fragment AboutPageParts on AboutPage {
-  __typename
-  heroLabel
-  heroTitleLine1
-  heroTitleLine2
-  heroDescription
-  studioImage
-  studioImageAlt
-  introHeading
-  introParagraph1
-  introParagraph2
-  valuesLabel
-  valuesHeading
-  values {
-    __typename
-    id
-    title
-    description
-  }
-  teamMembers {
-    __typename
-    name
-    role
-    image
-    bio
-    order
-  }
-}
-
-fragment ServicesPageParts on ServicesPage {
-  __typename
-  heroLabel
-  heroTitleLine1
-  heroTitleLine2
-  categories {
-    __typename
-    category
-    description
-    image
-    imageAlt
-    plan
-    items
-  }
-}
-
-fragment PricingPageParts on PricingPage {
-  __typename
-  heroLabel
-  heroTitleLine1
-  heroTitleLine2
-  heroSubtext
-  heroBackgroundImage
-  heroBackgroundImageUrl
-  sectionLabel
-  sectionHeading
-  sectionSubtext
-  pricingCategories {
-    __typename
-    label
-    slug
-    plans {
-      __typename
-      label
-      name
-      price
-      priceGbp
-      discountedPrice
-      discountedPriceGbp
-      priceNote
-      delivery
-      tagline
-      featured
-      ctaLabel
-      ctaLink {
-        __typename
-        linkType
-        linkValue
-      }
-      features
-      carePlan {
-        __typename
-        title
-        price
-        priceGbp
-        cadence
-        summary
-      }
-      bestFor
-      revisions
-    }
-    carePlans {
-      __typename
-      title
-      price
-      priceGbp
-      cadence
-      summary
-    }
-    addOns {
-      __typename
-      label
-      price
-      priceGbp
-      note
-    }
-  }
-  customLabel
-  customDescription
-  customCtaLabel
-  customCtaHref
 }

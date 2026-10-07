@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
+import { getAboutPage } from '@/src/lib/content';
+import { toMetadata } from '@/src/lib/seo';
 import { AboutPage } from '@/src/views/About';
 
-export const metadata: Metadata = {
-  title: 'About | VISH Studio',
-  description: 'Meet VISH Studio, the Mauritius creative technology agency helping ambitious businesses turn their next chapter into a trusted digital presence.',
-};
+export const metadata: Metadata = toMetadata(getAboutPage().seo);
 
 const About = () => {
   return <AboutPage />;

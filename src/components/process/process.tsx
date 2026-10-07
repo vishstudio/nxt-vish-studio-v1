@@ -27,7 +27,12 @@ export const Process = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease }}
           >
-            <p className="mb-5 font-mono text-xs tracking-[0.18em] text-vish-accent">OUR DELIVERY MODEL</p>
+            <p
+              className="mb-5 font-mono text-xs tracking-[0.18em] text-vish-accent"
+              data-tina-field={tinaField('processLabel')}
+            >
+              {content.processLabel}
+            </p>
             <SectionTitle size="lg" className="mb-6 max-w-xl" tinaField={tinaField('processHeading')}>
               {content.processHeading}
             </SectionTitle>

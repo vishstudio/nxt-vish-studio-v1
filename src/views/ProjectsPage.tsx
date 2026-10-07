@@ -1,6 +1,8 @@
 'use client';
 import { motion } from 'motion/react';
 import { useTinaProjectsList } from '../hooks/useTinaVisualEditing';
+import { useTinaPage } from '../hooks/tina/usePage';
+import { getProjectsPage } from '../lib/content';
 import type { Project } from '../lib/projects';
 import { Contact } from '../components/contact/contact';
 import { PageLayout } from '../components/ui/page-layout/page-layout';
@@ -11,6 +13,7 @@ import { ProjectsCta } from '../components/projects-cta/projects-cta';
 
 export const ProjectsPage = () => {
   const { data: projects } = useTinaProjectsList();
+  const { data: content, tinaField } = useTinaPage('projects.json', getProjectsPage());
   const ctaBackgroundImages = [
     '/assets/img/home-cta-1.avif',
     '/assets/img/home-cta-2.avif',
@@ -19,7 +22,8 @@ export const ProjectsPage = () => {
   return (
     <PageLayout>
       <PageHero
-        label="Our Portfolio"
+        label={content.heroLabel}
+        labelTinaField={tinaField('heroLabel')}
         backgroundImage="/assets/img/projects-hero.avif"
         title={
           <motion.h1
@@ -28,11 +32,14 @@ export const ProjectsPage = () => {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="font-display text-6xl md:text-8xl lg:text-9xl font-medium tracking-tight leading-[0.95] text-white mb-12"
           >
-            Selected <br />
-            <span className="text-gray-500">works<span className="text-vish-accent">.</span></span>
+            <span data-tina-field={tinaField('heroTitleLine1')}>{content.heroTitleLine1}</span> <br />
+            <span className="text-gray-500" data-tina-field={tinaField('heroTitleLine2')}>
+              {content.heroTitleLine2}<span className="text-vish-accent">.</span>
+            </span>
           </motion.h1>
         }
-        description="Explore a curated selection of our finest digital products. From immersive web experiences to comprehensive brand identities, each project represents our commitment to innovation and design excellence."
+        description={content.heroDescription}
+        descriptionTinaField={tinaField('heroDescription')}
       />
 
       <Section className="mb-32">

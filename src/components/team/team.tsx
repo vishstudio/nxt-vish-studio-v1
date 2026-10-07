@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll } from 'motion/react';
 import type { TeamMember } from '../../lib/content';
-import { getAboutPage } from '../../lib/content';
+import { useTinaSettings } from '../../hooks/useTinaVisualEditing';
 import { CarouselProgress } from '../carousel-progress/CarouselProgress';
 import { SectionTitle } from '../ui/section-title/section-title';
 
@@ -22,14 +22,14 @@ const getInitials = (name: string) =>
 
 interface TeamProps {
   showTitle?: boolean;
+  /** Optional override, e.g. for stories. Defaults to Site Settings → Team. */
   members?: TeamMember[];
-  /** Raw Tina team member objects for click-to-edit annotations */
-  rawTinaMembers?: any[];
-  /** tinaField helper from useTinaAbout */
-  tinaField?: (objOrField: any, fieldName?: string) => string | undefined;
 }
 
-export const Team = ({ showTitle = true, members, rawTinaMembers, tinaField }: TeamProps) => {
+export const Team = ({ showTitle = true, members }: TeamProps) => {
+  const { data: settings, tinaField, rawSiteSettings } = useTinaSettings();
+  const rawTeam = rawSiteSettings?.team;
+  const rawTinaMembers: any[] | undefined = members ? undefined : rawTeam?.members;
   const sectionRef = useRef<HTMLElement>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
   const [activeMemberIndex, setActiveMemberIndex] = useState(0);
@@ -41,8 +41,7 @@ export const Team = ({ showTitle = true, members, rawTinaMembers, tinaField }: T
     target: sectionRef,
     offset: ['start start', 'end end'],
   });
-  // Use provided members or fall back to static about page data
-  const teamData = members ?? getAboutPage().teamMembers ?? [];
+  const teamData = members ?? settings.team.members ?? [];
   const team = [...teamData].sort((a, b) => a.order - b.order);
 
   useEffect(() => {
@@ -126,7 +125,7 @@ export const Team = ({ showTitle = true, members, rawTinaMembers, tinaField }: T
 
   // Build a name → raw tina object map so sorting doesn't break index alignment
   const rawByName: Record<string, any> = {};
-  if (rawTinaMembers && tinaField) {
+  if (rawTinaMembers) {
     rawTinaMembers.forEach((m: any) => {
       if (m?.name) rawByName[m.name] = m;
     });
@@ -170,9 +169,14 @@ export const Team = ({ showTitle = true, members, rawTinaMembers, tinaField }: T
             transition={{ duration: 0.6 }}
             className="mb-12 md:mb-20 lg:mb-16"
           >
-            <SectionTitle className="mb-6">Our Team</SectionTitle>
-            <p className="max-w-2xl font-sans text-xl leading-relaxed text-gray-400 md:text-2xl">
-              We are a collective of specialists, working across disciplines to deliver unified digital experiences.
+            <SectionTitle className="mb-6" tinaField={rawTeam ? tinaField(rawTeam, 'heading') : undefined}>
+              {settings.team.heading}
+            </SectionTitle>
+            <p
+              className="max-w-2xl font-sans text-xl leading-relaxed text-gray-400 md:text-2xl"
+              data-tina-field={rawTeam ? tinaField(rawTeam, 'description') : undefined}
+            >
+              {settings.team.description}
             </p>
           </motion.div>
         )}
@@ -203,7 +207,7 @@ export const Team = ({ showTitle = true, members, rawTinaMembers, tinaField }: T
                 >
                   <div
                     className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-white/10 bg-vish-subtle shadow-2xl shadow-black/40"
-                    data-tina-field={rawMember && tinaField ? tinaField(rawMember, 'image') : undefined}
+                    data-tina-field={rawMember ? tinaField(rawMember, 'image') : undefined}
                   >
                     <div className="absolute inset-0 flex items-center justify-center bg-vish-subtle">
                       <span className="font-display text-7xl font-medium text-white/10">
@@ -220,7 +224,7 @@ export const Team = ({ showTitle = true, members, rawTinaMembers, tinaField }: T
                       <div className="flex items-start justify-between gap-4">
                         <p
                           className="font-mono text-[0.4rem] md:text-[0.65rem] uppercase leading-relaxed tracking-[0.14em] text-vish-accent"
-                          data-tina-field={rawMember && tinaField ? tinaField(rawMember, 'role') : undefined}
+                          data-tina-field={rawMember ? tinaField(rawMember, 'role') : undefined}
                         >
                           {member.role}
                         </p>
@@ -230,7 +234,7 @@ export const Team = ({ showTitle = true, members, rawTinaMembers, tinaField }: T
                       </div>
                       <h3
                         className="mt-3 font-display text-xl font-medium leading-tight text-white md:text-3xl"
-                        data-tina-field={rawMember && tinaField ? tinaField(rawMember, 'name') : undefined}
+                        data-tina-field={rawMember ? tinaField(rawMember, 'name') : undefined}
                       >
                         {member.name}
                         <span className="text-vish-accent">.</span>

@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowLeft, ExternalLink, X, ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react';
 import { useTinaProjectDetail } from '../hooks/useTinaVisualEditing';
+import { useTinaPage } from '../hooks/tina/usePage';
+import { getProjectsPage } from '../lib/content';
 import { getImageUrl } from '../utils/imageUrl';
 import { Navbar } from '../components/navbar/navbar';
 import { Contact } from '../components/contact/contact';
@@ -16,6 +18,9 @@ export const ProjectDetail = () => {
   const params = useParams();
   const slug = Array.isArray(params?.slug) ? params.slug[0] : (params?.slug ?? '');
   const { data: project } = useTinaProjectDetail(slug || '');
+  const { data: projectsPage, tinaField, rawPage } = useTinaPage('projects.json', getProjectsPage());
+  const labels = projectsPage.caseStudy;
+  const labelField = (name: string) => (rawPage?.caseStudy ? tinaField(rawPage.caseStudy, name) : undefined);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   useEffect(() => {
@@ -57,8 +62,8 @@ export const ProjectDetail = () => {
     return (
       <div className="min-h-screen bg-vish-bg text-white flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-display mb-4">Project Not Found</h1>
-          <Link href="/" className="text-vish-accent hover:underline">Back to Home</Link>
+          <h1 className="text-4xl font-display mb-4">{labels.notFoundHeading}</h1>
+          <Link href="/" className="text-vish-accent hover:underline">{labels.notFoundCtaLabel}</Link>
         </div>
       </div>
     );
@@ -67,25 +72,29 @@ export const ProjectDetail = () => {
   const projectSections = [
     {
       eyebrow: '01',
-      title: 'Overview',
+      title: labels.overviewTitle,
+      titleField: 'overviewTitle',
       content: project.overview || project.fullDescription || project.description,
       image: project.overviewImage,
     },
     {
       eyebrow: '02',
-      title: 'The Challenge',
+      title: labels.challengeTitle,
+      titleField: 'challengeTitle',
       content: project.challenge,
       image: project.challengeImage,
     },
     {
       eyebrow: '03',
-      title: 'The Strategy',
+      title: labels.strategyTitle,
+      titleField: 'strategyTitle',
       content: project.strategy,
       image: project.strategyImage,
     },
     {
       eyebrow: '04',
-      title: 'The Solution',
+      title: labels.solutionTitle,
+      titleField: 'solutionTitle',
       content: project.solution,
       image: project.solutionImage,
     },
@@ -98,7 +107,7 @@ export const ProjectDetail = () => {
       <main className="pt-32 pb-12 px-6 md:px-12 max-w-350 mx-auto">
         <Link href="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-vish-accent transition-colors mb-12 group">
           <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-          Back to Projects
+          <span data-tina-field={labelField('backLabel')}>{labels.backLabel}</span>
         </Link>
 
         <motion.div
@@ -125,7 +134,7 @@ export const ProjectDetail = () => {
               transition={{ duration: 0.5, delay: 0.15 }}
               className="inline-flex items-center gap-2 mb-12 px-6 py-3 bg-vish-accent text-black font-mono text-sm font-semibold rounded-full hover:bg-white transition-colors duration-200 group"
             >
-              Visit Live Site
+              <span data-tina-field={labelField('visitSiteLabel')}>{labels.visitSiteLabel}</span>
               <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
             </motion.a>
           )}
@@ -146,23 +155,23 @@ export const ProjectDetail = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-24">
           <div className="lg:col-span-4">
-            <h3 className="font-display text-2xl mb-6 text-white">Project Details</h3>
+            <h3 className="font-display text-2xl mb-6 text-white" data-tina-field={labelField('detailsHeading')}>{labels.detailsHeading}</h3>
             <div className="space-y-4 font-mono text-sm text-gray-400 border-t border-white/10 pt-6">
               <div className="flex justify-between">
-                <span>Year</span>
+                <span data-tina-field={labelField('yearLabel')}>{labels.yearLabel}</span>
                 <span className="text-white">{project.year}</span>
               </div>
               <div className="flex justify-between">
-                <span>Category</span>
+                <span data-tina-field={labelField('categoryLabel')}>{labels.categoryLabel}</span>
                 <span className="text-white text-right">{Array.isArray(project.category) ? project.category.join(', ') : project.category}</span>
               </div>
               <div className="flex justify-between">
-                <span>Role</span>
-                <span className="text-white">Design & Development</span>
+                <span data-tina-field={labelField('roleLabel')}>{labels.roleLabel}</span>
+                <span className="text-white">{project.role || labels.defaultRole}</span>
               </div>
               {project.siteUrl && (
                 <div className="flex justify-between items-center pt-2">
-                  <span>Live Site</span>
+                  <span data-tina-field={labelField('liveSiteLabel')}>{labels.liveSiteLabel}</span>
                   <Button
                     href={project.siteUrl}
                     variant="external"
@@ -170,15 +179,16 @@ export const ProjectDetail = () => {
                     onClick={() => trackProjectSiteClick(slug, project.title)}
                     icon={<ExternalLink className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />}
                     iconPosition="right"
+                    tinaField={labelField('viewSiteLabel')}
                   >
-                    View Site
+                    {labels.viewSiteLabel}
                   </Button>
                 </div>
               )}
             </div>
             {project.techStack && project.techStack.length > 0 && (
               <div className="mt-10 border-t border-white/10 pt-6">
-                <h4 className="font-mono text-xs text-gray-500 uppercase tracking-widest mb-4">Tech Stack</h4>
+                <h4 className="font-mono text-xs text-gray-500 uppercase tracking-widest mb-4" data-tina-field={labelField('techStackLabel')}>{labels.techStackLabel}</h4>
                 <div className="flex flex-wrap gap-2">
                   {project.techStack.map((tech) => (
                     <span
@@ -217,7 +227,7 @@ export const ProjectDetail = () => {
                   <div className={`${hasImage ? `lg:col-span-5 ${isReversed ? 'lg:order-2' : ''}` : 'max-w-4xl'} space-y-6`}>
                     <div>
                       <span className="font-mono text-xs text-vish-accent">{section.eyebrow}</span>
-                      <SectionTitle size="md" className="mt-4">
+                      <SectionTitle size="md" className="mt-4" tinaField={labelField(section.titleField)}>
                         {section.title}
                       </SectionTitle>
                     </div>
@@ -225,8 +235,8 @@ export const ProjectDetail = () => {
                       {section.content ? (
                         renderSectionText(section.content)
                       ) : (
-                        <p className="font-sans text-lg md:text-xl text-gray-500 leading-relaxed">
-                          Details coming soon.
+                        <p className="font-sans text-lg md:text-xl text-gray-500 leading-relaxed" data-tina-field={labelField('emptySectionText')}>
+                          {labels.emptySectionText}
                         </p>
                       )}
                     </div>
@@ -250,7 +260,7 @@ export const ProjectDetail = () => {
 
         {project.gallery && project.gallery.length > 0 && (
           <div className="space-y-4">
-            <h3 className="font-mono text-xs text-gray-500 uppercase tracking-widest">Gallery</h3>
+            <h3 className="font-mono text-xs text-gray-500 uppercase tracking-widest" data-tina-field={labelField('galleryLabel')}>{labels.galleryLabel}</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
               {project.gallery.map((img, index) => (
                 <motion.button

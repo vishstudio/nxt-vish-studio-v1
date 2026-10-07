@@ -13,6 +13,8 @@ export const Services = () => {
       rawCategories={rawServicesPage?.categories}
       tinaField={tinaField}
       variant="showcase"
+      copy={content.showcase}
+      rawCopy={rawServicesPage?.showcase}
     />
   );
 };

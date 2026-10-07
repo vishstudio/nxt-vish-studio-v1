@@ -1,21 +1,10 @@
 import type { Metadata } from 'next';
+import { getServicePage } from '@/src/lib/content';
+import { toMetadata } from '@/src/lib/seo';
 import { ServiceComingSoonPage } from '@/src/views/ServiceComingSoonPage';
 
-export const metadata: Metadata = {
-  title: 'Website Templates | VISH Studio',
-  description:
-    'Launch-ready website templates from VISH Studio. This service track is coming soon.',
-};
+export const metadata: Metadata = toMetadata(getServicePage('templates').seo);
 
-const Templates = () => {
-  return (
-    <ServiceComingSoonPage
-      label="Website Templates"
-      title="Website templates"
-      mutedTitle="coming soon"
-      description="Launch-ready website and product templates are being prepared for teams that need a faster starting point without losing the VISH Studio visual standard."
-    />
-  );
-};
+const Templates = () => <ServiceComingSoonPage slug="templates" />;
 
 export default Templates;

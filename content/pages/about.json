@@ -1,4 +1,9 @@
 {
+  "_template": "about",
+  "seo": {
+    "title": "About | VISH Studio",
+    "description": "Meet VISH Studio, the Mauritius creative technology agency helping ambitious businesses turn their next chapter into a trusted digital presence."
+  },
   "heroLabel": "The agency behind the work",
   "heroTitleLine1": "Built for the",
   "heroTitleLine2": "next chapter",
@@ -27,34 +32,7 @@
       "description": "We stay close to the real problem, communicate clearly, and make decisions with you—not in a black box."
     }
   ],
-  "teamMembers": [
-    {
-      "name": "Vishroy Seenarain",
-      "role": "CEO & Creative Director",
-      "image": "/assets/img/team/vishroy.jpg",
-      "bio": "Leading the vision with a passion for minimalist design and functional aesthetics.",
-      "order": 1
-    },
-    {
-      "name": "Divesh Heeramun",
-      "role": "CTO & Head of Engineering",
-      "image": "/assets/img/team/divesh.jpg",
-      "bio": "Architecting robust and scalable digital solutions.",
-      "order": 2
-    },
-    {
-      "name": "Pravesh Boodhoo",
-      "role": "COO & AI Specialist",
-      "image": "/assets/img/team/pravesh.jpg",
-      "bio": "Designing practical AI workflows and intelligent product systems.",
-      "order": 3
-    },
-    {
-      "name": "Alice Antoinette",
-      "role": "Lead Creative designer & Social Media Manager",
-      "image": "/assets/img/team/alice-antoinette.jpeg",
-      "bio": "",
-      "order": 4
-    }
-  ]
+  "heroCtaLabel": "Schedule a Free Call",
+  "storyLabel": "The VISH story",
+  "storyCtaLabel": "See the work"
 }

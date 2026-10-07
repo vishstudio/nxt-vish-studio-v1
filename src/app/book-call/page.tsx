@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
+import { getBookCallPage } from "@/src/lib/content";
+import { toMetadata } from "@/src/lib/seo";
 import { BookCall } from "@/src/components/book-call/book-call";
 import { Contact } from "@/src/components/contact/contact";
 import { PageLayout } from "@/src/components/ui/page-layout/page-layout";
 import { Section } from "@/src/components/ui/section/section";
 
-export const metadata: Metadata = {
-  title: "Schedule a Free Call | VISH Studio",
-  description: "Choose a time for a free 20-30 minute strategy call with VISH Studio.",
-};
+export const metadata: Metadata = toMetadata(getBookCallPage().seo);
 
 const BookCallPage = () => {
   return (

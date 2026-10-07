@@ -16,7 +16,12 @@ import {
 } from 'lucide-react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { useEffect, useState } from 'react';
-import type { ServiceCategory } from '../../lib/content';
+import {
+  getServicesPage,
+  type ServiceCategory,
+  type ServiceExplorerCopy,
+  type ServiceShowcaseCopy,
+} from '../../lib/content';
 import { sortByCanonicalServiceOrder } from '../../lib/services';
 import { getImageUrl } from '../../utils/imageUrl';
 import { Button } from '../ui/button/button';
@@ -27,6 +32,10 @@ interface ServiceCatalogueProps {
   tinaField: (source: unknown, field?: string) => string | undefined;
   id?: string;
   variant?: 'explorer' | 'showcase';
+  /** Section copy for the selected variant; defaults to the Services page document. */
+  copy?: ServiceShowcaseCopy | ServiceExplorerCopy;
+  /** Raw Tina object for `copy`, used for click-to-edit annotations. */
+  rawCopy?: unknown;
 }
 
 const serviceIcons: Record<string, LucideIcon> = {
@@ -40,7 +49,9 @@ const serviceIcons: Record<string, LucideIcon> = {
   'AI Integrations & Automations': Bot,
 };
 
-const ServiceShowcase = ({ services, rawCategories, tinaField, id }: ServiceCatalogueProps) => {
+const ServiceShowcase = ({ services, rawCategories, tinaField, id, copy: copyProp, rawCopy }: ServiceCatalogueProps) => {
+  const copy = (copyProp ?? getServicesPage().showcase) as ServiceShowcaseCopy;
+  const copyField = (name: string) => (rawCopy ? tinaField(rawCopy, name) : undefined);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const shouldReduceMotion = useReducedMotion();
@@ -90,13 +101,19 @@ const ServiceShowcase = ({ services, rawCategories, tinaField, id }: ServiceCata
       <div className="relative z-10 mx-auto max-w-[1400px]">
         <div className="mb-12 grid gap-6 md:mb-16 lg:grid-cols-[minmax(0,0.92fr)_minmax(20rem,0.58fr)] lg:items-end lg:gap-16">
           <div>
-            <p className="font-mono text-xs uppercase tracking-[0.18em] text-vish-accent">Service catalogue</p>
-            <h2 id="service-catalogue-title" className="mt-4 max-w-3xl font-display text-4xl font-medium leading-[0.98] tracking-tight text-white sm:text-5xl md:text-6xl">
-              Explore the work that moves your business forward<span className="text-vish-accent">.</span>
+            <p className="font-mono text-xs uppercase tracking-[0.18em] text-vish-accent" data-tina-field={copyField('label')}>
+              {copy.label}
+            </p>
+            <h2
+              id="service-catalogue-title"
+              className="mt-4 max-w-3xl font-display text-4xl font-medium leading-[0.98] tracking-tight text-white sm:text-5xl md:text-6xl"
+              data-tina-field={copyField('heading')}
+            >
+              {copy.heading}<span className="text-vish-accent">.</span>
             </h2>
           </div>
-          <p className="max-w-lg font-sans text-base leading-relaxed text-gray-400 lg:pb-1">
-            Select a service to see the focused work and outcomes it brings. The view advances automatically when left untouched.
+          <p className="max-w-lg font-sans text-base leading-relaxed text-gray-400 lg:pb-1" data-tina-field={copyField('description')}>
+            {copy.description}
           </p>
         </div>
 
@@ -107,7 +124,9 @@ const ServiceShowcase = ({ services, rawCategories, tinaField, id }: ServiceCata
         >
           <div className="flex flex-col border-b border-white/10 px-6 py-7 sm:px-8 sm:py-9 lg:border-b-0 lg:border-r">
             <div className="flex items-center justify-between gap-4">
-              <p className="font-mono text-xs uppercase tracking-[0.18em] text-vish-accent">Our services</p>
+              <p className="font-mono text-xs uppercase tracking-[0.18em] text-vish-accent" data-tina-field={copyField('listLabel')}>
+                {copy.listLabel}
+              </p>
               <p className="font-mono text-xs tracking-[0.16em] text-white/45">
                 {String(selectedIndex + 1).padStart(2, '0')} / {String(orderedServices.length).padStart(2, '0')}
               </p>
@@ -181,7 +200,9 @@ const ServiceShowcase = ({ services, rawCategories, tinaField, id }: ServiceCata
             </AnimatePresence>
             <div className="absolute inset-0 bg-linear-to-t from-black/65 via-black/10 to-transparent" aria-hidden="true" />
             <div className="absolute inset-x-4 bottom-16 rounded-2xl border border-white/15 bg-black/65 px-5 py-5 shadow-xl shadow-black/30 backdrop-blur-md sm:inset-x-5 sm:bottom-5 sm:px-6 sm:py-6">
-              <p className="font-mono text-xs uppercase tracking-[0.18em] text-vish-accent">What this covers</p>
+              <p className="font-mono text-xs uppercase tracking-[0.18em] text-vish-accent" data-tina-field={copyField('coversLabel')}>
+                {copy.coversLabel}
+              </p>
               <h3
                 className="mt-3 max-w-2xl font-display text-3xl font-medium leading-[0.94] tracking-tight text-white sm:text-4xl"
                 data-tina-field={selectedRawCategory ? tinaField(selectedRawCategory, 'category') : undefined}
@@ -195,7 +216,9 @@ const ServiceShowcase = ({ services, rawCategories, tinaField, id }: ServiceCata
                 {selectedService.description}
               </p>
               <p className="mt-5 max-w-2xl border-t border-white/20 pt-4 font-sans text-sm leading-relaxed text-white/75">
-                <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/45">Focus </span>
+                <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/45" data-tina-field={copyField('focusLabel')}>
+                  {copy.focusLabel}{' '}
+                </span>
                 {selectedService.items.slice(0, 3).join(' · ')}
               </p>
             </div>
@@ -234,7 +257,9 @@ const ServiceShowcase = ({ services, rawCategories, tinaField, id }: ServiceCata
   );
 };
 
-const ServiceExplorer = ({ services, rawCategories, tinaField, id }: ServiceCatalogueProps) => {
+const ServiceExplorer = ({ services, rawCategories, tinaField, id, copy: copyProp, rawCopy }: ServiceCatalogueProps) => {
+  const copy = (copyProp ?? getServicesPage().explorer) as ServiceExplorerCopy;
+  const copyField = (name: string) => (rawCopy ? tinaField(rawCopy, name) : undefined);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const orderedServices = sortByCanonicalServiceOrder(services);
@@ -259,13 +284,19 @@ const ServiceExplorer = ({ services, rawCategories, tinaField, id }: ServiceCata
       <div className="relative z-10 mx-auto max-w-[1400px]">
         <div className="mb-12 flex flex-col justify-between gap-5 md:mb-16 md:flex-row md:items-end">
           <div>
-            <p className="font-mono text-xs uppercase tracking-[0.18em] text-vish-accent">Service catalogue</p>
-            <h2 id="service-catalogue-title" className="mt-4 max-w-2xl font-display text-4xl font-medium leading-[0.98] tracking-tight text-white sm:text-5xl md:text-6xl">
-              Choose the work that moves your business forward<span className="text-vish-accent">.</span>
+            <p className="font-mono text-xs uppercase tracking-[0.18em] text-vish-accent" data-tina-field={copyField('label')}>
+              {copy.label}
+            </p>
+            <h2
+              id="service-catalogue-title"
+              className="mt-4 max-w-2xl font-display text-4xl font-medium leading-[0.98] tracking-tight text-white sm:text-5xl md:text-6xl"
+              data-tina-field={copyField('heading')}
+            >
+              {copy.heading}<span className="text-vish-accent">.</span>
             </h2>
           </div>
-          <p className="max-w-md font-sans text-base leading-relaxed text-gray-400">
-            Select a service to see the work we plan, the outcomes we focus on, and a relevant slice of our world.
+          <p className="max-w-md font-sans text-base leading-relaxed text-gray-400" data-tina-field={copyField('description')}>
+            {copy.description}
           </p>
         </div>
 
@@ -285,8 +316,12 @@ const ServiceExplorer = ({ services, rawCategories, tinaField, id }: ServiceCata
                   transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <div className="border-b border-white/10 px-6 py-7">
-                    <p className="font-mono text-xs uppercase tracking-[0.18em] text-white/45">Our services</p>
-                    <p className="mt-3 font-display text-2xl leading-tight">Select a service to see the plan<span className="text-vish-accent">.</span></p>
+                    <p className="font-mono text-xs uppercase tracking-[0.18em] text-white/45" data-tina-field={copyField('listLabel')}>
+                      {copy.listLabel}
+                    </p>
+                    <p className="mt-3 font-display text-2xl leading-tight" data-tina-field={copyField('listPrompt')}>
+                      {copy.listPrompt}<span className="text-vish-accent">.</span>
+                    </p>
                   </div>
                   <div className="grid px-6 pb-4 pt-2 md:grid-cols-2 md:gap-x-8">
                     {orderedServices.map((service, index) => {
@@ -335,12 +370,14 @@ const ServiceExplorer = ({ services, rawCategories, tinaField, id }: ServiceCata
                     className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-white/60 transition-colors hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-vish-accent"
                   >
                     <ArrowLeft className="size-4" aria-hidden="true" />
-                    All services
+                    {copy.allServicesLabel}
                   </button>
                 </div>
                 <div className="md:grid md:grid-cols-[minmax(0,0.92fr)_minmax(20rem,1.08fr)]">
                   <div className="px-6 py-7 sm:px-8 sm:py-9 md:py-10">
-                  <p className="font-mono text-xs uppercase tracking-[0.18em] text-white/45">Selected service</p>
+                  <p className="font-mono text-xs uppercase tracking-[0.18em] text-white/45" data-tina-field={copyField('selectedLabel')}>
+                    {copy.selectedLabel}
+                  </p>
                   {(() => {
                     const Icon = serviceIcons[selectedService.category] ?? Box;
 
@@ -365,7 +402,9 @@ const ServiceExplorer = ({ services, rawCategories, tinaField, id }: ServiceCata
                     {selectedService.description}
                   </p>
                   <div className="mt-8 border-t border-white/10 pt-5">
-                    <p className="font-mono text-xs uppercase tracking-[0.18em] text-white/45">How we plan it</p>
+                    <p className="font-mono text-xs uppercase tracking-[0.18em] text-white/45" data-tina-field={copyField('planLabel')}>
+                      {copy.planLabel}
+                    </p>
                     <ol className="mt-4 space-y-3">
                       {selectedService.plan.map((step, index) => (
                         <li key={step} className="grid grid-cols-[1.5rem_1fr] gap-3">
@@ -376,15 +415,17 @@ const ServiceExplorer = ({ services, rawCategories, tinaField, id }: ServiceCata
                     </ol>
                   </div>
                   <div className="mt-8 border-t border-white/10 pt-5">
-                    <p className="font-mono text-xs uppercase tracking-[0.18em] text-white/45">Typical scope</p>
+                    <p className="font-mono text-xs uppercase tracking-[0.18em] text-white/45" data-tina-field={copyField('scopeLabel')}>
+                      {copy.scopeLabel}
+                    </p>
                     <div className="mt-3 flex flex-wrap gap-2">
                       {selectedService.items.slice(0, 4).map((item) => (
                         <span key={item} className="rounded-full border border-white/10 px-3 py-1.5 font-sans text-xs text-gray-300">{item}</span>
                       ))}
                     </div>
                   </div>
-                  <Button href="/book-call" variant="primary" size="md" className="mt-8 w-full" icon={<CalendarCheck className="size-4" />} dataConversionAction="book_free_call">
-                    Schedule a Free Call
+                  <Button href="/book-call" variant="primary" size="md" className="mt-8 w-full" icon={<CalendarCheck className="size-4" />} dataConversionAction="book_free_call" tinaField={copyField('ctaLabel')}>
+                    {copy.ctaLabel}
                   </Button>
                   </div>
                   <div className="relative hidden min-h-full overflow-hidden border-l border-white/10 md:block">
@@ -395,8 +436,8 @@ const ServiceExplorer = ({ services, rawCategories, tinaField, id }: ServiceCata
                       data-tina-field={selectedRawCategory ? tinaField(selectedRawCategory, 'image') : undefined}
                     />
                     <div className="absolute inset-0 bg-linear-to-t from-black/55 to-transparent" aria-hidden="true" />
-                    <p className="absolute bottom-6 left-7 font-mono text-xs uppercase tracking-[0.18em] text-white">
-                      Project plan
+                    <p className="absolute bottom-6 left-7 font-mono text-xs uppercase tracking-[0.18em] text-white" data-tina-field={copyField('imageLabel')}>
+                      {copy.imageLabel}
                     </p>
                   </div>
                 </div>

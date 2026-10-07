@@ -16,6 +16,7 @@ import {
   serializeCookieConsent,
 } from '@/src/lib/cookie-consent';
 import { HERO_REVEALED_EVENT } from '@/src/lib/site-events';
+import { useTinaSettings } from '../../hooks/useTinaVisualEditing';
 
 interface CookieSettingsProps {
   openSignal?: number;
@@ -53,6 +54,10 @@ function writeConsent(consent: CookieConsent) {
 
 export const CookieSettings = ({ openSignal = 0 }: CookieSettingsProps) => {
   const pathname = usePathname();
+  const { data: settings, tinaField, rawSiteSettings } = useTinaSettings();
+  const copy = settings.cookies;
+  const copyField = (name: string) =>
+    rawSiteSettings?.cookies ? tinaField(rawSiteSettings.cookies, name) : undefined;
   const [hasLoaded, setHasLoaded] = useState(false);
   const [hasHeroRevealed, setHasHeroRevealed] = useState(false);
   const [showPreferenceBanner, setShowPreferenceBanner] = useState(false);
@@ -144,26 +149,26 @@ export const CookieSettings = ({ openSignal = 0 }: CookieSettingsProps) => {
           >
             <div className="grid grid-cols-1 gap-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
               <div>
-                <p className="mb-3 font-mono text-xs uppercase tracking-widest text-vish-accent">
-                  Cookie Preferences
+                <p className="mb-3 font-mono text-xs uppercase tracking-widest text-vish-accent" data-tina-field={copyField('bannerLabel')}>
+                  {copy.bannerLabel}
                 </p>
-                <h2 className="font-display text-2xl leading-tight text-white md:text-3xl">
-                  We use cookies to keep the site sharp.
+                <h2 className="font-display text-2xl leading-tight text-white md:text-3xl" data-tina-field={copyField('bannerHeading')}>
+                  {copy.bannerHeading}
                 </h2>
-                <p className="mt-3 max-w-2xl font-sans text-sm leading-relaxed text-gray-400">
-                  Necessary cookies keep the website working. Analytics cookies help us understand performance and improve the experience.
+                <p className="mt-3 max-w-2xl font-sans text-sm leading-relaxed text-gray-400" data-tina-field={copyField('bannerDescription')}>
+                  {copy.bannerDescription}
                 </p>
               </div>
 
               <div className="flex flex-wrap gap-3 justify-end">
-                <Button variant="ghost" size="sm" onClick={openPanel}>
-                  Settings
+                <Button variant="ghost" size="sm" onClick={openPanel} tinaField={copyField('settingsButtonLabel')}>
+                  {copy.settingsButtonLabel}
                 </Button>
-                <Button variant="outline" size="sm" onClick={rejectOptional}>
-                  Reject
+                <Button variant="outline" size="sm" onClick={rejectOptional} tinaField={copyField('rejectButtonLabel')}>
+                  {copy.rejectButtonLabel}
                 </Button>
-                <Button variant='white' size="sm" onClick={acceptAll}>
-                  Accept
+                <Button variant='white' size="sm" onClick={acceptAll} tinaField={copyField('acceptButtonLabel')}>
+                  {copy.acceptButtonLabel}
                 </Button>
               </div>
             </div>
@@ -194,11 +199,11 @@ export const CookieSettings = ({ openSignal = 0 }: CookieSettingsProps) => {
             >
               <div className="flex items-start justify-between gap-6">
                 <div>
-                  <p className="mb-4 font-mono text-xs uppercase tracking-widest text-vish-accent">
-                    Privacy Controls
+                  <p className="mb-4 font-mono text-xs uppercase tracking-widest text-vish-accent" data-tina-field={copyField('panelLabel')}>
+                    {copy.panelLabel}
                   </p>
-                  <h2 id="cookie-settings-title" className="font-display text-4xl leading-tight text-white md:text-5xl">
-                    Cookie settings<span className="text-vish-accent">.</span>
+                  <h2 id="cookie-settings-title" className="font-display text-4xl leading-tight text-white md:text-5xl" data-tina-field={copyField('panelHeading')}>
+                    {copy.panelHeading}<span className="text-vish-accent">.</span>
                   </h2>
                 </div>
                 <Button
@@ -211,21 +216,21 @@ export const CookieSettings = ({ openSignal = 0 }: CookieSettingsProps) => {
                   <X className="h-5 w-5 transition-transform duration-300 group-hover:rotate-90" />
                 </Button>
               </div>
-              <p className="mt-5 max-w-xl font-sans text-sm leading-relaxed text-gray-400 md:text-base">
-                Choose which optional cookies VISH Studio can use. You can update these settings at any time from this panel.
+              <p className="mt-5 max-w-xl font-sans text-sm leading-relaxed text-gray-400 md:text-base" data-tina-field={copyField('panelDescription')}>
+                {copy.panelDescription}
               </p>
 
               <div className="mt-8 space-y-4">
                 <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
                   <div className="flex items-start justify-between gap-5">
                     <div>
-                      <h3 className="font-display text-xl text-white">Necessary cookies</h3>
-                      <p className="mt-2 font-sans text-sm leading-relaxed text-gray-500">
-                        Required for core website behavior and cannot be disabled.
+                      <h3 className="font-display text-xl text-white" data-tina-field={copyField('necessaryTitle')}>{copy.necessaryTitle}</h3>
+                      <p className="mt-2 font-sans text-sm leading-relaxed text-gray-500" data-tina-field={copyField('necessaryDescription')}>
+                        {copy.necessaryDescription}
                       </p>
                     </div>
-                    <span className="rounded-full border border-white/10 px-3 py-1 font-mono text-xs uppercase tracking-widest text-white/45">
-                      Always on
+                    <span className="rounded-full border border-white/10 px-3 py-1 font-mono text-xs uppercase tracking-widest text-white/45" data-tina-field={copyField('alwaysOnLabel')}>
+                      {copy.alwaysOnLabel}
                     </span>
                   </div>
                 </div>
@@ -233,9 +238,9 @@ export const CookieSettings = ({ openSignal = 0 }: CookieSettingsProps) => {
                 <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
                   <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
                     <div>
-                      <h3 className="font-display text-xl text-white">Analytics cookies</h3>
-                      <p className="mt-2 max-w-md font-sans text-sm leading-relaxed text-gray-500">
-                        Allows Google Analytics and Microsoft Clarity to measure traffic and understand website interactions without changing the website experience.
+                      <h3 className="font-display text-xl text-white" data-tina-field={copyField('analyticsTitle')}>{copy.analyticsTitle}</h3>
+                      <p className="mt-2 max-w-md font-sans text-sm leading-relaxed text-gray-500" data-tina-field={copyField('analyticsDescription')}>
+                        {copy.analyticsDescription}
                       </p>
                     </div>
                     <Button
@@ -244,22 +249,22 @@ export const CookieSettings = ({ openSignal = 0 }: CookieSettingsProps) => {
                       onClick={toggleAnalytics}
                       ariaLabel={`Turn analytics cookies ${draftConsent.analytics ? 'off' : 'on'}`}
                     >
-                      {draftConsent.analytics ? 'Analytics On' : 'Analytics Off'}
+                      {draftConsent.analytics ? copy.analyticsOnLabel : copy.analyticsOffLabel}
                     </Button>
                   </div>
                 </div>
               </div>
 
               <div className="mt-auto flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-6">
-                <Button variant="ghost" size="sm" onClick={() => setIsPanelOpen(false)}>
-                  Cancel
+                <Button variant="ghost" size="sm" onClick={() => setIsPanelOpen(false)} tinaField={copyField('cancelLabel')}>
+                  {copy.cancelLabel}
                 </Button>
                 <div className="flex flex-wrap gap-3">
-                  <Button variant="outline" size="sm" onClick={rejectOptional}>
-                    Reject Optional
+                  <Button variant="outline" size="sm" onClick={rejectOptional} tinaField={copyField('rejectOptionalLabel')}>
+                    {copy.rejectOptionalLabel}
                   </Button>
-                  <Button variant="cta" size="sm" onClick={() => saveConsent(draftConsent)}>
-                    Save Settings
+                  <Button variant="cta" size="sm" onClick={() => saveConsent(draftConsent)} tinaField={copyField('saveLabel')}>
+                    {copy.saveLabel}
                   </Button>
                 </div>
               </div>

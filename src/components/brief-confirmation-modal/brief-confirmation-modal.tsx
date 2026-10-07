@@ -1,6 +1,6 @@
 "use client";
 
-import { getSiteSettings } from "@/src/lib/content";
+import { getSiteSettings, type BriefConfirmationContent } from "@/src/lib/content";
 import { Check, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect } from "react";
@@ -9,6 +9,7 @@ import { Button } from "../ui/button/button";
 interface BriefConfirmationModalProps {
   isOpen: boolean;
   briefId: string;
+  content: BriefConfirmationContent;
   onClose: () => void;
 }
 
@@ -17,6 +18,7 @@ const settings = getSiteSettings();
 export const BriefConfirmationModal = ({
   isOpen,
   briefId,
+  content,
   onClose,
 }: BriefConfirmationModalProps) => {
   useEffect(() => {
@@ -73,25 +75,27 @@ export const BriefConfirmationModal = ({
                   <Check className="h-6 w-6" />
                 </div>
                 <p className="mb-4 font-mono text-xs uppercase tracking-widest text-vish-accent">
-                  Brief submitted
+                  {content.label}
                 </p>
                 <h2
                   id="brief-confirmation-title"
                   className="font-display text-4xl font-medium leading-tight text-white md:text-5xl"
                 >
-                  Your project brief has been submitted
+                  {content.heading}
                   <span className="text-vish-accent">.</span>
                 </h2>
                 <p className="mt-6 max-w-xl font-sans text-base leading-relaxed text-gray-400 md:text-lg">
-                  We’ll review the questionnaire and contact you with the next
-                  steps. Your reference is{" "}
-                  <span className="text-white">{briefId}</span>.
+                  {content.description.split("{reference}").map((part, index) => (
+                    <span key={index}>
+                      {index > 0 ? <span className="text-white">{briefId}</span> : null}
+                      {part}
+                    </span>
+                  ))}
                 </p>
 
                 <div className="mt-8 rounded-2xl border border-white/10 bg-white/[0.025] p-5">
                   <p className="font-sans text-sm leading-relaxed text-gray-400">
-                    Need to add more information or make a request? Contact us
-                    directly:
+                    {content.contactPrompt}
                   </p>
                   <div className="mt-5 flex flex-col gap-3 sm:flex-row">
                     <Button
@@ -114,7 +118,7 @@ export const BriefConfirmationModal = ({
                 </div>
 
                 <Button href="/" variant="cta" size="md" className="mt-8">
-                  Back to home
+                  {content.homeCtaLabel}
                 </Button>
               </div>
             </div>

@@ -3,6 +3,7 @@
 import { ArrowRight, CalendarDays, Check, Mail, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect } from "react";
+import type { BookCallConfirmationContent } from "@/src/lib/content";
 import { Button } from "../ui/button/button";
 
 interface BookCallConfirmationModalProps {
@@ -11,6 +12,7 @@ interface BookCallConfirmationModalProps {
   selectedDate: string;
   selectedTime: string;
   email: string;
+  content: BookCallConfirmationContent;
   onClose: () => void;
 }
 
@@ -25,6 +27,7 @@ export const BookCallConfirmationModal = ({
   selectedDate,
   selectedTime,
   email,
+  content,
   onClose,
 }: BookCallConfirmationModalProps) => {
   useEffect(() => {
@@ -81,19 +84,22 @@ export const BookCallConfirmationModal = ({
                   <Check className="h-6 w-6" />
                 </div>
                 <p className="mb-4 font-mono text-xs uppercase tracking-widest text-vish-accent">
-                  Booking request received
+                  {content.label}
                 </p>
                 <h2
                   id="book-call-confirmation-title"
                   className="font-display text-4xl font-medium leading-tight text-white md:text-5xl"
                 >
-                  Your strategy call request has been received
+                  {content.heading}
                   <span className="text-vish-accent">.</span>
                 </h2>
                 <p className="mt-6 max-w-xl font-sans text-base leading-relaxed text-gray-400 md:text-lg">
-                  We received your selected slot and will email the calendar invite with the
-                  Google Meet link to <span className="text-white">{email}</span>{" "}
-                  shortly.
+                  {content.description.split("{email}").map((part, index) => (
+                    <span key={index}>
+                      {index > 0 ? <span className="text-white">{email}</span> : null}
+                      {part}
+                    </span>
+                  ))}
                 </p>
 
                 <div className="mt-8 grid gap-3 rounded-2xl border border-white/10 bg-white/[0.025] p-5 sm:grid-cols-2">
@@ -101,10 +107,10 @@ export const BookCallConfirmationModal = ({
                     <CalendarDays className="mt-1 h-4 w-4 shrink-0 text-gray-500" aria-hidden="true" />
                     <div>
                       <p className="font-mono text-[10px] uppercase tracking-widest text-gray-500">
-                        Selected slot
+                        {content.slotLabel}
                       </p>
                       <p className="mt-2 font-sans text-sm font-medium text-white">
-                        {selectedDate} at {formatDisplayTime(selectedTime)}
+                        {selectedDate} {content.slotJoiner} {formatDisplayTime(selectedTime)}
                       </p>
                     </div>
                   </div>
@@ -112,7 +118,7 @@ export const BookCallConfirmationModal = ({
                     <Mail className="mt-1 h-4 w-4 shrink-0 text-gray-500" aria-hidden="true" />
                     <div>
                       <p className="font-mono text-[10px] uppercase tracking-widest text-gray-500">
-                        Reference
+                        {content.referenceLabel}
                       </p>
                       <p className="mt-2 break-all font-mono text-xs text-white">
                         {bookingId}
@@ -123,7 +129,7 @@ export const BookCallConfirmationModal = ({
 
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                   <Button href="/" variant="cta" size="md">
-                    Back to home
+                    {content.homeCtaLabel}
                   </Button>
                   <Button
                     href="/start-project"
@@ -131,7 +137,7 @@ export const BookCallConfirmationModal = ({
                     size="md"
                     icon={<ArrowRight className="h-4 w-4" />}
                   >
-                    Start a Project
+                    {content.projectCtaLabel}
                   </Button>
                 </div>
               </div>

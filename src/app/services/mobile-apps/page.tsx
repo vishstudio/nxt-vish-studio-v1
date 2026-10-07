@@ -1,11 +1,10 @@
 import type { Metadata } from 'next';
+import { getServicePage } from '@/src/lib/content';
+import { toMetadata } from '@/src/lib/seo';
 import { ServiceLandingPage } from '@/src/views/ServiceLandingPage';
 
-export const metadata: Metadata = {
-  title: 'Mobile Apps | VISH Studio',
-  description: 'Mobile app strategy, design, and development from VISH Studio.',
-};
+export const metadata: Metadata = toMetadata(getServicePage('mobile-apps').seo);
 
-const MobileApps = () => <ServiceLandingPage label="Mobile Apps" title="Mobile apps" description="Mobile-first product experiences for customer portals, booking flows, internal teams, and launch-ready iOS or Android app concepts." />;
+const MobileApps = () => <ServiceLandingPage slug="mobile-apps" />;
 
 export default MobileApps;

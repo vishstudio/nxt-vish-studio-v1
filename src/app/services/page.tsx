@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
+import { getServicesPage } from '@/src/lib/content';
+import { toMetadata } from '@/src/lib/seo';
 import { ServicesPage } from '@/src/views/ServicesPage';
 
-export const metadata: Metadata = {
-  title: 'Services | VISH Studio',
-  description: 'Social media marketing, SaaS products, websites, website templates, software, mobile apps, branding, and AI integrations from VISH Studio.',
-};
+export const metadata: Metadata = toMetadata(getServicesPage().seo);
 
 const Services = () => {
   return <ServicesPage />;

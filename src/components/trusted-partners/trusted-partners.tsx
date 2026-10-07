@@ -12,7 +12,7 @@ interface TrustedPartnersProps {
 }
 
 export const TrustedPartners = ({ variant = 'full' }: TrustedPartnersProps) => {
-  const { data, tinaField } = useTinaPartners();
+  const { data, tinaField, rawPartners } = useTinaPartners();
   const partners = data.partners;
   const proofPoints = data.proofPoints;
   const shouldReduceMotion = useReducedMotion();
@@ -104,7 +104,7 @@ export const TrustedPartners = ({ variant = 'full' }: TrustedPartnersProps) => {
                 iconPosition="right"
                 dataConversionAction={PROJECT_INQUIRY_ACTION}
                 className="w-full font-mono text-xs font-semibold uppercase tracking-widest sm:w-auto"
-                data-tina-field={tinaField('ctaLabel')}
+                tinaField={tinaField('ctaLabel')}
               >
                 {data.ctaLabel}
               </Button>
@@ -126,7 +126,10 @@ export const TrustedPartners = ({ variant = 'full' }: TrustedPartnersProps) => {
                 }`;
                 const partnerContent = (
                   <>
-                    <span className="font-display text-xl font-medium leading-tight text-white transition-colors duration-300 group-hover:text-vish-accent md:text-2xl">
+                    <span
+                      className="font-display text-xl font-medium leading-tight text-white transition-colors duration-300 group-hover:text-vish-accent md:text-2xl"
+                      data-tina-field={rawPartners?.partners?.[index] ? tinaField(rawPartners.partners[index], 'name') : undefined}
+                    >
                       {partner.name}
                     </span>
                     <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/10 text-vish-gray transition-colors duration-300 group-hover:border-vish-accent/40 group-hover:text-vish-accent">
@@ -161,12 +164,18 @@ export const TrustedPartners = ({ variant = 'full' }: TrustedPartnersProps) => {
             </div>
 
             <div className="mt-6 grid gap-3 sm:grid-cols-3">
-              {proofPoints.map((proof) => (
+              {proofPoints.map((proof, index) => (
                 <div key={proof.label} className="rounded-2xl border border-white/10 px-5 py-4">
-                  <p className="font-display text-2xl font-medium leading-none text-white md:text-3xl">
+                  <p
+                    className="font-display text-2xl font-medium leading-none text-white md:text-3xl"
+                    data-tina-field={rawPartners?.proofPoints?.[index] ? tinaField(rawPartners.proofPoints[index], 'value') : undefined}
+                  >
                     {proof.value}
                   </p>
-                  <p className="mt-2 font-mono text-[0.66rem] font-semibold uppercase tracking-widest text-vish-gray">
+                  <p
+                    className="mt-2 font-mono text-[0.66rem] font-semibold uppercase tracking-widest text-vish-gray"
+                    data-tina-field={rawPartners?.proofPoints?.[index] ? tinaField(rawPartners.proofPoints[index], 'label') : undefined}
+                  >
                     {proof.label}
                   </p>
                 </div>

@@ -1,23 +1,12 @@
 "use client";
 import { trackEmailClick, trackSocialLinkClick } from "@/src/lib/analytics";
-import {
-  ArrowRight,
-  Bot,
-  Box,
-  CalendarCheck,
-  ChevronDown,
-  LayoutTemplate,
-  Megaphone,
-  Menu,
-  Monitor,
-  Palette,
-  Smartphone,
-  X,
-} from "lucide-react";
+import { ArrowRight, CalendarCheck, ChevronDown, Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useTinaSettings } from "../../hooks/useTinaVisualEditing";
+import type { NavigationLink } from "../../lib/content";
+import { getIcon } from "../../lib/icons";
 import {
   PROJECT_INQUIRY_HREF,
   PROJECT_INQUIRY_ACTION,
@@ -37,84 +26,42 @@ export const Navbar = () => {
   const isScrolledRef = useRef(false);
   const scrollRaf = useRef<number | null>(null);
 
-  const serviceSubItems = [
-    {
-      name: "Social Media Marketing",
-      href: "/services/social-media-marketing",
-      description: "Strategy, campaigns, and creative direction",
-      icon: Megaphone,
-    },
-    {
-      name: "SaaS Products",
-      href: "/services/saas-products",
-      description: "Client-ready applications",
-      icon: Box,
-    },
-    {
-      name: "Websites",
-      href: "/services/websites",
-      description: "High-converting digital experiences",
-      icon: Monitor,
-    },
-    {
-      name: "Website Templates",
-      href: "/services/templates",
-      description: "Launch-ready website foundations",
-      icon: LayoutTemplate,
-    },
-    {
-      name: "Softwares",
-      href: "/services/softwares",
-      description: "Custom tools and operational systems",
-      icon: Box,
-    },
-    {
-      name: "Mobile Apps",
-      href: "/services/mobile-apps",
-      description: "Customer and team mobile experiences",
-      icon: Smartphone,
-    },
-    {
-      name: "Branding",
-      href: "/services/branding",
-      description: "Identity systems built to be remembered",
-      icon: Palette,
-    },
-    {
-      name: "AI Integrations & Automations",
-      href: "/services/ai-automations",
-      description: "Connected workflow systems",
-      icon: Bot,
-    },
-  ];
+  const navigation = settings.navigation;
+  const servicesMenu = navigation.servicesMenu;
+  const serviceSubItems = servicesMenu.items.map((item) => ({
+    name: item.label,
+    href: item.href,
+    description: item.description,
+    icon: getIcon(item.icon),
+  }));
 
   const serviceMenuItems = [
     ...serviceSubItems,
     {
-      name: "See all services",
+      name: servicesMenu.overviewLabel,
       href: "/services",
-      description: "Full service overview",
+      description: servicesMenu.overviewDescription,
       icon: ArrowRight,
     },
   ];
 
-  const navItems = [
-    { name: "Home", href: "/" },
-    { name: "Projects", href: "/projects", activePaths: ["/project"] },
-    { name: "Services", href: "/services", children: serviceMenuItems },
-    // { name: "Pricing", href: "/pricing" },
-    { name: "About", href: "/about" },
-    { name: "Testimonials", href: "/testimonials" },
-  ];
+  const toNavItem = (link: NavigationLink) => ({
+    name: link.label,
+    href: link.href,
+    activePaths: link.activePaths,
+    children: link.hasServicesMenu ? serviceMenuItems : undefined,
+  });
 
-  const mobileNavItems = [
-    { name: "Projects", href: "/projects", id: "01" },
-    { name: "Services", id: "02", children: serviceMenuItems },
-    // { name: "Pricing", href: "/pricing", id: "03" },
-    { name: "About", href: "/about", id: "04" },
-    { name: "Testimonials", href: "/testimonials", id: "05" },
-    { name: "Schedule a call", href: "/book-call", id: "06" },
-  ];
+  const navItems = navigation.links
+    .filter((link) => link.showOnDesktop)
+    .map(toNavItem);
+
+  const mobileNavItems = navigation.links
+    .filter((link) => link.showOnMobile)
+    .map((link, index) => ({
+      ...toNavItem(link),
+      id: String(index + 1).padStart(2, "0"),
+    }));
 
   const normalizePath = (path: string) => path.replace(/\/$/, "") || "/";
   const currentPath = normalizePath(pathname || "/");
@@ -317,13 +264,13 @@ export const Navbar = () => {
                           <div className="grid grid-cols-[15rem_minmax(0,1fr)]">
                             <div className="flex flex-col border-r border-white/10 bg-white/[0.035] p-6">
                               <span className="font-mono text-[10px] uppercase tracking-widest text-vish-accent">
-                                Service tracks
+                                {servicesMenu.label}
                               </span>
                               <p className="mt-5 font-display text-2xl font-medium leading-tight text-white">
-                                Build the part of your business that matters next<span className="text-vish-accent">.</span>
+                                {servicesMenu.heading}<span className="text-vish-accent">.</span>
                               </p>
                               <p className="mt-4 font-sans text-sm leading-relaxed text-gray-500">
-                                Strategy, design, and technology assembled around your next move.
+                                {servicesMenu.description}
                               </p>
                               <a
                                 href="/services"
@@ -331,7 +278,7 @@ export const Navbar = () => {
                                 tabIndex={effectiveIsScrolled ? -1 : undefined}
                                 className="group/overview mt-auto flex items-center justify-between border-t border-white/10 pt-5 font-sans text-sm font-medium text-white transition-colors hover:text-vish-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vish-accent/70 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                               >
-                                See all services
+                                {servicesMenu.overviewLabel}
                                 <ArrowRight className="h-4 w-4 text-vish-accent transition-transform group-hover/overview:translate-x-1" aria-hidden="true" />
                               </a>
                             </div>
@@ -394,7 +341,7 @@ export const Navbar = () => {
               dataConversionAction={PROJECT_INQUIRY_ACTION}
               className="hidden font-sans lg:inline-flex"
             >
-              Schedule a Free Call
+              {navigation.ctaLabel}
             </Button>
 
             {effectiveIsScrolled ? (
@@ -407,7 +354,7 @@ export const Navbar = () => {
                 dataConversionAction={PROJECT_INQUIRY_ACTION}
                 className="lg:hidden"
               >
-                <span className="sr-only">Schedule a Free Call</span>
+                <span className="sr-only">{navigation.ctaLabel}</span>
               </Button>
             ) : (
               <>
@@ -420,7 +367,7 @@ export const Navbar = () => {
                   dataConversionAction={PROJECT_INQUIRY_ACTION}
                   className="hidden font-sans sm:inline-flex lg:hidden"
                 >
-                  Schedule a Call
+                  {navigation.ctaShortLabel}
                 </Button>
                 <Button
                   variant="cta"
@@ -431,7 +378,7 @@ export const Navbar = () => {
                   dataConversionAction={PROJECT_INQUIRY_ACTION}
                   className="sm:hidden"
                 >
-                  <span className="sr-only">Schedule a Free Call</span>
+                  <span className="sr-only">{navigation.ctaLabel}</span>
                 </Button>
               </>
             )}
@@ -585,7 +532,7 @@ export const Navbar = () => {
                   className="mt-8"
                 >
                   <p className="mb-4 font-mono text-xs uppercase tracking-widest text-white/30">
-                    Translate
+                    {navigation.mobileTranslateLabel}
                   </p>
                   <LanguageSelector compact />
                 </motion.div>
@@ -597,15 +544,15 @@ export const Navbar = () => {
                   className="mt-auto pt-12 pb-8"
                 >
                   <p className="font-mono text-xs text-white/30 uppercase tracking-widest mb-6">
-                    Connect
+                    {navigation.mobileConnectLabel}
                   </p>
                   <a
-                    href="mailto:hello@vish.studio"
+                    href={`mailto:${settings.email}`}
                     onClick={trackEmailClick}
                     className="notranslate block font-display text-2xl text-white hover:text-vish-accent transition-colors mb-8"
                     translate="no"
                   >
-                    hello@vish.studio
+                    {settings.email}
                   </a>
 
                   <div className="flex gap-6">

@@ -1,0 +1,16 @@
+{
+  "_template": "servicePage",
+  "seo": {
+    "title": "Website Templates | VISH Studio",
+    "description": "Launch-ready website templates from VISH Studio. This service track is coming soon."
+  },
+  "primaryCtaLabel": "Schedule a Free Call",
+  "label": "Website Templates",
+  "title": "Website templates",
+  "description": "Launch-ready website and product templates are being prepared for teams that need a faster starting point without losing the VISH Studio visual standard.",
+  "mutedTitle": "coming soon",
+  "secondaryCtaLabel": "Explore SaaS Products",
+  "secondaryCtaHref": "/services/saas-products",
+  "noticeLabel": "Coming Soon",
+  "noticeText": "This service track is being prepared. For now, schedule a strategy call and we can scope the same work directly with you."
+}

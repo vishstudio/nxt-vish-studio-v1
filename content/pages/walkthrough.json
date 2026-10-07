@@ -1,0 +1,66 @@
+{
+  "_template": "walkthrough",
+  "seo": {
+    "title": "Portal Walkthrough | VISH Studio",
+    "description": "A guided walkthrough of the VISH Studio client portal experience."
+  },
+  "navigationItems": [
+    {
+      "label": "Overview",
+      "icon": "layout-dashboard"
+    },
+    {
+      "label": "Projects",
+      "icon": "folder-kanban"
+    },
+    {
+      "label": "Calendar",
+      "icon": "calendar-days"
+    },
+    {
+      "label": "Clients",
+      "icon": "users-round"
+    }
+  ],
+  "statusLabel": "Portal status",
+  "statusText": "A quiet operating space for briefs, meetings, files, and project decisions.",
+  "label": "Portal walkthrough",
+  "heading": "Know where every project stands",
+  "description": "A guided view of how clients move from discovery to delivery inside the VISH Studio portal.",
+  "primaryCtaLabel": "Schedule a Free Call",
+  "secondaryCtaLabel": "View Flow",
+  "todayLabel": "Today",
+  "todayBadge": "Active",
+  "activityItems": [
+    "Discovery call request added to calendar",
+    "Project brief waiting for review",
+    "Next milestone scheduled"
+  ],
+  "outcomeLabel": "Expected",
+  "steps": [
+    {
+      "eyebrow": "01",
+      "title": "Share the brief",
+      "description": "Start with the project context, audience, deadline, and priority decisions so the studio can scope the right work.",
+      "icon": "file-text",
+      "outcome": "Clear scope"
+    },
+    {
+      "eyebrow": "02",
+      "title": "Plan milestones",
+      "description": "Track the project through calendar events, phases, deliverables, and review checkpoints in one operational view.",
+      "icon": "calendar-days",
+      "outcome": "Aligned timeline"
+    },
+    {
+      "eyebrow": "03",
+      "title": "Review progress",
+      "description": "Use the portal overview to follow status, open tasks, upcoming meetings, and the next action required from each side.",
+      "icon": "check-circle",
+      "outcome": "Next action"
+    }
+  ],
+  "closingHeading": "Ready to use the portal?",
+  "closingDescription": "Schedule a strategy call first and we will set up the right project space once the scope is confirmed.",
+  "closingCtaLabel": "Schedule a Free Call"
+}

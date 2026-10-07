@@ -45,6 +45,8 @@ export const ServicesPage = () => {
         services={services}
         rawCategories={rawServicesPage?.categories}
         tinaField={tinaField}
+        copy={content.explorer}
+        rawCopy={rawServicesPage?.explorer}
       />
       <Contact />
     </PageLayout>

@@ -48,5 +48,277 @@
       "label": "Sitemap",
       "url": "/sitemap.xml"
     }
-  ]
+  ],
+  "team": {
+    "heading": "Our Team",
+    "description": "We are a collective of specialists, working across disciplines to deliver unified digital experiences.",
+    "members": [
+      {
+        "name": "Vishroy Seenarain",
+        "role": "CEO & Creative Director",
+        "image": "/assets/img/team/vishroy.jpg",
+        "bio": "Leading the vision with a passion for minimalist design and functional aesthetics.",
+        "order": 1
+      },
+      {
+        "name": "Divesh Heeramun",
+        "role": "CTO & Head of Engineering",
+        "image": "/assets/img/team/divesh.jpg",
+        "bio": "Architecting robust and scalable digital solutions.",
+        "order": 2
+      },
+      {
+        "name": "Pravesh Boodhoo",
+        "role": "COO & AI Specialist",
+        "image": "/assets/img/team/pravesh.jpg",
+        "bio": "Designing practical AI workflows and intelligent product systems.",
+        "order": 3
+      },
+      {
+        "name": "Alice Antoinette",
+        "role": "Lead Creative designer & Social Media Manager",
+        "image": "/assets/img/team/alice-antoinette.jpeg",
+        "bio": "",
+        "order": 4
+      }
+    ]
+  },
+  "partners": {
+    "partnersLabel": "Trusted by industry leaders",
+    "trustHeading": "Trusted partners",
+    "trustDescription": "Businesses trust VISH Studio when their website, product, or brand system needs to feel credible before the first conversation.",
+    "ctaLabel": "Schedule a Free Call",
+    "proofPoints": [
+      {
+        "value": "7+",
+        "label": "Partners served"
+      },
+      {
+        "value": "4+",
+        "label": "Digital products launched"
+      },
+      {
+        "value": "2019",
+        "label": "Building since"
+      }
+    ],
+    "partners": [
+      {
+        "name": "Ikigai Learning NGO",
+        "url": "https://ikigai-learning.org"
+      },
+      {
+        "name": "ImaginePlus Ltd",
+        "url": "https://react-imagine3d.vercel.app/"
+      },
+      {
+        "name": "PaxPack",
+        "url": ""
+      },
+      {
+        "name": "GoGarage",
+        "url": "https://vish-studio.github.io/nxt-go-garage-marketing/"
+      },
+      {
+        "name": "MorisMetrics",
+        "url": "https://morismetrics.com/"
+      },
+      {
+        "name": "PlanitSwiss",
+        "url": "https://www.planitswiss.com/"
+      },
+      {
+        "name": "ForwardPsychology",
+        "url": "https://www.forwardpsychology.mu/"
+      }
+    ]
+  },
+  "newsletterLabel": "Studio notes",
+  "newsletterSuccessHeading": "You're on the list",
+  "newsletterSuccessDescription": "Watch your inbox for the next VISH Studio note.",
+  "loaderMotto": "Design. Engineering. Social Growth.",
+  "navigation": {
+    "ctaLabel": "Schedule a Free Call",
+    "ctaShortLabel": "Schedule a Call",
+    "links": [
+      {
+        "label": "Home",
+        "href": "/",
+        "showOnDesktop": true,
+        "showOnMobile": false
+      },
+      {
+        "label": "Projects",
+        "href": "/projects",
+        "activePaths": [
+          "/project"
+        ],
+        "showOnDesktop": true,
+        "showOnMobile": true
+      },
+      {
+        "label": "Services",
+        "href": "/services",
+        "hasServicesMenu": true,
+        "showOnDesktop": true,
+        "showOnMobile": true
+      },
+      {
+        "label": "About",
+        "href": "/about",
+        "showOnDesktop": true,
+        "showOnMobile": true
+      },
+      {
+        "label": "Testimonials",
+        "href": "/testimonials",
+        "showOnDesktop": true,
+        "showOnMobile": true
+      },
+      {
+        "label": "FAQ",
+        "href": "/faq",
+        "showOnDesktop": true,
+        "showOnMobile": true
+      },
+      {
+        "label": "Schedule a call",
+        "href": "/book-call",
+        "showOnDesktop": false,
+        "showOnMobile": true
+      }
+    ],
+    "servicesMenu": {
+      "label": "Service tracks",
+      "heading": "Build the part of your business that matters next",
+      "description": "Strategy, design, and technology assembled around your next move.",
+      "overviewLabel": "See all services",
+      "overviewDescription": "Full service overview",
+      "items": [
+        {
+          "label": "Social Media Marketing",
+          "href": "/services/social-media-marketing",
+          "description": "Strategy, campaigns, and creative direction",
+          "icon": "megaphone"
+        },
+        {
+          "label": "SaaS Products",
+          "href": "/services/saas-products",
+          "description": "Client-ready applications",
+          "icon": "box"
+        },
+        {
+          "label": "Websites",
+          "href": "/services/websites",
+          "description": "High-converting digital experiences",
+          "icon": "monitor"
+        },
+        {
+          "label": "Website Templates",
+          "href": "/services/templates",
+          "description": "Launch-ready website foundations",
+          "icon": "layout-template"
+        },
+        {
+          "label": "Softwares",
+          "href": "/services/softwares",
+          "description": "Custom tools and operational systems",
+          "icon": "box"
+        },
+        {
+          "label": "Mobile Apps",
+          "href": "/services/mobile-apps",
+          "description": "Customer and team mobile experiences",
+          "icon": "smartphone"
+        },
+        {
+          "label": "Branding",
+          "href": "/services/branding",
+          "description": "Identity systems built to be remembered",
+          "icon": "palette"
+        },
+        {
+          "label": "AI Integrations & Automations",
+          "href": "/services/ai-automations",
+          "description": "Connected workflow systems",
+          "icon": "bot"
+        }
+      ]
+    },
+    "mobileTranslateLabel": "Translate",
+    "mobileConnectLabel": "Connect"
+  },
+  "footer": {
+    "label": "Let's connect",
+    "ctaLabel": "Schedule a free call",
+    "reachUsLabel": "Reach us",
+    "exploreLabel": "Explore",
+    "exploreLinks": [
+      {
+        "label": "Our work",
+        "url": "/projects"
+      },
+      {
+        "label": "About the studio",
+        "url": "/about"
+      },
+      {
+        "label": "Client stories",
+        "url": "/testimonials"
+      },
+      {
+        "label": "Schedule a call",
+        "url": "/book-call"
+      }
+    ],
+    "servicesLabel": "Services",
+    "serviceLinks": [
+      {
+        "label": "All services",
+        "url": "/services"
+      },
+      {
+        "label": "Websites",
+        "url": "/services/websites"
+      },
+      {
+        "label": "SaaS products",
+        "url": "/services/saas-products"
+      },
+      {
+        "label": "AI automations",
+        "url": "/services/ai-automations"
+      }
+    ],
+    "followLabel": "Follow"
+  },
+  "projectCta": {
+    "imageLabel": "Next build",
+    "slotLabel": "Open Slot",
+    "heading": "Have a project that needs this level of care?",
+    "description": "Let us shape the next digital product with the same strategy, design, and technical depth.",
+    "ctaLabel": "Schedule a Free Call"
+  },
+  "cookies": {
+    "bannerLabel": "Cookie Preferences",
+    "bannerHeading": "We use cookies to keep the site sharp.",
+    "bannerDescription": "Necessary cookies keep the website working. Analytics cookies help us understand performance and improve the experience.",
+    "settingsButtonLabel": "Settings",
+    "rejectButtonLabel": "Reject",
+    "acceptButtonLabel": "Accept",
+    "triggerLabel": "Cookie Settings",
+    "panelLabel": "Privacy Controls",
+    "panelHeading": "Cookie settings",
+    "panelDescription": "Choose which optional cookies VISH Studio can use. You can update these settings at any time from this panel.",
+    "necessaryTitle": "Necessary cookies",
+    "necessaryDescription": "Required for core website behavior and cannot be disabled.",
+    "alwaysOnLabel": "Always on",
+    "analyticsTitle": "Analytics cookies",
+    "analyticsDescription": "Allows Google Analytics and Microsoft Clarity to measure traffic and understand website interactions without changing the website experience.",
+    "analyticsOnLabel": "Analytics On",
+    "analyticsOffLabel": "Analytics Off",
+    "cancelLabel": "Cancel",
+    "rejectOptionalLabel": "Reject Optional",
+    "saveLabel": "Save Settings"
+  }
 }

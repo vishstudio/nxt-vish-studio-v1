@@ -23,6 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/services/ai-automations',
     '/pricing',
     '/testimonials',
+    '/faq',
     '/walkthrough',
     '/privacy',
     '/terms',

@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
+import { getPricingPage } from '@/src/lib/pricing';
+import { toMetadata } from '@/src/lib/seo';
 import { PricingPage } from '@/src/views/PricingPage';
 
-export const metadata: Metadata = {
-  title: 'Pricing | VISH Studio',
-  description: 'Transparent pricing for custom web applications, high-performance websites, and brand architecture. Find the right plan for your project.',
-};
+export const metadata: Metadata = toMetadata(getPricingPage().seo);
 
 const Pricing = () => {
   return <PricingPage />;
