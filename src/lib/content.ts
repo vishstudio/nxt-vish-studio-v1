@@ -408,6 +408,9 @@ export interface FaqPageContent {
   faqHeading: string;
   faqSubtext: string;
   faqItems: FaqItem[];
+  viewAllLabel: string;
+  previousLabel: string;
+  nextLabel: string;
 }
 
 import faqJson from "@/content/pages/faq.json";

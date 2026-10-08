@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { useRef, useState } from 'react';
+import { ArrowRight, ChevronDown } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useTinaFaq } from '../../hooks/useTinaVisualEditing';
 import { Button } from '../ui/button/button';
@@ -9,27 +9,32 @@ import { Section } from '../ui/section/section';
 import { SectionTitle } from '../ui/section-title/section-title';
 
 interface FaqProps {
+  /** Show every question 10 at a time (FAQ page). Otherwise only the first 10 are shown (homepage). */
   paginate?: boolean;
 }
 
+/** Questions per page on /faq, and the homepage cap. */
 const FAQ_PAGE_SIZE = 10;
 
 export const Faq = ({ paginate = false }: FaqProps) => {
   const { data: content, tinaField, rawFaqPage } = useTinaFaq();
   const [openIndex, setOpenIndex] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
+  const listRef = useRef<HTMLDivElement>(null);
   const faqItems = content.faqItems ?? [];
   const pageCount = Math.ceil(faqItems.length / FAQ_PAGE_SIZE);
-  const visibleItems = paginate
-    ? faqItems.slice(
-        currentPage * FAQ_PAGE_SIZE,
-        (currentPage + 1) * FAQ_PAGE_SIZE,
-      )
-    : faqItems;
+  const pageStart = paginate ? currentPage * FAQ_PAGE_SIZE : 0;
+  const visibleItems = faqItems.slice(pageStart, pageStart + FAQ_PAGE_SIZE);
+  const hasMoreThanOnePage = faqItems.length > FAQ_PAGE_SIZE;
 
   const selectPage = (page: number) => {
     setCurrentPage(page);
     setOpenIndex(-1);
+
+    const list = listRef.current;
+    if (list && list.getBoundingClientRect().top < 0) {
+      list.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   };
 
   if (!faqItems.length) return null;
@@ -65,11 +70,9 @@ export const Faq = ({ paginate = false }: FaqProps) => {
           </p>
         </motion.div>
 
-        <div className="border-t border-white/10">
+        <div ref={listRef} className="scroll-mt-32 border-t border-white/10">
           {visibleItems.map((item, index) => {
-            const itemIndex = paginate
-              ? currentPage * FAQ_PAGE_SIZE + index
-              : index;
+            const itemIndex = pageStart + index;
             const isOpen = openIndex === itemIndex;
             const answerId = `faq-answer-${itemIndex}`;
             const rawItem = rawFaqPage?.faqItems?.[itemIndex];
@@ -127,6 +130,19 @@ export const Faq = ({ paginate = false }: FaqProps) => {
               </motion.div>
             );
           })}
+          {!paginate && hasMoreThanOnePage ? (
+            <div className="pt-8">
+              <Button
+                href="/faq"
+                variant="outline"
+                size="sm"
+                icon={<ArrowRight className="h-4 w-4" />}
+                tinaField={tinaField('viewAllLabel')}
+              >
+                {content.viewAllLabel}
+              </Button>
+            </div>
+          ) : null}
           {paginate && pageCount > 1 ? (
             <nav
               className="flex flex-wrap items-center justify-between gap-4 pt-8"
@@ -137,8 +153,9 @@ export const Faq = ({ paginate = false }: FaqProps) => {
                 size="sm"
                 disabled={currentPage === 0}
                 onClick={() => selectPage(currentPage - 1)}
+                tinaField={tinaField('previousLabel')}
               >
-                Previous
+                {content.previousLabel}
               </Button>
               <div className="flex items-center gap-2" aria-label={`Page ${currentPage + 1} of ${pageCount}`}>
                 {Array.from({ length: pageCount }, (_, page) => (
@@ -160,8 +177,9 @@ export const Faq = ({ paginate = false }: FaqProps) => {
                 size="sm"
                 disabled={currentPage === pageCount - 1}
                 onClick={() => selectPage(currentPage + 1)}
+                tinaField={tinaField('nextLabel')}
               >
-                Next
+                {content.nextLabel}
               </Button>
             </nav>
           ) : null}

@@ -36,5 +36,8 @@
       "question": "7. Still have a question?",
       "answer": "Every project is different. If you're exploring a new website, brand, SaaS platform, mobile application, custom software project or digital automation, schedule a free discovery call with VISH Studio, or reach out to us on email."
     }
-  ]
+  ],
+  "viewAllLabel": "View all questions",
+  "previousLabel": "Previous",
+  "nextLabel": "Next"
 }
