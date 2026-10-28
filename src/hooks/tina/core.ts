@@ -9,6 +9,9 @@ import { tinaField as rawTinaField } from "tinacms/dist/react";
 
 export { rawTinaField };
 
+// The generated client targets the local Tina dev server, so production visitors must not call it.
+export const SHOULD_FETCH_TINA = process.env.NODE_ENV !== "production";
+
 export const PLACEHOLDER_QUERY = `query { __typename }`;
 
 export interface TinaQueryResult<T> {
@@ -31,7 +34,7 @@ export function useTinaData<
   staticData: TContent,
   fetchQuery: () => Promise<TinaQueryResult<TQueryData>>,
   extractContent: (queryData: TQueryData) => TContent,
-  fetchRemote = true,
+  fetchRemote = SHOULD_FETCH_TINA,
 ): { data: TContent; tinaData: TQueryData | null } {
   const initialInput: TinaQueryResult<TQueryData> = {
     data: {} as TQueryData,

@@ -46,7 +46,7 @@ const RootLayout = ({
   children: React.ReactNode;
 }) => {
   return (
-    <html lang="en" style={{ backgroundColor: "#000000", color: "#ffffff" }}>
+    <html lang="en" suppressHydrationWarning style={{ backgroundColor: "#000000", color: "#ffffff" }}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
@@ -56,6 +56,7 @@ const RootLayout = ({
         />
       </head>
       <body
+        suppressHydrationWarning
         className={prompt.variable}
         style={{ backgroundColor: "#000000", color: "#ffffff", overflowX: "clip" }}
       >

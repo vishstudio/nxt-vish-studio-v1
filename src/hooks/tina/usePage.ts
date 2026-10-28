@@ -1,5 +1,5 @@
 import client from "../../../tina/__generated__/client";
-import { makeTinaField, normalizeLike, useTinaData } from "./core";
+import { SHOULD_FETCH_TINA, makeTinaField, normalizeLike, useTinaData } from "./core";
 
 /**
  * Visual-editing hook for any document in the Pages collection.
@@ -11,7 +11,7 @@ import { makeTinaField, normalizeLike, useTinaData } from "./core";
 export function useTinaPage<T>(
   relativePath: string,
   staticContent: T,
-  fetchRemote = true,
+  fetchRemote = SHOULD_FETCH_TINA,
 ) {
   const result = useTinaData(
     staticContent,
