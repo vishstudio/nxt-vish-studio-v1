@@ -437,6 +437,9 @@ type PageFaq implements Node & Document {
   faqHeading: String
   faqSubtext: String
   faqItems: [PageFaqFaqItems]
+  viewAllLabel: String
+  previousLabel: String
+  nextLabel: String
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -1009,6 +1012,9 @@ input PageFaqFilter {
   faqHeading: StringFilter
   faqSubtext: StringFilter
   faqItems: PageFaqFaqItemsFilter
+  viewAllLabel: StringFilter
+  previousLabel: StringFilter
+  nextLabel: StringFilter
 }
 
 input PageProjectsSeoFilter {
@@ -1978,6 +1984,9 @@ input PageFaqMutation {
   faqHeading: String
   faqSubtext: String
   faqItems: [PageFaqFaqItemsMutation]
+  viewAllLabel: String
+  previousLabel: String
+  nextLabel: String
 }
 
 input PageProjectsSeoMutation {

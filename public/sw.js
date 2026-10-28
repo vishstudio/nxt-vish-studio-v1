@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'vish-studio-v1';
+const CACHE_VERSION = 'vish-studio-v2';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const MAX_RUNTIME_ENTRIES = 80;
@@ -14,6 +14,9 @@ const shouldSkipRequest = (request) => {
 
   return (
     request.method !== 'GET' ||
+    url.searchParams.has('_rsc') ||
+    request.headers.has('RSC') ||
+    url.pathname.endsWith('.txt') ||
     url.pathname.startsWith('/admin') ||
     url.pathname.startsWith('/api') ||
     url.pathname.includes('tina') ||

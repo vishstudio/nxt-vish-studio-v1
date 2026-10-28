@@ -513,14 +513,17 @@ var faq = {
       type: "object",
       name: "faqItems",
       label: "FAQ Items",
-      description: "The homepage shows the same list; the /faq page paginates it 10 at a time.",
+      description: "The homepage shows the first 10; the /faq page shows all of them, 10 per page.",
       list: true,
       ui: { itemProps: (item) => ({ label: item?.question || "New FAQ" }) },
       fields: [
         { type: "string", name: "question", label: "Question", required: true },
         textarea("answer", "Answer")
       ]
-    }
+    },
+    text("viewAllLabel", "Homepage View All Link", "Shown under the homepage list when there are more than 10 questions."),
+    text("previousLabel", "Previous Page Button"),
+    text("nextLabel", "Next Page Button")
   ]
 };
 var projects = {

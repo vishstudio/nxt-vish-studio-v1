@@ -8,6 +8,9 @@ import { Loader } from '@/src/components/loader/loader';
 import { CustomCursor } from '@/src/components/custom-cursor/custom-cursor';
 import { COOKIE_SETTINGS_OPEN_EVENT } from '@/src/lib/cookie-consent';
 import { APP_READY_EVENT, HERO_REVEALED_EVENT } from '@/src/lib/site-events';
+import { installGoogleTranslateGuard } from '@/src/lib/google-translate-guard';
+
+installGoogleTranslateGuard();
 
 const CookieSettings = dynamic(
   () => import('@/src/components/cookie-settings/cookie-settings').then((mod) => mod.CookieSettings),
